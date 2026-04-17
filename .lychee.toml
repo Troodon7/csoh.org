@@ -44,6 +44,9 @@ exclude = [
   "programs\\.com",                # Timeout-prone
   "trustoncloud\\.com",            # Timeout-prone
   "careersinaudit\\.com",          # Bot-verification redirect (302)
+  "blog\\.lastpass\\.com",         # Cloudflare bot-block (403)
+  "news\\.sky\\.com",              # Bot-block (403)
+  "grep\\.app",                    # Rate-limits bots (429)
 ]
 
 # Accept common redirect status codes

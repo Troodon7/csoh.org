@@ -243,8 +243,8 @@ If you took a screenshot in Step 3, follow these sub-steps:
 
 ```json
 {
-  "https://example.com/your-resource": "img/previews/your-preview-image.jpg",
-  "https://example.com/another-resource": "img/previews/another-preview.jpg"
+  "https://example.com/": "img/previews/your-preview-image.jpg",
+  "https://example.org/": "img/previews/another-preview.jpg"
 }
 ```
 
