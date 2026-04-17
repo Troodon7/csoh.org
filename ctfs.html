@@ -44,29 +44,33 @@
 
         .ctf-calendar .resource-card {
             position: relative;
+        }
+
+        /* TBA cards have no image, so pad the top to make room for the badge */
+        .ctf-calendar .resource-card.tba {
+            opacity: 0.7;
             padding-top: 2.4rem;
         }
 
         .ctf-month-badge {
             position: absolute;
             top: 0.6rem;
-            left: 0.8rem;
-            background: #2c3e50;
+            left: 0.6rem;
+            background: rgba(44, 62, 80, 0.92);
             color: #fff;
-            padding: 0.15rem 0.55rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 4px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 600;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.03em;
             text-transform: uppercase;
-        }
-
-        .ctf-calendar .resource-card.tba {
-            opacity: 0.65;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+            z-index: 2;
         }
 
         .ctf-calendar .resource-card.tba .ctf-month-badge {
             background: #607D8B;
+            box-shadow: none;
         }
     </style>
 
@@ -160,6 +164,8 @@
                     <div class="resource-card"
                         data-tooltip="Drops you into an AWS environment with an S3 bucket locked down by a data perimeter. Goal: extract the flag despite the restrictions. Focuses on AWS IAM, resource policies, and data perimeter patterns.">
                         <span class="ctf-month-badge">Jun 2025</span>
+                        <img src="img/previews/cloudsecuritychampionship-com-challenge-1.jpg" alt="Preview"
+                            class="resource-preview" onerror="this.style.display='none'">
                         <h3>Perimeter Leak</h3>
                         <p>Extract secrets from a hardened AWS data perimeter. 10 points.</p>
                         <div class="resource-tags">
@@ -173,6 +179,8 @@
                     <div class="resource-card"
                         data-tooltip="Escape from a container and pivot to extract the flag from the host's filesystem. Covers container runtime security, kernel capabilities, and host-escape primitives.">
                         <span class="ctf-month-badge">Jul 2025</span>
+                        <img src="img/previews/cloudsecuritychampionship-com-challenge-2.jpg" alt="Preview"
+                            class="resource-preview" onerror="this.style.display='none'">
                         <h3>Contain Me If You Can</h3>
                         <p>Escape the container and extract the flag from the host filesystem. 20 points.</p>
                         <div class="resource-tags">
@@ -185,6 +193,8 @@
                     <div class="resource-card"
                         data-tooltip="Exploit OAuth permission scopes and Entra ID (Azure AD) misconfigurations to reach resources you shouldn't have access to. Focus on identity-based attack paths in Microsoft cloud.">
                         <span class="ctf-month-badge">Aug 2025</span>
+                        <img src="img/previews/cloudsecuritychampionship-com-challenge-3.jpg" alt="Preview"
+                            class="resource-preview" onerror="this.style.display='none'">
                         <h3>Breaking The Barriers</h3>
                         <p>Exploit OAuth and Entra ID misconfigurations to reach restricted resources. 10 points.</p>
                         <div class="resource-tags">
@@ -198,6 +208,8 @@
                     <div class="resource-card"
                         data-tooltip="Reconnaissance-heavy challenge where you discover hidden cloud infrastructure and exfiltrate sensitive data. Tests enumeration skills and reading of exposed metadata.">
                         <span class="ctf-month-badge">Sep 2025</span>
+                        <img src="img/previews/cloudsecuritychampionship-com-challenge-4.jpg" alt="Preview"
+                            class="resource-preview" onerror="this.style.display='none'">
                         <h3>Needle in a Haystack</h3>
                         <p>Use recon techniques to uncover hidden infrastructure and extract sensitive data. 20 points.</p>
                         <div class="resource-tags">
@@ -210,6 +222,8 @@
                     <div class="resource-card"
                         data-tooltip="Kubernetes privilege escalation challenge. Exploit RBAC misconfigurations, pod security issues, and service account abuse to capture the flag.">
                         <span class="ctf-month-badge">Oct 2025</span>
+                        <img src="img/previews/cloudsecuritychampionship-com-challenge-5.jpg" alt="Preview"
+                            class="resource-preview" onerror="this.style.display='none'">
                         <h3>Game of Pods</h3>
                         <p>Escalate privileges in Kubernetes and capture the flag. 30 points.</p>
                         <div class="resource-tags">
@@ -222,6 +236,8 @@
                     <div class="resource-card"
                         data-tooltip="Reverse-engineer a piece of malware to extract a hidden flag. Covers static and dynamic analysis in a cloud-adjacent threat context.">
                         <span class="ctf-month-badge">Nov 2025</span>
+                        <img src="img/previews/cloudsecuritychampionship-com-challenge-6.jpg" alt="Preview"
+                            class="resource-preview" onerror="this.style.display='none'">
                         <h3>Malware Busters!</h3>
                         <p>Reverse the malware and extract the flag. 10 points.</p>
                         <div class="resource-tags">
@@ -234,6 +250,8 @@
                     <div class="resource-card"
                         data-tooltip="Exploit Terraform automation running on a cron job in a container. Covers infrastructure-as-code supply chain attacks and cloud automation abuse.">
                         <span class="ctf-month-badge">Dec 2025</span>
+                        <img src="img/previews/cloudsecuritychampionship-com-challenge-7.jpg" alt="Preview"
+                            class="resource-preview" onerror="this.style.display='none'">
                         <h3>State of Affairs</h3>
                         <p>Exploit Terraform automation running inside a container to extract the flag. 20 points.</p>
                         <div class="resource-tags">
@@ -247,6 +265,8 @@
                     <div class="resource-card"
                         data-tooltip="A &quot;safe space&quot; for hackers — so what could go wrong? Multi-step cloud exploitation with a creative theme.">
                         <span class="ctf-month-badge">Jan 2026</span>
+                        <img src="img/previews/cloudsecuritychampionship-com-challenge-8.jpg" alt="Preview"
+                            class="resource-preview" onerror="this.style.display='none'">
                         <h3>Confession Booth</h3>
                         <p>A "safe space" for hackers. What could go wrong? 30 points.</p>
                         <div class="resource-tags">
@@ -259,6 +279,8 @@
                     <div class="resource-card"
                         data-tooltip="Investigate a breach and figure out how data was exfiltrated. Incident-response focused challenge testing log analysis and cloud forensics.">
                         <span class="ctf-month-badge">Feb 2026</span>
+                        <img src="img/previews/cloudsecuritychampionship-com-challenge-9.jpg" alt="Preview"
+                            class="resource-preview" onerror="this.style.display='none'">
                         <h3>Trust Issues</h3>
                         <p>Investigate a breach and uncover how company data was exfiltrated. 20 points.</p>
                         <div class="resource-tags">
@@ -271,6 +293,8 @@
                     <div class="resource-card"
                         data-tooltip="Celebrate S3's 20th birthday by finding the hidden present. AWS S3-focused challenge with a celebratory twist.">
                         <span class="ctf-month-badge">Mar 2026</span>
+                        <img src="img/previews/cloudsecuritychampionship-com-challenge-10.jpg" alt="Preview"
+                            class="resource-preview" onerror="this.style.display='none'">
                         <h3>Happy Birthday</h3>
                         <p>Celebrate S3's 20th birthday by finding the hidden present. 20 points.</p>
                         <div class="resource-tags">
