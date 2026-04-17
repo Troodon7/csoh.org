@@ -7,7 +7,7 @@
     <language>en-us</language>
     <managingEditor>admin@csoh.org (CSOH)</managingEditor>
     <webMaster>admin@csoh.org (CSOH)</webMaster>
-    <lastBuildDate>Thu, 16 Apr 2026 22:05:35 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Apr 2026 13:00:00 +0000</lastBuildDate>
     <ttl>720</ttl>
     <atom:link href="https://csoh.org/feed.xml" rel="self" type="application/rss+xml" />
     <image>
@@ -16,13 +16,96 @@
       <link>https://csoh.org/news.html</link>
     </image>
     <item>
-      <title>ImmuniWeb brings AI upgrades, post-quantum detection and more in Q1 2026</title>
-      <link>https://www.helpnetsecurity.com/2026/04/17/immuniweb-updates-q1-2026</link>
-      <description>ImmuniWeb unveiled technical updates, new features and functionalities across all products available on the ImmuniWeb AI Platform. ImmuniWeb Discovery Launch of a dedicated Cyber Threat Intelligence (CTI) dashboard Ad...</description>
-      <source url="https://www.helpnetsecurity.com/2026/04/17/immuniweb-updates-q1-2026">Help Net Security</source>
-      <guid isPermaLink="true">https://www.helpnetsecurity.com/2026/04/17/immuniweb-updates-q1-2026</guid>
-      <pubDate>Thu, 16 Apr 2026 22:05:35 +0000</pubDate>
+      <title>Coast Guard's New Cybersecurity Rules Offers Lessons for CISOs</title>
+      <link>https://www.darkreading.com/cybersecurity-operations/coast-guards-cybersecurity-rules-lessons-cisos</link>
+      <description>The Maritime Transportation Security Act (MTSA) requires plans to protect OT systems, audits by independent third parties, and a hybrid OT-security role.</description>
+      <source url="https://www.darkreading.com/cybersecurity-operations/coast-guards-cybersecurity-rules-lessons-cisos">Dark Reading</source>
+      <guid isPermaLink="true">https://www.darkreading.com/cybersecurity-operations/coast-guards-cybersecurity-rules-lessons-cisos</guid>
+      <pubDate>Fri, 17 Apr 2026 13:00:00 +0000</pubDate>
+      <category>Cloud Security</category>
+    </item>
+    <item>
+      <title>Webinar: From phishing to fallout — Why MSPs must rethink both security and recovery</title>
+      <link>https://www.bleepingcomputer.com/news/security/webinar-from-phishing-to-fallout-why-msps-must-rethink-both-security-and-recovery</link>
+      <description>Cyberattacks are evolving faster than many MSP and corporate defenses can keep up, with phishing driving much of today's cybercrime. Join our upcoming webinar to learn how to combine security and recovery strategies t...</description>
+      <source url="https://www.bleepingcomputer.com/news/security/webinar-from-phishing-to-fallout-why-msps-must-rethink-both-security-and-recovery">BleepingComputer</source>
+      <guid isPermaLink="true">https://www.bleepingcomputer.com/news/security/webinar-from-phishing-to-fallout-why-msps-must-rethink-both-security-and-recovery</guid>
+      <pubDate>Fri, 17 Apr 2026 08:20:28 -0400</pubDate>
+      <category>Phishing</category>
+    </item>
+    <item>
+      <title>In Other News: Satellite Cybersecurity Act, $90K Chrome Flaw, Teen Hacker Arrested</title>
+      <link>https://www.securityweek.com/in-other-news-satellite-cybersecurity-act-90k-chrome-flaw-teen-hacker-arrested</link>
+      <description>Other noteworthy stories that might have slipped under the radar: ShinyHunters targets Rockstar Games, ShowDoc vulnerability exploited in the wild, and EPA to boost cybersecurity budget to $19 million. The post In Oth...</description>
+      <source url="https://www.securityweek.com/in-other-news-satellite-cybersecurity-act-90k-chrome-flaw-teen-hacker-arrested">SecurityWeek</source>
+      <guid isPermaLink="true">https://www.securityweek.com/in-other-news-satellite-cybersecurity-act-90k-chrome-flaw-teen-hacker-arrested</guid>
+      <pubDate>Fri, 17 Apr 2026 12:00:00 +0000</pubDate>
+      <category>Vulnerability</category>
+    </item>
+    <item>
+      <title>Mythos and Cybersecurity</title>
+      <link>https://www.schneier.com/blog/archives/2026/04/mythos-and-cybersecurity.html</link>
+      <description>Last week, Anthropic pulled back the curtain on Claude Mythos Preview , an AI model so capable at finding and exploiting software vulnerabilities that the company decided it was too dangerous to release to the public....</description>
+      <source url="https://www.schneier.com/blog/archives/2026/04/mythos-and-cybersecurity.html">Schneier on Security</source>
+      <guid isPermaLink="true">https://www.schneier.com/blog/archives/2026/04/mythos-and-cybersecurity.html</guid>
+      <pubDate>Fri, 17 Apr 2026 11:02:37 +0000</pubDate>
+      <category>Vulnerability</category>
       <category>AI</category>
+    </item>
+    <item>
+      <title>Google wipes out 602 million scam ads with Gemini on duty</title>
+      <link>https://www.helpnetsecurity.com/2026/04/17/google-gemini-harmful-ads-blocking</link>
+      <description>Google claims that its security teams work around the clock using its Gemini AI models to detect and stop harmful ads. “Bad actors are using generative AI to create deceptive ads at scale, and Gemini helps us detect a...</description>
+      <source url="https://www.helpnetsecurity.com/2026/04/17/google-gemini-harmful-ads-blocking">Help Net Security</source>
+      <guid isPermaLink="true">https://www.helpnetsecurity.com/2026/04/17/google-gemini-harmful-ads-blocking</guid>
+      <pubDate>Fri, 17 Apr 2026 10:59:38 +0000</pubDate>
+      <category>AI</category>
+      <category>Scam</category>
+    </item>
+    <item>
+      <title>Google Blocks 8.3B Policy-Violating Ads in 2025, Launches Android 17 Privacy Overhaul</title>
+      <link>https://thehackernews.com/2026/04/google-blocks-83b-policy-violating-ads.html</link>
+      <description>Google this week announced a new set of Play policy updates to strengthen user privacy and protect businesses against fraud, even as it revealed it blocked or removed over 8.3 billion ads globally and suspended 24.9 m...</description>
+      <source url="https://thehackernews.com/2026/04/google-blocks-83b-policy-violating-ads.html">The Hacker News</source>
+      <guid isPermaLink="true">https://thehackernews.com/2026/04/google-blocks-83b-policy-violating-ads.html</guid>
+      <pubDate>Fri, 17 Apr 2026 16:17:00 +0530</pubDate>
+      <category>Scam</category>
+    </item>
+    <item>
+      <title>Another DraftKings Hacker Sentenced to Prison</title>
+      <link>https://www.securityweek.com/another-draftkings-hacker-sentenced-to-prison</link>
+      <description>Kamerin Stokes sold stolen credentials through an online marketplace even after pleading guilty to his role in the DraftKings attack. The post Another DraftKings Hacker Sentenced to Prison appeared first on SecurityWe...</description>
+      <source url="https://www.securityweek.com/another-draftkings-hacker-sentenced-to-prison">SecurityWeek</source>
+      <guid isPermaLink="true">https://www.securityweek.com/another-draftkings-hacker-sentenced-to-prison</guid>
+      <pubDate>Fri, 17 Apr 2026 10:45:13 +0000</pubDate>
+      <category>Scam</category>
+    </item>
+    <item>
+      <title>Lawmakers Gathered Quietly to Talk About AI. Angst and Fears of ‘Destruction’ Followed</title>
+      <link>https://www.securityweek.com/lawmakers-gathered-quietly-to-talk-about-ai-angst-and-fears-of-destruction-followed</link>
+      <description>Thursday’s discussion comes as leaders on Capitol Hill grapple with the dizzying pace of global developments in which technology plays a central role. The post Lawmakers Gathered Quietly to Talk About AI. Angst and Fe...</description>
+      <source url="https://www.securityweek.com/lawmakers-gathered-quietly-to-talk-about-ai-angst-and-fears-of-destruction-followed">SecurityWeek</source>
+      <guid isPermaLink="true">https://www.securityweek.com/lawmakers-gathered-quietly-to-talk-about-ai-angst-and-fears-of-destruction-followed</guid>
+      <pubDate>Fri, 17 Apr 2026 10:15:00 +0000</pubDate>
+      <category>AI</category>
+    </item>
+    <item>
+      <title>53 DDoS Domains Taken Down by Law Enforcement</title>
+      <link>https://www.securityweek.com/53-ddos-domains-taken-down-by-law-enforcement</link>
+      <description>Authorities in 21 countries participated in a coordinated action against DDoS-for-hire services. The post 53 DDoS Domains Taken Down by Law Enforcement appeared first on SecurityWeek .</description>
+      <source url="https://www.securityweek.com/53-ddos-domains-taken-down-by-law-enforcement">SecurityWeek</source>
+      <guid isPermaLink="true">https://www.securityweek.com/53-ddos-domains-taken-down-by-law-enforcement</guid>
+      <pubDate>Fri, 17 Apr 2026 06:40:21 +0000</pubDate>
+      <category>Cloud Security</category>
+    </item>
+    <item>
+      <title>Recently leaked Windows zero-days now exploited in attacks</title>
+      <link>https://www.bleepingcomputer.com/news/security/recently-leaked-windows-zero-days-now-exploited-in-attacks</link>
+      <description>Threat actors are exploiting three recently disclosed Windows security vulnerabilities in attacks aimed at gaining SYSTEM or elevated administrator permissions. [...]</description>
+      <source url="https://www.bleepingcomputer.com/news/security/recently-leaked-windows-zero-days-now-exploited-in-attacks">BleepingComputer</source>
+      <guid isPermaLink="true">https://www.bleepingcomputer.com/news/security/recently-leaked-windows-zero-days-now-exploited-in-attacks</guid>
+      <pubDate>Fri, 17 Apr 2026 02:14:52 -0400</pubDate>
+      <category>Vulnerability</category>
       <category>Threat Research</category>
     </item>
     <item>
@@ -41,6 +124,15 @@
       <source url="https://unit42.paloaltonetworks.com/exploitation-of-cve-2023-33538">Palo Alto Networks Unit 42</source>
       <guid isPermaLink="true">https://unit42.paloaltonetworks.com/exploitation-of-cve-2023-33538</guid>
       <pubDate>Thu, 16 Apr 2026 22:00:13 +0000</pubDate>
+      <category>Vulnerability</category>
+    </item>
+    <item>
+      <title>NIST Revamps CVE Framework to Focus on High-Impact Vulnerabilities</title>
+      <link>https://www.darkreading.com/vulnerabilities-threats/nist-revamps-cve-framework-to-focus-on-high-impact-vulnerabilities</link>
+      <description>The National Institute of Standards and Technology carved a new path for vulnerability remediation by changing the way it prioritizes software flaws.</description>
+      <source url="https://www.darkreading.com/vulnerabilities-threats/nist-revamps-cve-framework-to-focus-on-high-impact-vulnerabilities">Dark Reading</source>
+      <guid isPermaLink="true">https://www.darkreading.com/vulnerabilities-threats/nist-revamps-cve-framework-to-focus-on-high-impact-vulnerabilities</guid>
+      <pubDate>Thu, 16 Apr 2026 21:47:31 +0000</pubDate>
       <category>Vulnerability</category>
     </item>
     <item>
@@ -109,21 +201,12 @@
       <category>Vulnerability</category>
     </item>
     <item>
-      <title>NIST admits defeat on NVD backlog, will enrich only highest-risk CVEs going forward</title>
-      <link>https://www.helpnetsecurity.com/2026/04/16/nist-national-vulnerability-database-nvd-enrichment</link>
-      <description>NIST is overhauling how it manages the National Vulnerability Database (NVD) and switching to a risk-based model that prioritizes “enrichment” of only the most critical CVE-numbered security vulnerabilities. “This cha...</description>
-      <source url="https://www.helpnetsecurity.com/2026/04/16/nist-national-vulnerability-database-nvd-enrichment">Help Net Security</source>
-      <guid isPermaLink="true">https://www.helpnetsecurity.com/2026/04/16/nist-national-vulnerability-database-nvd-enrichment</guid>
-      <pubDate>Thu, 16 Apr 2026 16:19:50 +0000</pubDate>
-      <category>Vulnerability</category>
-    </item>
-    <item>
       <title>Cloudflare’s AI Platform: an inference layer designed for agents</title>
       <link>https://blog.cloudflare.com/ai-platform</link>
       <description>We're building AI Gateway into a unified inference layer for AI, letting developers call models from 14+ providers. New features include Workers AI binding integration and an expanded catalog with multimodal models.</description>
       <source url="https://blog.cloudflare.com/ai-platform">Cloudflare Blog</source>
       <guid isPermaLink="true">https://blog.cloudflare.com/ai-platform</guid>
-      <pubDate>Thu, 16 Apr 2026 14:00:00 +0000</pubDate>
+      <pubDate>Thu, 16 Apr 2026 14:05:00 +0000</pubDate>
       <category>AI</category>
     </item>
     <item>
@@ -184,15 +267,6 @@
       <category>AI</category>
     </item>
     <item>
-      <title>Fortinet fixes critical FortiSandbox vulnerabilities (CVE-2026-39813, CVE-2026-39808)</title>
-      <link>https://www.helpnetsecurity.com/2026/04/16/fortinet-fortisandbox-vulnerabilities-cve-2026-39813-cve-2026-39808</link>
-      <description>Two vulnerabilities (CVE-2026-39813, CVE-2026-39808) in FortiSandbox could be leveraged by unauthenticated attackers to bypass authentication and execute unauthorized code or commands on vulnerable systems. Both vulne...</description>
-      <source url="https://www.helpnetsecurity.com/2026/04/16/fortinet-fortisandbox-vulnerabilities-cve-2026-39813-cve-2026-39808">Help Net Security</source>
-      <guid isPermaLink="true">https://www.helpnetsecurity.com/2026/04/16/fortinet-fortisandbox-vulnerabilities-cve-2026-39813-cve-2026-39808</guid>
-      <pubDate>Thu, 16 Apr 2026 12:48:26 +0000</pubDate>
-      <category>Vulnerability</category>
-    </item>
-    <item>
       <title>NIST Drops NVD Enrichment for Pre-March 2026 Vulnerabilities</title>
       <link>https://www.infosecurity-magazine.com/news/nvd-enrichment-premarch-2026</link>
       <description>NIST’s National Vulnerability Database will now prioritize enriching new and exploited flaws to address the record growth of reported CVEs</description>
@@ -200,25 +274,6 @@
       <guid isPermaLink="true">https://www.infosecurity-magazine.com/news/nvd-enrichment-premarch-2026</guid>
       <pubDate>Thu, 16 Apr 2026 12:43:00 +0000</pubDate>
       <category>Vulnerability</category>
-    </item>
-    <item>
-      <title>Data Breach at Tennessee Hospital Affects 337,000</title>
-      <link>https://www.securityweek.com/data-breach-at-tennessee-hospital-affects-337000</link>
-      <description>Cookeville Regional Medical Center was targeted last year by the Rhysida ransomware group, which stole 500GB of data. The post Data Breach at Tennessee Hospital Affects 337,000 appeared first on SecurityWeek .</description>
-      <source url="https://www.securityweek.com/data-breach-at-tennessee-hospital-affects-337000">SecurityWeek</source>
-      <guid isPermaLink="true">https://www.securityweek.com/data-breach-at-tennessee-hospital-affects-337000</guid>
-      <pubDate>Thu, 16 Apr 2026 12:40:36 +0000</pubDate>
-      <category>Breach</category>
-      <category>Ransomware</category>
-    </item>
-    <item>
-      <title>Artemis Emerges From Stealth With $70 Million in Funding</title>
-      <link>https://www.securityweek.com/artemis-emerges-from-stealth-with-70-million</link>
-      <description>The startup is leveraging AI to prevent AI-powered attacks across applications, users, machines, and cloud workloads. The post Artemis Emerges From Stealth With $70 Million in Funding appeared first on SecurityWeek .</description>
-      <source url="https://www.securityweek.com/artemis-emerges-from-stealth-with-70-million">SecurityWeek</source>
-      <guid isPermaLink="true">https://www.securityweek.com/artemis-emerges-from-stealth-with-70-million</guid>
-      <pubDate>Thu, 16 Apr 2026 12:22:02 +0000</pubDate>
-      <category>AI</category>
     </item>
     <item>
       <title>Cisco says critical Webex Services flaw requires customer action</title>
@@ -240,15 +295,6 @@
       <category>Phishing</category>
     </item>
     <item>
-      <title>Splunk Enterprise Update Patches Code Execution Vulnerability</title>
-      <link>https://www.securityweek.com/splunk-enterprise-update-patches-code-execution-vulnerability</link>
-      <description>The flaw allows low-privileged users to upload files to a temporary directory to achieve remote code execution. The post Splunk Enterprise Update Patches Code Execution Vulnerability appeared first on SecurityWeek .</description>
-      <source url="https://www.securityweek.com/splunk-enterprise-update-patches-code-execution-vulnerability">SecurityWeek</source>
-      <guid isPermaLink="true">https://www.securityweek.com/splunk-enterprise-update-patches-code-execution-vulnerability</guid>
-      <pubDate>Thu, 16 Apr 2026 11:51:39 +0000</pubDate>
-      <category>Vulnerability</category>
-    </item>
-    <item>
       <title>Cisco Patches Four Critical Identity Services, Webex Flaws Enabling Code Execution</title>
       <link>https://thehackernews.com/2026/04/cisco-patches-four-critical-identity.html</link>
       <description>Cisco has announced patches to address four critical security flaws impacting Identity Services and Webex Services that could result in arbitrary code execution and allow an attacker to impersonate any user within the...</description>
@@ -258,35 +304,6 @@
       <category>Identity</category>
     </item>
     <item>
-      <title>Microsoft Paid Out $2.3 Million at Zero Day Quest 2026 Hacking Contest</title>
-      <link>https://www.securityweek.com/microsoft-paid-out-2-3-million-at-zero-day-quest-2026-hacking-contest</link>
-      <description>Researchers found more than 80 high-impact cloud and AI vulnerabilities during the event, which had a $5 million prize pool. The post Microsoft Paid Out $2.3 Million at Zero Day Quest 2026 Hacking Contest appeared fir...</description>
-      <source url="https://www.securityweek.com/microsoft-paid-out-2-3-million-at-zero-day-quest-2026-hacking-contest">SecurityWeek</source>
-      <guid isPermaLink="true">https://www.securityweek.com/microsoft-paid-out-2-3-million-at-zero-day-quest-2026-hacking-contest</guid>
-      <pubDate>Thu, 16 Apr 2026 11:21:27 +0000</pubDate>
-      <category>Azure</category>
-      <category>AI</category>
-    </item>
-    <item>
-      <title>Google Play is changing how Android apps access your contacts and location</title>
-      <link>https://www.helpnetsecurity.com/2026/04/16/google-play-store-policy-updates</link>
-      <description>Google’s new set of Google Play policy updates and account transfer feature strengthen user privacy and protect businesses from fraud. Google is also expanding features for managing new contact and location policy cha...</description>
-      <source url="https://www.helpnetsecurity.com/2026/04/16/google-play-store-policy-updates">Help Net Security</source>
-      <guid isPermaLink="true">https://www.helpnetsecurity.com/2026/04/16/google-play-store-policy-updates</guid>
-      <pubDate>Thu, 16 Apr 2026 11:10:58 +0000</pubDate>
-      <category>Scam</category>
-    </item>
-    <item>
-      <title>NIST Prioritizes NVD Enrichment for CVEs in CISA KEV, Critical Software</title>
-      <link>https://www.securityweek.com/nist-prioritizes-nvd-enrichment-for-cves-in-cisa-kev-critical-software</link>
-      <description>To optimize management of CVE volume, entries that do not meet specific criteria will not be automatically enriched. The post NIST Prioritizes NVD Enrichment for CVEs in CISA KEV, Critical Software appeared first on S...</description>
-      <source url="https://www.securityweek.com/nist-prioritizes-nvd-enrichment-for-cves-in-cisa-kev-critical-software">SecurityWeek</source>
-      <guid isPermaLink="true">https://www.securityweek.com/nist-prioritizes-nvd-enrichment-for-cves-in-cisa-kev-critical-software</guid>
-      <pubDate>Thu, 16 Apr 2026 10:47:14 +0000</pubDate>
-      <category>CISA</category>
-      <category>Vulnerability</category>
-    </item>
-    <item>
       <title>Data breach at edtech giant McGraw Hill affects 13.5 million accounts</title>
       <link>https://www.bleepingcomputer.com/news/security/data-breach-at-edtech-giant-mcgraw-hill-affects-135-million-accounts</link>
       <description>The ShinyHunters extortion group has leaked data from 13.5 million McGraw Hill user accounts, stolen after breaching the company's Salesforce environment earlier this month. [...]</description>
@@ -294,15 +311,6 @@
       <guid isPermaLink="true">https://www.bleepingcomputer.com/news/security/data-breach-at-edtech-giant-mcgraw-hill-affects-135-million-accounts</guid>
       <pubDate>Thu, 16 Apr 2026 06:35:09 -0400</pubDate>
       <category>Breach</category>
-    </item>
-    <item>
-      <title>Hidden Passenger? How Taboola Routes Logged-In Banking Sessions to Temu</title>
-      <link>https://thehackernews.com/2026/04/hidden-passenger-how-taboola-routes.html</link>
-      <description>A bank approved a Taboola pixel. That pixel quietly redirected logged-in users to a Temu tracking endpoint. This occurred without the bank’s knowledge, without user consent, and without a single security control regis...</description>
-      <source url="https://thehackernews.com/2026/04/hidden-passenger-how-taboola-routes.html">The Hacker News</source>
-      <guid isPermaLink="true">https://thehackernews.com/2026/04/hidden-passenger-how-taboola-routes.html</guid>
-      <pubDate>Thu, 16 Apr 2026 16:00:00 +0530</pubDate>
-      <category>Cloud Security</category>
     </item>
     <item>
       <title>Obsidian Plugin Abuse Delivers PHANTOMPULSE RAT in Targeted Finance, Crypto Attacks</title>
@@ -352,24 +360,6 @@
       <category>Breach</category>
       <category>Ransomware</category>
       <category>Threat Research</category>
-    </item>
-    <item>
-      <title>Critical Nginx UI auth bypass flaw now actively exploited in the wild</title>
-      <link>https://www.bleepingcomputer.com/news/security/critical-nginx-ui-auth-bypass-flaw-now-actively-exploited-in-the-wild</link>
-      <description>A critical vulnerability in Nginx UI with Model Context Protocol (MCP) support is now being exploited in the wild for full server takeover without authentication. [...]</description>
-      <source url="https://www.bleepingcomputer.com/news/security/critical-nginx-ui-auth-bypass-flaw-now-actively-exploited-in-the-wild">BleepingComputer</source>
-      <guid isPermaLink="true">https://www.bleepingcomputer.com/news/security/critical-nginx-ui-auth-bypass-flaw-now-actively-exploited-in-the-wild</guid>
-      <pubDate>Wed, 15 Apr 2026 18:35:09 -0400</pubDate>
-      <category>Vulnerability</category>
-    </item>
-    <item>
-      <title>New AgingFly malware used in attacks on Ukraine govt, hospitals</title>
-      <link>https://www.bleepingcomputer.com/news/security/new-agingfly-malware-used-in-attacks-on-ukraine-govt-hospitals</link>
-      <description>A new malware family named 'AgingFly' has been identified in attacks against local governments and hospitals that steal authentication data from Chromium-based browsers and WhatsApp messenger. [...]</description>
-      <source url="https://www.bleepingcomputer.com/news/security/new-agingfly-malware-used-in-attacks-on-ukraine-govt-hospitals">BleepingComputer</source>
-      <guid isPermaLink="true">https://www.bleepingcomputer.com/news/security/new-agingfly-malware-used-in-attacks-on-ukraine-govt-hospitals</guid>
-      <pubDate>Wed, 15 Apr 2026 17:57:17 -0400</pubDate>
-      <category>Cloud Security</category>
     </item>
     <item>
       <title>CVE-2026-33032: severe nginx-ui bug grants unauthenticated server access</title>
@@ -449,16 +439,6 @@
       <category>CISA</category>
       <category>Vulnerability</category>
       <category>AI</category>
-    </item>
-    <item>
-      <title>Microsoft Patch Tuesday for April 2026 fixed actively exploited SharePoint zero-day</title>
-      <link>https://securityaffairs.com/190831/security/microsoft-patch-tuesday-for-april-2026-fixed-actively-exploited-sharepoint-zero-day.html</link>
-      <description>Microsoft Patch Tuesday security updates for April 2026 fixed 165 vulnerabilities, including an actively exploited SharePoint zero-day. Microsoft Patch Tuesday security updates addressed 165 vulnerabilities, making it...</description>
-      <source url="https://securityaffairs.com/190831/security/microsoft-patch-tuesday-for-april-2026-fixed-actively-exploited-sharepoint-zero-day.html">Security Affairs</source>
-      <guid isPermaLink="true">https://securityaffairs.com/190831/security/microsoft-patch-tuesday-for-april-2026-fixed-actively-exploited-sharepoint-zero-day.html</guid>
-      <pubDate>Wed, 15 Apr 2026 05:18:18 +0000</pubDate>
-      <category>Azure</category>
-      <category>Vulnerability</category>
     </item>
     <item>
       <title>OpenAI Launches GPT-5.4-Cyber with Expanded Access for Security Teams</title>
@@ -798,17 +778,6 @@
       <category>AI</category>
     </item>
     <item>
-      <title>Medusa Ransomware Attack</title>
-      <link>https://fortiguard.fortinet.com/threat-signal-report/6398</link>
-      <description>What is the Attack? Microsoft Threat Intelligence has identified Storm-1175, a financially motivated threat actor conducting high-tempo ransomware operations leveraging the Medusa ransomware variant. The group special...</description>
-      <source url="https://fortiguard.fortinet.com/threat-signal-report/6398">FortiGuard Labs</source>
-      <guid isPermaLink="true">https://fortiguard.fortinet.com/threat-signal-report/6398</guid>
-      <pubDate>Fri, 10 Apr 2026 18:25:49 -0700</pubDate>
-      <category>Azure</category>
-      <category>Ransomware</category>
-      <category>Threat Research</category>
-    </item>
-    <item>
       <title>FINRA Launches Financial Intelligence Fusion Center to Combat Cybersecurity and Fraud Threats</title>
       <link>https://www.darkreading.com/threat-intelligence/finra-launches-financial-intelligence-fusion-center</link>
       <description />
@@ -1135,13 +1104,43 @@
       <category>Threat Research</category>
     </item>
     <item>
-      <title>GPU Rowhammer Attack Enables Privilege Escalation and Full System Compromise</title>
-      <link>https://www.infosecurity-magazine.com/news/gpu-based-rowhammer-attack</link>
-      <description>GPUBreach uses GPU Rowhammer on GDDR6 to flip bits, corrupt page tables and escalate to system root</description>
-      <source url="https://www.infosecurity-magazine.com/news/gpu-based-rowhammer-attack">Infosecurity Magazine</source>
-      <guid isPermaLink="true">https://www.infosecurity-magazine.com/news/gpu-based-rowhammer-attack</guid>
-      <pubDate>Tue, 07 Apr 2026 15:05:00 +0000</pubDate>
-      <category>Breach</category>
+      <title>How to use AI to manage cloud security threats</title>
+      <link>https://webflow.sysdig.com/blog/how-to-use-ai-to-manage-cloud-security-threats</link>
+      <description>Cloud defenders constantly face fast-moving security threats.</description>
+      <source url="https://webflow.sysdig.com/blog/how-to-use-ai-to-manage-cloud-security-threats">Sysdig Blog</source>
+      <guid isPermaLink="true">https://webflow.sysdig.com/blog/how-to-use-ai-to-manage-cloud-security-threats</guid>
+      <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
+      <category>AI</category>
+    </item>
+    <item>
+      <title>Cracks in the Bedrock: Escaping the AWS AgentCore Sandbox</title>
+      <link>https://unit42.paloaltonetworks.com/bypass-of-aws-sandbox-network-isolation-mode</link>
+      <description>Unit 42 uncovers critical vulnerabilities in Amazon Bedrock AgentCore's sandbox, demonstrating DNS tunneling and credential exposure. The post Cracks in the Bedrock: Escaping the AWS AgentCore Sandbox appeared first o...</description>
+      <source url="https://unit42.paloaltonetworks.com/bypass-of-aws-sandbox-network-isolation-mode">Palo Alto Networks Unit 42</source>
+      <guid isPermaLink="true">https://unit42.paloaltonetworks.com/bypass-of-aws-sandbox-network-isolation-mode</guid>
+      <pubDate>Tue, 07 Apr 2026 22:00:11 +0000</pubDate>
+      <category>AWS</category>
+      <category>Scam</category>
+    </item>
+    <item>
+      <title>Storm-1175 Deploys Medusa Ransomware at 'High Velocity'</title>
+      <link>https://www.darkreading.com/threat-intelligence/storm-1175-medusa-ransomware-high-velocity</link>
+      <description>Microsoft says the financially motivated cybercrime group has exploited n-day and zero-day vulnerabilities in campaigns predicated on speed.</description>
+      <source url="https://www.darkreading.com/threat-intelligence/storm-1175-medusa-ransomware-high-velocity">Dark Reading</source>
+      <guid isPermaLink="true">https://www.darkreading.com/threat-intelligence/storm-1175-medusa-ransomware-high-velocity</guid>
+      <pubDate>Tue, 07 Apr 2026 20:15:07 +0000</pubDate>
+      <category>Azure</category>
+      <category>Vulnerability</category>
+      <category>Ransomware</category>
+    </item>
+    <item>
+      <title>Grafana Patches AI Bug That Could Have Leaked User Data</title>
+      <link>https://www.darkreading.com/application-security/grafana-patches-ai-bug-leaked-user-data</link>
+      <description>By hiding malicious instructions on an attacker-controlled Web page, AI could ingest orders that appear benign but return sensitive data to the attacker's server.</description>
+      <source url="https://www.darkreading.com/application-security/grafana-patches-ai-bug-leaked-user-data">Dark Reading</source>
+      <guid isPermaLink="true">https://www.darkreading.com/application-security/grafana-patches-ai-bug-leaked-user-data</guid>
+      <pubDate>Tue, 07 Apr 2026 19:52:26 +0000</pubDate>
+      <category>AI</category>
     </item>
   </channel>
 </rss>
