@@ -33,19 +33,25 @@ SCREENSHOT_TIMEOUT = 30  # seconds
 MIN_PREVIEW_SIZE_KB = 8  # Real Playwright screenshots ~10-22KB; placeholders ~3KB
 
 
+def _placeholder_marker_path(preview_path):
+    """Return the Path of the sidecar marker that flags a preview as a placeholder."""
+    full_path = Path(__file__).parent.parent / preview_path
+    return full_path.parent / '.placeholders' / (full_path.name + '.placeholder')
+
+
 def is_preview_good(preview_path):
-    """Check if a preview file exists and meets basic quality thresholds."""
+    """Return True if the preview file exists and is not a generated placeholder.
+
+    We used to also require a minimum file size, but real Playwright screenshots
+    of sparse pages (grep.app, offline pages, etc.) can legitimately be 1-4 KB.
+    We now distinguish placeholders by a sidecar marker written at generation
+    time — any file without a marker is trusted.
+    """
     full_path = Path(__file__).parent.parent / preview_path
     if not full_path.exists():
         return False
-
-    try:
-        file_size = os.path.getsize(full_path)
-        if file_size < MIN_PREVIEW_SIZE_KB * 1024:
-            return False
-    except OSError:
+    if _placeholder_marker_path(preview_path).exists():
         return False
-
     return True
 
 def generate_filename_from_url(url):
@@ -177,7 +183,14 @@ def create_placeholder_image(output_path, message="Preview Not Available"):
         
         # Save
         img.save(output_path, 'JPEG', quality=85, optimize=True)
-        
+
+        # Write a sidecar marker so is_preview_good() knows this is a placeholder
+        # (and the next run should retry capture) regardless of file size.
+        out_path = Path(output_path)
+        marker_dir = out_path.parent / '.placeholders'
+        marker_dir.mkdir(parents=True, exist_ok=True)
+        (marker_dir / (out_path.name + '.placeholder')).touch()
+
         return True, "Created placeholder image"
     
     except ImportError:
@@ -323,9 +336,14 @@ def generate_preview(url, output_filename=None, force=False):
             break
         else:
             print(f"  ⚠️  {message}")
-    
-    # If all methods failed, create placeholder
-    if not success:
+
+    if success:
+        # Real capture — clear any stale placeholder marker from a prior run.
+        marker = output_path.parent / '.placeholders' / (output_path.name + '.placeholder')
+        if marker.exists():
+            marker.unlink()
+    else:
+        # All methods failed — fall back to a placeholder image.
         print(f"  📝 Creating placeholder image...")
         result, message = create_placeholder_image(output_path)
         if not result:
