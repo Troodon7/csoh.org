@@ -118,11 +118,19 @@ def capture_with_screenshot_api(url, output_path):
         }
         
         request = urllib.request.Request(api_url, headers=headers)
-        
+
         with urllib.request.urlopen(request, timeout=SCREENSHOT_TIMEOUT) as response:
-            with open(output_path, 'wb') as f:
-                f.write(response.read())
-        
+            content_type = (response.headers.get('Content-Type') or '').lower()
+            data = response.read()
+
+        # thum.io returns a GIF loading spinner when it can't capture the page.
+        # Reject anything that isn't a JPEG so we fall through to the placeholder.
+        if 'jpeg' not in content_type and not data.startswith(b'\xff\xd8\xff'):
+            return False, f"API returned non-JPEG content ({content_type or 'unknown'}) — likely a placeholder"
+
+        with open(output_path, 'wb') as f:
+            f.write(data)
+
         return True, "Screenshot captured with API"
     
     except Exception as e:
