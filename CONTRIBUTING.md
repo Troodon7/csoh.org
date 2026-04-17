@@ -658,6 +658,7 @@ Contributors get:
 - **GitHub questions** → Ask in [GitHub Issues](https://github.com/CloudSecurityOfficeHours/csoh.org/issues)
 - **Security issues** → Email security@csoh.org
 - **Want to contribute resources?** → Check [CONTRIBUTING_RESOURCES.md](CONTRIBUTING_RESOURCES.md)
+- **Want to add a CTF?** → Check [CONTRIBUTING_CTFS.md](CONTRIBUTING_CTFS.md)
 - **Want to set up local development?** → Check [DEVELOPMENT.md](DEVELOPMENT.md)
 
 ---
