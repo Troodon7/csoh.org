@@ -344,27 +344,25 @@ def generate_preview(url, output_filename=None, force=False):
     return True, relative_path, "Preview generated successfully"
 
 def extract_urls_from_resources_html():
-    """Extract all URLs from resources.html without good previews."""
-    resources_file = Path(__file__).parent.parent / 'resources.html'
-    
-    if not resources_file.exists():
-        return []
-    
+    """Extract card-link URLs from resources.html and ctfs.html without good previews."""
     import re
-    
-    with open(resources_file, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Find all resource card URLs (class and target can appear in either order)
-    pattern = r'<a\s+href="([^"]+)"[^>]*class="card-link"'
-    urls = re.findall(pattern, content)
-    
-    # Filter to only those without previews
-    urls_needing_previews = []
-    for url in urls:
-        if not check_existing_preview(url):
-            urls_needing_previews.append(url)
-    
+
+    repo_root = Path(__file__).parent.parent
+    pages = [repo_root / 'resources.html', repo_root / 'ctfs.html']
+    pattern = re.compile(r'<a\s+href="([^"]+)"[^>]*class="card-link"')
+
+    all_urls = []
+    seen = set()
+    for page in pages:
+        if not page.exists():
+            continue
+        content = page.read_text(encoding='utf-8')
+        for url in pattern.findall(content):
+            if url not in seen:
+                seen.add(url)
+                all_urls.append(url)
+
+    urls_needing_previews = [u for u in all_urls if not check_existing_preview(u)]
     return urls_needing_previews
 
 def main():
