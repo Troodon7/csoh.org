@@ -66,6 +66,13 @@ BOT_BLOCKED_DOMAINS = [
 # Extend shortener list with Amazon short links
 SHORTENER_DOMAINS_EXT = list(SHORTENER_DOMAINS) + ['a.co']
 
+# Domains that only serve HTTP (HTTPS is broken or unsupported).
+# upgrade_scheme() will leave these as http:// so links don't break.
+HTTP_ONLY_DOMAINS = {
+    'flaws.cloud',
+    'flaws2.cloud',
+}
+
 # --- Utility functions ---------------------------------------------------
 
 
@@ -87,16 +94,20 @@ def strip_tracking_params(url):
 
 
 def upgrade_scheme(url):
-    """Upgrade http:// to https:// (skip .onion, localhost, private/link-local IPs)."""
+    """Upgrade http:// to https:// (skip .onion, localhost, private IPs,
+    and domains known to not support HTTPS)."""
     try:
         parsed = urlparse(url)
         if parsed.scheme != 'http':
             return url
-        host = parsed.hostname or ''
+        host = (parsed.hostname or '').lower()
         if host.endswith('.onion') or host in ('localhost', '127.0.0.1'):
             return url
         # Skip private and link-local IPs (e.g. 169.254.169.254 AWS metadata)
         if _is_private_ip(host):
+            return url
+        # Skip domains that don't support HTTPS (upgrade would break the link)
+        if host in HTTP_ONLY_DOMAINS:
             return url
         return urlunparse(parsed._replace(scheme='https'))
     except Exception:
