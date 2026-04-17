@@ -45,7 +45,9 @@ SHORTENER_DOMAINS = [
 BLOCKLIST = [
     'malicious-example.com',
     'spam-domain.tk',
-    # Add known bad domains here
+    # Bot-detection redirect trap — legitimate sites 302 to this when they
+    # see a non-browser User-Agent. Never a real destination.
+    'survey-smiles.com',
 ]
 
 # Whitelist of trusted domains (won't trigger warnings, skip redirect resolution)

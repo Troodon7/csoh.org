@@ -17,7 +17,8 @@ from pathlib import Path
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
 sys.path.insert(0, str(Path(__file__).parent))
-from check_url_safety import resolve_urls_concurrent, SHORTENER_DOMAINS
+from check_url_safety import (resolve_urls_concurrent, SHORTENER_DOMAINS,
+                              URLSafetyChecker)
 from check_all_site_urls import extract_urls_from_html
 
 # --- Constants -----------------------------------------------------------
@@ -187,7 +188,10 @@ def build_replacement_map(all_unique, skip_resolve=False, timeout=10,
         'skipped_bot_blocked': [],
         'skipped_error': [],
         'skipped_trivial': [],
+        'skipped_unsafe_destination': [],
     }
+
+    safety_checker = URLSafetyChecker()
 
     # Phase 1: Strip tracking params
     after_strip = {}
@@ -244,6 +248,23 @@ def build_replacement_map(all_unique, skip_resolve=False, timeout=10,
             if is_meaningful_redirect(cleaned_url, resolved):
                 # Strip tracking params from the resolved URL too
                 resolved = strip_tracking_params(resolved)
+
+                # Safety-check the resolved destination before writing it.
+                # A URL that was safe at check-time can redirect to an
+                # unsafe destination (shortener flip, stale redirect, etc.).
+                # Block the replacement if the destination fails safety.
+                safety = safety_checker.check_url(resolved)
+                if not safety.get('safe', True) or safety.get('errors'):
+                    categories['skipped_unsafe_destination'].append(
+                        (original_url, cleaned_url, resolved,
+                         safety.get('errors', []),
+                         safety.get('warnings', [])))
+                    # Fall back to the pre-resolution URL (param-stripped +
+                    # scheme-upgraded) rather than writing an unsafe target.
+                    if cleaned_url != original_url:
+                        replacements[original_url] = cleaned_url
+                    continue
+
                 categories['redirect_resolved'].append(
                     (original_url, cleaned_url, resolved))
                 replacements[original_url] = resolved
@@ -332,6 +353,19 @@ def print_report(replacements, categories, file_changes, dry_run):
             print(f"  {cleaned}: {error}")
         print()
 
+    if categories['skipped_unsafe_destination']:
+        print(f"❌ UNSAFE redirect destinations (blocked): "
+              f"{len(categories['skipped_unsafe_destination'])}")
+        for orig, cleaned, resolved, errors, warnings in \
+                categories['skipped_unsafe_destination']:
+            print(f"  {orig}")
+            print(f"    -> resolved to: {resolved}")
+            for err in errors:
+                print(f"    • {err}")
+            for warn in warnings:
+                print(f"    ⚠ {warn}")
+        print()
+
     # Per-file summary
     changed_files = {f: c for f, c in file_changes.items() if c > 0}
     if changed_files:
@@ -394,6 +428,14 @@ def main():
             file_changes[filepath] = 0
 
     total = print_report(replacements, categories, file_changes, dry_run)
+
+    # Fail loudly if any redirect resolved to an unsafe destination —
+    # block deploy regardless of dry-run / apply mode.
+    if categories['skipped_unsafe_destination']:
+        print("::error::One or more URLs on the site redirect to unsafe "
+              "destinations. The originals were kept in HTML, but manual "
+              "review is required. See the report above.")
+        return 2
 
     # Exit 1 in dry-run mode if there are changes (useful for CI)
     if dry_run and total > 0:

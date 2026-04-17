@@ -30,7 +30,7 @@ PREVIEW_MAPPING = Path(__file__).parent.parent / 'preview-mapping.json'
 TARGET_WIDTH = 400
 TARGET_HEIGHT = 300
 SCREENSHOT_TIMEOUT = 30  # seconds
-MIN_PREVIEW_SIZE_KB = 12
+MIN_PREVIEW_SIZE_KB = 8  # Real Playwright screenshots ~10-22KB; placeholders ~3KB
 
 
 def is_preview_good(preview_path):
