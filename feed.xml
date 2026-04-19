@@ -7,7 +7,7 @@
     <language>en-us</language>
     <managingEditor>admin@csoh.org (CSOH)</managingEditor>
     <webMaster>admin@csoh.org (CSOH)</webMaster>
-    <lastBuildDate>Fri, 17 Apr 2026 13:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 19 Apr 2026 17:32:45 +0000</lastBuildDate>
     <ttl>720</ttl>
     <atom:link href="https://csoh.org/feed.xml" rel="self" type="application/rss+xml" />
     <image>
@@ -15,6 +15,121 @@
       <title>CSOH - Cloud Security News</title>
       <link>https://csoh.org/news.html</link>
     </image>
+    <item>
+      <title>Vercel confirms breach as hackers claim to be selling stolen data</title>
+      <link>https://www.bleepingcomputer.com/news/security/vercel-confirms-breach-as-hackers-claim-to-be-selling-stolen-data</link>
+      <description>Cloud development platform Vercel has disclosed a security incident after threat actors claimed to have breached its systems and are attempting to sell stolen data. [...]</description>
+      <source url="https://www.bleepingcomputer.com/news/security/vercel-confirms-breach-as-hackers-claim-to-be-selling-stolen-data">BleepingComputer</source>
+      <guid isPermaLink="true">https://www.bleepingcomputer.com/news/security/vercel-confirms-breach-as-hackers-claim-to-be-selling-stolen-data</guid>
+      <pubDate>Sun, 19 Apr 2026 13:32:45 -0400</pubDate>
+      <category>Breach</category>
+      <category>Threat Research</category>
+    </item>
+    <item>
+      <title>Apple account change alerts abused to send phishing emails</title>
+      <link>https://www.bleepingcomputer.com/news/security/apple-account-change-alerts-abused-to-send-phishing-emails</link>
+      <description>Apple account change notifications are being abused to send fake iPhone purchase phishing scams within legitimate emails sent from Apple's servers, increasing legitimacy and potentially allowing them to bypass spam fi...</description>
+      <source url="https://www.bleepingcomputer.com/news/security/apple-account-change-alerts-abused-to-send-phishing-emails">BleepingComputer</source>
+      <guid isPermaLink="true">https://www.bleepingcomputer.com/news/security/apple-account-change-alerts-abused-to-send-phishing-emails</guid>
+      <pubDate>Sun, 19 Apr 2026 12:03:01 -0400</pubDate>
+      <category>Phishing</category>
+      <category>Scam</category>
+    </item>
+    <item>
+      <title>Cyber attacks fuel surge in cargo theft across logistics industry</title>
+      <link>https://securityaffairs.com/191008/security/cyber-attacks-fuel-surge-in-cargo-theft-across-logistics-industry.html</link>
+      <description>Hackers infiltrate logistics firms to steal cargo and divert payments, cyberattacks are linked to organized crime and rising losses. Proofpoint researchers observed crooks targeting trucking and logistics companies, r...</description>
+      <source url="https://securityaffairs.com/191008/security/cyber-attacks-fuel-surge-in-cargo-theft-across-logistics-industry.html">Security Affairs</source>
+      <guid isPermaLink="true">https://securityaffairs.com/191008/security/cyber-attacks-fuel-surge-in-cargo-theft-across-logistics-industry.html</guid>
+      <pubDate>Sun, 19 Apr 2026 14:59:46 +0000</pubDate>
+      <category>Cloud Security</category>
+    </item>
+    <item>
+      <title>Security Affairs newsletter Round 573 by Pierluigi Paganini – INTERNATIONAL EDITION</title>
+      <link>https://securityaffairs.com/190994/breaking-news/security-affairs-newsletter-round-573-by-pierluigi-paganini-international-edition.html</link>
+      <description>A new round of the weekly Security Affairs newsletter has arrived! Every week, the best security articles from Security Affairs are free in your email box. Enjoy a new round of the weekly SecurityAffairs newsletter, i...</description>
+      <source url="https://securityaffairs.com/190994/breaking-news/security-affairs-newsletter-round-573-by-pierluigi-paganini-international-edition.html">Security Affairs</source>
+      <guid isPermaLink="true">https://securityaffairs.com/190994/breaking-news/security-affairs-newsletter-round-573-by-pierluigi-paganini-international-edition.html</guid>
+      <pubDate>Sun, 19 Apr 2026 09:32:00 +0000</pubDate>
+      <category>Cloud Security</category>
+    </item>
+    <item>
+      <title>Hidden VMs: how hackers leverage QEMU to stealthily steal data and spread malware</title>
+      <link>https://securityaffairs.com/190982/security/hidden-vms-how-hackers-leverage-qemu-to-stealthily-steal-data-and-spread-malware.html</link>
+      <description>Attackers abuse QEMU to hide malware in virtual machines, bypass detection, steal data, and deploy ransomware without leaving any trace. Sophos researchers report a rise in attackers abusing QEMU, an open-source emula...</description>
+      <source url="https://securityaffairs.com/190982/security/hidden-vms-how-hackers-leverage-qemu-to-stealthily-steal-data-and-spread-malware.html">Security Affairs</source>
+      <guid isPermaLink="true">https://securityaffairs.com/190982/security/hidden-vms-how-hackers-leverage-qemu-to-stealthily-steal-data-and-spread-malware.html</guid>
+      <pubDate>Sat, 18 Apr 2026 15:20:06 +0000</pubDate>
+      <category>Ransomware</category>
+    </item>
+    <item>
+      <title>Tycoon 2FA Loses Phishing Kit Crown Amid Surge in Attacks</title>
+      <link>https://www.securityweek.com/tycoon-2fa-loses-phishing-kit-crown-amid-surge-in-attacks</link>
+      <description>Threat actors are reusing Tycoon 2FA tools across other phishing kits following the platform’s disruption. The post Tycoon 2FA Loses Phishing Kit Crown Amid Surge in Attacks appeared first on SecurityWeek .</description>
+      <source url="https://www.securityweek.com/tycoon-2fa-loses-phishing-kit-crown-amid-surge-in-attacks">SecurityWeek</source>
+      <guid isPermaLink="true">https://www.securityweek.com/tycoon-2fa-loses-phishing-kit-crown-amid-surge-in-attacks</guid>
+      <pubDate>Sat, 18 Apr 2026 10:30:00 +0000</pubDate>
+      <category>Phishing</category>
+      <category>Threat Research</category>
+    </item>
+    <item>
+      <title>Nexcorium Mirai variant exploits TBK DVR flaw to launch DDoS attacks</title>
+      <link>https://securityaffairs.com/190974/malware/nexcorium-mirai-variant-exploits-tbk-dvr-flaw-to-launch-ddos-attacks.html</link>
+      <description>A Mirai variant called Nexcorium exploits a flaw in TBK DVRs to infect devices and use them in DDoS attacks, along with outdated TP-Link routers. Fortinet researchers found that threat actors are exploiting vulnerabil...</description>
+      <source url="https://securityaffairs.com/190974/malware/nexcorium-mirai-variant-exploits-tbk-dvr-flaw-to-launch-ddos-attacks.html">Security Affairs</source>
+      <guid isPermaLink="true">https://securityaffairs.com/190974/malware/nexcorium-mirai-variant-exploits-tbk-dvr-flaw-to-launch-ddos-attacks.html</guid>
+      <pubDate>Sat, 18 Apr 2026 10:05:16 +0000</pubDate>
+      <category>Vulnerability</category>
+      <category>Threat Research</category>
+    </item>
+    <item>
+      <title>[Webinar] Eliminate Ghost Identities Before They Expose Your Enterprise Data</title>
+      <link>https://thehackernews.com/2026/04/webinar-find-and-eliminate-orphaned-non.html</link>
+      <description>In 2024, compromised service accounts and forgotten API keys were behind 68% of cloud breaches. Not phishing. Not weak passwords. Unmanaged non-human identities that nobody was watching. For every employee in your org...</description>
+      <source url="https://thehackernews.com/2026/04/webinar-find-and-eliminate-orphaned-non.html">The Hacker News</source>
+      <guid isPermaLink="true">https://thehackernews.com/2026/04/webinar-find-and-eliminate-orphaned-non.html</guid>
+      <pubDate>Sat, 18 Apr 2026 13:37:00 +0530</pubDate>
+      <category>Breach</category>
+      <category>Phishing</category>
+    </item>
+    <item>
+      <title>Microsoft Defender under attack as three zero-days, two of them still unpatched, enable elevated access</title>
+      <link>https://securityaffairs.com/190961/hacking/microsoft-defender-under-attack-as-three-zero-days-two-of-them-still-unpatched-enable-elevated-access.html</link>
+      <description>Attackers exploit three Microsoft Defender zero-days, code-named BlueHammer, RedSun, and UnDefend, to gain elevated access. Attackers are exploiting three recently disclosed zero-day flaws in Microsoft Defender to gai...</description>
+      <source url="https://securityaffairs.com/190961/hacking/microsoft-defender-under-attack-as-three-zero-days-two-of-them-still-unpatched-enable-elevated-access.html">Security Affairs</source>
+      <guid isPermaLink="true">https://securityaffairs.com/190961/hacking/microsoft-defender-under-attack-as-three-zero-days-two-of-them-still-unpatched-enable-elevated-access.html</guid>
+      <pubDate>Sat, 18 Apr 2026 06:49:12 +0000</pubDate>
+      <category>Azure</category>
+      <category>Vulnerability</category>
+    </item>
+    <item>
+      <title>Mirai Variant Nexcorium Exploits CVE-2024-3721 to Hijack TBK DVRs for DDoS Botnet</title>
+      <link>https://thehackernews.com/2026/04/mirai-variant-nexcorium-exploits-cve.html</link>
+      <description>Threat actors are exploiting security flaws in TBK DVR and end‑of‑life (EoL) TP-Link Wi-Fi routers to deploy Mirai-botnet variants on compromised devices, according to findings from Fortinet FortiGuard Labs and Palo A...</description>
+      <source url="https://thehackernews.com/2026/04/mirai-variant-nexcorium-exploits-cve.html">The Hacker News</source>
+      <guid isPermaLink="true">https://thehackernews.com/2026/04/mirai-variant-nexcorium-exploits-cve.html</guid>
+      <pubDate>Sat, 18 Apr 2026 11:31:00 +0530</pubDate>
+      <category>Vulnerability</category>
+      <category>Threat Research</category>
+    </item>
+    <item>
+      <title>Threat Brief: Escalation of Cyber Risk Related to Iran (Updated April 17)</title>
+      <link>https://unit42.paloaltonetworks.com/iranian-cyberattacks-2026</link>
+      <description>Unit 42 details recent Iranian cyberattack activity, sharing direct observations of phishing, hacktivist activity and cybercrime. We include recommendations for defenders. The post Threat Brief: Escalation of Cyber Ri...</description>
+      <source url="https://unit42.paloaltonetworks.com/iranian-cyberattacks-2026">Palo Alto Networks Unit 42</source>
+      <guid isPermaLink="true">https://unit42.paloaltonetworks.com/iranian-cyberattacks-2026</guid>
+      <pubDate>Fri, 17 Apr 2026 22:35:07 +0000</pubDate>
+      <category>Phishing</category>
+    </item>
+    <item>
+      <title>Transform security logs into OCSF format using a configuration-driven ETL solution</title>
+      <link>https://aws.amazon.com/blogs/security/transform-security-logs-into-ocsf-format-using-a-configuration-driven-etl-solution</link>
+      <description>Security logs capture essential security-related activities, such as user sign-ins, file access, network traffic, and application usage. These logs are important for monitoring, detecting, and responding to potential...</description>
+      <source url="https://aws.amazon.com/blogs/security/transform-security-logs-into-ocsf-format-using-a-configuration-driven-etl-solution">AWS Security Blog</source>
+      <guid isPermaLink="true">https://aws.amazon.com/blogs/security/transform-security-logs-into-ocsf-format-using-a-configuration-driven-etl-solution</guid>
+      <pubDate>Fri, 17 Apr 2026 16:30:57 +0000</pubDate>
+      <category>AWS</category>
+    </item>
     <item>
       <title>Coast Guard's New Cybersecurity Rules Offers Lessons for CISOs</title>
       <link>https://www.darkreading.com/cybersecurity-operations/coast-guards-cybersecurity-rules-lessons-cisos</link>
@@ -90,15 +205,6 @@
       <category>AI</category>
     </item>
     <item>
-      <title>53 DDoS Domains Taken Down by Law Enforcement</title>
-      <link>https://www.securityweek.com/53-ddos-domains-taken-down-by-law-enforcement</link>
-      <description>Authorities in 21 countries participated in a coordinated action against DDoS-for-hire services. The post 53 DDoS Domains Taken Down by Law Enforcement appeared first on SecurityWeek .</description>
-      <source url="https://www.securityweek.com/53-ddos-domains-taken-down-by-law-enforcement">SecurityWeek</source>
-      <guid isPermaLink="true">https://www.securityweek.com/53-ddos-domains-taken-down-by-law-enforcement</guid>
-      <pubDate>Fri, 17 Apr 2026 06:40:21 +0000</pubDate>
-      <category>Cloud Security</category>
-    </item>
-    <item>
       <title>Recently leaked Windows zero-days now exploited in attacks</title>
       <link>https://www.bleepingcomputer.com/news/security/recently-leaked-windows-zero-days-now-exploited-in-attacks</link>
       <description>Threat actors are exploiting three recently disclosed Windows security vulnerabilities in attacks aimed at gaining SYSTEM or elevated administrator permissions. [...]</description>
@@ -107,15 +213,6 @@
       <pubDate>Fri, 17 Apr 2026 02:14:52 -0400</pubDate>
       <category>Vulnerability</category>
       <category>Threat Research</category>
-    </item>
-    <item>
-      <title>ZionSiphon malware designed to sabotage water treatment systems</title>
-      <link>https://www.bleepingcomputer.com/news/security/zionsiphon-malware-designed-to-sabotage-water-treatment-systems</link>
-      <description>A new malware called ZionSiphon, specifically designed for operational technology, is targeting water treatment and desalination environments to sabotage their operations. [...]</description>
-      <source url="https://www.bleepingcomputer.com/news/security/zionsiphon-malware-designed-to-sabotage-water-treatment-systems">BleepingComputer</source>
-      <guid isPermaLink="true">https://www.bleepingcomputer.com/news/security/zionsiphon-malware-designed-to-sabotage-water-treatment-systems</guid>
-      <pubDate>Thu, 16 Apr 2026 18:04:53 -0400</pubDate>
-      <category>Cloud Security</category>
     </item>
     <item>
       <title>A Deep Dive Into Attempted Exploitation of CVE-2023-33538</title>
@@ -154,16 +251,6 @@
       <category>Vulnerability</category>
     </item>
     <item>
-      <title>Cookeville Regional Medical Center hospital data breach impacts 337,917 people</title>
-      <link>https://securityaffairs.com/190898/cyber-crime/cookeville-regional-medical-center-hospital-data-breach-impacts-337917-people.html</link>
-      <description>A ransomware attack on Cookeville Regional Medical Center hospital (Tennessee) exposed data of 337,000 people after hackers stole 500GB of sensitive information from its systems. A ransomware attack on Cookeville Regi...</description>
-      <source url="https://securityaffairs.com/190898/cyber-crime/cookeville-regional-medical-center-hospital-data-breach-impacts-337917-people.html">Security Affairs</source>
-      <guid isPermaLink="true">https://securityaffairs.com/190898/cyber-crime/cookeville-regional-medical-center-hospital-data-breach-impacts-337917-people.html</guid>
-      <pubDate>Thu, 16 Apr 2026 18:03:55 +0000</pubDate>
-      <category>Breach</category>
-      <category>Ransomware</category>
-    </item>
-    <item>
       <title>The Q1 vulnerability pulse</title>
       <link>https://blog.talosintelligence.com/the-q1-vulnerability-pulse</link>
       <description>Thor provides an overview of the Q1 2026 vulnerability statistics, highlighting key trends in legacy CVEs and the evolving impact of AI on the threat landscape.</description>
@@ -181,24 +268,6 @@
       <guid isPermaLink="true">https://thehackernews.com/2026/04/newly-discovered-powmix-botnet-hits.html</guid>
       <pubDate>Thu, 16 Apr 2026 23:22:00 +0530</pubDate>
       <category>Threat Research</category>
-    </item>
-    <item>
-      <title>Government Can’t Win the Cyber War Without the Private Sector</title>
-      <link>https://www.securityweek.com/government-cant-win-the-cyber-war-without-the-private-sector</link>
-      <description>Securing national resilience now depends on faster, deeper partnerships with the private sector. The post Government Can’t Win the Cyber War Without the Private Sector appeared first on SecurityWeek .</description>
-      <source url="https://www.securityweek.com/government-cant-win-the-cyber-war-without-the-private-sector">SecurityWeek</source>
-      <guid isPermaLink="true">https://www.securityweek.com/government-cant-win-the-cyber-war-without-the-private-sector</guid>
-      <pubDate>Thu, 16 Apr 2026 17:00:00 +0000</pubDate>
-      <category>Cloud Security</category>
-    </item>
-    <item>
-      <title>Hackers exploit Marimo flaw to deploy NKAbuse malware from Hugging Face</title>
-      <link>https://www.bleepingcomputer.com/news/security/hackers-exploit-marimo-flaw-to-deploy-nkabuse-malware-from-hugging-face</link>
-      <description>Hackers are exploiting a critical vulnerability in Marimo reactive Python notebook to deploy a new variant of NKAbuse malware hosted on Hugging Face Spaces. [...]</description>
-      <source url="https://www.bleepingcomputer.com/news/security/hackers-exploit-marimo-flaw-to-deploy-nkabuse-malware-from-hugging-face">BleepingComputer</source>
-      <guid isPermaLink="true">https://www.bleepingcomputer.com/news/security/hackers-exploit-marimo-flaw-to-deploy-nkabuse-malware-from-hugging-face</guid>
-      <pubDate>Thu, 16 Apr 2026 12:58:06 -0400</pubDate>
-      <category>Vulnerability</category>
     </item>
     <item>
       <title>Cloudflare’s AI Platform: an inference layer designed for agents</title>
@@ -276,25 +345,6 @@
       <category>Vulnerability</category>
     </item>
     <item>
-      <title>Cisco says critical Webex Services flaw requires customer action</title>
-      <link>https://www.bleepingcomputer.com/news/security/cisco-says-critical-webex-services-flaw-requires-customer-action</link>
-      <description>Cisco has released security updates to patch four critical vulnerabilities, including a fixed improper certificate validation flaw in the company's cloud-based Webex Services platform that requires further customer ac...</description>
-      <source url="https://www.bleepingcomputer.com/news/security/cisco-says-critical-webex-services-flaw-requires-customer-action">BleepingComputer</source>
-      <guid isPermaLink="true">https://www.bleepingcomputer.com/news/security/cisco-says-critical-webex-services-flaw-requires-customer-action</guid>
-      <pubDate>Thu, 16 Apr 2026 08:01:42 -0400</pubDate>
-      <category>Cloud Security</category>
-    </item>
-    <item>
-      <title>[Webinar] Find and Eliminate Orphaned Non-Human Identities in Your Environment</title>
-      <link>https://thehackernews.com/2026/04/webinar-find-and-eliminate-orphaned-non.html</link>
-      <description>In 2024, compromised service accounts and forgotten API keys were behind 68% of cloud breaches. Not phishing. Not weak passwords. Unmanaged non-human identities that nobody was watching. For every employee in your org...</description>
-      <source url="https://thehackernews.com/2026/04/webinar-find-and-eliminate-orphaned-non.html">The Hacker News</source>
-      <guid isPermaLink="true">https://thehackernews.com/2026/04/webinar-find-and-eliminate-orphaned-non.html</guid>
-      <pubDate>Thu, 16 Apr 2026 17:25:00 +0530</pubDate>
-      <category>Breach</category>
-      <category>Phishing</category>
-    </item>
-    <item>
       <title>Cisco Patches Four Critical Identity Services, Webex Flaws Enabling Code Execution</title>
       <link>https://thehackernews.com/2026/04/cisco-patches-four-critical-identity.html</link>
       <description>Cisco has announced patches to address four critical security flaws impacting Identity Services and Webex Services that could result in arbitrary code execution and allow an attacker to impersonate any user within the...</description>
@@ -302,15 +352,6 @@
       <guid isPermaLink="true">https://thehackernews.com/2026/04/cisco-patches-four-critical-identity.html</guid>
       <pubDate>Thu, 16 Apr 2026 16:57:00 +0530</pubDate>
       <category>Identity</category>
-    </item>
-    <item>
-      <title>Data breach at edtech giant McGraw Hill affects 13.5 million accounts</title>
-      <link>https://www.bleepingcomputer.com/news/security/data-breach-at-edtech-giant-mcgraw-hill-affects-135-million-accounts</link>
-      <description>The ShinyHunters extortion group has leaked data from 13.5 million McGraw Hill user accounts, stolen after breaching the company's Salesforce environment earlier this month. [...]</description>
-      <source url="https://www.bleepingcomputer.com/news/security/data-breach-at-edtech-giant-mcgraw-hill-affects-135-million-accounts">BleepingComputer</source>
-      <guid isPermaLink="true">https://www.bleepingcomputer.com/news/security/data-breach-at-edtech-giant-mcgraw-hill-affects-135-million-accounts</guid>
-      <pubDate>Thu, 16 Apr 2026 06:35:09 -0400</pubDate>
-      <category>Breach</category>
     </item>
     <item>
       <title>Obsidian Plugin Abuse Delivers PHANTOMPULSE RAT in Targeted Finance, Crypto Attacks</title>
@@ -362,15 +403,6 @@
       <category>Threat Research</category>
     </item>
     <item>
-      <title>CVE-2026-33032: severe nginx-ui bug grants unauthenticated server access</title>
-      <link>https://securityaffairs.com/190841/hacking/cve-2026-33032-severe-nginx-ui-bug-grants-unauthenticated-server-access.html</link>
-      <description>An actively exploited critical nginx-ui flaw (CVE-2026-33032) lets attackers bypass authentication and take full control of Nginx servers. A critical vulnerability in nginx-ui, tracked as CVE-2026-33032 (CVSS score of...</description>
-      <source url="https://securityaffairs.com/190841/hacking/cve-2026-33032-severe-nginx-ui-bug-grants-unauthenticated-server-access.html">Security Affairs</source>
-      <guid isPermaLink="true">https://securityaffairs.com/190841/hacking/cve-2026-33032-severe-nginx-ui-bug-grants-unauthenticated-server-access.html</guid>
-      <pubDate>Wed, 15 Apr 2026 18:17:50 +0000</pubDate>
-      <category>Vulnerability</category>
-    </item>
-    <item>
       <title>n8n Webhooks Abused Since October 2025 to Deliver Malware via Phishing Emails</title>
       <link>https://thehackernews.com/2026/04/n8n-webhooks-abused-since-october-2025.html</link>
       <description>Threat actors have been observed weaponizing n8n, a popular artificial intelligence (AI) workflow automation platform, to facilitate sophisticated phishing campaigns and deliver malicious payloads or fingerprint devic...</description>
@@ -410,15 +442,6 @@
       <category>Azure</category>
       <category>Breach</category>
       <category>AI</category>
-    </item>
-    <item>
-      <title>Mirax malware campaign hits 220K accounts, enables full remote control</title>
-      <link>https://securityaffairs.com/190842/uncategorized/mirax-malware-campaign-hits-220k-accounts-enables-full-remote-control.html</link>
-      <description>Mirax, a new Android RAT, spread via Meta ads, infected 220,000 users and turns devices into SOCKS5 proxies, giving attackers full remote control. Mirax is a new Android remote access trojan spreading through ads on M...</description>
-      <source url="https://securityaffairs.com/190842/uncategorized/mirax-malware-campaign-hits-220k-accounts-enables-full-remote-control.html">Security Affairs</source>
-      <guid isPermaLink="true">https://securityaffairs.com/190842/uncategorized/mirax-malware-campaign-hits-220k-accounts-enables-full-remote-control.html</guid>
-      <pubDate>Wed, 15 Apr 2026 11:41:10 +0000</pubDate>
-      <category>Threat Research</category>
     </item>
     <item>
       <title>Deterministic + Agentic AI: The Architecture Exposure Validation Requires</title>
@@ -523,33 +546,6 @@
       <guid isPermaLink="true">https://blog.cloudflare.com/improved-developer-security</guid>
       <pubDate>Tue, 14 Apr 2026 13:00:10 +0000</pubDate>
       <category>Cloud Security</category>
-    </item>
-    <item>
-      <title>Scaling MCP adoption: Our reference architecture for simpler, safer and cheaper enterprise deployments of MCP</title>
-      <link>https://blog.cloudflare.com/enterprise-mcp</link>
-      <description>We share Cloudflare's internal strategy for governing MCP using Access, AI Gateway, and MCP server portals. We also launch Code Mode to slash token costs and recommend new rules for detecting Shadow MCP in Cloudflare...</description>
-      <source url="https://blog.cloudflare.com/enterprise-mcp">Cloudflare Blog</source>
-      <guid isPermaLink="true">https://blog.cloudflare.com/enterprise-mcp</guid>
-      <pubDate>Tue, 14 Apr 2026 13:00:10 +0000</pubDate>
-      <category>AI</category>
-    </item>
-    <item>
-      <title>Managed OAuth for Access: make internal apps agent-ready in one click</title>
-      <link>https://blog.cloudflare.com/managed-oauth-for-access</link>
-      <description>Managed OAuth for Cloudflare Access helps AI agents securely navigate internal applications. By adopting RFC 9728, agents can authenticate on behalf of users without using insecure service accounts.</description>
-      <source url="https://blog.cloudflare.com/managed-oauth-for-access">Cloudflare Blog</source>
-      <guid isPermaLink="true">https://blog.cloudflare.com/managed-oauth-for-access</guid>
-      <pubDate>Tue, 14 Apr 2026 13:00:10 +0000</pubDate>
-      <category>AI</category>
-    </item>
-    <item>
-      <title>Secure private networking for everyone: users, nodes, agents, Workers — introducing Cloudflare Mesh</title>
-      <link>https://blog.cloudflare.com/mesh</link>
-      <description>Cloudflare Mesh provides secure, private network access for users, nodes, and autonomous AI agents. By integrating with Workers VPC, developers can now grant agents scoped access to private databases and APIs without...</description>
-      <source url="https://blog.cloudflare.com/mesh">Cloudflare Blog</source>
-      <guid isPermaLink="true">https://blog.cloudflare.com/mesh</guid>
-      <pubDate>Tue, 14 Apr 2026 13:00:09 +0000</pubDate>
-      <category>AI</category>
     </item>
     <item>
       <title>Securing the AI Edge: Wiz and Cloudflare Integrate for End-to-End AI Protection</title>
@@ -954,15 +950,6 @@
       <category>Threat Research</category>
     </item>
     <item>
-      <title>On Microsoft’s Lousy Cloud Security</title>
-      <link>https://www.schneier.com/blog/archives/2026/04/on-microsofts-lousy-cloud-security.html</link>
-      <description>ProPublica has a scoop : In late 2024, the federal government’s cybersecurity evaluators rendered a troubling verdict on one of Microsoft’s biggest cloud computing offerings. The tech giant’s “lack of proper detailed...</description>
-      <source url="https://www.schneier.com/blog/archives/2026/04/on-microsofts-lousy-cloud-security.html">Schneier on Security</source>
-      <guid isPermaLink="true">https://www.schneier.com/blog/archives/2026/04/on-microsofts-lousy-cloud-security.html</guid>
-      <pubDate>Thu, 09 Apr 2026 10:51:36 +0000</pubDate>
-      <category>Azure</category>
-    </item>
-    <item>
       <title>Middle East Hack-for-Hire Operation Traced to South Asian Cyber Espionage Group</title>
       <link>https://www.infosecurity-magazine.com/news/middle-east-hack-operation-bitter</link>
       <description>A spear-phishing campaign which spread across the Middle East between 2023 and 2024 has now been linked to Bitter APT group</description>
@@ -998,6 +985,15 @@
       <guid isPermaLink="true">https://www.darkreading.com/threat-intelligence/russia-forest-blizzard-logins-soho-routers</guid>
       <pubDate>Thu, 09 Apr 2026 01:00:00 +0000</pubDate>
       <category>Cloud Security</category>
+    </item>
+    <item>
+      <title>Marimo OSS Python Notebook RCE: From Disclosure to Exploitation in Under 10 Hours</title>
+      <link>https://webflow.sysdig.com/blog/marimo-oss-python-notebook-rce-from-disclosure-to-exploitation-in-under-10-hours</link>
+      <description>On April 8, 2026, a critical vulnerability was disclosed in marimo, an open-source reactive Python notebook platform. Currently being tracked as GHSA-2679-6mx9-h9xc, it is a pre-authentication remote code execution (R...</description>
+      <source url="https://webflow.sysdig.com/blog/marimo-oss-python-notebook-rce-from-disclosure-to-exploitation-in-under-10-hours">Sysdig Blog</source>
+      <guid isPermaLink="true">https://webflow.sysdig.com/blog/marimo-oss-python-notebook-rce-from-disclosure-to-exploitation-in-under-10-hours</guid>
+      <pubDate>Thu, 09 Apr 2026 00:00:00 +0000</pubDate>
+      <category>Vulnerability</category>
     </item>
     <item>
       <title>Unpatchable Vulnerabilities of Kubernetes: CVE-2020-8562</title>
@@ -1047,6 +1043,42 @@
       <category>AI</category>
     </item>
     <item>
+      <title>A framework for securely collecting forensic artifacts into S3 buckets</title>
+      <link>https://aws.amazon.com/blogs/security/a-framework-for-securely-collecting-forensic-artifacts-into-s3-buckets</link>
+      <description>When customers experience a security incident, they need to acquire forensic artifacts to identify root cause, extract indicators of compromise (IoCs), and validate remediation efforts. NIST 800-86, Guide to Integrati...</description>
+      <source url="https://aws.amazon.com/blogs/security/a-framework-for-securely-collecting-forensic-artifacts-into-s3-buckets">AWS Security Blog</source>
+      <guid isPermaLink="true">https://aws.amazon.com/blogs/security/a-framework-for-securely-collecting-forensic-artifacts-into-s3-buckets</guid>
+      <pubDate>Wed, 08 Apr 2026 18:19:00 +0000</pubDate>
+      <category>AWS</category>
+    </item>
+    <item>
+      <title>New Chaos Variant Targets Misconfigured Cloud Deployments, Adds SOCKS Proxy</title>
+      <link>https://thehackernews.com/2026/04/new-chaos-variant-targets-misconfigured.html</link>
+      <description>Cybersecurity researchers have flagged a new variant ofmalware called Chaosthat'scapable of hitting misconfigured cloud deployments, marking an expansion of the botnet's targeting infrastructure. "Chaos malware is inc...</description>
+      <source url="https://thehackernews.com/2026/04/new-chaos-variant-targets-misconfigured.html">The Hacker News</source>
+      <guid isPermaLink="true">https://thehackernews.com/2026/04/new-chaos-variant-targets-misconfigured.html</guid>
+      <pubDate>Wed, 08 Apr 2026 23:21:00 +0530</pubDate>
+      <category>Cloud Security</category>
+    </item>
+    <item>
+      <title>Masjesu Botnet Emerges as DDoS-for-Hire Service Targeting Global IoT Devices</title>
+      <link>https://thehackernews.com/2026/04/masjesu-botnet-emerges-as-ddos-for-hire.html</link>
+      <description>Cybersecurity researchers have lifted the curtain on a stealthy botnet that's designed for distributed denial-of-service (DDoS) attacks. Called Masjesu, the botnet has been advertised via Telegram as a DDoS-for-hire s...</description>
+      <source url="https://thehackernews.com/2026/04/masjesu-botnet-emerges-as-ddos-for-hire.html">The Hacker News</source>
+      <guid isPermaLink="true">https://thehackernews.com/2026/04/masjesu-botnet-emerges-as-ddos-for-hire.html</guid>
+      <pubDate>Wed, 08 Apr 2026 22:00:00 +0530</pubDate>
+      <category>Cloud Security</category>
+    </item>
+    <item>
+      <title>Google API Keys Quietly Gain Access to Gemini on Android Devices</title>
+      <link>https://www.infosecurity-magazine.com/news/google-api-keys-access-gemini</link>
+      <description>Google API key flaw exposes mobile apps to Gemini AI access, private files and billing risks</description>
+      <source url="https://www.infosecurity-magazine.com/news/google-api-keys-access-gemini">Infosecurity Magazine</source>
+      <guid isPermaLink="true">https://www.infosecurity-magazine.com/news/google-api-keys-access-gemini</guid>
+      <pubDate>Wed, 08 Apr 2026 16:00:00 +0000</pubDate>
+      <category>AI</category>
+    </item>
+    <item>
       <title>Fraud Rockets Higher in Mobile-First Latin America</title>
       <link>https://www.darkreading.com/cyberattacks-data-breaches/fraud-mobile-first-latin-america</link>
       <description>Cyber-fraudsters move quickly from compromised devices to account takeover to funds transfer, shifting money before many financial institutions can react.</description>
@@ -1054,6 +1086,15 @@
       <guid isPermaLink="true">https://www.darkreading.com/cyberattacks-data-breaches/fraud-mobile-first-latin-america</guid>
       <pubDate>Wed, 08 Apr 2026 15:45:11 +0000</pubDate>
       <category>Scam</category>
+    </item>
+    <item>
+      <title>Critical Vulnerability in Ninja Forms Exposes WordPress Sites</title>
+      <link>https://www.infosecurity-magazine.com/news/flaw-ninja-forms-wordpress</link>
+      <description>Ninja Forms File Upload RCE via unauthenticated arbitrary file upload; update to 3.3.27 immediately</description>
+      <source url="https://www.infosecurity-magazine.com/news/flaw-ninja-forms-wordpress">Infosecurity Magazine</source>
+      <guid isPermaLink="true">https://www.infosecurity-magazine.com/news/flaw-ninja-forms-wordpress</guid>
+      <pubDate>Wed, 08 Apr 2026 15:10:00 +0000</pubDate>
+      <category>Vulnerability</category>
     </item>
     <item>
       <title>Full Sail University to Open IBM Cyber Defense Range Powered by AWS and Cloud Range on Campus</title>
@@ -1094,53 +1135,13 @@
       <category>Threat Research</category>
     </item>
     <item>
-      <title>New Lua-based malware “LucidRook” observed in targeted attacks against Taiwanese organizations</title>
-      <link>https://blog.talosintelligence.com/new-lua-based-malware-lucidrook</link>
-      <description>Cisco Talos uncovered a cluster of activity we track as UAT-10362 conducting spear-phishing campaigns against Taiwanese non-governmental organizations (NGOs) and suspected universities to deliver a newly identified ma...</description>
-      <source url="https://blog.talosintelligence.com/new-lua-based-malware-lucidrook">Cisco Talos</source>
-      <guid isPermaLink="true">https://blog.talosintelligence.com/new-lua-based-malware-lucidrook</guid>
-      <pubDate>Wed, 08 Apr 2026 10:00:55 +0000</pubDate>
-      <category>Phishing</category>
-      <category>Threat Research</category>
-    </item>
-    <item>
-      <title>How to use AI to manage cloud security threats</title>
-      <link>https://webflow.sysdig.com/blog/how-to-use-ai-to-manage-cloud-security-threats</link>
-      <description>Cloud defenders constantly face fast-moving security threats.</description>
-      <source url="https://webflow.sysdig.com/blog/how-to-use-ai-to-manage-cloud-security-threats">Sysdig Blog</source>
-      <guid isPermaLink="true">https://webflow.sysdig.com/blog/how-to-use-ai-to-manage-cloud-security-threats</guid>
-      <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
-      <category>AI</category>
-    </item>
-    <item>
-      <title>Cracks in the Bedrock: Escaping the AWS AgentCore Sandbox</title>
-      <link>https://unit42.paloaltonetworks.com/bypass-of-aws-sandbox-network-isolation-mode</link>
-      <description>Unit 42 uncovers critical vulnerabilities in Amazon Bedrock AgentCore's sandbox, demonstrating DNS tunneling and credential exposure. The post Cracks in the Bedrock: Escaping the AWS AgentCore Sandbox appeared first o...</description>
-      <source url="https://unit42.paloaltonetworks.com/bypass-of-aws-sandbox-network-isolation-mode">Palo Alto Networks Unit 42</source>
-      <guid isPermaLink="true">https://unit42.paloaltonetworks.com/bypass-of-aws-sandbox-network-isolation-mode</guid>
-      <pubDate>Tue, 07 Apr 2026 22:00:11 +0000</pubDate>
-      <category>AWS</category>
-      <category>Scam</category>
-    </item>
-    <item>
-      <title>Storm-1175 Deploys Medusa Ransomware at 'High Velocity'</title>
-      <link>https://www.darkreading.com/threat-intelligence/storm-1175-medusa-ransomware-high-velocity</link>
-      <description>Microsoft says the financially motivated cybercrime group has exploited n-day and zero-day vulnerabilities in campaigns predicated on speed.</description>
-      <source url="https://www.darkreading.com/threat-intelligence/storm-1175-medusa-ransomware-high-velocity">Dark Reading</source>
-      <guid isPermaLink="true">https://www.darkreading.com/threat-intelligence/storm-1175-medusa-ransomware-high-velocity</guid>
-      <pubDate>Tue, 07 Apr 2026 20:15:07 +0000</pubDate>
-      <category>Azure</category>
+      <title>CVE-2026-23226: How a Missing Lock in ksmbd’s Channel List Exposes Your Linux SMB3 Server</title>
+      <link>https://orca.security/resources/blog/cve-2026-23226-ksmbd-smb3-linux-kernel-uaf</link>
+      <description>Overview The Orca Security Research Pod discovered a use-after-free race condition in the Linux kernel’s ksmbd SMB3 server. When two connections share a session over SMB3 multichannel, the kernel can read a freed chan...</description>
+      <source url="https://orca.security/resources/blog/cve-2026-23226-ksmbd-smb3-linux-kernel-uaf">Orca Security Blog</source>
+      <guid isPermaLink="true">https://orca.security/resources/blog/cve-2026-23226-ksmbd-smb3-linux-kernel-uaf</guid>
+      <pubDate>Wed, 08 Apr 2026 12:50:00 +0000</pubDate>
       <category>Vulnerability</category>
-      <category>Ransomware</category>
-    </item>
-    <item>
-      <title>Grafana Patches AI Bug That Could Have Leaked User Data</title>
-      <link>https://www.darkreading.com/application-security/grafana-patches-ai-bug-leaked-user-data</link>
-      <description>By hiding malicious instructions on an attacker-controlled Web page, AI could ingest orders that appear benign but return sensitive data to the attacker's server.</description>
-      <source url="https://www.darkreading.com/application-security/grafana-patches-ai-bug-leaked-user-data">Dark Reading</source>
-      <guid isPermaLink="true">https://www.darkreading.com/application-security/grafana-patches-ai-bug-leaked-user-data</guid>
-      <pubDate>Tue, 07 Apr 2026 19:52:26 +0000</pubDate>
-      <category>AI</category>
     </item>
   </channel>
 </rss>
