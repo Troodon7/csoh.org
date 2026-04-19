@@ -259,6 +259,64 @@ def load_existing_urls(news_path: str, resources_path: str) -> set:
     return urls
 
 
+# Matches a full news card anchor block produced by render_card().
+EXISTING_CARD_RE = re.compile(
+    r'<a\s+href="([^"]+)"\s+class="card-link"[^>]*>\s*'
+    r'<div class="resource-card"([^>]*)>(.*?)</div>\s*</a>',
+    re.DOTALL,
+)
+ARTICLE_DATE_RE = re.compile(r'<p class="article-date">([^<]+)</p>')
+CARD_H3_RE = re.compile(r'<h3>(.*?)</h3>', re.DOTALL)
+CARD_SOURCE_RE = re.compile(r'<span class="source">\(([^)]+)\)</span>')
+CARD_TOOLTIP_RE = re.compile(r'data-tooltip="([^"]*)"')
+CARD_SUMMARY_P_RE = re.compile(r'<p>(.*?)<span class="source">', re.DOTALL)
+
+
+def parse_existing_cards(html_text: str) -> List[Dict[str, str]]:
+    """Extract previously-rendered news cards from news.html as entry dicts.
+
+    Returns a list suitable for feeding back into render_card / schema builders.
+    """
+    entries: List[Dict[str, str]] = []
+    for match in EXISTING_CARD_RE.finditer(html_text):
+        url = html.unescape(match.group(1))
+        body = match.group(3)
+
+        h3m = CARD_H3_RE.search(body)
+        if not h3m:
+            continue
+        title = strip_html(html.unescape(h3m.group(1)))
+
+        datem = ARTICLE_DATE_RE.search(body)
+        if not datem:
+            continue
+        try:
+            pub_dt = dt.datetime.strptime(datem.group(1).strip(), "%B %d, %Y")
+        except ValueError:
+            continue
+        pub_dt = pub_dt.replace(tzinfo=dt.timezone.utc)
+
+        # Prefer full tooltip summary when present; otherwise fall back to visible text.
+        tool_m = CARD_TOOLTIP_RE.search(match.group(2))
+        if tool_m:
+            summary = html.unescape(tool_m.group(1))
+        else:
+            sum_m = CARD_SUMMARY_P_RE.search(body)
+            summary = strip_html(html.unescape(sum_m.group(1))) if sum_m else ""
+
+        src_m = CARD_SOURCE_RE.search(body)
+        source = html.unescape(src_m.group(1)) if src_m else "Unknown Source"
+
+        entries.append({
+            "title": title,
+            "link": url,
+            "summary": summary,
+            "published": format_datetime(pub_dt),
+            "source": source,
+        })
+    return entries
+
+
 def format_date(d: dt.datetime) -> Tuple[str, str]:
     if d.tzinfo is None:
         d = d.replace(tzinfo=dt.timezone.utc)
@@ -544,9 +602,40 @@ def replace_collection_schema(html_text: str, schema_json: str) -> str:
     return new_text if n > 0 else html_text
 
 
-def build_entries(news_path: str, resources_path: str, max_articles: int, min_sources: int) -> Tuple[List[Dict[str, str]], str]:
-    existing = load_existing_urls(news_path, resources_path)
+def _entry_date(entry: Dict[str, str]) -> dt.datetime:
+    return (
+        parse_date(entry.get("published", ""))
+        or dt.datetime(1970, 1, 1, tzinfo=dt.timezone.utc)
+    )
+
+
+def build_entries(
+    news_path: str,
+    resources_path: str,
+    max_articles: int,
+    min_sources: int,
+    today_target: int = 10,
+) -> Tuple[List[Dict[str, str]], str]:
+    # Preserve entries already rendered in news.html so rolling RSS windows
+    # don't drop them on the next run. Same-day items especially accumulate
+    # across the day as each run adds whatever's freshly in the feeds.
+    try:
+        with open(news_path, "r", encoding="utf-8") as f:
+            news_html = f.read()
+        preserved = parse_existing_cards(news_html)
+    except FileNotFoundError:
+        preserved = []
+
+    existing_urls: set = {normalize_url(e["link"]) for e in preserved}
+    try:
+        with open(resources_path, "r", encoding="utf-8") as f:
+            existing_urls.update(normalize_url(u) for u in extract_links(f.read()))
+    except FileNotFoundError:
+        pass
+
+    today_date = dt.datetime.now(dt.timezone.utc).date()
     collected: List[Dict[str, str]] = []
+    today_fallback: List[Dict[str, str]] = []
 
     for feed in FEEDS:
         xml_text = fetch_feed(feed["url"])
@@ -555,30 +644,50 @@ def build_entries(news_path: str, resources_path: str, max_articles: int, min_so
         for item in parse_rss(xml_text, feed["name"]):
             if not item.get("title") or not item.get("link"):
                 continue
-            combined = f"{item['title']} {item.get('summary', '')}"
-            if not is_relevant(combined):
-                continue
             norm = normalize_url(item["link"])
-            if norm in existing:
+            if norm in existing_urls:
                 continue
             resolved = normalize_url(resolve_url(norm))
-            if resolved in existing:
+            if resolved in existing_urls:
                 continue
             item["link"] = resolved
-            collected.append(item)
+            existing_urls.add(resolved)
 
-    if not collected:
-        raise ValueError("No news items found from feeds")
+            combined = f"{item['title']} {item.get('summary', '')}"
+            if is_relevant(combined):
+                collected.append(item)
+            else:
+                pub_dt = parse_date(item.get("published", ""))
+                if pub_dt and pub_dt.astimezone(dt.timezone.utc).date() == today_date:
+                    # Today-dated item from a security-focused feed that
+                    # didn't hit the strict keyword filter. Held in reserve
+                    # for top-up only if we're short on today items.
+                    today_fallback.append(item)
 
-    # Sort by published date (newest first)
-    collected.sort(
-        key=lambda x: parse_date(x.get("published", ""))
-        or dt.datetime(1970, 1, 1, tzinfo=dt.timezone.utc),
-        reverse=True,
-    )
+    all_entries = preserved + collected
+    if not all_entries and not today_fallback:
+        raise ValueError("No news items found from feeds or preserved page")
 
-    # Select purely by date order
-    selected: List[Dict[str, str]] = collected[:max_articles]
+    all_entries.sort(key=_entry_date, reverse=True)
+    selected: List[Dict[str, str]] = all_entries[:max_articles]
+
+    today_count = sum(1 for e in selected if _entry_date(e).date() == today_date)
+    fallback_used = 0
+
+    if today_count < today_target and today_fallback:
+        # Top up today's count from the relaxed-filter pool. Items pass in
+        # order of publish time (newest first); we stop once we hit the
+        # target or exhaust the pool.
+        today_fallback.sort(key=_entry_date, reverse=True)
+        needed = today_target - today_count
+        selected_urls = {e["link"] for e in selected}
+        extras = [e for e in today_fallback if e["link"] not in selected_urls][:needed]
+        if extras:
+            all_entries = extras + all_entries
+            all_entries.sort(key=_entry_date, reverse=True)
+            selected = all_entries[:max_articles]
+            fallback_used = len(extras)
+            today_count = sum(1 for e in selected if _entry_date(e).date() == today_date)
 
     sources = {item["source"] for item in selected}
     if len(sources) < min_sources:
@@ -586,8 +695,21 @@ def build_entries(news_path: str, resources_path: str, max_articles: int, min_so
             f"Warning: Only {len(sources)} sources available; expected at least {min_sources}.",
             file=sys.stderr,
         )
+    if today_count < today_target:
+        print(
+            f"Warning: Only {today_count} today-dated entries (target {today_target}); "
+            f"feeds may not have enough published items yet.",
+            file=sys.stderr,
+        )
 
-    newest = parse_date(selected[0].get("published", "")) or dt.datetime.now(dt.timezone.utc)
+    print(
+        f"Selected {len(selected)} entries ({today_count} from today, "
+        f"{len(preserved)} preserved, {len(collected)} new from feeds, "
+        f"{fallback_used} relaxed-filter today top-ups).",
+        file=sys.stderr,
+    )
+
+    newest = _entry_date(selected[0])
     _, newest_iso = format_date(newest)
     return selected[:max_articles], newest_iso
 
@@ -599,10 +721,22 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--feed-file", default="feed.xml")
     parser.add_argument("--max-articles", type=int, default=120)
     parser.add_argument("--min-sources", type=int, default=10)
+    parser.add_argument(
+        "--today-target",
+        type=int,
+        default=10,
+        help="Minimum today-dated entries; tops up from relaxed-filter pool if below.",
+    )
     args = parser.parse_args(argv)
 
     try:
-        entries, newest_iso = build_entries(args.news_file, args.resources_file, args.max_articles, args.min_sources)
+        entries, newest_iso = build_entries(
+            args.news_file,
+            args.resources_file,
+            args.max_articles,
+            args.min_sources,
+            today_target=args.today_target,
+        )
     except Exception as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 1
