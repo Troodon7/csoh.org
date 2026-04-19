@@ -7,10 +7,12 @@ The [News page](https://csoh.org/news.html) is updated **automatically every 3 h
 1. **GitHub Actions** (a free automation service built into GitHub) runs a Python script on a schedule — every 3 hours.
 2. The script visits **32 cloud security news sources** and checks for new articles using something called **RSS feeds**. An RSS feed is like a news wire — it's a machine-readable list of recent articles that a website publishes so other tools can easily pull in headlines, dates, and summaries.
 3. The script filters those articles for **cloud security topics** (looking for keywords like "AWS", "Azure", "Kubernetes", "vulnerability", "breach", etc.) and throws out duplicates.
-4. It then updates `news.html` with fresh article cards — title, date, summary, source name, and a link to the original article. It also regenerates `feed.xml` (the RSS feed) with the latest articles.
-5. Instead of pushing changes directly, it **creates a Pull Request** (a proposed change) so a maintainer can review it before it goes live.
-6. If the only files changed are `news.html` and `feed.xml`, the PR is **automatically merged** — no human review needed for routine news updates.
-7. Once merged, the **unified site-update-deploy.yml workflow** automatically uploads the updated site to the web server via FTP.
+4. **Existing cards on `news.html` are preserved across runs.** RSS feeds are rolling windows, so today-dated articles from earlier runs would otherwise get dropped when feeds rotate. The script parses the current `news.html`, then merges in whatever new items this run's feeds surfaced, sorted by date and capped at 120 articles.
+5. If after that merge fewer than **10 today-dated articles** are on the page, the script tops up from a **relaxed-filter pool** — today-dated items from the same security feeds that didn't hit the strict keyword filter. The target is tunable with `--today-target`.
+6. It then writes fresh article cards to `news.html` (title, date, summary, source, link), regenerates `feed.xml` (the RSS feed), rebuilds the `NewsArticle` JSON-LD block on `news.html` from the top 20 articles, and refreshes `<lastmod>` dates in `sitemap.xml`.
+7. Instead of pushing changes directly, it **creates a Pull Request** (a proposed change) so a maintainer can review it before it goes live.
+8. If the only files changed are `news.html`, `feed.xml`, and `sitemap.xml`, the PR is **automatically merged** — no human review needed for routine news updates.
+9. Once merged, the **unified site-update-deploy.yml workflow** automatically uploads the updated site to the web server via FTP.
 
 **The end result:** the News page always has fresh, relevant cloud security articles without anyone lifting a finger.
 
@@ -105,7 +107,7 @@ Schedule (every 3 hours) or manual trigger
   Done    Create a Pull Request
               |
               v
-         Only news.html + feed.xml changed?
+         Only news.html + feed.xml + sitemap.xml changed?
           /         \
         Yes          No
          |            |
@@ -139,8 +141,11 @@ python3 update_news.py \
   --news-file news.html \
   --resources-file resources.html \
   --max-articles 120 \
-  --min-sources 10
+  --min-sources 10 \
+  --today-target 10
 ```
+
+`--today-target` sets the minimum number of today-dated entries the page should hold. If the strict keyword filter plus preserved cards don't hit this number, the script tops up from today-dated items on the same security feeds that narrowly missed the strict filter. Set to `0` to disable the top-up.
 
 ### Requirements
 
@@ -149,12 +154,30 @@ python3 update_news.py \
 
 ---
 
-## Duplicate Handling
+## Duplicate Handling & Card Preservation
 
 The script avoids posting the same article twice by comparing normalized URLs against:
 
-- Existing entries already in `news.html`
+- Existing entries already in `news.html` (these are also preserved, see below)
 - Any URLs in `resources.html` (so news doesn't duplicate a curated resource)
+
+**Preservation logic.** Each run parses the cards already on `news.html` and carries them forward. New feed items are layered on top, the combined set is sorted by date (newest first), and the result is capped at `--max-articles`. This means:
+
+- Today-dated articles surfaced in a morning run are still on the page after an afternoon run, even if the source feeds have since rotated them off.
+- Over a typical day, the today count grows as each run adds the freshest items and preserves the earlier ones.
+- The strict keyword filter only applies to new items. Preserved cards stay regardless — they were accepted when first added.
+
+## Today-Target Top-Up
+
+If preservation + new strict-filter items still leave fewer than `--today-target` today-dated entries (default 10), the script fills the gap from a **relaxed-filter pool**: today-dated items pulled from our security-focused feeds that didn't happen to contain a strict keyword. This trades a little precision for freshness on quiet publishing days (weekends, holidays).
+
+When this runs, workflow logs show a line like:
+
+```
+Selected 120 entries (10 from today, 120 preserved, 3 new from feeds, 2 relaxed-filter today top-ups).
+```
+
+If the page still falls short of the target after the top-up, the script prints a warning but does not fabricate entries.
 
 ---
 

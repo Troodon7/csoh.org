@@ -242,19 +242,23 @@ csoh.org/
 │   └── previews/               # Resource preview images
 │
 ├── tools/                      # Automation and maintenance scripts
-│   ├── submit_resource.py            # Interactive tool for submitting new resources
-│   ├── submit_news_source.py         # Interactive tool for submitting news sources
-│   ├── generate_preview.py           # Generate preview screenshots for resources
-│   ├── normalize_urls.py             # URL normalizer (tracking params, HTTPS, redirects)
-│   ├── check_url_safety.py           # Core URL safety validator with pattern matching
-│   ├── check_existing_urls.py        # Batch scanner for chat-resources.html URLs
-│   ├── check_all_site_urls.py        # Comprehensive site-wide URL scanner
-│   ├── update_chat_titles.py         # Generate descriptive titles for chat URLs
-│   ├── SUBMIT_RESOURCE_README.md     # Interactive submission tool documentation
-│   ├── SUBMIT_NEWS_SOURCE_README.md  # News source submission tool documentation
-│   ├── GENERATE_PREVIEW_README.md    # Preview image generation documentation
-│   ├── CHECK_URL_SAFETY_README.md    # URL safety checker documentation
-│   └── CHECK_URL_SAFETY_WORKFLOW.md  # GitHub Actions workflow documentation
+│   ├── submit_resource.py                  # Interactive tool for submitting new resources
+│   ├── submit_news_source.py               # Interactive tool for submitting news sources
+│   ├── generate_preview.py                 # Generate preview screenshots for resources
+│   ├── normalize_urls.py                   # URL normalizer (tracking params, HTTPS, redirects)
+│   ├── check_url_safety.py                 # Core URL safety validator with pattern matching
+│   ├── check_existing_urls.py              # Batch scanner for chat-resources.html URLs
+│   ├── check_all_site_urls.py              # Comprehensive site-wide URL scanner
+│   ├── update_chat_titles.py               # Generate descriptive titles for chat URLs
+│   ├── update_sitemap.py                   # Refresh sitemap.xml <lastmod> dates from git history
+│   ├── update_presentations_schema.py      # Regenerate VideoObject JSON-LD on presentations.html
+│   ├── SUBMIT_RESOURCE_README.md           # Interactive submission tool documentation
+│   ├── SUBMIT_NEWS_SOURCE_README.md        # News source submission tool documentation
+│   ├── GENERATE_PREVIEW_README.md          # Preview image generation documentation
+│   ├── CHECK_URL_SAFETY_README.md          # URL safety checker documentation
+│   ├── CHECK_URL_SAFETY_WORKFLOW.md        # GitHub Actions workflow documentation
+│   ├── UPDATE_SITEMAP_README.md            # Sitemap refresher documentation
+│   └── UPDATE_PRESENTATIONS_SCHEMA_README.md # Presentations VideoObject schema documentation
 │
 ├── update_news.py              # Python script to auto-update news articles + RSS feed
 ├── update_sri.py               # Python script to update SRI hashes & cache-bust params
@@ -264,7 +268,7 @@ csoh.org/
 │
 ├── .github/workflows/
 │   ├── update-news.yml              # Automated news + RSS feed updates (every 3 hours)
-│   ├── site-update-deploy.yml       # Unified workflow: SRI, URL normalization, preview, deploy
+│   ├── site-update-deploy.yml       # Unified workflow: SRI, URL normalization, previews, presentations schema, sitemap, deploy
 │   ├── check-url-safety.yml         # URL safety validation on PRs + weekly
 │   ├── normalize-urls.yml           # Monthly URL normalization (tracking params, redirects)
 │   ├── validate-html.yml            # HTML5 validation on PRs + weekly
@@ -359,6 +363,8 @@ This site uses **GitHub Actions workflows** to automate all major site updates. 
 - Updates SRI hashes and cache-busting tags if CSS/JS changed (using `update_sri.py`)
 - Checks URL safety — blocks deploy if unsafe URLs are detected (using `check_all_site_urls.py`)
 - Normalizes URLs — strips tracking parameters, upgrades HTTP to HTTPS, resolves redirects (using `normalize_urls.py`)
+- Regenerates the `VideoObject` JSON-LD on `presentations.html` (using `update_presentations_schema.py`)
+- Refreshes `<lastmod>` dates in `sitemap.xml` from git history (using `update_sitemap.py`)
 - Generates preview images for new resources in `resources.html` (using `generate_preview.py`)
 - Checks for broken links (non-blocking warning)
 - Deploys the site to the web server via FTP in smart passes:
@@ -399,12 +405,14 @@ Workflows use a **Personal Access Token (PAT)** stored as a GitHub repo secret c
 ## 🔍 SEO & Search Optimization
 
 ### Rich Snippets Enabled
-- ✅ **NewsArticle Schema** - 120+ articles eligible for Google News carousel
+- ✅ **NewsArticle Schema** - Top articles on `news.html` regenerated each run for Google News carousel eligibility
+- ✅ **VideoObject Schema** - Each YouTube talk on `presentations.html` marked up for video-rich results
 - ✅ **FAQPage Schema** - 5 high-relevance Q&A pairs for featured snippets
 - ✅ **Organization Schema** - Domain authority signals (4.8★ rating, 2000+ members)
 - ✅ **CollectionPage Schema** - Resource pages eligible for rich results
 - ✅ **Event Schema** - Weekly Zoom session marked up for search visibility
 - ✅ **BreadcrumbList** - Navigation hierarchy for SERP display
+- ✅ **Fresh `<lastmod>` sitemap dates** - refreshed from git history on every deploy
 
 ## 🤝 Contributing
 
@@ -509,6 +517,6 @@ Special thanks to:
 
 ---
 
-**Last Updated**: February 28, 2026
+**Last Updated**: April 19, 2026
 
 For the latest updates and announcements, follow us on Discord!

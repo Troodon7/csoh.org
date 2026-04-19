@@ -89,9 +89,9 @@ csoh.org/
 ├── breach-timeline.css     # Breach timeline page specific styles
 ├── breach-timeline.js      # Breach timeline page specific JS
 │
-├── tools/                  # Python automation scripts (URL safety, normalization, previews)
+├── tools/                  # Python automation scripts (URL safety, normalization, previews, sitemap, presentations schema)
 ├── .github/workflows/      # CI/CD pipelines (6 workflows)
-└── update_news.py          # News aggregation from 22 RSS feeds
+└── update_news.py          # News aggregation from 32 RSS feeds
 ```
 
 ### How Key Features Work
@@ -124,9 +124,10 @@ csoh.org/
 - **You do not need to update SRI hashes manually** -- CI handles it on merge
 
 **News Aggregation**
-- `update_news.py` pulls from 22 RSS/Atom feeds every 3 hours (via GitHub Actions)
-- Generates `news.html` and `feed.xml` automatically
-- PRs are auto-created and auto-merged if only news content changed
+- `update_news.py` pulls from 32 RSS/Atom feeds every 3 hours (via GitHub Actions)
+- Generates `news.html` and `feed.xml`, regenerates the `NewsArticle` JSON-LD block on `news.html`, and refreshes `sitemap.xml` lastmod dates
+- Preserves cards already on `news.html` across runs so today-dated items don't disappear when RSS feeds rotate
+- PRs are auto-created and auto-merged if only `news.html`, `feed.xml`, and `sitemap.xml` changed
 
 ---
 
@@ -224,6 +225,9 @@ See [CONTRIBUTING_KILL_CHAINS.md](CONTRIBUTING_KILL_CHAINS.md) for the full proc
 | `update_news.py` | News feed aggregation script | Adding/removing RSS sources |
 | `tools/normalize_urls.py` | URL normalizer (tracking params, HTTPS upgrade, redirects) | **Don't edit** -- runs in CI |
 | `tools/check_all_site_urls.py` | Site-wide URL safety scanner | Running local safety audits |
+| `tools/update_sitemap.py` | Refreshes `<lastmod>` dates in `sitemap.xml` from git history | **Don't edit** -- runs in CI and alongside `update_news.py` |
+| `tools/update_presentations_schema.py` | Regenerates `VideoObject` JSON-LD on `presentations.html` | **Don't edit** -- runs in CI on every deploy |
+| `sitemap.xml` | XML sitemap for search engines | **Don't edit** -- lastmod refreshed automatically |
 | `update_sri.py` | SRI hash generator | **Don't edit** -- runs in CI |
 | `.htaccess` | Apache server config (security headers, caching, compression) | Server configuration changes |
 | `nginx.conf` | Nginx server config (Docker deployments) | Server configuration changes |
