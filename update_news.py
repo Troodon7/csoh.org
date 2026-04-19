@@ -10,12 +10,16 @@
 import argparse
 import datetime as dt
 import html
+import json
+import os
 import re
+import subprocess
 import sys
 import urllib.request
 import xml.etree.ElementTree as ET
 from email.utils import format_datetime, parsedate_to_datetime
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+from urllib.parse import urlparse
 
 
 FEEDS = [
@@ -437,9 +441,107 @@ def replace_grid(html_text: str, cards_html: str) -> str:
 
 
 def update_date_modified(html_text: str, iso_date: str) -> str:
-    html_text = re.sub(r'"dateModified"\s*:\s*"[^"]+"', f'"dateModified": "{iso_date}"', html_text, count=1)
     html_text = re.sub(r'og:updated_time"\s+content="[^"]+"', f'og:updated_time" content="{iso_date}"', html_text, count=1)
     return html_text
+
+
+def build_newsarticle_schema(entry: Dict[str, str]) -> dict:
+    link = entry["link"]
+    parsed = urlparse(link)
+    origin = f"{parsed.scheme}://{parsed.netloc}" if parsed.scheme and parsed.netloc else "https://csoh.org"
+
+    published_dt = parse_date(entry.get("published", "")) or dt.datetime.now(dt.timezone.utc)
+    iso = published_dt.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    title = strip_html(html.unescape(entry["title"])).strip()
+    headline = title[:110]
+    full_summary = strip_html(html.unescape(entry.get("summary", "")))
+    description = full_summary[:250] if full_summary else title
+
+    source = entry["source"]
+    tags = build_tags(f"{entry['title']} {full_summary} {source}")
+    source_slug = SOURCE_SLUGS.get(source, "")
+    image_url = (
+        f"https://csoh.org/img/news-banners/{source_slug}.jpg"
+        if source_slug
+        else "https://csoh.org/banner.png"
+    )
+
+    return {
+        "@type": "NewsArticle",
+        "headline": headline,
+        "description": description,
+        "url": link,
+        "image": image_url,
+        "datePublished": iso,
+        "dateModified": iso,
+        "author": {
+            "@type": "Organization",
+            "name": source,
+            "url": origin,
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": source,
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://csoh.org/banner.png",
+                "width": 600,
+                "height": 60,
+            },
+        },
+        "inLanguage": "en-US",
+        "keywords": ", ".join(tags),
+    }
+
+
+def build_collection_schema(entries: List[Dict[str, str]], newest_iso: str, limit: int = 20) -> str:
+    articles = [build_newsarticle_schema(e) for e in entries[:limit]]
+    schema = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Cloud Security News",
+        "description": (
+            "Latest cloud security news: AWS/Azure/GCP vulnerabilities, data breaches, "
+            "zero-day exploits, security patches, and industry developments. Curated "
+            "daily by cloud security professionals."
+        ),
+        "url": "https://csoh.org/news.html",
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "Cloud Security News Articles",
+            "description": f"{len(entries)} curated cloud security news articles from reputable sources",
+            "author": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "url": "https://csoh.org/",
+                "logo": "https://csoh.org/banner.png",
+            },
+            "dateModified": newest_iso,
+            "inLanguage": "en-US",
+            "isAccessibleForFree": True,
+            "hasPart": articles,
+        },
+    }
+    # Escape `</` so a stray `</script>` in content can't terminate the inline script block.
+    return json.dumps(schema, indent=2, ensure_ascii=False).replace("</", "<\\/")
+
+
+def replace_collection_schema(html_text: str, schema_json: str) -> str:
+    pattern = re.compile(
+        r'(<!-- Structured Data - News Collection for Rich Snippets -->\s*<script type="application/ld\+json">)'
+        r'(.*?)'
+        r'(</script>)',
+        re.DOTALL,
+    )
+
+    indented = "\n".join("    " + line if line else line for line in schema_json.split("\n"))
+
+    def repl(match: re.Match[str]) -> str:
+        return f"{match.group(1)}\n{indented}\n    {match.group(3)}"
+
+    new_text, n = pattern.subn(repl, html_text, count=1)
+    return new_text if n > 0 else html_text
 
 
 def build_entries(news_path: str, resources_path: str, max_articles: int, min_sources: int) -> Tuple[List[Dict[str, str]], str]:
@@ -516,6 +618,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         return 1
 
     html_text = replace_grid(html_text, cards_html)
+    schema_json = build_collection_schema(entries, newest_iso)
+    html_text = replace_collection_schema(html_text, schema_json)
     html_text = update_date_modified(html_text, newest_iso)
 
     with open(args.news_file, "w", encoding="utf-8") as f:
@@ -524,6 +628,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     feed_xml = build_feed_xml(entries, newest_iso)
     with open(args.feed_file, "w", encoding="utf-8") as f:
         f.write(feed_xml)
+
+    # Refresh sitemap <lastmod> values so the news.html change is reflected.
+    sitemap_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tools", "update_sitemap.py")
+    if os.path.exists(sitemap_script):
+        subprocess.run([sys.executable, sitemap_script], check=False)
 
     print(
         f"Updated {args.news_file} and {args.feed_file} with {len(entries)} articles "

@@ -19,6 +19,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
           token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
@@ -42,10 +43,16 @@ jobs:
 
           echo "has_changes=true" >> "$GITHUB_OUTPUT"
 
-          count="$(printf '%s\n' "$files" | sed '/^$/d' | wc -l | tr -d ' ')"
-          if [ "$count" = "1" ] && [ "$files" = "news.html" ]; then
-            echo "only_news_files=true" >> "$GITHUB_OUTPUT"
-          elif [ "$count" = "2" ] && printf '%s\n' "$files" | sort | grep -qx "feed.xml" && printf '%s\n' "$files" | sort | grep -qx "news.html"; then
+          allowed="news.html feed.xml sitemap.xml"
+          only_allowed=true
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            case " $allowed " in
+              *" $f "*) ;;
+              *) only_allowed=false; break ;;
+            esac
+          done <<< "$files"
+          if [ "$only_allowed" = "true" ]; then
             echo "only_news_files=true" >> "$GITHUB_OUTPUT"
           else
             echo "only_news_files=false" >> "$GITHUB_OUTPUT"

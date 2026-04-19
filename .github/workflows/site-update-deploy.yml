@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
           token: ${{ secrets.PAT_TOKEN }}
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Save original commit SHA
         id: original_sha
@@ -109,6 +109,40 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Refresh presentations VideoObject schema
+        id: presentations_schema
+        run: |
+          python3 tools/update_presentations_schema.py
+          if git diff --quiet -- presentations.html; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No presentations schema changes"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add presentations.html
+            git commit -m "chore: refresh presentations VideoObject schema [skip ci]"
+            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Presentations schema changes committed"
+          fi
+
+      - name: Refresh sitemap lastmod dates
+        id: sitemap
+        run: |
+          python3 tools/update_sitemap.py
+          if git diff --quiet -- sitemap.xml; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No sitemap changes to commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add sitemap.xml
+            git commit -m "chore: refresh sitemap lastmod dates [skip ci]"
+            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Sitemap changes committed"
+          fi
+
       - name: Check for missing previews
         id: check_previews
         run: |
@@ -176,7 +210,7 @@ jobs:
       - name: Check if deploy is needed
         id: deploy_needed
         run: |
-          if [[ "${{ steps.sri.outputs.changed }}" == "true" || "${{ steps.check_previews.outputs.missing }}" == "true" || "${{ steps.check_chat_screenshots.outputs.new }}" == "true" || "${{ steps.html_changed.outputs.changed }}" == "true" || "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          if [[ "${{ steps.sri.outputs.changed }}" == "true" || "${{ steps.sitemap.outputs.changed }}" == "true" || "${{ steps.check_previews.outputs.missing }}" == "true" || "${{ steps.check_chat_screenshots.outputs.new }}" == "true" || "${{ steps.html_changed.outputs.changed }}" == "true" || "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             echo "deploy=true" >> $GITHUB_OUTPUT
           else
             echo "deploy=false" >> $GITHUB_OUTPUT
