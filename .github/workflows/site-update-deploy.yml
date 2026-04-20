@@ -97,7 +97,11 @@ jobs:
           if [ $NORM_EXIT -ne 0 ]; then
             echo "::warning::URL normalization exited with code $NORM_EXIT — some redirects may not have been resolved"
           fi
-          if git diff --quiet; then
+          # Scope the diff check to HTML files only — other steps (URL safety)
+          # may leave report files modified, but we only want to commit HTML
+          # changes here. Without this scope, an empty `git add '*.html'`
+          # followed by `git commit` fails under `bash -e` and blocks deploy.
+          if git diff --quiet -- '*.html'; then
             echo "No URL changes"
             echo "changed=false" >> $GITHUB_OUTPUT
           else
