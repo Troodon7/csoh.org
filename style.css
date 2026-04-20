@@ -473,6 +473,13 @@ nav a:focus {
     font-size: 1.1rem;
 }
 
+/* Hide an element. Used in place of inline `style="display:none;"`
+   so that strict CSPs and content-blocking shields (which can ignore
+   inline styles) don't leave the element visible. */
+.is-hidden {
+    display: none !important;
+}
+
 .no-results p {
     margin: 0;
 }

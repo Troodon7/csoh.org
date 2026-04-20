@@ -28,10 +28,10 @@
         content="Weekly recap notes from CSOH meetings covering cloud security, AI governance, supply chain attacks, and community discussions.">
     <meta name="twitter:image" content="https://csoh.org/banner.png">
 
-    <link rel="preload" href="/style.css?v=16396217" as="style"
-        integrity="sha384-3lg96gq3+cGNv7VGfQbv2zfgpMcQO+3aMAbIDW1o/OfRnHgn53H9DT3sELXFsNxz">
-    <link rel="stylesheet" href="/style.css?v=16396217"
-        integrity="sha384-3lg96gq3+cGNv7VGfQbv2zfgpMcQO+3aMAbIDW1o/OfRnHgn53H9DT3sELXFsNxz">
+    <link rel="preload" href="/style.css?v=634a7a6c" as="style"
+        integrity="sha384-yOs8eXkRlu8snbI50c5gF7UwsRqLLGgPA/NiD4CoteenkAyqCSDXfgnur95si/zo">
+    <link rel="stylesheet" href="/style.css?v=634a7a6c"
+        integrity="sha384-yOs8eXkRlu8snbI50c5gF7UwsRqLLGgPA/NiD4CoteenkAyqCSDXfgnur95si/zo">
 
     <!-- Structured Data - Breadcrumb -->
     <script type="application/ld+json">
@@ -426,7 +426,7 @@
                     </div>
                 </div>
             </div>
-            <p id="noMeetingResults" class="no-results" style="display:none;">
+            <p id="noMeetingResults" class="no-results is-hidden">
                 No meetings match your search.
                 <button class="clear-search-btn" id="clearMeetingSearch">clear filters</button>.
             </p>
@@ -2940,114 +2940,7 @@
 
     <script src="/main.js?v=29975f3e" integrity="sha384-A55kWiGR8wabWjEJ4fs9HjgYwF0FkJkVNvqiJDvP8mQoCD1QKJyGSQxE7OFv5d/H"
         defer></script>
-
-    <script>
-    // meetings.html filter — search + year/month + topical tags.
-    // Keeps the in-page index and meeting articles in sync.
-    (function () {
-        const articles = Array.from(document.querySelectorAll('article[id^="meeting-"]'));
-        const tocItems = Array.from(document.querySelectorAll('#table-of-contents li'));
-        const search = document.getElementById('meetingSearch');
-        const filters = document.getElementById('meetingFilters');
-        const countEl = document.getElementById('visibleMeetings');
-        const noResults = document.getElementById('noMeetingResults');
-        const clearBtn = document.getElementById('clearMeetingSearch');
-
-        if (!articles.length || !filters) return;
-
-        // Build map of id -> { tags, toc }
-        const meta = articles.map((art, i) => ({
-            el: art,
-            id: art.id,
-            tags: Array.from(art.querySelectorAll('.meeting-tags .tag')).map(t => t.textContent),
-            text: art.textContent.toLowerCase(),
-            toc: tocItems[i] || null,
-        }));
-
-        // Collect unique tags, keeping month tags (YYYY-MM) first and topical after.
-        const tagSet = new Set();
-        meta.forEach(m => m.tags.forEach(t => tagSet.add(t)));
-        const allTags = Array.from(tagSet);
-        const monthTags = allTags.filter(t => /^\d{4}-\d{2}$/.test(t)).sort().reverse();
-        const topicalTags = allTags.filter(t => !/^\d{4}-\d{2}$/.test(t)).sort();
-
-        // Insert tag buttons after the "All" button.
-        const frag = document.createDocumentFragment();
-        const makeBtn = (label, value) => {
-            const b = document.createElement('button');
-            b.className = 'filter-btn';
-            b.setAttribute('data-filter', 'tag:' + value);
-            b.textContent = label;
-            return b;
-        };
-        // Month tags (YYYY-MM) are deliberately omitted from the filter bar
-        // to keep the button grid tidy; they're still rendered on each
-        // meeting's tag row and remain searchable via the text box.
-        topicalTags.forEach(t => frag.appendChild(makeBtn(t, t)));
-        filters.appendChild(frag);
-
-        let activeFilter = 'all';
-        let searchTerm = '';
-
-        function refresh() {
-            let visible = 0;
-            meta.forEach(m => {
-                let show = true;
-                if (activeFilter !== 'all') {
-                    const value = activeFilter.slice(4); // strip "tag:"
-                    if (!m.tags.includes(value)) show = false;
-                }
-                if (show && searchTerm) {
-                    if (!m.text.includes(searchTerm)) show = false;
-                }
-                m.el.style.display = show ? '' : 'none';
-                if (m.toc) m.toc.style.display = show ? '' : 'none';
-                // Auto-expand topic <details> when a search term matches content
-                // inside it; collapse back to default when the search is cleared.
-                const det = m.el.querySelector('details.meeting-topics');
-                if (det) det.open = show && !!searchTerm;
-                if (show) visible++;
-            });
-            if (countEl) countEl.textContent = String(visible);
-            if (noResults) noResults.style.display = visible === 0 ? '' : 'none';
-        }
-
-        filters.addEventListener('click', (ev) => {
-            const btn = ev.target.closest('button[data-filter]');
-            if (!btn) return;
-            Array.from(filters.querySelectorAll('button[data-filter]')).forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeFilter = btn.getAttribute('data-filter');
-            refresh();
-        });
-
-        if (search) {
-            let timer = null;
-            search.addEventListener('input', () => {
-                clearTimeout(timer);
-                timer = setTimeout(() => {
-                    searchTerm = search.value.trim().toLowerCase();
-                    refresh();
-                }, 120);
-            });
-        }
-
-        if (clearBtn) {
-            clearBtn.addEventListener('click', () => {
-                if (search) search.value = '';
-                searchTerm = '';
-                activeFilter = 'all';
-                Array.from(filters.querySelectorAll('button[data-filter]')).forEach(b => b.classList.remove('active'));
-                const allBtn = filters.querySelector('button[data-filter="all"]');
-                if (allBtn) allBtn.classList.add('active');
-                refresh();
-            });
-        }
-
-        // Initial sync so the "All (N)" counter reflects the actual article count.
-        refresh();
-    })();
-    </script>
+    <script src="/meetings.js?v=3f38ae07" defer integrity="sha384-SYU+mhS+3pukfpRFbi6X1ETups8oDDcs/XkaK223+3INz/nN24KcHBYRBqSsvtnN"></script>
 </body>
 
 </html>

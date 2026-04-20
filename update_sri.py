@@ -182,6 +182,26 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
         content = bt_script_pattern.sub(replace_bt_script, content)
 
+    # Update meetings.js: SRI hash, cache-bust param, remove crossorigin
+    if 'meetings.js' in hashes:
+        mtg_script_pattern = re.compile(
+            r'<script\b[^>]*\bsrc=(["\'])(?:\.?/)?meetings\.js(?:\?[^"\']*)?(\1)[^>]*>',
+            re.IGNORECASE,
+        )
+
+        def replace_mtg_script(match: re.Match) -> str:
+            tag = match.group(0)
+            tag = re.sub(
+                r'(src=["\'])(?:\.?/)?meetings\.js(?:\?[^"\']*)?(["\'])',
+                rf'\g<1>/meetings.js?v={cache_busts["meetings.js"]}\2',
+                tag,
+            )
+            tag = upsert_attr(tag, 'integrity', hashes['meetings.js'])
+            tag = remove_attr(tag, 'crossorigin')
+            return tag
+
+        content = mtg_script_pattern.sub(replace_mtg_script, content)
+
     # Write back if changed
     if content != original_content:
         with open(html_path, 'w', encoding='utf-8') as f:
@@ -203,6 +223,7 @@ def main():
         'chat-resources.js': repo_root / 'chat-resources.js',
         'breach-timeline.css': repo_root / 'breach-timeline.css',
         'breach-timeline.js': repo_root / 'breach-timeline.js',
+        'meetings.js': repo_root / 'meetings.js',
     }
     
     # Calculate SRI hashes and cache-bust strings
