@@ -266,7 +266,7 @@ nav a:focus {
 }
 
 /* Primary search input */
-#searchInput {
+#searchInput, #meetingSearch {
     width: 100%;
     padding: 0.8rem 1rem 0.8rem 2.75rem;
     font-size: 1rem;
@@ -280,12 +280,12 @@ nav a:focus {
     transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
-#searchInput::placeholder {
+#searchInput::placeholder, #meetingSearch::placeholder {
     color: var(--text-muted, #94a3b8);
     font-size: 0.95rem;
 }
 
-#searchInput:focus {
+#searchInput:focus, #meetingSearch:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.14);
     background: var(--white);
@@ -314,13 +314,13 @@ nav a:focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
 }
 
-[data-theme="dark"] #searchInput {
+[data-theme="dark"] #searchInput, [data-theme="dark"] #meetingSearch {
     background: #1e2a3a;
     border-color: #2d3f55;
     color: var(--text-color);
 }
 
-[data-theme="dark"] #searchInput:focus {
+[data-theme="dark"] #searchInput:focus, [data-theme="dark"] #meetingSearch:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
     background: #162030;
@@ -402,7 +402,7 @@ nav a:focus {
     margin-bottom: 1rem;
 }
 
-.search-filter-container #searchInput {
+.search-filter-container #searchInput, .search-filter-container #meetingSearch {
     flex: 1;
     min-width: min(300px, 100%);
 }
@@ -973,7 +973,7 @@ footer {
     }
 
     .search-box input,
-    #searchInput {
+    #searchInput, #meetingSearch {
         width: 100%;
         font-size: 16px;
         /* Prevents iOS zoom on focus */
