@@ -104,12 +104,66 @@ def api_get(path: str, token: str, params: dict | None = None) -> dict:
 
 
 def list_recordings(token: str, user_id: str, start: dt.date, end: dt.date) -> list[dict]:
-    data = api_get(
-        f"/users/{user_id}/recordings",
-        token,
-        params={"from": start.isoformat(), "to": end.isoformat(), "page_size": 50},
-    )
-    return data.get("meetings", [])
+    """List recordings in [start, end]. Zoom caps each request at a 1-month window,
+    so we iterate month by month and paginate within each window."""
+    all_meetings: list[dict] = []
+    seen_ids: set = set()
+    window_start = start
+    while window_start <= end:
+        # Stay within Zoom's 30-day window per request.
+        window_end = min(end, window_start + dt.timedelta(days=30))
+        next_page_token = ""
+        while True:
+            params = {
+                "from": window_start.isoformat(),
+                "to": window_end.isoformat(),
+                "page_size": 300,
+            }
+            if next_page_token:
+                params["next_page_token"] = next_page_token
+            data = api_get(f"/users/{user_id}/recordings", token, params=params)
+            for m in data.get("meetings", []):
+                mid = m.get("uuid") or m.get("id")
+                if mid in seen_ids:
+                    continue
+                seen_ids.add(mid)
+                all_meetings.append(m)
+            next_page_token = data.get("next_page_token", "")
+            if not next_page_token:
+                break
+        # Advance window by 31 days so we don't overlap start/end by one.
+        window_start = window_end + dt.timedelta(days=1)
+    return all_meetings
+
+
+def in_pacific(iso_utc: str) -> tuple[str, int, int] | None:
+    """Convert Zoom's start_time (ISO UTC) to (weekday_name, hour, minute) in US/Pacific.
+
+    Returns None on parse failure. Uses zoneinfo (Python 3.9+ stdlib)."""
+    try:
+        from zoneinfo import ZoneInfo
+        # Zoom sends "2026-04-17T14:01:23Z" — parse as UTC
+        if iso_utc.endswith("Z"):
+            iso_utc = iso_utc[:-1] + "+00:00"
+        when_utc = dt.datetime.fromisoformat(iso_utc)
+        pacific = when_utc.astimezone(ZoneInfo("America/Los_Angeles"))
+        return pacific.strftime("%a"), pacific.hour, pacific.minute
+    except Exception:
+        return None
+
+
+def is_csoh_friday(meeting: dict, target_hour: int = 7, hour_slack_min: int = 45) -> bool:
+    """True if the meeting started Friday around target_hour local Pacific.
+    Default slack: 45 minutes either side of 07:00 catches sessions started early or late."""
+    info = in_pacific(meeting.get("start_time", ""))
+    if not info:
+        return False
+    weekday, hour, minute = info
+    if weekday != "Fri":
+        return False
+    minutes_into_day = hour * 60 + minute
+    target_minutes = target_hour * 60
+    return abs(minutes_into_day - target_minutes) <= hour_slack_min
 
 
 def transcript_file(meeting: dict) -> dict | None:
@@ -170,6 +224,10 @@ def main() -> int:
     parser.add_argument("--last", action="store_true", help="Use most recent recording with a transcript.")
     parser.add_argument("--list", action="store_true", dest="list_only", help="List recordings in range without downloading.")
     parser.add_argument("--days-back", type=int, default=14, help="How many days back to search (default 14).")
+    parser.add_argument("--months-back", type=int, default=None, help="Shortcut: scan N months back instead of --days-back.")
+    parser.add_argument("--csoh-only", action="store_true", help="Filter to Friday CSOH meetings (~07:00 US/Pacific).")
+    parser.add_argument("--target-hour", type=int, default=7, help="Pacific hour for --csoh-only filter (default 7).")
+    parser.add_argument("--hour-slack", type=int, default=45, help="Minutes either side of --target-hour (default 45).")
     parser.add_argument("--output", type=Path, help="Output file path (default /tmp/csoh-DATE-transcript.vtt).")
     parser.add_argument("--user-id", type=str, default="me", help="Zoom user ID (default: me = the S2S app's owner).")
     parser.add_argument("--env-file", type=Path, default=REPO_ROOT / ".env", help="Path to a .env file (default: repo .env).")
@@ -204,7 +262,10 @@ def main() -> int:
         return 1
 
     today = dt.date.today()
-    start_date = today - dt.timedelta(days=args.days_back)
+    if args.months_back:
+        start_date = today - dt.timedelta(days=31 * args.months_back)
+    else:
+        start_date = today - dt.timedelta(days=args.days_back)
     if args.date:
         try:
             target = dt.date.fromisoformat(args.date)
@@ -225,6 +286,9 @@ def main() -> int:
         except Exception:
             pass
         return 1
+
+    if args.csoh_only:
+        meetings = [m for m in meetings if is_csoh_friday(m, args.target_hour, args.hour_slack)]
 
     if args.list_only:
         print_listing(meetings)

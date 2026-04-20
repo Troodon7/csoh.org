@@ -9,10 +9,10 @@ Pulls the VTT transcript of a CSOH meeting from your Zoom cloud recording, ready
 1. Go to <https://marketplace.zoom.us/develop/create> → **Build App** → **Server-to-Server OAuth**.
 2. Give it a name (e.g. `CSOH Transcript Fetcher`).
 3. Under **App Credentials** note the **Account ID**, **Client ID**, and **Client Secret**.
-4. Under **Scopes**, add (minimum):
-   - `recording:read:recording` (read cloud recordings) — listed as `recording:read` in older UIs
-   - `user:read:user` (identify "me") — listed as `user:read`
-   - `meeting:read:meeting` (meeting metadata) — listed as `meeting:read`
+4. Under **Scopes**, add (minimum). Zoom migrated to granular scopes — use these exact names:
+   - `cloud_recording:read:list_user_recordings` — list a user's recordings
+   - `cloud_recording:read:recording` — read a specific recording's metadata/files
+   - `user:read:user` — identify "me" (may show as `user:read` in older UIs)
 5. Under **Activation**, click **Activate your app**.
 
 ### 2. Store the credentials
