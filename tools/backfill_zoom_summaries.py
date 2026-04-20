@@ -240,14 +240,19 @@ def main() -> int:
 
     existing = already_on_page()
     if args.replace_existing:
-        todo_dates = sorted(candidates_by_date.keys(), reverse=True)
+        candidate_dates = sorted(candidates_by_date.keys(), reverse=True)
     else:
-        todo_dates = sorted([d for d in candidates_by_date if d not in existing], reverse=True)
-    print(f"  {len(todo_dates)} to publish (skip={'no' if args.replace_existing else 'yes'}).", file=sys.stderr)
+        candidate_dates = sorted([d for d in candidates_by_date if d not in existing], reverse=True)
+    print(f"  {len(candidate_dates)} to publish (skip={'no' if args.replace_existing else 'yes'}).", file=sys.stderr)
 
-    if args.limit and args.limit < len(todo_dates):
-        todo_dates = todo_dates[:args.limit]
-        print(f"  limited to first {len(todo_dates)}.", file=sys.stderr)
+    if args.limit and args.limit < len(candidate_dates):
+        candidate_dates = candidate_dates[:args.limit]
+        print(f"  limited to first {len(candidate_dates)}.", file=sys.stderr)
+
+    # add_meeting.py inserts each new article at the TOP of the list, so to end
+    # up with newest-first order we need to publish OLDEST first — the newest
+    # date lands on top last.
+    todo_dates = list(reversed(candidate_dates))
 
     if not todo_dates:
         print("Nothing to do.", file=sys.stderr)
