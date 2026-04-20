@@ -189,11 +189,17 @@ def render_meeting_block(meeting: dict) -> str:
         f'            <h3>{h.escape(heading)}</h3>\n            <p>{h.escape(body)}</p>'
         for heading, body in meeting["topics"]
     )
+    # Month tag is always present; topical tags come from --tag / parsed input.
+    month = iso[:7]
+    tags = [month] + list(dict.fromkeys(meeting.get("tags") or []))  # dedupe, preserve order
+    tag_spans = "".join(f'<span class="tag">{h.escape(t)}</span>' for t in tags)
+    tags_block = f'            <div class="resource-tags meeting-tags">{tag_spans}</div>\n'
     return (
         f'        <article class="section" id="meeting-{iso}">\n'
         f'            <h2>CSOH {iso}</h2>\n'
         f'            <p><time datetime="{iso}"><em>{human}</em></time></p>\n'
         f'            <p><strong>Quick recap.</strong> {h.escape(meeting["recap"])}</p>\n'
+        f'{tags_block}'
         f'{topic_html}\n'
         f'            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>\n'
         f'        </article>\n'
@@ -278,6 +284,12 @@ def main(argv: list[str] | None = None) -> int:
         help="Short headline for the table of contents (default: first topic heading).",
     )
     parser.add_argument(
+        "--tag",
+        action="append",
+        default=[],
+        help="Topical tag to attach (repeatable). Example: --tag AI --tag Conferences",
+    )
+    parser.add_argument(
         "--meetings-file",
         type=Path,
         default=MEETINGS_HTML,
@@ -297,6 +309,8 @@ def main(argv: list[str] | None = None) -> int:
     except ValueError as exc:
         print(f"Error parsing note: {exc}", file=sys.stderr)
         return 1
+
+    meeting["tags"] = [t.strip() for t in args.tag if t.strip()]
 
     headline = args.headline or default_headline(meeting)
     html_text = args.meetings_file.read_text(encoding="utf-8")

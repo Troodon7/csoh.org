@@ -73,7 +73,16 @@ Body paragraph.
 ## Flags
 
 - `--headline "Short headline"` — override the TOC entry's short headline. Default is the first topic heading.
+- `--tag "Foo"` — topical tag for the filter bar (repeatable). Example: `--tag AI --tag Conferences --tag "Supply Chain"`. A month tag (`YYYY-MM`) is always added automatically from the meeting date.
 - `--meetings-file path/to/meetings.html` — operate on a different file (useful for testing).
+
+### Tag conventions
+
+Tags appear as filter buttons on `meetings.html`. Keep them short, Title Case, and reuse existing ones when possible so the filter bar stays tidy. Tags currently in use:
+
+`AI`, `Anniversary`, `Community`, `Conferences`, `Education`, `GitHub Actions`, `Governance`, `Guest Speaker`, `Industry News`, `Insider Threats`, `Passwords`, `SBOM`, `Supply Chain`, `Vulnerabilities`.
+
+Add new ones sparingly — each one creates a new filter button.
 
 ## Expected structure
 
