@@ -1,0 +1,290 @@
+name: Update SRI, Generate Previews, and Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '*.html'
+      - 'chat-screenshots/**'
+      - 'style.css'
+      - 'main.js'
+      - 'chat-resources.js'
+      - 'breach-timeline.css'
+      - 'breach-timeline.js'
+      - 'update_sri.py'
+      - '.htaccess'
+  workflow_dispatch:
+    inputs:
+      full_deploy:
+        description: 'Force a full mirror deploy'
+        required: false
+        default: 'true'
+
+jobs:
+  update-sri-and-previews:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 0
+
+      - name: Save original commit SHA
+        id: original_sha
+        run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install playwright Pillow
+          playwright install chromium
+
+      # --- SRI hashes are always updated and committed BEFORE any deploy step ---
+      - name: Update SRI hashes in HTML files (MUST RUN BEFORE DEPLOY)
+        id: sri
+        run: |
+          python3 update_sri.py
+          if git diff --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No SRI changes to commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add '*.html'
+            git commit -m "chore: update SRI hashes for CSS/JS files [skip ci]"
+            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "SRI changes committed"
+          fi
+
+      - name: Check URL safety (must pass before normalization)
+        id: url_safety
+        run: |
+          python3 tools/check_all_site_urls.py > url-safety-report.txt 2>&1 || true
+          cat url-safety-report.txt
+          if grep -q "❌ UNSAFE" url-safety-report.txt; then
+            echo "::error::Unsafe URLs detected — blocking normalization and deploy"
+            echo "safe=false" >> $GITHUB_OUTPUT
+            exit 1
+          else
+            echo "safe=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload safety report
+        if: always()
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f  # v7.0.0
+        with:
+          name: deploy-url-safety-report
+          path: url-safety-report.txt
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Normalize URLs (strip tracking params, resolve redirects)
+        id: normalize
+        run: |
+          python3 tools/normalize_urls.py --apply 2>&1 | tee normalize-output.txt
+          NORM_EXIT=${PIPESTATUS[0]}
+          if [ $NORM_EXIT -eq 2 ]; then
+            echo "::error::Normalization detected redirects to unsafe destinations — blocking deploy"
+            exit 1
+          fi
+          if [ $NORM_EXIT -ne 0 ]; then
+            echo "::warning::URL normalization exited with code $NORM_EXIT — some redirects may not have been resolved"
+          fi
+          if git diff --quiet; then
+            echo "No URL changes"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add '*.html'
+            git commit -m "chore: normalize URLs (tracking params, redirects) [skip ci]"
+            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Refresh presentations VideoObject schema
+        id: presentations_schema
+        run: |
+          python3 tools/update_presentations_schema.py
+          if git diff --quiet -- presentations.html; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No presentations schema changes"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add presentations.html
+            git commit -m "chore: refresh presentations VideoObject schema [skip ci]"
+            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Presentations schema changes committed"
+          fi
+
+      - name: Refresh sitemap lastmod dates
+        id: sitemap
+        run: |
+          python3 tools/update_sitemap.py
+          if git diff --quiet -- sitemap.xml; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No sitemap changes to commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add sitemap.xml
+            git commit -m "chore: refresh sitemap lastmod dates [skip ci]"
+            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Sitemap changes committed"
+          fi
+
+      - name: Check for missing previews
+        id: check_previews
+        run: |
+          python3 tools/generate_preview.py --check > preview-check.txt || true
+          if grep -q "Found.*resources without previews" preview-check.txt; then
+            echo "missing=true" >> $GITHUB_OUTPUT
+            echo "Found resources without previews"
+          else
+            echo "missing=false" >> $GITHUB_OUTPUT
+            echo "All resources have previews"
+          fi
+          cat preview-check.txt
+
+      - name: Generate missing previews
+        if: steps.check_previews.outputs.missing == 'true'
+        run: |
+          python3 tools/generate_preview.py --batch-auto
+
+      - name: Optimize images
+        if: steps.check_previews.outputs.missing == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jpegoptim
+          find img/previews -name "*.jpg" -exec jpegoptim --strip-all --max=85 {} \;
+
+      - name: Commit and push preview images
+        if: steps.check_previews.outputs.missing == 'true'
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git"
+          git add img/previews/*.jpg || true
+          git add preview-mapping.json || true
+          if git diff --cached --quiet; then
+            echo "No preview images to commit"
+          else
+            git commit -m "chore: auto-generate preview images for new resources [skip ci]"
+            git push
+          fi
+
+      - name: Check for new chat-screenshots
+        id: check_chat_screenshots
+        run: |
+          ORIG_SHA="${{ steps.original_sha.outputs.sha }}"
+          if git diff --name-only "${ORIG_SHA}^" "${ORIG_SHA}" -- 'chat-screenshots/' | grep -q .; then
+            echo "new=true" >> $GITHUB_OUTPUT
+            echo "New chat-screenshots detected"
+          else
+            echo "new=false" >> $GITHUB_OUTPUT
+            echo "No new chat-screenshots"
+          fi
+
+      - name: Check if HTML content changed
+        id: html_changed
+        run: |
+          ORIG_SHA="${{ steps.original_sha.outputs.sha }}"
+          if git diff --name-only "${ORIG_SHA}^" "${ORIG_SHA}" -- '*.html' | grep -q .; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if deploy is needed
+        id: deploy_needed
+        run: |
+          if [[ "${{ steps.sri.outputs.changed }}" == "true" || "${{ steps.sitemap.outputs.changed }}" == "true" || "${{ steps.check_previews.outputs.missing }}" == "true" || "${{ steps.check_chat_screenshots.outputs.new }}" == "true" || "${{ steps.html_changed.outputs.changed }}" == "true" || "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "deploy=true" >> $GITHUB_OUTPUT
+          else
+            echo "deploy=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check for broken links (non-blocking)
+        if: steps.deploy_needed.outputs.deploy == 'true'
+        id: linkcheck
+        uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411  # v2.8.0
+        continue-on-error: true
+        with:
+          args: >-
+            --config .lychee.toml
+            --no-progress
+            --max-concurrency 5
+            --glob-ignore-case
+            './*.html'
+          output: ./lychee-report.md
+          format: markdown
+          fail: true
+
+      - name: Upload link check report
+        if: steps.linkcheck.outcome == 'failure'
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f  # v7.0.0
+        with:
+          name: pre-deploy-broken-links
+          path: ./lychee-report.md
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Warn about broken links
+        if: steps.linkcheck.outcome == 'failure'
+        run: |
+          echo "::warning::Broken links detected before deploy — see 'pre-deploy-broken-links' artifact for details."
+
+      - name: Install lftp
+        if: steps.deploy_needed.outputs.deploy == 'true'
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Deploy to FTP
+        if: steps.deploy_needed.outputs.deploy == 'true'
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+        run: |
+          LFTP_CONN="set ssl:verify-certificate no; set ftp:ssl-force true; set ftp:ssl-protect-data true; open -u ${FTP_USER},${FTP_PASS} ${FTP_HOST}"
+          # Pass 1: site files — everything except img/ and chat-screenshots/
+          echo "==> Deploying site files..."
+          lftp -e "${LFTP_CONN}; mirror -R ./ /public_html/ --verbose=2 --parallel=4 \
+            --exclude .git/ --exclude .github/ --exclude .venv/ --exclude __pycache__/ \
+            --exclude img/ --exclude chat-screenshots/ \
+            --exclude-glob *.sh --exclude-glob *.pyc --exclude-glob *.pyo \
+            --exclude README.md --exclude CONTRIBUTING.md \
+            --exclude CONTRIBUTING_RESOURCES.md --exclude UPDATE_NEWS_README.md \
+            --exclude UPDATE_SRI_README.md --exclude LICENSE \
+            --exclude-glob .DS_Store --exclude tools/; bye"
+          # Pass 2: always sync img/previews/. lftp mirror only uploads changed
+          # files, so it's fast when nothing changed and catches any stale
+          # images on the server that were regenerated in the repo without
+          # triggering a `missing` signal.
+          echo "==> Syncing preview images..."
+          lftp -e "${LFTP_CONN}; mirror -R ./img/previews/ /public_html/img/previews/ --verbose=2 --parallel=4 \
+            --exclude-glob .DS_Store; bye"
+          # Pass 3: always sync news source banners (small, static set of ~19 images)
+          echo "==> Syncing news banners..."
+          lftp -e "${LFTP_CONN}; mirror -R ./img/news-banners/ /public_html/img/news-banners/ --verbose=2 --parallel=4 \
+            --exclude-glob .DS_Store; bye"
+          # Pass 4: only sync chat-screenshots/ when new ones were added this run
+          if [[ "${{ steps.check_chat_screenshots.outputs.new }}" == "true" ]]; then
+            echo "==> Syncing new chat-screenshots..."
+            lftp -e "${LFTP_CONN}; mirror -R ./chat-screenshots/ /public_html/chat-screenshots/ --verbose=2 --parallel=4 \
+              --exclude-glob .DS_Store; bye"
+          else
+            echo "==> No new chat-screenshots to sync, skipping."
+          fi
+          echo "==> Deploy complete."
