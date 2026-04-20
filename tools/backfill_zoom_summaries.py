@@ -159,7 +159,15 @@ def build_markdown(summary: dict, pacific_date: str) -> str:
     # (the empty "## Summary" body is skipped by the parser), but we prepend the
     # required H1 and strip the redundant "## Summary" divider.
     content = re.sub(r"^## Summary\s*\n", "", content, flags=re.MULTILINE)
-    return f"# CSOH {pacific_date}\n\n{content}\n"
+    # Strip Zoom's "Next steps" section — those entries reference private
+    # tasks.zoom.us action-item URLs and are mostly noise on a public page.
+    content = re.sub(
+        r"^## Next steps\s*\n(?:(?!^## ).*\n)*",
+        "",
+        content,
+        flags=re.MULTILINE,
+    )
+    return f"# CSOH {pacific_date}\n\n{content.strip()}\n"
 
 
 def already_on_page() -> set[str]:
