@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="Weekly recap notes from Cloud Security Office Hours meetings. Topic-by-topic summaries covering cloud security, AI governance, supply chain attacks, conferences, and community discussions.">
+    <meta name="keywords"
+        content="cloud security meeting notes, CSOH recap, cloud security community, security discussions, supply chain attacks, AI security, RSA conference">
+    <title>Meeting Recaps - Cloud Security Office Hours</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Meeting Recaps - Cloud Security Office Hours">
+    <meta property="og:description"
+        content="Weekly recap notes from CSOH meetings covering cloud security, AI governance, supply chain attacks, and community discussions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://csoh.org/meetings.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Meeting Recaps - Cloud Security Office Hours">
+    <meta name="twitter:description"
+        content="Weekly recap notes from CSOH meetings covering cloud security, AI governance, supply chain attacks, and community discussions.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=b254a630" as="style"
+        integrity="sha384-j0OVTaquozdWNkSZor3grqtAn5tSlyMpWVyp1pnwcwIJbp4AdZ0f1FPAs4A74z01">
+    <link rel="stylesheet" href="/style.css?v=b254a630"
+        integrity="sha384-j0OVTaquozdWNkSZor3grqtAn5tSlyMpWVyp1pnwcwIJbp4AdZ0f1FPAs4A74z01">
+
+    <!-- Structured Data - Breadcrumb -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meetings",
+          "item": "https://csoh.org/meetings.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data - Meeting Recaps Collection -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "CSOH Meeting Recaps",
+      "description": "Weekly recap notes from Cloud Security Office Hours meetings.",
+      "url": "https://csoh.org/meetings.html",
+      "mainEntity": {
+        "@type": "ItemList",
+        "name": "CSOH Meeting Recaps",
+        "numberOfItems": 11,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "Article",
+              "headline": "CSOH 2026-04-17: AI's impact on cybersecurity, Microsoft Red Sun zero-day, HSBC password controversy",
+              "datePublished": "2026-04-17",
+              "url": "https://csoh.org/meetings.html#meeting-2026-04-17",
+              "author": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "url": "https://csoh.org/"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://csoh.org/banner.png"
+                }
+              },
+              "description": "The Cloud Security Office Hours meeting focused on discussing recent developments in AI's impact on cybersecurity, particularly around Microsoft's Mythos AI tool and its potential to accelerate vulnerability discovery and exploitation. Part…",
+              "inLanguage": "en-US"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "Article",
+              "headline": "CSOH 2026-04-10: Open-source supply chain attacks, GitHub Actions hardening, early-computing nostalgia",
+              "datePublished": "2026-04-10",
+              "url": "https://csoh.org/meetings.html#meeting-2026-04-10",
+              "author": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "url": "https://csoh.org/"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://csoh.org/banner.png"
+                }
+              },
+              "description": "The meeting focused on discussing the current crisis in open source security, particularly regarding supply chain attacks and the impact of generative AI tools like Claude on vulnerability research. Participants, including Neil, Jay, Matt,…",
+              "inLanguage": "en-US"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "Article",
+              "headline": "CSOH 2026-04-03: RSA recap, Claude code leak, \"Meeple\" talk, AI governance and graph-backed ontologies",
+              "datePublished": "2026-04-03",
+              "url": "https://csoh.org/meetings.html#meeting-2026-04-03",
+              "author": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "url": "https://csoh.org/"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://csoh.org/banner.png"
+                }
+              },
+              "description": "Cloud Security Office Hours featured discussions about conference experiences, particularly RSA and Black Hat, with participants sharing insights about networking, speaking opportunities, and career development in cybersecurity. The group e…",
+              "inLanguage": "en-US"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@type": "Article",
+              "headline": "CSOH 2026-03-27: LiteLLM compromise, RSA attendance dip, supply-chain mitigations",
+              "datePublished": "2026-03-27",
+              "url": "https://csoh.org/meetings.html#meeting-2026-03-27",
+              "author": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "url": "https://csoh.org/"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://csoh.org/banner.png"
+                }
+              },
+              "description": "The meeting focused on discussing the recent Light LLM security compromise, where a Python package used by 97 million monthly users was compromised, leading to the theft of credentials and sensitive information from affected systems. The gr…",
+              "inLanguage": "en-US"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "item": {
+              "@type": "Article",
+              "headline": "CSOH 2026-03-20: Guest speaker Maria Thomas on behavioral science and online harassment",
+              "datePublished": "2026-03-20",
+              "url": "https://csoh.org/meetings.html#meeting-2026-03-20",
+              "author": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "url": "https://csoh.org/"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://csoh.org/banner.png"
+                }
+              },
+              "description": "The meeting focused on a presentation by Maria Thomas about behavioral science and online harassment, exploring how anonymity, neurotransmitters, and group dynamics contribute to harmful online behaviors. Maria discussed various forms of di…",
+              "inLanguage": "en-US"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "item": {
+              "@type": "Article",
+              "headline": "CSOH 2026-03-13: Wiz acquired by Google, Unicode supply-chain attacks, grad-school advice",
+              "datePublished": "2026-03-13",
+              "url": "https://csoh.org/meetings.html#meeting-2026-03-13",
+              "author": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "url": "https://csoh.org/"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://csoh.org/banner.png"
+                }
+              },
+              "description": "The meeting focused on several key topics, including the recent acquisition of Wiz by Google and its implications for the company and its employees. Participants discussed the potential risks and benefits of this acquisition, with some expr…",
+              "inLanguage": "en-US"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 7,
+            "item": {
+              "@type": "Article",
+              "headline": "CSOH 2026-03-06: Java auth vulnerability, SBOM debates, RSA OPSEC, DEF CON war stories",
+              "datePublished": "2026-03-06",
+              "url": "https://csoh.org/meetings.html#meeting-2026-03-06",
+              "author": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "url": "https://csoh.org/"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://csoh.org/banner.png"
+                }
+              },
+              "description": "The meeting focused on discussing a critical Java authentication vulnerability and its implications for organizations. Participants shared their experiences with patching and vulnerability management, emphasizing the importance of thorough…",
+              "inLanguage": "en-US"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 8,
+            "item": {
+              "@type": "Article",
+              "headline": "CSOH 2026-02-20: Password security, MFA > complexity, RSA planning, AI coding agents",
+              "datePublished": "2026-02-20",
+              "url": "https://csoh.org/meetings.html#meeting-2026-02-20",
+              "author": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "url": "https://csoh.org/"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://csoh.org/banner.png"
+                }
+              },
+              "description": "The Cloud Security Office Hours meeting focused on discussing password security practices and the importance of asking questions in technical environments. Tyler shared insights about using AI agents for software development and testing, wh…",
+              "inLanguage": "en-US"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 9,
+            "item": {
+              "@type": "Article",
+              "headline": "CSOH 2026-02-13: 3-year anniversary, new AI-built CSOH website, policy as code",
+              "datePublished": "2026-02-13",
+              "url": "https://csoh.org/meetings.html#meeting-2026-02-13",
+              "author": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "url": "https://csoh.org/"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://csoh.org/banner.png"
+                }
+              },
+              "description": "The Cloud Security Office Hours community celebrated its 3-year anniversary, with Shawn highlighting the growth of the global participant base and introducing a new website built using AI that is now community-editable via GitHub. The group…",
+              "inLanguage": "en-US"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 10,
+            "item": {
+              "@type": "Article",
+              "headline": "CSOH 2026-02-06: AI in coding, data provenance, and homeschooling with LLMs",
+              "datePublished": "2026-02-06",
+              "url": "https://csoh.org/meetings.html#meeting-2026-02-06",
+              "author": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "url": "https://csoh.org/"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://csoh.org/banner.png"
+                }
+              },
+              "description": "The Cloud Security Office Hours meeting began with introductions and casual conversation before transitioning into a discussion about AI's role in coding and development, including both its benefits and potential risks. The group explored v…",
+              "inLanguage": "en-US"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 11,
+            "item": {
+              "@type": "Article",
+              "headline": "CSOH 2026-01-30: Insider threats, AI policy challenges, GRC frameworks",
+              "datePublished": "2026-01-30",
+              "url": "https://csoh.org/meetings.html#meeting-2026-01-30",
+              "author": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "url": "https://csoh.org/"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Cloud Security Office Hours",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://csoh.org/banner.png"
+                }
+              },
+              "description": "The meeting began with informal discussions before transitioning into Cloud Security Office Hours, where new participants introduced themselves and shared their backgrounds in cybersecurity and security architecture. The group engaged in de…",
+              "inLanguage": "en-US"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <h1>CSOH</h1>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="ctfs.html">CTFs</a></li>
+                    <li><a href="sessions.html">Zoom Sessions</a></li>
+                    <li><a href="meetings.html" class="active" aria-current="page">Meetings</a></li>
+                    <li><a href="presentations.html">Presentations</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Meetings</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img"
+            decoding="async">
+        <h2>Meeting Recaps</h2>
+        <p>Topic-by-topic summaries of our weekly Friday Zoom sessions</p>
+        <div class="cta-buttons">
+            <a href="https://sendfox.com/CSOH" class="btn btn-primary" target="_blank"
+                rel="noopener noreferrer">Join the next meeting</a>
+            <a href="presentations.html" class="btn btn-secondary">Past recordings</a>
+        </div>
+    </section>
+
+    <main class="container" id="main-content">
+        <section class="section">
+            <h2>About these notes</h2>
+            <p>Cloud Security Office Hours meets every Friday on Zoom. Each session's recap below is a
+                topic-by-topic summary of the conversation — who raised what, what was debated, and
+                the consensus (or lack thereof). Recaps are written after the call, not during, so they
+                lag the live discussion by a day or two.</p>
+            <p>Want to contribute a recap, fix a summary, or join the next live meeting?
+                See the <a href="sessions.html">Zoom Sessions</a> page or open a pull request on GitHub.</p>
+        </section>
+
+        <section class="section" id="table-of-contents">
+            <h2>All meetings (11)</h2>
+            <ul>
+                <li><a href="#meeting-2026-04-17"><strong>CSOH 2026-04-17</strong> — AI&#x27;s impact on cybersecurity, Microsoft Red Sun zero-day, HSBC password controversy</a></li>
+                <li><a href="#meeting-2026-04-10"><strong>CSOH 2026-04-10</strong> — Open-source supply chain attacks, GitHub Actions hardening, early-computing nostalgia</a></li>
+                <li><a href="#meeting-2026-04-03"><strong>CSOH 2026-04-03</strong> — RSA recap, Claude code leak, &quot;Meeple&quot; talk, AI governance and graph-backed ontologies</a></li>
+                <li><a href="#meeting-2026-03-27"><strong>CSOH 2026-03-27</strong> — LiteLLM compromise, RSA attendance dip, supply-chain mitigations</a></li>
+                <li><a href="#meeting-2026-03-20"><strong>CSOH 2026-03-20</strong> — Guest speaker Maria Thomas on behavioral science and online harassment</a></li>
+                <li><a href="#meeting-2026-03-13"><strong>CSOH 2026-03-13</strong> — Wiz acquired by Google, Unicode supply-chain attacks, grad-school advice</a></li>
+                <li><a href="#meeting-2026-03-06"><strong>CSOH 2026-03-06</strong> — Java auth vulnerability, SBOM debates, RSA OPSEC, DEF CON war stories</a></li>
+                <li><a href="#meeting-2026-02-20"><strong>CSOH 2026-02-20</strong> — Password security, MFA &gt; complexity, RSA planning, AI coding agents</a></li>
+                <li><a href="#meeting-2026-02-13"><strong>CSOH 2026-02-13</strong> — 3-year anniversary, new AI-built CSOH website, policy as code</a></li>
+                <li><a href="#meeting-2026-02-06"><strong>CSOH 2026-02-06</strong> — AI in coding, data provenance, and homeschooling with LLMs</a></li>
+                <li><a href="#meeting-2026-01-30"><strong>CSOH 2026-01-30</strong> — Insider threats, AI policy challenges, GRC frameworks</a></li>
+            </ul>
+        </section>
+
+
+        <article class="section" id="meeting-2026-04-17">
+            <h2>CSOH 2026-04-17</h2>
+            <p><time datetime="2026-04-17"><em>Friday, April 17, 2026</em></time></p>
+            <p><strong>Quick recap.</strong> The Cloud Security Office Hours meeting focused on discussing recent developments in AI&#x27;s impact on cybersecurity, particularly around Microsoft&#x27;s Mythos AI tool and its potential to accelerate vulnerability discovery and exploitation. Participants debated whether AI significantly changes cloud security practices or merely accelerates existing trends, with Neil and Matt suggesting that while AI increases speed, the fundamental security approaches remain similar. The group also discussed a concerning trend of companies like Dave&#x27;s employer replacing human resources with AI, which raised questions about job security and potential legal implications. Additionally, the team examined a reported password policy change at HSBC that required passwords to be entered in all uppercase, which sparked debate about whether this represented a security issue or a database migration problem. The conversation ended with discussions about the importance of zero trust architectures and resilient systems as defenses against faster security threats, regardless of whether they originate from AI-powered attacks.</p>
+            <h3>AI in HR and Payroll Discussion</h3>
+            <p>The team discussed various updates and topics, including technical issues with audio during the meeting and the challenges of consumer laptop updates. Dave shared concerns about his company&#x27;s decision to replace HR and payroll functions with AI, which sparked discussion about the potential legal implications. The group also briefly touched on a new Microsoft Defender zero-day vulnerability. Throughout the meeting, participants engaged in casual conversation and shared links to relevant content, including a custom challenge coin.</p>
+
+            <h3>Microsoft Red Sun Zero Day</h3>
+            <p>The team discussed a Microsoft Red Sun Zero Day exploit that leverages Cloud Files API and OP lock race conditions to gain system privileges through Windows Defender. Bartek explained how the exploit uses file locks to create a race condition where Defender gets stuck in a remediation loop, allowing attackers to redirect file writes to system directories. The group noted that while Microsoft initially rejected this as a design issue, the exploit could potentially affect any privileged service writing files in unprivileged locations, making it an OS-level vulnerability.</p>
+
+            <h3>Cloud Security Team Updates</h3>
+            <p>The team discussed several topics including the nature of Defender, which was clarified to be primarily user space rather than kernel-level. Rev shared an idea about creating humorous management risk acceptance stamps for cybersecurity conferences. The group also discussed the Signal chat group for Cloud Security Office Hours, with Neil warning about the high volume of messages. D inquired about getting a pull request accepted on GitHub, which Neil agreed to review. Shawn announced recent website updates, including a new CTF page and news page improvements.</p>
+
+            <h3>Cybersecurity Threat Naming Conventions</h3>
+            <p>The group discussed the importance of consistent threat actor naming conventions across cybersecurity organizations, with Neil explaining how Microsoft and CrowdStrike have struggled with harmonizing their naming systems over the past decade. The conversation then shifted to analyzing a potential phishing message from HSBC India about password requirements, with participants debating whether the message was legitimate or a fake attempt. The discussion highlighted common password policy issues in banking systems, including problems with special character requirements and database upgrades.</p>
+
+            <h3>HSBC Password Security Concerns</h3>
+            <p>The team discussed a news story about HSBC India requiring customers to use all-uppercase passwords, which raised security concerns about potential plain text password storage. Neil explained the difference between storing plain text passwords and hashed passwords, noting that proper password storage should use one-way cryptographic hashing. The group debated whether HSBC might have been using an algorithm that converts passwords to uppercase before hashing, which would explain why existing passwords only work when entered in all uppercase. Ryan pointed out that the Cyber Security News post was from April 1st, suggesting it might be an April Fools prank.</p>
+
+            <h3>AI Impact on Cloud Security</h3>
+            <p>The group discussed the impact of AI on cloud security, with Neil expressing skepticism about Anthropic&#x27;s Mythos project, noting that while it may have marketing value, it doesn&#x27;t fundamentally change existing security approaches. Jay shared insights from an executive advisory board meeting, predicting a &quot;Wild West&quot; period of two years where large enterprises will make mistakes implementing AI solutions, potentially leading to legal issues, business disputes, and unexpected costs. The discussion also touched on concerns about job security in the face of AI automation, with participants noting that while AI may improve some attacker behaviors and defense capabilities, it&#x27;s not a complete replacement for human expertise.</p>
+
+            <h3>AI Impact on Security Challenges</h3>
+            <p>The group discussed the impact of AI on security and business, particularly focusing on the speed at which vulnerabilities can be discovered and exploited. Matt expressed concerns about the economic viability of AI-powered businesses, predicting potential challenges for companies like Oracle within 1-2 years. The discussion highlighted that while AI may make attackers more effective, the real challenge lies in organizations&#x27; ability to respond quickly to threats through improved infrastructure, zero trust methodologies, and defense-in-depth strategies rather than just speed of patching. The conversation also touched on the broader security landscape, including the importance of supply chain security and the potential of eBPF and post-exploitation techniques in addressing vulnerabilities.</p>
+            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>
+        </article>
+
+        <article class="section" id="meeting-2026-04-10">
+            <h2>CSOH 2026-04-10</h2>
+            <p><time datetime="2026-04-10"><em>Friday, April 10, 2026</em></time></p>
+            <p><strong>Quick recap.</strong> The meeting focused on discussing the current crisis in open source security, particularly regarding supply chain attacks and the impact of generative AI tools like Claude on vulnerability research. Participants, including Neil, Jay, Matt, and others, discussed the challenges of securing software dependencies, the effectiveness of defense-in-depth strategies, and the difficulties in implementing egress restrictions and package management controls. The conversation also touched on the trustworthiness of different package repositories, the risks of using third-party GitHub Actions, and the importance of separating build and publish processes to mitigate security risks. Additionally, the group shared personal experiences with early computing and hacking, reflecting on how learning environments and legal consequences have evolved over time.</p>
+            <h3>Open Source Security Challenges</h3>
+            <p>The meeting focused on discussing current challenges in open source security, particularly regarding supply chain attacks and the impact of generative AI tools like Claude&#x27;s Mythos on vulnerability research. Participants, including Jay, Dee, Matt, and Neil, discussed concerns about the effectiveness of AI tools in security research, with Matt expressing skepticism about the marketing claims surrounding these tools. Neil highlighted the parallels between the evolution of ransomware and the emerging trends in supply chain attacks, suggesting that attackers are testing and optimizing their strategies for monetization. The group also welcomed new member Basil from Pakistan and discussed the importance of defense-in-depth strategies in addressing these security challenges.</p>
+
+            <h3>Cloud Security Risk Mitigation Challenges</h3>
+            <p>The group discussed challenges in cloud security, particularly around mitigating risks from tools like TinyLM and Trivy that can steal cloud secrets. Jay emphasized the difficulty of implementing egress blocking measures, which Rev noted would be prohibitively expensive without strategic direction. Don explained that while there might not be misunderstandings about the problem, there is often ignorance about the consequences, comparing it to unknown vulnerabilities in widely-used products. The discussion also touched on user education needs and the complexity of modern technical systems, with Paul arguing that security responsibility should primarily rest with technology providers rather than end users.</p>
+
+            <h3>Supply Chain Security Measures</h3>
+            <p>The group discussed security measures and supply chain attack mitigation strategies. Matt and Neil discussed how attack methods are evolving to be more stealthy, with Matt predicting that supply chain attacks like XZ/CLAB will become more common and less detectable. Neil shared insights about AppLocker and Aaron Locker as security tools for Windows systems, suggesting the need for similar models to secure egress. The discussion concluded with participants sharing their cautious approaches to software updates, with Shawn and others expressing reluctance to perform blanket updates due to security concerns, and Neil mentioning plans to develop product functionality that includes cool-down periods for package updates.</p>
+
+            <h3>Package Repository Security</h3>
+            <p>The team discussed security concerns around package repositories and supply chain attacks. They debated the trustworthiness of different package ecosystems, with Matt and others noting that NPM and PyPI are particularly risky due to their open contribution models, while apt repositories in Ubuntu/Debian offer better security through stable release streams. Pavel suggested separating CI pipelines from publishing pipelines in different repositories to better protect secrets, and emphasized the importance of using hardware security keys like YubiKey for authentication. The discussion highlighted the growing risk of open source supply chain attacks and the need for more robust security measures in development processes.</p>
+
+            <h3>GitHub Actions Security Best Practices</h3>
+            <p>The team discussed security practices for GitHub Actions, focusing on minimizing the use of third-party dependencies and implementing defense-in-depth strategies. Rev shared recommendations for securely using third-party GitHub Actions, including minimizing dependencies, being selective about trusted providers, and separating privileged and unprivileged jobs to limit access to secrets. Neil demonstrated a current implementation that could be improved from a security perspective, and Pavel highlighted the challenge of protecting workflow YAML files once compromised, suggesting the need for isolated build systems. The discussion emphasized the importance of strategic decisions about security trade-offs, particularly in larger organizations where controlling access permissions becomes more complex.</p>
+
+            <h3>Cybersecurity Challenges in Open-Source Software</h3>
+            <p>The group discussed cybersecurity challenges, particularly around open-source software and zero-day vulnerabilities. Pavel emphasized the need to protect the &quot;publish&quot; step when releasing customer-facing software, while allowing more flexibility during internal development. Jay and Matt highlighted concerns about the security of widely-used open-source projects, noting how critical components like OpenSSL and Trivy have been maintained by small teams or volunteers. The discussion concluded with a debate about safe practices for handling PDFs, with participants sharing different approaches to mitigate security risks while managing necessary communications.</p>
+
+            <h3>School Security Vulnerabilities</h3>
+            <p>The group discussed security vulnerabilities in school environments, particularly focusing on how schools could serve as attack vectors due to inadequate IT security measures and backup systems. Matt explained that school districts often lack proper security infrastructure and have been targeted by ransomware attacks in the past. The discussion also covered PDF security on mobile devices, with Matt and Shawn agreeing that opening expected PDFs on iPhones is generally safe due to sandboxing, though they recommended verifying unexpected files with senders. The conversation concluded with participants sharing personal anecdotes about their early experiences with computers in educational settings, highlighting how hands-on learning and necessity-driven discovery can be more effective than formal education in developing technical skills.</p>
+
+            <h3>Affordable Computing and Learning Impact</h3>
+            <p>The group discussed the impact of affordable computing and restriction on creativity and learning. Matt shared his experience building a computer and learning networking, while Jay reflected on his early exposure to programming and security research, including his discovery of Spectre and Meltdown vulnerabilities. The conversation highlighted how access to low-cost hardware and learning opportunities shaped their technical journeys.</p>
+
+            <h3>Evolution of Computer Hacking Culture</h3>
+            <p>Jay and Matt discussed their experiences with early computer hacking and malware, sharing stories about finding security vulnerabilities and the evolution of hacking over time. They compared the current landscape of threat actors like Shiny Hunters and Scatter Spider to the 1990s hacking culture, noting how motivations and approaches have changed. The conversation also touched on the more severe legal consequences for hacking activities today compared to previous decades, and they reflected on the thrill and responsibilities of discovering security vulnerabilities in systems.</p>
+            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>
+        </article>
+
+        <article class="section" id="meeting-2026-04-03">
+            <h2>CSOH 2026-04-03</h2>
+            <p><time datetime="2026-04-03"><em>Friday, April 3, 2026</em></time></p>
+            <p><strong>Quick recap.</strong> Cloud Security Office Hours featured discussions about conference experiences, particularly RSA and Black Hat, with participants sharing insights about networking, speaking opportunities, and career development in cybersecurity. The group extensively discussed the recent &quot;Cloud Code leak&quot; revealing Anthropic&#x27;s backend implementation, analyzing the code quality and architectural decisions. Stryker presented her talk proposal titled &quot;Meeple: Treating People as Game Pieces in Security&quot; which focuses on avoiding single-dimensional thinking when implementing security controls. The conversation also covered best practices for speaking at conferences, with advice for both experienced and junior professionals, and concluded with a detailed technical discussion about AI security governance, including the use of ontologies, taxonomies, and graph databases to improve reliability and reduce hallucinations in AI systems.</p>
+            <h3>Security Risk Assessment Talk Proposal</h3>
+            <p>The meeting began with casual conversation and technical issues, including discussion about a Chinese webcam driver and a humorous thread about a cloud security code leak. The main focus was Stryker presenting a talk proposal titled &quot;Meeple: Building Risks Around Actions, Not Single-Dimensional Roles.&quot; Stryker explained the concept of treating people as one-dimensional game pieces rather than complex individuals, which can create security risks. The group discussed whether the title was clear enough, with Neil suggesting adding a definition of &quot;meeple&quot; in the title to help understanding. Stryker outlined the talk&#x27;s premise about avoiding binary thinking when assessing security risks based on single variables like role or seniority.</p>
+
+            <h3>Security Approaches and Conference Experiences</h3>
+            <p>The group discussed security approaches and conference experiences. Jay shared his frustration with treating all employees the same from a security perspective, arguing for more tailored approaches based on job roles. Stryker agreed with this approach and emphasized the importance of making experienced professionals think differently about security assumptions. The conversation then shifted to discussing RSA Conference, with participants sharing their different experiences as vendors, participants, and C-suite attendees. Mackenzie, a new recruiter in the field, introduced herself and expressed interest in learning more about the security space.</p>
+
+            <h3>Cybersecurity Conference Diversity Discussion</h3>
+            <p>The group discussed conference experiences and diversity issues in cybersecurity events. D shared concerns about RSA&#x27;s oversight in not including a Black affinity group despite having Latino and LGBTQ groups, expressing disappointment with the explanation that there was no space. The conversation then shifted to comparing different cybersecurity conferences, with participants discussing the differences between Black Hat and DEF CON, noting that DEF CON is more inclusive and less corporate-focused, while Black Hat offers more industry-relevant content but at a higher cost. The discussion concluded with reflections on conference networking opportunities and entertainment, including experiences with corporate performances at security events.</p>
+
+            <h3>Conference Speaking Engagement Strategies</h3>
+            <p>The group discussed strategies for getting selected to speak at industry conferences like RSA. Jay suggested that being selected as a speaker makes it easier to justify attendance to employers since it becomes a business development opportunity rather than just personal networking. Stryker shared her experience getting GEICO to pay for conference attendance through speaking engagements, including her upcoming talks at various events. The discussion emphasized that speakers don&#x27;t need to be perfectly polished or experienced to present, with several participants sharing that passion and expertise are more important than formal credentials. The conversation concluded with advice for junior professionals like Issam, who expressed concerns about language barriers and experience level, with participants reassuring him that accent and experience level don&#x27;t impact reception in the industry.</p>
+
+            <h3>AI Technology and Engineering Discussion</h3>
+            <p>The meeting focused on supporting a participant named Issam who was preparing to give a talk, with Neil and others offering encouragement and reassurance that he didn&#x27;t need to speak if he wasn&#x27;t comfortable, and suggesting alternative paths to success in the industry. The group then had an extensive discussion about AI technology, particularly Claude, where they criticized its engineering approach and compared it to &quot;spaghetti code,&quot; questioning the wisdom of building complex systems without proper engineering oversight. The conversation included observations about cult-like behavior in the AI community and concerns about the lack of experienced security professionals in AI company leadership roles.</p>
+
+            <h3>LLM Limitations in Logical Tasks</h3>
+            <p>The team discussed the limitations and challenges of using large language models (LLMs) for logical tasks, particularly highlighting how LLMs often arrive at solutions in illogical ways that they cannot consistently explain. Jay explained their approach to multi-agentic AI systems, where LLMs are used primarily to generate human-friendly responses rather than perform deterministic tasks like flight bookings, which are handled through business connectors. The discussion emphasized that while LLMs have their place in creating natural language outputs, they should not be expected to perform automated, predictable logic tasks that are better suited for traditional systems.</p>
+
+            <h3>AI Governance and Security Measures</h3>
+            <p>The group discussed AI governance and security measures, with Jay emphasizing the importance of secure-by-design architecture and threat modeling based on business processes rather than just technical aspects. Milos shared his experience implementing taxonomy, ontology, and graph-based solutions to reduce hallucinations in AI systems, particularly in an insurance company in Peru, though Jay noted this approach was similar to their existing methods. The discussion concluded with Jay recommending a four-part series on AI security that includes separating planning from execution and implementing verification mechanisms for critical use cases.</p>
+
+            <h3>Secure Agentic AI Implementation Challenges</h3>
+            <p>Jay and Milos discussed challenges in implementing secure agentic AI systems, focusing on preventing system failures and managing user privileges. They highlighted the importance of deterministic processes, input validation, and the separation of planning and execution tasks to mitigate risks. Jay mentioned their team&#x27;s approach of building custom solutions due to limited vendor support and shared insights on threat modeling and security practices in the AI space. The conversation also touched on the difficulty of finding appropriate design partners and the need for accessible documentation on AI security measures.</p>
+
+            <h3>Graph Databases and Privileges</h3>
+            <p>Milos discussed his work with graph databases, particularly using py.dev as a harness and Neo4J as the preferred graph database. He shared his experience building custom models and the benefits of combining graph databases with semantic layers and ontologies. Jay addressed a question about user privileges in AI systems, explaining the current implementation of service accounts and user delegation, while noting challenges with privilege dropping. Milos suggested using an ontology to define atomic operations and their required privileges, which Jay acknowledged as a feasible approach that could potentially involve temporary role assignments.</p>
+
+            <h3>AI Security Implementation Strategies</h3>
+            <p>The group discussed approaches to implementing AI systems with appropriate security and access controls. Jay emphasized the importance of time-based or task-based privilege revocation, while Milos suggested applying principles of just-in-time access and least privilege. They explored different frameworks, including Zero Knowledge Trust, and discussed the challenges of balancing security with practical implementation. The conversation also touched on the evolution of AI technology and its potential applications in business operations, particularly in areas like supply chain management and manufacturing.</p>
+
+            <h3>AI Research and Applications</h3>
+            <p>The group discussed various AI researchers and their approaches, with particular focus on Jan Lacun and his work on world models versus LLMs. Jay expressed preference for Jan&#x27;s clear communication style and practical approach, while criticizing Jeff Hinton&#x27;s shift toward more commercial positions. The conversation then shifted to broader AI topics, including concerns about AGI as a goal and discussions about Musk&#x27;s space-based data center plans, with the group expressing skepticism about the feasibility and practicality of such initiatives. The discussion concluded with reflections on current robotics applications, particularly highlighting warehouse robots and functional non-humanoid robots as more practical and effective than humanoid designs.</p>
+            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>
+        </article>
+
+        <article class="section" id="meeting-2026-03-27">
+            <h2>CSOH 2026-03-27</h2>
+            <p><time datetime="2026-03-27"><em>Friday, March 27, 2026</em></time></p>
+            <p><strong>Quick recap.</strong> The meeting focused on discussing the recent Light LLM security compromise, where a Python package used by 97 million monthly users was compromised, leading to the theft of credentials and sensitive information from affected systems. The group examined how the attack occurred through compromised GitHub repositories and discussed the role of security companies like Aqua and Checkmarx in the incident. Participants also shared their experiences from RSA conference, noting lower attendance and a higher concentration of vendors compared to previous years. The discussion touched on potential preventive measures including version pinning, air-gapped development environments, and the challenges of securing open-source dependencies. Additionally, the group welcomed new members including Mackenzie, a security recruiter, and Francois, a former colleague of Shawn&#x27;s from Fusion.IO.</p>
+            <h3>RSA Conference Discussion</h3>
+            <p>The meeting began with casual conversation about RSA conference attendance, where Shawn and Juninho discussed their experiences, noting lower attendance and limited new innovations despite AI being a prominent theme. The group welcomed new attendees and discussed the importance of networking through LinkedIn. No specific decisions or action items were outlined, and the session was designated as an open forum for questions and discussion.</p>
+
+            <h3>LiteLLM Security Vulnerability</h3>
+            <p>The meeting focused on a discussion about a significant security vulnerability in the LiteLLM Python package, which was compromised and led to the exfiltration of sensitive information from users&#x27; systems. Shawn shared a video explaining the details of the vulnerability, including how it affected systems and the role of package managers in security. The group also discussed the response on GitHub, where bot AI replies attempted to suppress the issue, and noted the irony that the compromised package was used for security by companies like Delve, which is currently facing allegations of misleading compliance reports.</p>
+
+            <h3>Light LLM Security Breach</h3>
+            <p>Shawn presented information about a security breach involving Light LLM and Trivy, where threat actors exfiltrated 300GB of credentials and are extorting multiple billion-dollar companies. Mackenzie introduced herself as a national risk and security recruiter from Tech Systems, offering to support the group with recruitment needs, particularly in cloud security roles for financial institutions and health services. Juninho provided additional context about how the Light LLM compromise occurred through a Trivy security scan, noting that Light LLM&#x27;s response was faster than competitors Aqua and Checkmarx.</p>
+
+            <h3>Open-Source Security Compromise</h3>
+            <p>The group discussed a security compromise involving open-source software, with Shawn noting that many developers were affected. Rev suggested that using vetted packaging from security companies could provide a delay in risk mitigation, while Shawn emphasized the importance of trusted open-source packages. Alex highlighted the need for human oversight in security processes, while Pavel proposed sandboxing sensitive information on developer machines to enhance security. Bartek suggested separating CI from CD as a potential solution.</p>
+
+            <h3>Supply Chain Attack Prevention Measures</h3>
+            <p>Frederick discussed detection and prevention measures for supply chain attacks, mentioning IOCs such as specific domains and file paths. He noted the importance of endpoint detection and protection, especially for activities related to AI coding and malicious package downloads. Juninho added that Team PCP appears to be targeting supply chain companies, highlighting the risks faced by organizations in this sector.</p>
+
+            <h3>Software Supply Chain Vulnerabilities</h3>
+            <p>The group discussed security vulnerabilities in software supply chains, particularly focusing on the compromise of Trivy and other vulnerability scanners. They explored various mitigation strategies including version pinning, air-gapped development environments, and limiting external connections, though Rev noted that allowlisting external connections would be difficult to implement effectively due to the complex dependencies in GitHub Actions. The discussion highlighted the effectiveness of the attackers&#x27; approach, including spamming communication channels to disrupt the response process, and concluded with agreement that while no perfect solution exists, implementing multiple security measures including short-lived credentials and private maintainer channels could help improve resilience.</p>
+
+            <h3>RSA Conference and AI Compliance</h3>
+            <p>The group discussed their recent experiences at RSA conference, noting significantly lower attendance compared to previous years, with many attendees being vendors rather than security practitioners. Jay observed that the event felt empty despite ongoing vendor activities, leading to speculation about whether RSA might end after this year. The conversation then shifted to compliance and AI, where Brian raised questions about Light LLM&#x27;s security credentials and Delve&#x27;s compliance issues, leading to a discussion about the role of AI in compliance processes, with participants agreeing that human oversight remains essential in auditing and compliance verification.</p>
+            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>
+        </article>
+
+        <article class="section" id="meeting-2026-03-20">
+            <h2>CSOH 2026-03-20</h2>
+            <p><time datetime="2026-03-20"><em>Friday, March 20, 2026</em></time></p>
+            <p><strong>Quick recap.</strong> The meeting focused on a presentation by Maria Thomas about behavioral science and online harassment, exploring how anonymity, neurotransmitters, and group dynamics contribute to harmful online behaviors. Maria discussed various forms of digital harassment, including cyberstalking, doxing, and pile-ons, while examining how platforms like 4chan and social media have amplified these issues. The discussion touched on the role of dopamine and serotonin in influencing behavior, as well as the evolution of online harassment from early forums to modern social media platforms. Participants explored potential solutions, including better platform moderation, increased real-world interactions for youth, and the importance of community support. The conversation concluded with reflections on the generational shift in internet usage and its impact on social dynamics.</p>
+            <h3>GitHub Security and Meeting Updates</h3>
+            <p>The meeting began with introductions and a brief discussion about GitHub security issues affecting Neil&#x27;s repositories. Shawn asked for permission to record Maria&#x27;s presentation, which she granted. Neil welcomed new attendees and reminded everyone about the no-stupid-questions policy. Several participants, including Adam Clark and LeventeG, reintroduced themselves after a period of absence. The conversation ended with Neil preparing to introduce the day&#x27;s special presenter.</p>
+
+            <h3>Online Harassment Research Presentation</h3>
+            <p>Maria Thomas presented research on behavioral science and online harassment, explaining how anonymity, social identity, and neurotransmitters like serotonin and dopamine influence harmful online behavior. She discussed various types of digital harassment, including direct harassment, cyberstalking, and pile-ons, highlighting how these behaviors can escalate to real-world violence and impact specific target groups, particularly women and people of color in positions of authority. Maria also covered historical examples of online harassment, from early internet forums to the establishment of platforms like 4chan, and explained how these platforms can contribute to harmful behaviors through their design and engagement mechanisms.</p>
+
+            <h3>Online Harassment Evolution Overview</h3>
+            <p>Maria presented a comprehensive overview of online harassment, tracing its evolution from Gamergate in 2014 to current forms of cybercrime. She detailed the rise of NVE (nihilistic violent extremism) groups like 764, which engage in child sextortion and other harmful activities, and discussed the emergence of Nudifier apps and AI-generated deepfakes that can create sexually explicit content. Maria concluded by noting that reported incidents of cyberbullying have increased significantly since 2016, highlighting the need for better prevention strategies and stronger legal frameworks to address these growing challenges.</p>
+
+            <h3>Online Harassment Threat Analysis</h3>
+            <p>The conversation ended with a Q&amp;A session following Maria&#x27;s presentation on online harassment. Stryker raised concerns about potentially oversimplifying threat actor profiles based on limited online data, and Maria suggested considering multiple perspectives when analyzing threat actors, including both adverse and favorable backgrounds. Maria shared an example of how challenging assumptions led to a more nuanced understanding of a harasser&#x27;s background. Matt asked about the cross-pollination of niche ideologies and aesthetics in harassment groups, though the transcript ended before he could receive a full response.</p>
+
+            <h3>Edgy Aesthetics and Online Anonymity</h3>
+            <p>Maria discussed the adoption of edgy aesthetics by unaffiliated groups, noting that it&#x27;s often driven by a desire to appear cool rather than genuine ideological fervor. She explained that malicious examples of dissociative anonymity include individuals creating aggressive online personas that differ significantly from their real-life behavior, such as someone pretending to be aggressive online while not being so in real life. When asked about de-radicalization, Maria acknowledged she wasn&#x27;t an expert but noted that while some people can be de-radicalized, especially if caught early, others may not be successfully de-radicalized once they&#x27;ve moved toward active violence.</p>
+
+            <h3>Addressing Toxic Online Behavior</h3>
+            <p>Maria discussed the importance of real-life support systems and community interactions to counteract toxic online behavior, emphasizing the need for industry leaders to apply behavioral science to address these issues. Stryker agreed with Maria&#x27;s points and shared insights about creating secure behaviors, offering to collaborate further and sharing a recommended book on content marketing. Matt shared an anecdote about inadvertently de-radicalizing peers in college, highlighting the challenges of scaling personal interventions and the limitations of technological solutions due to profit motives in social media platforms.</p>
+
+            <h3>Online Extreme Content Escalation</h3>
+            <p>The group discussed the rapid escalation of extreme content online, particularly affecting younger users. Maria highlighted the challenge of balancing internet access with protection for minors, noting that current platforms like Roblox are associated with child abuse due to insufficient moderation. Paul mentioned his work on developing new social media platforms designed to promote nuance and balance rather than extremism. The conversation also touched on potential correlations between neurotransmitter deficiencies and radicalization, with Stryker raising questions about whether ADHD or neurotransmitter issues might lead to increased risk-taking and radicalization. Maria acknowledged this as a promising area for further research and admitted her study was still in early stages.</p>
+
+            <h3>Youth Radicalization in Online Environments</h3>
+            <p>The group discussed how online environments and the lack of &quot;third places&quot; for youth might contribute to radicalization and alienation, particularly for neurodivergent individuals. Stryker suggested that better mental health support and community programs could help address these issues. Maria and Matt highlighted the role of online spaces as a substitute for real-life interactions, noting how unmoderated platforms and algorithmic recommendations can influence vulnerable youth. The conversation also touched on the challenges of parenting in a dual-career world and the need for more adult mentors in communities.</p>
+
+            <h3>Algorithmic Amplification and Harassment Impact</h3>
+            <p>The group discussed the impact of algorithmic amplification on harassment and radicalization compared to previous communication methods. Maria shared her experience working with Don McGowan on creating a new legal tort in Washington state allowing companies to sue on behalf of harassed employees. The conversation concluded with participants discussing networking strategies at conferences, particularly RSA, and the ethics of using social engineering techniques in professional settings. Neil announced plans for a future meeting featuring an engineer who worked on the Gripe vulnerability scanner.</p>
+            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>
+        </article>
+
+        <article class="section" id="meeting-2026-03-13">
+            <h2>CSOH 2026-03-13</h2>
+            <p><time datetime="2026-03-13"><em>Friday, March 13, 2026</em></time></p>
+            <p><strong>Quick recap.</strong> The meeting focused on several key topics, including the recent acquisition of Wiz by Google and its implications for the company and its employees. Participants discussed the potential risks and benefits of this acquisition, with some expressing concerns about the sustainability of acquired products. The group also explored the return of worms in cyber attacks and the implications for software supply chains. Additionally, there was a detailed discussion about cloud security education and career paths, with recommendations for learning resources and degree programs. The conversation ended with advice for someone considering graduate school, emphasizing the importance of practical experience and careful consideration of the cost and potential return on investment of a degree.</p>
+            <h3>LAN Atlas Network Monitoring Project</h3>
+            <p>The meeting focused on discussing a new Python project called LAN Atlas, which aims to create a network monitoring solution with components for on-premise and cloud deployment. Kyle, Dee, and Neil presented the project idea and outlined plans for team roles, including technical and non-technical positions. They invited participants and mentors to join the initiative, emphasizing its potential for practical experience and resume building. The group also celebrated Kyle&#x27;s birthday and discussed the recent acquisition of Wiz by Google, with participants sharing mixed perspectives on the acquisition&#x27;s implications for the company and its products.</p>
+
+            <h3>Supply Chain Unicode Injection Attack</h3>
+            <p>Neil led a discussion about a supply chain attack involving Unicode characters in code repositories, specifically examining instances in GitHub. The team analyzed how malicious code was inserted into legitimate pull requests, particularly through Dependabot updates. Kyle suggested the possibility of AI prompt injection, while Piyush and Pavel identified suspicious Dependabot commits that appeared fake. Neil questioned whether the attack originated from a compromised IDE, similar to previous findings in malicious NPM packages and VS Code extensions. The team examined specific examples, including a package.json file and TypeScript code, to understand how the injection occurred within otherwise valid commits.</p>
+
+            <h3>Node.js Worm Spread Discussion</h3>
+            <p>The group discussed the recent return of worms in cybersecurity, particularly focusing on how they spread through the Node.js/NPM ecosystem. Matt noted how worms can now spread through multi-step, multi-vector attacks, including targeting repository maintainers. The discussion included historical context about previous worm &quot;seasons,&quot; with Neil clarifying that the current situation represents &quot;season 3&quot; following the original worms and the 2001-2009 period that included email worms like Melissa and SQL Slammer. Brian Reich expressed frustration about the Node.js/NPM ecosystem&#x27;s reliance on unnecessary libraries like Lodash, comparing it to the &quot;left pad&quot; incident where a maintainer&#x27;s departure caused significant disruption to thousands of projects.</p>
+
+            <h3>JavaScript Development Challenges</h3>
+            <p>The group discussed challenges with JavaScript and Node.js development, particularly around governance issues and the language&#x27;s origins in browser-based applications. Brian Reich raised concerns about developers lacking fundamental software development knowledge due to rapid development cycles and React frameworks, while Kyle suggested that JavaScript&#x27;s rapid creation in a short time period contributes to ongoing challenges. The conversation concluded with a discussion about cloud security education, where Kyle recommended Georgia Tech&#x27;s OMSCS program as a cost-effective option for D, who was considering a cloud security graduate degree.</p>
+
+            <h3>Is a Cloud Security Degree Worthwhile?</h3>
+            <p>The group discussed whether pursuing a graduate degree in cloud security is worthwhile. Several participants advised against specialized cloud security degrees, suggesting instead to focus on general cybersecurity or computer science programs, as cloud security skills can be developed through practical experience and self-directed learning. The discussion highlighted that while formal education has value, it&#x27;s important to consider the cost, potential return on investment, and personal interests when deciding on a program. Specific practical advice was shared about learning cloud security through hands-on experience using tools like Terraform, setting up lab environments, and exploring resources like the Wiz.I/O website for specific solution areas. The conversation also touched on career goals, with one participant expressing interest in Mac malware research, leading to recommendations about learning ARM assembly and reverse engineering.</p>
+            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>
+        </article>
+
+        <article class="section" id="meeting-2026-03-06">
+            <h2>CSOH 2026-03-06</h2>
+            <p><time datetime="2026-03-06"><em>Friday, March 6, 2026</em></time></p>
+            <p><strong>Quick recap.</strong> The meeting focused on discussing a critical Java authentication vulnerability and its implications for organizations. Participants shared their experiences with patching and vulnerability management, emphasizing the importance of thorough scanning and communication with vendors. The group also discussed Software Bill of Materials (SBOMs) and their role in improving security posture. Personal anecdotes were shared about attending industry conferences and navigating social situations in professional settings. The conversation touched on the challenges of identifying threat actors within open communities and the importance of maintaining operational security (OPSEC) at events like RSA.</p>
+            <h3>JavaScript Library Authentication Vulnerability</h3>
+            <p>The meeting began with casual conversation before transitioning to a discussion about a critical authentication bypass vulnerability in a widely-used JavaScript library. Stryker and Neil explained the technical details and potential impacts, emphasizing the need for organizations to patch affected systems and conduct thorough vulnerability assessments. The group discussed strategies for addressing vulnerabilities in third-party software, including vendor communication, SLAs, and emergency mapping triages. The conversation ended with a reminder for attendees to check their systems and suppliers for the Java authentication issue.</p>
+
+            <h3>SBOMs: Security and Transparency</h3>
+            <p>The meeting focused on discussions about SBOMs (Software Bill of Materials) and their importance in software security. Stryker initiated the conversation, highlighting the need for accountability in tech stacks and the potential of SBOMs to serve as a forcing function for transparency. Jay and Neil provided insights into the challenges and misconceptions surrounding SBOMs, emphasizing their role in vendor vetting and risk management. The group also discussed the evolution of SBOM requirements following the SolarWinds compromise, noting the tension between regulatory demands and practical implementation. The conversation concluded with a reflection on the utility of SBOMs and the need for further clarity on their value and application.</p>
+
+            <h3>SBOMs: Challenges and Best Practices</h3>
+            <p>The group discussed the limitations and practicality of using Software Bill of Materials (SBOMs) in security practices. Umang expressed skepticism about the effectiveness of SBOMs and SCA tools, while Stryker emphasized the importance of actively monitoring libraries and using threat feeds. Pavel highlighted the need for per-release SBOMs and the importance of having a continuous posture. Jay and Shawn advised Dave on asking vendors for their software development and operational lifecycle (SDOL) documents, emphasizing the importance of due diligence when selecting SaaS providers. The conversation also touched on the challenges of securing critical systems and the potential for automated SBOM sourcing from vendors.</p>
+
+            <h3>Security Practices and Threats</h3>
+            <p>The meeting covered several security-related topics, including supply chain security, code escrow practices, and Wikipedia&#x27;s recent security incident. Stryker shared his experience verifying the security of his platform and the importance of double-checking suppliers. Dane discussed SBIM practices in the medical device industry and recommended adopting standard tools for generating and shipping security artifacts. Matt described Wikipedia&#x27;s security breach caused by a malicious user script, which led to the platform going read-only. The group also discussed the challenges of identifying threat actors in open communities, with Neil emphasizing the value of openness and collaboration in security efforts.</p>
+
+            <h3>Threat Actors and Community Safety</h3>
+            <p>The group discussed the nature of threat actors and community safety, with Stryker sharing experiences from administering the Lonely Hackers Club on Telegram. They explored different types of threat actors, including accidental insiders, and emphasized the importance of community guidelines and moderation. Rev expressed concerns about presenting at conferences due to potential AI misuse of recordings, but the group generally dismissed these fears. The conversation concluded with Stryker sharing a humorous anecdote about his initial concerns at DEF CON, highlighting the often exaggerated fears of new cybersecurity professionals.</p>
+
+            <h3>Public Speaking Security Best Practices</h3>
+            <p>The group discussed security concerns around public speaking engagements and online presence. Stryker advised attendees to be cautious about sharing personal information at conferences, suggesting they could request not to be recorded and consider the potential risks versus benefits of speaking publicly. Jay shared his experience of receiving targeted phishing attempts as a public figure in security, while Neil highlighted how Microsoft employees overreacted to attending DEF CON. The discussion concluded with Matt reflecting on how security professionals used to openly share information on IRC, contrasting with current professional boundaries, and Neil sharing an opportunity to host a presentation on online harassment research at Cloud Security Office Hours.</p>
+
+            <h3>Conference Preparation and Professional Conduct</h3>
+            <p>The group discussed their plans for an upcoming conference, with Stryker expressing excitement about a presentation on March 20th and hoping it would be recorded. They also talked about strategies for handling social situations at conferences, including staying sober and dealing with pressure to drink. The conversation touched on personal experiences with drinking and how it can affect professional situations in the cybersecurity industry.</p>
+
+            <h3>Social Engineering and Intuition</h3>
+            <p>The team discussed social engineering and intuition, with Matt sharing his ability to quickly assess people&#x27;s trustworthiness based on instinct. Neil advised being protective and watchful at social events, particularly with younger team members. Stryker offered to share social engineering resources with Matt, and they discussed the importance of gathering internal threat intelligence to stay informed about company changes. The conversation concluded with Matt mentioning his father&#x27;s background in security and his own early exposure to surveillance and counter-surveillance techniques.</p>
+            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>
+        </article>
+
+        <article class="section" id="meeting-2026-02-20">
+            <h2>CSOH 2026-02-20</h2>
+            <p><time datetime="2026-02-20"><em>Friday, February 20, 2026</em></time></p>
+            <p><strong>Quick recap.</strong> The Cloud Security Office Hours meeting focused on discussing password security practices and the importance of asking questions in technical environments. Tyler shared insights about using AI agents for software development and testing, while the group discussed how humans often struggle with creating secure passwords, with a study showing that AI-generated passwords can be easily predicted. The conversation emphasized that while complex passwords and regular rotations are often recommended, in practice, multi-factor authentication (MFA) provides much stronger protection against breaches than password complexity requirements. The meeting also highlighted the importance of creating safe spaces for asking technical questions, with participants sharing their experiences about how different communities handle question-asking differently.</p>
+            <h3>RSA Conference Planning and Updates</h3>
+            <p>The team discussed the upcoming RSA conference, where Stryker announced plans to organize Cloud Security Office Hours and coordinate a booth crawl. Shawn mentioned he would attend RSA but could not do so officially on Wiz&#x27;s dime due to other commitments, while D offered to host anyone needing a place to stay. The group also celebrated Chris&#x27;s birthday and discussed various personal updates, including D&#x27;s sprained ankle and Kaye&#x27;s observation of spring-like weather in New York.</p>
+
+            <h3>AI Development and Security Updates</h3>
+            <p>Shawn invited Sandip to present his session on &quot;Is QD worse than Y2K?&quot; at a future meeting, and Sandip agreed to do a dry run. The group discussed updates to Shawn&#x27;s website, including a new breach kill chain page and a news feed feature that Stryker planned to improve. Mario presented his work with coding agents, which use AI to assist in software development tasks, and the group discussed the potential benefits and security considerations of this technology.</p>
+
+            <h3>Security and AI in Development</h3>
+            <p>The meeting focused on discussing security challenges and solutions, with Shawn challenging participants to test the security of a system in a constructive manner. Tyler shared insights on using GenAI in software development, highlighting the effectiveness of their IBM software factory and the importance of human oversight. Neil introduced an upcoming guest, Maria Thomas, who will discuss behavioral science in online harassment on Cloud Security Office Hours on March 20th. The conversation also touched on the use of RAG (Retrieval Augmented Generation) and its potential benefits in handling large datasets.</p>
+
+            <h3>Safe Spaces for Questions</h3>
+            <p>The meeting began with a discussion about a behavioral science topic related to online harassment, which does not cover automated harassment. Shawn welcomed everyone to Cloud Security Office Hours, emphasizing the open and interrupt-driven nature of the discussion. The group engaged in light-hearted banter about a participant&#x27;s profile picture mix-up, and Jennifer introduced herself, mentioning her interest in PCI discussions. Neil highlighted the importance of creating safe spaces for asking questions, sharing his experience of implementing this philosophy with junior salespeople. The conversation ended with a reflection on the value of fostering environments where questions are welcomed and encouraged.</p>
+
+            <h3>GitHub Pull Requests for Learning</h3>
+            <p>The group discussed GitHub pull requests and their importance for learning and contributing, with Shawn emphasizing that pull requests can be for any changes, not just code, and that learning how to submit them is valuable. Stryker suggested creating a system to notify contributors when their pull requests will be reviewed, and the discussion touched on the importance of asking questions and the need for patience when explaining concepts. The meeting also highlighted the group&#x27;s supportive environment for learning, with Taylor and others sharing their experiences of being welcomed despite varying levels of technical knowledge.</p>
+
+            <h3>Cybersecurity Questioning Strategies</h3>
+            <p>The group discussed strategies for asking questions in cybersecurity, emphasizing the importance of clear, specific, and well-formatted questions to get effective responses. Tyler shared insights on the XY problem and how to frame questions to avoid misunderstandings. The conversation also covered password security, with Neil highlighting that long, complex passwords offer limited protection compared to unique passwords and multi-factor authentication (MFA). The discussion concluded with a reflection on evolving security practices and the need to focus on multiple barriers to compromise rather than relying solely on password complexity.</p>
+            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>
+        </article>
+
+        <article class="section" id="meeting-2026-02-13">
+            <h2>CSOH 2026-02-13</h2>
+            <p><time datetime="2026-02-13"><em>Friday, February 13, 2026</em></time></p>
+            <p><strong>Quick recap.</strong> The Cloud Security Office Hours community celebrated its 3-year anniversary, with Shawn highlighting the growth of the global participant base and introducing a new website built using AI that is now community-editable via GitHub. The group discussed policy as code, with Tyler presenting on infrastructure as code scanning tools and emphasizing the importance of not scanning for things you don&#x27;t need to act on. Rev shared insights on the challenges of implementing policy as code in multilingual organizations, while the discussion touched on insider threat considerations and the role of auditors in verifying security controls. The conversation concluded with participants sharing perspectives on audit processes and the balance between security controls and business operations.</p>
+            <h3>Cloud Security Office Hours Anniversary</h3>
+            <p>The meeting marked the third anniversary of Cloud Security Office Hours, which has grown into a global platform connecting professionals across continents. Shawn expressed gratitude for the program&#x27;s success and the opportunity to witness participants&#x27; career growth and friendships. The meeting began with a brief delay as some participants joined late, and Shawn noted the absence of Chris, attributing it to the late hour for him. The session also included a participant seeking a new role in cloud security, DevSecOps, and security automation, sharing their experience and certifications, and expressing openness to various opportunities. Shawn encouraged anyone new to the meeting to introduce themselves, but no new participants raised their hands.</p>
+
+            <h3>AI-Powered Cloud Security Website</h3>
+            <p>Shawn presented updates to the Cloud Security Office Hours (CSOH) website, which he rebuilt using AI to simplify content management and make it more community-driven. He explained that the site is now hosted on GitHub, allowing anyone to contribute by creating pull requests with suggested changes or additions. Shawn demonstrated new features including a news section, resource categorization, and buttons for suggesting improvements, while emphasizing that the site can be easily hosted on various platforms. The community discussed potential enhancements like adding a guestbook, visitor counter, and animated GIFs, with Stryker offering to contribute news sources and Charlie inquiring about SEO considerations for the static page.</p>
+
+            <h3>GitHub Static Website Development</h3>
+            <p>The meeting focused on discussing contributions to a simple static HTML website hosted on GitHub. Shawn explained his goal of creating a secure, community-driven site that could be easily modified through pull requests, without adding databases or complex features. Participants discussed potential improvements, including adding schema for better search engine optimization and implementing features like guestbooks or hit counters. Stryker emphasized the importance of following proper security practices when testing the site, while Shawn encouraged participants to attempt adding content or even defacing the site as a challenge, provided it was done securely and ethically.</p>
+
+            <h3>Policy as Code Implementation Strategy</h3>
+            <p>The team discussed implementing policy as code, with Neil explaining how this approach can automate security policy enforcement and provide the same benefits as DevOps pipelines. Jay emphasized the importance of coordinating with audit and compliance teams, while also suggesting a scheduled approach to policy changes to avoid surprising stakeholders. Rev shared insights on the challenges of managing narrative policies in multilingual organizations, highlighting the advantages of policy as code for better tracking and verification of compliance.</p>
+
+            <h3>Policy as Code Implementation Challenges</h3>
+            <p>The group discussed policy as code and its implementation across different cloud platforms. Rev explained the benefits of open policy documentation for collaboration and continuous improvement. Neil highlighted the challenges of authoring policies that apply across multiple cloud providers. Jay shared their experience with implementing policy changes and the need for a hierarchical approach. Frederick discussed the unique challenges of threat detection in a fast-paced, Kubernetes-first environment, particularly for smaller companies focusing on DevSecOps. The conversation touched on the intersection of AI and threat detection, as well as the need for harmonized policies across different cloud platforms.</p>
+
+            <h3>Policy as Code: Detective vs. Preventative</h3>
+            <p>Tyler presented on policy as code, emphasizing its application to infrastructure and software development. He discussed different types of controls, including detective, preventative, and proactive, and highlighted the importance of shifting policy enforcement as far left as possible. Tyler also shared insights on multi-cloud policy management and the use of open-source and commercial tools for infrastructure as code scanning. The discussion touched on the cost of data breaches and the benefits of using existing policy frameworks rather than creating custom policies.</p>
+
+            <h3>Policy Transparency and Security Challenges</h3>
+            <p>The meeting focused on discussions around policy as code, insider threats, and audit practices. Neil and Jay debated the merits of publishing policies, with Jay emphasizing the importance of guardrails and automated controls for ensuring compliance. Matt Alvarez raised concerns about insider threats and the potential for policy transparency to aid malicious actors, leading to a broader discussion on balancing security with business processes. The group also touched on the challenges of audits, with Jay highlighting the accountant-like nature of auditors and the need for organizations to be honest in presenting their controls. The conversation ended with reflections on the costs and complexities of audits, as well as a brief tangent on historical nuclear incidents.</p>
+            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>
+        </article>
+
+        <article class="section" id="meeting-2026-02-06">
+            <h2>CSOH 2026-02-06</h2>
+            <p><time datetime="2026-02-06"><em>Friday, February 6, 2026</em></time></p>
+            <p><strong>Quick recap.</strong> The Cloud Security Office Hours meeting began with introductions and casual conversation before transitioning into a discussion about AI&#x27;s role in coding and development, including both its benefits and potential risks. The group explored various technical and legal challenges surrounding autonomous agents and AI, including data provenance tracking, copyright issues, and the importance of maintaining fundamental coding skills. The conversation ended with conversations about AI&#x27;s applications in education, particularly for homeschooling and teaching math to children, and plans for celebrating the team&#x27;s upcoming three-year milestone.</p>
+            <h3>AI in Coding: Tools vs. Learning</h3>
+            <p>The meeting began with introductions, welcoming Allan, a 35-year software developer from Massachusetts, who found the group through a friend and is exploring cloud technology. The discussion then shifted to a debate on the use of AI versus documentation in learning and coding, with Nathaneal questioning the balance between using AI to write YAML and reading documentation. Neil and Shawn shared their perspectives, emphasizing the importance of hands-on experience and learning from mistakes, while acknowledging AI&#x27;s role as a tool for tasks already understood. The conversation concluded with a brief mention of Kimberly&#x27;s new job and a plug for a LinkedIn article on the topic.</p>
+
+            <h3>AI Tools in Coding Practice</h3>
+            <p>The group discussed the use of AI tools like Claude and ChatGPT for coding tasks, with several members sharing their experiences. Dee described using detailed AI prompts for transparency and research, while BrianReich explained how AI was useful for repetitive security remediation work on legacy code. Matt emphasized the importance of having a baseline knowledge to effectively use AI tools and avoid hallucinations, citing examples of AI-related security issues. The conversation touched on the potential risks of AI tools when used by those without sufficient technical knowledge.</p>
+
+            <h3>AI Implications and Ethical Concerns</h3>
+            <p>The group discussed the implications of AI agents, particularly focusing on the Moltbot incident and its potential as a marketing stunt or security vulnerability. They debated the role of AI in coding and development, with some expressing concerns about relying too heavily on AI tools at the expense of learning fundamental skills. The conversation also touched on the legal and ethical implications of AI, including questions about accountability and responsibility when AI agents cause harm. Madeline mentioned ongoing litigation related to 23andMe, highlighting the emerging case law in this area.</p>
+
+            <h3>AI Transparency and Data Provenance</h3>
+            <p>The group discussed legal and technical challenges around autonomous agents and AI, including copyright issues for AI-generated content and the need for data provenance tracking. Paul shared his work on implementing semantic layers and ontologies to improve AI transparency and accuracy, with Milos providing specific examples from UBS&#x27;s use of Neo4j for data auditability. The conversation concluded with Matt expressing skepticism that major LLM providers would adopt data provenance tracking due to potential legal implications and technical challenges.</p>
+
+            <h3>AI Trends and Challenges</h3>
+            <p>The group discussed the evolving landscape of AI and LLMs, with Matt predicting that large-scale generative AI models might become less popular due to high compute costs and limitations, while specialized and localized applications could gain traction. They emphasized the importance of data provenance and verifiability for companies, as well as the challenges of AI hallucinations and their potential dangers, particularly in security and expert domains. Neil highlighted the risks of relying on AI remediation guidance, while Kimberly shared her experiences with AI&#x27;s plausibility in different contexts, noting its effectiveness in some areas like behavior modification but its tendency to fabricate information in others.</p>
+
+            <h3>AI in Education: Benefits and Challenges</h3>
+            <p>The group discussed various topics including the use of AI in education, particularly for homeschooling and teaching math to children. Kimberly shared her experience using AI tools like ChatGPT and Gemini to create and solve logic puzzles for her children, highlighting both the benefits and limitations of these tools. The conversation also touched on the challenges and potential of AI in schools, with Kimberly mentioning a school charging $50,000 annually for AI-assisted education. Additionally, the group celebrated an upcoming three-year milestone for their team, discussing ideas for a celebration, including custom challenge coins and other tokens.</p>
+            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>
+        </article>
+
+        <article class="section" id="meeting-2026-01-30">
+            <h2>CSOH 2026-01-30</h2>
+            <p><time datetime="2026-01-30"><em>Friday, January 30, 2026</em></time></p>
+            <p><strong>Quick recap.</strong> The meeting began with informal discussions before transitioning into Cloud Security Office Hours, where new participants introduced themselves and shared their backgrounds in cybersecurity and security architecture. The group engaged in detailed discussions about insider threats, security training, and the challenges of user behavior in cybersecurity, including concerns about nation-state actors and AI tools. The conversation ended with conversations about security policies, compliance, and risk management, emphasizing the importance of GRC frameworks and addressing challenges with auditors and technology adoption.</p>
+            <h3>Meeting Kickoff and Introductions</h3>
+            <p>Shawn shared a song and a message in Chinese, which included birthday wishes and greetings to various people. Dave apologized for being unable to join the speaker.</p>
+
+            <h3>New Participant Introductions</h3>
+            <p>The meeting began with informal discussions about tools and temperature units before transitioning into Cloud Security Office Hours. Kent, a new participant from Las Vegas, introduced himself and shared his background in Azure and cybersecurity, mentioning he was referred by Brian Jones. Rev, from Chicago, discussed his work at SAP focusing on security architecture and vulnerability management. Stryker raised concerns about the misuse of the statistic that 90% of cyber breaches are caused by human error, emphasizing the need for evidence when citing such claims. Neil and others debated the interpretation of this statistic, with Neil arguing that the focus should be on minimizing the impact of user errors rather than blaming users. The conversation ended with Kent sharing insights from his military background on insider threats and the challenges of user behavior in cybersecurity.</p>
+
+            <h3>Insider Threats and Cultural Factors</h3>
+            <p>The group discussed insider threats and security training, with Stryker and Jay agreeing that while insider threats are a significant concern, the root cause often stems from cultural and incentive issues rather than malicious intent. Jay suggested reframing the motivation behind insider threats to focus on external pressures rather than assuming bad intent, while another participant emphasized the importance of balancing security controls with trust in employees. The discussion concluded with Rev sharing an example about Microsoft engineers in China potentially facing legal pressures that could conflict with company interests, though this was presented as a hypothetical scenario rather than a confirmed case.</p>
+
+            <h3>Insider Threats and Cybersecurity Challenges</h3>
+            <p>The meeting focused on security threats, particularly from nation-state actors, with Stryker and Jay discussing China&#x27;s mandatory vulnerability reporting system and its implications for insider threats. Stryker shared examples of insider threats, including a contractor who disabled logging systems, and the group discussed the increasing importance of human elements in cybersecurity. Dee emphasized the need to focus on unintentional insider threats in security awareness training, while Stryker sought clarification on data handling practices for AI tools, particularly regarding the use of ChatGPT.</p>
+
+            <h3>AI Security and Policy Challenges</h3>
+            <p>The team discussed challenges around AI and data security, with San suggesting a &quot;grandma test&quot; for sharing information with AI — if your grandma wouldn&#x27;t understand it, don&#x27;t share it. Stryker shared a humorous story about a Reddit thread involving inappropriate content accessed through a shared ChatGPT account. Rev raised concerns about the complexity of governing approved software and tools in the workplace, leading to a discussion about the challenges of maintaining up-to-date approved lists and the need for better bridges between policy and practical implementation.</p>
+
+            <h3>Security Policy and AI Implementation</h3>
+            <p>The meeting participants discussed various aspects of security policies, AI/LLM usage, and user access management. Neil emphasized the importance of &quot;guardrails and paved roads&quot; for managing user access and preventing malicious activities. The group also discussed the challenges of implementing and enforcing data sensitivity labels, with Ken highlighting the need for a clear policy on what constitutes sensitive data. Piyush suggested using AI and knowledge bases to help users navigate security policies more easily, though Jay cautioned that relying on AI agents could be a substitute for creating clear and well-structured policies in the first place. The conversation concluded with Stryker expressing support for GRC (Governance, Risk Management, and Compliance) frameworks, emphasizing their potential to help organizations meet security requirements in a practical and effective manner.</p>
+
+            <h3>Enhancing Security and Compliance Strategies</h3>
+            <p>The group discussed various aspects of security, compliance, and risk management. Jay emphasized the importance of GRC (governance, risk, and compliance) and highlighted how compliance can improve security posture. Stryker shared his frustration with executives who focus on legal liability rather than the human impact of breaches. Umang Patel described their success in improving compliance through automated enforcement of policies as code. The group also discussed challenges with auditors who focus on checklists rather than risk, and the need for better education of auditors on new technologies. The conversation concluded with a discussion about the potential end of human-as-a-service models in cloud computing, following recent AWS layoffs.</p>
+            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="resources.html">All Resources</a></li>
+                    <li><a href="sessions.html">Zoom Sessions</a></li>
+                    <li><a href="meetings.html">Meeting Recaps</a></li>
+                    <li><a href="presentations.html">Presentations</a></li>
+                    <li><a href="index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom
+                            Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a>
+                    </li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions and 200+ curated
+                    resources.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=29975f3e" integrity="sha384-A55kWiGR8wabWjEJ4fs9HjgYwF0FkJkVNvqiJDvP8mQoCD1QKJyGSQxE7OFv5d/H"
+        defer></script>
+</body>
+
+</html>
