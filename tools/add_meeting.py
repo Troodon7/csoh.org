@@ -185,22 +185,28 @@ def human_date(iso: str) -> str:
 def render_meeting_block(meeting: dict) -> str:
     iso = meeting["date"]
     human = human_date(iso)
+    topics = meeting["topics"]
     topic_html = "\n".join(
         f'            <h3>{h.escape(heading)}</h3>\n            <p>{h.escape(body)}</p>'
-        for heading, body in meeting["topics"]
+        for heading, body in topics
     )
     # Month tag is always present; topical tags come from --tag / parsed input.
     month = iso[:7]
     tags = [month] + list(dict.fromkeys(meeting.get("tags") or []))  # dedupe, preserve order
     tag_spans = "".join(f'<span class="tag">{h.escape(t)}</span>' for t in tags)
     tags_block = f'            <div class="resource-tags meeting-tags">{tag_spans}</div>\n'
+    n = len(topics)
+    summary_label = f"Show {n} discussion topics" if n != 1 else "Show discussion topic"
     return (
         f'        <article class="section" id="meeting-{iso}">\n'
         f'            <h2>CSOH {iso}</h2>\n'
         f'            <p><time datetime="{iso}"><em>{human}</em></time></p>\n'
         f'            <p><strong>Quick recap.</strong> {h.escape(meeting["recap"])}</p>\n'
         f'{tags_block}'
+        f'            <details class="meeting-topics">\n'
+        f'                <summary>{summary_label}</summary>\n'
         f'{topic_html}\n'
+        f'            </details>\n'
         f'            <p class="small"><a href="#table-of-contents">↑ Back to index</a></p>\n'
         f'        </article>\n'
     )

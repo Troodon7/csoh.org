@@ -10,9 +10,12 @@ Pulls the VTT transcript of a CSOH meeting from your Zoom cloud recording, ready
 2. Give it a name (e.g. `CSOH Transcript Fetcher`).
 3. Under **App Credentials** note the **Account ID**, **Client ID**, and **Client Secret**.
 4. Under **Scopes**, add (minimum). Zoom migrated to granular scopes — use these exact names:
-   - `cloud_recording:read:list_user_recordings` — list a user's recordings
+   - `cloud_recording:read:list_user_recordings` — list a user's cloud recordings (VTT transcripts tied to recordings)
    - `cloud_recording:read:recording` — read a specific recording's metadata/files
    - `user:read:user` — identify "me" (may show as `user:read` in older UIs)
+   - `meeting:read:list_summaries:admin` — list AI Companion meeting summaries across the account (optional, needed only for summary backfill)
+   - `meeting:read:list_meetings:admin` — list past meetings across the account (optional, pairs with the above)
+   - `meeting:read:summary:admin` — fetch the full text of a meeting summary (optional, needed only for summary backfill)
 5. Under **Activation**, click **Activate your app**.
 
 ### 2. Store the credentials
