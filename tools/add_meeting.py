@@ -197,10 +197,10 @@ def render_meeting_block(meeting: dict) -> str:
     tags_block = f'            <div class="resource-tags meeting-tags">{tag_spans}</div>\n'
     n = len(topics)
     summary_label = f"Show {n} discussion topics" if n != 1 else "Show discussion topic"
+    headline = (meeting.get("headline") or default_headline(meeting)).strip()
     return (
         f'        <article class="section" id="meeting-{iso}">\n'
-        f'            <h2>CSOH {iso}</h2>\n'
-        f'            <p><time datetime="{iso}"><em>{human}</em></time></p>\n'
+        f'            <h2><time datetime="{iso}">{h.escape(human)}</time> — {h.escape(headline)}</h2>\n'
         f'            <p><strong>Quick recap.</strong> {h.escape(meeting["recap"])}</p>\n'
         f'{tags_block}'
         f'            <details class="meeting-topics">\n'
@@ -319,6 +319,7 @@ def main(argv: list[str] | None = None) -> int:
     meeting["tags"] = [t.strip() for t in args.tag if t.strip()]
 
     headline = args.headline or default_headline(meeting)
+    meeting["headline"] = headline  # picked up by render_meeting_block for the h2
     html_text = args.meetings_file.read_text(encoding="utf-8")
 
     updated = replace_or_insert_article(html_text, meeting)

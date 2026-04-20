@@ -150,6 +150,99 @@ def infer_tags(text: str, max_tags: int = 4) -> list[str]:
     return picked
 
 
+NOISE_TITLE_RE = re.compile(
+    r'\b('
+    r'music sharing'
+    r'|audio clip[s]?'
+    r'|sharing audio'
+    r'|sharing music'
+    r'|audio sharing session'
+    r'|audio (?:and|&) chat'
+    r'|audio reflections'
+    r'|nonsensical (?:transcript|discussion|content|meeting)'
+    r'|incoherent (?:rambling|monologue|discussion|transcript|meeting|song|conversation|lyric)'
+    r'|rambling (?:without|with no) (?:clear|decisions|focus|topic)'
+    r"|shawn(?:&#x27;|\u2019|')s disjointed"
+    r'|disjointed (?:and (?:fragmented|unclear) )?'
+    r'(?:discussion|conversation|monologue|meeting|transcript|thought)'
+    r'|(?:provocative|song|incoherent|disjointed) lyrics?'
+    r'|song lyric (?:and|discussion)'
+    r'|lively discussion with music and camaraderie'
+    r'|informal greeting and weather'
+    r'|music discussion(?! at)'
+    r'|opening greetings? (?:and|&) (?:music|chat)'
+    r'|shawn listens to music'
+    r'|listens to music quietly'
+    r')\b',
+    re.IGNORECASE,
+)
+
+NOISE_BODY_RE = re.compile(
+    r'\b('
+    r'no significant decisions or action items'
+    r'|(?:no|lacks) clear decisions[,]? action items[,]? or substantial'
+    r'|no clear decisions[,]? alignments[,]? (?:or )?action items'
+    r'|without a coherent topic'
+    r'|without more context or a clearer (?:discussion topic|structure)'
+    r'|lacks a clear discussion'
+    r'|lacks a clear focus'
+    r'|doesn[\u2019\']t contain any substantive discussion'
+    r'|do(?:es)?n[\u2019\']t (?:have|seem to have) a clear (?:focus|topic|discussion)'
+    r'|no clear discussion topic'
+    r"|it[\u2019\']s (?:not possible|difficult) to provide a meaningful summary"
+    r'|disjointed (?:collection|sequence|conversation|set|series|and fragmented conversation|monologue) '
+    r'(?:of (?:phrases|sentences|words|greetings|comments|messages)|with )'
+    r'|series of greetings and pleasantries'
+    r'|series of audio clips'
+    r'|mix of audio (?:clips|and chat)'
+    r'|recording of [Ss]hawn [Nn]unley (?:performing|sharing)'
+    r'|playing various tracks'
+    r'|largely incoherent and lacked clear discussion'
+    r'|recites lyrics from various songs'
+    r'|stream of consciousness monologue or song lyrics'
+    r'|monologue or song lyrics'
+    r"|no decisions[,]? action items[,]? or meaningful content can be summarized"
+    r'|nonsensical (?:phrases|lyrics|content)'
+    r'|mostly nonsensical'
+    r'|not possible to provide a meaningful summary'
+    r"|isn[\u2019\']t possible to provide a meaningful summary"
+    r'|rather than a (?:real|meaningful|coherent) (?:meeting|discussion|conversation)'
+    r'|without a (?:real|coherent) (?:topic|focus|discussion|conversation)'
+    r'|rambling incoherently'
+    r'|no meaningful conversation captured'
+    r'|there does not seem to be any substantive content'
+    r'|lyrics do not seem to convey any clear'
+    r'|before any substantial business was addressed'
+    r'|enjoy(?:ing|ed)? the music and camaraderie'
+    r'|joining in the chorus'
+    r'|audio clips and messages, including music'
+    r'|listening to music and occasionally'
+    r'|no substantive discussion or decisions seem to have taken place'
+    r')',
+    re.IGNORECASE,
+)
+
+
+def _strip_noise_sections(markdown: str) -> str:
+    """Remove ### subsections that look like AI-gave-up or music-chitchat
+    summaries (the ones the Zoom transcript pulls from intro music or
+    quiet meetings). Each subsection runs from `### Heading\\n` up to the
+    next `### ` or end of file."""
+    section_re = re.compile(
+        r'(?P<full>^### (?P<heading>[^\n]+)\n(?P<body>(?:(?!^### ).*\n?)+))',
+        re.MULTILINE,
+    )
+
+    def maybe_strip(m: re.Match) -> str:
+        heading = m.group("heading").strip()
+        body = m.group("body").strip()
+        if NOISE_TITLE_RE.search(heading) or NOISE_BODY_RE.search(body):
+            return ""
+        return m.group("full")
+
+    return section_re.sub(maybe_strip, markdown)
+
+
 def build_markdown(summary: dict, pacific_date: str) -> str:
     content = summary.get("summary_content", "").strip()
     if not content:
@@ -167,6 +260,8 @@ def build_markdown(summary: dict, pacific_date: str) -> str:
         content,
         flags=re.MULTILINE,
     )
+    # Strip music chitchat / AI-gave-up subsections (intro music, etc.).
+    content = _strip_noise_sections(content)
     return f"# CSOH {pacific_date}\n\n{content.strip()}\n"
 
 
