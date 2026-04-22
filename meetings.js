@@ -21,22 +21,27 @@
         toc: tocItems[i] || null,
     }));
 
-    // Auto-generate topical-tag filter buttons. Month tags (YYYY-MM)
-    // are deliberately omitted to keep the button row tidy; they remain
-    // searchable via the text input.
+    // Auto-generate year and topical-tag filter buttons. Month tags
+    // (YYYY-MM) are searchable via the text input but not surfaced as
+    // buttons to keep the row tidy.
     const tagSet = new Set();
     meta.forEach(m => m.tags.forEach(t => tagSet.add(t)));
     const topicalTags = Array.from(tagSet).filter(t => !/^\d{4}-\d{2}$/.test(t)).sort();
 
+    const years = Array.from(new Set(
+        meta.map(m => (m.id.match(/^meeting-(\d{4})/) || [])[1]).filter(Boolean)
+    )).sort().reverse();
+
     const frag = document.createDocumentFragment();
-    const makeBtn = (label, value) => {
+    const makeBtn = (label, filterValue) => {
         const b = document.createElement('button');
         b.className = 'filter-btn';
-        b.setAttribute('data-filter', 'tag:' + value);
+        b.setAttribute('data-filter', filterValue);
         b.textContent = label;
         return b;
     };
-    topicalTags.forEach(t => frag.appendChild(makeBtn(t, t)));
+    years.forEach(y => frag.appendChild(makeBtn(y, 'year:' + y)));
+    topicalTags.forEach(t => frag.appendChild(makeBtn(t, 'tag:' + t)));
     filters.appendChild(frag);
 
     let activeFilter = 'all';
@@ -46,8 +51,11 @@
         let visible = 0;
         meta.forEach(m => {
             let show = true;
-            if (activeFilter !== 'all') {
-                const value = activeFilter.slice(4); // strip "tag:"
+            if (activeFilter.startsWith('year:')) {
+                const y = activeFilter.slice(5);
+                if (!m.id.startsWith('meeting-' + y)) show = false;
+            } else if (activeFilter.startsWith('tag:')) {
+                const value = activeFilter.slice(4);
                 if (!m.tags.includes(value)) show = false;
             }
             if (show && searchTerm) {

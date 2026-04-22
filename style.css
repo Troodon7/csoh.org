@@ -243,6 +243,36 @@ nav a:focus {
     margin: 2rem 0 1rem;
 }
 
+/* Meetings table of contents */
+#table-of-contents ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+    column-gap: 2rem;
+}
+
+#table-of-contents li {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    padding: 0.45rem 0;
+    break-inside: avoid;
+}
+
+#table-of-contents li a {
+    text-decoration: none;
+}
+
+#table-of-contents li a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    #table-of-contents ul {
+        columns: 1;
+    }
+}
+
 
 /* Filter/Search Bar */
 
