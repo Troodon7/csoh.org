@@ -546,32 +546,15 @@ Before you submit, make sure:
 - ✅ **You're not changing too much** - Keep each PR focused on one thing
 
 
-### 🛡️ Automated Site Update & Deploy Workflow
+### What happens after your PR merges
 
-When you submit a PR, our unified workflow (`site-update-deploy.yml`) will:
+`site-update-deploy.yml` runs SRI hashing, URL safety checks, URL normalization, preview-image generation, broken-link checks, and the FTP deploy. You don't need to run any of that locally — see [README.md#how-automation-works](README.md#-how-automation-works) for the full pipeline.
 
-- 🔒 **Update SRI hashes and cache-busting tags** if CSS/JS changed
-- 🛡️ **Check URL safety** — blocks deploy if unsafe URLs are detected
-- 🔗 **Normalize URLs** — strip tracking parameters, upgrade HTTP to HTTPS, resolve redirects
-- 🖼️ **Generate preview images** for any new resources in `resources.html`
-- 🔍 **Check for broken links** (non-blocking warning)
-- 🚀 **Deploy the site** after merge to main, in smart passes:
-  - Always deploys HTML/CSS/JS and other site files
-  - Only uploads `img/previews/` when new previews were generated
-  - Always syncs news source banner images
-  - Only uploads `chat-screenshots/` when new screenshots were added
-
-**What this means for you:**
-- SRI hashes, URL safety checks, URL normalization, preview images, and deploys are all handled automatically—no manual steps needed
-- If you add entries to `chat-resources.html` with new screenshots, commit the screenshots to `chat-screenshots/` and the workflow will upload them
-
-**Pro tips:**
-- Always use HTTPS when available
-- Link to official sources (GitHub, AWS docs, etc.)
-- Avoid URL shorteners - use full destination URLs
-- Test links before submitting
-
-See [tools/CHECK_URL_SAFETY_README.md](tools/CHECK_URL_SAFETY_README.md), [UPDATE_SRI_README.md](UPDATE_SRI_README.md), and [tools/GENERATE_PREVIEW_README.md](tools/GENERATE_PREVIEW_README.md) for full details.
+**Quick tips for URLs you add:**
+- Use HTTPS when available.
+- Link to the official source (GitHub, AWS docs, vendor blog).
+- Skip URL shorteners — paste the final destination.
+- Test the link before submitting.
 
 ---
 
@@ -633,25 +616,6 @@ A: If it would help a cloud security professional learn or advance, it's worth s
 
 ---
 
-## 🎁 Recognition
-
-Contributors get:
-- Your name and link in our contributor credits
-- Recognition in community posts
-- Gratitude from 2000+ cloud security professionals
-- The satisfaction of helping people learn
-
----
-
-## 🚀 Ready to Contribute?
-
-1. **Found a bug?** → [Report it here](https://github.com/CloudSecurityOfficeHours/csoh.org/issues/new)
-2. **Have a suggestion?** → [Create an issue](https://github.com/CloudSecurityOfficeHours/csoh.org/issues/new)
-3. **Want to make a change?** → Follow the steps above
-4. **Questions?** → Join our [Discord](https://discord.gg/AVzAY97D8E)
-
----
-
 ## 📞 Need Help?
 
 - **Community chat** → [Discord server](https://discord.gg/AVzAY97D8E) (fastest for questions)
@@ -661,10 +625,3 @@ Contributors get:
 - **Want to add a CTF?** → Check [CONTRIBUTING_CTFS.md](CONTRIBUTING_CTFS.md)
 - **Want to set up local development?** → Check [DEVELOPMENT.md](DEVELOPMENT.md)
 
----
-
-**Thank you for helping make CSOH better! 🙏**
-
-Every contribution—from fixing a typo to suggesting a whole new section—helps our community grow.
-
-*Made with ❤️ by the Cloud Security Office Hours Team*

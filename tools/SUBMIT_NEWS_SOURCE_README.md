@@ -61,6 +61,6 @@ Next steps:
 
 ## See Also
 
-- [Update News Automation](../UPDATE_NEWS_README.md)
+- [Update News Automation](UPDATE_NEWS_README.md)
 - [General Contributions](../CONTRIBUTING.md)
 - [Contribute Page](../contribute.html)

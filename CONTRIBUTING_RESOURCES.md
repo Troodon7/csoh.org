@@ -166,17 +166,11 @@ Tags help people find resources. Pick 2-5 tags from this list:
 
 **Other:** `NEW 2026` • `Free` • `Paid` • `Open Source`
 
-### Step 3: Get a Preview Image (Optional)
+### Step 3: Preview Image (Skip This)
 
-Preview images are the small screenshot shown for each resource. They're optional—the site works without them, but they make things look nice.
+Preview images auto-generate after you open a PR. You can skip to Step 4.
 
-
-**Easy option:** Just skip this step! The website will automatically generate thumbnails after you open a pull request, thanks to the unified workflow.
-
-**Better option:** Provide a custom preview image:
-- Take a screenshot of the resource's homepage
-- Save it as a JPG file (about 150KB or smaller)
-- Name it something clear, like: `cloudgoat-preview.jpg`
+If you want to provide your own, save a JPG under ~150 KB with a clear name (e.g. `cloudgoat-preview.jpg`) and come back to Step 5.
 
 ### Step 4: Edit the Resources HTML File
 

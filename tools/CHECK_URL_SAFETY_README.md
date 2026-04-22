@@ -14,11 +14,6 @@ python3 tools/check_url_safety.py "https://example.com/article"
 python3 tools/check_all_site_urls.py
 ```
 
-**Check all URLs in chat-resources.html:**
-```bash
-python3 tools/check_existing_urls.py
-```
-
 **Check multiple URLs from a file:**
 ```bash
 python3 tools/check_url_safety.py --batch urls.txt

@@ -74,7 +74,7 @@ Want to **add a new source**? You have two options:
 1. Run `python3 tools/submit_news_source.py` (interactive, recommended)
 2. Or edit the `FEEDS` list at the top of `update_news.py` manually
 
-**Script guide:** [tools/SUBMIT_NEWS_SOURCE_README.md](tools/SUBMIT_NEWS_SOURCE_README.md)
+**Script guide:** [SUBMIT_NEWS_SOURCE_README.md](SUBMIT_NEWS_SOURCE_README.md)
 
 ### Common Errors (Submit Script)
 

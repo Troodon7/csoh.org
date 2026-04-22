@@ -1,5 +1,3 @@
-// CSOH Chat Resources - Interactive JavaScript
-
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     const showAllBtn = document.getElementById('showAllBtn');
@@ -385,10 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // =========================================================================
-    // RESOURCE CARD TOOLTIPS  (shows destination URL on hover)
-    // =========================================================================
-
+    // Resource card tooltips — shows destination URL on hover
     function initTooltips() {
         // Skip on touch devices — no hover available
         if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;

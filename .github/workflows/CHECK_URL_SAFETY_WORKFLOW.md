@@ -59,11 +59,6 @@ Before pushing changes, you can run the checks locally:
 python3 tools/check_all_site_urls.py
 ```
 
-**Just chat-resources.html:**
-```bash
-python3 tools/check_existing_urls.py
-```
-
 **Single URL:**
 ```bash
 python3 tools/check_url_safety.py "https://example.com"
@@ -79,7 +74,6 @@ python3 tools/check_all_site_urls.py > site-wide-url-safety-report.txt 2>&1
 To adjust what URLs are flagged, edit:
 - `tools/check_url_safety.py` - Modify patterns, whitelist, or blocklist
 - `tools/check_all_site_urls.py` - Change which files are scanned or report format
-- `tools/check_existing_urls.py` - Customize chat-resources.html scanning
 
 ## Exit Codes
 

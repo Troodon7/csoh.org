@@ -173,6 +173,14 @@ NOISE_TITLE_RE = re.compile(
     r'|opening greetings? (?:and|&) (?:music|chat)'
     r'|shawn listens to music'
     r'|listens to music quietly'
+    r'|stream of consciousness'
+    r'|indecipherable (?:meeting|discussion|transcript)'
+    r'|bilingual text display'
+    r'|(?:multilingual |)song medley'
+    r'|warm-?up session'
+    r'|philosophical (?:and )?poetic|poetic musings'
+    r'|emotional connection (?:and|&)'
+    r'|cybersecurity music video'
     r')\b',
     re.IGNORECASE,
 )
@@ -199,7 +207,7 @@ NOISE_BODY_RE = re.compile(
     r'|playing various tracks'
     r'|largely incoherent and lacked clear discussion'
     r'|recites lyrics from various songs'
-    r'|stream of consciousness monologue or song lyrics'
+    r'|stream of consciousness'
     r'|monologue or song lyrics'
     r"|no decisions[,]? action items[,]? or meaningful content can be summarized"
     r'|nonsensical (?:phrases|lyrics|content)'
@@ -218,6 +226,16 @@ NOISE_BODY_RE = re.compile(
     r'|audio clips and messages, including music'
     r'|listening to music and occasionally'
     r'|no substantive discussion or decisions seem to have taken place'
+    r'|screen-?share (?:appears to )?display(?:s|ing)? (?:a (?:mix|series) of |what appears to be )?(?:song lyrics|disconnected|a poem)'
+    r'|performs a medley (?:of |)'
+    r'|reciting song lyrics'
+    r'|warming up for (?:a |the )meeting (?:or |)(?:presentation )?by singing'
+    r'|philosophical and poetic (?:statements|musings)'
+    r'|feelings of loneliness (?:and longing|)'
+    r'|expressed (?:his |her |)feelings about a past relationship'
+    r'|random with recurring phrases'
+    r'|song lyrics, greetings, and disconnected phrases'
+    r'|lively discussion, filled with music'
     r')',
     re.IGNORECASE,
 )

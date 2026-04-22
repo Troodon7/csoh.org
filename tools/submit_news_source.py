@@ -89,7 +89,6 @@ def looks_like_feed(text):
 
 
 def parse_existing_feeds(text):
-    # Basic parse to find existing names and URLs from FEEDS list.
     match = re.search(rf"{FEEDS_VAR}\s*=\s*\[(.*?)\]", text, re.DOTALL)
     if not match:
         return [], []

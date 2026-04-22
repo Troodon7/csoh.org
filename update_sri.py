@@ -80,7 +80,6 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
     original_content = content
 
-    # Update style.css: SRI hash, cache-bust param, remove crossorigin
     if 'style.css' in hashes:
         link_pattern = re.compile(
             r'<link\b[^>]*\bhref=(["\'])(?:\.?/)?style\.css(?:\?[^"\']*)?(\1)[^>]*>',
@@ -89,7 +88,6 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
         def replace_style_link(match: re.Match) -> str:
             tag = match.group(0)
-            # Update href to include cache-bust query param
             tag = re.sub(
                 r'(href=["\'])(?:\.?/)?style\.css(?:\?[^"\']*)?(["\'])',
                 rf'\g<1>/style.css?v={cache_busts["style.css"]}\2',
@@ -101,7 +99,6 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
         content = link_pattern.sub(replace_style_link, content)
 
-    # Update main.js: SRI hash, cache-bust param, remove crossorigin
     if 'main.js' in hashes:
         script_pattern = re.compile(
             r'<script\b[^>]*\bsrc=(["\'])(?:\.?/)?main\.js(?:\?[^"\']*)?(\1)[^>]*>',
@@ -110,7 +107,6 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
         def replace_main_script(match: re.Match) -> str:
             tag = match.group(0)
-            # Update src to include cache-bust query param
             tag = re.sub(
                 r'(src=["\'])(?:\.?/)?main\.js(?:\?[^"\']*)?(["\'])',
                 rf'\g<1>/main.js?v={cache_busts["main.js"]}\2',
@@ -122,7 +118,6 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
         content = script_pattern.sub(replace_main_script, content)
 
-    # Update chat-resources.js: SRI hash, cache-bust param, remove crossorigin
     if 'chat-resources.js' in hashes:
         chat_script_pattern = re.compile(
             r'<script\b[^>]*\bsrc=(["\'])(?:\.?/)?chat-resources\.js(?:\?[^"\']*)?(\1)[^>]*>',
@@ -142,7 +137,6 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
         content = chat_script_pattern.sub(replace_chat_script, content)
 
-    # Update breach-timeline.css: SRI hash, cache-bust param, remove crossorigin
     if 'breach-timeline.css' in hashes:
         bt_link_pattern = re.compile(
             r'<link\b[^>]*\bhref=(["\'])(?:\.?/)?breach-timeline\.css(?:\?[^"\']*)?(\1)[^>]*>',
@@ -162,7 +156,6 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
         content = bt_link_pattern.sub(replace_bt_style_link, content)
 
-    # Update breach-timeline.js: SRI hash, cache-bust param, remove crossorigin
     if 'breach-timeline.js' in hashes:
         bt_script_pattern = re.compile(
             r'<script\b[^>]*\bsrc=(["\'])(?:\.?/)?breach-timeline\.js(?:\?[^"\']*)?(\1)[^>]*>',
@@ -182,7 +175,6 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
         content = bt_script_pattern.sub(replace_bt_script, content)
 
-    # Update meetings.js: SRI hash, cache-bust param, remove crossorigin
     if 'meetings.js' in hashes:
         mtg_script_pattern = re.compile(
             r'<script\b[^>]*\bsrc=(["\'])(?:\.?/)?meetings\.js(?:\?[^"\']*)?(\1)[^>]*>',
@@ -202,7 +194,6 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
         content = mtg_script_pattern.sub(replace_mtg_script, content)
 
-    # Write back if changed
     if content != original_content:
         with open(html_path, 'w', encoding='utf-8') as f:
             f.write(content)
@@ -212,11 +203,8 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
 
 def main():
-    """Main function to update SRI hashes in all HTML files."""
-    # Get the repository root directory
     repo_root = Path(__file__).parent
-    
-    # Files to calculate hashes for
+
     files_to_hash = {
         'style.css': repo_root / 'style.css',
         'main.js': repo_root / 'main.js',
@@ -225,8 +213,7 @@ def main():
         'breach-timeline.js': repo_root / 'breach-timeline.js',
         'meetings.js': repo_root / 'meetings.js',
     }
-    
-    # Calculate SRI hashes and cache-bust strings
+
     print("Calculating SRI hashes...")
     hashes = {}
     cache_busts = {}
@@ -242,19 +229,16 @@ def main():
         cache_busts[name] = calculate_cache_bust(path)
         print(f"  {name}: {sri_hash} (v={cache_busts[name]})")
 
-    # If any required files are missing, exit with error
     if missing_files:
         print(f"Error: Required files not found: {', '.join(missing_files)}", file=sys.stderr)
         return 1
 
-    # Find all HTML files recursively in the repository
     html_files = list(repo_root.rglob('*.html'))
 
     if not html_files:
         print("Warning: No HTML files found", file=sys.stderr)
         return 0
 
-    # Update each HTML file
     print(f"\nUpdating {len(html_files)} HTML files...")
     modified_count = 0
     for html_path in sorted(html_files):

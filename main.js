@@ -1,6 +1,3 @@
-// CSOH Website - Interactive JavaScript
-
-// Debounce function for performance optimization
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -13,7 +10,6 @@ function debounce(func, wait) {
     };
 }
 
-// Cache frequently accessed DOM elements
 const domCache = {
     searchInput: null,
     categoryHeaders: null,
@@ -29,21 +25,14 @@ function sanitize(str) {
 document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('js-enabled');
 
-    // Initialize DOM cache
     domCache.searchInput = document.getElementById('searchInput');
     domCache.categoryHeaders = document.querySelectorAll('.category-section h3');
     domCache.cards = document.querySelectorAll('.resource-card');
 
-    // Dark mode initialization
     initThemeToggle();
-
-    // Search suggestions initialization
     initSearchSuggestions();
-
-    // Social sharing buttons (news page)
     initShareButtons();
 
-    // Enforce rel attributes on external links opened in new tabs.
     document.querySelectorAll('a[target="_blank"]').forEach(link => {
         const rel = (link.getAttribute('rel') || '').split(' ').filter(Boolean);
         if (!rel.includes('noopener')) rel.push('noopener');
@@ -51,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
         link.setAttribute('rel', rel.join(' '));
     });
 
-    // Hamburger menu toggle
     const hamburger = document.querySelector('.hamburger');
     if (hamburger) {
         hamburger.addEventListener('click', function () {
@@ -607,10 +595,7 @@ function updateVisibleCount() {
     }
 }
 
-// =========================================================================
-// DARK MODE
-// =========================================================================
-
+// Dark mode
 function initThemeToggle() {
     // Check saved preference or system preference
     const saved = localStorage.getItem('theme');
@@ -646,10 +631,7 @@ function updateToggleIcon(btn) {
     btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
 }
 
-// =========================================================================
-// SEARCH SUGGESTIONS / AUTOCOMPLETE
-// =========================================================================
-
+// Search suggestions / autocomplete
 function initSearchSuggestions() {
     const input = domCache.searchInput;
     if (!input) return;
@@ -783,10 +765,7 @@ function buildSuggestionIndex() {
     return suggestions;
 }
 
-// =========================================================================
-// SOCIAL SHARING BUTTONS (News page)
-// =========================================================================
-
+// Social sharing buttons (news page)
 function initShareButtons() {
     if (!document.body.classList.contains('news-page')) return;
 
@@ -817,10 +796,7 @@ function initShareButtons() {
     });
 }
 
-// =========================================================================
-// RESOURCE CARD TOOLTIPS
-// =========================================================================
-
+// Resource card tooltips
 function initTooltips() {
     // Skip on touch devices — no hover available
     if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;

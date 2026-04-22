@@ -18,10 +18,9 @@ from xml.dom.minidom import parseString
 
 
 def extract_articles(news_html: str) -> list:
-    """Extract article data from news.html card-link elements."""
     articles = []
 
-    # Match each card-link <a> block
+    # Match each card-link <a> block produced by update_news.render_card().
     pattern = re.compile(
         r'<a\s+href="([^"]+)"\s+class="card-link"[^>]*>'
         r'\s*<div\s+class="resource-card"[^>]*>'
@@ -67,7 +66,6 @@ def extract_articles(news_html: str) -> list:
 
 
 def build_rss(articles: list) -> str:
-    """Build RSS 2.0 XML string from article data."""
     rss = Element("rss", version="2.0")
     rss.set("xmlns:atom", "http://www.w3.org/2005/Atom")
 
@@ -123,7 +121,6 @@ def build_rss(articles: list) -> str:
         for tag in article["tags"]:
             SubElement(item, "category").text = tag
 
-    # Pretty print
     raw = tostring(rss, encoding="unicode", xml_declaration=False)
     dom = parseString('<?xml version="1.0" encoding="UTF-8"?>' + raw)
     return dom.toprettyxml(indent="  ", encoding=None)

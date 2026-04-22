@@ -1,5 +1,3 @@
-/* CSOH.org Website */
-
 :root {
     --primary-color: #2c3e50;
     --secondary-color: #3498db;
@@ -23,7 +21,6 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--light-bg);
-    /* Optimize font rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -81,7 +78,6 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    /* Performance optimization */
     contain: layout style;
 }
 

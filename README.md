@@ -1,6 +1,6 @@
 # Cloud Security Office Hours (CSOH)
 
-A modern, community-driven cloud security resource hub built as a fast, responsive static website. Home to **2000+ security professionals**, **200+ curated resources**, **120+ news articles**, **554+ community-shared URLs**, and weekly expert-led Zoom sessions.
+A community-run cloud-security resource hub, built as a static website. Weekly Zoom sessions, a curated resources catalog, news aggregation, and an RSS feed.
 
 [![GitHub](https://img.shields.io/badge/GitHub-CloudSecurityOfficeHours/csoh.org-blue)](https://github.com/CloudSecurityOfficeHours/csoh.org)
 [![Discord](https://img.shields.io/badge/Discord-2000%2B%20Members-5865F2)](https://discord.gg/AVzAY97D8E)
@@ -8,19 +8,15 @@ A modern, community-driven cloud security resource hub built as a fast, responsi
 
 ---
 
-## 🎯 About CSOH
+## About CSOH
 
-Cloud Security Office Hours is a **vendor-neutral, free community** dedicated to advancing cloud security education and collaboration. Founded in February 2023, CSOH has grown to 2000+ members worldwide, providing:
+Cloud Security Office Hours is a vendor-neutral, free community founded in February 2023. What's here:
 
-- **Weekly Expert Zoom Sessions** - Every Friday at 7am PT with industry experts
-- **200+ Curated Resources** - CTF challenges, hands-on labs, security tools, certifications
-- **120+ News Articles** - Cloud security news updated every 3 hours from 32 RSS feeds
-- **RSS Feed** - Subscribe at [csoh.org/feed.xml](https://csoh.org/feed.xml) for automatic news updates
-- **554+ Community-Shared URLs** - Secure, validated links from Zoom chat sessions
-- **Active Discord Community** - Real-time discussions, peer learning, mentorship
-- **Dark Mode** - Toggle between light and dark themes, with automatic OS preference detection
-- **Automated Security Validation** - All URLs checked for malicious patterns before publication
-- **Vendor Neutral** - Completely free, open, community-run initiative
+- Weekly Zoom sessions, Fridays at 7am PT with guest speakers.
+- A curated resources catalog (CTFs, labs, tools, certifications).
+- Cloud-security news aggregated every 3 hours from 32 RSS feeds.
+- The RSS feed itself at [csoh.org/feed.xml](https://csoh.org/feed.xml).
+- Discord for real-time discussion.
 
 ---
 
@@ -168,50 +164,15 @@ This is intentionally high-bar. A small number of deeply researched entries is m
 ---
 
 
-## 🚀 Features
+## Features
 
-### ⚡ Performance & Security
-- **Pure Static HTML** - No database, server-side code, or backend dependencies
-- **Instant Load Times** - Optimized CSS/JS, no external frameworks
-- **Minimal Attack Surface** - No database, no server-side code, no user sessions — eliminates entire vulnerability classes
-- **Automated URL Safety Checks** - All URLs validated for phishing, malware, and suspicious patterns
-- **CI/CD Security Validation** - GitHub Actions workflow blocks unsafe URLs before merge
-- **1,000+ URLs Validated** - Comprehensive site-wide security scanning
-- **Automated Preview Images** - Screenshots generated when new resources are added
-- **CDN Ready** - Deploy anywhere (GitHub Pages, Vercel, AWS S3, etc.)
-- **Near-Zero Downtime** - Simple static file hosting for maximum reliability
-
-### 🌙 Dark Mode
-- **One-Click Toggle** - 🌙/☀️ button in the header on every page
-- **OS Auto-Detection** - Respects `prefers-color-scheme` system setting
-- **Persistent Preference** - Choice saved in `localStorage` across sessions
-- **Full Coverage** - All pages, cards, tags, forms, and navigation styled for dark mode
-
-### 📡 RSS Feed
-- **Auto-Generated Feed** - `feed.xml` updated automatically alongside news articles
-- **Standards Compliant** - Valid RSS 2.0 feed for any reader app
-- **Reader Guide** - See [RSS_FEED_README.md](RSS_FEED_README.md) for setup instructions
-
-### 🔍 SEO & Discoverability
-- **Rich Schema Markup** - NewsArticle, FAQPage, Organization, Event, CollectionPage
-- **Featured Snippet Optimization** - FAQ schema for voice search
-- **Google News Carousel** - Article collection markup
-- **Mobile Responsive** - Perfect Google Lighthouse scores
-- **Sitemap.xml & robots.txt** - Full crawlability configuration
-- **Open Graph & Twitter Cards** - Social media optimization
-
-### ♿ Accessibility
-- **Semantic HTML5** - Proper heading hierarchy (H1→H2→H3)
-- **ARIA Labels** - Screen reader support (including dark mode toggle)
-- **Keyboard Navigation** - Full keyboard access
-- **Color Contrast** - WCAG AA compliant in both light and dark modes
-- **Alt Text** - Descriptive image labels
-
-### 🔎 Search & Filter
-- **Full-text Search** - Find resources by keyword
-- **Category Filtering** - Filter by resource type
-- **Tag-based Navigation** - AWS, Azure, GCP, Kubernetes, Certifications, Labs, CTF, Tools, etc.
-- **Date Sorting** - News articles sorted newest first
+- Static HTML — no database, no server-side code; deploys to GitHub Pages, Vercel, S3.
+- URL-safety gate — every PR is scanned for unsafe URLs before merge (`check_all_site_urls.py`).
+- RSS feed — `feed.xml` regenerated with each news update. See [RSS_FEED_README.md](RSS_FEED_README.md).
+- Dark mode — toggle plus `prefers-color-scheme` detection, persisted in `localStorage`.
+- Schema markup — NewsArticle, FAQPage, Organization, Event, CollectionPage.
+- Accessibility — semantic HTML5, ARIA labels, WCAG AA contrast in both themes.
+- Search + tag filtering on news and resources pages.
 
 ---
 
@@ -247,9 +208,7 @@ csoh.org/
 │   ├── generate_preview.py                 # Generate preview screenshots for resources
 │   ├── normalize_urls.py                   # URL normalizer (tracking params, HTTPS, redirects)
 │   ├── check_url_safety.py                 # Core URL safety validator with pattern matching
-│   ├── check_existing_urls.py              # Batch scanner for chat-resources.html URLs
 │   ├── check_all_site_urls.py              # Comprehensive site-wide URL scanner
-│   ├── update_chat_titles.py               # Generate descriptive titles for chat URLs
 │   ├── update_sitemap.py                   # Refresh sitemap.xml <lastmod> dates from git history
 │   ├── update_presentations_schema.py      # Regenerate VideoObject JSON-LD on presentations.html
 │   ├── SUBMIT_RESOURCE_README.md           # Interactive submission tool documentation
@@ -262,8 +221,6 @@ csoh.org/
 │
 ├── update_news.py              # Python script to auto-update news articles + RSS feed
 ├── update_sri.py               # Python script to update SRI hashes & cache-bust params
-├── UPDATE_NEWS_README.md       # News automation documentation
-├── UPDATE_SRI_README.md        # SRI & cache-busting documentation
 ├── RSS_FEED_README.md          # RSS feed usage guide for subscribers
 │
 ├── .github/workflows/
@@ -315,7 +272,7 @@ csoh.org/
 
 ### Adding a New Article to News
 
-News articles are **updated automatically** — you don't need to add them by hand. A GitHub Actions workflow runs every 3 hours, pulls articles from 32 cloud security RSS feeds, and creates a pull request with the new content. See the [How Automation Works](#-how-automation-works) section below for details, or read the full docs in [UPDATE_NEWS_README.md](UPDATE_NEWS_README.md).
+News articles are **updated automatically** — you don't need to add them by hand. A GitHub Actions workflow runs every 3 hours, pulls articles from 32 cloud security RSS feeds, and creates a pull request with the new content. See the [How Automation Works](#-how-automation-works) section below for details, or read the full docs in [tools/UPDATE_NEWS_README.md](tools/UPDATE_NEWS_README.md).
 
 To **add a new news source**, either:
 
@@ -394,11 +351,11 @@ In addition to the URL normalization that runs as part of every deploy, a **stan
   - Resolves redirecting URLs to their final destinations
 - **Output:** Creates a PR with a detailed report of all changes, auto-approved for review
 
-**Full docs:** See [UPDATE_SRI_README.md](UPDATE_SRI_README.md), [tools/GENERATE_PREVIEW_README.md](tools/GENERATE_PREVIEW_README.md), [UPDATE_NEWS_README.md](UPDATE_NEWS_README.md), and [tools/CHECK_URL_SAFETY_README.md](tools/CHECK_URL_SAFETY_README.md)
+**Full docs:** See [tools/UPDATE_SRI_README.md](tools/UPDATE_SRI_README.md), [tools/GENERATE_PREVIEW_README.md](tools/GENERATE_PREVIEW_README.md), [tools/UPDATE_NEWS_README.md](tools/UPDATE_NEWS_README.md), and [tools/CHECK_URL_SAFETY_README.md](tools/CHECK_URL_SAFETY_README.md)
 
 ### Setup Note
 
-Workflows use a **Personal Access Token (PAT)** stored as a GitHub repo secret called `PAT_TOKEN`. If workflows start failing with permission errors, the PAT may need to be rotated — see setup instructions in [UPDATE_NEWS_README.md](UPDATE_NEWS_README.md#setup-requirements).
+Workflows use a **Personal Access Token (PAT)** stored as a GitHub repo secret called `PAT_TOKEN`. If workflows start failing with permission errors, the PAT may need to be rotated — see setup instructions in [tools/UPDATE_NEWS_README.md](tools/UPDATE_NEWS_README.md#setup-requirements).
 
 ---
 
@@ -480,22 +437,6 @@ See **[DEVELOPMENT.md](DEVELOPMENT.md)** for the full local setup guide, project
 
 ---
 
-## 📋 Stats & Impact
-
-- **2000+** Community members
-- **200+** Curated resources
-- **554+** Community-shared URLs (from Zoom chat sessions)
-- **120+** News articles (auto-updated every 3 hours)
-- **1,000+** URLs validated for security
-- **6** Resource categories
-- **50+** Training platforms
-- **60+** Security tools catalogued
-- **~100+** Published presentations
-- **Weekly** Expert Zoom sessions
-- **6** Automated workflows (news, deploy, URL safety, URL normalization, HTML validation, link checker)
-
----
-
 ## 📜 License
 
 - **Website Code**: MIT License - Feel free to fork and customize
@@ -507,16 +448,4 @@ Copyright © 2023-2026 Cloud Security Office Hours
 
 ---
 
-## 🙏 Acknowledgments
-
-Special thanks to:
-- **2000+ Community Members** - Your engagement drives everything
-- **Guest Speakers** - Industry experts sharing knowledge
-- **Contributors** - Those adding resources and improvements
-- **Open Source Community** - Tools and platforms we catalog
-
----
-
-**Last Updated**: April 19, 2026
-
-For the latest updates and announcements, follow us on Discord!
+For the latest updates and announcements, follow us on Discord.

@@ -18,3 +18,8 @@ __pycache__/
 
 # Google verification
 google*.html
+
+# Generated URL-check / normalize reports
+chat-url-safety-report.txt
+normalize-report.txt
+url-safety-report.txt
