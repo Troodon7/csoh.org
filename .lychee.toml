@@ -47,6 +47,9 @@ exclude = [
   "blog\\.lastpass\\.com",         # Cloudflare bot-block (403)
   "news\\.sky\\.com",              # Bot-block (403)
   "grep\\.app",                    # Rate-limits bots (429)
+  "www\\.sophos\\.com",            # WAF timeouts for automated clients
+  "www\\.nsa\\.gov",               # Blocks bots (403)
+  "www\\.cyber\\.gov\\.au",        # WAF/geo timeouts for automated clients
 ]
 
 # Accept common redirect status codes

@@ -362,11 +362,15 @@ def generate_preview(url, output_filename=None, force=False):
     return True, relative_path, "Preview generated successfully"
 
 def extract_urls_from_resources_html():
-    """Extract card-link URLs from resources.html and ctfs.html without good previews."""
+    """Extract card-link URLs from pages that render preview images without good previews."""
     import re
 
     repo_root = Path(__file__).parent.parent
-    pages = [repo_root / 'resources.html', repo_root / 'ctfs.html']
+    pages = [
+        repo_root / 'resources.html',
+        repo_root / 'ctfs.html',
+        repo_root / 'threat-research.html',
+    ]
     pattern = re.compile(r'<a\s+href="([^"]+)"[^>]*class="card-link"')
 
     all_urls = []
@@ -376,6 +380,9 @@ def extract_urls_from_resources_html():
             continue
         content = page.read_text(encoding='utf-8')
         for url in pattern.findall(content):
+            # Skip relative / internal links — we only screenshot external URLs
+            if not url.startswith(('http://', 'https://')):
+                continue
             if url not in seen:
                 seen.add(url)
                 all_urls.append(url)
