@@ -163,6 +163,29 @@ This is intentionally high-bar. A small number of deeply researched entries is m
 
 ---
 
+## 🔬 Threat Research (`threat-research.html`)
+
+A curated directory of primary sources for cloud-focused threat research. Unlike Breach Kill Chains (which documents specific historical incidents), this page is a living index of where cloud defenders go for ongoing intel.
+
+### Sections
+
+- **Vendor Research Teams** — Wiz Research, Unit 42, Mandiant, Microsoft Threat Intelligence, Google TAG, CrowdStrike Counter Adversary Ops, SentinelLabs, Datadog Security Labs, Sysdig TRT, Aqua Nautilus, Permiso, Cado Security, AWS Security Bulletins, MSRC, IBM X-Force, Trellix, Proofpoint
+- **Annual Threat Reports** — Mandiant M-Trends, CrowdStrike Global Threat Report, Unit 42 Cloud Threat Report, Verizon DBIR, IBM X-Force Index, Datadog State of Cloud Security, CSA Top Threats, ENISA, Sophos State of Ransomware
+- **Notable Incidents & Post-Mortems** — cross-links to `breach-timeline.html` plus primary sources for Capital One, Storm-0558, SolarWinds, LastPass, Scattered Spider/MGM, Snowflake/UNC5537, Uber, Microsoft SAS Token Leak, Codecov, Okta HAR
+- **IOC Feeds & Threat Intel Platforms** — AlienVault OTX, abuse.ch, VirusTotal, MISP, Shodan, GreyNoise, Censys, CIRCL, Feodo Tracker, Spamhaus, IBM X-Force Exchange, OSINT Framework
+- **Attack Frameworks & Matrices** — MITRE ATT&CK Cloud / Containers, D3FEND, Microsoft Kubernetes Threat Matrix, OWASP Cloud-Native Top 10, TheHive, Sigma, Elastic Detection Rules
+- **Government & Regulatory Advisories** — CISA (+KEV), FBI IC3, NSA, UK NCSC, ACSC, NIST NVD, CVE.org
+
+### How to contribute a source
+
+Edit `threat-research.html` directly — each link is a standard `.resource-card` in the same format as `resources.html` and `presentations.html`. Open a PR with:
+
+- A link to the primary research output (blog index, report landing page, or feed URL — not a marketing page)
+- A one-sentence description of what's unique about the source
+- 2–3 tags (use existing tag classes where possible: `ctf`, `tool`, `lab`, `certification`, `job`, `ai-security`, `new`)
+
+---
+
 
 ## Features
 
@@ -186,6 +209,8 @@ csoh.org/
 ├── chat-resources.html         # Community-shared URLs from Zoom sessions (554+ URLs)
 ├── sessions.html               # Weekly Zoom session information
 ├── presentations.html          # Archive of recorded presentations
+├── breach-timeline.html        # Cloud breach kill chain library
+├── threat-research.html        # Curated cloud threat research directory
 ├── kevin-mitnick.html          # Special resource page
 │
 ├── style.css                   # Main stylesheet (responsive design + dark mode)

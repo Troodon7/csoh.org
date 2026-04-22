@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="Curated directory of cloud security threat research: vendor research teams, annual threat reports, notable incidents, IOC feeds, threat intel platforms, MITRE ATT&CK Cloud mappings, and government advisories.">
+    <meta name="keywords"
+        content="cloud threat research, threat intelligence, IOC feeds, MITRE ATT&CK cloud, cloud incidents, Wiz Research, Unit 42, Mandiant, Microsoft Threat Intelligence, Google TAG, CrowdStrike, Datadog Security Labs, Sysdig, CISA advisories">
+    <title>Cloud Threat Research - Cloud Security Office Hours</title>
+
+    <link rel="canonical" href="https://csoh.org/threat-research.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Cloud Threat Research - Cloud Security Office Hours">
+    <meta property="og:description"
+        content="Vendor research teams, annual threat reports, notable cloud incidents, IOC feeds, threat intel platforms, and government advisories — curated for cloud security professionals.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://csoh.org/threat-research.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cloud Threat Research - Cloud Security Office Hours">
+    <meta name="twitter:description"
+        content="Vendor research teams, annual threat reports, notable cloud incidents, IOC feeds, and threat intel platforms.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=368daabf" as="style"
+        integrity="sha384-/7LUxy1KmADp3V81you5OTilNB4eUf1xL3YwIChFXLMcLAU+gE6i3NbBtPxh1Iu/">
+    <link rel="stylesheet" href="/style.css?v=368daabf"
+        integrity="sha384-/7LUxy1KmADp3V81you5OTilNB4eUf1xL3YwIChFXLMcLAU+gE6i3NbBtPxh1Iu/">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Threat Research",
+          "item": "https://csoh.org/threat-research.html"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Cloud Threat Research",
+      "description": "Curated directory of cloud security threat research: vendor research teams, annual threat reports, notable incidents, IOC feeds, threat intel platforms, MITRE ATT&CK Cloud mappings, and government advisories.",
+      "url": "https://csoh.org/threat-research.html",
+      "isAccessibleForFree": true,
+      "inLanguage": "en-US",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/",
+        "logo": "https://csoh.org/banner.png"
+      }
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <h1>CSOH</h1>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="sessions.html">Zoom Sessions</a></li>
+                    <li><a href="ctfs.html">CTFs</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Threat Research</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img"
+            decoding="async">
+        <h2>🔬 Cloud Threat Research</h2>
+        <p>Primary sources for cloud-focused threat research — vendor research teams, annual threat reports, notable
+            incident post-mortems, IOC feeds, threat intel platforms, and government advisories. Everything linked
+            here is free to read.</p>
+        <div class="cta-buttons">
+            <a href="breach-timeline.html" class="btn btn-primary">Breach Kill Chains</a>
+            <a href="news.html" class="btn btn-secondary">Latest News</a>
+        </div>
+    </section>
+
+    <main class="container" id="main-content">
+        <section class="section">
+            <h2>About This Page</h2>
+            <p>Threat research is how the cloud security community learns from real attacks. This page collects the
+                research teams, reports, feeds, and frameworks that cloud defenders actually read. Where possible, we
+                link directly to the research output (a blog, a feed URL, or a report) rather than a vendor marketing
+                page.</p>
+            <p>Spot something missing?
+                <a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank"
+                    rel="noopener noreferrer" class="link--accent">Submit a PR on GitHub</a>
+                or email <a href="mailto:admin@csoh.org" class="link--accent">admin@csoh.org</a>.
+            </p>
+        </section>
+
+        <!-- Vendor Research Teams -->
+        <section class="section" id="research-teams">
+            <h2>🧠 Vendor Research Teams</h2>
+            <p>Teams that publish original cloud-focused threat research, detection logic, and attacker TTPs.</p>
+            <div class="resource-grid">
+                <a href="https://www.wiz.io/blog/tag/research" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Wiz Research</h3>
+                        <p>Cloud-native vulnerability research — tenant isolation failures, shared-responsibility gaps,
+                            and novel CSP bugs (e.g. ChaosDB, ExtraReplica, OMIGOD).</p>
+                        <div class="resource-tags">
+                            <span class="tag">Research</span>
+                            <span class="tag">Multi-Cloud</span>
+                            <span class="tag">Vulnerabilities</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://unit42.paloaltonetworks.com/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Unit 42 (Palo Alto Networks)</h3>
+                        <p>Threat intelligence on ransomware, APTs, cloud attack trends, and the annual Unit 42 Cloud
+                            Threat Report.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Threat Intel</span>
+                            <span class="tag">APT</span>
+                            <span class="tag">Ransomware</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://cloud.google.com/blog/topics/threat-intelligence" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Mandiant / Google Cloud Threat Intel</h3>
+                        <p>Incident response telemetry, nation-state tracking (UNC/APT groups), and the annual M-Trends
+                            report.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Threat Intel</span>
+                            <span class="tag">APT</span>
+                            <span class="tag">GCP</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.microsoft.com/en-us/security/blog/topic/threat-intelligence/" class="card-link"
+                    target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Microsoft Threat Intelligence</h3>
+                        <p>Tracks actors like Storm-0558, Midnight Blizzard, and Octo Tempest — with deep Azure/Entra
+                            ID attack detail.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Threat Intel</span>
+                            <span class="tag">Azure</span>
+                            <span class="tag">Entra ID</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://blog.google/threat-analysis-group/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Google Threat Analysis Group (TAG)</h3>
+                        <p>Nation-state actor tracking, 0-day exploitation analysis, and coordinated disclosure
+                            research.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Threat Intel</span>
+                            <span class="tag">Nation-State</span>
+                            <span class="tag">0-day</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.crowdstrike.com/en-us/blog/category.counter-adversary-operations/" class="card-link"
+                    target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>CrowdStrike Counter Adversary Ops</h3>
+                        <p>Adversary tracking (Scattered Spider, Cozy Bear, etc.), breakout-time stats, and the annual
+                            Global Threat Report.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Threat Intel</span>
+                            <span class="tag">Adversary Tracking</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.sentinelone.com/labs/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>SentinelLabs</h3>
+                        <p>In-depth malware reverse engineering and cloud intrusion analysis (e.g. LABRAT
+                            cryptojacking, Scarleteel).</p>
+                        <div class="resource-tags">
+                            <span class="tag">Malware Analysis</span>
+                            <span class="tag">Reverse Engineering</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://securitylabs.datadoghq.com/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Datadog Security Labs</h3>
+                        <p>Cloud detection engineering research, attack path analysis, and the annual State of Cloud
+                            Security report.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Detection Engineering</span>
+                            <span class="tag">AWS</span>
+                            <span class="tag">Multi-Cloud</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://sysdig.com/blog/category/threat-research/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Sysdig Threat Research (TRT)</h3>
+                        <p>Container and Kubernetes attack research — cryptojacking operations, runtime exploits, and
+                            supply-chain threats.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Containers</span>
+                            <span class="tag">Kubernetes</span>
+                            <span class="tag">Runtime</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.aquasec.com/blog/category/cloud-native-threat-intelligence/" class="card-link"
+                    target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Aqua Nautilus</h3>
+                        <p>Cloud-native threat research focused on container registries, package repositories, and
+                            CI/CD supply chain attacks.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Containers</span>
+                            <span class="tag">Supply Chain</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://permiso.io/blog" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Permiso Security</h3>
+                        <p>Identity-centric cloud threat research: LUCR-3 (Scattered Spider), AWS privilege escalation,
+                            and IdP abuse.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Identity</span>
+                            <span class="tag">AWS</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cadosecurity.com/blog" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Cado Security Labs</h3>
+                        <p>Cloud incident response and forensics research — covers novel malware families targeting
+                            AWS, Azure, and GCP.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Incident Response</span>
+                            <span class="tag">Forensics</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://cloud.google.com/blog/products/identity-security" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Google Cloud Security Blog</h3>
+                        <p>Product security research and detection content from Google Cloud, Chronicle, and
+                            BeyondCorp.</p>
+                        <div class="resource-tags">
+                            <span class="tag">GCP</span>
+                            <span class="tag">Detection Engineering</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://aws.amazon.com/security/security-bulletins/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>AWS Security Bulletins</h3>
+                        <p>Official AWS advisories for vulnerabilities affecting AWS services, open-source projects,
+                            and shared infrastructure.</p>
+                        <div class="resource-tags">
+                            <span class="tag">AWS</span>
+                            <span class="tag">Advisories</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://msrc.microsoft.com/blog/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Microsoft Security Response Center</h3>
+                        <p>MSRC advisories and vulnerability disclosure posts for Microsoft cloud, OS, and identity
+                            products.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Azure</span>
+                            <span class="tag">Advisories</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://securityintelligence.com/x-force/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>IBM X-Force</h3>
+                        <p>Threat intelligence research and the annual X-Force Threat Intelligence Index with cloud
+                            attack trend data.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Threat Intel</span>
+                            <span class="tag">Reports</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.trellix.com/advanced-research-center/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Trellix Advanced Research Center</h3>
+                        <p>Threat actor profiles, ransomware tracking, and vulnerability research from the former
+                            McAfee/FireEye labs.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Threat Intel</span>
+                            <span class="tag">Ransomware</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.proofpoint.com/us/blog/threat-insight" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Proofpoint Threat Insight</h3>
+                        <p>Research into phishing, BEC, and cloud account takeover campaigns — primary source for
+                            SaaS/M365 threats.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Phishing</span>
+                            <span class="tag">SaaS</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Annual Threat Reports -->
+        <section class="section" id="threat-reports">
+            <h2>📊 Annual Threat Reports</h2>
+            <p>The reports that drive the yearly cloud-security conversation. Most are free but require a form
+                submission.</p>
+            <div class="resource-grid">
+                <a href="https://cloud.google.com/security/resources/m-trends" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Mandiant M-Trends</h3>
+                        <p>Annual analysis of attacker behavior from Mandiant's incident response engagements —
+                            includes dwell time stats and cloud-specific TTPs.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Report</span>
+                            <span class="tag">IR</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.crowdstrike.com/en-us/global-threat-report/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>CrowdStrike Global Threat Report</h3>
+                        <p>Cloud intrusion growth rates, eCrime & nation-state actor profiles, and breakout-time
+                            benchmarks.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Report</span>
+                            <span class="tag">Adversary Tracking</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://unit42.paloaltonetworks.com/cloud-threat-report/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Unit 42 Cloud Threat Report</h3>
+                        <p>Dedicated to cloud posture and attack data from Palo Alto telemetry — config drift, exposed
+                            credentials, and misconfigurations.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Report</span>
+                            <span class="tag">Cloud Posture</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.verizon.com/business/resources/reports/dbir/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Verizon DBIR</h3>
+                        <p>The industry-standard Data Breach Investigations Report — thousands of incidents analyzed,
+                            with growing cloud coverage.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Report</span>
+                            <span class="tag">Breaches</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.ibm.com/reports/threat-intelligence" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>IBM X-Force Threat Intelligence Index</h3>
+                        <p>Annual trends on initial access vectors, top attacked industries, and cloud credential
+                            abuse.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Report</span>
+                            <span class="tag">Threat Intel</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://securitylabs.datadoghq.com/state-of-cloud-security/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Datadog State of Cloud Security</h3>
+                        <p>Real-world cloud posture data — IMDSv2 adoption, long-lived credentials, and public storage
+                            exposure across thousands of accounts.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Report</span>
+                            <span class="tag">Cloud Posture</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://cloudsecurityalliance.org/research/top-threats/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>CSA Top Threats to Cloud Computing</h3>
+                        <p>Cloud Security Alliance's ranked list of cloud threats, updated periodically with real
+                            incident case studies (the "Pandemic Eleven").</p>
+                        <div class="resource-tags">
+                            <span class="tag">Report</span>
+                            <span class="tag">Framework</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.enisa.europa.eu/topics/cyber-threats/threats-and-trends" class="card-link"
+                    target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>ENISA Threat Landscape</h3>
+                        <p>European Union's annual threat landscape report — a useful non-US perspective on cloud,
+                            supply chain, and ransomware trends.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Report</span>
+                            <span class="tag">EU</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.sophos.com/en-us/content/state-of-ransomware" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Sophos State of Ransomware</h3>
+                        <p>Annual survey of ransomware victims — includes ransom payment rates, recovery costs, and
+                            attack entry points.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Report</span>
+                            <span class="tag">Ransomware</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Notable Incidents -->
+        <section class="section" id="incidents">
+            <h2>💥 Notable Cloud Incidents &amp; Post-Mortems</h2>
+            <p>Real attacks with detailed public write-ups. Start with our own step-by-step breach kill chains, then
+                dig into primary sources.</p>
+            <div class="resource-grid">
+                <a href="breach-timeline.html" class="card-link">
+                    <div class="resource-card" data-no-preview>
+                        <h3>🧭 CSOH Breach Kill Chains</h3>
+                        <p>Our in-house collection: Capital One, Storm-0558, SolarWinds, LastPass, MGM, Snowflake — all
+                            mapped to MITRE ATT&amp;CK Cloud.</p>
+                        <div class="resource-tags">
+                            <span class="tag new">CSOH Original</span>
+                            <span class="tag">MITRE Mapped</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://krebsonsecurity.com/2019/08/what-we-can-learn-from-the-capital-one-hack/"
+                    class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Capital One (2019)</h3>
+                        <p>SSRF → IMDSv1 → over-privileged IAM role → 106M records exfiltrated from S3. The case that
+                            made AWS ship IMDSv2.</p>
+                        <div class="resource-tags">
+                            <span class="tag">AWS</span>
+                            <span class="tag">SSRF</span>
+                            <span class="tag">IAM</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://msrc.microsoft.com/blog/2023/09/results-of-major-technical-investigations-for-storm-0558-key-acquisition/"
+                    class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Storm-0558 (2023)</h3>
+                        <p>Microsoft's own post-mortem on how a stolen consumer signing key was used to forge tokens
+                            for enterprise Exchange Online accounts.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Azure</span>
+                            <span class="tag">Token Forgery</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cisa.gov/news-events/news/remediating-networks-affected-solarwinds-and-active-directoryms-365-compromise"
+                    class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>SolarWinds / SUNBURST (2020)</h3>
+                        <p>Supply-chain compromise that pivoted to Azure AD / M365 via Golden SAML. CISA's remediation
+                            guide is the canonical reference.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Supply Chain</span>
+                            <span class="tag">Azure AD</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://blog.lastpass.com/posts/2023/03/security-incident-update-recommended-actions"
+                    class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>LastPass (2022–23)</h3>
+                        <p>Home-PC Plex exploit → keylogger → master password → AWS S3 customer vault exfiltration.
+                            33M customers affected.</p>
+                        <div class="resource-tags">
+                            <span class="tag">AWS S3</span>
+                            <span class="tag">Credential Theft</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a" class="card-link"
+                    target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Scattered Spider / MGM (2023)</h3>
+                        <p>CISA joint advisory covering Scattered Spider (Octo Tempest, UNC3944) tradecraft — help-desk
+                            social engineering, Okta abuse, Azure pivot.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Social Eng</span>
+                            <span class="tag">Okta</span>
+                            <span class="tag">Azure</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.mandiant.com/resources/blog/unc5537-snowflake-data-theft-extortion" class="card-link"
+                    target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Snowflake / UNC5537 (2024)</h3>
+                        <p>Infostealer-harvested credentials used against Snowflake tenants without MFA — impacted
+                            165+ organizations.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Snowflake</span>
+                            <span class="tag">Infostealer</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.uber.com/newsroom/security-update/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Uber (2022)</h3>
+                        <p>Contractor MFA fatigue → PAM vault credentials → domain admin, AWS, GCP, Slack. Uber's
+                            own disclosure.</p>
+                        <div class="resource-tags">
+                            <span class="tag">MFA Fatigue</span>
+                            <span class="tag">Multi-Cloud</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://msrc.microsoft.com/blog/2023/09/microsoft-mitigated-exposure-of-internal-information-in-a-storage-account-due-to-azure-access-token/"
+                    class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Microsoft AI SAS Token Leak (2023)</h3>
+                        <p>38TB of internal data exposed via an overprivileged, long-lived Azure SAS token on a public
+                            GitHub repo. Discovered by Wiz.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Azure</span>
+                            <span class="tag">SAS Token</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.codecov.io/blog/post-mortem-security-incident-review/" class="card-link"
+                    target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Codecov (2021)</h3>
+                        <p>Docker image credential compromise leading to bash uploader tampering — a supply-chain
+                            attack that exposed customer CI secrets.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Supply Chain</span>
+                            <span class="tag">CI/CD</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://sec.okta.com/harfiles" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Okta Support System (2023)</h3>
+                        <p>Okta's own post-mortem on the HAR-file compromise affecting 100% of customer support
+                            tickets.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Identity</span>
+                            <span class="tag">SaaS</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cisa.gov/news-events/cybersecurity-advisories" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>CISA Cybersecurity Advisories</h3>
+                        <p>US government post-incident advisories (AA-series) — the most detailed public
+                            documentation of major ongoing campaigns.</p>
+                        <div class="resource-tags">
+                            <span class="tag">CISA</span>
+                            <span class="tag">Advisories</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- IOC Feeds & Threat Intel Platforms -->
+        <section class="section" id="ioc-feeds">
+            <h2>🎯 IOC Feeds &amp; Threat Intel Platforms</h2>
+            <p>Indicators, hashes, C2 infrastructure, and enrichment sources. Most are free; some offer higher-volume
+                paid tiers.</p>
+            <div class="resource-grid">
+                <a href="https://otx.alienvault.com/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>AlienVault OTX</h3>
+                        <p>Open Threat Exchange — community-contributed IOC "pulses" with IPs, hashes, domains,
+                            and CVEs. Free API.</p>
+                        <div class="resource-tags">
+                            <span class="tag">IOCs</span>
+                            <span class="tag">Community</span>
+                            <span class="tag">Free API</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://abuse.ch/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>abuse.ch (URLhaus, ThreatFox, MalwareBazaar)</h3>
+                        <p>High-signal feeds for malicious URLs, malware samples, and C2 infrastructure. Free
+                            non-commercial use.</p>
+                        <div class="resource-tags">
+                            <span class="tag">IOCs</span>
+                            <span class="tag">Malware</span>
+                            <span class="tag">C2</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.virustotal.com/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>VirusTotal</h3>
+                        <p>File, URL, IP, and domain reputation — the industry's default triage tool. VT Intelligence
+                            for hunting requires a paid plan.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Enrichment</span>
+                            <span class="tag">Malware</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.misp-project.org/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>MISP</h3>
+                        <p>Open-source threat intelligence platform used by CERTs and enterprises for sharing,
+                            correlating, and storing IOCs.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Platform</span>
+                            <span class="tag">Open Source</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.shodan.io/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Shodan</h3>
+                        <p>Search engine for internet-exposed services — find your own exposed S3, RDS, Kubernetes
+                            API servers before attackers do.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Recon</span>
+                            <span class="tag">Enrichment</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.greynoise.io/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>GreyNoise</h3>
+                        <p>Tells you whether an IP is part of internet-wide scan noise or targeted activity — cuts
+                            false positives on scan-based detections.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Enrichment</span>
+                            <span class="tag">Scan Data</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://censys.io/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Censys Search</h3>
+                        <p>Internet scanning and attack-surface search — track adversary infrastructure (Cobalt Strike
+                            beacons, phishing kits) across the IPv4 space.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Recon</span>
+                            <span class="tag">Attack Surface</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.circl.lu/services/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>CIRCL.lu</h3>
+                        <p>Luxembourg CERT — hosts public passive DNS, pDNS, SSL cert history, and hashlookup services
+                            for free.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Enrichment</span>
+                            <span class="tag">Passive DNS</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://feodotracker.abuse.ch/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Feodo Tracker</h3>
+                        <p>Live feed of botnet C2 IPs (Emotet, Dridex, TrickBot, IcedID) — perfect for blocklist
+                            automation.</p>
+                        <div class="resource-tags">
+                            <span class="tag">C2</span>
+                            <span class="tag">Blocklist</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.spamhaus.org/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Spamhaus</h3>
+                        <p>Long-running IP/domain reputation feeds — SBL, XBL, PBL, and the Botnet Controller List
+                            (BCL) are widely used at perimeters.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Reputation</span>
+                            <span class="tag">Blocklist</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://exchange.xforce.ibmcloud.com/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>IBM X-Force Exchange</h3>
+                        <p>Collaborative threat intelligence platform for IOC enrichment and sharing. Free tier
+                            includes API access.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Enrichment</span>
+                            <span class="tag">IOCs</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://osintframework.com/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>OSINT Framework</h3>
+                        <p>Tree of open-source intelligence resources — useful when pivoting from an IOC to actor
+                            attribution.</p>
+                        <div class="resource-tags">
+                            <span class="tag">OSINT</span>
+                            <span class="tag">Directory</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Frameworks -->
+        <section class="section" id="frameworks">
+            <h2>🗺️ Attack Frameworks &amp; Matrices</h2>
+            <p>The taxonomies you'll see referenced in every serious threat report. Learn the matrices, then use them
+                to structure your own hunts and detections.</p>
+            <div class="resource-grid">
+                <a href="https://attack.mitre.org/matrices/enterprise/cloud/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>MITRE ATT&amp;CK — Cloud Matrix</h3>
+                        <p>The canonical tactics/techniques mapping for AWS, Azure AD, GCP, Office 365, and SaaS
+                            attacks.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Framework</span>
+                            <span class="tag">MITRE</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://attack.mitre.org/matrices/enterprise/containers/" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>MITRE ATT&amp;CK — Containers Matrix</h3>
+                        <p>Tactics and techniques focused on container runtimes and Kubernetes — including escapes and
+                            orchestrator abuse.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Framework</span>
+                            <span class="tag">Containers</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://d3fend.mitre.org/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>MITRE D3FEND</h3>
+                        <p>Defensive technique knowledge graph — pairs with ATT&amp;CK to map what you can actually do
+                            about each technique.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Framework</span>
+                            <span class="tag">Defense</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.microsoft.com/en-us/security/blog/2020/04/02/attack-matrix-kubernetes/"
+                    class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Microsoft Kubernetes Threat Matrix</h3>
+                        <p>Kubernetes-specific threat matrix modeled on ATT&amp;CK — still the best starting point for
+                            K8s threat modeling.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Kubernetes</span>
+                            <span class="tag">Framework</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://owasp.org/www-project-cloud-native-application-security-top-10/" class="card-link"
+                    target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>OWASP Cloud-Native Top 10</h3>
+                        <p>OWASP's ranked list of cloud-native application risks — complements ATT&amp;CK with an
+                            application-layer view.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Framework</span>
+                            <span class="tag">AppSec</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.thehive-project.org/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>TheHive Project</h3>
+                        <p>Open-source SOAR/IR platform that pairs with MISP for case management and observable
+                            enrichment.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Platform</span>
+                            <span class="tag">Open Source</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://github.com/sigma-hq/sigma" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Sigma Rules</h3>
+                        <p>Generic, vendor-agnostic detection rule format. The public rule repo is a goldmine of
+                            ready-to-translate detections.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Detection Engineering</span>
+                            <span class="tag">Open Source</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://github.com/elastic/detection-rules" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Elastic Detection Rules</h3>
+                        <p>Elastic's public repo of tested detections — includes cloud-focused rules for AWS,
+                            Azure, GCP, and O365.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Detection Engineering</span>
+                            <span class="tag">Open Source</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Government & Regulatory -->
+        <section class="section" id="government-advisories">
+            <h2>🏛️ Government &amp; Regulatory Advisories</h2>
+            <p>Authoritative sources from CISA, NCSC, NSA, FBI, and peers — usually the first public detail on
+                active nation-state campaigns.</p>
+            <div class="resource-grid">
+                <a href="https://www.cisa.gov/news-events/cybersecurity-advisories" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>CISA Advisories</h3>
+                        <p>US Cybersecurity and Infrastructure Security Agency — alerts, binding directives, and joint
+                            advisories.</p>
+                        <div class="resource-tags">
+                            <span class="tag">US</span>
+                            <span class="tag">Advisories</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>CISA Known Exploited Vulnerabilities (KEV)</h3>
+                        <p>Authoritative list of CVEs observed being exploited in the wild. Patch these first.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Vulnerabilities</span>
+                            <span class="tag">KEV</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.ic3.gov/CSA" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>FBI IC3 Industry Alerts</h3>
+                        <p>FBI's public alerts on ongoing criminal campaigns — BEC, ransomware, cryptocurrency
+                            theft.</p>
+                        <div class="resource-tags">
+                            <span class="tag">FBI</span>
+                            <span class="tag">Advisories</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.nsa.gov/Press-Room/Cybersecurity-Advisories-Guidance/" class="card-link"
+                    target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>NSA Cybersecurity Advisories</h3>
+                        <p>NSA's public guidance — includes cloud security hardening documents and joint advisories
+                            with CISA.</p>
+                        <div class="resource-tags">
+                            <span class="tag">NSA</span>
+                            <span class="tag">Advisories</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.ncsc.gov.uk/section/advice-guidance/all-topics" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>UK NCSC</h3>
+                        <p>UK's National Cyber Security Centre — advisories and guidance, strong on supply chain and
+                            secure-by-default cloud guidance.</p>
+                        <div class="resource-tags">
+                            <span class="tag">UK</span>
+                            <span class="tag">Advisories</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cyber.gov.au/about-us/advisories" class="card-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Australian Cyber Security Centre (ACSC)</h3>
+                        <p>ACSC advisories — often first to publish on APAC-targeted campaigns and the source of the
+                            Essential Eight controls.</p>
+                        <div class="resource-tags">
+                            <span class="tag">AU</span>
+                            <span class="tag">Advisories</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://nvd.nist.gov/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>NIST National Vulnerability Database</h3>
+                        <p>US government CVE enrichment — CVSS scores, CPE matching, references.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Vulnerabilities</span>
+                            <span class="tag">CVE</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cve.org/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>CVE.org</h3>
+                        <p>The authoritative CVE Program — search, watch feeds, and access the raw CVE records.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Vulnerabilities</span>
+                            <span class="tag">CVE</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Contribute -->
+        <section class="section">
+            <h2>🤝 Help Us Keep This Current</h2>
+            <p>Threat research moves fast and this page will go stale if the community doesn't help. Know a team,
+                report, or feed we should add? Noticed a broken link?</p>
+            <div class="community-grid">
+                <div class="community-card">
+                    <h3 class="community-heading">📝 Submit a PR</h3>
+                    <p>Edit <code>threat-research.html</code> on GitHub and open a pull request — the fastest way to
+                        get a new source listed.</p>
+                    <a href="https://github.com/CloudSecurityOfficeHours/csoh.org" class="btn btn-primary mt-1"
+                        target="_blank" rel="noopener noreferrer">Open GitHub</a>
+                </div>
+                <div class="community-card">
+                    <h3 class="community-heading">✉️ Email a Suggestion</h3>
+                    <p>Not comfortable with GitHub? Email us with the source URL and a one-line description.</p>
+                    <a href="mailto:admin@csoh.org?subject=Threat%20Research%20Suggestion" class="btn btn-primary mt-1">Email
+                        admin@csoh.org</a>
+                </div>
+                <div class="community-card">
+                    <h3 class="community-heading">🎤 Present Your Research</h3>
+                    <p>Got original threat research to share? Come present it on a Friday Zoom session.</p>
+                    <a href="sessions.html" class="btn btn-primary mt-1">Friday Zoom Sessions</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="resources.html">All Resources</a></li>
+                    <li><a href="sessions.html">Zoom Sessions</a></li>
+                    <li><a href="presentations.html">Presentations</a></li>
+                    <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                    <li><a href="threat-research.html">Threat Research</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom
+                            Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank"
+                            rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions and 200+ curated
+                    resources.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=9d81eb00"
+        integrity="sha384-vP+40UURj3n09uktSobu7YVSRwy5XAZKzXB7k7a8UI8v01TDuVf7sBmnzaDyPFpV" defer></script>
+</body>
+
+</html>

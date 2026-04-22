@@ -80,6 +80,7 @@ csoh.org/
 ├── sessions.html           # Weekly Zoom session info
 ├── presentations.html      # Recorded presentation archive
 ├── breach-timeline.html    # Cloud breach kill chain timeline
+├── threat-research.html    # Curated cloud threat research directory
 ├── contribute.html         # How to contribute
 ├── contribute-resources.html # Resource submission form
 │

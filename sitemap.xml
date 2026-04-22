@@ -54,6 +54,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Threat Research - Curated cloud threat research directory -->
+  <url>
+    <loc>https://csoh.org/threat-research.html</loc>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Presentations - Regular updates -->
   <url>
     <loc>https://csoh.org/presentations.html</loc>
