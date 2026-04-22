@@ -57,6 +57,15 @@ FEEDS = [
     {"name": "SentinelLabs", "url": "https://www.sentinelone.com/labs/feed/"},
     {"name": "Elastic Security Labs", "url": "https://www.elastic.co/security-labs/rss/feed.xml"},
     {"name": "FortiGuard Labs", "url": "https://filestore.fortinet.com/fortiguard/rss/threatsignal.xml"},
+    # AppSec, Supply Chain & Identity
+    {"name": "Snyk Blog", "url": "https://snyk.io/blog/feed/"},
+    {"name": "GitGuardian Blog", "url": "https://blog.gitguardian.com/rss/"},
+    {"name": "Chainguard Unchained", "url": "https://www.chainguard.dev/unchained/rss.xml"},
+    # Vulnerability Research & Guidance
+    {"name": "Project Zero", "url": "https://projectzero.google/feed.xml"},
+    {"name": "Rapid7 Blog", "url": "https://www.rapid7.com/blog/rss/"},
+    {"name": "OWASP", "url": "https://owasp.org/feed.xml"},
+    {"name": "Cloud Security Alliance", "url": "https://cloudsecurityalliance.org/blog/feed/"},
 ]
 
 KEYWORDS = {
@@ -423,6 +432,15 @@ SOURCE_SLUGS = {
     "SentinelLabs": "sentinellabs",
     "Elastic Security Labs": "elastic-security-labs",
     "FortiGuard Labs": "fortiguard-labs",
+    # AppSec, Supply Chain & Identity
+    "Snyk Blog": "snyk",
+    "GitGuardian Blog": "gitguardian",
+    "Chainguard Unchained": "chainguard",
+    # Vulnerability Research & Guidance
+    "Project Zero": "project-zero",
+    "Rapid7 Blog": "rapid7",
+    "OWASP": "owasp",
+    "Cloud Security Alliance": "cloud-security-alliance",
 }
 
 

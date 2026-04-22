@@ -91,7 +91,7 @@ csoh.org/
 │
 ├── tools/                  # Python automation scripts (URL safety, normalization, previews, sitemap, presentations schema)
 ├── .github/workflows/      # CI/CD pipelines (6 workflows)
-└── update_news.py          # News aggregation from 32 RSS feeds
+└── update_news.py          # News aggregation from 39 RSS feeds
 ```
 
 ### How Key Features Work

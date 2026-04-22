@@ -14,7 +14,7 @@ Cloud Security Office Hours is a vendor-neutral, free community founded in Febru
 
 - Weekly Zoom sessions, Fridays at 7am PT with guest speakers.
 - A curated resources catalog (CTFs, labs, tools, certifications).
-- Cloud-security news aggregated every 3 hours from 32 RSS feeds.
+- Cloud-security news aggregated every 3 hours from 39 RSS feeds.
 - The RSS feed itself at [csoh.org/feed.xml](https://csoh.org/feed.xml).
 - Discord for real-time discussion.
 
