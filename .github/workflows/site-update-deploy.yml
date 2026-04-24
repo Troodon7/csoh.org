@@ -220,36 +220,6 @@ jobs:
             echo "deploy=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Check for broken links (non-blocking)
-        if: steps.deploy_needed.outputs.deploy == 'true'
-        id: linkcheck
-        uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411  # v2.8.0
-        continue-on-error: true
-        with:
-          args: >-
-            --config .lychee.toml
-            --no-progress
-            --max-concurrency 5
-            --glob-ignore-case
-            './*.html'
-          output: ./lychee-report.md
-          format: markdown
-          fail: true
-
-      - name: Upload link check report
-        if: steps.linkcheck.outcome == 'failure'
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f  # v7.0.0
-        with:
-          name: pre-deploy-broken-links
-          path: ./lychee-report.md
-          retention-days: 30
-          if-no-files-found: warn
-
-      - name: Warn about broken links
-        if: steps.linkcheck.outcome == 'failure'
-        run: |
-          echo "::warning::Broken links detected before deploy — see 'pre-deploy-broken-links' artifact for details."
-
       - name: Install lftp
         if: steps.deploy_needed.outputs.deploy == 'true'
         run: sudo apt-get update && sudo apt-get install -y lftp

@@ -21,14 +21,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
 
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
       - name: Check for broken links
         uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411  # v2.8.0
         with:
           args: >-
             --config .lychee.toml
+            --cache
+            --max-cache-age 3d
             --verbose
             --no-progress
-            --max-concurrency 5
+            --max-concurrency 20
             --glob-ignore-case
             './*.html'
           output: ./lychee-report.md
