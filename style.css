@@ -2516,8 +2516,15 @@ footer {
     color: #f5f7fa;
 }
 
-[data-theme="dark"] nav a {
+[data-theme="dark"] nav a,
+[data-theme="dark"] .dropdown-toggle,
+[data-theme="dark"] .dropdown-menu a {
     color: #f5f7fa;
+}
+
+[data-theme="dark"] .dropdown-menu {
+    background-color: #1c2530;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 [data-theme="dark"] .hamburger {
@@ -2947,6 +2954,193 @@ footer {
 @media (hover: none) and (pointer: coarse) {
     .resource-tooltip {
         display: none !important;
+    }
+}
+
+/* =========================================================================
+   DROPDOWN NAVIGATION
+   ========================================================================= */
+
+.has-dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: var(--white);
+    font: inherit;
+    font-weight: 500;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: opacity 0.3s, background-color 0.15s;
+}
+
+.dropdown-toggle:hover {
+    opacity: 0.8;
+}
+
+.dropdown-toggle .caret {
+    font-size: 0.7em;
+    transition: transform 0.2s;
+    line-height: 1;
+}
+
+.has-dropdown[aria-expanded="true"] > .dropdown-toggle .caret,
+.has-dropdown.open > .dropdown-toggle .caret {
+    transform: rotate(180deg);
+}
+
+.dropdown-toggle.active {
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 0.35rem 0.6rem;
+    border-radius: 6px;
+}
+
+.dropdown-toggle:focus-visible {
+    outline: 3px solid rgba(52, 152, 219, 0.4);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    min-width: 220px;
+    background-color: var(--primary-color);
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
+    z-index: 1001;
+    display: block;
+    flex-direction: column;
+    gap: 0;
+}
+
+.has-dropdown:hover > .dropdown-menu,
+.has-dropdown:focus-within > .dropdown-menu,
+.has-dropdown.open > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.55rem 1rem;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+    border-radius: 0;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu a:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+}
+
+.dropdown-menu a[aria-current="page"] {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Bridge the gap between toggle and menu so hover doesn't drop */
+.has-dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    height: 0.5rem;
+    width: 100%;
+    pointer-events: auto;
+}
+
+.has-dropdown:not(:hover):not(:focus-within):not(.open)::after {
+    pointer-events: none;
+}
+
+/* Mobile: flatten dropdowns into accordion */
+@media (max-width: 768px) {
+    .has-dropdown {
+        position: static;
+    }
+
+    .dropdown-toggle {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0;
+        text-align: left;
+    }
+
+    .dropdown-toggle.active {
+        padding: 0.75rem 1rem;
+        border-radius: 0;
+    }
+
+    .dropdown-menu {
+        position: static;
+        background-color: rgba(0, 0, 0, 0.15);
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+        min-width: 0;
+        opacity: 1;
+        visibility: hidden;
+        transform: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease, visibility 0s linear 0.2s;
+    }
+
+    .has-dropdown.open > .dropdown-menu {
+        visibility: visible;
+        max-height: 600px;
+        transition: max-height 0.25s ease, visibility 0s;
+    }
+
+    /* Disable desktop hover-reveal on mobile */
+    .has-dropdown:hover > .dropdown-menu,
+    .has-dropdown:focus-within > .dropdown-menu {
+        opacity: 1;
+        visibility: hidden;
+        max-height: 0;
+    }
+
+    .has-dropdown.open:hover > .dropdown-menu,
+    .has-dropdown.open:focus-within > .dropdown-menu,
+    .has-dropdown.open > .dropdown-menu {
+        visibility: visible;
+        max-height: 600px;
+    }
+
+    .dropdown-menu a {
+        padding: 0.6rem 1rem 0.6rem 2rem;
+        font-size: 0.85rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .has-dropdown::after {
+        display: none;
     }
 }
 

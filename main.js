@@ -51,6 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    initDropdownNav();
+
     // Add accessible label for search input
     if (domCache.searchInput && !document.querySelector('label[for="searchInput"]')) {
         const label = document.createElement('label');
@@ -859,5 +861,62 @@ function initTooltips() {
         currentCard = null;
         tooltip.classList.remove('visible');
         card.removeAttribute('aria-describedby');
+    });
+}
+
+function initDropdownNav() {
+    const items = document.querySelectorAll('.has-dropdown');
+    if (!items.length) return;
+
+    const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+
+    const closeAll = (except) => {
+        items.forEach(item => {
+            if (item === except) return;
+            item.classList.remove('open');
+            const toggle = item.querySelector('.dropdown-toggle');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+    };
+
+    items.forEach(item => {
+        const toggle = item.querySelector('.dropdown-toggle');
+        if (!toggle) return;
+
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const willOpen = !item.classList.contains('open');
+            closeAll(item);
+            item.classList.toggle('open', willOpen);
+            toggle.setAttribute('aria-expanded', String(willOpen));
+        });
+
+        toggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                item.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.focus();
+            }
+        });
+
+        const menu = item.querySelector('.dropdown-menu');
+        if (menu) {
+            menu.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    item.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    toggle.focus();
+                }
+            });
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.has-dropdown')) closeAll(null);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAll(null);
     });
 }

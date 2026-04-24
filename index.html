@@ -39,11 +39,11 @@
 
   <!-- Preload Critical Assets -->
 
-  <link rel="preload" href="/style.css?v=368daabf" as="style"
-    integrity="sha384-/7LUxy1KmADp3V81you5OTilNB4eUf1xL3YwIChFXLMcLAU+gE6i3NbBtPxh1Iu/">
+  <link rel="preload" href="/style.css?v=fcc4639f" as="style"
+    integrity="sha384-eR/lK4GYJclLumS9Q/PWQoKCmKXwtyT03TZwPnQd+ZoKXpL9itiHbxnZdEOLHDfD">
 
-  <link rel="stylesheet" href="/style.css?v=368daabf"
-    integrity="sha384-/7LUxy1KmADp3V81you5OTilNB4eUf1xL3YwIChFXLMcLAU+gE6i3NbBtPxh1Iu/">
+  <link rel="stylesheet" href="/style.css?v=fcc4639f"
+    integrity="sha384-eR/lK4GYJclLumS9Q/PWQoKCmKXwtyT03TZwPnQd+ZoKXpL9itiHbxnZdEOLHDfD">
 
   <!-- Structured Data for SEO -->
   <script type="application/ld+json">
@@ -217,11 +217,37 @@
       <nav>
         <ul>
           <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-          <li><a href="news.html">News</a></li>
-          <li><a href="resources.html">Resources</a></li>
-          <li><a href="sessions.html">Zoom Sessions</a></li>
-          <li><a href="ctfs.html">CTFs</a></li>
-          <li><a href="contribute.html">Contribute</a></li>
+          <li class="has-dropdown">
+            <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="resources.html">Resources</a></li>
+              <li><a href="ctfs.html">CTFs</a></li>
+            </ul>
+          </li>
+          <li class="has-dropdown">
+            <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="news.html">News</a></li>
+              <li><a href="threat-research.html">Threat Research</a></li>
+              <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+            </ul>
+          </li>
+          <li class="has-dropdown">
+            <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="sessions.html">Zoom Sessions</a></li>
+              <li><a href="meetings.html">Meeting Recaps</a></li>
+              <li><a href="presentations.html">Presentations</a></li>
+              <li><a href="chat-resources.html">Chat Resources</a></li>
+            </ul>
+          </li>
+          <li class="has-dropdown">
+            <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="contribute.html">Contribute Overview</a></li>
+              <li><a href="contribute-resources.html">Add a Resource</a></li>
+            </ul>
+          </li>
           <li><a href="index.html#about">About</a></li>
         </ul>
       </nav>
@@ -528,7 +554,7 @@
     </div>
   </footer>
 
-  <script src="/main.js?v=9d81eb00" integrity="sha384-vP+40UURj3n09uktSobu7YVSRwy5XAZKzXB7k7a8UI8v01TDuVf7sBmnzaDyPFpV"
+  <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
     defer></script>
 </body>
 
