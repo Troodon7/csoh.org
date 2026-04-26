@@ -476,6 +476,45 @@ nav a:focus {
     text-decoration: underline;
 }
 
+/* Internal cross-references between glossary terms — kept subtler so the
+   page doesn't turn into a rainbow of underlines. */
+.glossary-list dd a.glossary-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(52, 152, 219, 0.55);
+    padding-bottom: 1px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.glossary-list dd a.glossary-link:hover,
+.glossary-list dd a.glossary-link:focus {
+    background-color: rgba(52, 152, 219, 0.12);
+    border-bottom-color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.glossary-list dt:target {
+    background-color: rgba(241, 196, 15, 0.18);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    margin-left: -0.5rem;
+}
+
+[data-theme="dark"] .glossary-list dd a.glossary-link {
+    color: #e4ecf3;
+    border-bottom-color: rgba(124, 193, 238, 0.55);
+}
+
+[data-theme="dark"] .glossary-list dd a.glossary-link:hover,
+[data-theme="dark"] .glossary-list dd a.glossary-link:focus {
+    background-color: rgba(124, 193, 238, 0.18);
+    border-bottom-color: #7cc1ee;
+}
+
+[data-theme="dark"] .glossary-list dt:target {
+    background-color: rgba(241, 196, 15, 0.22);
+}
+
 [data-theme="dark"] .glossary-list dt {
     color: #7cc1ee;
 }

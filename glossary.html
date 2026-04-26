@@ -23,10 +23,10 @@
     <meta property="og:image" content="https://csoh.org/banner.png">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="preload" href="/style.css?v=136c6075" as="style"
-        integrity="sha384-FpY+wdacwa+ex1a0pyEc3fMFXWqHzqDZJ/1W2kgHXq+PioFMWag8kpEaNRsXVmQ/">
-    <link rel="stylesheet" href="/style.css?v=136c6075"
-        integrity="sha384-FpY+wdacwa+ex1a0pyEc3fMFXWqHzqDZJ/1W2kgHXq+PioFMWag8kpEaNRsXVmQ/">
+    <link rel="preload" href="/style.css?v=e0cfeab9" as="style"
+        integrity="sha384-yQ6xXMH/RGKl10AYReaf2t6rYMNco1w9NnQb7Wjm/ZrGihLJb9uUlHo5Pomn1YO1">
+    <link rel="stylesheet" href="/style.css?v=e0cfeab9"
+        integrity="sha384-yQ6xXMH/RGKl10AYReaf2t6rYMNco1w9NnQb7Wjm/ZrGihLJb9uUlHo5Pomn1YO1">
 
     <script type="application/ld+json">
     {
@@ -120,10 +120,10 @@
                 <div class="search-box">
                     <label for="glossarySearch" class="visually-hidden">Search glossary</label>
                     <div class="search-wrapper">
-                        <input type="text" id="glossarySearch" placeholder="Search 188 terms — try &quot;IAM&quot;, &quot;CNAPP&quot;, &quot;prompt injection&quot;…" autocomplete="off" spellcheck="false">
+                        <input type="text" id="glossarySearch" placeholder="Search 201 terms — try &quot;IAM&quot;, &quot;CNAPP&quot;, &quot;prompt injection&quot;…" autocomplete="off" spellcheck="false">
                     </div>
                 </div>
-                <p class="glossary-count"><span id="visibleTerms">188</span> terms shown</p>
+                <p class="glossary-count"><span id="visibleTerms">201</span> terms shown</p>
             </div>
             <p id="noGlossaryResults" class="no-results is-hidden">
                 No terms match your search.
@@ -149,605 +149,644 @@
 
             <h2 id="cloud-models">☁️ Cloud Service &amp; Deployment Models</h2>
             <dl class="glossary-list">
-                <dt>IaaS — Infrastructure as a Service</dt>
+                <dt id="term-iaas">IaaS — Infrastructure as a Service</dt>
                 <dd>Raw compute, storage, and network resources on demand. You manage the OS and everything above. Examples: EC2, Azure VM, GCE.</dd>
 
-                <dt>PaaS — Platform as a Service</dt>
+                <dt id="term-paas">PaaS — Platform as a Service</dt>
                 <dd>The provider runs the OS and runtime; you ship code. Examples: App Service, App Engine, Elastic Beanstalk.</dd>
 
-                <dt>SaaS — Software as a Service</dt>
+                <dt id="term-saas">SaaS — Software as a Service</dt>
                 <dd>Fully hosted application; you manage only your data and users. Examples: Microsoft 365, Salesforce, Workday.</dd>
 
-                <dt>FaaS — Function as a Service</dt>
-                <dd>Run a piece of code in response to an event. Provider handles everything else. Examples: AWS Lambda, Azure Functions, GCP Cloud Functions.</dd>
+                <dt id="term-faas">FaaS — Function as a Service</dt>
+                <dd>Run a piece of code in response to an event. Provider handles everything else. Examples: AWS <a class="glossary-link" href="#term-lambda">Lambda</a>, Azure Functions, GCP Cloud Functions.</dd>
 
-                <dt>Public / Private / Hybrid / Multi-Cloud</dt>
+                <dt id="term-public">Public / Private / Hybrid / Multi-Cloud</dt>
                 <dd>Public is shared infrastructure (AWS, Azure, GCP). Private is dedicated. Hybrid mixes them. Multi-cloud uses two or more public providers.</dd>
 
-                <dt>Cloud-Native</dt>
+                <dt id="term-cloud-native">Cloud-Native</dt>
                 <dd>Architecture that takes advantage of cloud-specific properties — elasticity, managed services, ephemeral compute, declarative APIs.</dd>
 
-                <dt>Shared Responsibility Model</dt>
-                <dd>The provider secures the cloud (hardware, hypervisor, physical sites); the customer secures what's <em>in</em> the cloud (data, identities, configuration). The line shifts depending on the service tier.</dd>
+                <dt id="term-shared-responsibility-model">Shared Responsibility Model</dt>
+                <dd>The provider secures the cloud (hardware, <a class="glossary-link" href="#term-hypervisor">hypervisor</a>, physical sites); the customer secures what's <em>in</em> the cloud (data, identities, configuration). The line shifts depending on the service tier.</dd>
             </dl>
 
             <h2 id="compute">🐳 Compute, Containers &amp; Serverless</h2>
             <dl class="glossary-list">
-                <dt>Container</dt>
+                <dt id="term-container">Container</dt>
                 <dd>An OS-level isolated process bundle. Same kernel as the host, separate userland.</dd>
 
-                <dt>Image</dt>
-                <dd>The static template a container is launched from. Layered, immutable, and addressable by digest.</dd>
+                <dt id="term-image">Image</dt>
+                <dd>The static template a <a class="glossary-link" href="#term-container">container</a> is launched from. Layered, immutable, and addressable by digest.</dd>
 
-                <dt>Registry</dt>
-                <dd>Where container images live (Docker Hub, ECR, GHCR, ACR, GAR).</dd>
+                <dt id="term-registry">Registry</dt>
+                <dd>Where <a class="glossary-link" href="#term-container">container</a> images live (Docker Hub, ECR, GHCR, ACR, GAR).</dd>
 
-                <dt>Kubernetes (K8s)</dt>
-                <dd>Open-source container orchestration. Schedules workloads onto a fleet of nodes via a declarative API.</dd>
+                <dt id="term-kubernetes">Kubernetes (K8s)</dt>
+                <dd>Open-source <a class="glossary-link" href="#term-container">container</a> orchestration. Schedules workloads onto a fleet of nodes via a declarative API.</dd>
 
-                <dt>Pod</dt>
-                <dd>The smallest deployable unit in K8s — one or more co-located containers that share a network namespace.</dd>
+                <dt id="term-pod">Pod</dt>
+                <dd>The smallest deployable unit in <a class="glossary-link" href="#term-kubernetes">K8s</a> — one or more co-located containers that share a network namespace.</dd>
 
-                <dt>Sidecar</dt>
-                <dd>A helper container co-located with an app container in the same pod (commonly for proxies, log shippers, secret fetchers).</dd>
+                <dt id="term-sidecar">Sidecar</dt>
+                <dd>A helper <a class="glossary-link" href="#term-container">container</a> co-located with an app container in the same <a class="glossary-link" href="#term-pod">pod</a> (commonly for proxies, log shippers, secret fetchers).</dd>
 
-                <dt>Service Mesh</dt>
-                <dd>An infrastructure layer that handles east-west service-to-service traffic — mTLS, retries, traffic shifting. Examples: Istio, Linkerd.</dd>
+                <dt id="term-service-mesh">Service Mesh</dt>
+                <dd>An infrastructure layer that handles east-west service-to-service traffic — <a class="glossary-link" href="#term-mtls">mTLS</a>, retries, traffic shifting. Examples: Istio, Linkerd.</dd>
 
-                <dt>Serverless</dt>
-                <dd>Compute model where you don't manage servers, scaling, or capacity — typically functions or container runtimes that scale to zero.</dd>
+                <dt id="term-serverless">Serverless</dt>
+                <dd>Compute model where you don't manage servers, scaling, or capacity — typically <a class="glossary-link" href="#term-lambda">functions</a> or <a class="glossary-link" href="#term-container">container</a> runtimes that scale to zero.</dd>
 
-                <dt>EKS / AKS / GKE</dt>
-                <dd>Managed Kubernetes from AWS / Azure / Google.</dd>
+                <dt id="term-eks">EKS / AKS / GKE</dt>
+                <dd>Managed <a class="glossary-link" href="#term-kubernetes">Kubernetes</a> from AWS / Azure / Google.</dd>
 
-                <dt>ECS / Fargate</dt>
-                <dd>AWS container orchestration (ECS) and its serverless data plane (Fargate).</dd>
+                <dt id="term-ecs">ECS / Fargate</dt>
+                <dd>AWS <a class="glossary-link" href="#term-container">container</a> orchestration (ECS) and its <a class="glossary-link" href="#term-serverless">serverless</a> data plane (Fargate).</dd>
 
-                <dt>Lambda / Functions / Cloud Functions</dt>
-                <dd>FaaS offerings from AWS / Azure / Google.</dd>
+                <dt id="term-lambda">Lambda / Functions / Cloud Functions</dt>
+                <dd><a class="glossary-link" href="#term-faas">FaaS</a> offerings from AWS / Azure / Google.</dd>
 
-                <dt>Confidential Computing</dt>
+                <dt id="term-confidential-computing">Confidential Computing</dt>
                 <dd>Hardware-enforced memory encryption (Intel SGX, AMD SEV, AWS Nitro, Azure Confidential VMs) so the cloud provider can't see your workload memory in plaintext.</dd>
+
+                <dt id="term-hypervisor">Hypervisor</dt>
+                <dd>Software that creates and isolates virtual machines. Type 1 runs on bare metal (ESXi, Xen, KVM); Type 2 runs on a host OS (VirtualBox, Parallels). The control plane the cloud provider secures.</dd>
+
+                <dt id="term-ebpf">eBPF</dt>
+                <dd>Extended Berkeley Packet Filter — a Linux kernel runtime that safely executes sandboxed programs attached to syscalls, network paths, and tracepoints. The basis of modern runtime-security and observability tooling (Cilium, <a class="glossary-link" href="#term-falco">Falco</a>, Tetragon).</dd>
             </dl>
 
             <h2 id="iam">🔑 Identity &amp; Access Management (IAM)</h2>
             <dl class="glossary-list">
-                <dt>IAM — Identity &amp; Access Management</dt>
+                <dt id="term-iam">IAM — Identity &amp; Access Management</dt>
                 <dd>Who you are and what you're allowed to do. The control plane for cloud security.</dd>
 
-                <dt>Principal</dt>
-                <dd>The acting identity — a user, role, service account, or workload — making an authenticated request.</dd>
+                <dt id="term-principal">Principal</dt>
+                <dd>The acting identity — a user, role, <a class="glossary-link" href="#term-service-account">service account</a>, or workload — making an authenticated request.</dd>
 
-                <dt>RBAC — Role-Based Access Control</dt>
+                <dt id="term-rbac">RBAC — Role-Based Access Control</dt>
                 <dd>Permissions assigned to roles, roles assigned to identities. Easy to reason about; coarse-grained.</dd>
 
-                <dt>ABAC — Attribute-Based Access Control</dt>
+                <dt id="term-abac">ABAC — Attribute-Based Access Control</dt>
                 <dd>Permissions evaluated against attributes (tag, department, time of day). Fine-grained, harder to audit.</dd>
 
-                <dt>PBAC — Policy-Based Access Control</dt>
-                <dd>Decisions made by a centralized policy engine (e.g., OPA) rather than scattered ACLs.</dd>
+                <dt id="term-pbac">PBAC — Policy-Based Access Control</dt>
+                <dd>Decisions made by a centralized policy engine (e.g., <a class="glossary-link" href="#term-opa">OPA</a>) rather than scattered ACLs.</dd>
 
-                <dt>IdP — Identity Provider</dt>
-                <dd>The system that authenticates users (Okta, Azure AD / Entra ID, Google Workspace).</dd>
+                <dt id="term-idp">IdP — Identity Provider</dt>
+                <dd>The system that authenticates users (Okta, Azure <a class="glossary-link" href="#term-active-directory">AD</a> / <a class="glossary-link" href="#term-entra-id">Entra ID</a>, Google Workspace).</dd>
 
-                <dt>SP — Service Provider / RP — Relying Party</dt>
-                <dd>The application that trusts the IdP's assertion of who the user is.</dd>
+                <dt id="term-sp">SP — Service Provider / RP — Relying Party</dt>
+                <dd>The application that trusts the <a class="glossary-link" href="#term-idp">IdP</a>'s assertion of who the user is.</dd>
 
-                <dt>SSO — Single Sign-On</dt>
+                <dt id="term-sso">SSO — Single Sign-On</dt>
                 <dd>Sign in once, get into many applications without re-entering credentials.</dd>
 
-                <dt>SAML 2.0</dt>
-                <dd>XML-based federation protocol — the IdP sends a signed assertion to the SP.</dd>
+                <dt id="term-saml-2-0">SAML 2.0</dt>
+                <dd>XML-based <a class="glossary-link" href="#term-federation">federation</a> protocol — the <a class="glossary-link" href="#term-idp">IdP</a> sends a signed assertion to the <a class="glossary-link" href="#term-sp">SP</a>.</dd>
 
-                <dt>OIDC — OpenID Connect</dt>
-                <dd>Identity layer on top of OAuth 2.0. Issues JWT ID tokens. The modern default.</dd>
+                <dt id="term-oidc">OIDC — OpenID Connect</dt>
+                <dd>Identity layer on top of <a class="glossary-link" href="#term-oauth-2-0">OAuth 2.0</a>. Issues <a class="glossary-link" href="#term-jwt">JWT</a> ID tokens. The modern default.</dd>
 
-                <dt>OAuth 2.0</dt>
+                <dt id="term-oauth-2-0">OAuth 2.0</dt>
                 <dd>Delegated authorization framework. Issues access tokens; the spec doesn't define authentication.</dd>
 
-                <dt>JWT — JSON Web Token</dt>
-                <dd>A signed (and optionally encrypted) JSON blob used as a token. Common in OIDC and API auth.</dd>
+                <dt id="term-jwt">JWT — JSON Web Token</dt>
+                <dd>A signed (and optionally encrypted) JSON blob used as a token. Common in <a class="glossary-link" href="#term-oidc">OIDC</a> and API auth.</dd>
 
-                <dt>MFA — Multi-Factor Authentication</dt>
-                <dd>Something you know + something you have (or are). Phishing-resistant MFA = WebAuthn / FIDO2.</dd>
+                <dt id="term-mfa">MFA — Multi-Factor Authentication</dt>
+                <dd>Something you know + something you have (or are). <a class="glossary-link" href="#term-phishing">Phishing</a>-resistant MFA = <a class="glossary-link" href="#term-fido2">WebAuthn</a> / FIDO2.</dd>
 
-                <dt>FIDO2 / WebAuthn / Passkeys</dt>
-                <dd>Public-key authentication standards that resist phishing. Passkeys are syncable WebAuthn credentials.</dd>
+                <dt id="term-fido2">FIDO2 / WebAuthn / Passkeys</dt>
+                <dd><a class="glossary-link" href="#term-public">Public</a>-key authentication standards that resist <a class="glossary-link" href="#term-phishing">phishing</a>. Passkeys are syncable WebAuthn credentials.</dd>
 
-                <dt>Federation</dt>
-                <dd>Trusting tokens from a foreign IdP (e.g., GitHub Actions OIDC tokens trusted by AWS to assume a role).</dd>
+                <dt id="term-federation">Federation</dt>
+                <dd>Trusting tokens from a foreign <a class="glossary-link" href="#term-idp">IdP</a> (e.g., GitHub Actions <a class="glossary-link" href="#term-oidc">OIDC</a> tokens trusted by AWS to assume a role).</dd>
 
-                <dt>STS — Security Token Service</dt>
+                <dt id="term-sts">STS — Security Token Service</dt>
                 <dd>Issues short-lived credentials, typically by exchanging a long-lived identity for a temporary role session.</dd>
 
-                <dt>AssumeRole</dt>
-                <dd>The AWS STS call that swaps your identity for temporary credentials of a target role.</dd>
+                <dt id="term-assumerole">AssumeRole</dt>
+                <dd>The AWS <a class="glossary-link" href="#term-sts">STS</a> call that swaps your identity for temporary credentials of a target role.</dd>
 
-                <dt>Service Account / Managed Identity / Workload Identity</dt>
-                <dd>The non-human principal a workload uses to authenticate (GCP service account, Azure managed identity, Kubernetes ServiceAccount → cloud role).</dd>
+                <dt id="term-service-account">Service Account / Managed Identity / Workload Identity</dt>
+                <dd>The non-human <a class="glossary-link" href="#term-principal">principal</a> a workload uses to authenticate (GCP service account, Azure managed identity, <a class="glossary-link" href="#term-kubernetes">Kubernetes</a> ServiceAccount → cloud role).</dd>
 
-                <dt>OIDC Federation (workload identity federation)</dt>
-                <dd>A workload presents a short-lived OIDC token from its host (e.g., GitHub Actions) which the cloud trusts to issue temporary credentials. Removes long-lived secrets from CI.</dd>
+                <dt id="term-oidc-federation">OIDC Federation (workload identity federation)</dt>
+                <dd>A workload presents a short-lived <a class="glossary-link" href="#term-oidc">OIDC</a> token from its host (e.g., GitHub Actions) which the cloud trusts to issue temporary credentials. Removes long-lived secrets from <a class="glossary-link" href="#term-ci">CI</a>.</dd>
 
-                <dt>Conditional Access</dt>
+                <dt id="term-conditional-access">Conditional Access</dt>
                 <dd>Policy that grants access only when contextual conditions are met (device compliant, location, risk score).</dd>
 
-                <dt>JIT — Just-In-Time Access</dt>
+                <dt id="term-jit">JIT — Just-In-Time Access</dt>
                 <dd>Permissions are elevated only for the duration of a task, then expire.</dd>
 
-                <dt>Least Privilege / Just-Enough Access</dt>
-                <dd>Grant the minimum permissions necessary for the task. The defining principle of cloud IAM.</dd>
+                <dt id="term-least-privilege">Least Privilege / Just-Enough Access</dt>
+                <dd>Grant the minimum permissions necessary for the task. The defining principle of cloud <a class="glossary-link" href="#term-iam">IAM</a>.</dd>
 
-                <dt>SCP — Service Control Policy</dt>
+                <dt id="term-scp">SCP — Service Control Policy</dt>
                 <dd>AWS Organizations guardrail; sets the maximum permissions an account can have, even for the root user.</dd>
 
-                <dt>Permission Boundary</dt>
-                <dd>An IAM policy that caps the effective permissions of an entity, regardless of attached policies.</dd>
+                <dt id="term-permission-boundary">Permission Boundary</dt>
+                <dd>An <a class="glossary-link" href="#term-iam">IAM</a> policy that caps the effective permissions of an entity, regardless of attached policies.</dd>
 
-                <dt>IMDS / IMDSv2</dt>
-                <dd>Instance Metadata Service — the link-local 169.254.169.254 endpoint that hands credentials to EC2 instances. v2 requires a session token to defeat SSRF abuse.</dd>
+                <dt id="term-imds">IMDS / IMDSv2</dt>
+                <dd>Instance Metadata Service — the link-local 169.254.169.254 endpoint that hands credentials to EC2 instances. v2 requires a session token to defeat <a class="glossary-link" href="#term-ssrf">SSRF</a> abuse.</dd>
+
+                <dt id="term-active-directory">Active Directory (AD)</dt>
+                <dd>Microsoft's directory service for on-prem identity. Still the primary user/group/auth backend for most enterprises; cloud identity providers federate to it.</dd>
+
+                <dt id="term-entra-id">Entra ID</dt>
+                <dd>Microsoft's cloud identity service (formerly Azure <a class="glossary-link" href="#term-active-directory">AD</a>). Hosts users, groups, conditional-access policies, and the SAML/<a class="glossary-link" href="#term-oidc">OIDC</a> endpoints behind Microsoft 365 and Azure.</dd>
+
+                <dt id="term-kerberos">Kerberos</dt>
+                <dd>Network authentication protocol using time-bound encrypted tickets. The auth fabric of <a class="glossary-link" href="#term-active-directory">Active Directory</a>; compromise of the krbtgt account yields a "<a class="glossary-link" href="#term-golden-ticket">Golden Ticket</a>".</dd>
+
+                <dt id="term-acl">ACL — Access Control List</dt>
+                <dd>A list of rules attached to a resource specifying who can access it and how. Predates <a class="glossary-link" href="#term-rbac">RBAC</a>/<a class="glossary-link" href="#term-abac">ABAC</a>; still common on filesystems, S3 objects, and network devices.</dd>
             </dl>
 
             <h2 id="network">🌐 Networking &amp; Zero Trust</h2>
             <dl class="glossary-list">
-                <dt>VPC / VNet</dt>
-                <dd>Virtual Private Cloud / Virtual Network — your isolated network space inside a cloud account.</dd>
+                <dt id="term-vpc">VPC / VNet</dt>
+                <dd>Virtual <a class="glossary-link" href="#term-public">Private</a> Cloud / Virtual Network — your isolated network space inside a cloud account.</dd>
 
-                <dt>Subnet</dt>
-                <dd>A slice of a VPC's IP range, bound to one availability zone.</dd>
+                <dt id="term-subnet">Subnet</dt>
+                <dd>A slice of a <a class="glossary-link" href="#term-vpc">VPC</a>'s IP range, bound to one availability zone.</dd>
 
-                <dt>Security Group</dt>
-                <dd>A stateful per-ENI firewall (AWS / Azure NSG / GCP firewall rule).</dd>
+                <dt id="term-security-group">Security Group</dt>
+                <dd>A stateful per-<a class="glossary-link" href="#term-eni">ENI</a> firewall (AWS / Azure NSG / GCP firewall rule).</dd>
 
-                <dt>NACL — Network Access Control List</dt>
-                <dd>A stateless subnet-level firewall (AWS).</dd>
+                <dt id="term-nacl">NACL — Network Access Control List</dt>
+                <dd>A stateless <a class="glossary-link" href="#term-subnet">subnet</a>-level firewall (AWS).</dd>
 
-                <dt>Peering / Transit Gateway / Cloud Interconnect</dt>
+                <dt id="term-peering">Peering / Transit Gateway / Cloud Interconnect</dt>
                 <dd>Mechanisms for connecting VPCs / VNets to each other or to on-prem networks.</dd>
 
-                <dt>NAT — Network Address Translation</dt>
-                <dd>Lets private-subnet workloads reach the internet through a shared egress IP.</dd>
+                <dt id="term-nat">NAT — Network Address Translation</dt>
+                <dd>Lets <a class="glossary-link" href="#term-public">private</a>-<a class="glossary-link" href="#term-subnet">subnet</a> workloads reach the internet through a shared <a class="glossary-link" href="#term-ingress">egress</a> IP.</dd>
 
-                <dt>PrivateLink / Private Endpoint / Private Service Connect</dt>
-                <dd>Private routable endpoints for cloud services that never traverse the public internet.</dd>
+                <dt id="term-privatelink">PrivateLink / Private Endpoint / Private Service Connect</dt>
+                <dd><a class="glossary-link" href="#term-public">Private</a> routable endpoints for cloud services that never traverse the public internet.</dd>
 
-                <dt>Ingress / Egress</dt>
+                <dt id="term-ingress">Ingress / Egress</dt>
                 <dd>Inbound / outbound traffic. Egress controls are where most data exfil hides.</dd>
 
-                <dt>WAF — Web Application Firewall</dt>
-                <dd>Layer-7 filter for HTTP traffic — XSS, SQLi, rate limits, geo blocks.</dd>
+                <dt id="term-waf">WAF — Web Application Firewall</dt>
+                <dd>Layer-7 filter for HTTP traffic — <a class="glossary-link" href="#term-xss">XSS</a>, SQLi, rate limits, geo blocks.</dd>
 
-                <dt>Bastion Host / Jump Box</dt>
-                <dd>A hardened entry point into a private network. Modern equivalents: SSM Session Manager, IAP, Azure Bastion.</dd>
+                <dt id="term-bastion-host">Bastion Host / Jump Box</dt>
+                <dd>A hardened entry point into a <a class="glossary-link" href="#term-public">private</a> network. Modern equivalents: SSM Session Manager, IAP, Azure Bastion.</dd>
 
-                <dt>Zero Trust</dt>
+                <dt id="term-zero-trust">Zero Trust</dt>
                 <dd>Architectural principle: assume the network is hostile. Authenticate and authorize every request, regardless of source.</dd>
 
-                <dt>BeyondCorp</dt>
+                <dt id="term-beyondcorp">BeyondCorp</dt>
                 <dd>Google's foundational zero-trust paper / model — access decisions based on user + device + context, not network location.</dd>
 
-                <dt>SASE / SSE</dt>
-                <dd>Secure Access Service Edge / Security Service Edge — vendor-bundled cloud-delivered SWG + ZTNA + CASB + FWaaS.</dd>
+                <dt id="term-sase">SASE / SSE</dt>
+                <dd>Secure Access Service Edge / Security Service Edge — vendor-bundled cloud-delivered SWG + <a class="glossary-link" href="#term-ztna">ZTNA</a> + <a class="glossary-link" href="#term-casb">CASB</a> + FWaaS.</dd>
 
-                <dt>ZTNA — Zero-Trust Network Access</dt>
+                <dt id="term-ztna">ZTNA — Zero-Trust Network Access</dt>
                 <dd>Identity-aware proxy that replaces traditional VPN. Per-application access, not network-wide.</dd>
 
-                <dt>CASB — Cloud Access Security Broker</dt>
-                <dd>Inline or API-based control point for SaaS usage — DLP, posture, shadow-IT discovery.</dd>
+                <dt id="term-casb">CASB — Cloud Access Security Broker</dt>
+                <dd>Inline or API-based control point for <a class="glossary-link" href="#term-saas">SaaS</a> usage — <a class="glossary-link" href="#term-dlp">DLP</a>, posture, shadow-IT discovery.</dd>
 
-                <dt>Microsegmentation</dt>
-                <dd>Fine-grained network isolation between workloads, typically enforced by sidecar proxies or eBPF.</dd>
+                <dt id="term-microsegmentation">Microsegmentation</dt>
+                <dd>Fine-grained network isolation between workloads, typically enforced by <a class="glossary-link" href="#term-sidecar">sidecar</a> proxies or <a class="glossary-link" href="#term-ebpf">eBPF</a>.</dd>
+
+                <dt id="term-ddos">DDoS — Distributed Denial of Service</dt>
+                <dd>Overwhelming a service with traffic from many sources to make it unavailable. Mitigated by CDNs, scrubbing services, and rate-limited APIs.</dd>
+
+                <dt id="term-eni">ENI — Elastic Network Interface</dt>
+                <dd>An AWS virtual NIC that can be detached and reattached between EC2 instances. The unit a <a class="glossary-link" href="#term-security-group">Security Group</a> is bound to.</dd>
             </dl>
 
             <h2 id="data">🔒 Data Protection, Secrets &amp; Cryptography</h2>
             <dl class="glossary-list">
-                <dt>KMS — Key Management Service</dt>
-                <dd>Managed service that creates, stores, and uses cryptographic keys. AWS KMS, Azure Key Vault, GCP Cloud KMS.</dd>
+                <dt id="term-kms">KMS — Key Management Service</dt>
+                <dd>Managed service that creates, stores, and uses cryptographic keys. AWS KMS, Azure Key <a class="glossary-link" href="#term-secrets-manager">Vault</a>, GCP Cloud KMS.</dd>
 
-                <dt>HSM — Hardware Security Module</dt>
+                <dt id="term-hsm">HSM — Hardware Security Module</dt>
                 <dd>Tamper-resistant hardware that performs crypto operations and never lets keys leave it.</dd>
 
-                <dt>KEK / DEK — Key Encryption Key / Data Encryption Key</dt>
-                <dd>Pattern: encrypt data with a DEK, then encrypt the DEK with a KEK held in KMS/HSM.</dd>
+                <dt id="term-kek">KEK / DEK — Key Encryption Key / Data Encryption Key</dt>
+                <dd>Pattern: encrypt data with a DEK, then encrypt the DEK with a KEK held in <a class="glossary-link" href="#term-kms">KMS</a>/<a class="glossary-link" href="#term-hsm">HSM</a>.</dd>
 
-                <dt>Envelope Encryption</dt>
-                <dd>The standard cloud pattern of wrapping a DEK with a KEK so the DEK can travel with the ciphertext.</dd>
+                <dt id="term-envelope-encryption">Envelope Encryption</dt>
+                <dd>The standard cloud pattern of wrapping a <a class="glossary-link" href="#term-kek">DEK</a> with a KEK so the DEK can travel with the ciphertext.</dd>
 
-                <dt>BYOK / HYOK</dt>
+                <dt id="term-byok">BYOK / HYOK</dt>
                 <dd>Bring/Hold Your Own Key — customer supplies (or holds) the master key, not the cloud provider.</dd>
 
-                <dt>Secrets Manager / Vault</dt>
+                <dt id="term-secrets-manager">Secrets Manager / Vault</dt>
                 <dd>A managed store for credentials, API keys, and connection strings (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault, GCP Secret Manager).</dd>
 
-                <dt>DLP — Data Loss Prevention</dt>
+                <dt id="term-dlp">DLP — Data Loss Prevention</dt>
                 <dd>Tooling that detects and blocks sensitive data (PII, PHI, secrets) from leaving its boundary.</dd>
 
-                <dt>Tokenization</dt>
-                <dd>Replacing sensitive values with non-reversible references; the real value lives in a token vault.</dd>
+                <dt id="term-tokenization">Tokenization</dt>
+                <dd>Replacing sensitive values with non-reversible references; the real value lives in a token <a class="glossary-link" href="#term-secrets-manager">vault</a>.</dd>
 
-                <dt>Encryption at Rest / In Transit / In Use</dt>
-                <dd>Three states data can be in. Cloud KMS handles 1 &amp; 2; confidential computing handles 3.</dd>
+                <dt id="term-encryption-at-rest">Encryption at Rest / In Transit / In Use</dt>
+                <dd>Three states data can be in. Cloud <a class="glossary-link" href="#term-kms">KMS</a> handles 1 &amp; 2; <a class="glossary-link" href="#term-confidential-computing">confidential computing</a> handles 3.</dd>
 
-                <dt>TLS — Transport Layer Security</dt>
-                <dd>Encrypts data in transit. TLS 1.2 minimum; 1.3 preferred.</dd>
+                <dt id="term-tls">TLS — Transport Layer Security</dt>
+                <dd>Encrypts data <a class="glossary-link" href="#term-encryption-at-rest">in transit</a>. TLS 1.2 minimum; 1.3 preferred.</dd>
 
-                <dt>mTLS — Mutual TLS</dt>
+                <dt id="term-mtls">mTLS — Mutual TLS</dt>
                 <dd>Both client and server authenticate via certificates. Common inside service meshes.</dd>
 
-                <dt>PKI — Public Key Infrastructure</dt>
-                <dd>The system of CAs, certificates, and trust chains that issues and validates the keys behind TLS, code signing, and S/MIME.</dd>
+                <dt id="term-pki">PKI — Public Key Infrastructure</dt>
+                <dd>The system of CAs, certificates, and trust chains that issues and validates the keys behind <a class="glossary-link" href="#term-tls">TLS</a>, code signing, and S/MIME.</dd>
             </dl>
 
             <h2 id="detection">📡 Logging, Detection &amp; Response</h2>
             <dl class="glossary-list">
-                <dt>SIEM — Security Information and Event Management</dt>
+                <dt id="term-siem">SIEM — Security Information and Event Management</dt>
                 <dd>Central log aggregation + correlation + alerting. Splunk, Sentinel, Chronicle, Elastic, Sumo.</dd>
 
-                <dt>SOAR — Security Orchestration, Automation, and Response</dt>
+                <dt id="term-soar">SOAR — Security Orchestration, Automation, and Response</dt>
                 <dd>Runs automated playbooks against alerts — enrich, contain, ticket, page.</dd>
 
-                <dt>SOC — Security Operations Center</dt>
+                <dt id="term-soc">SOC — Security Operations Center</dt>
                 <dd>The team (and room) that monitors and triages security alerts.</dd>
 
-                <dt>EDR / XDR / NDR / MDR</dt>
+                <dt id="term-edr">EDR / XDR / NDR / MDR</dt>
                 <dd>Endpoint / eXtended / Network Detection &amp; Response. MDR adds a managed service. XDR claims to unify telemetry across surfaces.</dd>
 
-                <dt>CloudTrail / Activity Log / Audit Log</dt>
+                <dt id="term-cloudtrail">CloudTrail / Activity Log / Audit Log</dt>
                 <dd>The control-plane audit trail for AWS / Azure / GCP. Your most important log source in cloud.</dd>
 
-                <dt>VPC Flow Logs</dt>
-                <dd>Network metadata (5-tuple, action, bytes) for traffic in a VPC. Cheap, useful for DFIR.</dd>
+                <dt id="term-vpc-flow-logs">VPC Flow Logs</dt>
+                <dd>Network metadata (5-tuple, action, bytes) for traffic in a <a class="glossary-link" href="#term-vpc">VPC</a>. Cheap, useful for <a class="glossary-link" href="#term-dfir">DFIR</a>.</dd>
 
-                <dt>GuardDuty / Defender for Cloud / Security Command Center (SCC)</dt>
+                <dt id="term-guardduty">GuardDuty / Defender for Cloud / Security Command Center (SCC)</dt>
                 <dd>Native threat detection services in AWS / Azure / GCP.</dd>
 
-                <dt>Falco</dt>
-                <dd>Open-source runtime threat detection for Linux and Kubernetes, originally based on syscalls and now eBPF.</dd>
+                <dt id="term-falco">Falco</dt>
+                <dd>Open-source runtime threat detection for Linux and <a class="glossary-link" href="#term-kubernetes">Kubernetes</a>, originally based on syscalls and now <a class="glossary-link" href="#term-ebpf">eBPF</a>.</dd>
 
-                <dt>Sigma</dt>
-                <dd>Vendor-agnostic detection rule format that compiles to SIEM-specific queries.</dd>
+                <dt id="term-sigma">Sigma</dt>
+                <dd>Vendor-agnostic detection rule format that compiles to <a class="glossary-link" href="#term-siem">SIEM</a>-specific queries.</dd>
 
-                <dt>YARA</dt>
+                <dt id="term-yara">YARA</dt>
                 <dd>Pattern-matching rules for files, malware, and memory artifacts.</dd>
 
-                <dt>OpenTelemetry (OTel)</dt>
+                <dt id="term-opentelemetry">OpenTelemetry (OTel)</dt>
                 <dd>Open standard for emitting traces, metrics, and logs across languages and platforms.</dd>
 
-                <dt>IOC — Indicator of Compromise</dt>
+                <dt id="term-ioc">IOC — Indicator of Compromise</dt>
                 <dd>An artifact (hash, IP, domain) tied to known-bad activity.</dd>
 
-                <dt>IOA — Indicator of Attack</dt>
+                <dt id="term-ioa">IOA — Indicator of Attack</dt>
                 <dd>A pattern of behavior suggesting attack regardless of specific artifacts.</dd>
 
-                <dt>Dwell Time</dt>
+                <dt id="term-dwell-time">Dwell Time</dt>
                 <dd>How long an attacker is in your environment before detection. The metric defenders try to shrink.</dd>
 
-                <dt>MTTD / MTTR</dt>
-                <dd>Mean Time To Detect / Respond. Common SOC KPIs.</dd>
+                <dt id="term-mttd">MTTD / MTTR</dt>
+                <dd>Mean Time To Detect / Respond. Common <a class="glossary-link" href="#term-soc">SOC</a> KPIs.</dd>
 
-                <dt>DFIR — Digital Forensics &amp; Incident Response</dt>
+                <dt id="term-dfir">DFIR — Digital Forensics &amp; Incident Response</dt>
                 <dd>The discipline (and team) that handles incidents end-to-end.</dd>
             </dl>
 
             <h2 id="posture">🧭 Posture, Policy &amp; the *PM Family</h2>
             <dl class="glossary-list">
-                <dt>CSPM — Cloud Security Posture Management</dt>
-                <dd>Continuous misconfiguration scanning of cloud accounts (public S3, open SGs, missing MFA, etc.).</dd>
+                <dt id="term-cspm">CSPM — Cloud Security Posture Management</dt>
+                <dd>Continuous misconfiguration scanning of cloud accounts (<a class="glossary-link" href="#term-public">public</a> S3, open SGs, missing <a class="glossary-link" href="#term-mfa">MFA</a>, etc.).</dd>
 
-                <dt>KSPM — Kubernetes Security Posture Management</dt>
-                <dd>Same idea, scoped to Kubernetes (RBAC sprawl, privileged pods, missing PSS).</dd>
+                <dt id="term-kspm">KSPM — Kubernetes Security Posture Management</dt>
+                <dd>Same idea, scoped to <a class="glossary-link" href="#term-kubernetes">Kubernetes</a> (<a class="glossary-link" href="#term-rbac">RBAC</a> sprawl, privileged pods, missing <a class="glossary-link" href="#term-pss">PSS</a>).</dd>
 
-                <dt>CIEM — Cloud Infrastructure Entitlements Management</dt>
-                <dd>Permission analysis — finds unused permissions, identifies privilege paths, drives least privilege.</dd>
+                <dt id="term-ciem">CIEM — Cloud Infrastructure Entitlements Management</dt>
+                <dd>Permission analysis — finds unused permissions, identifies privilege paths, drives <a class="glossary-link" href="#term-least-privilege">least privilege</a>.</dd>
 
-                <dt>CWPP — Cloud Workload Protection Platform</dt>
-                <dd>Runtime protection for VMs, containers, and serverless — agent-based or eBPF.</dd>
+                <dt id="term-cwpp">CWPP — Cloud Workload Protection Platform</dt>
+                <dd>Runtime protection for VMs, containers, and <a class="glossary-link" href="#term-serverless">serverless</a> — <a class="glossary-link" href="#term-agent">agent</a>-based or <a class="glossary-link" href="#term-ebpf">eBPF</a>.</dd>
 
-                <dt>CNAPP — Cloud-Native Application Protection Platform</dt>
-                <dd>The vendor super-bundle: CSPM + CWPP + CIEM + IaC scanning + sometimes DSPM/ASPM.</dd>
+                <dt id="term-cnapp">CNAPP — Cloud-Native Application Protection Platform</dt>
+                <dd>The vendor super-bundle: <a class="glossary-link" href="#term-cspm">CSPM</a> + <a class="glossary-link" href="#term-cwpp">CWPP</a> + <a class="glossary-link" href="#term-ciem">CIEM</a> + <a class="glossary-link" href="#term-iac">IaC</a> scanning + sometimes <a class="glossary-link" href="#term-dspm">DSPM</a>/<a class="glossary-link" href="#term-aspm">ASPM</a>.</dd>
 
-                <dt>DSPM — Data Security Posture Management</dt>
-                <dd>Discovers and classifies sensitive data across cloud and SaaS, then flags risky exposure.</dd>
+                <dt id="term-dspm">DSPM — Data Security Posture Management</dt>
+                <dd>Discovers and classifies sensitive data across cloud and <a class="glossary-link" href="#term-saas">SaaS</a>, then flags risky exposure.</dd>
 
-                <dt>ASPM — Application Security Posture Management</dt>
-                <dd>Aggregates SAST/DAST/SCA findings and ties them to ownership, priority, and reachability.</dd>
+                <dt id="term-aspm">ASPM — Application Security Posture Management</dt>
+                <dd>Aggregates <a class="glossary-link" href="#term-sast">SAST</a>/DAST/<a class="glossary-link" href="#term-sca">SCA</a> findings and ties them to ownership, priority, and reachability.</dd>
 
-                <dt>CADR — Cloud Application Detection and Response</dt>
+                <dt id="term-cadr">CADR — Cloud Application Detection and Response</dt>
                 <dd>Newer category: runtime detection focused on application-layer attacks in cloud.</dd>
 
-                <dt>OPA — Open Policy Agent</dt>
+                <dt id="term-opa">OPA — Open Policy Agent</dt>
                 <dd>General-purpose policy engine. Decisions in, decisions out.</dd>
 
-                <dt>Rego</dt>
-                <dd>The query language used by OPA.</dd>
+                <dt id="term-rego">Rego</dt>
+                <dd>The query language used by <a class="glossary-link" href="#term-opa">OPA</a>.</dd>
 
-                <dt>Policy-as-Code</dt>
+                <dt id="term-policy-as-code">Policy-as-Code</dt>
                 <dd>Expressing security and compliance rules as code — versioned, reviewable, testable.</dd>
 
-                <dt>Drift</dt>
+                <dt id="term-drift">Drift</dt>
                 <dd>Live infrastructure no longer matching its declared state (Terraform, Bicep, CFN). A common post-incident artifact.</dd>
 
-                <dt>Hardening / Baseline</dt>
+                <dt id="term-hardening">Hardening / Baseline</dt>
                 <dd>Reducing attack surface to a defined "known good" configuration (CIS Benchmark, vendor security best practices).</dd>
+
+                <dt id="term-pss">PSS — Pod Security Standards</dt>
+                <dd><a class="glossary-link" href="#term-kubernetes">Kubernetes</a>' built-in <a class="glossary-link" href="#term-pod">pod</a>-<a class="glossary-link" href="#term-hardening">hardening</a> tiers — Privileged / Baseline / Restricted — replacing the deprecated PodSecurityPolicy.</dd>
             </dl>
 
             <h2 id="vuln">🐛 Vulnerability &amp; Supply-Chain Security</h2>
             <dl class="glossary-list">
-                <dt>CVE — Common Vulnerabilities and Exposures</dt>
-                <dd>A unique ID for a publicly disclosed vulnerability, assigned by MITRE/CNAs.</dd>
+                <dt id="term-cve">CVE — Common Vulnerabilities and Exposures</dt>
+                <dd>A unique ID for a publicly disclosed vulnerability, assigned by <a class="glossary-link" href="#term-mitre">MITRE</a>/CNAs.</dd>
 
-                <dt>CVSS — Common Vulnerability Scoring System</dt>
-                <dd>0–10 severity score for a CVE. Famously poorly correlated with actual exploitation.</dd>
+                <dt id="term-cvss">CVSS — Common Vulnerability Scoring System</dt>
+                <dd>0–10 severity score for a <a class="glossary-link" href="#term-cve">CVE</a>. Famously poorly correlated with actual exploitation.</dd>
 
-                <dt>EPSS — Exploit Prediction Scoring System</dt>
-                <dd>FIRST-maintained probability that a CVE will be exploited in the next 30 days. Pairs better with CVSS than CVSS does alone.</dd>
+                <dt id="term-epss">EPSS — Exploit Prediction Scoring System</dt>
+                <dd><a class="glossary-link" href="#term-first">FIRST</a>-maintained probability that a <a class="glossary-link" href="#term-cve">CVE</a> will be exploited in the next 30 days. Pairs better with <a class="glossary-link" href="#term-cvss">CVSS</a> than CVSS does alone.</dd>
 
-                <dt>KEV — Known Exploited Vulnerabilities</dt>
-                <dd>CISA's catalog of CVEs known to be actively exploited. The "fix this now" list.</dd>
+                <dt id="term-kev">KEV — Known Exploited Vulnerabilities</dt>
+                <dd><a class="glossary-link" href="#term-cisa">CISA</a>'s catalog of CVEs known to be actively exploited. The "fix this now" list.</dd>
 
-                <dt>SAST / DAST / IAST</dt>
+                <dt id="term-sast">SAST / DAST / IAST</dt>
                 <dd>Static / Dynamic / Interactive Application Security Testing. Source-time / run-time / both.</dd>
 
-                <dt>SCA — Software Composition Analysis</dt>
+                <dt id="term-sca">SCA — Software Composition Analysis</dt>
                 <dd>Identifies open-source dependencies and their known vulnerabilities.</dd>
 
-                <dt>SBOM — Software Bill of Materials</dt>
+                <dt id="term-sbom">SBOM — Software Bill of Materials</dt>
                 <dd>The ingredient list for a piece of software — components, versions, licenses, hashes. Formats: SPDX, CycloneDX.</dd>
 
-                <dt>SLSA — Supply-chain Levels for Software Artifacts</dt>
-                <dd>OpenSSF framework defining levels of build-pipeline integrity (signed provenance, isolated builders, etc.).</dd>
+                <dt id="term-slsa">SLSA — Supply-chain Levels for Software Artifacts</dt>
+                <dd><a class="glossary-link" href="#term-openssf">OpenSSF</a> framework defining levels of build-pipeline integrity (signed <a class="glossary-link" href="#term-provenance">provenance</a>, isolated builders, etc.).</dd>
 
-                <dt>Sigstore / cosign</dt>
-                <dd>Free, keyless artifact signing using short-lived OIDC-based certs and a public transparency log.</dd>
+                <dt id="term-sigstore">Sigstore / cosign</dt>
+                <dd>Free, keyless artifact signing using short-lived <a class="glossary-link" href="#term-oidc">OIDC</a>-based certs and a <a class="glossary-link" href="#term-public">public</a> transparency log.</dd>
 
-                <dt>Provenance</dt>
+                <dt id="term-provenance">Provenance</dt>
                 <dd>Verifiable record of how a build artifact was produced — source commit, builder, dependencies.</dd>
 
-                <dt>Dependency Confusion</dt>
-                <dd>Supply-chain attack where a public package matches the name of a private internal one and gets pulled by mistake.</dd>
+                <dt id="term-dependency-confusion">Dependency Confusion</dt>
+                <dd>Supply-chain attack where a <a class="glossary-link" href="#term-public">public</a> package matches the name of a private internal one and gets pulled by mistake.</dd>
 
-                <dt>Typosquatting</dt>
+                <dt id="term-typosquatting">Typosquatting</dt>
                 <dd>Malicious package using a misspelling of a legitimate one.</dd>
 
-                <dt>VEX — Vulnerability Exploitability eXchange</dt>
-                <dd>Statement attached to an SBOM saying whether a known CVE is actually exploitable in this product / build.</dd>
+                <dt id="term-vex">VEX — Vulnerability Exploitability eXchange</dt>
+                <dd>Statement attached to an <a class="glossary-link" href="#term-sbom">SBOM</a> saying whether a known <a class="glossary-link" href="#term-cve">CVE</a> is actually exploitable in this product / build.</dd>
+
+                <dt id="term-cwe">CWE — Common Weakness Enumeration</dt>
+                <dd><a class="glossary-link" href="#term-mitre">MITRE</a>'s catalog of weakness types (e.g., CWE-79 = <a class="glossary-link" href="#term-xss">XSS</a>, CWE-89 = SQL injection). CVEs are concrete instances; CWEs are the categories.</dd>
             </dl>
 
             <h2 id="compliance">📜 Compliance Frameworks</h2>
             <dl class="glossary-list">
-                <dt>SOC 2</dt>
+                <dt id="term-soc-2">SOC 2</dt>
                 <dd>AICPA audit covering Security (required) plus optional Availability, Confidentiality, Processing Integrity, and Privacy.</dd>
 
-                <dt>ISO/IEC 27001</dt>
+                <dt id="term-iso">ISO/IEC 27001</dt>
                 <dd>International standard for an Information Security Management System (ISMS). Certifiable.</dd>
 
-                <dt>PCI DSS</dt>
+                <dt id="term-pci-dss">PCI DSS</dt>
                 <dd>Payment Card Industry Data Security Standard. If you process card data, this applies.</dd>
 
-                <dt>HIPAA</dt>
+                <dt id="term-hipaa">HIPAA</dt>
                 <dd>US healthcare regulation governing protected health information (PHI).</dd>
 
-                <dt>GDPR / CCPA / CPRA</dt>
+                <dt id="term-gdpr">GDPR / CCPA / CPRA</dt>
                 <dd>EU and California data-protection laws. Govern lawful basis, rights, and breach disclosure.</dd>
 
-                <dt>FedRAMP</dt>
+                <dt id="term-fedramp">FedRAMP</dt>
                 <dd>US federal program authorizing cloud services for government use. Low / Moderate / High baselines.</dd>
 
-                <dt>NIST CSF — Cybersecurity Framework</dt>
+                <dt id="term-nist-csf">NIST CSF — Cybersecurity Framework</dt>
                 <dd>Govern / Identify / Protect / Detect / Respond / Recover. Common North-Star for security programs.</dd>
 
-                <dt>NIST SP 800-53</dt>
-                <dd>The US-government control catalog underlying FedRAMP and many compliance regimes.</dd>
+                <dt id="term-nist-sp-800-53">NIST SP 800-53</dt>
+                <dd>The US-government control catalog underlying <a class="glossary-link" href="#term-fedramp">FedRAMP</a> and many compliance regimes.</dd>
 
-                <dt>NIST SP 800-171</dt>
+                <dt id="term-nist-sp-800-171">NIST SP 800-171</dt>
                 <dd>Controls for protecting Controlled Unclassified Information (CUI) in non-federal systems.</dd>
 
-                <dt>CIS Benchmarks</dt>
-                <dd>Hardening guides for specific platforms (AWS, Azure, GCP, K8s, OSes). Maintained by the Center for Internet Security.</dd>
+                <dt id="term-cis-benchmarks">CIS Benchmarks</dt>
+                <dd><a class="glossary-link" href="#term-hardening">Hardening</a> guides for specific platforms (AWS, Azure, GCP, <a class="glossary-link" href="#term-kubernetes">K8s</a>, OSes). Maintained by the Center for Internet Security.</dd>
 
-                <dt>CSA CCM — Cloud Controls Matrix</dt>
-                <dd>Cloud Security Alliance's cloud-specific control framework.</dd>
+                <dt id="term-csa-ccm">CSA CCM — Cloud Controls Matrix</dt>
+                <dd><a class="glossary-link" href="#term-csa">Cloud Security Alliance</a>'s cloud-specific control framework.</dd>
 
-                <dt>DORA</dt>
+                <dt id="term-dora">DORA</dt>
                 <dd>EU Digital Operational Resilience Act — financial-sector ICT risk and third-party oversight.</dd>
             </dl>
 
             <h2 id="attack">⚔️ Threats, Attacker Techniques &amp; Frameworks</h2>
             <dl class="glossary-list">
-                <dt>MITRE ATT&amp;CK</dt>
-                <dd>Knowledge base of adversary tactics, techniques, and procedures. Has Cloud, Containers, Mobile, ICS matrices.</dd>
+                <dt id="term-mitre-att-ck">MITRE ATT&amp;CK</dt>
+                <dd>Knowledge base of adversary <a class="glossary-link" href="#term-ttp">tactics, techniques, and procedures</a>. Has Cloud, Containers, Mobile, ICS matrices.</dd>
 
-                <dt>D3FEND</dt>
-                <dd>MITRE's defensive counterpart to ATT&amp;CK — countermeasure techniques mapped to attacker techniques.</dd>
+                <dt id="term-d3fend">D3FEND</dt>
+                <dd><a class="glossary-link" href="#term-mitre">MITRE</a>'s defensive counterpart to ATT&amp;CK — countermeasure techniques mapped to attacker techniques.</dd>
 
-                <dt>TTP — Tactics, Techniques, and Procedures</dt>
+                <dt id="term-ttp">TTP — Tactics, Techniques, and Procedures</dt>
                 <dd>The "how" of an adversary's behavior, increasingly specific from tactic → technique → procedure.</dd>
 
-                <dt>Kill Chain</dt>
-                <dd>Lockheed Martin's seven-stage model of an intrusion: Recon → Weaponization → Delivery → Exploitation → Installation → C2 → Actions on Objectives.</dd>
+                <dt id="term-kill-chain">Kill Chain</dt>
+                <dd>Lockheed Martin's seven-stage model of an intrusion: Recon → Weaponization → Delivery → Exploitation → Installation → <a class="glossary-link" href="#term-c2">C2</a> → Actions on Objectives.</dd>
 
-                <dt>Initial Access</dt>
-                <dd>How the attacker first lands — phish, exposed service, valid credentials, supply chain.</dd>
+                <dt id="term-initial-access">Initial Access</dt>
+                <dd>How the attacker <a class="glossary-link" href="#term-first">first</a> lands — phish, exposed service, valid credentials, supply chain.</dd>
 
-                <dt>Lateral Movement</dt>
+                <dt id="term-lateral-movement">Lateral Movement</dt>
                 <dd>Pivoting from one foothold to other systems, often using stolen tokens.</dd>
 
-                <dt>Privilege Escalation</dt>
+                <dt id="term-privilege-escalation">Privilege Escalation</dt>
                 <dd>Gaining higher rights than originally granted (vertical) or rights of a peer (horizontal).</dd>
 
-                <dt>Persistence</dt>
+                <dt id="term-persistence">Persistence</dt>
                 <dd>Mechanisms attackers leave to survive reboots, password rotations, and credential rotations.</dd>
 
-                <dt>Exfiltration</dt>
+                <dt id="term-exfiltration">Exfiltration</dt>
                 <dd>Stealing data out of the environment — often via DNS, S3, GitHub, or messaging services.</dd>
 
-                <dt>C2 — Command &amp; Control</dt>
+                <dt id="term-c2">C2 — Command &amp; Control</dt>
                 <dd>The channel an attacker uses to control implants. Often blended with legitimate cloud services.</dd>
 
-                <dt>Credential Stuffing</dt>
+                <dt id="term-credential-stuffing">Credential Stuffing</dt>
                 <dd>Replaying breached username/password pairs against other services.</dd>
 
-                <dt>Phishing / Spear Phishing / Whaling</dt>
+                <dt id="term-phishing">Phishing / Spear Phishing / Whaling</dt>
                 <dd>Email-borne credential theft, targeted variant, and exec-targeted variant.</dd>
 
-                <dt>Consent Phishing / OAuth Phishing</dt>
+                <dt id="term-consent-phishing">Consent Phishing / OAuth Phishing</dt>
                 <dd>Tricking a user into granting an attacker-owned OAuth app permission to their account. No password ever stolen.</dd>
 
-                <dt>MFA Fatigue / Push Bombing</dt>
-                <dd>Spamming push prompts until the user accepts one. Defeated by number matching and FIDO2.</dd>
+                <dt id="term-mfa-fatigue">MFA Fatigue / Push Bombing</dt>
+                <dd>Spamming push prompts until the user accepts one. Defeated by number matching and <a class="glossary-link" href="#term-fido2">FIDO2</a>.</dd>
 
-                <dt>SSRF — Server-Side Request Forgery</dt>
-                <dd>Trick a server into fetching an attacker-chosen URL. In cloud, the historical path to IMDS credentials.</dd>
+                <dt id="term-ssrf">SSRF — Server-Side Request Forgery</dt>
+                <dd>Trick a server into fetching an attacker-chosen URL. In cloud, the historical path to <a class="glossary-link" href="#term-imds">IMDS</a> credentials.</dd>
 
-                <dt>XSS — Cross-Site Scripting</dt>
+                <dt id="term-xss">XSS — Cross-Site Scripting</dt>
                 <dd>Injecting attacker-controlled JS into another user's session. Stored, reflected, DOM-based.</dd>
 
-                <dt>CSRF — Cross-Site Request Forgery</dt>
+                <dt id="term-csrf">CSRF — Cross-Site Request Forgery</dt>
                 <dd>Tricking a victim's browser into making an authenticated request to a target site.</dd>
 
-                <dt>RCE — Remote Code Execution</dt>
+                <dt id="term-rce">RCE — Remote Code Execution</dt>
                 <dd>Running attacker code on a server. The most consequential class of bug.</dd>
 
-                <dt>Golden SAML</dt>
-                <dd>Forging arbitrary SAML assertions after stealing the IdP's signing key. Made famous by SolarWinds.</dd>
+                <dt id="term-golden-saml">Golden SAML</dt>
+                <dd>Forging arbitrary SAML assertions after stealing the <a class="glossary-link" href="#term-idp">IdP</a>'s signing key. Made famous by SolarWinds.</dd>
 
-                <dt>Golden Ticket / Silver Ticket</dt>
-                <dd>Active Directory Kerberos ticket forgeries (krbtgt or service-account hashes).</dd>
+                <dt id="term-golden-ticket">Golden Ticket / Silver Ticket</dt>
+                <dd><a class="glossary-link" href="#term-active-directory">Active Directory</a> <a class="glossary-link" href="#term-kerberos">Kerberos</a> ticket forgeries (krbtgt or service-account hashes).</dd>
 
-                <dt>Pass-the-Hash / Pass-the-Token / Pass-the-Cookie</dt>
+                <dt id="term-pass-the-hash">Pass-the-Hash / Pass-the-Token / Pass-the-Cookie</dt>
                 <dd>Reusing stolen credential material without ever knowing the underlying password.</dd>
 
-                <dt>BOLA / IDOR</dt>
+                <dt id="term-bola">BOLA / IDOR</dt>
                 <dd>Broken Object Level Authorization / Insecure Direct Object Reference — accessing another user's record by changing an ID.</dd>
 
-                <dt>Living Off the Land (LOTL)</dt>
+                <dt id="term-living-off-the-land">Living Off the Land (LOTL)</dt>
                 <dd>Attackers using legitimate, signed tools already in the environment (PowerShell, certutil, AWS CLI) to evade detection.</dd>
 
-                <dt>Shadow IT / Shadow AI</dt>
-                <dd>Unsanctioned services / AI tools adopted by employees, outside the visibility of security and IT.</dd>
+                <dt id="term-shadow-it">Shadow IT / Shadow AI</dt>
+                <dd>Unsanctioned services / <a class="glossary-link" href="#term-red-teaming">AI</a> tools adopted by employees, outside the visibility of security and IT.</dd>
             </dl>
 
             <h2 id="ai">🤖 AI, LLM &amp; Agentic-System Security</h2>
             <dl class="glossary-list">
-                <dt>LLM — Large Language Model</dt>
+                <dt id="term-llm">LLM — Large Language Model</dt>
                 <dd>Transformer-based models trained on huge text corpora; the engine behind chat assistants and agents.</dd>
 
-                <dt>Prompt Injection</dt>
-                <dd>Untrusted input that overrides the system prompt or coerces the model into actions it shouldn't take. The defining LLM vulnerability.</dd>
+                <dt id="term-prompt-injection">Prompt Injection</dt>
+                <dd>Untrusted input that overrides the system prompt or coerces the model into actions it shouldn't take. The defining <a class="glossary-link" href="#term-llm">LLM</a> vulnerability.</dd>
 
-                <dt>Indirect Prompt Injection</dt>
+                <dt id="term-indirect-prompt-injection">Indirect Prompt Injection</dt>
                 <dd>Injection delivered via content the model retrieves (web pages, emails, docs) rather than the user's message.</dd>
 
-                <dt>Jailbreak</dt>
-                <dd>Inputs that bypass an LLM's safety training to elicit prohibited content.</dd>
+                <dt id="term-jailbreak">Jailbreak</dt>
+                <dd>Inputs that bypass an <a class="glossary-link" href="#term-llm">LLM</a>'s safety training to elicit prohibited content.</dd>
 
-                <dt>RAG — Retrieval-Augmented Generation</dt>
+                <dt id="term-rag">RAG — Retrieval-Augmented Generation</dt>
                 <dd>Retrieving relevant documents at query time and stuffing them into the model's context.</dd>
 
-                <dt>MCP — Model Context Protocol</dt>
+                <dt id="term-mcp">MCP — Model Context Protocol</dt>
                 <dd>Open standard for giving LLMs structured access to tools and data sources.</dd>
 
-                <dt>Agent / Agentic System</dt>
-                <dd>An LLM that can take actions via tools, often in multi-step loops. Expands the blast radius of prompt injection.</dd>
+                <dt id="term-agent">Agent / Agentic System</dt>
+                <dd>An <a class="glossary-link" href="#term-llm">LLM</a> that can take actions via tools, often in multi-step loops. Expands the <a class="glossary-link" href="#term-blast-radius">blast radius</a> of <a class="glossary-link" href="#term-prompt-injection">prompt injection</a>.</dd>
 
-                <dt>Tool Use / Function Calling</dt>
-                <dd>An LLM emitting a structured request to call an external function (API, shell, browser).</dd>
+                <dt id="term-tool-use">Tool Use / Function Calling</dt>
+                <dd>An <a class="glossary-link" href="#term-llm">LLM</a> emitting a structured request to call an external function (API, shell, browser).</dd>
 
-                <dt>Confused-Deputy (in agents)</dt>
-                <dd>An agent acting on behalf of the wrong principal — typically because tool input from one user is interpreted as instructions from another.</dd>
+                <dt id="term-confused-deputy">Confused-Deputy (in agents)</dt>
+                <dd>An <a class="glossary-link" href="#term-agent">agent</a> acting on behalf of the wrong <a class="glossary-link" href="#term-principal">principal</a> — typically because tool input from one user is interpreted as instructions from another.</dd>
 
-                <dt>Guardrails</dt>
-                <dd>Input/output filters around an LLM to block prompt injection, PII leaks, or off-topic responses. Helpful, not sufficient.</dd>
+                <dt id="term-guardrails">Guardrails</dt>
+                <dd>Input/output filters around an <a class="glossary-link" href="#term-llm">LLM</a> to block <a class="glossary-link" href="#term-prompt-injection">prompt injection</a>, PII leaks, or off-topic responses. Helpful, not sufficient.</dd>
 
-                <dt>Model Exfiltration</dt>
+                <dt id="term-model-exfiltration">Model Exfiltration</dt>
                 <dd>Stealing weights or fine-tuning data from a hosted model.</dd>
 
-                <dt>Training-Data Extraction</dt>
+                <dt id="term-training-data-extraction">Training-Data Extraction</dt>
                 <dd>Eliciting verbatim training data from a model, especially memorized PII or secrets.</dd>
 
-                <dt>Red-Teaming (AI)</dt>
-                <dd>Adversarial probing of a model or agent for harmful, biased, or insecure behaviors.</dd>
+                <dt id="term-red-teaming">Red-Teaming (AI)</dt>
+                <dd>Adversarial probing of a model or <a class="glossary-link" href="#term-agent">agent</a> for harmful, biased, or insecure behaviors.</dd>
 
-                <dt>OWASP LLM Top 10</dt>
-                <dd>The community-maintained top risks list for LLM applications.</dd>
+                <dt id="term-owasp-llm-top-10">OWASP LLM Top 10</dt>
+                <dd>The community-maintained top risks list for <a class="glossary-link" href="#term-llm">LLM</a> applications.</dd>
 
-                <dt>NIST AI RMF</dt>
-                <dd>NIST's AI Risk Management Framework — Govern / Map / Measure / Manage.</dd>
+                <dt id="term-nist-ai-rmf">NIST AI RMF</dt>
+                <dd><a class="glossary-link" href="#term-nist">NIST</a>'s <a class="glossary-link" href="#term-red-teaming">AI</a> Risk Management Framework — Govern / Map / Measure / Manage.</dd>
 
-                <dt>Promptware</dt>
+                <dt id="term-promptware">Promptware</dt>
                 <dd>Malicious payloads delivered via prompts to LLMs and agents — a cloud-relevant attack class as agents gain real-world tool access (see <a href="breach-timeline.html">Breach Kill Chains</a>).</dd>
             </dl>
 
             <h2 id="ops">⚙️ DevOps, IaC &amp; Operating Concepts</h2>
             <dl class="glossary-list">
-                <dt>IaC — Infrastructure as Code</dt>
+                <dt id="term-iac">IaC — Infrastructure as Code</dt>
                 <dd>Declaring infrastructure in versioned code. Terraform / OpenTofu, CloudFormation, Bicep, Pulumi, Crossplane.</dd>
 
-                <dt>GitOps</dt>
-                <dd>Use Git as the source of truth for desired state; an agent reconciles the live system to match.</dd>
+                <dt id="term-gitops">GitOps</dt>
+                <dd>Use Git as the source of truth for desired state; an <a class="glossary-link" href="#term-agent">agent</a> reconciles the live system to match.</dd>
 
-                <dt>CI/CD — Continuous Integration / Continuous Delivery</dt>
+                <dt id="term-ci">CI/CD — Continuous Integration / Continuous Delivery</dt>
                 <dd>Pipelines that build, test, and deploy code automatically.</dd>
 
-                <dt>Immutable Infrastructure</dt>
-                <dd>Servers/containers are never modified after deploy — they're replaced. Reduces drift and forensics surprises.</dd>
+                <dt id="term-immutable-infrastructure">Immutable Infrastructure</dt>
+                <dd>Servers/containers are never modified after deploy — they're replaced. Reduces <a class="glossary-link" href="#term-drift">drift</a> and forensics surprises.</dd>
 
-                <dt>Blue/Green &amp; Canary Deploys</dt>
-                <dd>Deployment patterns that ship to a subset of traffic to limit blast radius.</dd>
+                <dt id="term-blue">Blue/Green &amp; Canary Deploys</dt>
+                <dd>Deployment patterns that ship to a subset of traffic to limit <a class="glossary-link" href="#term-blast-radius">blast radius</a>.</dd>
 
-                <dt>Blast Radius</dt>
+                <dt id="term-blast-radius">Blast Radius</dt>
                 <dd>The scope of damage if a credential, identity, or system is compromised. Minimizing it is a design principle.</dd>
 
-                <dt>Ephemeral Credentials</dt>
-                <dd>Short-lived (minutes to hours) credentials issued by STS / OIDC federation. The replacement for long-lived access keys.</dd>
+                <dt id="term-ephemeral-credentials">Ephemeral Credentials</dt>
+                <dd>Short-lived (minutes to hours) credentials issued by <a class="glossary-link" href="#term-sts">STS</a> / <a class="glossary-link" href="#term-oidc-federation">OIDC federation</a>. The replacement for long-lived access keys.</dd>
 
-                <dt>Secrets Sprawl</dt>
+                <dt id="term-secrets-sprawl">Secrets Sprawl</dt>
                 <dd>Long-lived API keys checked into repos, dumped in shell histories, or shared in chat. Cloud's most reliable attack source.</dd>
 
-                <dt>Shift Left / Shift Right</dt>
-                <dd>Doing security in dev/CI (left) vs. runtime/production (right). Both are needed.</dd>
+                <dt id="term-shift-left">Shift Left / Shift Right</dt>
+                <dd>Doing security in dev/<a class="glossary-link" href="#term-ci">CI</a> (left) vs. runtime/production (right). Both are needed.</dd>
 
-                <dt>Toil</dt>
+                <dt id="term-toil">Toil</dt>
                 <dd>Repetitive manual operational work. SRE term — the thing automation aims to eliminate.</dd>
 
-                <dt>SLO / SLI / SLA</dt>
+                <dt id="term-slo">SLO / SLI / SLA</dt>
                 <dd>Service Level Objective / Indicator / Agreement — what you target, how you measure, what you're contractually liable for.</dd>
 
-                <dt>Runbook / Playbook</dt>
+                <dt id="term-runbook">Runbook / Playbook</dt>
                 <dd>Documented procedures for handling specific operational or security events.</dd>
             </dl>
 
             <h2 id="orgs">🏛️ Standards Bodies &amp; Authorities</h2>
             <dl class="glossary-list">
-                <dt>NIST</dt>
-                <dd>US National Institute of Standards and Technology. Owns CSF, the SP 800-series, NVD, and the AI RMF.</dd>
+                <dt id="term-nist">NIST</dt>
+                <dd>US National Institute of Standards and Technology. Owns CSF, the <a class="glossary-link" href="#term-sp">SP</a> 800-series, <a class="glossary-link" href="#term-nvd">NVD</a>, and the <a class="glossary-link" href="#term-red-teaming">AI</a> RMF.</dd>
 
-                <dt>CISA</dt>
-                <dd>US Cybersecurity &amp; Infrastructure Security Agency. Publishes KEV, advisories, and Secure-by-Design guidance.</dd>
+                <dt id="term-cisa">CISA</dt>
+                <dd>US Cybersecurity &amp; Infrastructure Security Agency. Publishes <a class="glossary-link" href="#term-kev">KEV</a>, advisories, and Secure-by-Design guidance.</dd>
 
-                <dt>MITRE</dt>
-                <dd>Operates the CVE program, ATT&amp;CK, D3FEND, and CWE.</dd>
+                <dt id="term-mitre">MITRE</dt>
+                <dd>Operates the <a class="glossary-link" href="#term-cve">CVE</a> program, ATT&amp;CK, <a class="glossary-link" href="#term-d3fend">D3FEND</a>, and <a class="glossary-link" href="#term-cwe">CWE</a>.</dd>
 
-                <dt>CSA — Cloud Security Alliance</dt>
+                <dt id="term-csa">CSA — Cloud Security Alliance</dt>
                 <dd>Industry body behind CCSK, CCAK, the CCM, and the Egregious Eleven / Top Threats reports.</dd>
 
-                <dt>OWASP</dt>
+                <dt id="term-owasp">OWASP</dt>
                 <dd>Open Worldwide Application Security Project. Top 10 series, ASVS, ZAP.</dd>
 
-                <dt>ENISA</dt>
+                <dt id="term-enisa">ENISA</dt>
                 <dd>EU Agency for Cybersecurity. Publishes risk reports and threat-landscape research.</dd>
 
-                <dt>FIRST</dt>
-                <dd>Forum of Incident Response and Security Teams. Owns CVSS and EPSS, hosts the global CSIRT community.</dd>
+                <dt id="term-first">FIRST</dt>
+                <dd>Forum of Incident Response and Security Teams. Owns <a class="glossary-link" href="#term-cvss">CVSS</a> and <a class="glossary-link" href="#term-epss">EPSS</a>, hosts the global CSIRT community.</dd>
 
-                <dt>CNCF</dt>
-                <dd>Cloud Native Computing Foundation. Stewards Kubernetes, Falco, OPA, OpenTelemetry, and more.</dd>
+                <dt id="term-cncf">CNCF</dt>
+                <dd>Cloud Native Computing Foundation. Stewards <a class="glossary-link" href="#term-kubernetes">Kubernetes</a>, <a class="glossary-link" href="#term-falco">Falco</a>, <a class="glossary-link" href="#term-opa">OPA</a>, <a class="glossary-link" href="#term-opentelemetry">OpenTelemetry</a>, and more.</dd>
 
-                <dt>OpenSSF</dt>
-                <dd>Open Source Security Foundation. Stewards SLSA, Sigstore, Scorecard.</dd>
+                <dt id="term-openssf">OpenSSF</dt>
+                <dd>Open Source Security Foundation. Stewards <a class="glossary-link" href="#term-slsa">SLSA</a>, <a class="glossary-link" href="#term-sigstore">Sigstore</a>, Scorecard.</dd>
 
-                <dt>NVD — National Vulnerability Database</dt>
-                <dd>NIST's enriched feed of CVEs with CVSS scoring and CPE tagging.</dd>
+                <dt id="term-nvd">NVD — National Vulnerability Database</dt>
+                <dd><a class="glossary-link" href="#term-nist">NIST</a>'s enriched feed of CVEs with <a class="glossary-link" href="#term-cvss">CVSS</a> scoring and CPE tagging.</dd>
+
+                <dt id="term-cisa-kev">CISA KEV</dt>
+                <dd>The <a class="glossary-link" href="#term-kev">Known Exploited Vulnerabilities</a> catalog maintained by <a class="glossary-link" href="#term-cisa">CISA</a>. The authoritative "patch this now" list for vulnerabilities seen in real attacks.</dd>
+
+                <dt id="term-owasp-zap">OWASP ZAP</dt>
+                <dd>Open-source web-application security scanner from <a class="glossary-link" href="#term-owasp">OWASP</a>. Common in <a class="glossary-link" href="#term-ci">CI</a> pipelines for <a class="glossary-link" href="#term-sast">DAST</a>.</dd>
+
+                <dt id="term-openssf-scorecard">OpenSSF Scorecard</dt>
+                <dd>Automated checks that score the security posture of an open-source project — signed releases, branch protection, dependency pinning, fuzzing — producing a 0–10 score.</dd>
             </dl>
 
             <div class="info-box--yellow">
