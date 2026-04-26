@@ -81,7 +81,7 @@ All first-party CSS and JavaScript files include SRI hashes:
 ```
 
 The `update_sri.py` script:
-1. Calculates SHA-384 hashes of `style.css` and `main.js`
+1. Calculates SHA-384 hashes for every tracked first-party asset (`style.css`, `main.js`, `chat-resources.js`, `breach-timeline.css`, `breach-timeline.js`, `meetings.js`, `glossary.js`)
 2. Updates the `integrity` attribute in all HTML files
 3. Adds cache-busting `?v=` parameters derived from the hash
 4. Runs automatically in CI before every deploy
@@ -109,6 +109,7 @@ This means even if the hosting account were compromised and files were tampered 
 - The site sets no cookies of any kind
 - `localStorage` is used only for the dark mode theme preference (`theme` key)
 - No user data is collected, stored, or transmitted
+- See [privacy.html](privacy.html) for the user-facing Privacy Policy
 
 ---
 

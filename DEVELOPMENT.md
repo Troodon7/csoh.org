@@ -81,16 +81,24 @@ csoh.org/
 ├── presentations.html      # Recorded presentation archive
 ├── breach-timeline.html    # Cloud breach kill chain timeline
 ├── threat-research.html    # Curated cloud threat research directory
+├── glossary.html           # 200+ cloud security terms with live search & cross-links
+├── faq.html                # Frequently asked questions
+├── code-of-conduct.html    # Community Code of Conduct
+├── privacy.html            # Privacy Policy (no cookies, no marketing)
+├── security-policy.html    # Security disclosure policy
+├── meetings.html           # Weekly meeting recaps with speaker filter
 ├── contribute.html         # How to contribute
 ├── contribute-resources.html # Resource submission form
 │
 ├── style.css               # All site styles (includes dark mode)
 ├── main.js                 # Search, filtering, sorting, dark mode toggle
 ├── chat-resources.js       # Chat resources page specific JS
+├── meetings.js             # Meeting recaps filtering + speaker filter
+├── glossary.js             # Glossary page live search
 ├── breach-timeline.css     # Breach timeline page specific styles
 ├── breach-timeline.js      # Breach timeline page specific JS
 │
-├── tools/                  # Python automation scripts (URL safety, normalization, previews, sitemap, presentations schema)
+├── tools/                  # Python automation scripts (URL safety, normalization, previews, sitemap, presentations schema, glossary cross-linking)
 ├── .github/workflows/      # CI/CD pipelines (6 workflows)
 └── update_news.py          # News aggregation from 39 RSS feeds
 ```
@@ -154,6 +162,9 @@ If you changed shared files (`style.css`, `main.js`), verify these pages:
 - `http://localhost:8091/resources.html` -- Resources (search, filters, tags)
 - `http://localhost:8091/news.html` -- News articles
 - `http://localhost:8091/chat-resources.html` -- Chat resources (separate JS)
+- `http://localhost:8091/glossary.html` -- Glossary (separate JS, search + cross-links)
+- `http://localhost:8091/meetings.html` -- Meeting recaps (separate JS, speaker filter)
+- `http://localhost:8091/faq.html` -- FAQ (FAQPage schema, collapsible details)
 
 ### Automated Checks (run by CI on your PR)
 
@@ -212,6 +223,22 @@ See [SUBMIT_NEWS_SOURCE_README.md](tools/SUBMIT_NEWS_SOURCE_README.md) for detai
 
 See [CONTRIBUTING_KILL_CHAINS.md](CONTRIBUTING_KILL_CHAINS.md) for the full process and HTML template.
 
+### Adding a Glossary Term
+
+1. Edit `glossary.html` and locate the right `<h2 id="...">` section.
+2. Add a new `<dt>...</dt>` + `<dd>...</dd>` pair inside that section's `<dl class="glossary-list">`.
+3. Run the cross-linker:
+
+   ```bash
+   python3 tools/crosslink_glossary.py
+   ```
+
+   It will give your new `<dt>` an `id="term-..."` slug, hyperlink any existing terms in your new definition, and hyperlink your new term wherever it's mentioned in other definitions. The script is idempotent and safe to re-run.
+
+4. If the term count crosses a round number (e.g. 200 → 250), update the search-bar placeholder and `<span id="visibleTerms">` count in `glossary.html`.
+
+See [tools/CROSSLINK_GLOSSARY_README.md](tools/CROSSLINK_GLOSSARY_README.md) for more.
+
 ---
 
 ## File Reference
@@ -228,8 +255,12 @@ See [CONTRIBUTING_KILL_CHAINS.md](CONTRIBUTING_KILL_CHAINS.md) for the full proc
 | `tools/check_all_site_urls.py` | Site-wide URL safety scanner | Running local safety audits |
 | `tools/update_sitemap.py` | Refreshes `<lastmod>` dates in `sitemap.xml` from git history | **Don't edit** -- runs in CI and alongside `update_news.py` |
 | `tools/update_presentations_schema.py` | Regenerates `VideoObject` JSON-LD on `presentations.html` | **Don't edit** -- runs in CI on every deploy |
+| `tools/crosslink_glossary.py` | Adds `id="term-..."` to glossary `<dt>`s and hyperlinks every term mention in `<dd>`s | Run after adding/editing glossary entries |
+| `glossary.html` | Cloud-security glossary (200+ terms) with live search and cross-linked definitions | Adding/editing terms; run `crosslink_glossary.py` after |
+| `glossary.js` | Live search/filter for `glossary.html` | Changing search behavior |
+| `meetings.js` | Filters + auto-detected speaker filter for `meetings.html` | Adding new recurring speakers (`SPEAKERS` list) |
 | `sitemap.xml` | XML sitemap for search engines | **Don't edit** -- lastmod refreshed automatically |
-| `update_sri.py` | SRI hash generator | **Don't edit** -- runs in CI |
+| `update_sri.py` | SRI hash generator (handles main.js, style.css, chat-resources.js, breach-timeline.css, breach-timeline.js, meetings.js, glossary.js) | **Don't edit** -- runs in CI |
 | `.htaccess` | Apache server config (security headers, caching, compression) | Server configuration changes |
 | `nginx.conf` | Nginx server config (Docker deployments) | Server configuration changes |
 

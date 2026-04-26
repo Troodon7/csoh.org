@@ -228,12 +228,38 @@ def link_dds(content: str, term_re: re.Pattern[str], key_to_slug: dict[str, str]
     return "".join(out)
 
 
+def unwrap_denylisted_links(content: str) -> tuple[str, int]:
+    """Remove any existing <a class="glossary-link">WORD</a> where WORD's
+    lowercased form is in the DENYLIST. The link is replaced with WORD
+    itself (the link text)."""
+    pattern = re.compile(
+        r'<a\s+class="glossary-link"\s+href="#[^"]+">([^<]+)</a>',
+        re.IGNORECASE,
+    )
+    removed = 0
+
+    def replace(m: re.Match) -> str:
+        nonlocal removed
+        word = m.group(1)
+        if word.strip().lower() in DENYLIST:
+            removed += 1
+            return word
+        return m.group(0)
+
+    return pattern.sub(replace, content), removed
+
+
 def main() -> int:
     if not GLOSSARY.exists():
         print(f"glossary not found: {GLOSSARY}", file=sys.stderr)
         return 1
 
     content = GLOSSARY.read_text(encoding="utf-8")
+
+    # Pass 0: clean up any existing links whose word is now denylisted.
+    content, n_unwrapped = unwrap_denylisted_links(content)
+    if n_unwrapped:
+        print(f"Unwrapped {n_unwrapped} stale link(s) for denylisted words.")
 
     # Pass 1: assign IDs and collect terms.
     content, key_to_slug = add_dt_ids(content)

@@ -258,7 +258,7 @@
                 <dd>Something you know + something you have (or are). <a class="glossary-link" href="#term-phishing">Phishing</a>-resistant MFA = <a class="glossary-link" href="#term-fido2">WebAuthn</a> / <a class="glossary-link" href="#term-fido2">FIDO2</a>.</dd>
 
                 <dt id="term-fido2">FIDO2 / WebAuthn / Passkeys</dt>
-                <dd><a class="glossary-link" href="#term-public">Public</a>-key authentication standards that resist <a class="glossary-link" href="#term-phishing">phishing</a>. Passkeys are syncable WebAuthn credentials.</dd>
+                <dd>Public-key authentication standards that resist <a class="glossary-link" href="#term-phishing">phishing</a>. Passkeys are syncable WebAuthn credentials.</dd>
 
                 <dt id="term-federation">Federation</dt>
                 <dd>Trusting tokens from a foreign <a class="glossary-link" href="#term-idp">IdP</a> (e.g., GitHub Actions <a class="glossary-link" href="#term-oidc">OIDC</a> tokens trusted by AWS to assume a role).</dd>
@@ -270,7 +270,7 @@
                 <dd>The AWS <a class="glossary-link" href="#term-sts">STS</a> call that swaps your identity for temporary credentials of a target role.</dd>
 
                 <dt id="term-service-account">Service Account / Managed Identity / Workload Identity</dt>
-                <dd>The non-human <a class="glossary-link" href="#term-principal">principal</a> a workload uses to authenticate (GCP service account, Azure managed identity, <a class="glossary-link" href="#term-kubernetes">Kubernetes</a> ServiceAccount → cloud role).</dd>
+                <dd>The non-human principal a workload uses to authenticate (GCP service account, Azure managed identity, <a class="glossary-link" href="#term-kubernetes">Kubernetes</a> ServiceAccount → cloud role).</dd>
 
                 <dt id="term-oidc-federation">OIDC Federation (workload identity federation)</dt>
                 <dd>A workload presents a short-lived <a class="glossary-link" href="#term-oidc">OIDC</a> token from its host (e.g., GitHub Actions) which the cloud trusts to issue temporary credentials. Removes long-lived secrets from <a class="glossary-link" href="#term-ci">CI</a>.</dd>
@@ -309,7 +309,7 @@
             <h2 id="network">🌐 Networking &amp; Zero Trust</h2>
             <dl class="glossary-list">
                 <dt id="term-vpc">VPC / VNet</dt>
-                <dd>Virtual <a class="glossary-link" href="#term-public">Private</a> Cloud / Virtual Network — your isolated network space inside a cloud account.</dd>
+                <dd>Virtual Private Cloud / Virtual Network — your isolated network space inside a cloud account.</dd>
 
                 <dt id="term-subnet">Subnet</dt>
                 <dd>A slice of a <a class="glossary-link" href="#term-vpc">VPC</a>'s IP range, bound to one availability zone.</dd>
@@ -324,10 +324,10 @@
                 <dd>Mechanisms for connecting VPCs / VNets to each other or to on-prem networks.</dd>
 
                 <dt id="term-nat">NAT — Network Address Translation</dt>
-                <dd>Lets <a class="glossary-link" href="#term-public">private</a>-<a class="glossary-link" href="#term-subnet">subnet</a> workloads reach the internet through a shared <a class="glossary-link" href="#term-ingress">egress</a> IP.</dd>
+                <dd>Lets private-<a class="glossary-link" href="#term-subnet">subnet</a> workloads reach the internet through a shared <a class="glossary-link" href="#term-ingress">egress</a> IP.</dd>
 
                 <dt id="term-privatelink">PrivateLink / Private Endpoint / Private Service Connect</dt>
-                <dd><a class="glossary-link" href="#term-public">Private</a> routable endpoints for cloud services that never traverse the public internet.</dd>
+                <dd>Private routable endpoints for cloud services that never traverse the public internet.</dd>
 
                 <dt id="term-ingress">Ingress / Egress</dt>
                 <dd>Inbound / outbound traffic. Egress controls are where most data exfil hides.</dd>
@@ -336,7 +336,7 @@
                 <dd>Layer-7 filter for HTTP traffic — <a class="glossary-link" href="#term-xss">XSS</a>, SQLi, rate limits, geo blocks.</dd>
 
                 <dt id="term-bastion-host">Bastion Host / Jump Box</dt>
-                <dd>A hardened entry point into a <a class="glossary-link" href="#term-public">private</a> network. Modern equivalents: SSM Session Manager, IAP, Azure Bastion.</dd>
+                <dd>A hardened entry point into a private network. Modern equivalents: SSM Session Manager, IAP, Azure Bastion.</dd>
 
                 <dt id="term-zero-trust">Zero Trust</dt>
                 <dd>Architectural principle: assume the network is hostile. Authenticate and authorize every request, regardless of source.</dd>
@@ -456,7 +456,7 @@
             <h2 id="posture">🧭 Posture, Policy &amp; the *PM Family</h2>
             <dl class="glossary-list">
                 <dt id="term-cspm">CSPM — Cloud Security Posture Management</dt>
-                <dd>Continuous misconfiguration scanning of cloud accounts (<a class="glossary-link" href="#term-public">public</a> S3, open SGs, missing <a class="glossary-link" href="#term-mfa">MFA</a>, etc.).</dd>
+                <dd>Continuous misconfiguration scanning of cloud accounts (public S3, open SGs, missing <a class="glossary-link" href="#term-mfa">MFA</a>, etc.).</dd>
 
                 <dt id="term-kspm">KSPM — Kubernetes Security Posture Management</dt>
                 <dd>Same idea, scoped to <a class="glossary-link" href="#term-kubernetes">Kubernetes</a> (<a class="glossary-link" href="#term-rbac">RBAC</a> sprawl, privileged pods, missing <a class="glossary-link" href="#term-pss">PSS</a>).</dd>
@@ -507,7 +507,7 @@
                 <dd>0–10 severity score for a <a class="glossary-link" href="#term-cve">CVE</a>. Famously poorly correlated with actual exploitation.</dd>
 
                 <dt id="term-epss">EPSS — Exploit Prediction Scoring System</dt>
-                <dd><a class="glossary-link" href="#term-first">FIRST</a>-maintained probability that a <a class="glossary-link" href="#term-cve">CVE</a> will be exploited in the next 30 days. Pairs better with <a class="glossary-link" href="#term-cvss">CVSS</a> than <a class="glossary-link" href="#term-cvss">CVSS</a> does alone.</dd>
+                <dd>FIRST-maintained probability that a <a class="glossary-link" href="#term-cve">CVE</a> will be exploited in the next 30 days. Pairs better with <a class="glossary-link" href="#term-cvss">CVSS</a> than <a class="glossary-link" href="#term-cvss">CVSS</a> does alone.</dd>
 
                 <dt id="term-kev">KEV — Known Exploited Vulnerabilities</dt>
                 <dd><a class="glossary-link" href="#term-cisa">CISA</a>'s catalog of CVEs known to be actively exploited. The "fix this now" list.</dd>
@@ -525,13 +525,13 @@
                 <dd><a class="glossary-link" href="#term-openssf">OpenSSF</a> framework defining levels of build-pipeline integrity (signed <a class="glossary-link" href="#term-provenance">provenance</a>, isolated builders, etc.).</dd>
 
                 <dt id="term-sigstore">Sigstore / cosign</dt>
-                <dd>Free, keyless artifact signing using short-lived <a class="glossary-link" href="#term-oidc">OIDC</a>-based certs and a <a class="glossary-link" href="#term-public">public</a> transparency log.</dd>
+                <dd>Free, keyless artifact signing using short-lived <a class="glossary-link" href="#term-oidc">OIDC</a>-based certs and a public transparency log.</dd>
 
                 <dt id="term-provenance">Provenance</dt>
                 <dd>Verifiable record of how a build artifact was produced — source commit, builder, dependencies.</dd>
 
                 <dt id="term-dependency-confusion">Dependency Confusion</dt>
-                <dd>Supply-chain attack where a <a class="glossary-link" href="#term-public">public</a> package matches the name of a private internal one and gets pulled by mistake.</dd>
+                <dd>Supply-chain attack where a public package matches the name of a private internal one and gets pulled by mistake.</dd>
 
                 <dt id="term-typosquatting">Typosquatting</dt>
                 <dd>Malicious package using a misspelling of a legitimate one.</dd>
@@ -597,7 +597,7 @@
                 <dd>Lockheed Martin's seven-stage model of an intrusion: Recon → Weaponization → Delivery → Exploitation → Installation → <a class="glossary-link" href="#term-c2">C2</a> → Actions on Objectives.</dd>
 
                 <dt id="term-initial-access">Initial Access</dt>
-                <dd>How the attacker <a class="glossary-link" href="#term-first">first</a> lands — phish, exposed service, valid credentials, supply chain.</dd>
+                <dd>How the attacker first lands — phish, exposed service, valid credentials, supply chain.</dd>
 
                 <dt id="term-lateral-movement">Lateral Movement</dt>
                 <dd>Pivoting from one foothold to other systems, often using stolen tokens.</dd>
@@ -684,7 +684,7 @@
                 <dd>An <a class="glossary-link" href="#term-llm">LLM</a> emitting a structured request to call an external function (API, shell, browser).</dd>
 
                 <dt id="term-confused-deputy">Confused-Deputy (in agents)</dt>
-                <dd>An <a class="glossary-link" href="#term-agent">agent</a> acting on behalf of the wrong <a class="glossary-link" href="#term-principal">principal</a> — typically because tool input from one user is interpreted as instructions from another.</dd>
+                <dd>An <a class="glossary-link" href="#term-agent">agent</a> acting on behalf of the wrong principal — typically because tool input from one user is interpreted as instructions from another.</dd>
 
                 <dt id="term-guardrails">Guardrails</dt>
                 <dd>Input/output filters around an <a class="glossary-link" href="#term-llm">LLM</a> to block <a class="glossary-link" href="#term-prompt-injection">prompt injection</a>, PII leaks, or off-topic responses. Helpful, not sufficient.</dd>

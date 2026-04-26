@@ -64,13 +64,18 @@ You never have to manually update fingerprints or worry about visitors seeing st
 
 This Python script does all the work. Note that `style.css` includes a large dark mode section (~500 lines of overrides), so any changes to dark mode styling will trigger SRI hash recalculation. When run, the script:
 
-1. Reads `style.css` and `main.js` from the repo
+1. Reads each tracked asset from the repo:
+   - `style.css`, `main.js`
+   - `chat-resources.js`, `breach-timeline.css`, `breach-timeline.js`
+   - `meetings.js`, `glossary.js`
 2. Calculates a **SHA-384 hash** (the fingerprint) for each file
 3. Calculates a **short SHA-256 hash** (the cache-bust `?v=` tag) for each file
 4. Scans every `.html` file in the repo
 5. Updates the `integrity` attribute with the new fingerprint
 6. Updates the `href`/`src` URL with the new `?v=` tag
 7. Removes any `crossorigin` attribute (not needed for same-origin files — having it caused mobile browsers to block the CSS)
+
+To add a new tracked asset, append a line to the `files_to_hash` map and a corresponding regex block in `update_html_file` — see how `meetings.js` and `glossary.js` are wired up.
 
 ### Running manually
 

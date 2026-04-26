@@ -16,6 +16,8 @@ Cloud Security Office Hours is a vendor-neutral, free community founded in Febru
 - A curated resources catalog (CTFs, labs, tools, certifications).
 - 1,000+ curated external links spanning 493 domains across the site.
 - Cloud-security news aggregated every 3 hours from 39 RSS feeds.
+- A 200+ term [glossary](glossary.html) and [FAQ](faq.html) for newcomers.
+- A community [Code of Conduct](code-of-conduct.html) and [Privacy Policy](privacy.html) — no cookies, no trackers, no marketing.
 - The RSS feed itself at [csoh.org/feed.xml](https://csoh.org/feed.xml).
 - Mailing list — sign up at [sendfox.com/CSOH](https://sendfox.com/CSOH) to get the weekly Zoom link and calendar info.
 
@@ -27,11 +29,13 @@ Cloud Security Office Hours is a vendor-neutral, free community founded in Febru
 
 Here's our recommended learning path:
 
-1. **Start with Resources**: Browse [CTF Challenges](resources.html#ctf-challenges) and [Labs](resources.html#labs-training) for hands-on practice
-2. **Get Certified**: Explore [Certifications](resources.html#certifications) path for your cloud platform
-3. **Join the Mailing List**: Sign up at [sendfox.com/CSOH](https://sendfox.com/CSOH) to get the Zoom link for our weekly Friday sessions (7am PT)
-4. **Stay Updated**: Check [News](news.html) for latest threats and updates
-5. **Subscribe to RSS**: Add our [RSS feed](https://csoh.org/feed.xml) to your reader — see [RSS_FEED_README.md](RSS_FEED_README.md) for setup
+1. **Decode the Acronyms**: Skim the [Glossary](glossary.html) — 200+ terms, every cross-reference hyperlinked
+2. **Read the FAQ**: The [FAQ](faq.html) covers how CSOH works — sessions, mailing list, recording policy, contributing
+3. **Start with Resources**: Browse [CTF Challenges](resources.html#ctf-challenges) and [Labs](resources.html#labs-training) for hands-on practice
+4. **Get Certified**: Explore [Certifications](resources.html#certifications) path for your cloud platform
+5. **Join the Mailing List**: Sign up at [sendfox.com/CSOH](https://sendfox.com/CSOH) to get the Zoom link for our weekly Friday sessions (7am PT)
+6. **Stay Updated**: Check [News](news.html) for latest threats and updates
+7. **Subscribe to RSS**: Add our [RSS feed](https://csoh.org/feed.xml) to your reader — see [RSS_FEED_README.md](RSS_FEED_README.md) for setup
 
 ---
 
@@ -127,6 +131,7 @@ Archive of past Zoom session presentations:
 Topic-by-topic recaps of every weekly session:
 - **91+ meeting recaps** with per-topic summaries and speaker notes
 - Searchable, filterable by tag (AWS, Azure, AI, supply chain, conferences, etc.)
+- **Speaker filter** — auto-detects recurring community members across recaps and surfaces a one-click filter row (Shawn, Neil, Jay, Matt, etc.) with appearance counts
 - Auto-ingested from Zoom AI Companion summaries or VTT transcripts via `tools/add_meeting.py`
 
 ### 🚩 Cloud CTFs (`ctfs.html`)
@@ -137,6 +142,25 @@ Dedicated directory for hands-on cloud CTF challenges:
 
 ### 📡 RSS Subscribe (`rss.html`)
 Plain-English landing page for the `feed.xml` feed: explains what RSS is, recommends readers (Feedly, Inoreader, NetNewsWire, Thunderbird), and gives one-click subscribe instructions.
+
+### 📖 Glossary (`glossary.html`)
+A plain-English glossary of cloud-security acronyms and concepts:
+- **200+ terms** across 13 sections — cloud models, IAM, network, data, detection, the *PM family, supply-chain, ATT&CK, AI/LLM, DevOps, standards bodies
+- **Live search** filters terms and definitions as you type, hiding sections with no matches
+- **Cross-linked**: every glossary term mentioned in any other definition is automatically hyperlinked to its entry — see `tools/crosslink_glossary.py`
+- Targeted terms (arrived via `#term-...` anchor) get a yellow highlight so the reader can immediately spot them
+
+### ❓ FAQ (`faq.html`)
+Frequently asked questions covering CSOH's format, mailing list, recording policy, contributing, and presenter pitches. Backed by `FAQPage` schema for rich-snippet eligibility.
+
+### 🤝 Code of Conduct (`code-of-conduct.html`)
+Community standards for every CSOH-organized space — Friday Zoom session, mailing list, GitHub repo. Covers expected and unacceptable behavior, reporting, and enforcement. Adapted from the Contributor Covenant.
+
+### 🔐 Privacy Policy (`privacy.html`)
+Plain-English privacy policy. Short version: no cookies, no analytics, no marketing trackers, never sell or share data. The only personal data we hold is your mailing-list email. External links are scrubbed of tracking parameters before publication.
+
+### 🔒 Security Policy (`security-policy.html`)
+RFC 9116-compliant vulnerability disclosure policy. Mirrored at `/.well-known/security.txt`.
 
 ---
 
@@ -230,6 +254,10 @@ csoh.org/
 ├── meetings.html               # Weekly meeting recaps (91+ entries, topic-by-topic)
 ├── ctfs.html                   # Dedicated cloud CTF directory (39+ challenges)
 ├── rss.html                    # Landing page explaining the RSS feed to subscribers
+├── glossary.html               # 200+ cloud security terms with live search & cross-links
+├── faq.html                    # Frequently asked questions (FAQPage schema)
+├── code-of-conduct.html        # Community Code of Conduct
+├── privacy.html                # Privacy Policy (no cookies, no marketing)
 ├── breach-timeline.html        # Cloud breach kill chain library
 ├── threat-research.html        # Curated cloud threat research directory
 ├── contribute.html             # General contributions guide
@@ -242,7 +270,8 @@ csoh.org/
 ├── style.css                   # Main stylesheet (responsive design + dark mode)
 ├── main.js                     # Shared interactive features (search, filter, sort, dark mode)
 ├── chat-resources.js           # chat-resources.html-specific filtering/search
-├── meetings.js                 # meetings.html-specific index + filters
+├── meetings.js                 # meetings.html-specific index + filters + speaker filter
+├── glossary.js                 # glossary.html-specific search/filter
 ├── breach-timeline.css         # breach-timeline.html-specific styles
 ├── breach-timeline.js          # breach-timeline.html-specific tab/panel logic
 ├── feed.xml                    # RSS feed (auto-generated by update_news.py)
@@ -271,6 +300,7 @@ csoh.org/
 │   ├── check_all_site_urls.py              # Comprehensive site-wide URL scanner
 │   ├── update_sitemap.py                   # Refresh sitemap.xml <lastmod> dates from git history
 │   ├── update_presentations_schema.py      # Regenerate VideoObject JSON-LD on presentations.html
+│   ├── crosslink_glossary.py               # Auto-link every glossary term mention to its <dt> entry
 │   ├── SUBMIT_RESOURCE_README.md           # Interactive resource submission docs
 │   ├── SUBMIT_RESOURCE_EXAMPLE.md          # Walkthrough example for the resource tool
 │   ├── SUBMIT_NEWS_SOURCE_README.md        # News source submission docs
@@ -283,7 +313,8 @@ csoh.org/
 │   ├── UPDATE_NEWS_README.md               # News aggregation pipeline docs
 │   ├── UPDATE_SRI_README.md                # SRI hash generator docs
 │   ├── UPDATE_SITEMAP_README.md            # Sitemap refresher docs
-│   └── UPDATE_PRESENTATIONS_SCHEMA_README.md # Presentations VideoObject schema docs
+│   ├── UPDATE_PRESENTATIONS_SCHEMA_README.md # Presentations VideoObject schema docs
+│   └── CROSSLINK_GLOSSARY_README.md        # Glossary cross-linking docs
 │
 ├── update_news.py              # News aggregation script (39 RSS feeds, runs every 3 hours)
 ├── update_sri.py               # Updates SRI hashes & cache-bust params across HTML files
@@ -386,6 +417,18 @@ Both require Zoom Server-to-Server OAuth credentials in a local `.env` (see `.en
 ### Adding a New CTF
 
 Run `python3 tools/submit_ctf.py` to add a challenge to `ctfs.html` interactively. See [tools/SUBMIT_CTF_README.md](tools/SUBMIT_CTF_README.md) for the script, or [CONTRIBUTING_CTFS.md](CONTRIBUTING_CTFS.md) for the full contribution guide.
+
+### Adding a Glossary Term
+
+1. Open `glossary.html` and locate the right `<h2 id="...">` section (cloud models, IAM, network, data, detection, posture, vuln, compliance, attack, AI, ops, standards bodies).
+2. Add a new `<dt>...</dt>` + `<dd>...</dd>` pair anywhere inside that section's `<dl class="glossary-list">`. Format the headword as `ABBR — Long Form` or just `Term Name`; aliases can be separated by `/`.
+3. Run `python3 tools/crosslink_glossary.py` — it will:
+   - Add an `id="term-..."` to your new `<dt>`.
+   - Hyperlink your new term wherever it appears in other definitions.
+   - Hyperlink any existing terms that appear in your new definition.
+4. Update the search-bar count and OG description if the total moved past a round number.
+
+The script is idempotent and safe to re-run. See [tools/CROSSLINK_GLOSSARY_README.md](tools/CROSSLINK_GLOSSARY_README.md) for details.
 
 ### Customizing the Homepage
 
@@ -528,6 +571,11 @@ See **[DEVELOPMENT.md](DEVELOPMENT.md)** for the full local setup guide, project
 - 🔗 **Share** CSOH with your network
 - 💬 **Contribute** resources or improvements
 - 💰 **Donate** via [PayPal](https://www.paypal.com/paypalme/cloudsec) (optional, fully community-run)
+
+### Policies
+- 🤝 **[Code of Conduct](code-of-conduct.html)** — community standards across Friday Zoom, mailing list, and GitHub
+- 🔐 **[Privacy Policy](privacy.html)** — no cookies, no trackers, no marketing
+- 🔒 **[Security Policy](security-policy.html)** / [SECURITY.md](SECURITY.md) — coordinated disclosure
 
 ---
 

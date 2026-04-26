@@ -2,6 +2,8 @@
 
 Welcome! This guide covers **any change you want to suggest** to the CSOH website — whether it's adding news sources, improving descriptions, fixing typos, or redesigning the homepage. You don't need to be a developer.
 
+> **Before you contribute**, please read the [Code of Conduct](code-of-conduct.html). It applies to every CSOH-organized space — Friday Zoom, the mailing list, GitHub issues, and pull-request review. Our [Privacy Policy](privacy.html) covers how the site handles your data (short version: no cookies, no marketing).
+
 > **🎉 First time contributing?** Start here — pick whichever feels easiest:
 >
 > | What you want to do | Easiest way | Time |
@@ -620,8 +622,13 @@ A: If it would help a cloud security professional learn or advance, it's worth s
 
 - **General questions** → Email admin@csoh.org or bring them to a [Friday Zoom session](https://sendfox.com/CSOH)
 - **GitHub questions** → Ask in [GitHub Issues](https://github.com/CloudSecurityOfficeHours/csoh.org/issues)
-- **Security issues** → Email security@csoh.org
+- **Security issues** → Email security@csoh.org or see [security-policy.html](security-policy.html)
+- **Code of Conduct concerns** → Email admin@csoh.org or see [code-of-conduct.html](code-of-conduct.html)
+- **Privacy questions** → See [privacy.html](privacy.html)
+- **Confused by the acronyms?** → Check the [glossary.html](glossary.html)
+- **Common questions** → See [faq.html](faq.html)
 - **Want to contribute resources?** → Check [CONTRIBUTING_RESOURCES.md](CONTRIBUTING_RESOURCES.md)
 - **Want to add a CTF?** → Check [CONTRIBUTING_CTFS.md](CONTRIBUTING_CTFS.md)
+- **Want to add a glossary term?** → Check [tools/CROSSLINK_GLOSSARY_README.md](tools/CROSSLINK_GLOSSARY_README.md)
 - **Want to set up local development?** → Check [DEVELOPMENT.md](DEVELOPMENT.md)
 
