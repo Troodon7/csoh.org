@@ -30,6 +30,21 @@ def slugify(text: str) -> str:
     return "term-" + text if text else "term-unknown"
 
 
+# Generic single-word keys that overlap too often with ordinary English
+# usage. Excluded from the lookup so we don't spam-link every "public" or
+# "private" in a definition with the Public/Private cloud-deployment dt.
+DENYLIST = {
+    "public",
+    "private",
+    "hybrid",
+    "image",
+    "baseline",
+    "registry",
+    "principal",
+    "first",
+}
+
+
 def derive_keys(dt_inner_html: str) -> list[str]:
     """Return the lookup keys for a <dt>, ordered (primary first)."""
     text = re.sub(r"<[^>]+>", "", dt_inner_html)
@@ -64,14 +79,17 @@ def derive_keys(dt_inner_html: str) -> list[str]:
             if piece and 1 <= len(piece.split()) <= 6:
                 keys.append(piece)
 
-    # Dedupe, preserve order.
+    # Dedupe, preserve order, drop denylisted single-word keys.
     seen: set[str] = set()
     unique: list[str] = []
     for k in keys:
         kl = k.lower()
-        if kl and kl not in seen:
-            seen.add(kl)
-            unique.append(k)
+        if not kl or kl in seen:
+            continue
+        if kl in DENYLIST:
+            continue
+        seen.add(kl)
+        unique.append(k)
     return unique
 
 
@@ -124,10 +142,11 @@ def link_dd(
     key_to_slug: dict[str, str],
     self_slug: str,
 ) -> str:
-    """Return inner with first-occurrence term mentions wrapped in <a>.
+    """Return inner with every term mention wrapped in <a>.
 
     Protects existing <a>...</a> regions (and any tag content) so we don't
-    nest anchors or rewrite attribute strings.
+    nest anchors or rewrite attribute strings. Skips self-links (a term
+    doesn't link to its own dt inside its own definition).
     """
     # Mask existing <a>...</a> regions with placeholders.
     a_re = re.compile(r"<a\b[^>]*>.*?</a>", re.DOTALL | re.IGNORECASE)
@@ -140,17 +159,16 @@ def link_dd(
     masked = a_re.sub(stash, inner)
 
     # Walk segments: tags vs text. Only modify text segments.
-    seen_slugs = {self_slug} if self_slug else set()
     out: list[str] = []
     cursor = 0
     tag_re = re.compile(r"<[^>]+>")
     for tm in tag_re.finditer(masked):
         if tm.start() > cursor:
-            out.append(_link_text(masked[cursor : tm.start()], term_re, key_to_slug, seen_slugs))
+            out.append(_link_text(masked[cursor : tm.start()], term_re, key_to_slug, self_slug))
         out.append(tm.group(0))
         cursor = tm.end()
     if cursor < len(masked):
-        out.append(_link_text(masked[cursor:], term_re, key_to_slug, seen_slugs))
+        out.append(_link_text(masked[cursor:], term_re, key_to_slug, self_slug))
     result = "".join(out)
 
     # Restore placeholders.
@@ -164,8 +182,10 @@ def _link_text(
     text: str,
     term_re: re.Pattern[str],
     key_to_slug: dict[str, str],
-    seen_slugs: set[str],
+    self_slug: str,
 ) -> str:
+    """Wrap every glossary-term occurrence in text with an <a>, except
+    occurrences whose target is the dt's own slug (self-links)."""
     if not text:
         return text
     out: list[str] = []
@@ -173,9 +193,8 @@ def _link_text(
     for m in term_re.finditer(text):
         word = m.group(1)
         slug = key_to_slug.get(word.lower())
-        if not slug or slug in seen_slugs:
+        if not slug or slug == self_slug:
             continue
-        seen_slugs.add(slug)
         out.append(text[cursor : m.start()])
         out.append(f'<a class="glossary-link" href="#{slug}">{word}</a>')
         cursor = m.end()
