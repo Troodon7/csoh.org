@@ -194,6 +194,25 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
         content = mtg_script_pattern.sub(replace_mtg_script, content)
 
+    if 'glossary.js' in hashes:
+        glossary_script_pattern = re.compile(
+            r'<script\b[^>]*\bsrc=(["\'])(?:\.?/)?glossary\.js(?:\?[^"\']*)?(\1)[^>]*>',
+            re.IGNORECASE,
+        )
+
+        def replace_glossary_script(match: re.Match) -> str:
+            tag = match.group(0)
+            tag = re.sub(
+                r'(src=["\'])(?:\.?/)?glossary\.js(?:\?[^"\']*)?(["\'])',
+                rf'\g<1>/glossary.js?v={cache_busts["glossary.js"]}\2',
+                tag,
+            )
+            tag = upsert_attr(tag, 'integrity', hashes['glossary.js'])
+            tag = remove_attr(tag, 'crossorigin')
+            return tag
+
+        content = glossary_script_pattern.sub(replace_glossary_script, content)
+
     if content != original_content:
         with open(html_path, 'w', encoding='utf-8') as f:
             f.write(content)
@@ -212,6 +231,7 @@ def main():
         'breach-timeline.css': repo_root / 'breach-timeline.css',
         'breach-timeline.js': repo_root / 'breach-timeline.js',
         'meetings.js': repo_root / 'meetings.js',
+        'glossary.js': repo_root / 'glossary.js',
     }
 
     print("Calculating SRI hashes...")

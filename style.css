@@ -419,6 +419,93 @@ nav a:focus {
     border-style: solid;
 }
 
+/* Glossary search bar */
+.glossary-filter-bar {
+    margin: 1.5rem 0 0.5rem;
+}
+
+.glossary-filter-bar .search-box {
+    width: 100%;
+}
+
+.glossary-filter-bar .search-wrapper {
+    width: 100%;
+}
+
+.glossary-count {
+    margin: 0.6rem 0 0;
+    font-size: 0.9rem;
+    color: #666;
+    opacity: 0.85;
+}
+
+[data-theme="dark"] .glossary-count {
+    color: #aaa;
+}
+
+/* Glossary definition list */
+.glossary-list {
+    margin: 1rem 0 2.5rem;
+    padding: 0;
+}
+
+.glossary-list dt {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-top: 1.5rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--border-color);
+    line-height: 1.35;
+}
+
+.glossary-list dt:first-of-type {
+    margin-top: 0.5rem;
+}
+
+.glossary-list dd {
+    margin: 0.6rem 0 0 0;
+    padding: 0 0 0.25rem 0;
+    line-height: 1.65;
+    font-size: 0.97rem;
+    color: var(--text-color);
+}
+
+.glossary-list dd a {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+[data-theme="dark"] .glossary-list dt {
+    color: #7cc1ee;
+}
+
+[data-theme="dark"] .glossary-list dd {
+    color: var(--text-color);
+}
+
+/* Heading anchors on the glossary page get a touch more breathing room. */
+.content-section h2[id] {
+    margin-top: 2.5rem;
+    padding-top: 0.5rem;
+    scroll-margin-top: 80px;
+}
+
+.content-section h2[id]:first-of-type {
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .glossary-list dt {
+        font-size: 1.02rem;
+        margin-top: 1.25rem;
+    }
+    .glossary-list dd {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+}
+
 .show-all-btn {
     padding: 0.6rem 1.5rem;
     border: 2px solid var(--primary-color);

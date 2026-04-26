@@ -23,10 +23,10 @@
     <meta property="og:image" content="https://csoh.org/banner.png">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="preload" href="/style.css?v=34e1bc6d" as="style"
-        integrity="sha384-JmilqcLhAJnRiaVEw4F5GLM5aCPsTIuKWp10CUC+msZEoFStPOMCHJSViehR4ETp">
-    <link rel="stylesheet" href="/style.css?v=34e1bc6d"
-        integrity="sha384-JmilqcLhAJnRiaVEw4F5GLM5aCPsTIuKWp10CUC+msZEoFStPOMCHJSViehR4ETp">
+    <link rel="preload" href="/style.css?v=136c6075" as="style"
+        integrity="sha384-FpY+wdacwa+ex1a0pyEc3fMFXWqHzqDZJ/1W2kgHXq+PioFMWag8kpEaNRsXVmQ/">
+    <link rel="stylesheet" href="/style.css?v=136c6075"
+        integrity="sha384-FpY+wdacwa+ex1a0pyEc3fMFXWqHzqDZJ/1W2kgHXq+PioFMWag8kpEaNRsXVmQ/">
 
     <script type="application/ld+json">
     {
@@ -115,6 +115,20 @@
             <div class="info-box--blue">
                 <p>Cloud security has more three-letter acronyms than any reasonable field should. This page is the cheat sheet — short definitions, no marketing fluff. Missing something? <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/issues">Open an issue</a> or email <a href="mailto:admin@csoh.org">admin@csoh.org</a>.</p>
             </div>
+
+            <div class="filter-bar glossary-filter-bar">
+                <div class="search-box">
+                    <label for="glossarySearch" class="visually-hidden">Search glossary</label>
+                    <div class="search-wrapper">
+                        <input type="text" id="glossarySearch" placeholder="Search 188 terms — try &quot;IAM&quot;, &quot;CNAPP&quot;, &quot;prompt injection&quot;…" autocomplete="off" spellcheck="false">
+                    </div>
+                </div>
+                <p class="glossary-count"><span id="visibleTerms">188</span> terms shown</p>
+            </div>
+            <p id="noGlossaryResults" class="no-results is-hidden">
+                No terms match your search.
+                <button class="clear-search-btn" id="clearGlossarySearch">clear</button>.
+            </p>
 
             <h2 id="contents">📚 Contents</h2>
             <ul>
@@ -785,6 +799,7 @@
     </footer>
 
     <script src="/main.js?v=16a0410e" defer integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"></script>
+    <script src="/glossary.js?v=8950a84f" defer integrity="sha384-UsnVK0kzfG0O967ECRT+Yo5h1VmCDztnktgPICZ2Jzc52+Qpw2cR5nH7UVi76FRn"></script>
 </body>
 
 </html>
