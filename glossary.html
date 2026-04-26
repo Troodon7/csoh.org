@@ -120,10 +120,10 @@
                 <div class="search-box">
                     <label for="glossarySearch" class="visually-hidden">Search glossary</label>
                     <div class="search-wrapper">
-                        <input type="text" id="glossarySearch" placeholder="Search 201 terms — try &quot;IAM&quot;, &quot;CNAPP&quot;, &quot;prompt injection&quot;…" autocomplete="off" spellcheck="false">
+                        <input type="text" id="glossarySearch" placeholder="Search 208 terms — try &quot;IAM&quot;, &quot;CNAPP&quot;, &quot;prompt injection&quot;…" autocomplete="off" spellcheck="false">
                     </div>
                 </div>
-                <p class="glossary-count"><span id="visibleTerms">201</span> terms shown</p>
+                <p class="glossary-count"><span id="visibleTerms">208</span> terms shown</p>
             </div>
             <p id="noGlossaryResults" class="no-results is-hidden">
                 No terms match your search.
@@ -400,6 +400,15 @@
 
                 <dt id="term-pki">PKI — Public Key Infrastructure</dt>
                 <dd>The system of CAs, certificates, and trust chains that issues and validates the keys behind <a class="glossary-link" href="#term-tls">TLS</a>, code signing, and S/MIME.</dd>
+
+                <dt id="term-pqc">PQC — Post-Quantum Cryptography</dt>
+                <dd>Cryptographic algorithms designed to resist attacks from sufficiently large quantum computers. <a class="glossary-link" href="#term-nist">NIST</a>'s first standardized PQC suite (ML-KEM, ML-DSA, SLH-DSA) is what cloud providers and <a class="glossary-link" href="#term-tls">TLS</a> implementations are migrating toward.</dd>
+
+                <dt id="term-hndl">HNDL — Harvest Now, Decrypt Later</dt>
+                <dd>Threat model where an adversary captures encrypted traffic or data today, banking on future quantum computers to break it. The reason <a class="glossary-link" href="#term-pqc">PQC</a> migrations are urgent for long-lived secrets even though large quantum computers don't exist yet.</dd>
+
+                <dt id="term-crypto-agility">Crypto Agility</dt>
+                <dd>The property of a system that can swap cryptographic algorithms (and key sizes) without redesign. Critical for the <a class="glossary-link" href="#term-pqc">PQC</a> transition — and for surviving the next algorithm break after that.</dd>
             </dl>
 
             <h2 id="detection">📡 Logging, Detection &amp; Response</h2>
@@ -479,6 +488,9 @@
                 <dt id="term-cadr">CADR — Cloud Application Detection and Response</dt>
                 <dd>Newer category: runtime detection focused on application-layer attacks in cloud.</dd>
 
+                <dt id="term-ai-app">AI-APP — AI Application Protection Platform</dt>
+                <dd>Emerging category (coined by Wiz) for platforms that secure deployed <a class="glossary-link" href="#term-red-teaming">AI</a>/<a class="glossary-link" href="#term-llm">LLM</a> applications end-to-end — model inventory, prompt-injection defenses, data-flow monitoring between models and tools, and runtime detection of <a class="glossary-link" href="#term-agent">agent</a> misuse. Pairs with <a class="glossary-link" href="#term-cnapp">CNAPP</a> for the <a class="glossary-link" href="#term-red-teaming">AI</a> workload layer.</dd>
+
                 <dt id="term-opa">OPA — Open Policy Agent</dt>
                 <dd>General-purpose policy engine. Decisions in, decisions out.</dd>
 
@@ -496,6 +508,9 @@
 
                 <dt id="term-pss">PSS — Pod Security Standards</dt>
                 <dd><a class="glossary-link" href="#term-kubernetes">Kubernetes</a>' built-in <a class="glossary-link" href="#term-pod">pod</a>-<a class="glossary-link" href="#term-hardening">hardening</a> tiers — Privileged / Baseline / Restricted — replacing the deprecated PodSecurityPolicy.</dd>
+
+                <dt id="term-ctem">CTEM — Continuous Threat Exposure Management</dt>
+                <dd>Gartner-coined program model that unifies vulnerability management, attack-surface management, identity-risk analysis, and red-team validation into one continuous loop. Increasingly the framing replacing traditional "patch the <a class="glossary-link" href="#term-cve">CVE</a>" vulnerability programs.</dd>
             </dl>
 
             <h2 id="vuln">🐛 Vulnerability &amp; Supply-Chain Security</h2>
@@ -535,6 +550,12 @@
 
                 <dt id="term-typosquatting">Typosquatting</dt>
                 <dd>Malicious package using a misspelling of a legitimate one.</dd>
+
+                <dt id="term-pypi">PyPI — Python Package Index</dt>
+                <dd>The official public repository for Python packages. A frequent supply-chain target — <a class="glossary-link" href="#term-typosquatting">typosquatting</a>, <a class="glossary-link" href="#term-dependency-confusion">dependency confusion</a>, and account takeovers of maintainers all show up here regularly.</dd>
+
+                <dt id="term-npm">npm</dt>
+                <dd>The default package registry for JavaScript / Node.js. Same threat profile as <a class="glossary-link" href="#term-pypi">PyPI</a>: <a class="glossary-link" href="#term-typosquatting">typosquatting</a>, <a class="glossary-link" href="#term-dependency-confusion">dependency confusion</a>, post-install scripts that steal secrets, and high-blast-radius compromises of popular packages.</dd>
 
                 <dt id="term-vex">VEX — Vulnerability Exploitability eXchange</dt>
                 <dd>Statement attached to an <a class="glossary-link" href="#term-sbom">SBOM</a> saying whether a known <a class="glossary-link" href="#term-cve">CVE</a> is actually exploitable in this product / build.</dd>
