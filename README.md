@@ -14,6 +14,7 @@ Cloud Security Office Hours is a vendor-neutral, free community founded in Febru
 
 - Weekly Zoom sessions, Fridays at 7am PT with guest speakers.
 - A curated resources catalog (CTFs, labs, tools, certifications).
+- 1,000+ curated external links spanning 493 domains across the site.
 - Cloud-security news aggregated every 3 hours from 39 RSS feeds.
 - The RSS feed itself at [csoh.org/feed.xml](https://csoh.org/feed.xml).
 - Discord for real-time discussion.
@@ -65,7 +66,7 @@ Comprehensive catalog of **200+ cloud security resources** organized by 6 catego
 - **Pwned Labs** - Realistic penetration testing scenarios
 - Plus 20+ additional training platforms
 
-#### 🛡️ Security Tools & Platforms (60+ Tools)
+#### 🛡️ Security Tools & Platforms (25+ Tools)
 - **CNAPP (Cloud Native Application Protection)** - Runtime protection tools
 - **CSPM (Cloud Security Posture Management)** - Configuration & compliance scanning
 - **KSPM (Kubernetes Security Posture Management)** - K8s-specific security
@@ -73,7 +74,7 @@ Comprehensive catalog of **200+ cloud security resources** organized by 6 catego
 - **Compliance & Config Management** - Terraform, Ansible, CloudFormation
 - **Vulnerability Management** - Snyk, Qualys, Tenable, etc.
 
-#### 🎓 Certifications & Professional Development (40+ Certs)
+#### 🎓 Certifications & Professional Development (25+ Certs)
 - **AWS** - Security Specialty, Solutions Architect, Database Specialty
 - **Azure** - Security Engineer Associate, Administrator Associate
 - **Google Cloud** - Professional Cloud Security Engineer
@@ -82,12 +83,12 @@ Comprehensive catalog of **200+ cloud security resources** organized by 6 catego
 - **General Security** - CISSP, CEH, SC-300, AZ-305
 - **Bootcamps & Prep Courses** - Pwned Labs, AWSome Day, etc.
 
-#### 🤖 AI Security (15+ Resources)
+#### 🤖 AI Security (50+ Resources)
 - **AI Security Tools** - Trend Micro Workload Security, etc.
 - **AI Vulnerable Environments** - AIGoat, AI Security CTFs
 - **AI Security Research** - Papers, whitepapers, research resources
 
-#### 💼 Job Search Resources (20+ Listings)
+#### 💼 Job Search Resources (50+ Listings)
 - **Job Boards** - LinkedIn, Dice, CyberSecJobs, CloudSecurityJobs
 - **Resume Services** - Resume optimization platforms
 - **Interview Prep** - Technical interview guides
