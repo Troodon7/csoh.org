@@ -178,23 +178,38 @@ def link_dd(
     return re.sub(r"\x00A(\d+)\x00", unstash, result)
 
 
+_SENTENCE_END = re.compile(r"[.!?]")
+
+
 def _link_text(
     text: str,
     term_re: re.Pattern[str],
     key_to_slug: dict[str, str],
     self_slug: str,
 ) -> str:
-    """Wrap every glossary-term occurrence in text with an <a>, except
-    occurrences whose target is the dt's own slug (self-links)."""
+    """Wrap glossary-term occurrences in text with <a>. Within a sentence,
+    each target slug is linked only once — repeating the same word (or
+    another alias of the same term) inside one sentence does not get a
+    second link. Sentence boundaries are `.`, `!`, `?`. Self-links are
+    always skipped."""
     if not text:
         return text
     out: list[str] = []
     cursor = 0
+    seen_in_sentence: set[str] = set()
     for m in term_re.finditer(text):
+        # If a sentence boundary appears between the previous match (or
+        # start of text) and this one, reset the per-sentence seen set.
+        if _SENTENCE_END.search(text, cursor, m.start()):
+            seen_in_sentence = set()
+
         word = m.group(1)
         slug = key_to_slug.get(word.lower())
         if not slug or slug == self_slug:
             continue
+        if slug in seen_in_sentence:
+            continue
+        seen_in_sentence.add(slug)
         out.append(text[cursor : m.start()])
         out.append(f'<a class="glossary-link" href="#{slug}">{word}</a>')
         cursor = m.end()
@@ -228,10 +243,10 @@ def link_dds(content: str, term_re: re.Pattern[str], key_to_slug: dict[str, str]
     return "".join(out)
 
 
-def unwrap_denylisted_links(content: str) -> tuple[str, int]:
-    """Remove any existing <a class="glossary-link">WORD</a> where WORD's
-    lowercased form is in the DENYLIST. The link is replaced with WORD
-    itself (the link text)."""
+def unwrap_all_glossary_links(content: str) -> tuple[str, int]:
+    """Strip every existing <a class="glossary-link">WORD</a>, replacing it
+    with WORD. Done before relinking so the current rules (denylist,
+    first-per-sentence, etc.) apply to the whole file consistently."""
     pattern = re.compile(
         r'<a\s+class="glossary-link"\s+href="#[^"]+">([^<]+)</a>',
         re.IGNORECASE,
@@ -240,11 +255,8 @@ def unwrap_denylisted_links(content: str) -> tuple[str, int]:
 
     def replace(m: re.Match) -> str:
         nonlocal removed
-        word = m.group(1)
-        if word.strip().lower() in DENYLIST:
-            removed += 1
-            return word
-        return m.group(0)
+        removed += 1
+        return m.group(1)
 
     return pattern.sub(replace, content), removed
 
@@ -256,10 +268,11 @@ def main() -> int:
 
     content = GLOSSARY.read_text(encoding="utf-8")
 
-    # Pass 0: clean up any existing links whose word is now denylisted.
-    content, n_unwrapped = unwrap_denylisted_links(content)
+    # Pass 0: strip all existing glossary-links so we can relink fresh
+    # under the current rules (denylist, first-per-sentence, etc.).
+    content, n_unwrapped = unwrap_all_glossary_links(content)
     if n_unwrapped:
-        print(f"Unwrapped {n_unwrapped} stale link(s) for denylisted words.")
+        print(f"Stripped {n_unwrapped} existing link(s) for fresh relinking.")
 
     # Pass 1: assign IDs and collect terms.
     content, key_to_slug = add_dt_ids(content)

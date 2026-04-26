@@ -457,6 +457,8 @@ nav a:focus {
     padding-bottom: 0.35rem;
     border-bottom: 1px solid var(--border-color);
     line-height: 1.35;
+    /* Offset for the 56px sticky header so anchor jumps land below it. */
+    scroll-margin-top: 80px;
 }
 
 .glossary-list dt:first-of-type {

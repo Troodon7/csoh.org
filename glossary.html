@@ -23,10 +23,10 @@
     <meta property="og:image" content="https://csoh.org/banner.png">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="preload" href="/style.css?v=22a51b60" as="style"
-        integrity="sha384-wk4kskzp+BNDcJ5bQtPWz9BaZMgnB6RdJyrKkaxhAKwqCLQiQUKXNx8yM7yTOdl4">
-    <link rel="stylesheet" href="/style.css?v=22a51b60"
-        integrity="sha384-wk4kskzp+BNDcJ5bQtPWz9BaZMgnB6RdJyrKkaxhAKwqCLQiQUKXNx8yM7yTOdl4">
+    <link rel="preload" href="/style.css?v=aafcb728" as="style"
+        integrity="sha384-Gy6/E+PcOXfeETLfbpNROKg7FSN2YYjY9HeqDguQRr40McPWNStQGoGJoKZ1PxHb">
+    <link rel="stylesheet" href="/style.css?v=aafcb728"
+        integrity="sha384-Gy6/E+PcOXfeETLfbpNROKg7FSN2YYjY9HeqDguQRr40McPWNStQGoGJoKZ1PxHb">
 
     <script type="application/ld+json">
     {
@@ -159,7 +159,7 @@
                 <dd>Fully hosted application; you manage only your data and users. Examples: Microsoft 365, Salesforce, Workday.</dd>
 
                 <dt id="term-faas">FaaS — Function as a Service</dt>
-                <dd>Run a piece of code in response to an event. Provider handles everything else. Examples: AWS <a class="glossary-link" href="#term-lambda">Lambda</a>, Azure <a class="glossary-link" href="#term-lambda">Functions</a>, GCP <a class="glossary-link" href="#term-lambda">Cloud Functions</a>.</dd>
+                <dd>Run a piece of code in response to an event. Provider handles everything else. Examples: AWS <a class="glossary-link" href="#term-lambda">Lambda</a>, Azure Functions, GCP Cloud Functions.</dd>
 
                 <dt id="term-public">Public / Private / Hybrid / Multi-Cloud</dt>
                 <dd>Public is shared infrastructure (AWS, Azure, GCP). Private is dedicated. Hybrid mixes them. Multi-cloud uses two or more public providers.</dd>
@@ -189,7 +189,7 @@
                 <dd>The smallest deployable unit in <a class="glossary-link" href="#term-kubernetes">K8s</a> — one or more co-located containers that share a network namespace.</dd>
 
                 <dt id="term-sidecar">Sidecar</dt>
-                <dd>A helper <a class="glossary-link" href="#term-container">container</a> co-located with an app <a class="glossary-link" href="#term-container">container</a> in the same <a class="glossary-link" href="#term-pod">pod</a> (commonly for proxies, log shippers, secret fetchers).</dd>
+                <dd>A helper <a class="glossary-link" href="#term-container">container</a> co-located with an app container in the same <a class="glossary-link" href="#term-pod">pod</a> (commonly for proxies, log shippers, secret fetchers).</dd>
 
                 <dt id="term-service-mesh">Service Mesh</dt>
                 <dd>An infrastructure layer that handles east-west service-to-service traffic — <a class="glossary-link" href="#term-mtls">mTLS</a>, retries, traffic shifting. Examples: Istio, Linkerd.</dd>
@@ -255,7 +255,7 @@
                 <dd>A signed (and optionally encrypted) JSON blob used as a token. Common in <a class="glossary-link" href="#term-oidc">OIDC</a> and API auth.</dd>
 
                 <dt id="term-mfa">MFA — Multi-Factor Authentication</dt>
-                <dd>Something you know + something you have (or are). <a class="glossary-link" href="#term-phishing">Phishing</a>-resistant MFA = <a class="glossary-link" href="#term-fido2">WebAuthn</a> / <a class="glossary-link" href="#term-fido2">FIDO2</a>.</dd>
+                <dd>Something you know + something you have (or are). <a class="glossary-link" href="#term-phishing">Phishing</a>-resistant MFA = <a class="glossary-link" href="#term-fido2">WebAuthn</a> / FIDO2.</dd>
 
                 <dt id="term-fido2">FIDO2 / WebAuthn / Passkeys</dt>
                 <dd>Public-key authentication standards that resist <a class="glossary-link" href="#term-phishing">phishing</a>. Passkeys are syncable WebAuthn credentials.</dd>
@@ -375,7 +375,7 @@
                 <dd>Pattern: encrypt data with a DEK, then encrypt the DEK with a KEK held in <a class="glossary-link" href="#term-kms">KMS</a>/<a class="glossary-link" href="#term-hsm">HSM</a>.</dd>
 
                 <dt id="term-envelope-encryption">Envelope Encryption</dt>
-                <dd>The standard cloud pattern of wrapping a <a class="glossary-link" href="#term-kek">DEK</a> with a <a class="glossary-link" href="#term-kek">KEK</a> so the <a class="glossary-link" href="#term-kek">DEK</a> can travel with the ciphertext.</dd>
+                <dd>The standard cloud pattern of wrapping a <a class="glossary-link" href="#term-kek">DEK</a> with a KEK so the DEK can travel with the ciphertext.</dd>
 
                 <dt id="term-byok">BYOK / HYOK</dt>
                 <dd>Bring/Hold Your Own Key — customer supplies (or holds) the master key, not the cloud provider.</dd>
@@ -483,7 +483,7 @@
                 <dd>Discovers and classifies sensitive data across cloud and <a class="glossary-link" href="#term-saas">SaaS</a>, then flags risky exposure.</dd>
 
                 <dt id="term-aspm">ASPM — Application Security Posture Management</dt>
-                <dd>Aggregates <a class="glossary-link" href="#term-sast">SAST</a>/<a class="glossary-link" href="#term-sast">DAST</a>/<a class="glossary-link" href="#term-sca">SCA</a> findings and ties them to ownership, priority, and reachability.</dd>
+                <dd>Aggregates <a class="glossary-link" href="#term-sast">SAST</a>/DAST/<a class="glossary-link" href="#term-sca">SCA</a> findings and ties them to ownership, priority, and reachability.</dd>
 
                 <dt id="term-cadr">CADR — Cloud Application Detection and Response</dt>
                 <dd>Newer category: runtime detection focused on application-layer attacks in cloud.</dd>
@@ -522,7 +522,7 @@
                 <dd>0–10 severity score for a <a class="glossary-link" href="#term-cve">CVE</a>. Famously poorly correlated with actual exploitation.</dd>
 
                 <dt id="term-epss">EPSS — Exploit Prediction Scoring System</dt>
-                <dd>FIRST-maintained probability that a <a class="glossary-link" href="#term-cve">CVE</a> will be exploited in the next 30 days. Pairs better with <a class="glossary-link" href="#term-cvss">CVSS</a> than <a class="glossary-link" href="#term-cvss">CVSS</a> does alone.</dd>
+                <dd>FIRST-maintained probability that a <a class="glossary-link" href="#term-cve">CVE</a> will be exploited in the next 30 days. Pairs better with <a class="glossary-link" href="#term-cvss">CVSS</a> than CVSS does alone.</dd>
 
                 <dt id="term-kev">KEV — Known Exploited Vulnerabilities</dt>
                 <dd><a class="glossary-link" href="#term-cisa">CISA</a>'s catalog of CVEs known to be actively exploited. The "fix this now" list.</dd>
