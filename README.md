@@ -3,7 +3,7 @@
 A community-run cloud-security resource hub, built as a static website. Weekly Zoom sessions, a curated resources catalog, news aggregation, and an RSS feed.
 
 [![GitHub](https://img.shields.io/badge/GitHub-CloudSecurityOfficeHours/csoh.org-blue)](https://github.com/CloudSecurityOfficeHours/csoh.org)
-[![Discord](https://img.shields.io/badge/Discord-2000%2B%20Members-5865F2)](https://discord.gg/AVzAY97D8E)
+[![Mailing List](https://img.shields.io/badge/Mailing%20List-2000%2B%20Members-orange)](https://sendfox.com/CSOH)
 [![License](https://img.shields.io/badge/License-Open%20Content-green)](LICENSE)
 
 ---
@@ -17,7 +17,7 @@ Cloud Security Office Hours is a vendor-neutral, free community founded in Febru
 - 1,000+ curated external links spanning 493 domains across the site.
 - Cloud-security news aggregated every 3 hours from 39 RSS feeds.
 - The RSS feed itself at [csoh.org/feed.xml](https://csoh.org/feed.xml).
-- Discord for real-time discussion.
+- Mailing list — sign up at [sendfox.com/CSOH](https://sendfox.com/CSOH) to get the weekly Zoom link and calendar info.
 
 ---
 
@@ -29,10 +29,9 @@ Here's our recommended learning path:
 
 1. **Start with Resources**: Browse [CTF Challenges](resources.html#ctf-challenges) and [Labs](resources.html#labs-training) for hands-on practice
 2. **Get Certified**: Explore [Certifications](resources.html#certifications) path for your cloud platform
-3. **Join Community**: Register for [Weekly Zoom Sessions](sessions.html) (Fridays 7am PT)
+3. **Join the Mailing List**: Sign up at [sendfox.com/CSOH](https://sendfox.com/CSOH) to get the Zoom link for our weekly Friday sessions (7am PT)
 4. **Stay Updated**: Check [News](news.html) for latest threats and updates
 5. **Subscribe to RSS**: Add our [RSS feed](https://csoh.org/feed.xml) to your reader — see [RSS_FEED_README.md](RSS_FEED_README.md) for setup
-6. **Network**: Join [Discord](https://discord.gg/AVzAY97D8E) for real-time discussions
 
 ---
 
@@ -42,7 +41,7 @@ Here's our recommended learning path:
 Central hub featuring:
 - Community overview and value proposition
 - Featured resource categories with quick navigation
-- Call-to-action buttons for Zoom registration and Discord
+- Call-to-action buttons for mailing list signup (which delivers the Zoom link)
 - Enhanced schema markup for improved SERP visibility
 - Testimonials and member count (2000+)
 
@@ -487,7 +486,7 @@ Want to help improve CSOH? We have **beginner-friendly guides** for contributing
 
 **Easy options (no coding required):**
 1. [Report an issue](https://github.com/CloudSecurityOfficeHours/csoh.org/issues) - Found a bug? Have a suggestion?
-2. [Join Discord](https://discord.gg/AVzAY97D8E) - Discuss ideas with the community
+2. [Join the mailing list](https://sendfox.com/CSOH) - Get the weekly Zoom link and meeting info
 3. [Add a resource](contribute-resources.html) - Use our web-based guide (copy/paste method)
 4. [Use the submission tool](tools/SUBMIT_RESOURCE_README.md) - Interactive Python script (automated)
 5. [Add a news source](tools/SUBMIT_NEWS_SOURCE_README.md) - Interactive Python script
@@ -516,14 +515,13 @@ See **[DEVELOPMENT.md](DEVELOPMENT.md)** for the full local setup guide, project
 ## 📞 Community & Support
 
 ### Join the Community
-- **Discord**: https://discord.gg/AVzAY97D8E - 2000+ members, real-time discussions
-- **Zoom Sessions**: https://sendfox.com/CSOH - Fridays at 7am PT
+- **Mailing List**: https://sendfox.com/CSOH - 2000+ subscribers; sign up to receive the weekly Friday Zoom link (7am PT)
 - **GitHub**: https://github.com/CloudSecurityOfficeHours/csoh.org
 
 ### Need Help?
-- **Discord**: Ask in #general or #resources channel
+- **Email**: admin@csoh.org for general questions or to reach community admins
 - **Issues**: Create a [GitHub issue](https://github.com/CloudSecurityOfficeHours/csoh.org/issues)
-- **Contact**: Reach out via Discord to community admins
+- **Friday Zoom**: Bring questions live — sign up at [sendfox.com/CSOH](https://sendfox.com/CSOH) for the link
 
 ### Support CSOH
 - ❤️ **Star** this repository
@@ -544,4 +542,4 @@ Copyright © 2023-2026 Cloud Security Office Hours
 
 ---
 
-For the latest updates and announcements, follow us on Discord.
+For the latest updates and announcements, sign up for the [mailing list](https://sendfox.com/CSOH).

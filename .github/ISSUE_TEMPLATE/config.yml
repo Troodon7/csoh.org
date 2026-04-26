@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: "💬 Ask a Question on Discord"
-    url: "https://discord.gg/AVzAY97D8E"
-    about: "Join our Discord community for real-time help and discussion"
+  - name: "📬 Join the Mailing List"
+    url: "https://sendfox.com/CSOH"
+    about: "Sign up to get the weekly Friday Zoom link and meeting info"
   - name: "📧 Email the Team"
     url: "mailto:admin@csoh.org"
     about: "For private questions or security concerns"

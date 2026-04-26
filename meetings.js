@@ -1,4 +1,4 @@
-// meetings.html filter — search + topical tags.
+// meetings.html filter — search + topical tags + speaker tags.
 // Lives in an external file because the site's strict CSP
 // (`script-src 'self'`) blocks any inline <script> block.
 (function () {
@@ -12,14 +12,44 @@
 
     if (!articles.length || !filters) return;
 
+    // Curated list of recurring CSOH speakers and core community members.
+    // Frequency floor: 3+ separate meeting articles. Order = display order.
+    const SPEAKERS = [
+        { id: 'Shawn',     label: 'Shawn (Nunley)' },
+        { id: 'Neil',      label: 'Neil' },
+        { id: 'Jay',       label: 'Jay' },
+        { id: 'Matt',      label: 'Matt' },
+        { id: 'Stryker',   label: 'Stryker' },
+        { id: 'Tyler',     label: 'Tyler' },
+        { id: 'Rev',       label: 'Rev' },
+        { id: 'Frederick', label: 'Frederick' },
+        { id: 'Juninho',   label: 'Juninho' },
+        { id: 'Kyle',      label: 'Kyle' },
+        { id: 'Maria',     label: 'Maria (Thomas)' },
+        { id: 'Milos',     label: 'Milos' },
+        { id: 'Chris',     label: 'Chris' },
+        { id: 'Kimberly',  label: 'Kimberly' },
+        { id: 'Dave',      label: 'Dave' },
+        { id: 'Jennifer',  label: 'Jennifer' },
+    ];
+
+    // Match a name as a standalone capitalized word (e.g. "Shawn welcomed"),
+    // not as a substring (e.g. "review" should not match "Rev").
+    const speakerRegex = (name) => new RegExp('\\b' + name + '\\b');
+
     // Build a map of each meeting's filter-relevant data.
-    const meta = articles.map((art, i) => ({
-        el: art,
-        id: art.id,
-        tags: Array.from(art.querySelectorAll('.meeting-tags .tag')).map(t => t.textContent),
-        text: art.textContent.toLowerCase(),
-        toc: tocItems[i] || null,
-    }));
+    const meta = articles.map((art, i) => {
+        const text = art.textContent;
+        const speakers = SPEAKERS.filter(s => speakerRegex(s.id).test(text)).map(s => s.id);
+        return {
+            el: art,
+            id: art.id,
+            tags: Array.from(art.querySelectorAll('.meeting-tags .tag')).map(t => t.textContent),
+            speakers,
+            text: text.toLowerCase(),
+            toc: tocItems[i] || null,
+        };
+    });
 
     // Auto-generate year and topical-tag filter buttons. Month tags
     // (YYYY-MM) are searchable via the text input but not surfaced as
@@ -32,16 +62,33 @@
         meta.map(m => (m.id.match(/^meeting-(\d{4})/) || [])[1]).filter(Boolean)
     )).sort().reverse();
 
+    // Only show speaker buttons for speakers actually detected in the recaps,
+    // and annotate each button with a count.
+    const speakerCounts = new Map();
+    meta.forEach(m => m.speakers.forEach(s => speakerCounts.set(s, (speakerCounts.get(s) || 0) + 1)));
+    const speakersDetected = SPEAKERS.filter(s => speakerCounts.has(s.id));
+
     const frag = document.createDocumentFragment();
-    const makeBtn = (label, filterValue) => {
+    const makeBtn = (label, filterValue, extraClass) => {
         const b = document.createElement('button');
-        b.className = 'filter-btn';
+        b.className = 'filter-btn' + (extraClass ? ' ' + extraClass : '');
         b.setAttribute('data-filter', filterValue);
         b.textContent = label;
         return b;
     };
     years.forEach(y => frag.appendChild(makeBtn(y, 'year:' + y)));
     topicalTags.forEach(t => frag.appendChild(makeBtn(t, 'tag:' + t)));
+
+    if (speakersDetected.length) {
+        const sep = document.createElement('span');
+        sep.className = 'filter-group-label';
+        sep.textContent = 'Speakers:';
+        frag.appendChild(sep);
+        speakersDetected.forEach(s => {
+            const count = speakerCounts.get(s.id) || 0;
+            frag.appendChild(makeBtn(s.label + ' (' + count + ')', 'speaker:' + s.id, 'speaker'));
+        });
+    }
     filters.appendChild(frag);
 
     let activeFilter = 'all';
@@ -57,6 +104,9 @@
             } else if (activeFilter.startsWith('tag:')) {
                 const value = activeFilter.slice(4);
                 if (!m.tags.includes(value)) show = false;
+            } else if (activeFilter.startsWith('speaker:')) {
+                const value = activeFilter.slice(8);
+                if (!m.speakers.includes(value)) show = false;
             }
             if (show && searchTerm) {
                 if (!m.text.includes(searchTerm)) show = false;

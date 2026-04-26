@@ -473,7 +473,7 @@ A: Anything that helps cloud security professionals learn, practice, or advance 
 Congratulations! By adding a resource, you're helping grow the cloud security community. Every contribution matters, no matter how small.
 
 **Questions?** 
-- Join our [Discord community](https://discord.gg/AVzAY97D8E)
+- Email us at admin@csoh.org or join a [Friday Zoom session](https://sendfox.com/CSOH)
 - Open an issue on [GitHub](https://github.com/CloudSecurityOfficeHours/csoh.org)
 
 **Ready to add your first resource?** Start with [Step 1](#step-1-gather-your-resource-info) above!

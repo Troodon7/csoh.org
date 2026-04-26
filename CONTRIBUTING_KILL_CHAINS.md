@@ -240,4 +240,4 @@ This approach is particularly useful if you attended a Friday Zoom session where
 
 ## Questions?
 
-Join the **#kill-chains** channel on [Discord](https://discord.gg/AVzAY97D8E) or bring your incident to a [Friday Zoom session](https://sendfox.com/CSOH) — community discussion often surfaces the best technical detail for a step.
+Bring your incident to a [Friday Zoom session](https://sendfox.com/CSOH) — community discussion often surfaces the best technical detail for a step.
