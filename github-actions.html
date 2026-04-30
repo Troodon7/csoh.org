@@ -227,8 +227,9 @@ jobs:
         <section id="anatomy">
             <h2>Anatomy of a workflow file</h2>
             <p>Open <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/validate-html.yml" target="_blank" rel="noopener noreferrer"><code>.github/workflows/validate-html.yml</code></a> in another tab and follow along. It's short and exhibits most of the moving parts.</p>
+            <p><strong>Tip:</strong> the workflow file has matching <code>§1</code>–<code>§4</code> markers in its comments. <kbd>Ctrl/Cmd+F</kbd> for <code>§3</code> in the file to jump straight to the section we're discussing here.</p>
 
-            <h3>Triggers (<code>on:</code>)</h3>
+            <h3 id="anatomy-1">§1 — Triggers (<code>on:</code>)</h3>
             <p>This workflow runs in three situations:</p>
             <div class="code-block"><pre>on:
   pull_request:
@@ -239,19 +240,19 @@ jobs:
   workflow_dispatch:</pre></div>
             <p>Translation: when a PR touches any HTML file, every Monday at 07:00 UTC, or whenever someone clicks "Run workflow." The <code>paths</code> filter is the secret to a fast CI — if you only validate HTML, don't run on CSS-only PRs.</p>
 
-            <h3>Permissions</h3>
+            <h3 id="anatomy-2">§2 — Permissions</h3>
             <div class="code-block"><pre>permissions:
   contents: read
   pull-requests: write</pre></div>
             <p>Default GitHub-Actions permissions are broader than they need to be. We pin every workflow to the minimum: read the code, post PR comments, nothing else. If a malicious dependency ever lands in one of our Actions, it can't push to the repo because we never gave it that scope.</p>
 
-            <h3>Concurrency</h3>
+            <h3 id="anatomy-3">§3 — Concurrency</h3>
             <div class="code-block"><pre>concurrency:
   group: validate-html-${{ github.ref }}
   cancel-in-progress: true</pre></div>
             <p>Runs of this workflow on the same git ref (the same PR or branch) cancel each other. Push a fix, the in-flight validation stops and a fresh one starts on the new commit. Different PRs run in parallel because the group includes <code>${{ github.ref }}</code>. We learned this lesson the hard way — see "<a href="#concepts">Concepts that bite newcomers</a>".</p>
 
-            <h3>Jobs and steps</h3>
+            <h3 id="anatomy-4">§4 — Jobs and steps</h3>
             <div class="code-block"><pre>jobs:
   validate-html:
     runs-on: ubuntu-latest

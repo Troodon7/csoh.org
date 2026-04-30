@@ -9,7 +9,10 @@
 
 name: Validate HTML
 
+# -----------------------------------------------------------------------------
+# §1 — Triggers (matches "Anatomy / §1" on github-actions.html)
 # When does this workflow run?
+# -----------------------------------------------------------------------------
 on:
   # On every pull request that touches an HTML file (skip PRs that only edit
   # CSS, scripts, or docs — no point re-validating then).
@@ -30,46 +33,58 @@ on:
   # Lets you run the workflow manually from the Actions tab in GitHub.
   workflow_dispatch:
 
+# -----------------------------------------------------------------------------
+# §2 — Permissions (matches "Anatomy / §2" on github-actions.html)
 # What this workflow is allowed to do.
 # `contents: read` = can read repo files. `pull-requests: write` = can post
 # review comments. Read-only on the codebase — safer than the default.
+# -----------------------------------------------------------------------------
 permissions:
   contents: read
   pull-requests: write
 
 
-# Concurrency = "don't let two of these run at the same time."
+# -----------------------------------------------------------------------------
+# §3 — Concurrency (matches "Anatomy / §3" on github-actions.html)
+# "Don't let two of these run at the same time."
 # `group` is the lock name; same group + same ref = queued/cancelled.
 # `${{ github.ref }}` makes the lock per-branch/per-PR, so different PRs
 # can validate in parallel — only the SAME PR cancels its old run.
 # `cancel-in-progress: true` = if you push a new commit to a PR, kill the
 # old validation run and start fresh on the latest commit. Read-only checks
 # are safe to interrupt.
+# -----------------------------------------------------------------------------
 concurrency:
   group: validate-html-${{ github.ref }}
   cancel-in-progress: true
 
+# -----------------------------------------------------------------------------
+# §4 — Jobs and steps (matches "Anatomy / §4" on github-actions.html)
+# Each job runs on its own fresh VM ("runner"). Steps inside a job share
+# the same filesystem and run in order; a failed step fails the whole job
+# unless the step is marked `if: always()` or `continue-on-error: true`.
+# -----------------------------------------------------------------------------
 jobs:
   validate-html:
     # The VM image GitHub gives us. `ubuntu-latest` is the standard pick.
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: pull the repo onto the runner so we can read the files.
+      # Step 1 — Pull the repo onto the runner so we can read the files.
       # The pinned SHA (instead of @v6) is a security best practice — it
       # prevents a compromised tag from running malicious code on our runner.
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
 
-      # Step 2: refuse inline <script> blocks. Production CSP is
+      # Step 2 — Refuse inline <script> blocks. Production CSP is
       # `script-src 'self'`, so inline scripts are silently blocked in the
       # browser — they "pass" HTML validation but break behavior. JSON-LD
       # and other data-typed <script> blocks are allowed (CSP exempts them).
       - name: Reject inline scripts (CSP gate)
         run: python3 tools/check_no_inline_scripts.py
 
-      # Step 3: actually validate. This action wraps the Nu HTML Checker
-      # (the same engine validator.w3.org uses).
+      # Step 3 — Run the actual W3C validator. This action wraps the Nu
+      # HTML Checker (the same engine validator.w3.org uses).
       - name: Validate HTML5
         uses: Cyb3r-Jak3/html5validator-action@443b108eb8e134b63a1f8a8ba0c942d552608ed7  # master 2025-09-19
         with:
@@ -78,9 +93,9 @@ jobs:
           # is intentionally non-standard HTML — Google requires it as-is.
           blacklist: google66d489593949bd4c.html
 
-      # Step 3: stash the validation log as an artifact you can download from
-      # the GitHub run page. `if: always()` = run even if the previous step
-      # failed, so we still get the log when it's most useful.
+      # Step 4 — Stash the validation log as an artifact you can download
+      # from the GitHub run page. `if: always()` = run even if the previous
+      # step failed, so we still get the log when it's most useful.
       - name: Upload validation log
         if: always()
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f  # v7.0.0
@@ -90,7 +105,7 @@ jobs:
           retention-days: 30                            # auto-delete after 30 days
           if-no-files-found: warn
 
-      # Step 4: if validation failed AND this is a PR, post the errors as
+      # Step 5 — If validation failed AND this is a PR, post the errors as
       # a comment so the contributor sees them without digging through logs.
       - name: Comment on PR with validation results
         if: failure() && github.event_name == 'pull_request'
