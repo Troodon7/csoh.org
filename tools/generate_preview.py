@@ -382,6 +382,7 @@ def extract_urls_from_resources_html():
         repo_root / 'resources.html',
         repo_root / 'ctfs.html',
         repo_root / 'threat-research.html',
+        repo_root / 'conferences.html',
     ]
     pattern = re.compile(r'<a\s+href="([^"]+)"[^>]*class="card-link"')
 

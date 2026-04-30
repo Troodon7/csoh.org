@@ -131,6 +131,9 @@ Information about weekly community gatherings:
 - **Registration Link:** https://sendfox.com/CSOH
 - Format details and speaker information
 
+### 🏟️ Conferences (`conferences.html`)
+A practitioner's directory of security and hacker conferences worldwide — RSA, DEF CON, Black Hat, fwd:cloudsec, KubeCon, CCC, Troopers, OffensiveCon, HITB, NULLCON, BSides, ShmooCon, Pwn2Own, and the rest. Each entry covers what makes the event unique plus its honest pros and cons.
+
 ### 🎬 Presentations (`presentations.html`)
 Archive of past Zoom session presentations:
 - Recorded sessions from industry experts
@@ -267,6 +270,7 @@ csoh.org/
 ├── presentations.html          # Archive of recorded presentations
 ├── meetings.html               # Weekly meeting recaps (91+ entries, topic-by-topic)
 ├── ctfs.html                   # Dedicated cloud CTF directory (39+ challenges)
+├── conferences.html            # Security & hacker conferences directory with pros/cons
 ├── rss.html                    # Landing page explaining the RSS feed to subscribers
 ├── glossary.html               # 200+ cloud security terms with live search & cross-links
 ├── faq.html                    # Frequently asked questions (FAQPage schema)

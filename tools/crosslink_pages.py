@@ -43,6 +43,7 @@ TARGET_PAGES = [
     "ctfs.html",
     "threat-research.html",
     "breach-timeline.html",
+    "conferences.html",
     "meetings.html",
     "presentations.html",
     "sessions.html",

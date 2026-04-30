@@ -91,6 +91,7 @@ csoh.org/
 ├── security-policy.html    # Security disclosure policy
 ├── meetings.html           # Weekly meeting recaps with speaker filter
 ├── ctfs.html               # Dedicated cloud CTF directory
+├── conferences.html        # Security & hacker conferences directory
 ├── rss.html                # RSS subscription landing page
 ├── contribute.html         # How to contribute
 ├── contribute-resources.html # Resource submission form
