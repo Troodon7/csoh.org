@@ -954,27 +954,7 @@
 
     <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
         defer></script>
-    <!-- Simple client-side filter — meetings.js had heavier per-topic search;
-         here on the index we just filter cards by date / topic / headline text. -->
-    <script>
-    (function() {
-      const input = document.getElementById('meetingSearch');
-      const cards = Array.from(document.querySelectorAll('.meeting-card'));
-      const noRes = document.getElementById('noMeetingResults');
-      if (!input || !cards.length) return;
-      input.addEventListener('input', () => {
-        const q = input.value.toLowerCase().trim();
-        let visible = 0;
-        cards.forEach(card => {
-          const txt = card.textContent.toLowerCase();
-          const match = !q || txt.includes(q);
-          card.style.display = match ? '' : 'none';
-          if (match) visible++;
-        });
-        if (noRes) noRes.classList.toggle('is-hidden', visible !== 0);
-      });
-    })();
-    </script>
+    <script src="/meetings.js?v=34ecf0de" defer integrity="sha384-51/2BAlH+9kU4Qp47J7yPdP8X9MH8aXKsnrk7zu0yL4Epo8BDOjZTQqyzuUOuVnn"></script>
 </body>
 
 </html>

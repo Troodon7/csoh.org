@@ -61,7 +61,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
 
-      # Step 2: actually validate. This action wraps the Nu HTML Checker
+      # Step 2: refuse inline <script> blocks. Production CSP is
+      # `script-src 'self'`, so inline scripts are silently blocked in the
+      # browser — they "pass" HTML validation but break behavior. JSON-LD
+      # and other data-typed <script> blocks are allowed (CSP exempts them).
+      - name: Reject inline scripts (CSP gate)
+        run: python3 tools/check_no_inline_scripts.py
+
+      # Step 3: actually validate. This action wraps the Nu HTML Checker
       # (the same engine validator.w3.org uses).
       - name: Validate HTML5
         uses: Cyb3r-Jak3/html5validator-action@443b108eb8e134b63a1f8a8ba0c942d552608ed7  # master 2025-09-19
