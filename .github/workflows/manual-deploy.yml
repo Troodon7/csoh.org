@@ -3,6 +3,13 @@ name: Manual Deploy to Server
 on:
   workflow_dispatch:
 
+
+# Shared with site-update-deploy and the other deploy-pipeline workflows so
+# commits to main and FTP deploys never race each other. Queue serially.
+concurrency:
+  group: deploy-pipeline
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

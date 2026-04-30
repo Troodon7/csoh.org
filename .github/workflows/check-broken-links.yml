@@ -13,6 +13,13 @@ permissions:
   contents: read
   pull-requests: write
 
+
+# Cancel older runs against the same ref when a new push lands. Read-only
+# checks — safe to interrupt and restart on the latest commit.
+concurrency:
+  group: check-broken-links-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check-links:
     runs-on: ubuntu-latest

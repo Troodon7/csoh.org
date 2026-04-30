@@ -10,6 +10,13 @@ on:
     paths:
       - 'update_news.py'
 
+
+# Shared with site-update-deploy and the other deploy-pipeline workflows so
+# commits to main and FTP deploys never race each other. Queue serially.
+concurrency:
+  group: deploy-pipeline
+  cancel-in-progress: false
+
 jobs:
   update-news:
     runs-on: ubuntu-latest

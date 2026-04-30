@@ -21,11 +21,12 @@ on:
         required: false
         default: 'true'
 
-# Serialize runs of this workflow so two pushes don't race their commit-push
-# steps against each other. New runs queue rather than cancel — every push
-# still gets its deploy.
+# Shared concurrency group across all workflows that push commits to main
+# or run an FTP deploy: site-update-deploy, manual-deploy, update-news,
+# normalize-urls. They queue serially rather than racing — every trigger
+# still gets its run, just one at a time.
 concurrency:
-  group: site-update-deploy
+  group: deploy-pipeline
   cancel-in-progress: false
 
 jobs:
