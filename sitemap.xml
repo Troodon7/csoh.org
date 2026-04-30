@@ -46,6 +46,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- GitHub Actions - Educational page on CI/CD via our workflows -->
+  <url>
+    <loc>https://csoh.org/github-actions.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- News - Updates very frequently -->
   <url>
     <loc>https://csoh.org/news.html</loc>

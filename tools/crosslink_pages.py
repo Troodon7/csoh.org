@@ -53,6 +53,7 @@ TARGET_PAGES = [
     "what-is-cloud-security.html",
     "learning-path.html",
     "cloud-security-certifications.html",
+    "github-actions.html",
     "kevin-mitnick.html",
     "contribute.html",
     "contribute-resources.html",

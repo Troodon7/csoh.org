@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="GitHub Actions explained through CSOH's real workflows: triggers, concurrency, secrets, PAT vs GITHUB_TOKEN, common gotchas. Learn by reading our YAML.">
+    <meta name="keywords"
+        content="GitHub Actions, CI/CD, workflows, YAML, automation, GitHub workflow, github actions tutorial, devsecops, deploy automation, lftp deploy">
+    <title>How We Use GitHub Actions - Cloud Security Office Hours</title>
+
+    <link rel="canonical" href="https://csoh.org/github-actions.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="How We Use GitHub Actions - CSOH">
+    <meta property="og:description"
+        content="Learn GitHub Actions by reading CSOH's actual workflow files — triggers, secrets, concurrency, common gotchas, all explained against real production examples.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/github-actions.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How We Use GitHub Actions">
+    <meta name="twitter:description"
+        content="GitHub Actions explained through CSOH's real, commented workflows.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=d6c1acef" as="style"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
+    <link rel="stylesheet" href="/style.css?v=d6c1acef"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How We Use GitHub Actions",
+      "description": "GitHub Actions explained through CSOH's real workflow files — triggers, concurrency, secrets, common gotchas.",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-04-30",
+      "dateModified": "2026-04-30",
+      "mainEntityOfPage": "https://csoh.org/github-actions.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "How We Use GitHub Actions",
+          "item": "https://csoh.org/github-actions.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="ctfs.html">CTFs</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="github-actions.html" aria-current="page">GitHub Actions</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">News</a></li>
+                            <li><a href="threat-research.html">Threat Research</a></li>
+                            <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="sessions.html">Zoom Sessions</a></li>
+                            <li><a href="conferences.html">Conferences</a></li>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="contribute.html">Contribute Overview</a></li>
+                            <li><a href="contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">GitHub Actions</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img"
+            decoding="async">
+        <h1>How We Use GitHub Actions</h1>
+        <p>GitHub Actions explained against real, working production code — every concept tied to a specific line in CSOH's own workflows. If you learn better by reading other people's YAML than by reading the docs, this is for you.</p>
+        <div class="cta-buttons">
+            <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/tree/main/.github/workflows" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Browse the Workflows</a>
+            <a href="#workflows-tour" class="btn btn-secondary">Take the Tour</a>
+        </div>
+    </section>
+
+    <main class="container contribute-article" id="main-content">
+        <div class="info-box--blue">
+            <p><strong>The honest version:</strong> GitHub Actions is the friendliest <a class="glossary-link" href="glossary.html#term-ci">CI</a>/CD platform you'll meet. It runs a script when something happens in your repo — a push, a pull request, a scheduled time, or a button click. That's it. Everything else is configuration. The docs are good but vast; the fastest way to actually <em>get</em> Actions is to read someone else's working YAML and trace what each line does. That's what this page is — every concept comes with a "go look at line N of this file in our repo" pointer.</p>
+            <p style="margin-top:0.75rem;"><strong>What you'll need:</strong> a GitHub repository, comfort with git basics, and willingness to read shell. No prior CI/CD experience required.</p>
+        </div>
+
+        <div class="toc">
+            <h3>📖 On this page</h3>
+            <ol>
+                <li><a href="#what-is-it">What GitHub Actions actually is</a></li>
+                <li><a href="#why-cool">Why it's cool (and where it isn't)</a></li>
+                <li><a href="#anatomy">Anatomy of a workflow file</a></li>
+                <li><a href="#workflows-tour">A tour of CSOH's seven workflows</a></li>
+                <li><a href="#concepts">Concepts that bite newcomers</a></li>
+                <li><a href="#security">Security baseline</a></li>
+                <li><a href="#using-our-repo">Using our repo as a learning resource</a></li>
+                <li><a href="#further">Further reading</a></li>
+            </ol>
+        </div>
+
+        <section id="what-is-it">
+            <h2>What GitHub Actions actually is</h2>
+            <p>GitHub Actions is GitHub's built-in automation runner. You drop a YAML file under <code>.github/workflows/</code>, and GitHub watches your repository for the events you list — a push to main, a new pull request, a cron schedule, a manual button click. When a matching event fires, GitHub spins up a fresh virtual machine ("runner"), runs the steps you wrote, and tears it down.</p>
+            <p>Every workflow file boils down to:</p>
+            <ul>
+                <li><strong>name</strong> — what to call this workflow in the UI</li>
+                <li><strong>on</strong> — what events trigger it</li>
+                <li><strong>jobs</strong> — one or more named bundles of steps</li>
+                <li><strong>steps</strong> — what to actually do (run a script, use a published Action, set an output)</li>
+            </ul>
+            <p>Here's the absolute minimum:</p>
+            <div class="code-block"><pre>name: Hello
+on:
+  push:
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hi, $GITHUB_ACTOR pushed to $GITHUB_REF"</pre></div>
+            <p>Drop that at <code>.github/workflows/hello.yml</code> and every push to your repo will produce a 5-second run that prints your username. From there, the surface area expands fast — but the shape stays the same.</p>
+        </section>
+
+        <section id="why-cool">
+            <h2>Why it's cool (and where it isn't)</h2>
+            <h3>What's good</h3>
+            <ul>
+                <li><strong>Zero infrastructure to run.</strong> No Jenkins server, no agents to patch, no SSH keys to rotate. You write YAML; GitHub gives you fresh VMs.</li>
+                <li><strong>Free for public repos, generous for private.</strong> Public repos get unlimited Linux minutes. Private gets a meaningful free tier for small teams.</li>
+                <li><strong>Marketplace ecosystem.</strong> 20,000+ pre-built Actions for common tasks (checkout, build, deploy, sign artifacts, post Slack messages). Most are 2–3 lines to use.</li>
+                <li><strong>Tight integration.</strong> Actions read your code, comment on PRs, set commit statuses, and modify the repo as a first-class citizen — no external bot infrastructure.</li>
+                <li><strong>Schedules.</strong> Cron-on-the-internet, free. We use this to refresh news every 3 hours and run weekly link checks.</li>
+                <li><strong>Inspectable.</strong> Every run, every step, every line of output is logged and downloadable. The full history of "did our deploy succeed?" is there forever.</li>
+            </ul>
+            <h3>Where it isn't</h3>
+            <ul>
+                <li><strong>YAML.</strong> Whitespace-sensitive, easy to break, no compile-time error for most mistakes — you push, you wait, you find out it didn't fire.</li>
+                <li><strong>Hard to test locally.</strong> Tools like <a href="https://github.com/nektos/act" target="_blank" rel="noopener noreferrer">act</a> exist but only approximate the real environment. The real test is "push and watch."</li>
+                <li><strong>Slow feedback for small fixes.</strong> A typo in <code>if: condition</code> is a 30-second wait per attempt to verify.</li>
+                <li><strong>The free tier is metered for private repos.</strong> Heavy CI use can rack up minutes; macOS and Windows runners cost more than Linux.</li>
+                <li><strong>Some footguns are sharp.</strong> <code>pull_request_target</code> + secrets is the canonical way to leak credentials to a malicious PR. We'll cover safer patterns below.</li>
+            </ul>
+        </section>
+
+        <section id="anatomy">
+            <h2>Anatomy of a workflow file</h2>
+            <p>Open <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/validate-html.yml" target="_blank" rel="noopener noreferrer"><code>.github/workflows/validate-html.yml</code></a> in another tab and follow along. It's short and exhibits most of the moving parts.</p>
+
+            <h3>Triggers (<code>on:</code>)</h3>
+            <p>This workflow runs in three situations:</p>
+            <div class="code-block"><pre>on:
+  pull_request:
+    paths:
+      - '**.html'
+  schedule:
+    - cron: '0 7 * * 1'
+  workflow_dispatch:</pre></div>
+            <p>Translation: when a PR touches any HTML file, every Monday at 07:00 UTC, or whenever someone clicks "Run workflow." The <code>paths</code> filter is the secret to a fast CI — if you only validate HTML, don't run on CSS-only PRs.</p>
+
+            <h3>Permissions</h3>
+            <div class="code-block"><pre>permissions:
+  contents: read
+  pull-requests: write</pre></div>
+            <p>Default GitHub-Actions permissions are broader than they need to be. We pin every workflow to the minimum: read the code, post PR comments, nothing else. If a malicious dependency ever lands in one of our Actions, it can't push to the repo because we never gave it that scope.</p>
+
+            <h3>Concurrency</h3>
+            <div class="code-block"><pre>concurrency:
+  group: validate-html-${{ github.ref }}
+  cancel-in-progress: true</pre></div>
+            <p>Runs of this workflow on the same git ref (the same PR or branch) cancel each other. Push a fix, the in-flight validation stops and a fresh one starts on the new commit. Different PRs run in parallel because the group includes <code>${{ github.ref }}</code>. We learned this lesson the hard way — see "<a href="#concepts">Concepts that bite newcomers</a>".</p>
+
+            <h3>Jobs and steps</h3>
+            <div class="code-block"><pre>jobs:
+  validate-html:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - name: Validate HTML5
+        uses: Cyb3r-Jak3/html5validator-action@443b108eb8e134b63a1f8a8ba0c942d552608ed7  # master 2025-09-19
+        with:
+          root: .
+          blacklist: google66d489593949bd4c.html</pre></div>
+            <p>Two important habits visible here:</p>
+            <ul>
+                <li><strong>Pin Actions to a full SHA, not a tag.</strong> The trailing comment is the version for humans; the SHA is what actually runs. Tags can be moved silently. SHAs cannot. The <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/security/dependabot" target="_blank" rel="noopener noreferrer">Dependabot</a> bumps these for us.</li>
+                <li><strong>Name every step.</strong> <code>name:</code> is what shows up in the run UI. Skip it and your run log is full of "Run actions/checkout@…" lines that nobody can grep.</li>
+            </ul>
+        </section>
+
+        <section id="workflows-tour">
+            <h2>A tour of CSOH's seven workflows</h2>
+            <p>Each one solves a single, named problem. Click through to read the source — every file is heavily commented for new readers.</p>
+
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/site-update-deploy.yml" target="_blank" rel="noopener noreferrer">site-update-deploy.yml</a> — The big one</h3>
+            <p>Runs on every push to main that touches site files. Walks through ten housekeeping steps (SRI hashes, URL safety check, URL normalization, presentations schema, sitemap dates, preview screenshot generation, image optimization), commits each one back to main if anything changed, then mirrors the whole site to FTP. Read this if you want to see <strong>conditional steps</strong>, <strong>step outputs</strong>, <strong>committing back to the same repo</strong>, and <strong>FTP deploy via lftp</strong>.</p>
+
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/update-news.yml" target="_blank" rel="noopener noreferrer">update-news.yml</a> — Scheduled content updates</h3>
+            <p>Every 3 hours, refreshes <a href="news.html">news.html</a> from configured RSS/Atom feeds, opens a PR with the changes, auto-approves it (using a separate bot account so we don't violate "can't approve your own PR"), and auto-merges if only news files were touched. Read this if you want to see <strong>cron schedules</strong>, <strong>auto-PR creation</strong>, and the <strong>two-PAT pattern</strong>.</p>
+
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/normalize-urls.yml" target="_blank" rel="noopener noreferrer">normalize-urls.yml</a> — Monthly maintenance</h3>
+            <p>Once a month, strips tracking parameters and resolves redirects on every link, then opens a PR for human review. Auto-approved but not auto-merged because cross-domain redirects deserve eyes. Good example of <strong>auto-PR with mandatory human gate</strong>.</p>
+
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/manual-deploy.yml" target="_blank" rel="noopener noreferrer">manual-deploy.yml</a> — On-demand deploy</h3>
+            <p>Pure <code>workflow_dispatch</code>. Force-pushes the entire site to FTP when you click "Run workflow." Useful for "the auto-deploy skipped this push and I need it live now." Smallest workflow — good for reading the deploy plumbing without distractions.</p>
+
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/validate-html.yml" target="_blank" rel="noopener noreferrer">validate-html.yml</a> — PR check</h3>
+            <p>Runs the <a href="https://github.com/Cyb3r-Jak3/html5validator-action" target="_blank" rel="noopener noreferrer">W3C HTML5 validator</a> on every HTML-touching PR. Posts a comment on failure with the first 50 lines of the error log. Read this for <strong>PR comments via github-script</strong> and <strong>conditional posting (<code>if: failure() &amp;&amp; github.event_name == 'pull_request'</code>)</strong>.</p>
+
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/check-broken-links.yml" target="_blank" rel="noopener noreferrer">check-broken-links.yml</a> — External link rot</h3>
+            <p>Crawls every link in the site with <a href="https://github.com/lycheeverse/lychee" target="_blank" rel="noopener noreferrer">lychee</a>, weekly and per-PR. Caches HTTP responses for 3 days so it's fast. Read this for <strong>cache restoration</strong> and a non-blocking check (<code>fail: false</code>) — link rot is everywhere and shouldn't gate merges.</p>
+
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/check-url-safety.yml" target="_blank" rel="noopener noreferrer">check-url-safety.yml</a> — Malware/phishing check</h3>
+            <p>Validates every external URL against safety lists. Runs on PRs and weekly. Hard fails the workflow if anything unsafe is found and posts a summary comment. Sister workflow to broken-links.</p>
+        </section>
+
+        <section id="concepts">
+            <h2>Concepts that bite newcomers</h2>
+
+            <h3>1. <code>GITHUB_TOKEN</code> vs Personal Access Token (PAT)</h3>
+            <p>Every workflow run gets an automatic, scoped <code>GITHUB_TOKEN</code> — usable for most repo operations, but commits made with it <strong>do not trigger downstream workflows</strong>. That's a deliberate anti-loop measure. We use a Personal Access Token (<code>PAT_TOKEN</code>) when we want a bot-pushed commit to trigger another workflow — for example, when <code>update-news</code> opens a PR that needs <code>validate-html</code> and <code>check-broken-links</code> to run on it.</p>
+            <p>If your bot's commits are mysteriously not triggering CI: you're using <code>GITHUB_TOKEN</code> and need a PAT.</p>
+
+            <h3>2. PATs need <code>workflow</code> scope to push workflow files</h3>
+            <p>This bit us in late April 2026. GitHub blocks any PAT push that touches <code>.github/workflows/*</code> unless the PAT carries the <code>workflow</code> scope — a security guardrail that prevents a leaked PAT from rewriting CI to deploy malicious code. The catch: the check runs against every commit in the push range, not just the bot's own commit. So once main has any workflow file changes, every subsequent bot-driven force-push of a derived branch will fail until the PAT has <code>workflow</code> scope.</p>
+            <p>Lesson: when you create your <code>PAT_TOKEN</code>, give it <code>workflow</code> scope from day one. Otherwise the day you edit a workflow file, your bots break.</p>
+
+            <h3>3. Concurrency: queue, cancel, or both?</h3>
+            <p>Two common patterns, and getting them mixed up causes either lost runs or lost time:</p>
+            <ul>
+                <li><strong>Queue (don't cancel):</strong> <code>cancel-in-progress: false</code>. Right for things you can't lose — deploys, content commits, anything that mutates state. Multiple triggers stack and run one after another. CSOH's deploy-pipeline group works this way.</li>
+                <li><strong>Cancel old runs:</strong> <code>cancel-in-progress: true</code>. Right for read-only checks per branch — validators, linters, link checkers. Push a fix, the old run dies, the new one starts. Saves time.</li>
+            </ul>
+            <p>Mistake we made: at first, our deploy workflow had no concurrency at all. Two news-update commits within a minute spawned two simultaneous deploys that interleaved their commits and corrupted the deployed site.</p>
+
+            <h3>4. <code>git push</code> from a runner can race with concurrent runs</h3>
+            <p>Even with concurrency groups, you can race against <em>other workflows</em> in different groups (or against humans). A safer push pattern:</p>
+            <div class="code-block"><pre>git push || (git pull --rebase origin main &amp;&amp; git push)</pre></div>
+            <p>If the first push is rejected because main moved, rebase on top of the latest main and retry. We use this in every commit-and-push step in <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/site-update-deploy.yml" target="_blank" rel="noopener noreferrer">site-update-deploy.yml</a>.</p>
+
+            <h3>5. Step outputs and conditionals</h3>
+            <p>Steps can publish small key/value outputs that later steps in the same job can read:</p>
+            <div class="code-block"><pre>- name: Did anything change?
+  id: detect
+  run: |
+    if git diff --quiet; then
+      echo "changed=false" &gt;&gt; $GITHUB_OUTPUT
+    else
+      echo "changed=true" &gt;&gt; $GITHUB_OUTPUT
+    fi
+
+- name: Deploy
+  if: steps.detect.outputs.changed == 'true'
+  run: ./deploy.sh</pre></div>
+            <p>This is how our deploy job decides whether to actually run the FTP step at all — if no SRI hashes, no sitemap, no previews, no HTML changed, the whole deploy is skipped.</p>
+
+            <h3>6. <code>if: always()</code> vs <code>if: failure()</code></h3>
+            <p>By default, a step skips if any earlier step failed. <code>if: always()</code> forces it to run anyway — handy for uploading a debug log. <code>if: failure()</code> only runs the step <em>because</em> something earlier failed — handy for posting "your build broke" comments. We use both extensively in our PR-check workflows.</p>
+
+            <h3>7. Artifacts: download for offline debugging</h3>
+            <p><code>actions/upload-artifact</code> stuffs files into per-run storage that you can download from the run page. Critical for any step that produces a report — we use it for the safety-scan output, the link-rot crawl, the HTML validator log. <code>retention-days: 30</code> keeps your storage usage bounded.</p>
+
+            <h3>8. Secrets are write-only and masked</h3>
+            <p>Anything in <code>secrets.X</code> is automatically masked in run logs (printed as <code>***</code>). Never <code>echo</code> a secret to debug it — even if you wrote the workflow yourself, the masking still applies. To <em>see</em> a secret, you have to use it. Never put secrets in the YAML directly; always reference them by name.</p>
+        </section>
+
+        <section id="security">
+            <h2>Security baseline</h2>
+            <p>Whatever you build, do these from day one:</p>
+            <ol>
+                <li><strong>Pin every Action to a full commit SHA.</strong> Not <code>@v3</code>, not <code>@main</code>. Tags and branches can be moved silently by a compromised maintainer; SHAs cannot. Use <a href="https://github.com/sethvargo/ratchet" target="_blank" rel="noopener noreferrer">sethvargo/ratchet</a> or <a href="https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot" target="_blank" rel="noopener noreferrer">Dependabot</a> to keep the SHAs current.</li>
+                <li><strong>Set explicit <code>permissions:</code> on every workflow.</strong> Default to <code>contents: read</code>. Add only what you need.</li>
+                <li><strong>Avoid <code>pull_request_target</code> unless you fully understand it.</strong> It runs in the context of the base branch with full secrets, on code from a fork. Footgun. The <a href="breach-timeline.html">breach kill chains</a> page covers an attack pattern that exploited this on a major OSS project.</li>
+                <li><strong>Don't echo secrets, don't log them, don't write them to artifacts.</strong> Even if it's "just a debug step you'll remove later."</li>
+                <li><strong>Use <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a> for cloud credentials when you can.</strong> AWS, GCP, and Azure all support short-lived federated tokens via OIDC — no long-lived access keys to leak. We don't use this on CSOH (FTP-based deploy), but for any cloud deploy this is the modern default.</li>
+                <li><strong>Treat <code>${{ github.event.* }}</code> as untrusted input</strong> when interpolating into shell. PR titles, branch names, and commit messages can contain attacker-controlled strings. Use <code>${VAR}</code> from <code>env:</code> instead of inline <code>${{ }}</code> in run blocks.</li>
+            </ol>
+        </section>
+
+        <section id="using-our-repo">
+            <h2>Using our repo as a learning resource</h2>
+            <p>The whole point of this page is that <a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">our repo</a> is a working, in-production reference. A suggested reading order:</p>
+            <ol>
+                <li><strong>Start with the smallest:</strong> <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/manual-deploy.yml" target="_blank" rel="noopener noreferrer">manual-deploy.yml</a>. ~90 lines, one job, one trigger, demonstrates the FTP deploy plumbing without distractions.</li>
+                <li><strong>Read the validators:</strong> <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/validate-html.yml" target="_blank" rel="noopener noreferrer">validate-html.yml</a> and <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/check-broken-links.yml" target="_blank" rel="noopener noreferrer">check-broken-links.yml</a>. PR-comment patterns, caching, and the read-only check shape.</li>
+                <li><strong>Then the auto-PR ones:</strong> <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/update-news.yml" target="_blank" rel="noopener noreferrer">update-news.yml</a> and <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/normalize-urls.yml" target="_blank" rel="noopener noreferrer">normalize-urls.yml</a>. Scheduling, two-PAT auto-approve dance, conditional auto-merge.</li>
+                <li><strong>Finally, the big one:</strong> <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/site-update-deploy.yml" target="_blank" rel="noopener noreferrer">site-update-deploy.yml</a>. Step outputs, conditional steps, committing back to the repo, deploy gating, FTP mirroring with retry.</li>
+            </ol>
+            <p>Every workflow file in our repo is heavily commented — every non-obvious line has a 1–3 line explanation aimed at someone who has never written GitHub Actions before.</p>
+            <p>You can fork the repo, gut the content, keep the workflow scaffolding, and have a working static-site CI/CD in an hour. We'd love it if you did. Send us a link in the <a href="sessions.html">Friday Zoom</a>.</p>
+        </section>
+
+        <section id="further">
+            <h2>Further reading</h2>
+            <ul>
+                <li><a href="https://docs.github.com/en/actions" target="_blank" rel="noopener noreferrer">GitHub Actions documentation</a> — the official source of truth, well-organized.</li>
+                <li><a href="https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions" target="_blank" rel="noopener noreferrer">Security hardening for GitHub Actions</a> — required reading. Bookmark and re-read.</li>
+                <li><a href="https://docs.github.com/en/actions/learn-github-actions/contexts" target="_blank" rel="noopener noreferrer">Contexts and expressions</a> — what <code>${{ github.x }}</code>, <code>${{ steps.x.y }}</code>, <code>${{ secrets.X }}</code> actually evaluate to.</li>
+                <li><a href="https://github.com/marketplace?type=actions" target="_blank" rel="noopener noreferrer">Actions Marketplace</a> — pre-built actions for most common tasks. Always check the source before using.</li>
+                <li><a href="https://github.com/sethvargo/ratchet" target="_blank" rel="noopener noreferrer">ratchet</a> — pin tags to SHAs automatically.</li>
+                <li><a href="https://github.com/nektos/act" target="_blank" rel="noopener noreferrer">act</a> — run GitHub Actions workflows locally for faster iteration.</li>
+                <li><a href="https://stepsecurity.io/" target="_blank" rel="noopener noreferrer">StepSecurity</a> — opinionated tooling for <a class="glossary-link" href="glossary.html#term-hardening">hardening</a> Actions across an org.</li>
+            </ul>
+        </section>
+
+        <section class="cta-section">
+            <h2>Questions?</h2>
+            <p>Bring them to <a href="sessions.html">Friday Zoom</a>. We've got several practitioners who run nontrivial Actions setups (auto-deploy, signed artifacts, OIDC to AWS/GCP) and are happy to walk through specifics. The <a href="meetings.html">meeting recaps</a> often surface CI/CD horror stories worth learning from.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="resources.html">All Resources</a></li>
+                    <li><a href="sessions.html">Zoom Sessions</a></li>
+                    <li><a href="presentations.html">Presentations</a></li>
+                    <li><a href="index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

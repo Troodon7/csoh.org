@@ -77,6 +77,7 @@ csoh.org/
 ├── what-is-cloud-security.html      # Pillar: vendor-neutral cloud security overview
 ├── learning-path.html               # Beginner→advanced learning roadmap (HowTo schema)
 ├── cloud-security-certifications.html # CCSK/CCSP/AWS/Azure/GCP/CKS comparison
+├── github-actions.html              # Learn-by-example GitHub Actions explainer
 ├── resources.html          # 200+ curated resources (largest page)
 ├── news.html               # Auto-generated news articles
 ├── chat-resources.html     # Community-shared URLs from Zoom chat

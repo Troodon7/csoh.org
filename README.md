@@ -60,6 +60,9 @@ Step-by-step roadmap from "no cloud experience" to working practitioner: prerequ
 ### 🎓 Cloud Security Certifications (`cloud-security-certifications.html`)
 Side-by-side comparison of the major cloud security certifications — CCSK, CCSP, AWS Security Specialty, Microsoft AZ-500/SC-100, Google PCSE, and CKS. Includes a comparison table, recommended paths by role (career switcher / established engineer / senior architect / detection specialist), and an FAQ.
 
+### ⚙️ How We Use GitHub Actions (`github-actions.html`)
+Learn-by-example explainer for GitHub Actions, using CSOH's seven workflow files as the teaching material. Covers triggers, concurrency, secrets, the GITHUB_TOKEN vs PAT distinction, the `workflow` scope gotcha, and a recommended reading order through our heavily-commented YAML.
+
 ### 📚 Resources (`resources.html`)
 Comprehensive catalog of **200+ cloud security resources** organized by 6 categories:
 
@@ -263,6 +266,7 @@ csoh.org/
 ├── what-is-cloud-security.html # Pillar: vendor-neutral cloud-security overview (FAQ schema)
 ├── learning-path.html          # Beginner→advanced roadmap (HowTo schema)
 ├── cloud-security-certifications.html # CCSK / CCSP / AWS / Azure / GCP / CKS comparison
+├── github-actions.html         # Learn GitHub Actions via our heavily-commented workflows
 ├── resources.html              # Main resource directory (200+ resources in 6 categories)
 ├── news.html                   # Cloud security news (120+ articles)
 ├── chat-resources.html         # Community-shared URLs from Zoom sessions (557+ URLs)
