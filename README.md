@@ -478,6 +478,7 @@ This site uses **GitHub Actions workflows** to automate all major site updates. 
 - Manual trigger via the GitHub Actions tab
 
 **What it does:**
+- Restores file modification times from git history (so the FTP step uploads only what actually changed — see "Incremental deploys" below)
 - Updates SRI hashes and cache-busting tags if CSS/JS changed (using `update_sri.py`)
 - Checks URL safety — blocks deploy if unsafe URLs are detected (using `check_all_site_urls.py`)
 - Normalizes URLs — strips tracking parameters, upgrades HTTP to HTTPS, resolves redirects (using `normalize_urls.py`)
@@ -485,16 +486,18 @@ This site uses **GitHub Actions workflows** to automate all major site updates. 
 - Refreshes `<lastmod>` dates in `sitemap.xml` from git history (using `update_sitemap.py`)
 - Generates preview images for new resources in `resources.html` (using `generate_preview.py`)
 - Checks for broken links (non-blocking warning)
-- Deploys the site to the web server via FTP in smart passes:
-  - **Pass 1:** Always deploys all HTML/CSS/JS and other site files (excludes images)
-  - **Pass 2:** Only uploads `img/previews/` when new preview images were generated
-  - **Pass 3:** Always syncs news source banner images
-  - **Pass 4:** Only uploads `chat-screenshots/` when new screenshots were added
+- Deploys the site to the web server via FTP in four passes:
+  - **Pass 1:** Site files (HTML/CSS/JS, excludes `img/` and `chat-screenshots/`)
+  - **Pass 2:** `img/previews/` (always synced; only changed files transfer)
+  - **Pass 3:** `img/news-banners/` (always synced; only changed files transfer)
+  - **Pass 4:** `chat-screenshots/` only when new screenshots were added
 
 **How it works:**
 1. Checks for any changes that require SRI updates, URL normalization, new previews, or new chat screenshots
 2. Runs each step in order: SRI → URL safety → URL normalization → previews → link check → deploy
 3. URL safety check and normalization must pass before previews are generated or the site is deployed
+
+**Incremental deploys:** A fresh `actions/checkout` gives every file the same mtime (the moment of the checkout), which would make `lftp mirror` re-upload the entire tree on every run. The workflow rewinds each tracked file's mtime to its last-commit date before any housekeeping runs; the housekeeping scripts then only modify files that actually need changes (they all wrap their writes in `if content != original_content`). Net effect: lftp uploads only files with new bytes — typically a few HTML files per run, not the whole site.
 
 **News updates** are still handled by a separate scheduled workflow (`update-news.yml`) that runs every 3 hours and creates a PR with new articles. Once merged, the unified workflow deploys the site.
 

@@ -286,8 +286,13 @@ When you add a new HTML page, do all of the following — none are automated:
 6. Add a single keyword-rich `<h1>` in the hero.
 7. **Add the page to `sitemap.xml`** (a new `<url>` block). `update_sitemap.py` only refreshes `<lastmod>` for entries already in the sitemap — it does not auto-discover new pages.
 8. **Add the page to the nav** (`<ul class="dropdown-menu">`) **on every existing HTML page**. The nav is duplicated per page, not shared. Pick the right dropdown: `Learn` for educational/reference content, `Defend` for threat/news content, `Attend` for community/sessions, `Contribute` for contributor pages.
-9. Update the file structure trees in `README.md` and `DEVELOPMENT.md`.
-10. Let CI regenerate SRI hashes (`update_sri.py` runs on deploy) or run it locally.
+9. **Add the page to `TARGET_PAGES` in `tools/crosslink_pages.py`** so glossary terms get auto-linked across the new page. Then run:
+   ```bash
+   python3 tools/crosslink_pages.py
+   ```
+10. **If your new page has external `card-link` URLs** (resource cards with screenshots), add it to the `pages` list near the bottom of `tools/generate_preview.py` so the deploy workflow auto-generates preview images for those URLs.
+11. Update the file structure trees in `README.md` and `DEVELOPMENT.md`, and (if it's an educational/feature page) add a per-page section to `README.md` describing it.
+12. Let CI regenerate SRI hashes (`update_sri.py` runs on deploy) or run it locally.
 
 ### Cross-linking
 
@@ -297,6 +302,15 @@ When you add a new HTML page, do all of the following — none are automated:
 ### Scripts that touch HTML are SEO-safe by design
 
 `update_news.py`, `add_meeting.py`, `submit_resource.py`, `submit_ctf.py`, `update_presentations_schema.py`, `crosslink_glossary.py`, and `crosslink_pages.py` all modify *content regions* (cards, meeting entries, schema JSON, glossary `<dd>` blocks, inline term anchors) — they never rewrite `<title>`, `<meta name="description">`, or `<h1>` tags. If you add a new HTML-generating script, follow the same rule: leave page-level SEO metadata alone.
+
+### Scripts must only write when content actually changes
+
+Every script in `tools/` (and `update_sri.py`, `update_news.py` at the repo root) wraps its file writes in a `if content != original_content` check. Two reasons:
+
+1. **Clean git history.** A no-op run produces no diff and no commits.
+2. **Incremental deploys.** The `site-update-deploy` workflow rewinds each file's mtime to its last-commit date before any housekeeping runs. `lftp mirror` then uploads only files whose local mtime is newer than the server — i.e., only files the housekeeping scripts actually modified. If your script `open(..., 'w')`s a file unconditionally, every run will give it a fresh "now" mtime and force a re-upload of unchanged content. The whole site re-uploads. Don't.
+
+If your script needs to be sure it overwrote even an identical file (e.g., to re-run a destructive transformation), do that work explicitly — don't make it the default.
 
 ---
 

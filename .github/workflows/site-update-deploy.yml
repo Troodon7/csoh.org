@@ -69,6 +69,31 @@ jobs:
         id: original_sha
         run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
+      # A fresh `actions/checkout` gives every file the SAME mtime — the
+      # moment of the checkout. lftp's `mirror` decides what to upload
+      # based on size + mtime; if every local file looks "new" relative to
+      # the server, lftp re-uploads literally everything every run.
+      #
+      # Fix: rewind each file's mtime to the date of its last git commit.
+      # Files we DON'T touch this run keep their historical mtime → lftp
+      # sees they match the server and skips them. Files the housekeeping
+      # steps below modify (SRI rewrites, sitemap, previews) get a fresh
+      # "now" mtime → lftp sees they're newer than the server and uploads
+      # only those.
+      #
+      # Result: the deploy uploads only what actually changed, not the
+      # whole tree. Saves a couple of minutes per run and a lot of FTP
+      # round-trips on the host.
+      - name: Restore file mtimes from git history
+        run: |
+          # `ls-files -z` = NUL-terminated paths (handles spaces in names)
+          # `git log -1 --format=%ct -- <file>` = unix timestamp of last commit
+          # `touch -d @<unix>` = set file's modification time
+          git ls-files -z | while IFS= read -r -d '' file; do
+            ts=$(git log -1 --format=%ct -- "$file" 2>/dev/null)
+            [ -n "$ts" ] && touch -d "@$ts" "$file"
+          done
+
       # Install Python — most of the housekeeping scripts are Python.
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0

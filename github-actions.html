@@ -272,7 +272,7 @@ jobs:
             <p>Each one solves a single, named problem. Click through to read the source — every file is heavily commented for new readers.</p>
 
             <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/site-update-deploy.yml" target="_blank" rel="noopener noreferrer">site-update-deploy.yml</a> — The big one</h3>
-            <p>Runs on every push to main that touches site files. Walks through ten housekeeping steps (SRI hashes, URL safety check, URL normalization, presentations schema, sitemap dates, preview screenshot generation, image optimization), commits each one back to main if anything changed, then mirrors the whole site to FTP. Read this if you want to see <strong>conditional steps</strong>, <strong>step outputs</strong>, <strong>committing back to the same repo</strong>, and <strong>FTP deploy via lftp</strong>.</p>
+            <p>Runs on every push to main that touches site files. Walks through ten housekeeping steps (SRI hashes, URL safety check, URL normalization, presentations schema, sitemap dates, preview screenshot generation, image optimization), commits each one back to main if anything changed, then mirrors only the changed files to FTP. Read this if you want to see <strong>conditional steps</strong>, <strong>step outputs</strong>, <strong>committing back to the same repo</strong>, <strong>incremental FTP deploys via mtime restoration</strong>, and <strong>lftp with timeout safety</strong>.</p>
 
             <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/update-news.yml" target="_blank" rel="noopener noreferrer">update-news.yml</a> — Scheduled content updates</h3>
             <p>Every 3 hours, refreshes <a href="news.html">news.html</a> from configured RSS/Atom feeds, opens a PR with the changes, auto-approves it (using a separate bot account so we don't violate "can't approve your own PR"), and auto-merges if only news files were touched. Read this if you want to see <strong>cron schedules</strong>, <strong>auto-PR creation</strong>, and the <strong>two-PAT pattern</strong>.</p>
@@ -341,6 +341,15 @@ jobs:
 
             <h3>8. Secrets are write-only and masked</h3>
             <p>Anything in <code>secrets.X</code> is automatically masked in run logs (printed as <code>***</code>). Never <code>echo</code> a secret to debug it — even if you wrote the workflow yourself, the masking still applies. To <em>see</em> a secret, you have to use it. Never put secrets in the YAML directly; always reference them by name.</p>
+
+            <h3>9. <code>actions/checkout</code> resets every file's mtime — incremental deploys break</h3>
+            <p>A fresh checkout gives every file the SAME mtime: the moment it was checked out. If you're using <code>rsync</code>, <code>lftp mirror</code>, or any other tool that decides what to upload by comparing mtimes, every run will re-upload the entire tree. Took us months to notice — the deploy was just slow.</p>
+            <p>The fix is a one-liner before the deploy step: walk every tracked file and rewind its mtime to the date of its last git commit. Then your housekeeping scripts (which only write files that actually change) generate a fresh "now" mtime on exactly the files that need it, and the deploy uploads only those:</p>
+            <div class="code-block"><pre>git ls-files -z | while IFS= read -r -d '' file; do
+  ts=$(git log -1 --format=%ct -- "$file" 2&gt;/dev/null)
+  [ -n "$ts" ] &amp;&amp; touch -d "@$ts" "$file"
+done</pre></div>
+            <p>See it in <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/site-update-deploy.yml" target="_blank" rel="noopener noreferrer">site-update-deploy.yml</a>. Pairs with a discipline rule for housekeeping scripts: <strong>only write a file when its content actually changes</strong> (<code>if new == old: skip</code>). Together they mean a no-op deploy actually does nothing.</p>
         </section>
 
         <section id="security">
