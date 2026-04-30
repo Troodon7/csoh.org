@@ -32,6 +32,18 @@ TARGET_HEIGHT = 300
 SCREENSHOT_TIMEOUT = 30  # seconds
 MIN_PREVIEW_SIZE_KB = 8  # Real Playwright screenshots ~10-22KB; placeholders ~3KB
 
+# URLs that consistently fail to produce useful previews — bot detection,
+# JS-heavy SPAs that render blank, login walls, etc. The --check command
+# will skip these so they don't block the deploy workflow on every run.
+PREVIEW_IGNORE_URLS = {
+    'https://www.sentinelone.com/labs/',
+    'https://www.ibm.com/reports/threat-intelligence',
+    'https://www.sophos.com/en-us/content/state-of-ransomware',
+    'https://blog.lastpass.com/posts/2023/03/security-incident-update-recommended-actions',
+    'https://otx.alienvault.com/',
+    'https://www.cyber.gov.au/about-us/advisories',
+}
+
 
 def _placeholder_marker_path(preview_path):
     """Return the Path of the sidecar marker that flags a preview as a placeholder."""
@@ -387,7 +399,10 @@ def extract_urls_from_resources_html():
                 seen.add(url)
                 all_urls.append(url)
 
-    urls_needing_previews = [u for u in all_urls if not check_existing_preview(u)]
+    urls_needing_previews = [
+        u for u in all_urls
+        if u not in PREVIEW_IGNORE_URLS and not check_existing_preview(u)
+    ]
     return urls_needing_previews
 
 def main():
