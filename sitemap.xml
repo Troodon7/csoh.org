@@ -5,7 +5,7 @@
   <!-- Homepage - Highest priority -->
   <url>
     <loc>https://csoh.org/</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -17,7 +17,7 @@
   <!-- Resources - High priority, updates frequently -->
   <url>
     <loc>https://csoh.org/resources.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -25,7 +25,7 @@
   <!-- What is Cloud Security - Pillar page -->
   <url>
     <loc>https://csoh.org/what-is-cloud-security.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -33,7 +33,7 @@
   <!-- Learning Path - Roadmap page -->
   <url>
     <loc>https://csoh.org/learning-path.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -41,7 +41,7 @@
   <!-- Cloud Security Certifications - Comparison page -->
   <url>
     <loc>https://csoh.org/cloud-security-certifications.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -65,7 +65,7 @@
   <!-- Sessions - Regular updates -->
   <url>
     <loc>https://csoh.org/sessions.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -81,7 +81,7 @@
   <!-- Meeting Recaps - Updated after each Friday session -->
   <url>
     <loc>https://csoh.org/meetings.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -89,7 +89,7 @@
   <!-- Breach Kill Chains - Cloud breach analysis -->
   <url>
     <loc>https://csoh.org/breach-timeline.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -97,7 +97,7 @@
   <!-- Threat Research - Curated cloud threat research directory -->
   <url>
     <loc>https://csoh.org/threat-research.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -105,7 +105,7 @@
   <!-- CTFs - Cloud security CTF challenge directory -->
   <url>
     <loc>https://csoh.org/ctfs.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -113,7 +113,7 @@
   <!-- RSS subscription page -->
   <url>
     <loc>https://csoh.org/rss.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -121,7 +121,7 @@
   <!-- Presentations - Regular updates -->
   <url>
     <loc>https://csoh.org/presentations.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -129,7 +129,7 @@
   <!-- Kevin Mitnick Memorial -->
   <url>
     <loc>https://csoh.org/kevin-mitnick.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -137,14 +137,14 @@
   <!-- Contribute pages -->
   <url>
     <loc>https://csoh.org/contribute.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://csoh.org/contribute-resources.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -152,7 +152,7 @@
   <!-- Security Policy -->
   <url>
     <loc>https://csoh.org/security-policy.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -160,7 +160,7 @@
   <!-- Code of Conduct -->
   <url>
     <loc>https://csoh.org/code-of-conduct.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -168,7 +168,7 @@
   <!-- Privacy Policy -->
   <url>
     <loc>https://csoh.org/privacy.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -176,7 +176,7 @@
   <!-- Glossary -->
   <url>
     <loc>https://csoh.org/glossary.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -184,7 +184,7 @@
   <!-- FAQ -->
   <url>
     <loc>https://csoh.org/faq.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
