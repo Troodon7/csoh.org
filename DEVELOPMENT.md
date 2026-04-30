@@ -74,6 +74,9 @@ The site is a **static HTML website** with no build step or framework. Each page
 ```
 csoh.org/
 ├── index.html              # Homepage
+├── what-is-cloud-security.html      # Pillar: vendor-neutral cloud security overview
+├── learning-path.html               # Beginner→advanced learning roadmap (HowTo schema)
+├── cloud-security-certifications.html # CCSK/CCSP/AWS/Azure/GCP/CKS comparison
 ├── resources.html          # 200+ curated resources (largest page)
 ├── news.html               # Auto-generated news articles
 ├── chat-resources.html     # Community-shared URLs from Zoom chat
@@ -87,6 +90,8 @@ csoh.org/
 ├── privacy.html            # Privacy Policy (no cookies, no marketing)
 ├── security-policy.html    # Security disclosure policy
 ├── meetings.html           # Weekly meeting recaps with speaker filter
+├── ctfs.html               # Dedicated cloud CTF directory
+├── rss.html                # RSS subscription landing page
 ├── contribute.html         # How to contribute
 ├── contribute-resources.html # Resource submission form
 │
@@ -235,9 +240,61 @@ See [CONTRIBUTING_KILL_CHAINS.md](CONTRIBUTING_KILL_CHAINS.md) for the full proc
 
    It will give your new `<dt>` an `id="term-..."` slug, hyperlink any existing terms in your new definition, and hyperlink your new term wherever it's mentioned in other definitions. The script is idempotent and safe to re-run.
 
-4. If the term count crosses a round number (e.g. 200 → 250), update the search-bar placeholder and `<span id="visibleTerms">` count in `glossary.html`.
+4. Run the **cross-page** linker to hyperlink the term wherever it's mentioned outside `glossary.html`:
+
+   ```bash
+   python3 tools/crosslink_pages.py
+   ```
+
+   Same idempotent behavior — strips and rebuilds every cross-page link. See [tools/CROSSLINK_PAGES_README.md](tools/CROSSLINK_PAGES_README.md).
+
+5. If the term count crosses a round number (e.g. 200 → 250), update the search-bar placeholder and `<span id="visibleTerms">` count in `glossary.html`.
 
 See [tools/CROSSLINK_GLOSSARY_README.md](tools/CROSSLINK_GLOSSARY_README.md) for more.
+
+---
+
+## SEO Conventions
+
+The site is search-optimized for cloud-security queries. The conventions below are enforced manually — none of the build scripts validate them, so please follow them when adding pages or editing existing ones. Regressing them silently hurts ranking for "cloud security" terms.
+
+### Page metadata
+
+- **`<title>`** — pattern: `Topic - Cloud Security Office Hours` (or `Topic - CSOH` on shorter pages). Front-load the topic, keep it under ~60 chars.
+- **`<meta name="description">`** — **strict 155-char limit** (Google truncates above ~155). Front-load "cloud security" + the page's distinct angle. Don't pad.
+- **Canonical** — every page must have `<link rel="canonical" href="https://csoh.org/PAGE.html">`.
+- **Open Graph / Twitter Card** — set both `og:title`/`og:description` and `twitter:title`/`twitter:description`. The OG description doesn't have the 155-char rule, but keep it tight.
+
+### Headings
+
+- **One `<h1>` per page.** Place it inside the hero (`<section class="hero hero--compact">` or `<section class="hero">`). The hero CSS already styles both `h1` and `h2` identically, so use `<h1>`.
+- **The `<h1>` must include cloud-security keywords** — e.g. `Cloud Security Resources`, not `Resources`. The page title should match what someone would Google.
+- **Do NOT put `<h1>` in the logo.** The logo is `<div class="logo-title">CSOH</div>` (a div, not a heading) — same on every page. Don't change this back to `<h1>`.
+- **Subsequent headings** are `<h2>` (section heads), then `<h3>` (subsections). Don't skip levels.
+
+### Adding a new page
+
+When you add a new HTML page, do all of the following — none are automated:
+
+1. Copy an existing page that's structurally similar (e.g., `what-is-cloud-security.html` for an article-style pillar page; `resources.html` for a card directory).
+2. Write a < 155-char meta description, front-loaded with cloud-security keywords.
+3. Use a `Topic - Cloud Security Office Hours` title.
+4. Set `<link rel="canonical" href="https://csoh.org/yourpage.html">`.
+5. Add a `BreadcrumbList` JSON-LD block (`Home > Your Page`).
+6. Add a single keyword-rich `<h1>` in the hero.
+7. **Add the page to `sitemap.xml`** (a new `<url>` block). `update_sitemap.py` only refreshes `<lastmod>` for entries already in the sitemap — it does not auto-discover new pages.
+8. **Add the page to the nav** (`<ul class="dropdown-menu">`) **on every existing HTML page**. The nav is duplicated per page, not shared. Pick the right dropdown: `Learn` for educational/reference content, `Defend` for threat/news content, `Attend` for community/sessions, `Contribute` for contributor pages.
+9. Update the file structure trees in `README.md` and `DEVELOPMENT.md`.
+10. Let CI regenerate SRI hashes (`update_sri.py` runs on deploy) or run it locally.
+
+### Cross-linking
+
+- Inside the body of educational pages, link to the glossary, CTFs, breach kill chains, and pillar pages with **keyword-rich anchor text** ("cloud security CTF challenges", not "click here").
+- The hub-and-spoke pattern matters for SEO: `what-is-cloud-security.html` is the hub; pillar pages, glossary, CTFs, breach kill chains, certifications, and learning path are spokes that link back to the hub. Don't break this when refactoring.
+
+### Scripts that touch HTML are SEO-safe by design
+
+`update_news.py`, `add_meeting.py`, `submit_resource.py`, `submit_ctf.py`, `update_presentations_schema.py`, `crosslink_glossary.py`, and `crosslink_pages.py` all modify *content regions* (cards, meeting entries, schema JSON, glossary `<dd>` blocks, inline term anchors) — they never rewrite `<title>`, `<meta name="description">`, or `<h1>` tags. If you add a new HTML-generating script, follow the same rule: leave page-level SEO metadata alone.
 
 ---
 
@@ -256,7 +313,8 @@ See [tools/CROSSLINK_GLOSSARY_README.md](tools/CROSSLINK_GLOSSARY_README.md) for
 | `tools/update_sitemap.py` | Refreshes `<lastmod>` dates in `sitemap.xml` from git history | **Don't edit** -- runs in CI and alongside `update_news.py` |
 | `tools/update_presentations_schema.py` | Regenerates `VideoObject` JSON-LD on `presentations.html` | **Don't edit** -- runs in CI on every deploy |
 | `tools/crosslink_glossary.py` | Adds `id="term-..."` to glossary `<dt>`s and hyperlinks every term mention in `<dd>`s | Run after adding/editing glossary entries |
-| `glossary.html` | Cloud-security glossary (200+ terms) with live search and cross-linked definitions | Adding/editing terms; run `crosslink_glossary.py` after |
+| `tools/crosslink_pages.py` | Hyperlinks first occurrence of each glossary term across all content pages | Run after adding/editing glossary entries (or after adding a new content page) |
+| `glossary.html` | Cloud-security glossary (200+ terms) with live search and cross-linked definitions | Adding/editing terms; run `crosslink_glossary.py` *and* `crosslink_pages.py` after |
 | `glossary.js` | Live search/filter for `glossary.html` | Changing search behavior |
 | `meetings.js` | Filters + auto-detected speaker filter for `meetings.html` | Adding new recurring speakers (`SPEAKERS` list) |
 | `sitemap.xml` | XML sitemap for search engines | **Don't edit** -- lastmod refreshed automatically |

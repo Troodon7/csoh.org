@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta name="description"
-        content="Step-by-step attack kill chains for major cloud security breaches, mapped to MITRE ATT&CK Cloud techniques. A learning resource for cloud security professionals.">
+        content="Step-by-step cloud security breach kill chains mapped to MITRE ATT&CK Cloud — Capital One, SolarWinds, MGM, Snowflake and more, vendor-neutral.">
     <meta name="keywords"
         content="cloud breach kill chain, MITRE ATT&CK cloud, cloud security breaches, Capital One breach, SolarWinds attack, incident response, cloud attack timeline, AWS security breach, Azure security breach">
     <title>Breach Kill Chains - Cloud Security Office Hours</title>
@@ -28,10 +28,10 @@
         content="Step-by-step attack kill chains for major cloud security breaches, mapped to MITRE ATT&CK Cloud techniques.">
     <meta name="twitter:image" content="https://csoh.org/banner.png">
 
-    <link rel="preload" href="/style.css?v=aafcb728" as="style"
-        integrity="sha384-Gy6/E+PcOXfeETLfbpNROKg7FSN2YYjY9HeqDguQRr40McPWNStQGoGJoKZ1PxHb">
-    <link rel="stylesheet" href="/style.css?v=aafcb728"
-        integrity="sha384-Gy6/E+PcOXfeETLfbpNROKg7FSN2YYjY9HeqDguQRr40McPWNStQGoGJoKZ1PxHb">
+    <link rel="preload" href="/style.css?v=d6c1acef" as="style"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
+    <link rel="stylesheet" href="/style.css?v=d6c1acef"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
     <link rel="stylesheet" href="breach-timeline.css?v=8b44d5a7" integrity="sha384-jWoZzW8O/ywW8cS2Dd9EOxBRiFtUSJfjBoV0voZlo4MXpivLevOWxmsCww7TCuFX">
 
     <!-- Structured Data -->
@@ -70,7 +70,7 @@
         <div class="header-content">
             <a href="index.html" class="logo-link">
                 <div class="logo">
-                    <h1>CSOH</h1>
+                    <div class="logo-title">CSOH</div>
                     <p>Cloud Security Office Hours</p>
                 </div>
             </a>
@@ -82,8 +82,11 @@
           <li class="has-dropdown">
             <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
             <ul class="dropdown-menu">
+              <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+              <li><a href="learning-path.html">Learning Path</a></li>
               <li><a href="resources.html">Resources</a></li>
               <li><a href="ctfs.html">CTFs</a></li>
+              <li><a href="cloud-security-certifications.html">Certifications</a></li>
               <li><a href="glossary.html">Glossary</a></li>
             </ul>
           </li>
@@ -129,8 +132,8 @@
     <section class="hero hero--compact">
         <img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img"
             decoding="async">
-        <h2>Cloud Breach Kill Chains</h2>
-        <p>Real attacks. Real post-mortems. Step-by-step attack progression mapped to MITRE ATT&amp;CK Cloud — so you
+        <h1>Cloud Breach Kill Chains</h1>
+        <p>Real attacks. Real post-mortems. Step-by-step attack progression mapped to <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud — so you
             can understand exactly what happened, and stop it next time.</p>
         <div class="hero-chips">
             <span class="hero-chip chip-mitre">MITRE ATT&amp;CK Cloud Mapped</span>
@@ -138,6 +141,12 @@
             <span class="hero-chip chip-src">Official Post-Mortems Sourced</span>
         </div>
     </section>
+
+    <div class="container" style="padding-top:1.5rem; padding-bottom:0;">
+        <div class="info-box--blue">
+            <p><strong>Want to practice these techniques?</strong> Try the <a href="ctfs.html">cloud security CTF challenges</a> — many cover the same attack patterns (<a class="glossary-link" href="glossary.html#term-ssrf">SSRF</a>, <a class="glossary-link" href="glossary.html#term-iam">IAM</a> exploitation, token abuse). Unfamiliar with terms like <a class="glossary-link" href="glossary.html#term-imds">IMDSv2</a>, <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a>, or <a class="glossary-link" href="glossary.html#term-golden-saml">Golden SAML</a>? See the <a href="glossary.html">cloud security glossary</a>. For broader context on threat actors and trends, browse the <a href="threat-research.html">cloud threat research directory</a> or the <a href="what-is-cloud-security.html">cloud security overview</a>.</p>
+        </div>
+    </div>
 
 <nav class="incident-tabs" role="tablist">
   <button class="itab active" data-panel="capital-one" data-year="2019" role="tab">Capital One 2019 <span class="itab-prov prov-aws">AWS</span></button>
@@ -163,10 +172,10 @@
       <span class="prov-tag prov-aws">AWS</span>
     </div>
     <h2 class="inc-title">Capital One – SSRF → IMDSv1 → Over-Privileged IAM Role → 106M Record S3 Exfiltration</h2>
-    <p class="inc-summary">A former AWS engineer exploited a misconfigured WAF via server-side request forgery to reach the EC2 instance metadata service, stealing temporary IAM role credentials. An over-privileged role then granted access to 700+ S3 buckets containing 106 million customer records. The attack ran undetected for 77 days and directly caused AWS to build IMDSv2.</p>
+    <p class="inc-summary">A former AWS engineer exploited a misconfigured <a class="glossary-link" href="glossary.html#term-waf">WAF</a> via server-side request forgery to reach the <a class="glossary-link" href="glossary.html#term-ec2">EC2</a> instance metadata service, stealing temporary IAM role credentials. An over-privileged role then granted access to 700+ <a class="glossary-link" href="glossary.html#term-s3">S3</a> buckets containing 106 million customer records. The attack ran undetected for 77 days and directly caused AWS to build IMDSv2.</p>
     <div class="inc-stats">
       <div class="inc-stat"><strong>106M</strong> records exposed</div>
-      <div class="inc-stat"><strong>77 days</strong> dwell time</div>
+      <div class="inc-stat"><strong>77 days</strong> <a class="glossary-link" href="glossary.html#term-dwell-time">dwell time</a></div>
       <div class="inc-stat"><strong>$80M</strong> civil penalty</div>
       <div class="inc-stat"><strong>Threat actor:</strong> Paige Thompson, former AWS employee</div>
     </div>
@@ -194,7 +203,7 @@
       </div>
     </div>
 
-    <div class="phase-lbl ph-init">⚡ Initial Access</div>
+    <div class="phase-lbl ph-init">⚡ <a class="glossary-link" href="glossary.html#term-initial-access">Initial Access</a></div>
     <div class="kc-step step-r">
       <div class="step-num">02</div>
       <div class="step-body">
@@ -238,7 +247,7 @@
           <div class="step-title">700+ S3 buckets enumerated using stolen role credentials</div>
           <a class="mt mt-di" href="https://attack.mitre.org/techniques/T1619/" target="_blank" rel="noopener">T1619 – Cloud Storage Object Discovery</a>
         </div>
-        <p class="step-desc">With the stolen AWS credentials, Thompson used the CLI to list all S3 buckets accessible to the ISRM-WAF-Role. The role had been granted sweeping S3 list and read permissions — far beyond what a WAF firewall function ever needed — violating least privilege at the design level.</p>
+        <p class="step-desc">With the stolen AWS credentials, Thompson used the CLI to list all S3 buckets accessible to the ISRM-WAF-Role. The role had been granted sweeping S3 list and read permissions — far beyond what a WAF firewall function ever needed — violating <a class="glossary-link" href="glossary.html#term-least-privilege">least privilege</a> at the design level.</p>
         <div class="step-code">
           <span class="hl">Command:</span> aws s3 ls (authenticated with stolen session credentials)<br>
           <span class="hl">Result:</span> 700+ buckets listed including Capital One customer data stores<br>
@@ -248,7 +257,7 @@
       </div>
     </div>
 
-    <div class="phase-lbl ph-exfil">📤 Exfiltration</div>
+    <div class="phase-lbl ph-exfil">📤 <a class="glossary-link" href="glossary.html#term-exfiltration">Exfiltration</a></div>
     <div class="kc-step step-c">
       <div class="step-num">05</div>
       <div class="step-body">
@@ -260,7 +269,7 @@
         <div class="step-code">
           <span class="hl">Tool:</span> aws s3 sync<br>
           <span class="hl">Data exfiltrated:</span> 106M records, 140K SSNs, 80K bank accounts, credit/financial history<br>
-          <span class="hl">Detection gap:</span> GuardDuty not enabled; S3 access logs not monitored for volume anomalies
+          <span class="hl">Detection gap:</span> <a class="glossary-link" href="glossary.html#term-guardduty">GuardDuty</a> not enabled; S3 access logs not monitored for volume anomalies
         </div>
         <div class="step-tags"><span class="stag">aws s3 sync</span><span class="stag">PII</span><span class="stag">T1530</span><span class="stag">Financial Data</span></div>
       </div>
@@ -284,8 +293,8 @@
     <div class="def-box">
       <h3>🛡 How to Defend Against This Chain</h3>
       <div class="def-items">
-        <div class="def-item"><strong>Enforce IMDSv2 on all EC2 instances.</strong> IMDSv2 requires a session token obtained via a PUT request — SSRF attacks that can only issue GET requests cannot obtain credentials. AWS defaults new instances to IMDSv2 and you can enforce it via SCP across your organisation.</div>
-        <div class="def-item"><strong>Apply least-privilege IAM to every role.</strong> A WAF role should only write WAF logs — not list or read S3. Use IAM Access Analyzer findings and Access Advisor unused-permission reports to identify and tighten over-privileged roles.</div>
+        <div class="def-item"><strong>Enforce IMDSv2 on all EC2 instances.</strong> IMDSv2 requires a session token obtained via a PUT request — SSRF attacks that can only issue GET requests cannot obtain credentials. AWS defaults new instances to IMDSv2 and you can enforce it via <a class="glossary-link" href="glossary.html#term-scp">SCP</a> across your organisation.</div>
+        <div class="def-item"><strong>Apply least-privilege IAM to every role.</strong> A WAF role should only write WAF logs — not list or read S3. Use <a class="glossary-link" href="glossary.html#term-iam-access-analyzer">IAM Access Analyzer</a> findings and Access Advisor unused-permission reports to identify and tighten over-privileged roles.</div>
         <div class="def-item"><strong>Enable Amazon GuardDuty.</strong> GuardDuty's UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration finding specifically detects role credentials being used from outside the EC2 instance that issued them.</div>
         <div class="def-item"><strong>Alert on anomalous S3 access volume.</strong> Large-scale GetObject or ListBucket calls from an unexpected IP or at an unusual rate should trigger a CloudWatch + SNS alert immediately.</div>
         <div class="def-item"><strong>Add SSRF rules to your WAF.</strong> Block requests containing 169.254.169.254 in URL, body, or headers. This is not in default WAF configurations — it must be explicitly added.</div>
@@ -314,7 +323,7 @@
       <span class="prov-tag prov-green">GCP</span>
     </div>
     <h2 class="inc-title">Uber – Dark Web Creds → MFA Push Fatigue → Hardcoded PAM Secret → Full AWS/GCP Admin</h2>
-    <p class="inc-summary">An 18-year-old attacker purchased an Uber contractor's VPN credentials from a dark web infostealer marketplace, then used MFA push-bombing combined with WhatsApp social engineering to bypass two-factor auth. Once inside the corporate network, they found a PowerShell script with hardcoded admin credentials for Thycotic — Uber's PAM system — unlocking full admin access to AWS, GCP, Slack, SentinelOne, HackerOne, and more within hours.</p>
+    <p class="inc-summary">An 18-year-old attacker purchased an Uber contractor's VPN credentials from a dark web <a class="glossary-link" href="glossary.html#term-infostealer">infostealer</a> marketplace, then used <a class="glossary-link" href="glossary.html#term-mfa">MFA</a> push-bombing combined with WhatsApp social engineering to bypass two-factor auth. Once inside the corporate network, they found a PowerShell script with hardcoded admin credentials for Thycotic — Uber's PAM system — unlocking full admin access to AWS, GCP, Slack, SentinelOne, HackerOne, and more within hours.</p>
     <div class="inc-stats">
       <div class="inc-stat"><strong>Full admin</strong> on AWS, GCP, Slack, SentinelOne, HackerOne</div>
       <div class="inc-stat"><strong>&lt;24 hours</strong> initial access to full compromise</div>
@@ -353,9 +362,9 @@
         </div>
         <p class="step-desc">The attacker repeatedly attempted VPN login, flooding the contractor's phone with MFA push notifications. After approximately an hour of notifications, they contacted the contractor on WhatsApp claiming to be Uber IT support and stating the only way to stop the notifications was to approve one. The contractor complied.</p>
         <div class="step-code">
-          <span class="hl">Technique:</span> MFA push fatigue ("push bombing") for ~1 hour<br>
+          <span class="hl">Technique:</span> MFA push fatigue ("<a class="glossary-link" href="glossary.html#term-mfa-fatigue">push bombing</a>") for ~1 hour<br>
           <span class="hl">Social engineering:</span> WhatsApp message: "I'm from Uber IT. Accept the push to stop the notifications."<br>
-          <span class="hl">MFA type:</span> Push notification (not phishing-resistant FIDO2)<br>
+          <span class="hl">MFA type:</span> Push notification (not <a class="glossary-link" href="glossary.html#term-phishing">phishing</a>-resistant <a class="glossary-link" href="glossary.html#term-fido2">FIDO2</a>)<br>
           <span class="hl">Why it worked:</span> No number-matching · No limit on push attempt rate
         </div>
         <div class="step-tags"><span class="stag">MFA Fatigue</span><span class="stag">Push Bombing</span><span class="stag">WhatsApp SE</span><span class="stag">T1621</span></div>
@@ -393,9 +402,9 @@
           <span class="hl">Location:</span> Internal network share (contractor VPN accessible)<br>
           <span class="hl">Contents:</span> Hardcoded Thycotic domain admin username + password in plaintext<br>
           <span class="hl">Irony:</span> Thycotic was the PAM system specifically designed to prevent hardcoded secrets<br>
-          <span class="hl">Root cause:</span> Automation script needed PAM API access but used a static credential instead of a scoped service account
+          <span class="hl">Root cause:</span> Automation script needed PAM API access but used a static credential instead of a scoped <a class="glossary-link" href="glossary.html#term-service-account">service account</a>
         </div>
-        <div class="step-tags"><span class="stag">Hardcoded Credentials</span><span class="stag">PowerShell</span><span class="stag">T1552.001</span><span class="stag">Secrets Sprawl</span></div>
+        <div class="step-tags"><span class="stag">Hardcoded Credentials</span><span class="stag">PowerShell</span><span class="stag">T1552.001</span><span class="stag"><a class="glossary-link" href="glossary.html#term-secrets-sprawl">Secrets Sprawl</a></span></div>
       </div>
     </div>
 
@@ -404,7 +413,7 @@
       <div class="step-num">05</div>
       <div class="step-body">
         <div class="step-hdr">
-          <div class="step-title">Thycotic admin access → all secrets extracted → full cloud and SaaS compromise</div>
+          <div class="step-title">Thycotic admin access → all secrets extracted → full cloud and <a class="glossary-link" href="glossary.html#term-saas">SaaS</a> compromise</div>
           <a class="mt mt-pe" href="https://attack.mitre.org/techniques/T1078/004/" target="_blank" rel="noopener">T1078.004 – Cloud Accounts</a>
         </div>
         <p class="step-desc">Using the admin credentials, the attacker logged into Thycotic and extracted all stored secrets. Thycotic was the single source of truth for credentials across Uber's entire cloud and SaaS footprint.</p>
@@ -413,7 +422,7 @@
           → AWS (cloud infrastructure admin)<br>
           → GCP + Google Workspace (admin)<br>
           → Slack workspace (admin — used to announce breach to all Uber employees)<br>
-          → SentinelOne XDR (admin — ability to suppress security alerts)<br>
+          → SentinelOne <a class="glossary-link" href="glossary.html#term-edr">XDR</a> (admin — ability to suppress security alerts)<br>
           → HackerOne admin console (access to private vulnerability reports)<br>
           → DUO, OneLogin, VMware vSphere, Uber internal dashboards
         </div>
@@ -439,9 +448,9 @@
     <div class="def-box">
       <h3>🛡 How to Defend Against This Chain</h3>
       <div class="def-items">
-        <div class="def-item"><strong>Deploy phishing-resistant MFA (FIDO2 / hardware security keys).</strong> Push notification MFA is defeated by fatigue attacks. Number-matching — requiring users to match a code shown on screen — stops automated bombing. FIDO2/passkeys are immune to both fatigue and phishing.</div>
-        <div class="def-item"><strong>Never hardcode credentials in scripts — use dynamic secrets from your PAM.</strong> Scripts should authenticate to your PAM via a scoped, short-lived service account, or use cloud-native options (AWS Secrets Manager, GCP Secret Manager with Workload Identity). Run Trufflehog or GitLeaks in CI/CD.</div>
-        <div class="def-item"><strong>Segment your network so contractor VPNs cannot reach all internal shares.</strong> Contractors should only access resources their role requires. A contractor VPN with visibility across all internal file shares is a single-hop lateral movement risk.</div>
+        <div class="def-item"><strong>Deploy <a class="glossary-link" href="glossary.html#term-phishing-resistant">phishing-resistant MFA</a> (FIDO2 / hardware security keys).</strong> Push notification MFA is defeated by fatigue attacks. Number-matching — requiring users to match a code shown on screen — stops automated bombing. FIDO2/passkeys are immune to both fatigue and phishing.</div>
+        <div class="def-item"><strong>Never hardcode credentials in scripts — use dynamic secrets from your PAM.</strong> Scripts should authenticate to your PAM via a scoped, short-lived service account, or use cloud-native options (AWS Secrets Manager, GCP Secret Manager with Workload Identity). Run Trufflehog or GitLeaks in <a class="glossary-link" href="glossary.html#term-ci">CI</a>/CD.</div>
+        <div class="def-item"><strong>Segment your network so contractor VPNs cannot reach all internal shares.</strong> Contractors should only access resources their role requires. A contractor VPN with visibility across all internal file shares is a single-hop <a class="glossary-link" href="glossary.html#term-lateral-movement">lateral movement</a> risk.</div>
         <div class="def-item"><strong>Alert on anomalous PAM admin logins immediately.</strong> PAM is the crown jewels. A PAM admin login from a new device, new IP, or at an unusual time should trigger an immediate alert — not a periodic review.</div>
         <div class="def-item"><strong>Enrol contractor devices in MDM and require health attestation before VPN admission.</strong> Device health checks can catch infostealer infections before they translate into credential theft.</div>
       </div>
@@ -465,7 +474,7 @@
     <div class="inc-meta">
       <span class="inc-year">April 2021 – June 2023 (2 year operation)</span>
       <span class="sev-badge sev-critical">Critical</span>
-      <span class="prov-tag prov-azure">Azure AD / Exchange Online</span>
+      <span class="prov-tag prov-azure"><a class="glossary-link" href="glossary.html#term-entra-id">Azure AD</a> / Exchange Online</span>
     </div>
     <h2 class="inc-title">Storm-0558 – Compromised Engineer → Crash Dump → Stolen MSA Signing Key → Forged Tokens → Government Email Espionage</h2>
     <p class="inc-summary">Chinese nation-state actor Storm-0558 compromised a Microsoft engineer's corporate account, discovered a consumer MSA signing key that had accidentally been included in a crash dump in a debugging environment, and used it to forge authentication tokens. A token validation bug in Exchange Online accepted these consumer tokens as enterprise credentials, enabling access to ~25 organisations' email — including 60,000 US State Department emails — for weeks before discovery.</p>
@@ -529,7 +538,7 @@
         <p class="step-desc">Starting May 15, 2023, Storm-0558 used the stolen MSA consumer signing key to forge OpenID v2.0 access tokens impersonating specific users at targeted government organisations. The tokens were correctly signed — any service validating them against Microsoft's published public keys would accept them as legitimate.</p>
         <div class="step-code">
           <span class="hl">Token type:</span> OpenID v2.0 access tokens (signed with MSA consumer key)<br>
-          <span class="hl">Blast radius (per Wiz):</span> Could forge tokens for any Azure AD app supporting personal account auth — not just Exchange<br>
+          <span class="hl"><a class="glossary-link" href="glossary.html#term-blast-radius">Blast radius</a> (per Wiz):</span> Could forge tokens for any Azure AD app supporting personal account auth — not just Exchange<br>
           <span class="hl">Services potentially at risk:</span> OneDrive, SharePoint, Teams, any app using "Login with Microsoft"
         </div>
         <div class="step-tags"><span class="stag">Token Forgery</span><span class="stag">MSA Key</span><span class="stag">OpenID v2.0</span><span class="stag">T1606.001</span></div>
@@ -577,7 +586,7 @@
       <div class="step-num">06</div>
       <div class="step-body">
         <div class="step-hdr"><div class="step-title">US State Dept detects via custom MailItemsAccessed alert ("Big Yellow Taxi") — June 16, 2023</div></div>
-        <p class="step-desc">The State Dept detected the breach via a custom alert rule triggered by the MailItemsAccessed audit event — which was only available to organisations that had purchased Microsoft's E5 license tier. Organisations on lower tiers could not see this event and were unable to detect the breach independently. Following CISA pressure, Microsoft extended MailItemsAccessed to E3 customers in September 2023.</p>
+        <p class="step-desc">The State Dept detected the breach via a custom alert rule triggered by the MailItemsAccessed audit event — which was only available to organisations that had purchased Microsoft's E5 license tier. Organisations on lower tiers could not see this event and were unable to detect the breach independently. Following <a class="glossary-link" href="glossary.html#term-cisa">CISA</a> pressure, Microsoft extended MailItemsAccessed to E3 customers in September 2023.</p>
         <div class="step-code">
           <span class="hl">Detection event:</span> MailItemsAccessed — unknown application ID accessing mailboxes<br>
           <span class="hl">Critical licensing gap:</span> MailItemsAccessed was E5-only at time of breach · Most victims couldn't see it<br>
@@ -594,7 +603,7 @@
         <div class="def-item"><strong>Explicitly validate token issuers in your applications — don't assume the SDK does it.</strong> For Azure AD apps, confirm tokens are signed by the correct key type for your audience. Don't rely on library defaults.</div>
         <div class="def-item"><strong>Protect crash dump pipelines — scan for key material before copying to non-isolated environments.</strong> Crash dumps should be treated as potentially sensitive and scanned for credentials and key material before being moved to debugging environments.</div>
         <div class="def-item"><strong>Treat acquired companies' devices as untrusted until fully re-enrolled under your MDM.</strong> Devices from acquisitions should go through a full wipe-and-re-enrol process before receiving corporate credentials.</div>
-        <div class="def-item"><strong>Maintain an approved OAuth application inventory and alert on deviations.</strong> Alert on any application accessing mailboxes that is not in your approved inventory. Conditional Access policies can enforce application restrictions.</div>
+        <div class="def-item"><strong>Maintain an approved OAuth application inventory and alert on deviations.</strong> Alert on any application accessing mailboxes that is not in your approved inventory. <a class="glossary-link" href="glossary.html#term-conditional-access">Conditional Access</a> policies can enforce application restrictions.</div>
       </div>
     </div>
     <div class="src-box">
@@ -651,7 +660,7 @@
       </div>
     </div>
 
-    <div class="phase-lbl ph-exec">📡 Backdoor Activation and C2 Beaconing</div>
+    <div class="phase-lbl ph-exec">📡 Backdoor Activation and <a class="glossary-link" href="glossary.html#term-c2">C2</a> Beaconing</div>
     <div class="kc-step step-o">
       <div class="step-num">02</div>
       <div class="step-body">
@@ -669,7 +678,7 @@
       </div>
     </div>
 
-    <div class="phase-lbl ph-priv">🔼 On-Prem Privilege Escalation</div>
+    <div class="phase-lbl ph-priv">🔼 On-Prem <a class="glossary-link" href="glossary.html#term-privilege-escalation">Privilege Escalation</a></div>
     <div class="kc-step step-p">
       <div class="step-num">03</div>
       <div class="step-body">
@@ -677,7 +686,7 @@
           <div class="step-title">TEARDROP dropper deploys Cobalt Strike BEACON; domain admin privileges obtained on-premises</div>
           <a class="mt mt-pe" href="https://attack.mitre.org/techniques/T1078/002/" target="_blank" rel="noopener">T1078.002 – Domain Accounts</a>
         </div>
-        <p class="step-desc">At selected high-value targets, SUNBURST delivered TEARDROP — a memory-resident dropper — which deployed Cobalt Strike BEACON for interactive C2 and lateral movement. SVR used BEACON to escalate to domain admin privileges on the victim's on-premises Active Directory, positioning themselves to attack cloud identity via the ADFS server.</p>
+        <p class="step-desc">At selected high-value targets, SUNBURST delivered TEARDROP — a memory-resident dropper — which deployed Cobalt Strike BEACON for interactive C2 and lateral movement. SVR used BEACON to escalate to domain admin privileges on the victim's on-premises <a class="glossary-link" href="glossary.html#term-active-directory">Active Directory</a>, positioning themselves to attack cloud identity via the ADFS server.</p>
         <div class="step-code">
           <span class="hl">Second-stage malware:</span> TEARDROP (memory-resident dropper) → Cobalt Strike BEACON (C2)<br>
           <span class="hl">Goal of on-prem access:</span> Reach ADFS server to steal the SAML token-signing certificate<br>
@@ -696,14 +705,14 @@
           <a class="mt mt-de" href="https://attack.mitre.org/techniques/T1606/002/" target="_blank" rel="noopener">T1606.002 – SAML Token Forgery</a>
           <a class="mt mt-lm" href="https://attack.mitre.org/techniques/T1550/" target="_blank" rel="noopener">T1550 – Use Alternate Auth Material</a>
         </div>
-        <p class="step-desc">With domain admin privileges, SVR extracted the ADFS token-signing private key and certificate from the on-premises federation server. Using this key, they could forge SAML assertions impersonating any user — "Golden SAML." Forged SAML tokens bypass MFA entirely because the SAML assertion IS the proof of authentication — no second factor is requested when a valid SAML response is presented.</p>
+        <p class="step-desc">With domain admin privileges, SVR extracted the ADFS token-signing private key and certificate from the on-premises <a class="glossary-link" href="glossary.html#term-federation">federation</a> server. Using this key, they could forge SAML assertions impersonating any user — "Golden SAML." Forged SAML tokens bypass MFA entirely because the SAML assertion IS the proof of authentication — no second factor is requested when a valid SAML response is presented.</p>
         <div class="step-code">
           <span class="hl">Golden SAML attack steps:</span><br>
           1. Extract ADFS private signing key + certificate (requires domain admin)<br>
           2. Forge SAML assertion claiming to be any privileged user (Global Admin, etc.)<br>
           3. Present to Azure AD / M365 — accepted as fully legitimate<br>
           4. MFA bypassed — the forged SAML IS the authentication proof<br>
-          <span class="hl">Persistence:</span> SAML signing certs rarely rotated — access persisted indefinitely without re-exploitation
+          <span class="hl"><a class="glossary-link" href="glossary.html#term-persistence">Persistence</a>:</span> SAML signing certs rarely rotated — access persisted indefinitely without re-exploitation
         </div>
         <div class="step-tags"><span class="stag">Golden SAML</span><span class="stag">ADFS</span><span class="stag">MFA Bypass</span><span class="stag">T1606.002</span><span class="stag">On-Prem to Cloud</span></div>
       </div>
@@ -724,7 +733,7 @@
           <span class="hl">Cloud persistence mechanisms added:</span><br>
           → New federated identity providers added to Azure AD<br>
           → OAuth app permissions granted for API-based access<br>
-          → Service principal credentials added for ongoing access<br>
+          → <a class="glossary-link" href="glossary.html#term-service-principal">Service principal</a> credentials added for ongoing access<br>
           <span class="hl">Key lesson:</span> Removing Orion did NOT remove cloud access — Azure AD had to be separately evicted
         </div>
         <div class="step-tags"><span class="stag">M365 Email Access</span><span class="stag">Azure AD Persistence</span><span class="stag">OAuth Backdoors</span><span class="stag">US Government</span></div>
@@ -735,7 +744,7 @@
     <div class="kc-step step-g">
       <div class="step-num">06</div>
       <div class="step-body">
-        <div class="step-hdr"><div class="step-title">FireEye discovers its own red team tools stolen; traces back to trojanized Orion — December 13, 2020</div></div>
+        <div class="step-hdr"><div class="step-title">FireEye discovers its own <a class="glossary-link" href="glossary.html#term-red-team">red team</a> tools stolen; traces back to trojanized Orion — December 13, 2020</div></div>
         <p class="step-desc">FireEye discovered theft of its proprietary red team offensive tools during an internal investigation and traced the intrusion to a trojanized SolarWinds Orion update. Their public disclosure on December 13, 2020 triggered a global incident response and CISA Emergency Directive 21-01 requiring all federal agencies to immediately disconnect Orion. Crucially, removing Orion did not remove cloud persistence — Azure AD backdoors required a separate, comprehensive eviction process.</p>
         <div class="step-code">
           <span class="hl">Discovered by:</span> FireEye (investigating their own breach, Dec 13 2020)<br>
@@ -750,7 +759,7 @@
     <div class="def-box">
       <h3>🛡 How to Defend Against This Chain</h3>
       <div class="def-items">
-        <div class="def-item"><strong>Treat your ADFS / identity provider as a Tier 0 asset equal to domain controllers.</strong> The ADFS server holds the keys to all federated services. Protect it with privileged access workstations, no internet exposure, and HSM-protected signing keys. Monitor it as you would your most critical production system.</div>
+        <div class="def-item"><strong>Treat your ADFS / <a class="glossary-link" href="glossary.html#term-idp">identity provider</a> as a Tier 0 asset equal to domain controllers.</strong> The ADFS server holds the keys to all federated services. Protect it with privileged access workstations, no internet exposure, and <a class="glossary-link" href="glossary.html#term-hsm">HSM</a>-protected signing keys. Monitor it as you would your most critical production system.</div>
         <div class="def-item"><strong>Detect Golden SAML by correlating ADFS event logs with Azure AD sign-in logs.</strong> Legitimate ADFS authentications leave traces in both systems. An Azure AD sign-in with no corresponding ADFS authentication event (IDs 1202, 1200) is highly suspicious.</div>
         <div class="def-item"><strong>Audit Azure AD federated identity providers, OAuth app permissions, and service principals regularly.</strong> SVR's cloud persistence survived Orion removal. Use Microsoft Entra audit logs or Defender for Cloud Apps to detect new high-privilege applications.</div>
         <div class="def-item"><strong>Implement software supply chain integrity verification for build systems.</strong> Monitor build environments with endpoint security. Verify build artifact integrity. Implement reproducible builds. Treat your CI/CD pipeline as production infrastructure.</div>
@@ -780,7 +789,7 @@
       <span class="prov-tag prov-azure">Azure Blob Storage</span>
     </div>
     <h2 class="inc-title">Microsoft AI Research SAS Token — Over-Permissioned Token → Public GitHub → 38TB Internal Data Exposed for 3 Years</h2>
-    <p class="inc-summary">A Microsoft AI researcher shared a URL to open-source training data on a public GitHub repository. The URL contained an Azure Shared Access Signature token — but instead of being scoped to a specific file or container, it was an Account SAS with full-control permissions to the entire storage account, set to expire in 2051. Anyone who found the URL could read, modify, or delete 38TB of internal Microsoft data including employee workstation backups, private keys, saved passwords, and 30,000+ internal Teams messages. Discovered and responsibly disclosed by Wiz Research in June 2023 after ~3 years of exposure.</p>
+    <p class="inc-summary">A Microsoft <a class="glossary-link" href="glossary.html#term-ai">AI</a> researcher shared a URL to open-source training data on a public GitHub repository. The URL contained an Azure Shared Access Signature token — but instead of being scoped to a specific file or container, it was an Account SAS with full-control permissions to the entire storage account, set to expire in 2051. Anyone who found the URL could read, modify, or delete 38TB of internal Microsoft data including employee workstation backups, private keys, saved passwords, and 30,000+ internal Teams messages. Discovered and responsibly disclosed by Wiz Research in June 2023 after ~3 years of exposure.</p>
     <div class="inc-stats">
       <div class="inc-stat"><strong>38 TB</strong> exposed</div>
       <div class="inc-stat"><strong>3 years</strong> exposure window</div>
@@ -1086,7 +1095,7 @@
       <span class="prov-tag prov-blue">Azure AD</span>
     </div>
     <h2 class="inc-title">Scattered Spider / MGM Resorts – LinkedIn OSINT → Vishing Help Desk → Okta Super Admin → Azure AD → 100 ESXi Servers Encrypted</h2>
-    <p class="inc-summary">Scattered Spider (UNC3944) compromised MGM Resorts International in September 2023 using a single 10-minute phone call to the IT help desk. Attackers researched an MGM employee on LinkedIn, impersonated them to a help desk agent, obtained an MFA reset, and gained initial access. From there they escalated to Okta Super Administrator, claimed Azure AD tenant-level control, moved laterally across the network, and encrypted over 100 ESXi hypervisors using ALPHV/BlackCat ransomware — causing $100M in losses and a 10-day outage. The entire initial access chain required no technical exploit whatsoever.</p>
+    <p class="inc-summary">Scattered Spider (UNC3944) compromised MGM Resorts International in September 2023 using a single 10-minute phone call to the IT help desk. Attackers researched an MGM employee on LinkedIn, impersonated them to a help desk agent, obtained an MFA reset, and gained initial access. From there they escalated to Okta Super Administrator, claimed Azure AD <a class="glossary-link" href="glossary.html#term-tenant">tenant</a>-level control, moved laterally across the network, and encrypted over 100 ESXi hypervisors using ALPHV/BlackCat ransomware — causing $100M in losses and a 10-day outage. The entire initial access chain required no technical exploit whatsoever.</p>
     <div class="inc-stats">
       <div class="inc-stat"><strong>$100M+</strong> estimated losses</div>
       <div class="inc-stat"><strong>10 days</strong> operational disruption</div>
@@ -1171,7 +1180,7 @@
           <a class="mt mt-pe" href="https://attack.mitre.org/techniques/T1078/004/" target="_blank" rel="noopener">T1078.004 – Cloud Accounts</a>
           <a class="mt mt-pe" href="https://attack.mitre.org/techniques/T1098/" target="_blank" rel="noopener">T1098 – Account Manipulation</a>
         </div>
-        <p class="step-desc">With initial account access, the attacker escalated to Okta Super Administrator. Mandiant additionally confirmed a technique not widely reported: UNC3944 used Okta's self-assignment feature to assign the compromised account to every application in the Okta instance — giving them SSO access to every federated application simultaneously, and a visual inventory of every app tile available in the Okta portal. They also configured a second Identity Provider as an impersonation app and stripped MFA from targeted admin accounts.</p>
+        <p class="step-desc">With initial account access, the attacker escalated to Okta Super Administrator. Mandiant additionally confirmed a technique not widely reported: UNC3944 used Okta's self-assignment feature to assign the compromised account to every application in the Okta instance — giving them <a class="glossary-link" href="glossary.html#term-sso">SSO</a> access to every federated application simultaneously, and a visual inventory of every app tile available in the Okta portal. They also configured a second Identity Provider as an impersonation app and stripped MFA from targeted admin accounts.</p>
         <div class="step-code">
           <span class="hl">Platform abused:</span> Okta — identity provider for MGM's entire enterprise application estate<br>
           <span class="hl">Privilege achieved:</span> Super Administrator — full control over all identity for downstream applications<br>
@@ -1196,15 +1205,15 @@
         <div class="step-code">
           <span class="hl">Cloud platform:</span> Microsoft Azure AD — highest possible tenant permissions claimed<br>
           <span class="hl">Mandiant confirmed persistence:</span> New VMs created in vSphere and Azure via SSO — used as clean base for all further activity<br>
-          <span class="hl">VM hardening by attacker:</span> MAS_AIO and privacy-script.bat used to remove Microsoft Defender and Windows telemetry<br>
-          <span class="hl">PCUnlocker ISO:</span> Attached to existing VMs via vCenter to reset local admin passwords, bypassing domain controls<br>
+          <span class="hl">VM <a class="glossary-link" href="glossary.html#term-hardening">hardening</a> by attacker:</span> MAS_AIO and privacy-script.bat used to remove Microsoft Defender and Windows telemetry<br>
+          <span class="hl">PCUnlocker <a class="glossary-link" href="glossary.html#term-iso">ISO</a>:</span> Attached to existing VMs via vCenter to reset local admin passwords, bypassing domain controls<br>
           <span class="hl">Impact:</span> Cloud activity sourced from inside the environment — malicious traffic indistinguishable from legitimate traffic
         </div>
         <div class="step-tags"><span class="stag">Azure AD Tenant Root</span><span class="stag">New VM Persistence</span><span class="stag">Defender Disabled</span><span class="stag">PCUnlocker</span><span class="stag">T1078.004</span><span class="stag">T1578.002</span></div>
       </div>
     </div>
 
-    <div class="phase-lbl ph-persist">🕵️ Lateral Movement & Persistence — LOTL + SaaS Abuse</div>
+    <div class="phase-lbl ph-persist">🕵️ Lateral Movement & Persistence — <a class="glossary-link" href="glossary.html#term-living-off-the-land">LOTL</a> + SaaS Abuse</div>
     <div class="kc-step step-b">
       <div class="step-num">06</div>
       <div class="step-body">
@@ -1219,7 +1228,7 @@
           <span class="hl">Credential theft:</span> Mimikatz, "SecretServerSecretStealer" PowerShell script, ADRecon<br>
           <span class="hl">Tunnelling tools (Mandiant confirmed):</span> NGROK, RSOCX, Localtonet, Tailscale, Remmina<br>
           <span class="hl">Python libraries:</span> IMPACKET installed on attacker VMs<br>
-          <span class="hl">EDR evasion:</span> BYOVD — CVE-2015-2291 Intel driver used to disable endpoint security agents<br>
+          <span class="hl">EDR evasion:</span> BYOVD — <a class="glossary-link" href="glossary.html#term-cve">CVE</a>-2015-2291 Intel driver used to disable endpoint security agents<br>
           <span class="hl">SaaS accessed (Mandiant confirmed):</span> vCenter, CyberArk, Salesforce, Azure, CrowdStrike, AWS, GCP — all via Okta SSO
         </div>
         <div class="step-tags"><span class="stag">CrowdStrike RTR Abuse</span><span class="stag">Mimikatz</span><span class="stag">IMPACKET</span><span class="stag">NGROK</span><span class="stag">RSOCX</span><span class="stag">BYOVD</span><span class="stag">T1021.001</span><span class="stag">T1562</span></div>
@@ -1274,11 +1283,11 @@
       <div class="def-items">
         <div class="def-item"><strong>Implement phishing-resistant MFA (FIDO2/passkeys) and never allow help desk agents to reset MFA via phone.</strong> This single control breaks the entire initial access chain. The attack required no technical exploit — it required one help desk agent following standard procedure. Move MFA resets to an out-of-band workflow requiring manager approval and visual identity verification (video call with government ID).</div>
         <div class="def-item"><strong>Treat Okta as a Tier 0 asset — the same way you treat Active Directory.</strong> Super Administrator access in Okta gives an attacker control over every application federated to it. Require hardware security keys for all Okta admin access, enable Okta ThreatInsight, and alert immediately on new Identity Provider configuration or authenticator resets for admin accounts.</div>
-        <div class="def-item"><strong>Monitor and alert on Okta Org2Org federation changes and new IdP configurations.</strong> The attacker configured a second Identity Provider to impersonate any user in the organisation. New IdP additions should require change control approval and trigger immediate SOC review — they are almost never legitimate outside of planned migrations.</div>
-        <div class="def-item"><strong>Segment your ESXi environment from the corporate identity plane.</strong> ESXi hypervisors should not be reachable from identities that live in the same plane as corporate Okta and Azure AD. Separate management networks, dedicated credentials not linked to SSO, and jump hosts with hardware MFA are the minimum bar for hypervisor access.</div>
+        <div class="def-item"><strong>Monitor and alert on Okta Org2Org federation changes and new IdP configurations.</strong> The attacker configured a second Identity Provider to impersonate any user in the organisation. New IdP additions should require change control approval and trigger immediate <a class="glossary-link" href="glossary.html#term-soc">SOC</a> review — they are almost never legitimate outside of planned migrations.</div>
+        <div class="def-item"><strong>Segment your ESXi environment from the corporate identity plane.</strong> ESXi hypervisors should not be reachable from identities that live in the same plane as corporate Okta and Azure AD. Separate management networks, dedicated credentials not linked to SSO, and jump hosts with hardware MFA are the minimum bar for <a class="glossary-link" href="glossary.html#term-hypervisor">hypervisor</a> access.</div>
         <div class="def-item"><strong>Detect LOTL tools in unusual contexts.</strong> ngrok, Tailscale, and Remmina are legitimate tools — but their presence on server infrastructure or in a SOC alert at 2am is not. Build detection rules for tunnelling tools on non-developer endpoints and alert on new VPN mesh clients enrolled outside your MDM.</div>
         <div class="def-item"><strong>Have an offline, immutable backup of ESXi VM configurations and snapshots.</strong> The rapid encryption of 100+ hypervisors succeeded partly because MGM lacked good backup and restoration practices. Offline backups that can't be reached via domain credentials are the last line of defence when ransomware hits the hypervisor layer.</div>
-        <div class="def-item"><strong>Run tabletop exercises specifically for the "help desk social engineering → Okta → cloud" scenario.</strong> This is now the most documented and replicated attack chain in enterprise security. CISA and FBI have both published guidance on it. If your IR plan doesn't include a playbook for identity provider compromise as an initial step, update it today.</div>
+        <div class="def-item"><strong>Run tabletop exercises specifically for the "help desk social engineering → Okta → cloud" scenario.</strong> This is now the most documented and replicated attack chain in enterprise security. CISA and FBI have both published guidance on it. If your IR plan doesn't include a <a class="glossary-link" href="glossary.html#term-runbook">playbook</a> for identity provider compromise as an initial step, update it today.</div>
       </div>
     </div>
 
@@ -1313,7 +1322,7 @@
     </div>
     <h2 class="inc-title">Promptware – Indirect Prompt Injection → Context Poisoning → Persistence → C2 → Covert Camera Livestream</h2>
     <p class="inc-summary">
-      Researchers demonstrated a complete seven-stage kill chain targeting cloud-connected AI assistants — from a malicious Google Calendar invite to covert Zoom video streaming, all triggered by the victim typing "thanks." Documented across 36 real-world incidents by Schneier, Nassi et al., the pattern — termed "promptware" — mirrors classical malware kill chains but executes entirely through the LLM prompt layer. C2 was confirmed in the ChatGPT ZombAI attack (Oct 2024) and the Microsoft Copilot Reprompt attack (Jan 2026, CVE-2026-24307), both patched after disclosure.
+      Researchers demonstrated a complete seven-stage <a class="glossary-link" href="glossary.html#term-kill-chain">kill chain</a> targeting cloud-connected AI assistants — from a malicious Google Calendar invite to covert Zoom video streaming, all triggered by the victim typing "thanks." Documented across 36 real-world incidents by Schneier, Nassi et al., the pattern — termed "<a class="glossary-link" href="glossary.html#term-promptware">promptware</a>" — mirrors classical malware kill chains but executes entirely through the <a class="glossary-link" href="glossary.html#term-llm">LLM</a> prompt layer. C2 was confirmed in the ChatGPT ZombAI attack (Oct 2024) and the Microsoft Copilot Reprompt attack (Jan 2026, CVE-2026-24307), both patched after disclosure.
     </p>
     <div class="inc-stats">
       <div class="inc-stat"><strong>36</strong> real-world incidents analysed</div>
@@ -1337,7 +1346,7 @@
           <a class="mt mt-ta" href="https://attack.mitre.org/techniques/T1566/" target="_blank" rel="noopener">T1566 – Phishing</a>
         </div>
         <p class="step-desc">
-          Attacker sends the target a Google Calendar meeting invitation with a malicious prompt embedded in the event title. When the victim asks Gemini "What are my meetings today?", the Google Calendar Agent retrieves the event — including the poisoned title — and feeds it directly into Gemini's active context. The victim never sees the raw title; they only see Gemini's natural-language response. This is indirect prompt injection: the attacker's instructions enter the LLM through a trusted, user-requested data retrieval, not through direct user input.
+          Attacker sends the target a Google Calendar meeting invitation with a malicious prompt embedded in the event title. When the victim asks Gemini "What are my meetings today?", the Google Calendar Agent retrieves the event — including the poisoned title — and feeds it directly into Gemini's active context. The victim never sees the raw title; they only see Gemini's natural-language response. This is <a class="glossary-link" href="glossary.html#term-indirect-prompt-injection">indirect prompt injection</a>: the attacker's instructions enter the LLM through a trusted, user-requested data retrieval, not through direct user input.
         </p>
         <div class="step-code">
           <span class="hl">Delivery vector:</span> Google Calendar event title (shared workspace artifact)<br>
@@ -1345,7 +1354,7 @@
           <span class="hl">Why it works:</span> LLMs process all tokens — system prompts, user queries, retrieved data — as a single undifferentiated sequence; there is no code/data boundary
         </div>
         <div class="step-tags">
-          <span class="stag">Indirect Prompt Injection</span>
+          <span class="stag">Indirect <a class="glossary-link" href="glossary.html#term-prompt-injection">Prompt Injection</a></span>
           <span class="stag">Google Gemini</span>
           <span class="stag">Google Calendar</span>
           <span class="stag">T1566</span>
@@ -1358,7 +1367,7 @@
       <div class="step-num">02</div>
       <div class="step-body">
         <div class="step-hdr">
-          <div class="step-title">Delayed tool invocation defers execution until a benign user action — bypassing real-time guardrails</div>
+          <div class="step-title">Delayed tool invocation defers execution until a benign user action — bypassing real-time <a class="glossary-link" href="glossary.html#term-guardrails">guardrails</a></div>
           <a class="mt mt-pe" href="https://attack.mitre.org/techniques/T1548/" target="_blank" rel="noopener">T1548 – Abuse Elevation Control Mechanism</a>
         </div>
         <p class="step-desc">
@@ -1371,7 +1380,7 @@
         </div>
         <div class="step-tags">
           <span class="stag">Delayed Tool Invocation</span>
-          <span class="stag">Jailbreak</span>
+          <span class="stag"><a class="glossary-link" href="glossary.html#term-jailbreak">Jailbreak</a></span>
           <span class="stag">Guardrail Bypass</span>
           <span class="stag">T1548</span>
         </div>
@@ -1494,7 +1503,7 @@
         </p>
         <div class="step-code">
           <span class="hl">Primary objective:</span> Covert Zoom video capture — triggered by victim typing "thanks"<br>
-          <span class="hl">Reprompt objective:</span> Incremental data exfiltration — attacker probes for sensitive details based on prior C2 replies<br>
+          <span class="hl">Reprompt objective:</span> Incremental <a class="glossary-link" href="glossary.html#term-data-exfiltration">data exfiltration</a> — attacker probes for sensitive details based on prior C2 replies<br>
           <span class="hl">Discovery:</span> Google deployed mitigations after SafeBreach disclosure; Reprompt (CVE-2026-24307) patched Jan 13 2026
         </div>
         <div class="step-tags">
@@ -1514,7 +1523,7 @@
         <div class="def-item"><strong>Treat all LLM-retrieved content as untrusted input.</strong> Calendar titles, email subjects, document names, and web page content must be sanitised before being added to context — analogous to parameterised SQL queries. Deploy content-inspection layers that detect instruction-like patterns (imperative sentences, tool invocation syntax) in retrieved workspace artifacts before they reach the model context.</div>
         <div class="def-item"><strong>Audit and gate long-term memory writes.</strong> Alert on unexpected writes to AI persistent memory stores (ChatGPT Memory, Copilot, Gemini Saved Info). No prompt injection should be able to persist instructions without explicit user consent and a visible confirmation flow. Log all memory mutations with the source artifact that triggered them.</div>
         <div class="def-item"><strong>Apply least-privilege to every AI agent's tool permissions.</strong> A calendar assistant should not have permission to launch video applications, send emails, or control smart home devices by default. Scope-limit every tool an LLM agent can invoke — apply the same discipline used for IAM roles and OAuth scopes. Review and revoke over-broad agent permissions in Google Workspace, Microsoft 365 Copilot, and any enterprise AI integration.</div>
-        <div class="def-item"><strong>Block parameter-to-prompt URL patterns at the network and DLP layer.</strong> The Reprompt attack (CVE-2026-24307) used a <code>q=</code> URL parameter to prefill a malicious Copilot prompt. Enforce Microsoft Purview DLP policies for Copilot, flag outbound requests where AI query parameters contain instruction-like text, and monitor for LLM sessions issuing sequential requests to external servers — the signature of C2 chain-request exfiltration.</div>
+        <div class="def-item"><strong>Block parameter-to-prompt URL patterns at the network and <a class="glossary-link" href="glossary.html#term-dlp">DLP</a> layer.</strong> The Reprompt attack (CVE-2026-24307) used a <code>q=</code> URL parameter to prefill a malicious Copilot prompt. Enforce <a class="glossary-link" href="glossary.html#term-purview">Microsoft Purview</a> DLP policies for Copilot, flag outbound requests where AI query parameters contain instruction-like text, and monitor for LLM sessions issuing sequential requests to external servers — the signature of C2 chain-request exfiltration.</div>
       </div>
     </div>
 
@@ -1567,7 +1576,7 @@
         <div class="step-code">
           <span class="hl">Malware families:</span> RedLine Stealer, Vidar, Lumma — browser credential dumpers<br>
           <span class="hl">Credential age:</span> Some logs dated years prior to the campaign — passwords never rotated<br>
-          <span class="hl">Why it worked:</span> No Snowflake-side MFA requirement · No network policy allowlisting · No anomalous-login alerting
+          <span class="hl">Why it worked:</span> No Snowflake-side MFA requirement · No <a class="glossary-link" href="glossary.html#term-network-policy">network policy</a> allowlisting · No anomalous-login alerting
         </div>
         <div class="step-tags"><span class="stag">Infostealer</span><span class="stag">RedLine</span><span class="stag">Credential Harvesting</span><span class="stag">T1555.003</span></div>
       </div>
@@ -1651,8 +1660,8 @@
       <h3>🛡 How to Defend Against This Chain</h3>
       <div class="def-items">
         <div class="def-item"><strong>Enforce MFA on all Snowflake accounts — especially service accounts.</strong> Snowflake now supports mandatory MFA policies at the account level. Enable it. This single control would have stopped the entire campaign — every victim account was compromised solely because valid credentials plus no MFA was sufficient to authenticate.</div>
-        <div class="def-item"><strong>Configure Snowflake network policies to allowlist known source IPs.</strong> Snowflake NETWORK POLICY objects restrict which IP ranges can connect to a tenant. Lock production Snowflake access to your corporate egress IPs, VPN ranges, and known analytics tool IPs. A login from a residential or VPS IP should be impossible.</div>
-        <div class="def-item"><strong>Monitor Snowflake QUERY_HISTORY for COPY INTO external stage operations.</strong> Any COPY INTO pointing at an external stage that isn't a known data pipeline target should trigger an immediate alert. Enable Snowflake's Access History and query the QUERY_HISTORY view in your SIEM. This is the single most reliable detection signal for this attack pattern.</div>
+        <div class="def-item"><strong>Configure Snowflake network policies to allowlist known source IPs.</strong> Snowflake NETWORK POLICY objects restrict which IP ranges can connect to a tenant. Lock production Snowflake access to your corporate <a class="glossary-link" href="glossary.html#term-ingress">egress</a> IPs, VPN ranges, and known analytics tool IPs. A login from a residential or VPS IP should be impossible.</div>
+        <div class="def-item"><strong>Monitor Snowflake QUERY_HISTORY for COPY INTO external stage operations.</strong> Any COPY INTO pointing at an external stage that isn't a known data pipeline target should trigger an immediate alert. Enable Snowflake's Access History and query the QUERY_HISTORY view in your <a class="glossary-link" href="glossary.html#term-siem">SIEM</a>. This is the single most reliable detection signal for this attack pattern.</div>
         <div class="def-item"><strong>Apply least-privilege Snowflake roles.</strong> Analyst accounts and service accounts should have READ access only to the specific schemas they need — not SELECT * on the entire data warehouse. Use Snowflake's role hierarchy and avoid granting ACCOUNTADMIN to any account used by applications or individual analysts.</div>
         <div class="def-item"><strong>Subscribe to credential-exposure monitoring services.</strong> Infostealer logs containing your organisation's credentials appear on underground markets before attacks. Services like SpyCloud, Hudson Rock, or Flare detect your credentials in infostealer logs. Integrate alerts to trigger forced password resets and MFA re-enrolment.</div>
       </div>
@@ -1733,7 +1742,7 @@
       <div class="step-num">03</div>
       <div class="step-body">
         <div class="step-hdr">
-          <div class="step-title">Unpatched Plex Media Server vulnerability exploited on DevOps engineer's home PC — remote code execution</div>
+          <div class="step-title">Unpatched Plex Media Server vulnerability exploited on DevOps engineer's home PC — <a class="glossary-link" href="glossary.html#term-rce">remote code execution</a></div>
           <a class="mt mt-ex" href="https://attack.mitre.org/techniques/T1203/" target="_blank" rel="noopener">T1203 – Exploitation for Client Execution</a>
         </div>
         <p class="step-desc">The targeted DevOps engineer ran Plex Media Server on their personal home computer. The attacker exploited a known vulnerability in Plex that had been publicly disclosed years prior and had a patch available — but the engineer's home installation was unpatched. Plex itself disclosed separately that it had been notified of this exploitation and confirmed the CVE was over two years old with a patch available. The exploit provided remote code execution on the home machine.</p>
@@ -1805,11 +1814,11 @@
     <div class="def-box">
       <h3>🛡 How to Defend Against This Chain</h3>
       <div class="def-items">
-        <div class="def-item"><strong>Never store production credentials in personal vaults on unmanaged devices.</strong> Production AWS keys, infrastructure credentials, and decryption keys must live in corporate-managed secrets stores (AWS Secrets Manager, HashiCorp Vault) accessed only from managed, MDM-enrolled, EDR-monitored devices. A personal laptop running home media software is not an appropriate platform for production credential access.</div>
+        <div class="def-item"><strong>Never store production credentials in personal vaults on unmanaged devices.</strong> Production AWS keys, infrastructure credentials, and decryption keys must live in corporate-managed secrets stores (AWS <a class="glossary-link" href="glossary.html#term-secrets-manager">Secrets Manager</a>, HashiCorp Vault) accessed only from managed, MDM-enrolled, EDR-monitored devices. A personal laptop running home media software is not an appropriate platform for production credential access.</div>
         <div class="def-item"><strong>Apply patch management to home machines used for work — or prohibit personal device production access entirely.</strong> The Plex vulnerability was over two years old with a patch available. If employees access production systems from home machines, those machines must meet a minimum security baseline: OS patches current, no unnecessary server software, corporate EDR installed. Better still: use a dedicated corporate-issued workstation for production access.</div>
         <div class="def-item"><strong>Segment production access behind hardware MFA that doesn't trust device state.</strong> Require a fresh FIDO2 hardware key challenge for every production credential retrieval — regardless of whether the device is "trusted." This would have broken the chain at Step 4: even with the master password, the attacker would have needed the physical hardware key.</div>
         <div class="def-item"><strong>Limit the blast radius of any single employee's credential access.</strong> Only four employees needed production backup key access. For each, access should require dual authorisation (two-person integrity), be time-limited with break-glass logging, and use separate credentials that cannot be stored alongside day-to-day vault contents.</div>
-        <div class="def-item"><strong>Alert on anomalous S3 access patterns from production credential use.</strong> An AWS access key that normally accesses a small set of S3 paths should trigger an alert if it suddenly issues GetObject calls across entire bucket prefixes. GuardDuty's S3 anomaly detection and CloudTrail + SIEM rules can catch bulk exfiltration even when credentials are legitimate.</div>
+        <div class="def-item"><strong>Alert on anomalous S3 access patterns from production credential use.</strong> An AWS access key that normally accesses a small set of S3 paths should trigger an alert if it suddenly issues GetObject calls across entire bucket prefixes. GuardDuty's S3 anomaly detection and <a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a> + SIEM rules can catch bulk exfiltration even when credentials are legitimate.</div>
       </div>
     </div>
 

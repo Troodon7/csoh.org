@@ -22,6 +22,30 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- What is Cloud Security - Pillar page -->
+  <url>
+    <loc>https://csoh.org/what-is-cloud-security.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Learning Path - Roadmap page -->
+  <url>
+    <loc>https://csoh.org/learning-path.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cloud Security Certifications - Comparison page -->
+  <url>
+    <loc>https://csoh.org/cloud-security-certifications.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- News - Updates very frequently -->
   <url>
     <loc>https://csoh.org/news.html</loc>
@@ -60,6 +84,22 @@
     <lastmod>2026-04-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <!-- CTFs - Cloud security CTF challenge directory -->
+  <url>
+    <loc>https://csoh.org/ctfs.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- RSS subscription page -->
+  <url>
+    <loc>https://csoh.org/rss.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
   </url>
 
   <!-- Presentations - Regular updates -->

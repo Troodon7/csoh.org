@@ -91,7 +91,7 @@ header {
     flex-wrap: wrap;
 }
 
-.logo h1 {
+.logo .logo-title {
     font-size: 1.8rem;
     font-weight: 700;
 }
@@ -134,7 +134,7 @@ nav a:hover {
     align-items: center;
 }
 
-.header-content .logo h1 {
+.header-content .logo .logo-title {
     margin: 0;
     line-height: 1;
 }
@@ -166,6 +166,7 @@ nav a:focus {
     text-align: center;
 }
 
+.hero h1,
 .hero h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
@@ -737,6 +738,7 @@ nav a:focus {
 }
 
 /* News page typography alignment */
+.news-page .hero h1,
 .news-page .hero h2 {
     font-size: 2.5rem;
 }
@@ -1062,7 +1064,7 @@ footer {
     }
 
     /* Logo - TINY */
-    .logo h1 {
+    .logo .logo-title {
         font-size: 1rem;
         margin: 0;
         line-height: 1.2;
@@ -1121,6 +1123,7 @@ footer {
         padding: 1rem 1rem;
     }
 
+    .hero h1,
     .hero h2 {
         font-size: 1.3rem;
         line-height: 1.2;
@@ -1389,6 +1392,7 @@ footer {
         padding: 0.75rem 0.75rem;
     }
 
+    .hero h1,
     .hero h2 {
         font-size: 1.1rem;
     }
@@ -2267,7 +2271,7 @@ footer {
         gap: 0.5rem;
     }
 
-    .logo h1 {
+    .logo .logo-title {
         font-size: 1rem;
         line-height: 1.2;
         margin: 0;
@@ -2328,6 +2332,7 @@ footer {
         padding: 1.25rem 0.9rem;
     }
 
+    .hero h1,
     .hero h2 {
         font-size: 1.35rem;
         line-height: 1.2;
@@ -2377,6 +2382,7 @@ footer {
         min-height: 28px;
     }
 
+    .hero h1,
     .hero h2 {
         font-size: 1.2rem;
     }
@@ -2442,7 +2448,7 @@ footer {
         color: #f5f7fa;
     }
 
-    :root:not([data-theme]) .logo h1,
+    :root:not([data-theme]) .logo .logo-title,
     :root:not([data-theme]) .logo p,
     :root:not([data-theme]) .logo-link {
         color: #f5f7fa;
@@ -2458,7 +2464,9 @@ footer {
         color: #ffffff !important;
     }
 
+    :root:not([data-theme]) .hero h1,
     :root:not([data-theme]) .hero h2,
+    :root:not([data-theme]) .hero--compact h1,
     :root:not([data-theme]) .hero--compact h2 {
         color: #ffffff !important;
     }
@@ -2656,7 +2664,7 @@ footer {
     color: #f5f7fa;
 }
 
-[data-theme="dark"] .logo h1,
+[data-theme="dark"] .logo .logo-title,
 [data-theme="dark"] .logo p,
 [data-theme="dark"] .logo-link {
     color: #f5f7fa;
@@ -2683,7 +2691,9 @@ footer {
     color: #ffffff !important;
 }
 
+[data-theme="dark"] .hero h1,
 [data-theme="dark"] .hero h2,
+[data-theme="dark"] .hero--compact h1,
 [data-theme="dark"] .hero--compact h2 {
     color: #ffffff !important;
 }

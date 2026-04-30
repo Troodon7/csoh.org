@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="Compare cloud security certifications: CCSK, CCSP, AWS Security Specialty, Azure SC-100/AZ-500, Google Cloud Security Engineer, CKS. Vendor-neutral guide.">
+    <meta name="keywords"
+        content="cloud security certifications, CCSK, CCSP, AWS Security Specialty, AZ-500, SC-100, Google Cloud Security Engineer, CKS, certified kubernetes security specialist, cloud security exam">
+    <title>Cloud Security Certifications Compared - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/cloud-security-certifications.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Cloud Security Certifications Compared - CSOH">
+    <meta property="og:description"
+        content="Side-by-side comparison of the major cloud security certifications: CCSK, CCSP, AWS, Azure, Google, and Kubernetes. Vendor-neutral.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/cloud-security-certifications.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cloud Security Certifications Compared">
+    <meta name="twitter:description"
+        content="A practitioner's guide to the major cloud security certifications. Vendor-neutral.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=d6c1acef" as="style"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
+    <link rel="stylesheet" href="/style.css?v=d6c1acef"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Cloud Security Certifications Compared",
+      "description": "Side-by-side comparison of major cloud security certifications: CCSK, CCSP, AWS, Azure, GCP, and Kubernetes.",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-04-29",
+      "dateModified": "2026-04-29",
+      "mainEntityOfPage": "https://csoh.org/cloud-security-certifications.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Certifications",
+          "item": "https://csoh.org/cloud-security-certifications.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="ctfs.html">CTFs</a></li>
+                            <li><a href="cloud-security-certifications.html" aria-current="page">Certifications</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">News</a></li>
+                            <li><a href="threat-research.html">Threat Research</a></li>
+                            <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="sessions.html">Zoom Sessions</a></li>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="contribute.html">Contribute Overview</a></li>
+                            <li><a href="contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Certifications</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img"
+            decoding="async">
+        <h1>Cloud Security Certifications Compared</h1>
+        <p>The major cloud security certifications side-by-side. What each one is worth, who should take it, what it costs, and what comes next. Vendor-neutral guidance from practitioners.</p>
+        <div class="cta-buttons">
+            <a href="#comparison" class="btn btn-primary">Comparison Table</a>
+            <a href="learning-path.html" class="btn btn-secondary">Learning Path</a>
+        </div>
+    </section>
+
+    <main class="container contribute-article" id="main-content">
+        <div class="info-box--blue">
+            <p><strong>Quick guidance:</strong> Start with CCSK if you want a vendor-neutral foundation. Add a provider-specific cert (AWS, Azure, or GCP) for the cloud you actually work with. CCSP is the gold-standard senior credential — pursue it once you have a few years of cloud experience. CKS if <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a> is your day job. Don't pay for a bootcamp until you've tried the free official material.</p>
+        </div>
+
+        <div class="toc">
+            <h3>📖 On this page</h3>
+            <ol>
+                <li><a href="#comparison">Side-by-side comparison</a></li>
+                <li><a href="#vendor-neutral">Vendor-neutral certifications</a></li>
+                <li><a href="#aws">AWS-specific certifications</a></li>
+                <li><a href="#azure">Microsoft Azure certifications</a></li>
+                <li><a href="#gcp">Google Cloud certifications</a></li>
+                <li><a href="#kubernetes">Kubernetes security certifications</a></li>
+                <li><a href="#paths">Recommended paths by role</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ol>
+        </div>
+
+        <section id="comparison">
+            <h2>Side-by-side comparison</h2>
+            <p>Prices and details change — confirm with the certifying body before paying.</p>
+            <div class="content-section" style="overflow-x:auto;">
+                <table style="width:100%; border-collapse:collapse; margin:1rem 0;">
+                    <thead>
+                        <tr style="background:#f4f6f8; text-align:left;">
+                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Cert</th>
+                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Issuer</th>
+                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Vendor-neutral?</th>
+                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Approx. cost (USD)</th>
+                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Format</th>
+                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Best for</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>CCSK</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;"><a class="glossary-link" href="glossary.html#term-csa">CSA</a></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Yes</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">~$395</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Online, open-book</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Foundation; first cert</td></tr>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>CCSP</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">ISC2</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Yes</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">~$599 + endorsement</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Proctored, 4 hrs</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Senior practitioners</td></tr>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>AWS Security Specialty (SCS-C02)</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">AWS</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">No (AWS)</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">~$300</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Proctored, 170 min</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">AWS-focused engineers</td></tr>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>Microsoft AZ-500</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Microsoft</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">No (Azure)</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">~$165</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Proctored</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Azure security engineers</td></tr>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>Microsoft SC-100</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Microsoft</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">No (Microsoft)</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">~$165</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Proctored</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Cybersecurity architects</td></tr>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>Google PCSE</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Google</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">No (GCP)</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">~$200</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Proctored, 2 hrs</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">GCP security engineers</td></tr>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>CKS</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;"><a class="glossary-link" href="glossary.html#term-cncf">CNCF</a> / Linux Foundation</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Yes (K8s)</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">~$395</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Hands-on lab, 2 hrs</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Kubernetes practitioners</td></tr>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>GIAC GCSA / GCPN</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">SANS / GIAC</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Mostly</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">$$$$</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Proctored</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Employer-funded; deep technical</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="vendor-neutral">
+            <h2>Vendor-neutral certifications</h2>
+
+            <h3>CCSK — Certificate of Cloud Security Knowledge (CSA)</h3>
+            <p>The classic vendor-neutral starter cert. Open-book online exam against the CSA Security Guidance and <a class="glossary-link" href="glossary.html#term-enisa">ENISA</a> Cloud Risk Assessment. Genuinely useful study material — the v5 guidance is a solid baseline for the field. Recommended as a first cert for almost everyone, including people who already work in security and need to formalize their cloud knowledge.</p>
+            <ul>
+                <li><strong>Format:</strong> 60 questions, 90 minutes, 80% to pass, online.</li>
+                <li><strong>Renewal:</strong> No expiration (legacy versions stay valid).</li>
+                <li><strong>Effort:</strong> 30–60 hours of self-study.</li>
+            </ul>
+
+            <h3>CCSP — Certified Cloud Security Professional (ISC2)</h3>
+            <p>The senior-level vendor-neutral credential, often paired with CISSP. Six domains covering architecture, data security, platform/infrastructure, applications, operations, and legal/compliance. Requires five years of IT experience (three in security, one in cloud) — though one CSA cert can substitute for the cloud year.</p>
+            <ul>
+                <li><strong>Format:</strong> 150 questions, 4 hours, proctored.</li>
+                <li><strong>Renewal:</strong> 90 CPEs over 3 years; AMF (~$125/year).</li>
+                <li><strong>Best for:</strong> Architects, senior engineers, and consultants who want a credential for proposals and promotion packets.</li>
+            </ul>
+        </section>
+
+        <section id="aws">
+            <h2>AWS-specific certifications</h2>
+
+            <h3>AWS Certified Security – Specialty (SCS-C02)</h3>
+            <p>The deepest AWS-focused security cert. Covers <a class="glossary-link" href="glossary.html#term-iam">IAM</a>, threat detection, infrastructure security, identity <a class="glossary-link" href="glossary.html#term-federation">federation</a>, data protection, and incident response. Now an associate-level prerequisite is no longer required, so anyone can take it cold — though SAA-C03 (Solutions Architect Associate) study makes it materially easier.</p>
+            <ul>
+                <li><strong>Format:</strong> ~65 questions, 170 minutes, proctored.</li>
+                <li><strong>Renewal:</strong> 3 years.</li>
+                <li><strong>Best for:</strong> Anyone working primarily in AWS. Pairs well with practical experience using <a class="glossary-link" href="glossary.html#term-guardduty">GuardDuty</a>, Security Hub, <a class="glossary-link" href="glossary.html#term-iam-access-analyzer">IAM Access Analyzer</a>, and <a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a>.</li>
+            </ul>
+        </section>
+
+        <section id="azure">
+            <h2>Microsoft Azure certifications</h2>
+
+            <h3>AZ-500 — Microsoft Azure Security Engineer Associate</h3>
+            <p>Implementation-focused: identity (Entra), platform protection, security operations, and data/applications. Practical, hands-on flavor. The natural next step for anyone running Defender for Cloud, Sentinel, and Entra at work.</p>
+
+            <h3>SC-100 — Microsoft Cybersecurity Architect Expert</h3>
+            <p>Design-focused, more senior. Zero-trust strategy, governance, regulatory compliance, infrastructure and data architecture. Requires you to already hold one of: AZ-500, SC-200, SC-300, or MS-500. Good for cybersecurity architects working in a Microsoft-heavy environment.</p>
+
+            <h3>SC-200 / SC-300 / SC-400</h3>
+            <p>Operational-tier certs — Defender/Sentinel operations (SC-200), Entra identity admin (SC-300), and information protection (SC-400). Worth pursuing if those are your day job, but skippable if you're going straight to AZ-500/SC-100.</p>
+        </section>
+
+        <section id="gcp">
+            <h2>Google Cloud certifications</h2>
+
+            <h3>Professional Cloud Security Engineer (PCSE)</h3>
+            <p>Google's flagship security cert. Covers identity, data protection, network security, GCP Security Command Center, key management, and compliance. Two-year renewal cycle. Smaller community than AWS or Microsoft, but the cert itself is well-respected for GCP-specific roles.</p>
+            <ul>
+                <li><strong>Format:</strong> 50–60 questions, 2 hours, proctored.</li>
+                <li><strong>Renewal:</strong> 2 years.</li>
+            </ul>
+        </section>
+
+        <section id="kubernetes">
+            <h2>Kubernetes security certifications</h2>
+
+            <h3>CKS — Certified Kubernetes Security Specialist</h3>
+            <p>Hands-on lab exam — you SSH into a cluster and complete real tasks. Covers cluster <a class="glossary-link" href="glossary.html#term-hardening">hardening</a>, system hardening, supply-chain security, runtime security, monitoring, and incident response. Requires a current CKA (Certified Kubernetes Administrator) to register.</p>
+            <ul>
+                <li><strong>Format:</strong> Performance-based, 2 hours, proctored.</li>
+                <li><strong>Renewal:</strong> 2 years.</li>
+                <li><strong>Best for:</strong> Anyone with Kubernetes in their job description. One of the most respected hands-on certs in the industry.</li>
+            </ul>
+        </section>
+
+        <section id="paths">
+            <h2>Recommended paths by role</h2>
+
+            <h3>Career switcher / new to cloud security</h3>
+            <ol>
+                <li>CCSK (foundation, vendor-neutral)</li>
+                <li>One associate cert in your target cloud (e.g., AWS Solutions Architect Associate)</li>
+                <li>The provider security specialty (AWS Security Specialty, AZ-500, or PCSE)</li>
+                <li>CCSP after 3+ years of experience</li>
+            </ol>
+
+            <h3>Established security engineer adding cloud</h3>
+            <ol>
+                <li>CCSK (fast on-ramp)</li>
+                <li>Provider security specialty for whichever cloud you support</li>
+                <li>CKS if you touch Kubernetes</li>
+            </ol>
+
+            <h3>Senior architect / consultant</h3>
+            <ol>
+                <li>CCSP (signaling)</li>
+                <li>SC-100 if Microsoft is in your portfolio</li>
+                <li>Stay current via the provider specialty for your primary cloud</li>
+            </ol>
+
+            <h3>Detection / incident response specialist</h3>
+            <ol>
+                <li>CCSK (foundation)</li>
+                <li>SC-200 (Sentinel) or AWS Security Specialty</li>
+                <li>GIAC GCSA or GCPN (employer-funded)</li>
+            </ol>
+        </section>
+
+        <section id="faq">
+            <h2>FAQ</h2>
+
+            <h3>Do certifications get you a job?</h3>
+            <p>Not by themselves. They get you past resume filters and signal commitment. Pair every cert with hands-on work — labs, CTFs, side projects, write-ups. A CCSK plus a portfolio of <a href="ctfs.html">CloudGoat write-ups</a> is far more compelling than three certs and no lab work.</p>
+
+            <h3>CCSK or CCSP first?</h3>
+            <p>CCSK first, almost always. It's open-book, online, and prepares you for CCSP. Some people skip straight to CCSP if they already have years of cloud experience and just want the senior credential.</p>
+
+            <h3>Are SANS / GIAC certifications worth the cost?</h3>
+            <p>If your employer pays, yes — SANS courses are excellent. If you'd be paying out of pocket, the value-per-dollar is much better with CCSK + a provider specialty + practical lab work.</p>
+
+            <h3>Do I need a cert for every cloud?</h3>
+            <p>No. Pick the cloud you actually use. Most jobs are 80%+ one cloud. Cross-cloud knowledge from CCSK plus deep knowledge of one provider beats shallow knowledge of all three.</p>
+
+            <h3>How current do these certs stay?</h3>
+            <p>The provider specialties get refreshed every 1–3 years and the new versions matter (AWS SCS-C02 is meaningfully different from C01). CCSK gets revised when CSA publishes new guidance — v5 is the current generation. CCSP is the most stable.</p>
+        </section>
+
+        <section class="cta-section">
+            <h2>Next steps</h2>
+            <ul>
+                <li><a href="learning-path.html">Follow the cloud security learning path</a> — see where each cert fits in a 12–24 month plan.</li>
+                <li><a href="resources.html?category=certification">Browse the certifications resource catalog</a> — links to study guides and practice exams.</li>
+                <li><a href="ctfs.html">Practice on cloud security CTFs</a> — hands-on experience makes certs stick.</li>
+                <li><a href="sessions.html">Ask the community on Friday Zoom</a> — get advice from people who've taken the exams.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="resources.html">All Resources</a></li>
+                    <li><a href="sessions.html">Zoom Sessions</a></li>
+                    <li><a href="presentations.html">Presentations</a></li>
+                    <li><a href="index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

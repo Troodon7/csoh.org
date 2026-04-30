@@ -21,10 +21,10 @@
     <meta property="og:image" content="https://csoh.org/banner.png">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="preload" href="/style.css?v=aafcb728" as="style"
-        integrity="sha384-Gy6/E+PcOXfeETLfbpNROKg7FSN2YYjY9HeqDguQRr40McPWNStQGoGJoKZ1PxHb">
-    <link rel="stylesheet" href="/style.css?v=aafcb728"
-        integrity="sha384-Gy6/E+PcOXfeETLfbpNROKg7FSN2YYjY9HeqDguQRr40McPWNStQGoGJoKZ1PxHb">
+    <link rel="preload" href="/style.css?v=d6c1acef" as="style"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
+    <link rel="stylesheet" href="/style.css?v=d6c1acef"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
 </head>
 
 <body>
@@ -34,7 +34,7 @@
         <div class="header-content">
             <div class="logo">
                 <a href="/" class="logo-link">
-                    <h1>CSOH</h1>
+                    <div class="logo-title">CSOH</div>
                 </a>
                 <p>Cloud Security Office Hours</p>
             </div>
@@ -46,8 +46,11 @@
                     <li class="has-dropdown">
                         <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
                         <ul class="dropdown-menu">
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="learning-path.html">Learning Path</a></li>
                             <li><a href="resources.html">Resources</a></li>
                             <li><a href="ctfs.html">CTFs</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
                             <li><a href="glossary.html">Glossary</a></li>
                         </ul>
                     </li>
@@ -92,13 +95,13 @@
     <section class="hero hero--compact">
         <img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img"
             decoding="async">
-        <h2>🔐 Privacy Policy</h2>
+        <h1>🔐 Privacy Policy</h1>
         <p>How CSOH handles your data. Short version: as little as possible, never for marketing, and we don't use cookies.</p>
     </section>
 
     <main class="container" id="main-content">
         <section class="content-section">
-            <h1>🔐 CSOH Privacy Policy</h1>
+            <h2>🔐 CSOH Privacy Policy</h2>
 
             <div class="info-box--blue">
                 <p><strong>The 30-second version:</strong></p>
@@ -129,7 +132,7 @@
                 <li>Occasional community announcements (rare — typically &lt;1 per month)</li>
             </ul>
             <p>That is the entire purpose. We do not run promotional campaigns, sponsored emails, partner mailings, or anything else against the list. <strong>If you stop wanting our emails, the unsubscribe link in every message removes you immediately.</strong></p>
-            <p>The list itself is hosted by SendFox (an email-service provider). SendFox processes the mail on our behalf and is bound by their own <a href="https://sendfox.com/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>. We do not export the list to any other service.</p>
+            <p>The list itself is hosted by SendFox (an email-<a class="glossary-link" href="glossary.html#term-sp">service provider</a>). SendFox processes the mail on our behalf and is bound by their own <a href="https://sendfox.com/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>. We do not export the list to any other service.</p>
 
             <h3>2. Email correspondence</h3>
             <p>If you email <a href="mailto:admin@csoh.org">admin@csoh.org</a> or another organizer, we keep that thread for as long as is reasonable to follow up. We don't add you to anything else based on that email.</p>
@@ -161,7 +164,7 @@
             <p>The website is hosted in the United States. The mailing list (SendFox) and code repository (GitHub) are also US-based. By emailing us or signing up for the list, you consent to your data being processed in the US.</p>
 
             <h2>🔒 Security</h2>
-            <p>We follow standard practices to protect what little data we hold: HTTPS everywhere, narrow access to mailing-list and email accounts, MFA on organizer accounts, strict Content Security Policy on the site, automated URL-safety scanning before merge. To report a vulnerability, see our <a href="security-policy.html">Security Policy</a>.</p>
+            <p>We follow standard practices to protect what little data we hold: HTTPS everywhere, narrow access to mailing-list and email accounts, <a class="glossary-link" href="glossary.html#term-mfa">MFA</a> on organizer accounts, strict Content Security Policy on the site, automated URL-safety scanning before merge. To report a vulnerability, see our <a href="security-policy.html">Security Policy</a>.</p>
 
             <h2>📜 Your rights</h2>
             <p>You have the right to:</p>

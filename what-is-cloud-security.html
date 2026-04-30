@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="Cloud security explained: what it is, the shared responsibility model, key threats, the CSPM/CNAPP/CIEM tool stack and how to start learning. Vendor-neutral.">
+    <meta name="keywords"
+        content="what is cloud security, cloud security explained, cloud security fundamentals, shared responsibility model, CSPM, CNAPP, CIEM, CWPP, cloud security overview, AWS security, Azure security, GCP security">
+    <title>What is Cloud Security? - Cloud Security Office Hours</title>
+
+    <link rel="canonical" href="https://csoh.org/what-is-cloud-security.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="What is Cloud Security? - CSOH">
+    <meta property="og:description"
+        content="A vendor-neutral introduction to cloud security: shared responsibility, top threats, the tool landscape (CSPM/CNAPP/CIEM) and a learning roadmap.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/what-is-cloud-security.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="What is Cloud Security?">
+    <meta name="twitter:description"
+        content="A vendor-neutral introduction to cloud security from the CSOH community.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=d6c1acef" as="style"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
+    <link rel="stylesheet" href="/style.css?v=d6c1acef"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "What is Cloud Security?",
+      "description": "A vendor-neutral overview of cloud security: shared responsibility, common threats, the tool landscape, and how to get started.",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-04-29",
+      "dateModified": "2026-04-29",
+      "mainEntityOfPage": "https://csoh.org/what-is-cloud-security.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "What is Cloud Security?",
+          "item": "https://csoh.org/what-is-cloud-security.html"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is cloud security?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cloud security is the set of practices, tools, and policies that protect data, applications, identities, and infrastructure running on cloud platforms like AWS, Microsoft Azure, and Google Cloud. It covers configuration, identity and access management, network controls, data protection, threat detection, incident response, and compliance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the shared responsibility model?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The shared responsibility model defines what the cloud provider secures versus what the customer secures. Providers handle the security OF the cloud — physical data centers, the hypervisor, and managed-service internals. Customers handle security IN the cloud — their configurations, IAM, code, data, and the workloads they deploy. The dividing line shifts depending on whether you use IaaS, PaaS, or SaaS."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the biggest cloud security threats?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The most common cloud security threats are misconfigurations (public S3 buckets, open security groups), over-privileged identities and stolen credentials, insecure APIs and SSRF vulnerabilities that reach metadata services, supply-chain attacks against CI/CD, and account takeovers via phishing or token theft. Most real cloud breaches chain several of these together rather than relying on a single zero-day."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between CSPM, CNAPP, CWPP, and CIEM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CSPM (Cloud Security Posture Management) finds misconfigurations across your cloud accounts. CWPP (Cloud Workload Protection Platform) protects workloads — VMs, containers, serverless. CIEM (Cloud Infrastructure Entitlement Management) analyzes who can do what across your IAM. CNAPP (Cloud-Native Application Protection Platform) is the umbrella category that bundles CSPM, CWPP, CIEM, and often vulnerability management and runtime protection into one platform."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I start learning cloud security?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start with one cloud provider (AWS, Azure, or GCP), learn its IAM and networking fundamentals, then practice on intentionally vulnerable environments like CloudGoat, flAWS, or PwnedLabs. Read real breach post-mortems to see how attacks actually unfold. Pick up a foundational certification (CCSK is vendor-neutral; the AWS, Azure, or GCP security certs are provider-specific). Join a community like Cloud Security Office Hours to learn from practitioners."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="what-is-cloud-security.html" aria-current="page">What is Cloud Security?</a></li>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="ctfs.html">CTFs</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">News</a></li>
+                            <li><a href="threat-research.html">Threat Research</a></li>
+                            <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="sessions.html">Zoom Sessions</a></li>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="contribute.html">Contribute Overview</a></li>
+                            <li><a href="contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">What is Cloud Security?</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img"
+            decoding="async">
+        <h1>What is Cloud Security?</h1>
+        <p>The vendor-neutral guide. What it is, who's responsible for what, the threats that matter, the tool landscape, and how to start learning — written by practitioners, not a vendor's marketing team.</p>
+        <div class="cta-buttons">
+            <a href="learning-path.html" class="btn btn-primary">Learning Path</a>
+            <a href="resources.html" class="btn btn-secondary">Browse Resources</a>
+        </div>
+    </section>
+
+    <main class="container contribute-article" id="main-content">
+        <div class="info-box--blue">
+            <p><strong>The 60-second version:</strong> Cloud security protects data, identities, and workloads running on AWS, Azure, GCP, and similar platforms. The cloud provider secures the underlying platform; you secure how you configure and use it. Most real breaches come from misconfigurations, over-privileged <a class="glossary-link" href="glossary.html#term-iam">IAM</a>, stolen credentials, or insecure APIs — not exotic zero-days. The toolkit is built around posture management (<a class="glossary-link" href="glossary.html#term-cspm">CSPM</a>), workload protection (<a class="glossary-link" href="glossary.html#term-cwpp">CWPP</a>), entitlement analysis (<a class="glossary-link" href="glossary.html#term-ciem">CIEM</a>), and increasingly the all-in-one <a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a> platforms.</p>
+        </div>
+
+        <div class="toc">
+            <h3>📖 On this page</h3>
+            <ol>
+                <li><a href="#definition">What cloud security actually is</a></li>
+                <li><a href="#shared-responsibility">The shared responsibility model</a></li>
+                <li><a href="#pillars">The core pillars of cloud security</a></li>
+                <li><a href="#threats">The threats that matter</a></li>
+                <li><a href="#tools">The tool landscape (CSPM, CNAPP, CWPP, CIEM)</a></li>
+                <li><a href="#getting-started">How to get started</a></li>
+                <li><a href="#faq">Frequently asked questions</a></li>
+            </ol>
+        </div>
+
+        <section id="definition">
+            <h2>What cloud security actually is</h2>
+            <p><strong>Cloud security</strong> is the practice of protecting data, applications, identities, and infrastructure that run on cloud platforms — primarily Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP), but also second-tier providers like Oracle Cloud, IBM Cloud, and Alibaba Cloud, plus the <a class="glossary-link" href="glossary.html#term-saas">SaaS</a> layer (Microsoft 365, Salesforce, Snowflake, GitHub, and so on).</p>
+            <p>It is not a single product or a single team. In a mature organization, cloud security spans configuration management, identity and access, network controls, data protection, application security, threat detection, incident response, and compliance — all running across hundreds or thousands of accounts, subscriptions, and projects.</p>
+            <p>If you're new to the field, see the <a href="glossary.html">cloud security glossary</a> for plain-English definitions of the acronyms in this article.</p>
+        </section>
+
+        <section id="shared-responsibility">
+            <h2>The shared responsibility model</h2>
+            <p>The single most important concept in cloud security is the <strong><a class="glossary-link" href="glossary.html#term-shared-responsibility-model">shared responsibility model</a></strong>. Cloud providers secure some things; you secure the rest. The line moves depending on the service.</p>
+            <p>The classic framing:</p>
+            <ul>
+                <li><strong>Security <em>of</em> the cloud</strong> — physical data centers, the network backbone, the <a class="glossary-link" href="glossary.html#term-hypervisor">hypervisor</a>, the managed-service internals. The provider's job, full stop.</li>
+                <li><strong>Security <em>in</em> the cloud</strong> — your configurations, IAM policies, code, data, network rules, and the workloads you deploy. Your job.</li>
+            </ul>
+            <p>Where the line sits depends on the service model:</p>
+            <ul>
+                <li><strong><a class="glossary-link" href="glossary.html#term-iaas">IaaS</a></strong> (raw VMs like <a class="glossary-link" href="glossary.html#term-ec2">EC2</a>): you secure almost everything above the hypervisor — OS patching, network rules, IAM, applications, and data.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-paas">PaaS</a></strong> (managed services like RDS, App Service, <a class="glossary-link" href="glossary.html#term-lambda">Cloud Run</a>): the provider patches the runtime; you still own configuration, access controls, and data.</li>
+                <li><strong>SaaS</strong> (Microsoft 365, Salesforce): the provider runs the application; you still own user accounts, data classification, sharing settings, and integrations.</li>
+            </ul>
+            <p>Almost every notable cloud breach comes down to a customer-side failure — not a provider compromise. The Capital One, Snowflake/UNC5537, Microsoft Storm-0558, and LastPass incidents are all instructive. See the <a href="breach-timeline.html">breach kill chains</a> for full step-by-step analyses.</p>
+        </section>
+
+        <section id="pillars">
+            <h2>The core pillars of cloud security</h2>
+            <p>You can carve up cloud security a dozen ways. The pillars below are the ones most teams organize around.</p>
+
+            <h3>Identity and access management (IAM)</h3>
+            <p>In the cloud, identity is the new perimeter. Every API call is authenticated and authorized against an identity — a user, a role, a <a class="glossary-link" href="glossary.html#term-service-principal">service principal</a>, a <a class="glossary-link" href="glossary.html#term-service-account">workload identity</a>. Strong IAM means least-privilege policies, no long-lived access keys where you can avoid them, <a class="glossary-link" href="glossary.html#term-mfa">MFA</a> everywhere, and continuous review of who can do what. Most cloud breaches involve at least one identity failure: an over-privileged role, a leaked key, a phished session token.</p>
+
+            <h3>Configuration and posture</h3>
+            <p>The cloud is a giant configuration surface. Public <a class="glossary-link" href="glossary.html#term-s3">S3</a> buckets, open security groups, unencrypted disks, disabled logging, weak password policies — these are the day-to-day failure modes. CSPM tools exist to find them at scale and keep them fixed.</p>
+
+            <h3>Network security</h3>
+            <p>VPCs, subnets, security groups, network ACLs, private endpoints, transit gateways, service meshes. The principles are familiar — segment, restrict, monitor — but the implementation is provider-specific and changes constantly.</p>
+
+            <h3>Data protection</h3>
+            <p>Encrypt data at rest and <a class="glossary-link" href="glossary.html#term-encryption-at-rest">in transit</a>, manage keys (<a class="glossary-link" href="glossary.html#term-kms">KMS</a>, <a class="glossary-link" href="glossary.html#term-key-vault">Key Vault</a>, <a class="glossary-link" href="glossary.html#term-cloud-kms">Cloud KMS</a>), classify what's sensitive, and prevent <a class="glossary-link" href="glossary.html#term-exfiltration">exfiltration</a>. Increasingly this also means thinking about what data you let LLMs and <a class="glossary-link" href="glossary.html#term-ai">AI</a> services see.</p>
+
+            <h3>Application and workload security</h3>
+            <p>Secure code, dependency scanning, container image <a class="glossary-link" href="glossary.html#term-hardening">hardening</a>, runtime protection for VMs and <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a>, <a class="glossary-link" href="glossary.html#term-serverless">serverless</a> function security. CWPP and CNAPP platforms cover much of this.</p>
+
+            <h3>Threat detection and response</h3>
+            <p><a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a>, Azure Activity Log, GCP Audit Logs feeding a <a class="glossary-link" href="glossary.html#term-siem">SIEM</a>. Provider-native services like <a class="glossary-link" href="glossary.html#term-guardduty">GuardDuty</a>, Defender for Cloud, and Security Command Center. Detection content mapped to <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud techniques. A response <a class="glossary-link" href="glossary.html#term-runbook">runbook</a> for when something fires.</p>
+
+            <h3>Compliance and governance</h3>
+            <p><a class="glossary-link" href="glossary.html#term-soc">SOC</a> 2, <a class="glossary-link" href="glossary.html#term-iso">ISO</a> 27001, <a class="glossary-link" href="glossary.html#term-pci-dss">PCI DSS</a>, <a class="glossary-link" href="glossary.html#term-hipaa">HIPAA</a>, <a class="glossary-link" href="glossary.html#term-fedramp">FedRAMP</a>, <a class="glossary-link" href="glossary.html#term-gdpr">GDPR</a>, the <a class="glossary-link" href="glossary.html#term-nis2">NIS2 Directive</a>. Most of this is "did you implement controls and can you prove it" — and most of the proof comes from configuration evidence the cloud already produces.</p>
+        </section>
+
+        <section id="threats">
+            <h2>The threats that matter</h2>
+            <p>Forget "advanced persistent threats" for a minute. The breaches that actually happen tend to come from a small set of repeatable patterns:</p>
+            <ul>
+                <li><strong>Misconfiguration.</strong> Public buckets, exposed databases, open admin endpoints, missing logging.</li>
+                <li><strong>Over-privileged identities.</strong> A workload that has <code>*:*</code> when it should have read-only on one bucket. Capital One is the canonical example.</li>
+                <li><strong>Credential theft.</strong> <a class="glossary-link" href="glossary.html#term-phishing">Phishing</a>, malware, info-stealers, hardcoded secrets in source code, leaked tokens in <a class="glossary-link" href="glossary.html#term-ci">CI</a> logs. Snowflake/UNC5537 was almost entirely credential reuse.</li>
+                <li><strong>Insecure APIs and <a class="glossary-link" href="glossary.html#term-ssrf">SSRF</a>.</strong> Web apps that can be coerced into calling internal endpoints, including the cloud metadata service. <a class="glossary-link" href="glossary.html#term-imds">IMDSv2</a> exists because of Capital One.</li>
+                <li><strong>Supply-chain compromise.</strong> A poisoned dependency, a compromised CI/CD step, a malicious GitHub Action. SolarWinds is the marquee case.</li>
+                <li><strong>Account takeover.</strong> <a class="glossary-link" href="glossary.html#term-mfa-fatigue">MFA fatigue</a>, session token theft, social engineering of helpdesks. Scattered Spider/MGM is the textbook example.</li>
+                <li><strong>Insider risk.</strong> Departing engineers, over-broad access, audit gaps.</li>
+                <li><strong>AI/<a class="glossary-link" href="glossary.html#term-llm">LLM</a>-specific risks.</strong> <a class="glossary-link" href="glossary.html#term-prompt-injection">Prompt injection</a>, data leakage through model outputs, agentic systems with too much authority.</li>
+            </ul>
+            <p>Real attacks chain several of these together. To see exactly how, walk through the <a href="breach-timeline.html">cloud breach kill chains</a>, all mapped to MITRE ATT&amp;CK Cloud techniques.</p>
+        </section>
+
+        <section id="tools">
+            <h2>The tool landscape (CSPM, CNAPP, CWPP, CIEM)</h2>
+            <p>The acronym soup is real. Here's a working map of the major categories:</p>
+            <ul>
+                <li><strong>CSPM — Cloud Security Posture Management.</strong> Continuously scans your cloud accounts for misconfigurations against a benchmark like CIS or your own policies. Examples: Prowler, ScoutSuite, Steampipe, plus commercial platforms.</li>
+                <li><strong>CWPP — Cloud Workload Protection Platform.</strong> Protects the running workload — VMs, containers, serverless. Includes vulnerability scanning, runtime detection, file integrity monitoring.</li>
+                <li><strong>CIEM — Cloud Infrastructure Entitlement Management.</strong> Analyzes IAM at scale. Who can assume what role? Which permissions are unused? Where are the privilege-escalation paths?</li>
+                <li><strong>CNAPP — Cloud-Native Application Protection Platform.</strong> The umbrella category. A single platform that bundles CSPM + CWPP + CIEM and often vulnerability management, container security, and <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scanning. The market trend is consolidation into CNAPP.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-dspm">DSPM</a> — Data Security Posture Management.</strong> Finds and classifies sensitive data across cloud stores, then tracks who can access it.</li>
+                <li><strong>SIEM/<a class="glossary-link" href="glossary.html#term-soar">SOAR</a>.</strong> Centralizes logs and automates response. The <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> variants are increasingly important as log volume explodes.</li>
+                <li><strong>Provider-native services.</strong> AWS GuardDuty/Security Hub/<a class="glossary-link" href="glossary.html#term-iam-access-analyzer">IAM Access Analyzer</a>; Microsoft Defender for Cloud + Entra; GCP Security Command Center. Often the cheapest credible starting point.</li>
+            </ul>
+            <p>For specific tools, hands-on labs, and certifications, see the <a href="resources.html">cloud security resources catalog</a>.</p>
+        </section>
+
+        <section id="getting-started">
+            <h2>How to get started</h2>
+            <p>If you're trying to break into cloud security or level up, the path that actually works for most people:</p>
+            <ol>
+                <li><strong>Pick one cloud.</strong> AWS, Azure, or GCP. Don't try to learn three at once. AWS has the deepest community and the most learning material.</li>
+                <li><strong>Learn IAM and networking first.</strong> Almost every breach involves one or both. The provider's free training (AWS Skill Builder, Microsoft Learn, Google Cloud Skills Boost) is fine for fundamentals.</li>
+                <li><strong>Practice on intentionally vulnerable environments.</strong> CloudGoat, flAWS, EntraGoat, CNAPPGoat, and PwnedLabs let you exploit and defend without getting fired. See our <a href="ctfs.html">cloud security CTF directory</a>.</li>
+                <li><strong>Read real breach post-mortems.</strong> Understanding how Capital One, SolarWinds, Snowflake, MGM, and LastPass actually happened teaches more than any textbook. Walk through the <a href="breach-timeline.html">breach kill chains</a>.</li>
+                <li><strong>Pick up one foundational certification.</strong> CCSK (<a class="glossary-link" href="glossary.html#term-csa">Cloud Security Alliance</a>) is vendor-neutral and a great anchor. AWS Security Specialty, Microsoft SC-100/AZ-500, and Google's Cloud Security Engineer are the provider-specific options. See our <a href="cloud-security-certifications.html">cloud security certifications guide</a>.</li>
+                <li><strong>Join a community.</strong> Talking to practitioners is how you learn what's actually current. <a href="sessions.html">CSOH meets every Friday on Zoom</a>, free, no marketing.</li>
+            </ol>
+            <p>For a structured plan with specific milestones, see the <a href="learning-path.html">cloud security learning path</a>.</p>
+        </section>
+
+        <section id="faq">
+            <h2>Frequently asked questions</h2>
+
+            <h3>Is cloud security different from regular cybersecurity?</h3>
+            <p>The principles are the same. The implementation is wildly different. In on-prem environments you control the network and physical access; in the cloud you don't. Identity becomes the perimeter. Configuration becomes the attack surface. Everything is API-driven, which means everything is automatable — both for defense and for attackers.</p>
+
+            <h3>Do I need to know how to code?</h3>
+            <p>Not to start. You will pick up Python and shell over time, plus enough Terraform or CloudFormation to read what your team is deploying. Reading code matters more than writing it for most cloud security roles.</p>
+
+            <h3>How long does it take to get a cloud security job?</h3>
+            <p>It depends entirely on your starting point. A working sysadmin or network engineer can usually transition in 6–12 months of focused learning plus a cert. Someone starting from zero is more like 1–2 years. Hands-on labs and a portfolio of CTF write-ups beat passive coursework.</p>
+
+            <h3>What's the salary like?</h3>
+            <p>In the US, cloud security engineers typically land in the $130k–$220k range depending on location, seniority, and whether you're at a big tech company. Specialized roles (cloud incident response, <a class="glossary-link" href="glossary.html#term-detection-engineering">detection engineering</a>, CNAPP architects) trend higher. Outside the US, ranges vary substantially — check local sources.</p>
+
+            <h3>Should I pay for a bootcamp?</h3>
+            <p>Usually no. The free and low-cost material is excellent if you're disciplined: official provider training, CSA's CCSK study guide, PwnedLabs, our <a href="resources.html">resources catalog</a>, and the <a href="ctfs.html">CTF directory</a>. Pay for SANS or a focused cert lab if your employer is footing the bill.</p>
+
+            <h3>What's CNAPP and do I need to care?</h3>
+            <p>CNAPP is the all-in-one cloud security platform category — CSPM + CWPP + CIEM in one tool. If you're an operator at a company buying tools, you'll almost certainly evaluate CNAPP vendors. If you're learning, focus on the underlying concepts (posture, workload, entitlement, runtime) and the products will make sense.</p>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to go deeper?</h2>
+            <p>Pick your next step:</p>
+            <ul>
+                <li><a href="learning-path.html">Follow the CSOH cloud security learning path</a> — beginner to advanced, with milestones.</li>
+                <li><a href="cloud-security-certifications.html">Compare cloud security certifications</a> — CCSK, CCSP, AWS, Azure, GCP, CKS.</li>
+                <li><a href="ctfs.html">Practice on cloud security CTFs</a> — 38+ free challenges across providers.</li>
+                <li><a href="breach-timeline.html">Read real breach kill chains</a> — Capital One, Snowflake, MGM, SolarWinds, mapped to ATT&amp;CK.</li>
+                <li><a href="sessions.html">Join the Friday Zoom session</a> — free, weekly, vendor-neutral.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="resources.html">All Resources</a></li>
+                    <li><a href="sessions.html">Zoom Sessions</a></li>
+                    <li><a href="presentations.html">Presentations</a></li>
+                    <li><a href="index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

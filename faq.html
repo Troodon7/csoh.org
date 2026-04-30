@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta name="description"
-        content="Frequently asked questions about Cloud Security Office Hours — what we are, how to join, the Friday Zoom session, the mailing list, the resource catalog, and how to contribute.">
+        content="Cloud Security Office Hours FAQ: what CSOH is, how to join the free Friday Zoom, the mailing list, the resource catalog and how to contribute.">
     <meta name="keywords"
         content="CSOH FAQ, cloud security office hours FAQ, how to join CSOH, CSOH zoom session, cloud security community FAQ">
     <title>FAQ - Cloud Security Office Hours (CSOH)</title>
@@ -23,10 +23,10 @@
     <meta property="og:image" content="https://csoh.org/banner.png">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="preload" href="/style.css?v=aafcb728" as="style"
-        integrity="sha384-Gy6/E+PcOXfeETLfbpNROKg7FSN2YYjY9HeqDguQRr40McPWNStQGoGJoKZ1PxHb">
-    <link rel="stylesheet" href="/style.css?v=aafcb728"
-        integrity="sha384-Gy6/E+PcOXfeETLfbpNROKg7FSN2YYjY9HeqDguQRr40McPWNStQGoGJoKZ1PxHb">
+    <link rel="preload" href="/style.css?v=d6c1acef" as="style"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
+    <link rel="stylesheet" href="/style.css?v=d6c1acef"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
 
     <script type="application/ld+json">
     {
@@ -93,7 +93,7 @@
         <div class="header-content">
             <div class="logo">
                 <a href="/" class="logo-link">
-                    <h1>CSOH</h1>
+                    <div class="logo-title">CSOH</div>
                 </a>
                 <p>Cloud Security Office Hours</p>
             </div>
@@ -105,8 +105,11 @@
                     <li class="has-dropdown">
                         <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
                         <ul class="dropdown-menu">
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="learning-path.html">Learning Path</a></li>
                             <li><a href="resources.html">Resources</a></li>
                             <li><a href="ctfs.html">CTFs</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
                             <li><a href="glossary.html">Glossary</a></li>
                         </ul>
                     </li>
@@ -151,13 +154,13 @@
     <section class="hero hero--compact">
         <img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img"
             decoding="async">
-        <h2>❓ Frequently Asked Questions</h2>
+        <h1>❓ Frequently Asked Questions</h1>
         <p>The community's most common questions about CSOH — what we are, how to join, and how everything works.</p>
     </section>
 
     <main class="container" id="main-content">
         <section class="content-section">
-            <h1>❓ FAQ</h1>
+            <h2>❓ FAQ</h2>
 
             <div class="info-box--blue">
                 <p>Don't see your question? Email <a href="mailto:admin@csoh.org">admin@csoh.org</a> or open a <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/issues">GitHub issue</a> — we'll answer and likely add it here.</p>
@@ -210,7 +213,7 @@
 
             <details class="meeting-topics">
                 <summary><strong>What does a session look like?</strong></summary>
-                <p>Roughly: a brief welcome and intros, often a guest presentation (15–30 minutes), then open discussion and Q&amp;A. Topics cover the gamut — recent breaches, conference recap, AI/LLM security, IAM design, tooling tradeoffs, career questions, and whatever else attendees bring.</p>
+                <p>Roughly: a brief welcome and intros, often a guest presentation (15–30 minutes), then open discussion and Q&amp;A. Topics cover the gamut — recent breaches, conference recap, <a class="glossary-link" href="glossary.html#term-ai">AI</a>/<a class="glossary-link" href="glossary.html#term-llm">LLM</a> security, <a class="glossary-link" href="glossary.html#term-iam">IAM</a> design, tooling tradeoffs, career questions, and whatever else attendees bring.</p>
             </details>
 
             <details class="meeting-topics">
@@ -284,12 +287,12 @@
 
             <details class="meeting-topics">
                 <summary><strong>What is the Breach Kill Chains page for?</strong></summary>
-                <p><a href="breach-timeline.html">Breach Kill Chains</a> is a curated library of step-by-step cloud breach reconstructions, mapped to MITRE ATT&amp;CK Cloud techniques. Each entry is sourced from a real post-mortem, official advisory, or court documents — not summaries of summaries.</p>
+                <p><a href="breach-timeline.html">Breach Kill Chains</a> is a curated library of step-by-step cloud breach reconstructions, mapped to <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud techniques. Each entry is sourced from a real post-mortem, official advisory, or court documents — not summaries of summaries.</p>
             </details>
 
             <details class="meeting-topics">
                 <summary><strong>How does the Threat Research page differ?</strong></summary>
-                <p><a href="threat-research.html">Threat Research</a> is a directory of where to find ongoing intel — vendor research teams, annual reports, IOC feeds, attack frameworks, government advisories. Kill Chains documents historical incidents; Threat Research is the live feed of where to look.</p>
+                <p><a href="threat-research.html">Threat Research</a> is a directory of where to find ongoing intel — vendor research teams, annual reports, <a class="glossary-link" href="glossary.html#term-ioc">IOC</a> feeds, attack frameworks, government advisories. Kill Chains documents historical incidents; Threat Research is the live feed of where to look.</p>
             </details>
 
             <h2 id="privacy">🔐 Privacy &amp; Conduct</h2>
@@ -332,7 +335,7 @@
             </details>
 
             <details class="meeting-topics">
-                <summary><strong>Can I contribute a breach kill chain?</strong></summary>
+                <summary><strong>Can I contribute a breach <a class="glossary-link" href="glossary.html#term-kill-chain">kill chain</a>?</strong></summary>
                 <p>Yes — but the bar is high. We require a real post-mortem or official disclosure as the source, step-by-step technical detail, and ATT&amp;CK mappings. See <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/CONTRIBUTING_KILL_CHAINS.md">CONTRIBUTING_KILL_CHAINS.md</a>.</p>
             </details>
 

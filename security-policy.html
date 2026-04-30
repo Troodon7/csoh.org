@@ -17,11 +17,11 @@
     <meta name="theme-color" content="#2c3e50">
 
     <!-- Preload Critical Assets -->
-    <link rel="preload" href="/style.css?v=aafcb728" as="style"
-        integrity="sha384-Gy6/E+PcOXfeETLfbpNROKg7FSN2YYjY9HeqDguQRr40McPWNStQGoGJoKZ1PxHb">
+    <link rel="preload" href="/style.css?v=d6c1acef" as="style"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
 
-    <link rel="stylesheet" href="/style.css?v=aafcb728"
-        integrity="sha384-Gy6/E+PcOXfeETLfbpNROKg7FSN2YYjY9HeqDguQRr40McPWNStQGoGJoKZ1PxHb">
+    <link rel="stylesheet" href="/style.css?v=d6c1acef"
+        integrity="sha384-7hiTc0Mm4ki9PsZFtTA83J5GCJ9J5YjGrRZj4m6o8hkDYb3E+wHwMa7Xt0HcOR6W">
 </head>
 
 <body>
@@ -31,7 +31,7 @@
         <div class="header-content">
             <div class="logo">
                 <a href="/" class="logo-link">
-                    <h1>CSOH</h1>
+                    <div class="logo-title">CSOH</div>
                 </a>
                 <p>Cloud Security Office Hours</p>
             </div>
@@ -43,8 +43,11 @@
           <li class="has-dropdown">
             <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
             <ul class="dropdown-menu">
+              <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+              <li><a href="learning-path.html">Learning Path</a></li>
               <li><a href="resources.html">Resources</a></li>
               <li><a href="ctfs.html">CTFs</a></li>
+              <li><a href="cloud-security-certifications.html">Certifications</a></li>
               <li><a href="glossary.html">Glossary</a></li>
             </ul>
           </li>
@@ -89,13 +92,13 @@
     <section class="hero hero--compact">
         <img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img"
             decoding="async">
-        <h2>🔒 Security Policy</h2>
+        <h1>🔒 Security Policy</h1>
         <p>How to responsibly disclose security vulnerabilities related to the CSOH website and community resources.</p>
     </section>
 
     <main class="container">
         <section class="content-section">
-            <h1>🔒 Security Vulnerability Disclosure Policy</h1>
+            <h2>🔒 Security Vulnerability Disclosure Policy</h2>
 
             <div class="info-box--blue">
                 <p><strong>About CSOH:</strong> Cloud Security Office Hours is a volunteer-run community for cloud
@@ -107,7 +110,7 @@
             <p>This security policy applies to vulnerabilities found in:</p>
             <ul>
                 <li><strong>The csoh.org website</strong> - our public-facing community website</li>
-                <li><strong>Our web infrastructure</strong> - server configurations, DNS, SSL/TLS, hosting</li>
+                <li><strong>Our web infrastructure</strong> - server configurations, DNS, SSL/<a class="glossary-link" href="glossary.html#term-tls">TLS</a>, hosting</li>
                 <li><strong>Community resources</strong> - publicly hosted materials and documentation</li>
             </ul>
 
@@ -124,9 +127,9 @@
             <h2>🐛 What We Consider a Security Vulnerability</h2>
             <p>We take security seriously and welcome reports of genuine security issues, including:</p>
             <ul>
-                <li>Cross-Site Scripting (XSS)</li>
+                <li><a class="glossary-link" href="glossary.html#term-xss">Cross-Site Scripting</a> (XSS)</li>
                 <li>SQL Injection or other injection attacks</li>
-                <li>Server-Side Request Forgery (SSRF)</li>
+                <li><a class="glossary-link" href="glossary.html#term-ssrf">Server-Side Request Forgery</a> (SSRF)</li>
                 <li>Authentication or authorization bypass</li>
                 <li>Sensitive data exposure (e.g., exposed credentials, API keys)</li>
                 <li>Security misconfigurations with exploitable impact</li>
@@ -180,7 +183,7 @@
             <p>When researching and reporting vulnerabilities, please:</p>
             <ul>
                 <li><strong>Do not</strong> access, modify, or delete data that doesn't belong to you</li>
-                <li><strong>Do not</strong> perform actions that could harm our website availability (DoS/DDoS)</li>
+                <li><strong>Do not</strong> perform actions that could harm our website availability (DoS/<a class="glossary-link" href="glossary.html#term-ddos">DDoS</a>)</li>
                 <li><strong>Do not</strong> disclose the issue publicly until we've had a chance to address it</li>
                 <li><strong>Do not</strong> exploit the vulnerability beyond what's necessary for validation</li>
                 <li><strong>Do</strong> test only against csoh.org (not our members or users)</li>

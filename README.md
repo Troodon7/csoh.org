@@ -29,13 +29,15 @@ Cloud Security Office Hours is a vendor-neutral, free community founded in Febru
 
 Here's our recommended learning path:
 
-1. **Decode the Acronyms**: Skim the [Glossary](glossary.html) — 200+ terms, every cross-reference hyperlinked
-2. **Read the FAQ**: The [FAQ](faq.html) covers how CSOH works — sessions, mailing list, recording policy, contributing
-3. **Start with Resources**: Browse [CTF Challenges](resources.html#ctf-challenges) and [Labs](resources.html#labs-training) for hands-on practice
-4. **Get Certified**: Explore [Certifications](resources.html#certifications) path for your cloud platform
-5. **Join the Mailing List**: Sign up at [sendfox.com/CSOH](https://sendfox.com/CSOH) to get the Zoom link for our weekly Friday sessions (7am PT)
-6. **Stay Updated**: Check [News](news.html) for latest threats and updates
-7. **Subscribe to RSS**: Add our [RSS feed](https://csoh.org/feed.xml) to your reader — see [RSS_FEED_README.md](RSS_FEED_README.md) for setup
+1. **Get the Lay of the Land**: Read [What is Cloud Security?](what-is-cloud-security.html) — the vendor-neutral pillar overview of the field
+2. **Follow the Roadmap**: Walk the [Learning Path](learning-path.html) — beginner → advanced with milestones, free labs, and study targets
+3. **Decode the Acronyms**: Skim the [Glossary](glossary.html) — 200+ terms, every cross-reference hyperlinked
+4. **Read the FAQ**: The [FAQ](faq.html) covers how CSOH works — sessions, mailing list, recording policy, contributing
+5. **Start with Resources**: Browse [CTF Challenges](ctfs.html) and [Labs](resources.html#labs-training) for hands-on practice
+6. **Get Certified**: Compare options in the [Cloud Security Certifications guide](cloud-security-certifications.html) — CCSK, CCSP, AWS, Azure, GCP, CKS
+7. **Join the Mailing List**: Sign up at [sendfox.com/CSOH](https://sendfox.com/CSOH) to get the Zoom link for our weekly Friday sessions (7am PT)
+8. **Stay Updated**: Check [News](news.html) for latest threats and updates
+9. **Subscribe to RSS**: Add our [RSS feed](https://csoh.org/feed.xml) to your reader — see [RSS_FEED_README.md](RSS_FEED_README.md) for setup
 
 ---
 
@@ -48,6 +50,15 @@ Central hub featuring:
 - Call-to-action buttons for mailing list signup (which delivers the Zoom link)
 - Enhanced schema markup for improved SERP visibility
 - Testimonials and member count (2000+)
+
+### ☁️ What is Cloud Security? (`what-is-cloud-security.html`)
+Vendor-neutral pillar page introducing the field — shared responsibility model, core pillars, top threats, the CSPM/CNAPP/CWPP/CIEM tool landscape, and a pointer-rich getting-started roadmap. Targets the high-volume "what is cloud security" search query and serves as the hub that links into the rest of the site. FAQ schema for rich snippets.
+
+### 🛣️ Learning Path (`learning-path.html`)
+Step-by-step roadmap from "no cloud experience" to working practitioner: prerequisites, beginner / intermediate / advanced stages with milestones, specialization tracks, and a "stay current" rhythm. Marked up with `HowTo` schema. Built from what actually works for the 2000+ members of the community.
+
+### 🎓 Cloud Security Certifications (`cloud-security-certifications.html`)
+Side-by-side comparison of the major cloud security certifications — CCSK, CCSP, AWS Security Specialty, Microsoft AZ-500/SC-100, Google PCSE, and CKS. Includes a comparison table, recommended paths by role (career switcher / established engineer / senior architect / detection specialist), and an FAQ.
 
 ### 📚 Resources (`resources.html`)
 Comprehensive catalog of **200+ cloud security resources** organized by 6 categories:
@@ -246,6 +257,9 @@ Edit `threat-research.html` directly — each link is a standard `.resource-card
 ```
 csoh.org/
 ├── index.html                  # Homepage with hero section & category overview
+├── what-is-cloud-security.html # Pillar: vendor-neutral cloud-security overview (FAQ schema)
+├── learning-path.html          # Beginner→advanced roadmap (HowTo schema)
+├── cloud-security-certifications.html # CCSK / CCSP / AWS / Azure / GCP / CKS comparison
 ├── resources.html              # Main resource directory (200+ resources in 6 categories)
 ├── news.html                   # Cloud security news (120+ articles)
 ├── chat-resources.html         # Community-shared URLs from Zoom sessions (557+ URLs)
@@ -301,6 +315,7 @@ csoh.org/
 │   ├── update_sitemap.py                   # Refresh sitemap.xml <lastmod> dates from git history
 │   ├── update_presentations_schema.py      # Regenerate VideoObject JSON-LD on presentations.html
 │   ├── crosslink_glossary.py               # Auto-link every glossary term mention to its <dt> entry
+│   ├── crosslink_pages.py                  # Auto-link glossary terms across the rest of the site
 │   ├── SUBMIT_RESOURCE_README.md           # Interactive resource submission docs
 │   ├── SUBMIT_RESOURCE_EXAMPLE.md          # Walkthrough example for the resource tool
 │   ├── SUBMIT_NEWS_SOURCE_README.md        # News source submission docs
