@@ -193,7 +193,7 @@
         <!-- Vendor Research Teams -->
         <section class="section" id="research-teams">
             <h2>🧠 Vendor Research Teams</h2>
-            <p>Teams that publish original cloud-focused threat research, detection logic, and attacker TTPs.</p>
+            <p>The fastest path to fresh, technical threat intel. These are the teams whose telemetry — incident-response engagements, agent fleets, sandbox detonations, honeypots — surfaces novel cloud-attacker behavior weeks or months before it lands in MITRE ATT&amp;CK or the next annual report. Each team writes from a slightly different vantage (CSPM, EDR, IR consulting, IaaS provider, runtime), so cross-referencing two or three on the same incident usually fills in details any one source misses. Subscribe to a handful via RSS, weight the ones whose stack overlaps yours (cloud provider, K8s distro, EDR vendor), and treat the detections they publish as starter content for your own SIEM or hunt program.</p>
             <div class="resource-grid">
                 <a href="https://www.wiz.io/blog/tag/research" class="card-link" target="_blank"
                     rel="noopener noreferrer">
@@ -439,8 +439,7 @@
         <!-- Annual Threat Reports -->
         <section class="section" id="threat-reports">
             <h2>📊 Annual Threat Reports</h2>
-            <p>The reports that drive the yearly cloud-security conversation. Most are free but require a form
-                submission.</p>
+            <p>The strategic-level documents that set the conversation each year — read by CISOs, board members, and the practitioners who have to translate the findings into roadmaps. They're worth reading critically: each report is part marketing, part field data, and the vendors disagree as much as they agree (one will call ransomware the top threat, another will name initial-access brokers, a third valid-account abuse). That disagreement is itself useful — it tells you what's noisy in their telemetry vs. yours. Skim two or three each year, extract the numbers that matter (median dwell time, top initial-access vectors, ransom-pay rates, breach cost per record) and use them to ground budget conversations in something other than hype. Most are free downloads behind a form.</p>
             <div class="resource-grid">
                 <a href="https://cloud.google.com/security/resources/m-trends" class="card-link" target="_blank"
                     rel="noopener noreferrer">
@@ -565,8 +564,7 @@
         <!-- Notable Incidents -->
         <section class="section" id="incidents">
             <h2>💥 Notable Cloud Incidents &amp; Post-Mortems</h2>
-            <p>Real attacks with detailed public write-ups. Start with our own step-by-step breach kill chains, then
-                dig into primary sources.</p>
+            <p>Real attacks beat tabletop scenarios — actual adversaries make moves a red team wouldn't think of, defenders miss things in ways no checklist predicts, and the fallout (regulatory, financial, reputational) makes the lesson stick. Each incident here has either a vendor post-mortem, a CISA advisory, or court documents detailed enough to reconstruct the attack step-by-step. Read them looking for recurring patterns rather than one-off vulnerabilities: identity sprawl and over-permissive roles, secrets committed to source, weak tenant isolation, supply-chain compromise, and gaps between provider and customer responsibility keep showing up across years and clouds. Start with our own step-by-step <a href="breach-timeline.html">kill chains</a> mapped to MITRE ATT&amp;CK Cloud, then drill into the primary sources to see what each company actually disclosed (and, sometimes, what they tried not to).</p>
             <div class="resource-grid">
                 <a href="breach-timeline.html" class="card-link">
                     <div class="resource-card" data-no-preview>
@@ -728,8 +726,7 @@
         <!-- IOC Feeds & Threat Intel Platforms -->
         <section class="section" id="ioc-feeds">
             <h2>🎯 IOC Feeds &amp; Threat Intel Platforms</h2>
-            <p>Indicators, hashes, <a class="glossary-link" href="glossary.html#term-c2">C2</a> infrastructure, and enrichment sources. Most are free; some offer higher-volume
-                paid tiers.</p>
+            <p>The atomic layer of threat intelligence: IPs, domains, file hashes, <a class="glossary-link" href="glossary.html#term-c2">C2</a> beacons, malicious certificates, and the platforms that aggregate and enrich them. IOCs are perishable — adversaries rotate infrastructure on hours-to-days timescales — so use them for retrospective hunts and high-confidence blocklists, not as a substitute for behavioral detection. The real value comes from feeding them into your SIEM, EDR, or DNS sinkhole so a hit pages someone, and from using enrichment platforms (VirusTotal, GreyNoise, Censys, Shodan) to triage alerts in seconds instead of hours. Most of these sources offer a free community tier and a paid commercial tier; the free tiers are usually enough for a small team to bootstrap a hunt program.</p>
             <div class="resource-grid">
                 <a href="https://otx.alienvault.com/" class="card-link" target="_blank" rel="noopener noreferrer">
                     <div class="resource-card">
@@ -882,8 +879,7 @@
         <!-- Frameworks -->
         <section class="section" id="frameworks">
             <h2>🗺️ Attack Frameworks &amp; Matrices</h2>
-            <p>The taxonomies you'll see referenced in every serious threat report. Learn the matrices, then use them
-                to structure your own hunts and detections.</p>
+            <p>Shared vocabularies for talking about attacker behavior, defender countermeasures, and detection coverage. MITRE ATT&amp;CK is the lingua franca — its Cloud, Containers, and Kubernetes matrices show up in nearly every serious threat report — and D3FEND maps countermeasures back to those same techniques so you can reason about defensive coverage instead of just attacker creativity. Specialized matrices (Microsoft's Kubernetes Threat Matrix, OWASP's Cloud-Native Top 10) zoom in on environments where ATT&amp;CK is too generic to be actionable. The practical move: pick one technique your team has missed in a recent incident, find every public detection rule for it (Sigma, Elastic, Splunk), measure your current coverage, and close the gap. Repeat. Over a quarter or two this turns into a real detection-engineering program rather than a wall of unread alerts.</p>
             <div class="resource-grid">
                 <a href="https://attack.mitre.org/matrices/enterprise/cloud/" class="card-link" target="_blank"
                     rel="noopener noreferrer">
@@ -992,8 +988,7 @@
         <!-- Government & Regulatory -->
         <section class="section" id="government-advisories">
             <h2>🏛️ Government &amp; Regulatory Advisories</h2>
-            <p>Authoritative sources from <a class="glossary-link" href="glossary.html#term-cisa">CISA</a>, NCSC, NSA, FBI, and peers — usually the first public detail on
-                active nation-state campaigns.</p>
+            <p>Authoritative, attribution-grade detail you can't get anywhere else. <a class="glossary-link" href="glossary.html#term-cisa">CISA</a>, NCSC, NSA, FBI, ACSC, and their counterparts have visibility into incidents most vendors don't — federal IR engagements, classified telemetry, sector-wide ISAC reporting — and they declassify enough of it into public advisories for defenders to act on. Joint advisories (multi-agency, often multi-country) are where you'll find the cleanest technical write-ups of active nation-state campaigns, including specific TTPs, IOCs, and recommended mitigations. The <a class="glossary-link" href="glossary.html#term-kev">KEV</a> catalog deserves special attention — if a CVE lands there, it has been observed in real attacks and your patching SLA for it should be days, not quarters. Subscribe to the email lists or RSS feeds for at least your home country's national CERT and CISA's advisories; both are free and signal-dense.</p>
             <div class="resource-grid">
                 <a href="https://www.cisa.gov/news-events/cybersecurity-advisories" class="card-link" target="_blank"
                     rel="noopener noreferrer">
