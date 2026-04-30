@@ -1,9 +1,22 @@
+# =============================================================================
+# Update News
+# -----------------------------------------------------------------------------
+# Every 3 hours, pulls fresh items from configured RSS/Atom feeds and rewrites
+# the news.html cards + JSON-LD schema. If anything changed, opens a PR and
+# (when only the news files were touched) auto-approves and auto-merges it.
+# The merge then triggers site-update-deploy to push the new content live.
+# =============================================================================
+
 name: Update News
 
 on:
+  # Run every 3 hours, on the hour. cron timezone is always UTC.
   schedule:
-    - cron: '0 */3 * * *'
+    - cron: '0 */3 * * *'   # min hour day-of-month month day-of-week
+  # Manual trigger from the Actions tab.
   workflow_dispatch:
+  # Re-run if someone edits the news script itself, so changes to feed
+  # config / parsing rules take effect immediately on next push.
   push:
     branches:
       - main
@@ -22,24 +35,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Full clone with our PAT (Personal Access Token) so the create-PR
+      # action below has the elevated permissions it needs. The default
+      # GITHUB_TOKEN can't trigger downstream workflows on PRs it creates,
+      # which is why we use the PAT instead.
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
           token: ${{ secrets.PAT_TOKEN }}
           fetch-depth: 0
 
+      # Install Python — update_news.py is a Python script.
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
         with:
           python-version: '3.x'
 
+      # Run the actual script. It rewrites news.html and feed.xml in place.
       - name: Update news.html from feeds
         run: python3 update_news.py
 
+      # Did the script change anything? And were the changes ONLY to the
+      # safe-to-auto-merge files? We use this to decide whether to enable
+      # auto-merge or require human review.
       - name: Detect changed files
         id: changes
         run: |
+          # `set -euo pipefail` — fail fast on errors, undefined vars, or
+          # broken pipes. Standard "strict mode" for shell scripts.
           set -euo pipefail
+          # `git diff --name-only` lists files modified vs the last commit.
           files="$(git diff --name-only)"
 
           if [ -z "$files" ]; then
@@ -50,13 +75,15 @@ jobs:
 
           echo "has_changes=true" >> "$GITHUB_OUTPUT"
 
+          # Walk every changed file. If ANY file isn't in the allowed list,
+          # flip `only_allowed=false` and break — humans need to review it.
           allowed="news.html feed.xml sitemap.xml"
           only_allowed=true
           while IFS= read -r f; do
             [ -z "$f" ] && continue
             case " $allowed " in
-              *" $f "*) ;;
-              *) only_allowed=false; break ;;
+              *" $f "*) ;;                              # match — allowed
+              *) only_allowed=false; break ;;          # no match — not allowed
             esac
           done <<< "$files"
           if [ "$only_allowed" = "true" ]; then
@@ -65,14 +92,17 @@ jobs:
             echo "only_news_files=false" >> "$GITHUB_OUTPUT"
           fi
 
+      # Open a PR with whatever the news script changed. The action handles
+      # branch creation, commit, push, and PR creation — all in one shot.
       - name: Create Pull Request
         id: cpr
         if: steps.changes.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0  # v8.1.0
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}               # PAT so downstream CI runs
           commit-message: 'chore: update news feed content'
           title: 'chore: Update news articles'
+          # Multi-line PR body. `|` keeps newlines literal.
           body: |
             This PR was automatically created by the Update News workflow.
 
@@ -83,20 +113,26 @@ jobs:
             - Updated `dateModified` in JSON-LD
 
             This can be safely reviewed and merged.
-          branch: update-news-content
-          delete-branch: true
+          branch: update-news-content                   # always reuses the same branch name
+          delete-branch: true                            # clean up after merge
           labels: automated, content
-          
+
+      # Approve our own PR using a SECOND PAT (different identity), because
+      # GitHub won't let you approve your own PR with the same token that
+      # opened it. APPROVAL_PAT_TOKEN belongs to a separate bot account.
       - name: Auto approve
         if: steps.cpr.outputs.pull-request-number != ''
         run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.APPROVAL_PAT_TOKEN }}
-          
+
+      # Only enable auto-merge when the diff is purely news content. If the
+      # script accidentally touches anything else, the PR stays open until a
+      # human reviews — important safety valve.
       - name: Enable PR auto-merge when only news content files changed
         if: steps.changes.outputs.only_news_files == 'true' && steps.cpr.outputs.pull-request-number != ''
         uses: peter-evans/enable-pull-request-automerge@a660677d5469627102a1c1e11409dd063606628d  # v3.0.0
         with:
           token: ${{ secrets.PAT_TOKEN }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          merge-method: squash
+          merge-method: squash                          # one tidy commit on main

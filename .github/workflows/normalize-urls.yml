@@ -1,11 +1,23 @@
+# =============================================================================
+# Normalize URLs
+# -----------------------------------------------------------------------------
+# Once a month, scans every link in our HTML, strips tracking parameters
+# (utm_*, fbclid, gclid…), upgrades http → https, and follows redirects to
+# the final destination. Opens a PR with the changes — auto-approved but NOT
+# auto-merged, so a human can eyeball cross-domain redirects before they land.
+# =============================================================================
+
 name: Normalize URLs
 
 on:
+  # Monthly cleanup, 1st of the month at 08:00 UTC.
   schedule:
-    # Monthly on the 1st at 08:00 UTC
-    - cron: '0 8 1 * *'
+    - cron: '0 8 1 * *'   # min hour day-of-month month day-of-week
+  # Manual trigger from the Actions tab.
   workflow_dispatch:
 
+# Needs `contents: write` because the create-PR action commits & pushes a new
+# branch. `pull-requests: write` lets it open and label the PR.
 permissions:
   contents: write
   pull-requests: write
@@ -20,28 +32,38 @@ concurrency:
 jobs:
   normalize-urls:
     runs-on: ubuntu-latest
+    # Hard cap: each redirect resolution is a real HTTP call, so this can
+    # drag if a site is slow.
     timeout-minutes: 15
 
     steps:
+      # PAT-authenticated checkout so the create-PR step has the right
+      # permissions to push branches and trigger downstream CI on the PR.
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
           token: ${{ secrets.PAT_TOKEN }}
 
+      # Install Python — both safety check and normalizer are Python scripts.
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
         with:
           python-version: '3.x'
 
+      # Run safety check FIRST. We don't want to follow redirects that lead
+      # to malicious destinations — the redirect resolver could otherwise
+      # silently rewrite a benign-looking URL to something bad.
       - name: Check URL safety (must pass before normalization)
         run: |
           python3 tools/check_all_site_urls.py > url-safety-report.txt 2>&1 || true
           cat url-safety-report.txt
+          # Halt the workflow if the report flags any unsafe URLs.
           if grep -q "❌ UNSAFE" url-safety-report.txt; then
             echo "::error::Unsafe URLs detected — blocking normalization"
             exit 1
           fi
 
+      # Save the safety report for download from the run page.
       - name: Upload safety report
         if: always()
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f  # v7.0.0
@@ -51,11 +73,15 @@ jobs:
           retention-days: 30
           if-no-files-found: warn
 
+      # The actual normalizer. `--apply` means "rewrite the files," not just
+      # report. `tee` saves output to a report file AND prints to the run log.
       - name: Run URL normalizer
         run: |
           cd tools && python3 normalize_urls.py --apply 2>&1 | tee ../normalize-report.txt
           cd ..
 
+      # Open a PR with the URL changes. Reuses the same `normalize-urls`
+      # branch each month — old branch is auto-deleted after merge.
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0  # v8.1.0
@@ -78,12 +104,18 @@ jobs:
           delete-branch: true
           labels: automated, content
 
+      # Approve via the second PAT (so we don't violate "can't approve your
+      # own PR" rules). Note we DO NOT auto-merge here — a human reviews
+      # before this lands, because cross-domain redirects can change link
+      # destinations in ways that need attention.
       - name: Auto approve
         if: steps.cpr.outputs.pull-request-number != ''
         run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.APPROVAL_PAT_TOKEN }}
 
+      # Save the normalization log too — useful when reviewing the PR to see
+      # exactly what the script did and why.
       - name: Upload normalization report
         if: always()
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f  # v7.0.0

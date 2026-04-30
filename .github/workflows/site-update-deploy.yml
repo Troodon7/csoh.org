@@ -1,6 +1,23 @@
+# =============================================================================
+# Update SRI, Generate Previews, and Deploy
+# -----------------------------------------------------------------------------
+# The big one. Runs on every push to main that touches site files. Walks
+# through a sequence of housekeeping steps (SRI hashes, URL safety, URL
+# normalization, presentations schema, sitemap dates, preview screenshots),
+# committing each one back to main if anything changed. Then mirrors the
+# whole tree to the FTP server.
+#
+# Each step that commits-and-pushes uses
+#     git push || (git pull --rebase origin main && git push)
+# so that if another deploy-pipeline workflow pushed a commit while this one
+# was working, this run rebases on top and tries again instead of failing.
+# =============================================================================
+
 name: Update SRI, Generate Previews, and Deploy
 
 on:
+  # Auto-run on every push to main, but ONLY when one of the listed file
+  # patterns changed. Editing tools/ or docs alone won't trigger a deploy.
   push:
     branches:
       - main
@@ -14,6 +31,8 @@ on:
       - 'breach-timeline.js'
       - 'update_sri.py'
       - '.htaccess'
+  # Manual trigger from the Actions tab. The `full_deploy` input is purely
+  # cosmetic right now — kept for compatibility with the older Actions UI.
   workflow_dispatch:
     inputs:
       full_deploy:
@@ -33,50 +52,77 @@ jobs:
   update-sri-and-previews:
     runs-on: ubuntu-latest
     steps:
+      # PAT-authenticated full clone. We need the PAT (not the default
+      # GITHUB_TOKEN) because some of the steps below push commits and we
+      # want those to fire downstream workflows. fetch-depth: 0 = no shallow
+      # clone, so `git diff` and `git log` see full history.
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
           token: ${{ secrets.PAT_TOKEN }}
           fetch-depth: 0
 
+      # Remember the commit SHA we started from. Later steps push new commits
+      # and we want to compare against THIS sha (not HEAD) to know what the
+      # original push actually changed.
       - name: Save original commit SHA
         id: original_sha
         run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
+      # Install Python — most of the housekeeping scripts are Python.
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
         with:
           python-version: '3.x'
 
+      # Install Playwright + Pillow (used by generate_preview.py to capture
+      # and resize screenshots) plus a headless Chromium binary.
       - name: Install dependencies
         run: |
           pip install playwright Pillow
           playwright install chromium
 
       # --- SRI hashes are always updated and committed BEFORE any deploy step ---
+      # SRI = Subresource Integrity. Each <script> and <link rel="stylesheet">
+      # tag carries a sha384 hash of the file it loads; browsers refuse to
+      # execute the file if the hash mismatches. We recompute these hashes
+      # whenever style.css or main.js changes, otherwise the page breaks.
       - name: Update SRI hashes in HTML files (MUST RUN BEFORE DEPLOY)
         id: sri
         run: |
           python3 update_sri.py
+          # `git diff --quiet` exits 0 if there's nothing changed, 1 if there is.
           if git diff --quiet; then
+            # Set a step output so later steps can ask "did SRI change?"
             echo "changed=false" >> $GITHUB_OUTPUT
             echo "No SRI changes to commit"
           else
+            # Configure git as the bot identity, then commit & push.
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            # `*.html` is shell-globbed by git itself; commit ONLY HTML files.
             git add '*.html'
+            # `[skip ci]` in a commit message tells GitHub Actions NOT to
+            # trigger workflows on this commit — avoids a deploy loop.
             git commit -m "chore: update SRI hashes for CSS/JS files [skip ci]"
+            # If push fails (race with another deploy-pipeline run), pull
+            # with rebase and retry. See file header for context.
             git push || (git pull --rebase origin main && git push)
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "SRI changes committed"
           fi
 
+      # Validate every URL in our HTML against safety lists. We block the
+      # whole deploy if anything unsafe slipped through — this is the
+      # deploy-time equivalent of the per-PR check.
       - name: Check URL safety (must pass before normalization)
         id: url_safety
         run: |
           python3 tools/check_all_site_urls.py > url-safety-report.txt 2>&1 || true
           cat url-safety-report.txt
           if grep -q "❌ UNSAFE" url-safety-report.txt; then
+            # `::error::` makes GitHub Actions render this as a red error
+            # annotation in the run summary.
             echo "::error::Unsafe URLs detected — blocking normalization and deploy"
             echo "safe=false" >> $GITHUB_OUTPUT
             exit 1
@@ -84,6 +130,9 @@ jobs:
             echo "safe=true" >> $GITHUB_OUTPUT
           fi
 
+      # Save the safety report so reviewers can read it. `if: always()` =
+      # upload even if the previous step failed (that's exactly when we
+      # most want the report).
       - name: Upload safety report
         if: always()
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f  # v7.0.0
@@ -93,15 +142,24 @@ jobs:
           retention-days: 30
           if-no-files-found: warn
 
+      # Strip tracking params and resolve redirects on every URL. Same logic
+      # as the standalone normalize-urls workflow, but runs inline so changes
+      # ride along with the same deploy instead of opening a PR.
       - name: Normalize URLs (strip tracking params, resolve redirects)
         id: normalize
         run: |
+          # `tee` writes output to a file AND prints it. PIPESTATUS[0] is
+          # the exit code of the FIRST command in the pipe (Python), not tee.
           python3 tools/normalize_urls.py --apply 2>&1 | tee normalize-output.txt
           NORM_EXIT=${PIPESTATUS[0]}
+          # Exit code 2 from normalize_urls.py = a redirect went to an
+          # unsafe destination. Don't deploy; surface as a hard error.
           if [ $NORM_EXIT -eq 2 ]; then
             echo "::error::Normalization detected redirects to unsafe destinations — blocking deploy"
             exit 1
           fi
+          # Other nonzero exits are warnings (couldn't resolve some URLs);
+          # `::warning::` shows them as yellow annotations but doesn't fail.
           if [ $NORM_EXIT -ne 0 ]; then
             echo "::warning::URL normalization exited with code $NORM_EXIT — some redirects may not have been resolved"
           fi
@@ -121,10 +179,14 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
+      # presentations.html embeds JSON-LD VideoObject schema for each YouTube
+      # talk. This script regenerates that block from the cards on the page,
+      # so when you add a presentation the schema follows automatically.
       - name: Refresh presentations VideoObject schema
         id: presentations_schema
         run: |
           python3 tools/update_presentations_schema.py
+          # Only commit if presentations.html actually changed.
           if git diff --quiet -- presentations.html; then
             echo "changed=false" >> $GITHUB_OUTPUT
             echo "No presentations schema changes"
@@ -138,6 +200,8 @@ jobs:
             echo "Presentations schema changes committed"
           fi
 
+      # Refresh the <lastmod> dates in sitemap.xml from each file's git
+      # commit date. Search engines use these to decide what to re-crawl.
       - name: Refresh sitemap lastmod dates
         id: sitemap
         run: |
@@ -155,9 +219,14 @@ jobs:
             echo "Sitemap changes committed"
           fi
 
+      # Look for resource cards on the site that don't yet have a preview
+      # screenshot. Sets a step output so the next two steps know whether
+      # to actually generate them.
       - name: Check for missing previews
         id: check_previews
         run: |
+          # `|| true` — don't fail this step if the script exits nonzero;
+          # we just want the report to grep.
           python3 tools/generate_preview.py --check > preview-check.txt || true
           if grep -q "Found.*resources without previews" preview-check.txt; then
             echo "missing=true" >> $GITHUB_OUTPUT
@@ -168,18 +237,27 @@ jobs:
           fi
           cat preview-check.txt
 
+      # Headless-Chromium screenshot every URL that's missing a preview.
+      # Conditional — only runs if the previous step found something missing.
       - name: Generate missing previews
         if: steps.check_previews.outputs.missing == 'true'
         run: |
           python3 tools/generate_preview.py --batch-auto
 
+      # Squeeze the new JPGs (strip metadata, recompress at quality 85).
+      # Saves a noticeable amount of bandwidth on the live site.
       - name: Optimize images
         if: steps.check_previews.outputs.missing == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y jpegoptim
+          # `find ... -exec`: run jpegoptim once per file. `\;` ends the
+          # -exec command (not `\+` because we want one-at-a-time output).
           find img/previews -name "*.jpg" -exec jpegoptim --strip-all --max=85 {} \;
 
+      # Commit and push the new preview JPGs + the mapping file. We swap the
+      # remote URL to use a token-authenticated form because PAT_TOKEN may
+      # have permissions the default origin doesn't.
       - name: Commit and push preview images
         if: steps.check_previews.outputs.missing == 'true'
         env:
@@ -187,9 +265,13 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Rewrite the origin URL to embed the PAT for HTTPS push auth.
           git remote set-url origin "https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git"
+          # `|| true` lets the step continue if there are no JPGs to add.
           git add img/previews/*.jpg || true
           git add preview-mapping.json || true
+          # `git diff --cached --quiet` checks the staging area: nothing to
+          # commit means we just exit cleanly.
           if git diff --cached --quiet; then
             echo "No preview images to commit"
           else
@@ -197,10 +279,15 @@ jobs:
             git push || (git pull --rebase origin main && git push)
           fi
 
+      # Did the original push (the one that triggered this workflow) include
+      # any chat-screenshots? Sets a flag the deploy step uses to decide
+      # whether to upload the chat-screenshots/ directory.
       - name: Check for new chat-screenshots
         id: check_chat_screenshots
         run: |
           ORIG_SHA="${{ steps.original_sha.outputs.sha }}"
+          # `${ORIG_SHA}^` = the parent of the original commit. Diff between
+          # that and the original commit shows what THIS push introduced.
           if git diff --name-only "${ORIG_SHA}^" "${ORIG_SHA}" -- 'chat-screenshots/' | grep -q .; then
             echo "new=true" >> $GITHUB_OUTPUT
             echo "New chat-screenshots detected"
@@ -209,6 +296,7 @@ jobs:
             echo "No new chat-screenshots"
           fi
 
+      # Same shape as above but for HTML files. Used by the deploy gate.
       - name: Check if HTML content changed
         id: html_changed
         run: |
@@ -219,6 +307,16 @@ jobs:
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
+      # Decide whether the FTP deploy actually needs to run. We deploy when
+      # ANY of these are true:
+      #   - SRI hashes changed
+      #   - sitemap was refreshed
+      #   - previews were generated
+      #   - new chat-screenshots
+      #   - any HTML changed
+      #   - manual workflow_dispatch trigger
+      # If none of the above, we skip the deploy entirely — saves the FTP
+      # bandwidth and surface area for nothing-to-do runs.
       - name: Check if deploy is needed
         id: deploy_needed
         run: |
@@ -228,10 +326,12 @@ jobs:
             echo "deploy=false" >> $GITHUB_OUTPUT
           fi
 
+      # Install lftp only if we're actually going to deploy.
       - name: Install lftp
         if: steps.deploy_needed.outputs.deploy == 'true'
         run: sudo apt-get update && sudo apt-get install -y lftp
 
+      # The actual FTP deploy. Uploads the site to the live server.
       - name: Deploy to FTP
         if: steps.deploy_needed.outputs.deploy == 'true'
         # Hard cap so a hung lftp doesn't burn the 6-hour job budget.
@@ -255,7 +355,12 @@ jobs:
                      open -u ${FTP_USER},${FTP_PASS} ${FTP_HOST}"
           # --parallel=2 is gentler on hosts that throttle concurrent transfers;
           # the previous --parallel=4 stalled mid-mirror in late April 2026.
-          # Pass 1: site files — everything except img/ and chat-screenshots/
+
+          # Pass 1: site files. `mirror -R` = REVERSE mirror (local → remote).
+          # We exclude img/ and chat-screenshots/ because we sync those in
+          # dedicated passes below — they have their own rules and timing.
+          # The other --exclude rules drop dev-only files (.git, README, etc.)
+          # that don't belong on the public server.
           echo "==> Deploying site files..."
           lftp -e "${LFTP_CONN}; mirror -R ./ /public_html/ --verbose=2 --parallel=2 \
             --exclude .git/ --exclude .github/ --exclude .venv/ --exclude __pycache__/ \
@@ -276,6 +381,7 @@ jobs:
           lftp -e "${LFTP_CONN}; mirror -R ./img/news-banners/ /public_html/img/news-banners/ --verbose=2 --parallel=2 \
             --exclude-glob .DS_Store; bye"
           # Pass 4: only sync chat-screenshots/ when new ones were added this run
+          # (they're large; skip the full mirror when nothing changed).
           if [[ "${{ steps.check_chat_screenshots.outputs.new }}" == "true" ]]; then
             echo "==> Syncing new chat-screenshots..."
             lftp -e "${LFTP_CONN}; mirror -R ./chat-screenshots/ /public_html/chat-screenshots/ --verbose=2 --parallel=2 \

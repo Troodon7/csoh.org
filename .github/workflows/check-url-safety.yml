@@ -1,21 +1,36 @@
+# =============================================================================
+# Check URL Safety
+# -----------------------------------------------------------------------------
+# Scans every external link in the site's HTML files against safety lists
+# (malware databases, known-bad domains, etc.). Stops a PR from merging if any
+# link points somewhere unsafe and posts a summary comment so the contributor
+# knows what to remove.
+# =============================================================================
+
 name: Check URL Safety
 
 on:
+  # Run on PRs that touch HTML — that's where new URLs get introduced.
   pull_request:
     paths:
       - '**.html'
+  # Weekly recheck (Mondays at 06:30 UTC) catches domains that turn malicious
+  # AFTER they were originally safe to link.
   schedule:
-    # Weekly on Mondays at 06:30 UTC
-    - cron: '30 6 * * 1'
+    - cron: '30 6 * * 1'   # min hour day-of-month month day-of-week
+  # Manual trigger from the Actions tab.
   workflow_dispatch:
 
+# `contents: read` = read repo files. `pull-requests: write` = post comments.
+# This workflow never modifies the codebase, so write access to contents is
+# deliberately withheld.
 permissions:
   contents: read
   pull-requests: write
 
 
-# Cancel older runs against the same ref when a new push lands. Read-only
-# checks — safe to interrupt and restart on the latest commit.
+# Per-ref concurrency: a new push to the same PR cancels the old run. Read-only,
+# so safe to interrupt. PRs on different branches still run in parallel.
 concurrency:
   group: check-url-safety-${{ github.ref }}
   cancel-in-progress: true
@@ -23,26 +38,37 @@ concurrency:
 jobs:
   check-urls:
     runs-on: ubuntu-latest
+    # Hard cap so a hung HTTP request can't burn the 6-hour job budget.
     timeout-minutes: 15
-    
+
     steps:
+      # Pull the code so we can read HTML files.
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
 
+      # Install Python — the safety check is a Python script.
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
         with:
-          python-version: '3.x'
+          python-version: '3.x'   # any Python 3 — script is version-tolerant
 
+      # Run the actual scanner. Pipes stdout+stderr into a report file.
+      # `|| true` keeps this step from failing on the script's nonzero exit;
+      # we want to inspect the report and decide ourselves whether to fail.
       - name: Run URL safety check
         run: |
           python3 tools/check_all_site_urls.py > site-wide-url-safety-report.txt 2>&1 || true
           cat site-wide-url-safety-report.txt
+          # If the report contains the string "❌ UNSAFE", the script flagged
+          # at least one bad URL — fail the workflow with a GH-Actions error.
           if grep -q "❌ UNSAFE" site-wide-url-safety-report.txt; then
             echo "::error::Unsafe URLs detected in HTML files"
             exit 1
           fi
 
+      # Save the report so a reviewer can download it from the run page.
+      # `if: always()` = upload even if the script failed (the report still
+      # exists and is what we need to debug).
       - name: Upload safety report
         if: always()
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f  # v7.0.0
@@ -52,10 +78,13 @@ jobs:
           retention-days: 30
           if-no-files-found: warn
 
+      # If the previous step failed AND we're on a PR, post a summary comment.
       - name: Comment on PR with results
         if: failure() && github.event_name == 'pull_request'
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd  # v8.0.0
         with:
+          # JS that runs in a Node sandbox the action provides. `github`,
+          # `context`, etc. are pre-bound helpers for the GH API.
           script: |
             const fs = require('fs');
             let report = '';
@@ -64,20 +93,23 @@ jobs:
             } catch (e) {
               report = 'Error reading safety report';
             }
-            
-            // Extract summary
+
+            // Pull just the summary block from the report — full report can
+            // be hundreds of lines and we want a readable PR comment.
             const summaryMatch = report.match(/SUMMARY[\s\S]*?={50,}/);
             const summary = summaryMatch ? summaryMatch[0] : 'See full report in artifacts';
-            
+
+            // Extract the count from the report header for a punchy first line.
             const unsafeMatch = report.match(/❌ UNSAFE URLS \((\d+)\):/);
             const unsafeCount = unsafeMatch ? unsafeMatch[1] : '0';
-            
+
             let comment = `## ⚠️ URL Safety Check Failed\n\n`;
             comment += `Found **${unsafeCount} unsafe URL(s)** in HTML files\n\n`;
             comment += `\`\`\`\n${summary}\n\`\`\`\n\n`;
             comment += `Please review the URLs and remove any unsafe entries.\n\n`;
             comment += `Full report is available in the workflow artifacts.`;
-            
+
+            // Post the comment on the PR.
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,

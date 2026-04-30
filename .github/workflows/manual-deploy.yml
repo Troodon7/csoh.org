@@ -1,11 +1,26 @@
+# =============================================================================
+# Manual Deploy to Server
+# -----------------------------------------------------------------------------
+# Force-pushes the entire site to the FTP host on demand. Use this when:
+#   - the auto-deploy workflow skipped a push (no relevant files changed) but
+#     you still need to update the live server, OR
+#   - the server got out of sync with main for some other reason.
+# It does NOT run on push — only when you click "Run workflow" in the Actions
+# tab. The full mirror means it uploads everything and removes server files
+# that no longer exist locally.
+# =============================================================================
+
 name: Manual Deploy to Server
 
+# Only manual triggers — no schedule, no push.
 on:
   workflow_dispatch:
 
 
-# Shared with site-update-deploy and the other deploy-pipeline workflows so
-# commits to main and FTP deploys never race each other. Queue serially.
+# Same `deploy-pipeline` lock as site-update-deploy / update-news /
+# normalize-urls. If one of those is mid-run when you click "Run workflow",
+# this manual deploy waits in line — no FTP collisions, no half-committed
+# states.
 concurrency:
   group: deploy-pipeline
   cancel-in-progress: false
@@ -14,29 +29,55 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # Full clone (all history) so we can compute commit dates per file in
+      # the next step. `fetch-depth: 0` = no shallow clone.
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
           fetch-depth: 0
 
+      # Git checkouts give every file the SAME mtime (the time of the
+      # checkout), which makes lftp re-upload everything every run. Touching
+      # each file to its last-commit time means lftp's "is this newer?" check
+      # only flags files that actually changed — much faster mirroring.
       - name: Restore file mtimes from git history
         run: |
+          # `ls-files -z` = NUL-terminated paths (handles spaces in filenames)
+          # `git log -1 --format=%ct` = unix timestamp of last commit for that file
+          # `touch -d @<unix-timestamp>` = set the file's modification time
           git ls-files -z | while IFS= read -r -d '' file; do
             ts=$(git log -1 --format=%ct -- "$file" 2>/dev/null)
             [ -n "$ts" ] && touch -d "@$ts" "$file"
           done
 
+      # lftp is the FTP client we use — supports SSL/TLS, parallel transfers,
+      # and `mirror` (rsync-like sync to a remote host).
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
+      # The actual deploy. Three secrets are pulled from the repo's secret
+      # store: FTP_HOST, FTP_USER, FTP_PASS. Never echo these.
       - name: Deploy to FTP (full mirror)
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASS: ${{ secrets.FTP_PASS }}
         run: |
+          # LFTP_CONN is the connection setup string passed to every lftp
+          # invocation. Each `set` is a session option:
+          #   ssl:verify-certificate no  — don't fail on self-signed certs
+          #   ftp:ssl-force true         — refuse plain-text FTP
+          #   ftp:ssl-protect-data true  — encrypt the data channel too
+          # `open -u user,pass host` connects with credentials.
           LFTP_CONN="set ssl:verify-certificate no; set ftp:ssl-force true; set ftp:ssl-protect-data true; open -u ${FTP_USER},${FTP_PASS} ${FTP_HOST}"
           echo "==> Deploying all site files..."
+
+          # `mirror -R` = REVERSE mirror — local → remote (the default is
+          # remote → local). `--verbose=2` logs each transfer; `--parallel=4`
+          # uploads 4 files at a time. The long list of --exclude rules drops
+          # things that shouldn't be on the public server (git internals,
+          # contributor docs, build artifacts, macOS .DS_Store cruft, the
+          # tools/ scripts, etc.).
           lftp -e "${LFTP_CONN}; mirror -R ./ /public_html/ --verbose=2 --parallel=4 \
             --exclude .git/ --exclude .github/ --exclude .venv/ --exclude __pycache__/ \
             --exclude-glob *.sh --exclude-glob *.pyc --exclude-glob *.pyo \
