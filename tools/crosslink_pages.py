@@ -297,10 +297,21 @@ def mask_skip_zones(content: str) -> tuple[str, list[str]]:
 
 
 def unmask(content: str, placeholders: list[str]) -> str:
+    """Restore placeholders. Must loop because masked regions can nest:
+    a `<h3>` stashed first, then the `<a>` that wraps it stashed second,
+    means the inner placeholder lives inside the outer placeholder's text
+    and only surfaces after the outer one is restored. `re.sub` does one
+    pass, so loop until no more substitutions happen."""
+
     def restore(m: re.Match) -> str:
         return placeholders[int(m.group(1))]
 
-    return re.sub(r"\x00P(\d+)\x00", restore, content)
+    pattern = re.compile(r"\x00P(\d+)\x00")
+    while True:
+        new_content = pattern.sub(restore, content)
+        if new_content == content:
+            return new_content
+        content = new_content
 
 
 def link_text_segments(
