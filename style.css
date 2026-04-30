@@ -2883,24 +2883,25 @@ footer {
 .breadcrumb-nav ol {
     display: flex;
     flex-wrap: wrap;
+    align-items: baseline;
     list-style: none;
-    gap: 0.25rem;
+    column-gap: 0.4rem;
+    row-gap: 0.15rem;
     font-size: 0.875rem;
+    line-height: 1.4;
     color: #666;
     margin: 0;
     padding: 0;
 }
 
 .breadcrumb-nav li {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+    white-space: nowrap;
 }
 
 .breadcrumb-nav li + li::before {
     content: '›';
     color: #999;
-    margin-right: 0.25rem;
+    padding-right: 0.4rem;
 }
 
 .breadcrumb-nav a {
