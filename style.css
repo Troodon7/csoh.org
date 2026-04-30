@@ -3295,6 +3295,26 @@ footer {
         border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
+    /* Mobile: the current-page indicator keeps the row's full-width
+       shape — desktop's small rounded pill (padding 0.35rem 0.6rem,
+       border-radius 6px) shrinks the active row vs its siblings and
+       drops the dropdown sub-item's left indent. Override here so the
+       active row is the same height & indent as everything else; just
+       the background highlight differs. Specificity is bumped (header
+       prefix; `.dropdown-menu` for sub-items) to outrank the global
+       `nav a[aria-current="page"]` rule. */
+    header nav a.active,
+    header nav a[aria-current="page"] {
+        padding: 0.75rem 1rem;
+        border-radius: 0;
+    }
+
+    header .dropdown-menu a.active,
+    header .dropdown-menu a[aria-current="page"] {
+        padding: 0.6rem 1rem 0.6rem 2rem;
+        border-radius: 0;
+    }
+
     .has-dropdown::after {
         display: none;
     }
