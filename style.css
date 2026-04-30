@@ -2223,6 +2223,17 @@ footer {
     border-radius: 8px;
 }
 
+.cta-section ul {
+    text-align: left;
+    max-width: 48rem;
+    margin: 1rem auto 0;
+    padding-left: 1.5rem;
+}
+
+.cta-section ul li + li {
+    margin-top: 0.5rem;
+}
+
 .cta-link {
     color: var(--primary-color);
     text-decoration: none;
