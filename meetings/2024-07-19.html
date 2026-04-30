@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="The team from Equinix discussed recent infrastructure outages, the potential impact on the company's reputation, and the trend of customers preferring to…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2024-07-19, Friday Zoom, Equinix Team Addresses Infrastructure Outage">
+    <title>Friday, July 19, 2024 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2024-07-19.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, July 19, 2024 CSOH Recap — Equinix Team Addresses Infrastructure Outage">
+    <meta property="og:description" content="The team from Equinix discussed recent infrastructure outages, the potential impact on the company's reputation, and the trend of customers preferring to…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2024-07-19.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, July 19, 2024 CSOH Recap">
+    <meta name="twitter:description" content="The team from Equinix discussed recent infrastructure outages, the potential impact on the company's reputation, and the trend of customers preferring to…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Equinix Team Addresses Infrastructure Outage',
+      "description": "The team from Equinix discussed recent infrastructure outages, the potential impact on the company's reputation, and the trend of customers preferring to…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2024-07-19",
+      "dateModified": "2024-07-19",
+      "mainEntityOfPage": "https://csoh.org/meetings/2024-07-19.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, July 19, 2024',
+          "item": "https://csoh.org/meetings/2024-07-19.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, July 19, 2024</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, July 19, 2024 — Meeting Recap</h1>
+        <p>Equinix Team Addresses Infrastructure Outage</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2024-07-19">Friday, July 19, 2024</time> — Equinix Team Addresses Infrastructure Outage</h2>
+            <p><strong>Quick recap.</strong> The team from Equinix discussed recent infrastructure outages, the potential impact on the company&#x27;s reputation, and the trend of customers preferring to rent server space. They also explored the potential of <a class="glossary-link" href="../glossary.html#term-ai">AI</a> in container configuration, the implications of a global outage, and the impact of system outages on the health industry and the stock market. Lastly, they discussed the recent challenges faced by Crowdstrike, the potential implications of Google&#x27;s proposed acquisition of Palo Alto, and the concept of co-opetition.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2024-07</span><span class="tag">AI</span><span class="tag">Community</span><span class="tag">Industry News</span></div>
+            <details class="meeting-topics">
+                <summary>Show 9 discussion topics</summary>
+            <h3>Equinix Team Addresses Infrastructure Outage</h3>
+            <p>Shawn, Matt Alvarez, and Cooper from Equinix discussed the recent infrastructure outage caused by an automatic software update. They discussed the difficulties in fixing the issue, including the need to boot into safe mode and the potential lack of access to the necessary 48-bit locker key. The conversation also touched on the negative impact on the company&#x27;s reputation. Shawn shared his experience in the data center industry, revealing that he was part of the team that created the Colo business at Exodus Communications, which grew to a valuation of $28 billion. The team also discussed the trend of customers preferring to rent server space rather than manage their own infrastructure.</p>
+            <h3>Team Updates and New Members Discussed</h3>
+            <p>The team discussed recent events including a Reddit outage and issues with CrowdStrike. Shawn introduced new members, Thomas and Cooper, who are looking to expand their knowledge and network. Shawn also encouraged the group to take advantage of the forum for networking and learning. Jay shared that he had released a blog and was open to discussions about it.</p>
+            <h3>AI, Container Configuration, and CrowdStrike</h3>
+            <p>Jay, Shawn, Jim, and Galan discussed the potential of AI and its impact on container configuration. Shawn praised the research team&#x27;s work, while Jay admired a particular solution&#x27;s elegance. The team also shared their experiences during the recent CrowdStrike incident, with Galan sharing his personal impact due to issues with hotel key cards. The group agreed to stay updated on future developments in the field. The team also discussed the global impact of a recent update to the CrowdStrike software, which caused many systems to crash and display a blue screen of death, akin to the disruption caused by the &#x27;90s worms, Sobig and Slammer.</p>
+            <h3>Microsoft Azure Mitigation Concerns and Solutions</h3>
+            <p>Neil expressed concerns about Microsoft Azure&#x27;s guidance for mitigation, noting that some customers had to reboot their machines multiple times. Adam St., Shawn, and Galan discussed the effectiveness of suggested solutions and the challenges of repairing Azure-based machines. The team also considered the potential of buying Crowdstrike stock due to issues with Azure and discussed its extensive integration with tech companies and the US government. The conversation concluded with Neil and Jay speculating on the breadth of Microsoft&#x27;s Defender tool and the significant number of companies affected by recent events.</p>
+            <h3>Global Outage Implications and Backup Solutions</h3>
+            <p>The team engaged in a discussion about the potential implications of a global outage, drawing from their experiences at Crowdstrike and in the medical sector. Shawn highlighted the financial and liability concerns, while Samantha explained that her hospital has backup systems in place to ensure continuity of care during network downtime. The team also discussed the potential change in the company&#x27;s operating procedure to a <a class="glossary-link" href="../glossary.html#term-public">multi-cloud</a> system for backup purposes, prompted by the risk of data loss. Concerns were raised about the lack of a backup system for Windows-based medical devices, and the team acknowledged the current efforts to address this issue.</p>
+            <h3>System Outage Consequences and Solutions</h3>
+            <p>The team discussed the potential consequences of a system outage, focusing on its impact on the health industry and the stock market. Don raised concerns about the inability to access medical records in emergencies, while Alhaji highlighted the potential loss of life and the drop in share prices for companies like Crowdstrike. The team also explored the potential for customers to seek alternatives and the risk of lawsuits following an outage. Lastly, they discussed the potential reevaluation of technology, particularly the use of <a class="glossary-link" href="../glossary.html#term-ebpf">eBPF</a> over kernel-level solutions, and the challenges of regular updates for mission-critical systems.</p>
+            <h3>Crowdstrike Senate Hearing and Share Price Impact</h3>
+            <p>Matt Alvarez opened a discussion about setting a date for the Crowdstrike Senate hearing. The conversation then shifted to the recent security issue that led to a significant drop in share prices. Kurt expressed curiosity about how long it would take for Crowdstrike to publish the root cause of the issue, with Jay suggesting it could take 3 to 6 weeks. Neil shared a past experience from Microsoft about a similar issue, emphasizing the importance of thorough testing before rolling out new software. Brandon then discussed the impact of the incident on cyber insurance claims, highlighting that it was a significant uptick. The conversation concluded with SLuengo@BankUnited.com acknowledging that such incidents could happen to any company.</p>
+            <h3>Crowdstrike Challenges and Google Acquisition</h3>
+            <p>The team discussed the recent challenges faced by Crowdstrike and possible solutions, with a focus on the importance of a deployment strategy. They also explored the potential implications of Google&#x27;s proposed acquisition of Palo Alto, with Shawn, Neil, Jay, and Kurt expressing their views. The team agreed that such acquisitions are common in the tech industry and should not significantly alter their relationships, though Palo Alto might emphasize its independence more. Kurt added that any initial disruptions would likely be settled quickly as all parties aim to remain profitable.</p>
+            <h3>Co-Opetition Discussion and Feedback</h3>
+            <p>Shawn led a discussion about co-opetition, referencing Ray&#x27;s competitive strategy towards Microsoft. Dane shared his perspective as an Orca and Google customer, expressing his appreciation for Google&#x27;s recent efforts. Shawn then invited feedback and suggestions for future topics, mentioning that all members would receive a lapel pin. The conversation ended with Shawn sharing an example of co-opetition from his own experience and announcing the next meeting.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2024-07-12.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2024-07-26.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

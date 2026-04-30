@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="A former AWS engineer exploited a misconfigured WAF via server-side request forgery to reach the EC2 instance metadata service, stealing temporary IAM…">
+    <meta name="keywords" content="Capital One 2019, breach analysis, kill chain, MITRE ATT&CK, cloud security incident, post-mortem, 2019">
+    <title>Capital One 2019 (2019) Breach Kill Chain - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/breaches/capital-one.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Capital One 2019 (2019) Breach Kill Chain">
+    <meta property="og:description" content="A former AWS engineer exploited a misconfigured WAF via server-side request forgery to reach the EC2 instance metadata service, stealing temporary IAM…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/breaches/capital-one.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Capital One 2019 (2019) Breach Kill Chain">
+    <meta name="twitter:description" content="A former AWS engineer exploited a misconfigured WAF via server-side request forgery to reach the EC2 instance metadata service, stealing temporary IAM…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="breach-timeline.css?v=29fbd6a9" integrity="sha384-WrezLhCC8Bdnk6bhRviNG3f7jv+K1IW8/RCNel8OBIyPAd9wiZ4IMtSBG5Nu6Wja">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Capital One – SSRF → IMDSv1 → Over-Privileged IAM Role → 106M Record S3 Exfiltration',
+      "description": "A former AWS engineer exploited a misconfigured WAF via server-side request forgery to reach the EC2 instance metadata service, stealing temporary IAM…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2019-01-01",
+      "dateModified": "2026-04-30",
+      "mainEntityOfPage": "https://csoh.org/breaches/capital-one.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Cloud Security Breach Analysis"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Breach Kill Chains",
+          "item": "https://csoh.org/breach-timeline.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Capital One 2019',
+          "item": "https://csoh.org/breaches/capital-one.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html" aria-current="page">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+            <li><span aria-current="page">Capital One 2019</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Capital One 2019 — 2019</h1>
+        <p>Step-by-step <a class="glossary-link" href="../glossary.html#term-kill-chain">kill chain</a> mapped to <a class="glossary-link" href="../glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud, sourced from official post-mortems and primary technical analyses.</p>
+    </section>
+
+    <main class="kc-main kc-page" id="main-content">
+        <div class="incident-panel active" role="article" id="capital-one">
+
+  <div class="inc-header">
+    <div class="inc-meta">
+      <span class="inc-year">March–July 2019</span>
+      <span class="sev-badge sev-critical">Critical</span>
+      <span class="prov-tag prov-aws">AWS</span>
+    </div>
+    <h2 class="inc-title">Capital One – SSRF → IMDSv1 → Over-Privileged IAM Role → 106M Record S3 Exfiltration</h2>
+    <p class="inc-summary">A former AWS engineer exploited a misconfigured <a class="glossary-link" href="../glossary.html#term-waf">WAF</a> via <a class="glossary-link" href="../glossary.html#term-ssrf">server-side request forgery</a> to reach the <a class="glossary-link" href="../glossary.html#term-ec2">EC2</a> instance metadata service, stealing temporary <a class="glossary-link" href="../glossary.html#term-iam">IAM</a> role credentials. An over-privileged role then granted access to 700+ <a class="glossary-link" href="../glossary.html#term-s3">S3</a> buckets containing 106 million customer records. The attack ran undetected for 77 days and directly caused AWS to build <a class="glossary-link" href="../glossary.html#term-imds">IMDSv2</a>.</p>
+    <div class="inc-stats">
+      <div class="inc-stat"><strong>106M</strong> records exposed</div>
+      <div class="inc-stat"><strong>77 days</strong> <a class="glossary-link" href="../glossary.html#term-dwell-time">dwell time</a></div>
+      <div class="inc-stat"><strong>$80M</strong> civil penalty</div>
+      <div class="inc-stat"><strong>Threat actor:</strong> Paige Thompson, former AWS employee</div>
+    </div>
+    <a class="pm-link" href="https://krebsonsecurity.com/2019/08/what-we-can-learn-from-the-capital-one-hack/" target="_blank" rel="noopener">📄 KrebsOnSecurity post-mortem ↗</a>
+    <a class="pm-link" href="https://blog.appsecco.com/an-ssrf-privileged-aws-keys-and-the-capital-one-breach-4c3c2cded3af" target="_blank" rel="noopener">📄 Appsecco technical analysis ↗</a>
+    <a class="pm-link" href="https://aws.amazon.com/blogs/security/defense-in-depth-open-firewalls-reverse-proxies-ssrf-vulnerabilities-ec2-instance-metadata-service/" target="_blank" rel="noopener">📄 AWS IMDSv2 response ↗</a>
+  </div>
+  <div class="kill-chain">
+
+    <div class="phase-lbl ph-recon">🔍 Reconnaissance</div>
+    <div class="kc-step step-r">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Automated scanning for AWS-hosted apps vulnerable to SSRF</div>
+          <a class="mt mt-ta" href="https://attack.mitre.org/techniques/T1595/" target="_blank" rel="noopener">T1595 – Active Scanning</a>
+        </div>
+        <p class="step-desc">Thompson built a custom tool to scan the internet for EC2-hosted web applications that would relay requests to the AWS instance metadata service at 169.254.169.254. SSRF was not in ModSecurity's default detection rule set — it had to be explicitly configured.</p>
+        <div class="step-code">
+          <span class="hl">Target:</span> Public-facing ModSecurity WAF running on EC2<br>
+          <span class="hl">Why SSRF wasn't blocked:</span> Not in default WAF rules — required manual configuration<br>
+          <span class="hl">Scanning approach:</span> Automated — targeted multiple AWS-hosted organisations
+        </div>
+        <div class="step-tags"><span class="stag">SSRF</span><span class="stag">EC2</span><span class="stag">WAF</span><span class="stag">ModSecurity</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-init">⚡ <a class="glossary-link" href="../glossary.html#term-initial-access">Initial Access</a></div>
+    <div class="kc-step step-r">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">SSRF exploitation — WAF tricked into relaying requests to IMDS</div>
+          <a class="mt mt-ta" href="https://attack.mitre.org/techniques/T1190/" target="_blank" rel="noopener">T1190 – Exploit Public-Facing App</a>
+        </div>
+        <p class="step-desc">The WAF was misconfigured — running in logging-only mode or bypassable — so Thompson sent crafted HTTP requests containing the IMDS endpoint as the target URL. The WAF relayed these server-side, making the EC2 instance itself issue the metadata request.</p>
+        <div class="step-code">
+          <span class="hl">SSRF payload target:</span> http://169.254.169.254/latest/meta-data/<br>
+          <span class="hl">IMDSv1 behaviour:</span> No authentication — any GET request from the instance is served<br>
+          <span class="hl">WAF failure:</span> Relayed SSRF payload rather than blocking it
+        </div>
+        <div class="step-tags"><span class="stag">SSRF</span><span class="stag">IMDSv1</span><span class="stag">T1190</span><span class="stag">169.254.169.254</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-cred">🔑 Credential Access</div>
+    <div class="kc-step step-y">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">EC2 IAM role credentials retrieved from IMDS — no auth required</div>
+          <a class="mt mt-ca" href="https://attack.mitre.org/techniques/T1552/005/" target="_blank" rel="noopener">T1552.005 – Cloud Instance Metadata API</a>
+        </div>
+        <p class="step-desc">IMDSv1 returned the temporary AWS credentials (AccessKeyId, SecretAccessKey, SessionToken) for the "ISRM-WAF-Role" attached to the EC2 instance. No token, header, or authentication required — just a GET request to the metadata path from within the instance (which the SSRF provided).</p>
+        <div class="step-code">
+          <span class="hl">IMDS path:</span> /latest/meta-data/iam/security-credentials/ISRM-WAF-Role<br>
+          <span class="hl">Credentials returned:</span> AccessKeyId + SecretAccessKey + SessionToken<br>
+          <span class="hl">Key problem:</span> The role had S3 permissions far beyond what a WAF needs
+        </div>
+        <div class="step-tags"><span class="stag">IMDSv1</span><span class="stag">ISRM-WAF-Role</span><span class="stag">Temp Credentials</span><span class="stag">T1552.005</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-priv">🔼 Privilege Abuse — Over-Permissioned IAM Role</div>
+    <div class="kc-step step-p">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">700+ S3 buckets enumerated using stolen role credentials</div>
+          <a class="mt mt-di" href="https://attack.mitre.org/techniques/T1619/" target="_blank" rel="noopener">T1619 – Cloud Storage Object Discovery</a>
+        </div>
+        <p class="step-desc">With the stolen AWS credentials, Thompson used the CLI to list all S3 buckets accessible to the ISRM-WAF-Role. The role had been granted sweeping S3 list and read permissions — far beyond what a WAF firewall function ever needed — violating <a class="glossary-link" href="../glossary.html#term-least-privilege">least privilege</a> at the design level.</p>
+        <div class="step-code">
+          <span class="hl">Command:</span> aws s3 ls (authenticated with stolen session credentials)<br>
+          <span class="hl">Result:</span> 700+ buckets listed including Capital One customer data stores<br>
+          <span class="hl">Root failure:</span> IAM role permissions never reviewed against principle of least privilege
+        </div>
+        <div class="step-tags"><span class="stag">IAM</span><span class="stag">S3</span><span class="stag">Least Privilege Violation</span><span class="stag">T1619</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-exfil">📤 <a class="glossary-link" href="../glossary.html#term-exfiltration">Exfiltration</a></div>
+    <div class="kc-step step-c">
+      <div class="step-num">05</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">30GB bulk S3 exfiltration — 106M customer records</div>
+          <a class="mt mt-ef" href="https://attack.mitre.org/techniques/T1530/" target="_blank" rel="noopener">T1530 – Data from Cloud Storage</a>
+        </div>
+        <p class="step-desc">Thompson synced S3 bucket contents to external storage using aws s3 sync. Approximately 30GB over multiple sessions — 100M US and 6M Canadian credit card application records, 140,000 SSNs, 80,000 bank account numbers, credit scores, and transaction history.</p>
+        <div class="step-code">
+          <span class="hl">Tool:</span> aws s3 sync<br>
+          <span class="hl">Data exfiltrated:</span> 106M records, 140K SSNs, 80K bank accounts, credit/financial history<br>
+          <span class="hl">Detection gap:</span> <a class="glossary-link" href="../glossary.html#term-guardduty">GuardDuty</a> not enabled; S3 access logs not monitored for volume anomalies
+        </div>
+        <div class="step-tags"><span class="stag">aws s3 sync</span><span class="stag">PII</span><span class="stag">T1530</span><span class="stag">Financial Data</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-disco">🚨 Discovery</div>
+    <div class="kc-step step-g">
+      <div class="step-num">06</div>
+      <div class="step-body">
+        <div class="step-hdr"><div class="step-title">Discovered 77 days later — Thompson bragged about it on GitHub and IRC</div></div>
+        <p class="step-desc">Thompson bragged about the breach on GitHub and in Slack and IRC channels under the handle "erratic." A member of the public noticed the posts, reviewed the data, and filed a responsible disclosure with Capital One on July 17, 2019. No internal monitoring — not GuardDuty, not S3 access logs, not IAM anomaly detection — caught the breach during the 77-day dwell period.</p>
+        <div class="step-code">
+          <span class="hl">Discovery method:</span> External tipster via Capital One responsible disclosure program<br>
+          <span class="hl">Monitoring failures:</span> No GuardDuty · No S3 volume alerts · No anomalous IAM activity detection<br>
+          <span class="hl">Arrest:</span> Paige Thompson, July 29, 2019
+        </div>
+        <div class="step-tags"><span class="stag">77 Day Dwell</span><span class="stag">No Internal Detection</span><span class="stag">External Tipster</span></div>
+      </div>
+    </div>
+
+    <div class="def-box">
+      <h3>🛡 How to Defend Against This Chain</h3>
+      <div class="def-items">
+        <div class="def-item"><strong>Enforce IMDSv2 on all EC2 instances.</strong> IMDSv2 requires a session token obtained via a PUT request — SSRF attacks that can only issue GET requests cannot obtain credentials. AWS defaults new instances to IMDSv2 and you can enforce it via <a class="glossary-link" href="../glossary.html#term-scp">SCP</a> across your organisation.</div>
+        <div class="def-item"><strong>Apply least-privilege IAM to every role.</strong> A WAF role should only write WAF logs — not list or read S3. Use <a class="glossary-link" href="../glossary.html#term-iam-access-analyzer">IAM Access Analyzer</a> findings and Access Advisor unused-permission reports to identify and tighten over-privileged roles.</div>
+        <div class="def-item"><strong>Enable Amazon GuardDuty.</strong> GuardDuty's UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration finding specifically detects role credentials being used from outside the EC2 instance that issued them.</div>
+        <div class="def-item"><strong>Alert on anomalous S3 access volume.</strong> Large-scale GetObject or ListBucket calls from an unexpected IP or at an unusual rate should trigger a CloudWatch + SNS alert immediately.</div>
+        <div class="def-item"><strong>Add SSRF rules to your WAF.</strong> Block requests containing 169.254.169.254 in URL, body, or headers. This is not in default WAF configurations — it must be explicitly added.</div>
+      </div>
+    </div>
+    <div class="src-box">
+      <h4>Primary Sources</h4>
+      <div class="src-links">
+        <a class="src-link" href="https://krebsonsecurity.com/2019/08/what-we-can-learn-from-the-capital-one-hack/" target="_blank" rel="noopener">KrebsOnSecurity</a>
+        <a class="src-link" href="https://blog.appsecco.com/an-ssrf-privileged-aws-keys-and-the-capital-one-breach-4c3c2cded3af" target="_blank" rel="noopener">Appsecco</a>
+        <a class="src-link" href="https://aws.amazon.com/blogs/security/defense-in-depth-open-firewalls-reverse-proxies-ssrf-vulnerabilities-ec2-instance-metadata-service/" target="_blank" rel="noopener">AWS IMDSv2 Blog</a>
+        <a class="src-link" href="https://dl.acm.org/doi/full/10.1145/3546068" target="_blank" rel="noopener">ACM Systematic Analysis</a>
+        <a class="src-link" href="https://attack.mitre.org/techniques/T1552/005/" target="_blank" rel="noopener">MITRE T1552.005</a>
+      </div>
+    </div>
+  </div>
+        </div>
+
+        <nav class="incident-pager" aria-label="Other breach kill chains">
+            <a class="pager-link pager-prev" href="mitnick-novell.html">← Previous breach</a>
+            <a class="pager-link pager-index" href="../breach-timeline.html">All breaches</a>
+            <a class="pager-link pager-next" href="solarwinds.html">Next breach →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

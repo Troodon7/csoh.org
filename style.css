@@ -3321,3 +3321,110 @@ footer {
 }
 
 /* end of stylesheet - v2 */
+/* =========================================================================
+   MEETINGS.HTML INDEX (after split into per-meeting pages)
+   Card-list layout for the directory page that links to /meetings/<date>.html
+   ========================================================================= */
+
+.meeting-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 3rem;
+    padding: 0;
+}
+
+.meeting-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid var(--secondary-color, #3498db);
+    border-radius: 8px;
+    padding: 0;
+    margin: 0;
+    transition: transform 0.12s, box-shadow 0.15s, border-left-color 0.15s;
+}
+.meeting-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    border-left-color: var(--accent-color, #e74c3c);
+}
+.meeting-card-link {
+    display: block;
+    padding: 1rem 1.25rem;
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+}
+.meeting-card-link h2 {
+    font-size: 1rem;
+    line-height: 1.35;
+    margin: 0 0 0.5rem;
+    color: var(--primary-color, #2c3e50);
+    font-weight: 600;
+}
+.meeting-card-link h2 time {
+    color: var(--text-muted, #64748b);
+    font-weight: 500;
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 0.15rem;
+}
+.meeting-card-summary {
+    color: var(--text-muted, #475569);
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin: 0 0 0.6rem;
+}
+.meeting-card .meeting-tags {
+    margin-bottom: 0.5rem;
+}
+.meeting-card-cta {
+    color: var(--secondary-color, #3498db);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.meeting-count {
+    color: var(--text-muted, #64748b);
+    font-size: 0.9rem;
+    margin: 0.5rem 0 1rem;
+}
+
+/* Per-meeting page: tighter spacing for the article body */
+.meeting-page h2 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    margin: 1rem 0 0.5rem;
+}
+.meeting-page h3 {
+    font-size: 1.05rem;
+    color: var(--primary-color, #2c3e50);
+    margin: 1.25rem 0 0.4rem;
+}
+.meeting-page details.meeting-topics {
+    margin-top: 1rem;
+}
+.meeting-page details.meeting-topics > summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--secondary-color, #3498db);
+    margin-bottom: 0.5rem;
+}
+
+/* Dark mode */
+[data-theme="dark"] .meeting-card {
+    background: #0d1424;
+    border-color: #1e293b;
+    border-left-color: #38bdf8;
+}
+[data-theme="dark"] .meeting-card:hover { border-left-color: #f87171; }
+[data-theme="dark"] .meeting-card-link h2 { color: #e2e8f0; }
+[data-theme="dark"] .meeting-card-link h2 time { color: #94a3b8; }
+[data-theme="dark"] .meeting-card-summary { color: #94a3b8; }
+[data-theme="dark"] .meeting-card-cta { color: #38bdf8; }
+[data-theme="dark"] .meeting-count { color: #94a3b8; }
+
+/* Mobile */
+@media (max-width: 600px) {
+    .meeting-list { grid-template-columns: 1fr; }
+}

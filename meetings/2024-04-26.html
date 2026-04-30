@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="The team discussed strategies for managing and safeguarding secrets, with a focus on the risks of malicious insiders and the misuse of tools like AWS and…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2024-04-26, Friday Zoom, Managing Secrets and Preventing Unauthorized Access">
+    <title>Friday, April 26, 2024 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2024-04-26.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, April 26, 2024 CSOH Recap — Managing Secrets and Preventing Unauthorized Access">
+    <meta property="og:description" content="The team discussed strategies for managing and safeguarding secrets, with a focus on the risks of malicious insiders and the misuse of tools like AWS and…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2024-04-26.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, April 26, 2024 CSOH Recap">
+    <meta name="twitter:description" content="The team discussed strategies for managing and safeguarding secrets, with a focus on the risks of malicious insiders and the misuse of tools like AWS and…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Managing Secrets and Preventing Unauthorized Access',
+      "description": "The team discussed strategies for managing and safeguarding secrets, with a focus on the risks of malicious insiders and the misuse of tools like AWS and…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2024-04-26",
+      "dateModified": "2024-04-26",
+      "mainEntityOfPage": "https://csoh.org/meetings/2024-04-26.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, April 26, 2024',
+          "item": "https://csoh.org/meetings/2024-04-26.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, April 26, 2024</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, April 26, 2024 — Meeting Recap</h1>
+        <p>Managing Secrets and Preventing Unauthorized Access</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2024-04-26">Friday, April 26, 2024</time> — Managing Secrets and Preventing Unauthorized Access</h2>
+            <p><strong>Quick recap.</strong> The team discussed strategies for managing and safeguarding secrets, with a focus on the risks of malicious insiders and the misuse of tools like AWS and Google CLI. Lastly, they explored the implications of the acquisition of HashiCorp by IBM, the potential challenges and opportunities in relation to Open Tofu and other software products, and shared personal startup journeys.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2024-04</span><span class="tag">Vulnerabilities</span><span class="tag">Passwords</span><span class="tag">Insider Threats</span><span class="tag">Industry News</span></div>
+            <details class="meeting-topics">
+                <summary>Show 4 discussion topics</summary>
+            <h3>Managing Secrets and Preventing Unauthorized Access</h3>
+            <p>Jay Flora and other members of the group introduced themselves and their areas of expertise, with a focus on technical marketing, security, and compliance. The discussion centered around the importance of managing and safeguarding secrets, with a particular emphasis on the potential risks of malicious insiders and the misuse of tools like AWS and Google CLI. The team also discussed strategies to prevent unauthorized access, including the use of canary tokens, monitoring <a class="glossary-link" href="../glossary.html#term-s3">S3</a> bucket names, and the proactive auditing of environment variables and secrets. The group also explored the potential utility of using GitHub&#x27;s public repositories as a resource, while acknowledging the risks associated with storing secrets in the code.</p>
+            <h3>Canary Tokens, Strong Passwords, and Security</h3>
+            <p>Matt Currie emphasized the importance of using canary tokens for detecting unauthorized access, and Neil highlighted the significance of strong passwords through an incident involving a deputy CISO. The conversation also touched on the potential consequences of a security breach and the need for prompt action to secure and clean up any compromised data. The team then transitioned into discussing a new topic, with Don being invited to lead the discussion.</p>
+            <h3>HashiCorp Acquisition by IBM Discussion</h3>
+            <p>The team discussed the acquisition of HashiCorp by IBM, with Neil expressing his hope for HashiCorp&#x27;s independence but predicting a negative impact on its direction if it joined IBM. Neil also suggested the potential benefits of reunifying Terraform and HashiCorp under a single platform, while Shawn shared his negative experiences with IBM&#x27;s internal culture. The team also discussed the implications of the acquisition for Ansible, with Neil expressing concerns about the potential negative impact on product quality if the engineering and product teams were merged. Jay suggested that IBM&#x27;s interest in HashiCorp might be motivated by financial considerations, and Mischa indicated that some platforms like Terraform and Vault are unlikely to change significantly in the short term.</p>
+            <h3>Open Source, Cyber Security, and Start-Ups</h3>
+            <p>The team discussed potential challenges and opportunities in relation to Open Tofu, Terraform, and other open source and proprietary software products. They also explored rumors surrounding Wiz&#x27;s plans to acquire Lace Work and the recent trend in cyber security start-up valuations. Personal startup journeys were shared, with Jay Jay Flora reflecting on his experience from technical marketing at Facebook to his current position at Laceward. The team agreed to continue discussions on these topics in a follow-up meeting the following week.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2024-04-05.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2024-05-10.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

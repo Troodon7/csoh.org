@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="The team discussed the challenges and differences between on-premises and cloud-based systems, with a focus on security and infrastructure, and the…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2024-10-25, Friday Zoom, Transitioning to Cloud-Based Systems Challenges">
+    <title>Friday, October 25, 2024 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2024-10-25.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, October 25, 2024 CSOH Recap — Transitioning to Cloud-Based Systems Challenges">
+    <meta property="og:description" content="The team discussed the challenges and differences between on-premises and cloud-based systems, with a focus on security and infrastructure, and the…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2024-10-25.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, October 25, 2024 CSOH Recap">
+    <meta name="twitter:description" content="The team discussed the challenges and differences between on-premises and cloud-based systems, with a focus on security and infrastructure, and the…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Transitioning to Cloud-Based Systems Challenges',
+      "description": "The team discussed the challenges and differences between on-premises and cloud-based systems, with a focus on security and infrastructure, and the…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2024-10-25",
+      "dateModified": "2024-10-25",
+      "mainEntityOfPage": "https://csoh.org/meetings/2024-10-25.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, October 25, 2024',
+          "item": "https://csoh.org/meetings/2024-10-25.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, October 25, 2024</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, October 25, 2024 — Meeting Recap</h1>
+        <p>Transitioning to Cloud-Based Systems Challenges</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2024-10-25">Friday, October 25, 2024</time> — Transitioning to Cloud-Based Systems Challenges</h2>
+            <p><strong>Quick recap.</strong> The team discussed the challenges and differences between on-premises and cloud-based systems, with a focus on security and infrastructure, and the importance of building resilient architectures. They also shared their personal experiences and career paths, emphasizing the importance of networking, preparation, and a global approach in their field. Lastly, they discussed various projects and technologies, including chaos engineering, graph databases, and cloud security, and the importance of security and privacy in their work.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2024-10</span><span class="tag">Community</span></div>
+            <details class="meeting-topics">
+                <summary>Show 4 discussion topics</summary>
+            <h3>Transitioning to Cloud-Based Systems Challenges</h3>
+            <p>The team discussed the challenges of transitioning from on-premises to cloud-based systems, with a focus on the differences in security and infrastructure. Alhaji inquired about chaos engineering, and Crystal suggested looking into AWS&#x27;s Trust documentation for insights. Brad confirmed that Azure also has a Chaos Studio and emphasized the importance of building resilient architectures. The team agreed that understanding these differences is crucial for success in cloud-based systems.</p>
+            <h3>Team Congratulates Crystal, Discusses Security</h3>
+            <p>In the meeting, Chris, Shawn, Crystal, Neil, and Syed discussed various topics. Crystal shared her recent promotion to security architect and expressed her gratitude to the team for their support in her growth. Chris and Neil congratulated her and praised her confidence. Syed, who joined the call from Pakistan, shared his journey from working in automation and business operations to security operations for a California-based company. He asked for suggestions on how to get more into security and if there are companies that openly hire people from anywhere in the world. Chris and Neil encouraged him to continue learning and exploring opportunities.</p>
+            <h3>Global Experience and Networking Importance</h3>
+            <p>Neil discussed his extensive global experience, particularly in Microsoft&#x27;s security team, where he worked with teams in various countries. He highlighted the importance of a global approach in their field and suggested Microsoft&#x27;s CSS as a great place to learn incident response. Chris agreed, emphasizing the global nature of their work and the importance of networking and preparation. David shared his personal experience of building a global network, starting with a global role and traveling extensively, which led to multiple opportunities. He stressed the importance of hard work, determination, and stepping out of one&#x27;s comfort zone to achieve success.</p>
+            <h3>Csp, Stealth Project, and Graph Databases</h3>
+            <p>In the meeting, David shared his work on a Csp in Ireland and a stealth project. He also mentioned his dislike for Ireland&#x27;s climate and Dallas. Chris revealed that David works part-time on the Board of Tourism for Ireland. Paul discussed his work on a cloud security project, focusing on a Django project and the use of Apache Agea graph extension with Postgres SQL. He was considering switching to Digital Ocean. The team also discussed the potential of graph databases, with Shawn highlighting their efficiency and Neil expressing skepticism about their application in various contexts. Brian suggested attending a Graphql summit for further learning. The team also discussed the importance of security and privacy in their work.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2024-10-18.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2024-11-01.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="The meeting focused on several key topics, including the recent acquisition of Wiz by Google and its implications for the company and its employees.…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2026-03-13, Friday Zoom, Wiz acquired by Google, Unicode supply-chain attacks, grad-school advice">
+    <title>Friday, March 13, 2026 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2026-03-13.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, March 13, 2026 CSOH Recap — Wiz acquired by Google, Unicode supply-chain attacks, grad-school advice">
+    <meta property="og:description" content="The meeting focused on several key topics, including the recent acquisition of Wiz by Google and its implications for the company and its employees.…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2026-03-13.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, March 13, 2026 CSOH Recap">
+    <meta name="twitter:description" content="The meeting focused on several key topics, including the recent acquisition of Wiz by Google and its implications for the company and its employees.…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Wiz acquired by Google, Unicode supply-chain attacks, grad-school advice',
+      "description": "The meeting focused on several key topics, including the recent acquisition of Wiz by Google and its implications for the company and its employees.…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-03-13",
+      "dateModified": "2026-03-13",
+      "mainEntityOfPage": "https://csoh.org/meetings/2026-03-13.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, March 13, 2026',
+          "item": "https://csoh.org/meetings/2026-03-13.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, March 13, 2026</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, March 13, 2026 — Meeting Recap</h1>
+        <p>Wiz acquired by Google, Unicode supply-chain attacks, grad-school advice</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2026-03-13">Friday, March 13, 2026</time> — Wiz acquired by Google, Unicode supply-chain attacks, grad-school advice</h2>
+            <p><strong>Quick recap.</strong> The meeting focused on several key topics, including the recent acquisition of Wiz by Google and its implications for the company and its employees. Participants discussed the potential risks and benefits of this acquisition, with some expressing concerns about the sustainability of acquired products. The group also explored the return of worms in cyber attacks and the implications for software supply chains. Additionally, there was a detailed discussion about cloud security education and career paths, with recommendations for learning resources and degree programs. The conversation ended with advice for someone considering graduate school, emphasizing the importance of practical experience and careful consideration of the cost and potential return on investment of a degree.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2026-03</span><span class="tag">Industry News</span><span class="tag">Supply Chain</span><span class="tag">Education</span></div>
+            <details class="meeting-topics">
+                <summary>Show 5 discussion topics</summary>
+            <h3>LAN Atlas Network Monitoring Project</h3>
+            <p>The meeting focused on discussing a new Python project called LAN Atlas, which aims to create a network monitoring solution with components for on-premise and cloud deployment. Kyle, Dee, and Neil presented the project idea and outlined plans for team roles, including technical and non-technical positions. They invited participants and mentors to join the initiative, emphasizing its potential for practical experience and resume building. The group also celebrated Kyle&#x27;s birthday and discussed the recent acquisition of Wiz by Google, with participants sharing mixed perspectives on the acquisition&#x27;s implications for the company and its products.</p>
+
+            <h3>Supply Chain Unicode Injection Attack</h3>
+            <p>Neil led a discussion about a supply chain attack involving Unicode characters in code repositories, specifically examining instances in GitHub. The team analyzed how malicious code was inserted into legitimate pull requests, particularly through Dependabot updates. Kyle suggested the possibility of <a class="glossary-link" href="../glossary.html#term-ai">AI</a> <a class="glossary-link" href="../glossary.html#term-prompt-injection">prompt injection</a>, while Piyush and Pavel identified suspicious Dependabot commits that appeared fake. Neil questioned whether the attack originated from a compromised IDE, similar to previous findings in malicious <a class="glossary-link" href="../glossary.html#term-npm">NPM</a> packages and VS Code extensions. The team examined specific examples, including a package.json file and TypeScript code, to understand how the injection occurred within otherwise valid commits.</p>
+
+            <h3>Node.js Worm Spread Discussion</h3>
+            <p>The group discussed the recent return of worms in cybersecurity, particularly focusing on how they spread through the Node.js/NPM ecosystem. Matt noted how worms can now spread through multi-step, multi-vector attacks, including targeting repository maintainers. The discussion included historical context about previous worm &quot;seasons,&quot; with Neil clarifying that the current situation represents &quot;season 3&quot; following the original worms and the 2001-2009 period that included email worms like Melissa and SQL Slammer. Brian Reich expressed frustration about the Node.js/NPM ecosystem&#x27;s reliance on unnecessary libraries like Lodash, comparing it to the &quot;left pad&quot; incident where a maintainer&#x27;s departure caused significant disruption to thousands of projects.</p>
+
+            <h3>JavaScript Development Challenges</h3>
+            <p>The group discussed challenges with JavaScript and Node.js development, particularly around governance issues and the language&#x27;s origins in browser-based applications. Brian Reich raised concerns about developers lacking fundamental software development knowledge due to rapid development cycles and React frameworks, while Kyle suggested that JavaScript&#x27;s rapid creation in a short time period contributes to ongoing challenges. The conversation concluded with a discussion about cloud security education, where Kyle recommended Georgia Tech&#x27;s OMSCS program as a cost-effective option for D, who was considering a cloud security graduate degree.</p>
+
+            <h3>Is a Cloud Security Degree Worthwhile?</h3>
+            <p>The group discussed whether pursuing a graduate degree in cloud security is worthwhile. Several participants advised against specialized cloud security degrees, suggesting instead to focus on general cybersecurity or computer science programs, as cloud security skills can be developed through practical experience and self-directed learning. The discussion highlighted that while formal education has value, it&#x27;s important to consider the cost, potential return on investment, and personal interests when deciding on a program. Specific practical advice was shared about learning cloud security through hands-on experience using tools like Terraform, setting up lab environments, and exploring resources like the Wiz.I/O website for specific solution areas. The conversation also touched on career goals, with one participant expressing interest in Mac malware research, leading to recommendations about learning ARM assembly and reverse engineering.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2026-03-06.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2026-03-20.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

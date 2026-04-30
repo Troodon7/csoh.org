@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="The meeting focused on discussing the current crisis in open source security, particularly regarding supply chain attacks and the impact of generative AI…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2026-04-10, Friday Zoom, Open-source supply chain attacks, GitHub Actions hardening, early-computing nostalgia">
+    <title>Friday, April 10, 2026 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2026-04-10.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, April 10, 2026 CSOH Recap — Open-source supply chain attacks, GitHub Actions hardening, early-computing nost">
+    <meta property="og:description" content="The meeting focused on discussing the current crisis in open source security, particularly regarding supply chain attacks and the impact of generative AI…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2026-04-10.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, April 10, 2026 CSOH Recap">
+    <meta name="twitter:description" content="The meeting focused on discussing the current crisis in open source security, particularly regarding supply chain attacks and the impact of generative AI…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Open-source supply chain attacks, GitHub Actions hardening, early-computing nostalgia',
+      "description": "The meeting focused on discussing the current crisis in open source security, particularly regarding supply chain attacks and the impact of generative AI…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-04-10",
+      "dateModified": "2026-04-10",
+      "mainEntityOfPage": "https://csoh.org/meetings/2026-04-10.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, April 10, 2026',
+          "item": "https://csoh.org/meetings/2026-04-10.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, April 10, 2026</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, April 10, 2026 — Meeting Recap</h1>
+        <p>Open-source supply chain attacks, GitHub Actions <a class="glossary-link" href="../glossary.html#term-hardening">hardening</a>, early-computing nostalgia</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2026-04-10">Friday, April 10, 2026</time> — Open-source supply chain attacks, GitHub Actions hardening, early-computing nostalgia</h2>
+            <p><strong>Quick recap.</strong> The meeting focused on discussing the current crisis in open source security, particularly regarding supply chain attacks and the impact of generative <a class="glossary-link" href="../glossary.html#term-ai">AI</a> tools like Claude on vulnerability research. Participants, including Neil, Jay, Matt, and others, discussed the challenges of securing software dependencies, the effectiveness of defense-in-depth strategies, and the difficulties in implementing <a class="glossary-link" href="../glossary.html#term-ingress">egress</a> restrictions and package management controls. The conversation also touched on the trustworthiness of different package repositories, the risks of using third-party GitHub Actions, and the importance of separating build and publish processes to mitigate security risks. Additionally, the group shared personal experiences with early computing and hacking, reflecting on how learning environments and legal consequences have evolved over time.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2026-04</span><span class="tag">Supply Chain</span><span class="tag">GitHub Actions</span><span class="tag">Community</span></div>
+            <details class="meeting-topics">
+                <summary>Show 9 discussion topics</summary>
+            <h3>Open Source Security Challenges</h3>
+            <p>The meeting focused on discussing current challenges in open source security, particularly regarding supply chain attacks and the impact of generative AI tools like Claude&#x27;s Mythos on vulnerability research. Participants, including Jay, Dee, Matt, and Neil, discussed concerns about the effectiveness of AI tools in security research, with Matt expressing skepticism about the marketing claims surrounding these tools. Neil highlighted the parallels between the evolution of ransomware and the emerging trends in supply chain attacks, suggesting that attackers are testing and optimizing their strategies for monetization. The group also welcomed new member Basil from Pakistan and discussed the importance of defense-in-depth strategies in addressing these security challenges.</p>
+
+            <h3>Cloud Security Risk Mitigation Challenges</h3>
+            <p>The group discussed challenges in cloud security, particularly around mitigating risks from tools like TinyLM and Trivy that can steal cloud secrets. Jay emphasized the difficulty of implementing egress blocking measures, which Rev noted would be prohibitively expensive without strategic direction. Don explained that while there might not be misunderstandings about the problem, there is often ignorance about the consequences, comparing it to unknown vulnerabilities in widely-used products. The discussion also touched on user education needs and the complexity of modern technical systems, with Paul arguing that security responsibility should primarily rest with technology providers rather than end users.</p>
+
+            <h3>Supply Chain Security Measures</h3>
+            <p>The group discussed security measures and supply chain attack mitigation strategies. Matt and Neil discussed how attack methods are evolving to be more stealthy, with Matt predicting that supply chain attacks like XZ/CLAB will become more common and less detectable. Neil shared insights about AppLocker and Aaron Locker as security tools for Windows systems, suggesting the need for similar models to secure egress. The discussion concluded with participants sharing their cautious approaches to software updates, with Shawn and others expressing reluctance to perform blanket updates due to security concerns, and Neil mentioning plans to develop product functionality that includes cool-down periods for package updates.</p>
+
+            <h3>Package Repository Security</h3>
+            <p>The team discussed security concerns around package repositories and supply chain attacks. They debated the trustworthiness of different package ecosystems, with Matt and others noting that <a class="glossary-link" href="../glossary.html#term-npm">NPM</a> and <a class="glossary-link" href="../glossary.html#term-pypi">PyPI</a> are particularly risky due to their open contribution models, while apt repositories in Ubuntu/Debian offer better security through stable release streams. Pavel suggested separating <a class="glossary-link" href="../glossary.html#term-ci">CI</a> pipelines from publishing pipelines in different repositories to better protect secrets, and emphasized the importance of using hardware security keys like YubiKey for authentication. The discussion highlighted the growing risk of open source supply chain attacks and the need for more robust security measures in development processes.</p>
+
+            <h3>GitHub Actions Security Best Practices</h3>
+            <p>The team discussed security practices for GitHub Actions, focusing on minimizing the use of third-party dependencies and implementing defense-in-depth strategies. Rev shared recommendations for securely using third-party GitHub Actions, including minimizing dependencies, being selective about trusted providers, and separating privileged and unprivileged jobs to limit access to secrets. Neil demonstrated a current implementation that could be improved from a security perspective, and Pavel highlighted the challenge of protecting workflow YAML files once compromised, suggesting the need for isolated build systems. The discussion emphasized the importance of strategic decisions about security trade-offs, particularly in larger organizations where controlling access permissions becomes more complex.</p>
+
+            <h3>Cybersecurity Challenges in Open-Source Software</h3>
+            <p>The group discussed cybersecurity challenges, particularly around open-source software and zero-day vulnerabilities. Pavel emphasized the need to protect the &quot;publish&quot; step when releasing customer-facing software, while allowing more flexibility during internal development. Jay and Matt highlighted concerns about the security of widely-used open-source projects, noting how critical components like OpenSSL and Trivy have been maintained by small teams or volunteers. The discussion concluded with a debate about safe practices for handling PDFs, with participants sharing different approaches to mitigate security risks while managing necessary communications.</p>
+
+            <h3>School Security Vulnerabilities</h3>
+            <p>The group discussed security vulnerabilities in school environments, particularly focusing on how schools could serve as attack vectors due to inadequate IT security measures and backup systems. Matt explained that school districts often lack proper security infrastructure and have been targeted by ransomware attacks in the past. The discussion also covered PDF security on mobile devices, with Matt and Shawn agreeing that opening expected PDFs on iPhones is generally safe due to sandboxing, though they recommended verifying unexpected files with senders. The conversation concluded with participants sharing personal anecdotes about their early experiences with computers in educational settings, highlighting how hands-on learning and necessity-driven discovery can be more effective than formal education in developing technical skills.</p>
+
+            <h3>Affordable Computing and Learning Impact</h3>
+            <p>The group discussed the impact of affordable computing and restriction on creativity and learning. Matt shared his experience building a computer and learning networking, while Jay reflected on his early exposure to programming and security research, including his discovery of Spectre and Meltdown vulnerabilities. The conversation highlighted how access to low-cost hardware and learning opportunities shaped their technical journeys.</p>
+
+            <h3>Evolution of Computer Hacking Culture</h3>
+            <p>Jay and Matt discussed their experiences with early computer hacking and malware, sharing stories about finding security vulnerabilities and the evolution of hacking over time. They compared the current landscape of threat actors like Shiny Hunters and Scatter Spider to the 1990s hacking culture, noting how motivations and approaches have changed. The conversation also touched on the more severe legal consequences for hacking activities today compared to previous decades, and they reflected on the thrill and responsibilities of discovering security vulnerabilities in systems.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2026-04-03.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2026-04-17.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

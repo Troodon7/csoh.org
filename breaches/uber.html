@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="An 18-year-old attacker purchased an Uber contractor's VPN credentials from a dark web infostealer marketplace, then used MFA push-bombing combined with…">
+    <meta name="keywords" content="Uber 2022, breach analysis, kill chain, MITRE ATT&CK, cloud security incident, post-mortem, 2022">
+    <title>Uber 2022 (2022) Breach Kill Chain - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/breaches/uber.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Uber 2022 (2022) Breach Kill Chain">
+    <meta property="og:description" content="An 18-year-old attacker purchased an Uber contractor's VPN credentials from a dark web infostealer marketplace, then used MFA push-bombing combined with…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/breaches/uber.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Uber 2022 (2022) Breach Kill Chain">
+    <meta name="twitter:description" content="An 18-year-old attacker purchased an Uber contractor's VPN credentials from a dark web infostealer marketplace, then used MFA push-bombing combined with…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="breach-timeline.css?v=29fbd6a9" integrity="sha384-WrezLhCC8Bdnk6bhRviNG3f7jv+K1IW8/RCNel8OBIyPAd9wiZ4IMtSBG5Nu6Wja">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Uber – Dark Web Creds → MFA Push Fatigue → Hardcoded PAM Secret → Full AWS/GCP Admin',
+      "description": "An 18-year-old attacker purchased an Uber contractor's VPN credentials from a dark web infostealer marketplace, then used MFA push-bombing combined with…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2022-01-01",
+      "dateModified": "2026-04-30",
+      "mainEntityOfPage": "https://csoh.org/breaches/uber.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Cloud Security Breach Analysis"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Breach Kill Chains",
+          "item": "https://csoh.org/breach-timeline.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Uber 2022',
+          "item": "https://csoh.org/breaches/uber.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html" aria-current="page">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+            <li><span aria-current="page">Uber 2022</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Uber 2022 — 2022</h1>
+        <p>Step-by-step <a class="glossary-link" href="../glossary.html#term-kill-chain">kill chain</a> mapped to <a class="glossary-link" href="../glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud, sourced from official post-mortems and primary technical analyses.</p>
+    </section>
+
+    <main class="kc-main kc-page" id="main-content">
+        <div class="incident-panel active" role="article" id="uber-2022">
+
+  <div class="inc-header">
+    <div class="inc-meta">
+      <span class="inc-year">September 15–16, 2022</span>
+      <span class="sev-badge sev-critical">Critical</span>
+      <span class="prov-tag prov-aws">AWS</span>
+      <span class="prov-tag prov-green">GCP</span>
+    </div>
+    <h2 class="inc-title">Uber – Dark Web Creds → MFA Push Fatigue → Hardcoded PAM Secret → Full AWS/GCP Admin</h2>
+    <p class="inc-summary">An 18-year-old attacker purchased an Uber contractor's VPN credentials from a dark web <a class="glossary-link" href="../glossary.html#term-infostealer">infostealer</a> marketplace, then used <a class="glossary-link" href="../glossary.html#term-mfa">MFA</a> push-bombing combined with WhatsApp social engineering to bypass two-factor auth. Once inside the corporate network, they found a PowerShell script with hardcoded admin credentials for Thycotic — Uber's PAM system — unlocking full admin access to AWS, GCP, Slack, SentinelOne, HackerOne, and more within hours.</p>
+    <div class="inc-stats">
+      <div class="inc-stat"><strong>Full admin</strong> on AWS, GCP, Slack, SentinelOne, HackerOne</div>
+      <div class="inc-stat"><strong>&lt;24 hours</strong> <a class="glossary-link" href="../glossary.html#term-initial-access">initial access</a> to full compromise</div>
+      <div class="inc-stat"><strong>Attacker:</strong> 18-year-old, allegedly LAPSUS$-affiliated</div>
+    </div>
+    <a class="pm-link" href="https://www.uber.com/us/en/newsroom/security-update/" target="_blank" rel="noopener">📄 Uber official security update ↗</a>
+    <a class="pm-link" href="https://blog.gitguardian.com/uber-breach-2022/" target="_blank" rel="noopener">📄 GitGuardian technical analysis ↗</a>
+  </div>
+  <div class="kill-chain">
+
+    <div class="phase-lbl ph-init">🛒 Initial Access — Purchased Credentials</div>
+    <div class="kc-step step-r">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Contractor VPN credentials purchased from dark web infostealer log</div>
+          <a class="mt mt-ca" href="https://attack.mitre.org/techniques/T1078/" target="_blank" rel="noopener">T1078 – Valid Accounts</a>
+        </div>
+        <p class="step-desc">The targeted contractor's device had previously been infected with infostealer malware, which exfiltrated saved browser credentials to a dark web marketplace. The attacker purchased the username and password — no zero-day or technical exploit required.</p>
+        <div class="step-code">
+          <span class="hl">Source:</span> Infostealer log purchased from dark web forum<br>
+          <span class="hl">Credential type:</span> Uber contractor corporate VPN credentials<br>
+          <span class="hl">Defence gap:</span> No monitoring for credential leakage · Third-party device not enrolled in MDM or health-checked before VPN access
+        </div>
+        <div class="step-tags"><span class="stag">Infostealer</span><span class="stag">Dark Web</span><span class="stag">T1078</span><span class="stag">Third-Party Risk</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-exec">📱 MFA Bypass — Push Fatigue + Social Engineering</div>
+    <div class="kc-step step-o">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">MFA push-bombing campaign + WhatsApp impersonation of Uber IT</div>
+          <a class="mt mt-ca" href="https://attack.mitre.org/techniques/T1621/" target="_blank" rel="noopener">T1621 – MFA Request Generation</a>
+        </div>
+        <p class="step-desc">The attacker repeatedly attempted VPN login, flooding the contractor's phone with MFA push notifications. After approximately an hour of notifications, they contacted the contractor on WhatsApp claiming to be Uber IT support and stating the only way to stop the notifications was to approve one. The contractor complied.</p>
+        <div class="step-code">
+          <span class="hl">Technique:</span> MFA push fatigue ("<a class="glossary-link" href="../glossary.html#term-mfa-fatigue">push bombing</a>") for ~1 hour<br>
+          <span class="hl">Social engineering:</span> WhatsApp message: "I'm from Uber IT. Accept the push to stop the notifications."<br>
+          <span class="hl">MFA type:</span> Push notification (not <a class="glossary-link" href="../glossary.html#term-phishing">phishing</a>-resistant <a class="glossary-link" href="../glossary.html#term-fido2">FIDO2</a>)<br>
+          <span class="hl">Why it worked:</span> No number-matching · No limit on push attempt rate
+        </div>
+        <div class="step-tags"><span class="stag">MFA Fatigue</span><span class="stag">Push Bombing</span><span class="stag">WhatsApp SE</span><span class="stag">T1621</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-exec">🔌 Internal Recon</div>
+    <div class="kc-step step-o">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">VPN established; contractor-level access used to enumerate internal network shares</div>
+          <a class="mt mt-di" href="https://attack.mitre.org/techniques/T1046/" target="_blank" rel="noopener">T1046 – Network Service Discovery</a>
+        </div>
+        <p class="step-desc">Once the contractor approved the push, the attacker connected to Uber's corporate VPN and began scanning the internal network. Internal infrastructure had no micro-segmentation — a contractor VPN account could reach all internal file shares.</p>
+        <div class="step-code">
+          <span class="hl">Access level at this point:</span> Contractor VPN (low privilege)<br>
+          <span class="hl">Recon target:</span> Internal file shares and intranet services<br>
+          <span class="hl">Defence gap:</span> No east-west network segmentation · Contractor VPN had broad internal network visibility
+        </div>
+        <div class="step-tags"><span class="stag">VPN</span><span class="stag">Internal Recon</span><span class="stag">No Segmentation</span><span class="stag">T1046</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-cred">💀 Critical Discovery — Hardcoded Secret</div>
+    <div class="kc-step step-p">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">PowerShell script on internal share contained hardcoded Thycotic PAM admin credentials</div>
+          <a class="mt mt-ca" href="https://attack.mitre.org/techniques/T1552/001/" target="_blank" rel="noopener">T1552.001 – Credentials in Files</a>
+        </div>
+        <p class="step-desc">On an internal network share accessible via the contractor VPN, the attacker found a PowerShell script containing plaintext admin credentials for Thycotic — Uber's Privileged Access Management platform. This single file became the skeleton key to every system in the organisation.</p>
+        <div class="step-code">
+          <span class="hl">Location:</span> Internal network share (contractor VPN accessible)<br>
+          <span class="hl">Contents:</span> Hardcoded Thycotic domain admin username + password in plaintext<br>
+          <span class="hl">Irony:</span> Thycotic was the PAM system specifically designed to prevent hardcoded secrets<br>
+          <span class="hl">Root cause:</span> Automation script needed PAM API access but used a static credential instead of a scoped <a class="glossary-link" href="../glossary.html#term-service-account">service account</a>
+        </div>
+        <div class="step-tags"><span class="stag">Hardcoded Credentials</span><span class="stag">PowerShell</span><span class="stag">T1552.001</span><span class="stag"><a class="glossary-link" href="../glossary.html#term-secrets-sprawl">Secrets Sprawl</a></span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-priv">👑 Total Compromise — Keys to the Kingdom</div>
+    <div class="kc-step step-p">
+      <div class="step-num">05</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Thycotic admin access → all secrets extracted → full cloud and <a class="glossary-link" href="../glossary.html#term-saas">SaaS</a> compromise</div>
+          <a class="mt mt-pe" href="https://attack.mitre.org/techniques/T1078/004/" target="_blank" rel="noopener">T1078.004 – Cloud Accounts</a>
+        </div>
+        <p class="step-desc">Using the admin credentials, the attacker logged into Thycotic and extracted all stored secrets. Thycotic was the single source of truth for credentials across Uber's entire cloud and SaaS footprint.</p>
+        <div class="step-code">
+          <span class="hl">Systems fully compromised:</span><br>
+          → AWS (cloud infrastructure admin)<br>
+          → GCP + Google Workspace (admin)<br>
+          → Slack workspace (admin — used to announce breach to all Uber employees)<br>
+          → SentinelOne <a class="glossary-link" href="../glossary.html#term-edr">XDR</a> (admin — ability to suppress security alerts)<br>
+          → HackerOne admin console (access to private vulnerability reports)<br>
+          → DUO, OneLogin, VMware vSphere, Uber internal dashboards
+        </div>
+        <div class="step-tags"><span class="stag">PAM Takeover</span><span class="stag">AWS Admin</span><span class="stag">GCP Admin</span><span class="stag">Full Compromise</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-disco">🚨 Discovery</div>
+    <div class="kc-step step-g">
+      <div class="step-num">06</div>
+      <div class="step-body">
+        <div class="step-hdr"><div class="step-title">Attacker self-announces the breach in Uber's company Slack</div></div>
+        <p class="step-desc">The attacker used their Slack admin access to broadcast a message to all Uber employees announcing the breach, then posted screenshots on Twitter under "teapotuberhacker." Uber's security team discovered the breach within hours — not through monitoring, but through the attacker's announcement.</p>
+        <div class="step-code">
+          <span class="hl">Discovery method:</span> Attacker self-announced in company-wide Slack<br>
+          <span class="hl">Key gap:</span> No alert fired on new AWS admin account creation · No alert on PAM admin login from unknown device<br>
+          <span class="hl">SentinelOne access meant:</span> The attacker could have suppressed EDR alerts to cover tracks
+        </div>
+        <div class="step-tags"><span class="stag">Self-Announced</span><span class="stag">No Internal Detection</span><span class="stag">Slack Admin Abuse</span></div>
+      </div>
+    </div>
+
+    <div class="def-box">
+      <h3>🛡 How to Defend Against This Chain</h3>
+      <div class="def-items">
+        <div class="def-item"><strong>Deploy <a class="glossary-link" href="../glossary.html#term-phishing-resistant">phishing-resistant MFA</a> (FIDO2 / hardware security keys).</strong> Push notification MFA is defeated by fatigue attacks. Number-matching — requiring users to match a code shown on screen — stops automated bombing. FIDO2/passkeys are immune to both fatigue and phishing.</div>
+        <div class="def-item"><strong>Never hardcode credentials in scripts — use dynamic secrets from your PAM.</strong> Scripts should authenticate to your PAM via a scoped, short-lived service account, or use cloud-native options (AWS Secrets Manager, GCP Secret Manager with Workload Identity). Run Trufflehog or GitLeaks in <a class="glossary-link" href="../glossary.html#term-ci">CI</a>/CD.</div>
+        <div class="def-item"><strong>Segment your network so contractor VPNs cannot reach all internal shares.</strong> Contractors should only access resources their role requires. A contractor VPN with visibility across all internal file shares is a single-hop <a class="glossary-link" href="../glossary.html#term-lateral-movement">lateral movement</a> risk.</div>
+        <div class="def-item"><strong>Alert on anomalous PAM admin logins immediately.</strong> PAM is the crown jewels. A PAM admin login from a new device, new IP, or at an unusual time should trigger an immediate alert — not a periodic review.</div>
+        <div class="def-item"><strong>Enrol contractor devices in MDM and require health attestation before VPN admission.</strong> Device health checks can catch infostealer infections before they translate into credential theft.</div>
+      </div>
+    </div>
+    <div class="src-box">
+      <h4>Primary Sources</h4>
+      <div class="src-links">
+        <a class="src-link" href="https://www.uber.com/us/en/newsroom/security-update/" target="_blank" rel="noopener">Uber Official</a>
+        <a class="src-link" href="https://blog.gitguardian.com/uber-breach-2022/" target="_blank" rel="noopener">GitGuardian</a>
+        <a class="src-link" href="https://www.upguard.com/blog/what-caused-the-uber-data-breach" target="_blank" rel="noopener">UpGuard</a>
+        <a class="src-link" href="https://attack.mitre.org/techniques/T1621/" target="_blank" rel="noopener">MITRE T1621</a>
+        <a class="src-link" href="https://attack.mitre.org/techniques/T1552/001/" target="_blank" rel="noopener">MITRE T1552.001</a>
+      </div>
+    </div>
+  </div>
+        </div>
+
+        <nav class="incident-pager" aria-label="Other breach kill chains">
+            <a class="pager-link pager-prev" href="solarwinds.html">← Previous breach</a>
+            <a class="pager-link pager-index" href="../breach-timeline.html">All breaches</a>
+            <a class="pager-link pager-next" href="lastpass.html">Next breach →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

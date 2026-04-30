@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="The meeting began with a recitation of song lyrics and casual conversation before transitioning to a presentation by Etay Haral on cloud detection…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2025-01-03, Friday Zoom, Cloud Detection Engineering Presentation">
+    <title>Friday, January 3, 2025 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2025-01-03.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, January 3, 2025 CSOH Recap — Cloud Detection Engineering Presentation">
+    <meta property="og:description" content="The meeting began with a recitation of song lyrics and casual conversation before transitioning to a presentation by Etay Haral on cloud detection…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2025-01-03.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, January 3, 2025 CSOH Recap">
+    <meta name="twitter:description" content="The meeting began with a recitation of song lyrics and casual conversation before transitioning to a presentation by Etay Haral on cloud detection…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Cloud Detection Engineering Presentation',
+      "description": "The meeting began with a recitation of song lyrics and casual conversation before transitioning to a presentation by Etay Haral on cloud detection…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2025-01-03",
+      "dateModified": "2025-01-03",
+      "mainEntityOfPage": "https://csoh.org/meetings/2025-01-03.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, January 3, 2025',
+          "item": "https://csoh.org/meetings/2025-01-03.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, January 3, 2025</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, January 3, 2025 — Meeting Recap</h1>
+        <p>Cloud <a class="glossary-link" href="../glossary.html#term-detection-engineering">Detection Engineering</a> Presentation</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2025-01-03">Friday, January 3, 2025</time> — Cloud Detection Engineering Presentation</h2>
+            <p><strong>Quick recap.</strong> The meeting began with a recitation of song lyrics and casual conversation before transitioning to a presentation by Etay Haral on cloud detection engineering, focusing on role unchaining in AWS and the challenges of tracing activities back to original actors. The discussion then shifted to operationalizing cloud monitoring, log analysis, and the importance of parsers in creating comprehensive investigation graphs, with participants sharing insights on different cloud service providers and vulnerability management strategies. The conversation ended with conversations about proactive threat detection tools, the challenges faced by educational institutions in maintaining cybersecurity, and personal anecdotes shared by team members.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2025-01</span><span class="tag"><a class="glossary-link" href="../glossary.html#term-ai">AI</a></span><span class="tag">Vulnerabilities</span><span class="tag">Conferences</span><span class="tag">Guest Speaker</span></div>
+            <details class="meeting-topics">
+                <summary>Show 9 discussion topics</summary>
+            <h3>Cloud Detection Engineering Presentation</h3>
+            <p>Shawn initiated the meeting, welcoming participants and encouraging them to connect on LinkedIn. He introduced a special guest, Etay Haral from the threat research team, who would be presenting on cloud detection engineering. Shawn also mentioned that the meeting would be recorded for those who wished to participate without being recorded. Etay began his presentation, discussing his journey into detection engineering and his experiences at Gem and Whiz. He highlighted the challenges and opportunities he encountered in building and creating content for detection engineers and <a class="glossary-link" href="../glossary.html#term-soc">SOC</a> teams. The meeting was open for questions and discussions.</p>
+            <h3>Role Unchaining for Incident Investigation</h3>
+            <p>Itay discussed the importance of role unchaining in AWS for SOC teams, highlighting its role in tracing activities back to the original actor. He explained that role chaining, where a user assumes multiple roles, can obscure the identity of the original actor, making it difficult to investigate incidents. Itay emphasized that unchaining is crucial for understanding what happened, investigating, and responding if necessary. He also mentioned two types of attackers: drive-by attackers who are noisy and easy to detect, and more sophisticated attackers who use role chaining to obfuscate their identity. The conversation ended with Itay outlining a process for role unchaining, which involves searching for an assume role event given a suspicious event to investigate.</p>
+            <h3>Challenges in Unchaining AWS Access Keys</h3>
+            <p>Itay discussed the challenges faced while trying to unchain the access keys in AWS. Initially, they found temporary access keys to be a useful breadcrumb for unchaining, but this method proved insufficient due to the console port quirk, which generates almost random temporary access keys for console sessions. Itay also mentioned the console conceal quirk, which allows attackers to use the AWS console for reconnaissance without their activities being logged with the relevant access key. However, Itay noted that attackers typically use the console for reconnaissance rather than to obfuscate their identity. Consequently, they had to find alternative breadcrumbs to unchain the role assumption chain. They discovered the identity tuple, which consists of the session name, role name, and session creation date, as useful breadcrumbs. This method has proven effective in unchaining across multiple accounts within an organization. Itay also clarified that external identity providers (IDPs) like Octa simplify the process of unchaining, as they restrict certain actions that attackers might exploit.</p>
+            <h3>Cloud Monitoring and Log Analysis</h3>
+            <p>In the meeting, Shawn and Itay discussed the operationalization of cloud monitoring and the importance of log analysis. They highlighted the need for a policy to react to events and the role of different teams in monitoring alerts. Itay emphasized the importance of role unchaining for investigation and detection, particularly in large-scale operations. He also discussed the benefits of unchaining in ingestion time, such as creating investigation breakdowns and building a detection engine. The team also touched on the cost implications of log collection and analysis, with Shawn noting that smaller operations might find Guard Duty useful but it becomes expensive and less useful in larger environments.</p>
+            <h3>Parser Challenges in Cloud Investigations</h3>
+            <p>In the meeting, Itay discussed the importance of parsers in creating a comprehensive investigation graph for understanding attack timelines. He highlighted the challenges faced with AWS and Azure, noting that AWS requires more complex parsing due to its event structure. Itay also shared a method of cross-referencing logs and inventory to build better timelines. Matt Alvarez asked about the difficulty of tracking actors across different cloud service providers, to which Itay responded that GCP is the easiest, followed by AWS, and then Azure. Jay agreed with Itay&#x27;s assessment, noting that even Microsoft struggles with Azure.</p>
+            <h3>Gratitude, Future Sessions, and Tech Impact</h3>
+            <p>Shawn expressed gratitude for Itay&#x27;s presentation and invited him to return for future sessions. Shawn then left the meeting to undergo a pet scan. The team wished Shawn good luck and expressed their appreciation for Itay&#x27;s contribution. The team also discussed the upcoming changes in the administration and the potential impact on their work. Jay and Matt Alvarez discussed the interesting talks they had attended at the CCC conference, highlighting the political undertones and the impact of technology on society. They also discussed the recent appeals court decision striking down net neutrality rules, expressing concern about the potential consequences. Neil mentioned that <a class="glossary-link" href="../glossary.html#term-nvd">NVD</a> had enriched about 1% of all new CVEs in the last two weeks of December and that Cisco seemed to be backing away from them.</p>
+            <h3>Vulnerability Management and Scoring Challenges</h3>
+            <p>This segment discusses ongoing challenges and perspectives regarding vulnerability management and scoring systems like the NVD and <a class="glossary-link" href="../glossary.html#term-cvss">CVSS</a>. Neil expresses concerns about the fragmentation of vulnerability scoring approaches as NVD&#x27;s role becomes uncertain, potentially leading to inconsistent prioritization. Jay suggests focusing more on preventative controls rather than chasing alerts. They acknowledge communication issues from NVD but debate whether a centralized vulnerability scoring system is truly necessary. The discussion highlights the difficulties smaller organizations face in keeping up with vulnerability remediation amidst an overwhelming number of alerts.</p>
+            <h3>Gray Noise, Paid Intelligence, and Vulnerabilities</h3>
+            <p>In the meeting, Matt Alvarez discussed the potential of Gray Noise as a proactive tool for detecting exploits, suggesting it could provide valuable context on exploitability. Neil expressed concerns about the increasing reliance on paid intelligence services, fearing it could widen the gap between those who can afford protection and those who cannot. Jay emphasized the importance of having a good backup strategy and being able to respond quickly to vulnerabilities, suggesting that early detection may not always be the most crucial factor. The team also discussed the challenges of balancing the need for intelligence with the need to protect the ecosystem as a whole.</p>
+            <h3>School District Network Security Challenges</h3>
+            <p>In the meeting, Matt Alvarez shared his experiences working in school district networks and the challenges faced by school districts in maintaining security. He mentioned his father&#x27;s experience with a ransomware attack that resulted in the loss of data. Jay shared his experience with a university&#x27;s network team, highlighting the issue of alert fatigue. Matt also shared his experience working at a hotel during its construction, where he encountered alert fatigue due to frequent fire alarm tests. The team discussed the importance of regular drills and procedures to prepare for emergencies. Neil shared his experience participating in the Polar Bear Plunge in Coney Island on New Year&#x27;s Day. The team ended the conversation with well wishes for the upcoming weekend.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2024-12-27.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2025-01-10.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

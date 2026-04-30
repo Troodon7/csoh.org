@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="CSPM vs CNAPP vs CWPP vs CIEM vs DSPM — what each acronym actually means, when you need each, and how they overlap. Vendor-neutral comparison.">
+    <meta name="keywords"
+        content="CSPM vs CNAPP, CNAPP vs CWPP, CIEM, DSPM, cloud security tools, cloud security posture management, cloud-native application protection platform, cloud workload protection">
+    <title>CSPM vs CNAPP vs CWPP vs CIEM vs DSPM - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/cspm-vs-cnapp.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="CSPM vs CNAPP vs CWPP vs CIEM vs DSPM - CSOH">
+    <meta property="og:description"
+        content="A vendor-neutral comparison of the cloud-security tool categories — what each acronym means, when you need it, and how they overlap.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/cspm-vs-cnapp.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CSPM vs CNAPP vs CWPP vs CIEM vs DSPM">
+    <meta name="twitter:description"
+        content="A practitioner's comparison of the *PM family of cloud security tools.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "CSPM vs CNAPP vs CWPP vs CIEM vs DSPM",
+      "description": "A vendor-neutral practitioner's comparison of the cloud-security tool categories.",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-04-30",
+      "dateModified": "2026-04-30",
+      "mainEntityOfPage": "https://csoh.org/cspm-vs-cnapp.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "CSPM vs CNAPP",
+          "item": "https://csoh.org/cspm-vs-cnapp.html"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between CSPM and CNAPP?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CSPM (Cloud Security Posture Management) finds misconfigurations across your cloud accounts. CNAPP (Cloud-Native Application Protection Platform) is the umbrella category that includes CSPM plus workload protection (CWPP), entitlement management (CIEM), vulnerability scanning, and runtime detection — all in one platform. Every CNAPP includes CSPM functionality; the reverse is not true."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need CNAPP if I already have CSPM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Maybe. CSPM solves about 60-70% of cloud security findings — the misconfigurations. CNAPP adds the runtime, workload, and identity-permission layers. If your environment is small, mostly serverless, or your detection happens elsewhere (SIEM/EDR), CSPM alone may be enough. If you run containers or VMs at scale and want one pane of glass, CNAPP is the consolidation play."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is CNAPP just a marketing term?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It started that way (coined by Gartner in 2021) but the bundled offerings are real product capabilities — not just rebadged CSPM. Whether the bundle saves you money over best-of-breed tools depends on your scale and existing investments."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="cspm-vs-cnapp.html" aria-current="page">CSPM vs CNAPP</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="ctfs.html">CTFs</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="github-actions.html">GitHub Actions</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">News</a></li>
+                            <li><a href="threat-research.html">Threat Research</a></li>
+                            <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="sessions.html">Zoom Sessions</a></li>
+                            <li><a href="conferences.html">Conferences</a></li>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="contribute.html">Contribute Overview</a></li>
+                            <li><a href="contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">CSPM vs CNAPP</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>CSPM vs CNAPP vs CWPP vs CIEM vs DSPM</h1>
+        <p>The acronym soup, decoded. What each tool category actually does, when you need it, where they overlap, and how the consolidation push to "<a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a>" changes the buying decision. Vendor-neutral.</p>
+        <div class="cta-buttons">
+            <a href="#comparison" class="btn btn-primary">Comparison Table</a>
+            <a href="#which-do-i-need" class="btn btn-secondary">Which Do I Need?</a>
+        </div>
+    </section>
+
+    <main class="container contribute-article" id="main-content">
+        <div class="info-box--blue">
+            <p><strong>The 30-second version:</strong> <strong><a class="glossary-link" href="glossary.html#term-cspm">CSPM</a></strong> finds misconfigurations. <strong><a class="glossary-link" href="glossary.html#term-cwpp">CWPP</a></strong> protects what's running on your VMs and containers. <strong><a class="glossary-link" href="glossary.html#term-ciem">CIEM</a></strong> analyzes who can do what across your <a class="glossary-link" href="glossary.html#term-iam">IAM</a>. <strong><a class="glossary-link" href="glossary.html#term-dspm">DSPM</a></strong> finds and watches your sensitive data. <strong>CNAPP</strong> is the umbrella that bundles all of the above into one platform. <strong>SSPM</strong> does the same job as CSPM but for <a class="glossary-link" href="glossary.html#term-saas">SaaS</a> apps (Microsoft 365, Salesforce) instead of cloud accounts.</p>
+            <p style="margin-top:0.75rem;">If you only buy one tool, buy a CSPM (or the CSPM module of a CNAPP). It addresses 60–70% of cloud-security findings. The other categories are layers you add as your environment matures.</p>
+        </div>
+
+        <div class="toc">
+            <h3>📖 On this page</h3>
+            <ol>
+                <li><a href="#comparison">Side-by-side comparison</a></li>
+                <li><a href="#cspm">CSPM — Cloud Security Posture Management</a></li>
+                <li><a href="#cwpp">CWPP — Cloud Workload Protection Platform</a></li>
+                <li><a href="#ciem">CIEM — Cloud Infrastructure Entitlement Management</a></li>
+                <li><a href="#dspm">DSPM — Data Security Posture Management</a></li>
+                <li><a href="#sspm">SSPM — SaaS Security Posture Management</a></li>
+                <li><a href="#cnapp">CNAPP — the umbrella category</a></li>
+                <li><a href="#which-do-i-need">Which do I actually need?</a></li>
+                <li><a href="#open-source">Open-source options for each</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ol>
+        </div>
+
+        <section id="comparison">
+            <h2>Side-by-side comparison</h2>
+            <p>The categories are easier to keep straight when you see them next to each other:</p>
+            <div class="content-section" style="overflow-x:auto;">
+                <table style="width:100%; border-collapse:collapse; margin:1rem 0; min-width:700px;">
+                    <thead>
+                        <tr style="background:#f4f6f8; text-align:left;">
+                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Category</th>
+                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">What it watches</th>
+                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Primary signal</th>
+                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Catches things like</th>
+                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">When you need it</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>CSPM</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Cloud account configuration</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Cloud APIs, <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scans</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Public <a class="glossary-link" href="glossary.html#term-s3">S3</a>, open SGs, missing <a class="glossary-link" href="glossary.html#term-mfa">MFA</a>, no encryption</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">From day one</td></tr>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>CWPP</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Running VMs, containers, <a class="glossary-link" href="glossary.html#term-serverless">serverless</a></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Agents, <a class="glossary-link" href="glossary.html#term-ebpf">eBPF</a>, syscalls</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Vulnerable images, unauthorized processes, malware</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">When you run <a class="glossary-link" href="glossary.html#term-kubernetes">K8s</a>/VMs at scale</td></tr>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>CIEM</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">IAM permissions across accounts</td><td style="padding:0.6rem; border-bottom:1px solid #eee;"><a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a>, IAM policies</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Over-privileged roles, unused permissions, privilege paths</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">When IAM &gt; ~50 roles</td></tr>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>DSPM</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Data stores (S3, RDS, Snowflake, etc.)</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Content scanning, classification</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">PII in dev environments, shadow data, exposed databases</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">When you have regulated data</td></tr>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>SSPM</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">SaaS apps (M365, Salesforce, GitHub)</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">SaaS APIs, OAuth tokens</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Risky third-party app grants, weak SaaS configs</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">When SaaS sprawl matters</td></tr>
+                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>CNAPP</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">All of the above</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Multi-source unified</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Toxic combinations across categories</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">When tool sprawl hurts</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="cspm">
+            <h2>CSPM — Cloud Security Posture Management</h2>
+            <p>The oldest and most mature category. CSPM tools continuously scan your cloud accounts (AWS, Azure, GCP, OCI) via their APIs and flag deviations from a security baseline — public S3 buckets, security groups open to the internet on port 22, unencrypted databases, IAM users without MFA, root-account API keys, missing CloudTrail, the works.</p>
+            <h3>What good CSPM does</h3>
+            <ul>
+                <li>Continuous scanning across every cloud account in your organization</li>
+                <li>Findings mapped to standards (<a class="glossary-link" href="glossary.html#term-cis-benchmarks">CIS Benchmarks</a>, AWS FSBP, <a class="glossary-link" href="glossary.html#term-nist">NIST</a>, <a class="glossary-link" href="glossary.html#term-pci-dss">PCI DSS</a>, <a class="glossary-link" href="glossary.html#term-hipaa">HIPAA</a>)</li>
+                <li>IaC scanning at PR time (Terraform, CloudFormation, Bicep) so misconfigurations don't reach prod</li>
+                <li>Auto-remediation playbooks for common findings ("close this public S3 bucket")</li>
+                <li>Compliance posture reporting that satisfies auditors without manual evidence collection</li>
+            </ul>
+            <h3>Pros</h3>
+            <p>Cheapest credible cloud-security investment per dollar. Closes the bulk of the "how did this happen?" findings before they happen. Mature category — every cloud-security vendor has a CSPM module.</p>
+            <h3>Cons</h3>
+            <p>Doesn't see anything <em>inside</em> your workloads. Can't tell you if a process is doing something it shouldn't, only whether the surrounding configuration allows that to happen. CSPM-alone teams sometimes get a false sense of security ("we have 0 findings") while runtime threats go undetected.</p>
+            <h3>Examples</h3>
+            <p>Open-source: <strong>Prowler</strong>, <strong>ScoutSuite</strong>, <strong>Steampipe</strong>, <strong>Cloudsplaining</strong>. Provider-native: <strong><a class="glossary-link" href="glossary.html#term-security-hub">AWS Security Hub</a></strong>, <strong>Microsoft <a class="glossary-link" href="glossary.html#term-guardduty">Defender for Cloud</a></strong>, <strong>Google Security Command Center</strong>. Commercial: <strong>Wiz</strong>, <strong>Orca</strong>, <strong>Lacework</strong>, <strong>Palo Alto Prisma Cloud</strong>, <strong>CrowdStrike Falcon Cloud Security</strong>, <strong>Tenable Cloud Security</strong>.</p>
+        </section>
+
+        <section id="cwpp">
+            <h2>CWPP — Cloud Workload Protection Platform</h2>
+            <p>CWPP protects the running workload — virtual machines, containers, serverless functions. It's the cloud-era successor to endpoint protection: where <a class="glossary-link" href="glossary.html#term-edr">EDR</a> watches a Windows desktop's processes and registry, CWPP watches a Linux VM's syscalls or a Kubernetes <a class="glossary-link" href="glossary.html#term-pod">pod</a>'s network and filesystem activity.</p>
+            <h3>What good CWPP does</h3>
+            <ul>
+                <li>Vulnerability scanning of container images (registry and runtime) and VM disk images</li>
+                <li>Runtime threat detection — unauthorized process execution, network connections to known-bad IPs, <a class="glossary-link" href="glossary.html#term-privilege-escalation">privilege escalation</a>, file integrity violations</li>
+                <li>Behavioral baselining — alert when a workload starts doing something it never did before</li>
+                <li>Compliance evidence (FIM for PCI, host-level audit for <a class="glossary-link" href="glossary.html#term-soc">SOC</a> 2)</li>
+                <li>Increasingly, eBPF-based agents that don't require kernel modules and have low overhead</li>
+            </ul>
+            <h3>Pros</h3>
+            <p>Catches what CSPM can't see — the post-exploitation and <a class="glossary-link" href="glossary.html#term-persistence">persistence</a> stages of an attack. <a class="glossary-link" href="glossary.html#term-falco">Falco</a>'s "shell spawned in container" rule has caught more than one supply-chain compromise.</p>
+            <h3>Cons</h3>
+            <p>Agent management overhead. False-positive tuning is a real ongoing job. Coverage gaps on serverless workloads (<a class="glossary-link" href="glossary.html#term-lambda">Lambda</a>, Cloud Functions, Cloud Run) where you can't run an agent — those rely on provider-side telemetry instead.</p>
+            <h3>Examples</h3>
+            <p>Open-source: <strong>Falco</strong>, <strong><a class="glossary-link" href="glossary.html#term-tetragon">Tetragon</a></strong> (eBPF-based), <strong>Trivy</strong> (image vuln). Commercial: most CNAPP platforms include CWPP modules; <strong>SentinelOne</strong>, <strong>CrowdStrike</strong>, <strong>Sysdig Secure</strong>, <strong>Aqua</strong>, <strong>Palo Alto Prisma</strong> all have strong workload offerings.</p>
+        </section>
+
+        <section id="ciem">
+            <h2>CIEM — Cloud Infrastructure Entitlement Management</h2>
+            <p>CIEM is IAM as a graph problem. It analyzes every identity (user, role, <a class="glossary-link" href="glossary.html#term-service-principal">service principal</a>, <a class="glossary-link" href="glossary.html#term-service-account">workload identity</a>) and every permission across every cloud account, finds privilege-escalation paths, and surfaces over-permissioned roles.</p>
+            <h3>What good CIEM does</h3>
+            <ul>
+                <li>Map effective permissions — what can identity X actually do, accounting for all attached policies, group memberships, SCPs, and condition evaluations?</li>
+                <li>Find unused permissions — "this role has S3:* but only ever uses S3:GetObject, here's the trimmed policy"</li>
+                <li>Detect privilege-escalation chains — "this user can <code>iam:CreatePolicyVersion</code>, which means they can become admin"</li>
+                <li>Cross-cloud visibility — federations, SAML trust relationships, <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a> workload identities, all in one graph</li>
+                <li>Drift alerting — flag when a role's permissions expand beyond its baseline</li>
+            </ul>
+            <h3>Pros</h3>
+            <p>The thing that catches the Capital One pattern (over-privileged role + <a class="glossary-link" href="glossary.html#term-ssrf">SSRF</a>). Mature CIEM tools turn IAM least-privilege from a wish into an operational practice.</p>
+            <h3>Cons</h3>
+            <p>Hard to operationalize at small scale — if you have 5 IAM roles, you don't need a graph database. Implementation effort is real: tuning what counts as "actually unused" requires baselining and data review.</p>
+            <h3>Examples</h3>
+            <p>Open-source: <strong>Cloudsplaining</strong>, <strong>Pacu</strong> (offensive — finds privilege paths), <strong>ROADtools</strong> (Entra). Provider-native: <strong>AWS <a class="glossary-link" href="glossary.html#term-iam-access-analyzer">IAM Access Analyzer</a></strong> (gets closer with each release), <strong>Microsoft Entra Privileged Identity Management</strong>. Commercial CIEM is typically a CNAPP module now (<strong>Wiz</strong>, <strong>Orca</strong>, <strong>Sonrai</strong>, <strong>Ermetic / Tenable</strong>).</p>
+        </section>
+
+        <section id="dspm">
+            <h2>DSPM — Data Security Posture Management</h2>
+            <p>DSPM scans your data stores (S3, EBS snapshots, RDS, BigQuery, Snowflake, GitHub repos…) and tells you what sensitive data lives where, who can access it, and whether the surrounding controls match the data's classification. The newer category — emerged around 2022.</p>
+            <h3>What good DSPM does</h3>
+            <ul>
+                <li>Auto-discover and classify data — PII, PCI, PHI, IP, secrets — at scale, without sampling</li>
+                <li>Map data flow — "this PII lives in a prod RDS, snapshots get copied to a dev account, the dev account is shared with a contractor"</li>
+                <li>Surface "shadow data" — copies of regulated data in places nobody's tracking (test environments, shared drives, backup buckets)</li>
+                <li>Tie data classification to access policy — flag sensitive data accessible to overly broad principals</li>
+            </ul>
+            <h3>Pros</h3>
+            <p>Increasingly the differentiator for organizations with regulatory burden (healthcare, financial services, EU residents under <a class="glossary-link" href="glossary.html#term-gdpr">GDPR</a>). Catches things CSPM and CWPP miss because they're not looking at the actual data.</p>
+            <h3>Cons</h3>
+            <p>Newest category, so terminology and capabilities still shifting. Scanning costs (especially at S3 scale) can be material. Privacy-of-the-scanner concerns: in some regulated environments, you can't ship customer data out of the account to a SaaS DSPM.</p>
+            <h3>Examples</h3>
+            <p>Open-source: <strong>Open-DSPM</strong>, <strong>Macie</strong> (provider-native, AWS only). Commercial: <strong>Wiz DSPM</strong>, <strong>Cyera</strong>, <strong>Sentra</strong>, <strong>Dig</strong> (acquired by Palo Alto), <strong>Laminar</strong> (acquired by Rubrik), <strong>Symmetry</strong>.</p>
+        </section>
+
+        <section id="sspm">
+            <h2>SSPM — SaaS Security Posture Management</h2>
+            <p>The same job CSPM does for <a class="glossary-link" href="glossary.html#term-iaas">IaaS</a>, but for SaaS — Microsoft 365, Google Workspace, Salesforce, GitHub, Slack, Workday, etc. It catches risky configurations, third-party OAuth grants, and dormant admin accounts that traditional cloud security tools don't see.</p>
+            <h3>What good SSPM does</h3>
+            <ul>
+                <li>Catalog OAuth apps connected to corporate SaaS, with risk scores</li>
+                <li>Find unused/forgotten admin accounts and external collaborators</li>
+                <li>Audit SaaS configurations against vendor benchmarks (Microsoft Secure Score, Google Cloud security best practices)</li>
+                <li>Detect risky behavior — bulk downloads, anomalous OAuth grants, unusual login locations</li>
+            </ul>
+            <h3>Pros</h3>
+            <p>SaaS is where most modern data lives. Traditional <a class="glossary-link" href="glossary.html#term-casb">CASB</a> / CSPM tools don't touch the inside of SaaS apps. The OAuth-app problem alone is worth the cost for orgs with 100+ SaaS subscriptions.</p>
+            <h3>Cons</h3>
+            <p>Coverage varies wildly by app — vendors integrate with the most popular apps first. Long tail of niche SaaS may not be supported. Less critical for organizations with strict SaaS allowlists.</p>
+            <h3>Examples</h3>
+            <p>Commercial: <strong>AppOmni</strong>, <strong>Adaptive Shield</strong> (acquired by CrowdStrike), <strong>Obsidian</strong>, <strong>Reco</strong>, <strong>DoControl</strong>. Microsoft and Google's native security centers cover their own ecosystems well.</p>
+        </section>
+
+        <section id="cnapp">
+            <h2>CNAPP — the umbrella category</h2>
+            <p>Coined by Gartner in 2021. CNAPP doesn't replace any of the above — it bundles them. A CNAPP platform typically includes CSPM + CWPP + CIEM + IaC scanning + container vuln + (increasingly) DSPM, with a unified data model and one console.</p>
+            <h3>The pitch</h3>
+            <p>One pane of glass. One vendor relationship. <strong>Toxic-combination detection</strong> — the unique CNAPP capability that no single-category tool offers. A CSPM might tell you "this S3 bucket is public." A separate CIEM might tell you "this IAM role has unused permissions." A CNAPP can tell you "this S3 bucket is public AND contains regulated PII AND is accessible by a workload identity that's reachable from the internet via a known-vulnerable container." That cross-domain reasoning is the actual value.</p>
+            <h3>Pros</h3>
+            <p>Operationally simpler if you're starting from scratch. Cross-domain detections that point tools can't replicate. Single procurement / contract / training surface. Generally cheaper than buying CSPM + CWPP + CIEM + DSPM separately at scale.</p>
+            <h3>Cons</h3>
+            <p>Vendor lock-in. A CNAPP that's mediocre at one of its modules may still beat your existing point tool because of integration leverage — but the reverse is true too. "Best of breed" arguments exist for a reason. Also: <strong>CNAPP is a market category, not a product spec</strong> — what one vendor calls CNAPP differs in capability from another by a lot.</p>
+            <h3>Buying considerations</h3>
+            <ul>
+                <li>Coverage of YOUR clouds (some are AWS-strong but Azure/GCP shallow)</li>
+                <li>Agent footprint (agentless full-coverage is the new bar; agent-required CWPP modules are increasingly seen as a downgrade)</li>
+                <li>How well it integrates with your <a class="glossary-link" href="glossary.html#term-siem">SIEM</a>, ticketing, and IaC pipelines</li>
+                <li>Detection content quality — anyone can ship 1,000 rules; the question is which fire and which are noise</li>
+                <li>Pricing model — most charge per workload or per "billable resource"; do the math at your actual size</li>
+            </ul>
+            <h3>Examples</h3>
+            <p><strong>Wiz</strong> (the market leader as of 2026), <strong>Orca</strong>, <strong>Lacework</strong>, <strong>Palo Alto Prisma Cloud</strong>, <strong>CrowdStrike Falcon Cloud Security</strong>, <strong>Microsoft Defender for Cloud</strong> (the first-party CNAPP for Azure), <strong>Sysdig Secure</strong>, <strong>Aqua</strong>, <strong>Tenable Cloud Security</strong>, <strong>Check Point CloudGuard</strong>.</p>
+        </section>
+
+        <section id="which-do-i-need">
+            <h2>Which do I actually need?</h2>
+            <p>The honest answers, by maturity stage:</p>
+            <h3>"We just put workloads in the cloud last quarter"</h3>
+            <p>Start with provider-native CSPM (AWS Security Hub, Microsoft Defender for Cloud, GCP Security Command Center). They're cheap, decent, and tied to the cloud you're already using. Get the findings to zero before evaluating commercial tools. Open-source <strong>Prowler</strong> for ad-hoc deep audits.</p>
+            <h3>"We have a few hundred resources across AWS"</h3>
+            <p>Add a commercial CSPM (or the CSPM module of a CNAPP). The provider-native tools start to feel limited at this scale — too many findings, hard to triage, weak IaC scanning. Wiz, Orca, and Lacework are the typical short-list.</p>
+            <h3>"We run Kubernetes in production"</h3>
+            <p>Add CWPP. <strong>Falco</strong> as a free starting point if you have the operational chops; commercial CNAPP CWPP modules if you want managed detection content and consolidated alerting. Definitely do <strong>Network Policies</strong> and <strong><a class="glossary-link" href="glossary.html#term-pss">Pod Security Standards</a></strong> — those are configuration practices, not products.</p>
+            <h3>"Our IAM has gotten complicated"</h3>
+            <p>If you've crossed roughly 50 IAM roles or 5 cloud accounts, CIEM starts paying off. AWS IAM Access Analyzer is a free starting point. Commercial CIEM (now mostly CNAPP-bundled) for the privilege-escalation graph view.</p>
+            <h3>"We handle regulated data"</h3>
+            <p>Add DSPM. Especially if you have data flowing through copy/snapshot/backup pipelines that nobody's tracking. AWS Macie is a starting point on AWS; commercial DSPM for <a class="glossary-link" href="glossary.html#term-public">multi-cloud</a> and finer classification.</p>
+            <h3>"We have 200+ SaaS subscriptions"</h3>
+            <p>Add SSPM. Especially worth it if you have a distributed workforce making OAuth-grant decisions you don't see.</p>
+            <h3>"We have 4 different point tools and security ops is drowning"</h3>
+            <p>This is where CNAPP consolidation makes financial sense. Run a serious POC — POCs are how you discover that "consolidated" doesn't always mean "as good as the point tool you're replacing."</p>
+        </section>
+
+        <section id="open-source">
+            <h2>Open-source options for each category</h2>
+            <p>You can build a credible cloud-security program entirely on open source, especially if you're small or budget-constrained. Quality is real:</p>
+            <ul>
+                <li><strong>CSPM:</strong> <a href="https://github.com/prowler-cloud/prowler" target="_blank" rel="noopener noreferrer">Prowler</a> (AWS, Azure, GCP, K8s — the gold standard), <a href="https://github.com/nccgroup/ScoutSuite" target="_blank" rel="noopener noreferrer">ScoutSuite</a>, <a href="https://github.com/turbot/steampipe" target="_blank" rel="noopener noreferrer">Steampipe</a> (SQL queries against cloud APIs)</li>
+                <li><strong>CWPP:</strong> <a href="https://github.com/falcosecurity/falco" target="_blank" rel="noopener noreferrer">Falco</a> (runtime detection), <a href="https://github.com/cilium/tetragon" target="_blank" rel="noopener noreferrer">Tetragon</a> (eBPF-based), <a href="https://github.com/aquasecurity/trivy" target="_blank" rel="noopener noreferrer">Trivy</a> (vuln scanning)</li>
+                <li><strong>CIEM:</strong> <a href="https://github.com/salesforce/cloudsplaining" target="_blank" rel="noopener noreferrer">Cloudsplaining</a> (AWS IAM least-privilege analysis), <a href="https://github.com/dirkjanm/ROADtools" target="_blank" rel="noopener noreferrer">ROADtools</a> (<a class="glossary-link" href="glossary.html#term-entra-id">Entra ID</a>)</li>
+                <li><strong>DSPM:</strong> Largely a commercial space; some adjacent OSS in the data-classification area (<a href="https://github.com/Microsoft/presidio" target="_blank" rel="noopener noreferrer">Microsoft Presidio</a> for PII detection)</li>
+                <li><strong>IaC scanning:</strong> <a href="https://github.com/aquasecurity/tfsec" target="_blank" rel="noopener noreferrer">tfsec</a>, <a href="https://github.com/bridgecrewio/checkov" target="_blank" rel="noopener noreferrer">Checkov</a>, <a href="https://github.com/open-policy-agent/conftest" target="_blank" rel="noopener noreferrer">Conftest</a></li>
+            </ul>
+            <p>Combine: Prowler in <a class="glossary-link" href="glossary.html#term-ci">CI</a> for posture, Falco on K8s nodes for runtime, Cloudsplaining on a schedule for IAM drift, Macie or Presidio for data classification, Trivy at PR time for image scanning. That's a credible cloud-security program for free, with the trade-off of more operational overhead than a managed CNAPP.</p>
+        </section>
+
+        <section id="faq">
+            <h2>FAQ</h2>
+
+            <h3>Is CNAPP just a marketing term?</h3>
+            <p>It started as a Gartner-coined category, and there's marketing energy around it. But the bundled offerings are real product capabilities — not just rebadged CSPM. The cross-domain "toxic combination" detections are technically distinctive and require a unified data model that point tools don't have.</p>
+
+            <h3>Should I buy CNAPP or stay best-of-breed?</h3>
+            <p>Run the POC. The honest answer is: depends on your scale, your existing investments, your team's specialization, and the specific vendors. Most mid-size organizations end up at CNAPP because the operational simplification outweighs the per-module compromises. Specialized shops (heavy K8s, heavy regulated data) often stay best-of-breed for their critical category and use a CNAPP for everything else.</p>
+
+            <h3>Where does CASB fit in?</h3>
+            <p>CASB (Cloud Access Security Broker) is the older umbrella for SaaS controls — proxy-based or API-based monitoring of SaaS usage. SSPM is essentially the API-based half of CASB, evolved. Most modern programs use SSPM directly and don't deploy CASB proxies.</p>
+
+            <h3>Do I need a CNAPP if I'm fully serverless?</h3>
+            <p>Probably not. Serverless workloads (Lambda, Cloud Functions) don't have agents to deploy or hosts to scan. CSPM + IaC scanning + provider-native runtime telemetry covers most of what CNAPP would otherwise add.</p>
+
+            <h3>What's "ASPM" and where does it fit?</h3>
+            <p><a class="glossary-link" href="glossary.html#term-aspm">ASPM</a> (Application Security Posture Management) is the AppSec-flavor cousin — finds vulns in your code and dependencies, with attack-surface mapping into the running app. Mostly an AppSec tool category; some CNAPP vendors are extending into it.</p>
+        </section>
+
+        <section class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="cloud-security-best-practices.html">Cloud security best practices</a> — the controls these tools implement.</li>
+                <li><a href="shared-responsibility-model.html">Shared responsibility model</a> — what you actually need to secure.</li>
+                <li><a href="resources.html">Resources directory</a> — vendor and open-source tools, organized by category.</li>
+                <li><a href="sessions.html">Friday Zoom</a> — practitioners debate tool selections every week. Bring your shortlist.</li>
+                <li><a href="glossary.html">Glossary</a> — every acronym on this page, defined.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="resources.html">All Resources</a></li>
+                    <li><a href="sessions.html">Zoom Sessions</a></li>
+                    <li><a href="presentations.html">Presentations</a></li>
+                    <li><a href="index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="The meeting focused on discussing a critical Java authentication vulnerability and its implications for organizations. Participants shared their…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2026-03-06, Friday Zoom, Java auth vulnerability, SBOM debates, RSA OPSEC, DEF CON war stories">
+    <title>Friday, March 6, 2026 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2026-03-06.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, March 6, 2026 CSOH Recap — Java auth vulnerability, SBOM debates, RSA OPSEC, DEF CON war stories">
+    <meta property="og:description" content="The meeting focused on discussing a critical Java authentication vulnerability and its implications for organizations. Participants shared their…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2026-03-06.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, March 6, 2026 CSOH Recap">
+    <meta name="twitter:description" content="The meeting focused on discussing a critical Java authentication vulnerability and its implications for organizations. Participants shared their…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Java auth vulnerability, SBOM debates, RSA OPSEC, DEF CON war stories',
+      "description": "The meeting focused on discussing a critical Java authentication vulnerability and its implications for organizations. Participants shared their…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-03-06",
+      "dateModified": "2026-03-06",
+      "mainEntityOfPage": "https://csoh.org/meetings/2026-03-06.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, March 6, 2026',
+          "item": "https://csoh.org/meetings/2026-03-06.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, March 6, 2026</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, March 6, 2026 — Meeting Recap</h1>
+        <p>Java auth vulnerability, <a class="glossary-link" href="../glossary.html#term-sbom">SBOM</a> debates, RSA OPSEC, DEF CON war stories</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2026-03-06">Friday, March 6, 2026</time> — Java auth vulnerability, SBOM debates, RSA OPSEC, DEF CON war stories</h2>
+            <p><strong>Quick recap.</strong> The meeting focused on discussing a critical Java authentication vulnerability and its implications for organizations. Participants shared their experiences with patching and vulnerability management, emphasizing the importance of thorough scanning and communication with vendors. The group also discussed Software Bill of Materials (SBOMs) and their role in improving security posture. Personal anecdotes were shared about attending industry conferences and navigating social situations in professional settings. The conversation touched on the challenges of identifying threat actors within open communities and the importance of maintaining operational security (OPSEC) at events like RSA.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2026-03</span><span class="tag">Vulnerabilities</span><span class="tag">SBOM</span><span class="tag">Conferences</span></div>
+            <details class="meeting-topics">
+                <summary>Show 8 discussion topics</summary>
+            <h3>JavaScript Library Authentication Vulnerability</h3>
+            <p>The meeting began with casual conversation before transitioning to a discussion about a critical authentication bypass vulnerability in a widely-used JavaScript library. Stryker and Neil explained the technical details and potential impacts, emphasizing the need for organizations to patch affected systems and conduct thorough vulnerability assessments. The group discussed strategies for addressing vulnerabilities in third-party software, including vendor communication, SLAs, and emergency mapping triages. The conversation ended with a reminder for attendees to check their systems and suppliers for the Java authentication issue.</p>
+
+            <h3>SBOMs: Security and Transparency</h3>
+            <p>The meeting focused on discussions about SBOMs (Software Bill of Materials) and their importance in software security. Stryker initiated the conversation, highlighting the need for accountability in tech stacks and the potential of SBOMs to serve as a forcing function for transparency. Jay and Neil provided insights into the challenges and misconceptions surrounding SBOMs, emphasizing their role in vendor vetting and risk management. The group also discussed the evolution of SBOM requirements following the SolarWinds compromise, noting the tension between regulatory demands and practical implementation. The conversation concluded with a reflection on the utility of SBOMs and the need for further clarity on their value and application.</p>
+
+            <h3>SBOMs: Challenges and Best Practices</h3>
+            <p>The group discussed the limitations and practicality of using Software Bill of Materials (SBOMs) in security practices. Umang expressed skepticism about the effectiveness of SBOMs and <a class="glossary-link" href="../glossary.html#term-sca">SCA</a> tools, while Stryker emphasized the importance of actively monitoring libraries and using threat feeds. Pavel highlighted the need for per-release SBOMs and the importance of having a continuous posture. Jay and Shawn advised Dave on asking vendors for their software development and operational lifecycle (SDOL) documents, emphasizing the importance of due diligence when selecting <a class="glossary-link" href="../glossary.html#term-saas">SaaS</a> providers. The conversation also touched on the challenges of securing critical systems and the potential for automated SBOM sourcing from vendors.</p>
+
+            <h3>Security Practices and Threats</h3>
+            <p>The meeting covered several security-related topics, including supply chain security, code escrow practices, and Wikipedia&#x27;s recent security incident. Stryker shared his experience verifying the security of his platform and the importance of double-checking suppliers. Dane discussed SBIM practices in the medical device industry and recommended adopting standard tools for generating and shipping security artifacts. Matt described Wikipedia&#x27;s security breach caused by a malicious user script, which led to the platform going read-only. The group also discussed the challenges of identifying threat actors in open communities, with Neil emphasizing the value of openness and collaboration in security efforts.</p>
+
+            <h3>Threat Actors and Community Safety</h3>
+            <p>The group discussed the nature of threat actors and community safety, with Stryker sharing experiences from administering the Lonely Hackers Club on Telegram. They explored different types of threat actors, including accidental insiders, and emphasized the importance of community guidelines and moderation. Rev expressed concerns about presenting at conferences due to potential <a class="glossary-link" href="../glossary.html#term-ai">AI</a> misuse of recordings, but the group generally dismissed these fears. The conversation concluded with Stryker sharing a humorous anecdote about his initial concerns at DEF CON, highlighting the often exaggerated fears of new cybersecurity professionals.</p>
+
+            <h3>Public Speaking Security Best Practices</h3>
+            <p>The group discussed security concerns around public speaking engagements and online presence. Stryker advised attendees to be cautious about sharing personal information at conferences, suggesting they could request not to be recorded and consider the potential risks versus benefits of speaking publicly. Jay shared his experience of receiving targeted <a class="glossary-link" href="../glossary.html#term-phishing">phishing</a> attempts as a public figure in security, while Neil highlighted how Microsoft employees overreacted to attending DEF CON. The discussion concluded with Matt reflecting on how security professionals used to openly share information on IRC, contrasting with current professional boundaries, and Neil sharing an opportunity to host a presentation on online harassment research at Cloud Security Office Hours.</p>
+
+            <h3>Conference Preparation and Professional Conduct</h3>
+            <p>The group discussed their plans for an upcoming conference, with Stryker expressing excitement about a presentation on March 20th and hoping it would be recorded. They also talked about strategies for handling social situations at conferences, including staying sober and dealing with pressure to drink. The conversation touched on personal experiences with drinking and how it can affect professional situations in the cybersecurity industry.</p>
+
+            <h3>Social Engineering and Intuition</h3>
+            <p>The team discussed social engineering and intuition, with Matt sharing his ability to quickly assess people&#x27;s trustworthiness based on instinct. Neil advised being protective and watchful at social events, particularly with younger team members. Stryker offered to share social engineering resources with Matt, and they discussed the importance of gathering internal threat intelligence to stay informed about company changes. The conversation concluded with Matt mentioning his father&#x27;s background in security and his own early exposure to surveillance and counter-surveillance techniques.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2026-02-27.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2026-03-13.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

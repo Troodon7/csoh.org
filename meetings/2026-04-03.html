@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="Cloud Security Office Hours featured discussions about conference experiences, particularly RSA and Black Hat, with participants sharing insights about…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2026-04-03, Friday Zoom, RSA recap, Claude code leak, "Meeple" talk, AI governance and graph-backed ontologies">
+    <title>Friday, April 3, 2026 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2026-04-03.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, April 3, 2026 CSOH Recap — RSA recap, Claude code leak, &quot;Meeple&quot; talk, AI governance and graph-ba">
+    <meta property="og:description" content="Cloud Security Office Hours featured discussions about conference experiences, particularly RSA and Black Hat, with participants sharing insights about…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2026-04-03.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, April 3, 2026 CSOH Recap">
+    <meta name="twitter:description" content="Cloud Security Office Hours featured discussions about conference experiences, particularly RSA and Black Hat, with participants sharing insights about…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'RSA recap, Claude code leak, "Meeple" talk, AI governance and graph-backed ontologies',
+      "description": "Cloud Security Office Hours featured discussions about conference experiences, particularly RSA and Black Hat, with participants sharing insights about…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-04-03",
+      "dateModified": "2026-04-03",
+      "mainEntityOfPage": "https://csoh.org/meetings/2026-04-03.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, April 3, 2026',
+          "item": "https://csoh.org/meetings/2026-04-03.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, April 3, 2026</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, April 3, 2026 — Meeting Recap</h1>
+        <p>RSA recap, Claude code leak, &quot;Meeple&quot; talk, <a class="glossary-link" href="../glossary.html#term-ai">AI</a> governance and graph-backed ontologies</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2026-04-03">Friday, April 3, 2026</time> — RSA recap, Claude code leak, &quot;Meeple&quot; talk, AI governance and graph-backed ontologies</h2>
+            <p><strong>Quick recap.</strong> Cloud Security Office Hours featured discussions about conference experiences, particularly RSA and Black Hat, with participants sharing insights about networking, speaking opportunities, and career development in cybersecurity. The group extensively discussed the recent &quot;Cloud Code leak&quot; revealing Anthropic&#x27;s backend implementation, analyzing the code quality and architectural decisions. Stryker presented her talk proposal titled &quot;Meeple: Treating People as Game Pieces in Security&quot; which focuses on avoiding single-dimensional thinking when implementing security controls. The conversation also covered best practices for speaking at conferences, with advice for both experienced and junior professionals, and concluded with a detailed technical discussion about AI security governance, including the use of ontologies, taxonomies, and graph databases to improve reliability and reduce hallucinations in AI systems.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2026-04</span><span class="tag">Conferences</span><span class="tag">AI</span><span class="tag">Governance</span></div>
+            <details class="meeting-topics">
+                <summary>Show 11 discussion topics</summary>
+            <h3>Security Risk Assessment Talk Proposal</h3>
+            <p>The meeting began with casual conversation and technical issues, including discussion about a Chinese webcam driver and a humorous thread about a cloud security code leak. The main focus was Stryker presenting a talk proposal titled &quot;Meeple: Building Risks Around Actions, Not Single-Dimensional Roles.&quot; Stryker explained the concept of treating people as one-dimensional game pieces rather than complex individuals, which can create security risks. The group discussed whether the title was clear enough, with Neil suggesting adding a definition of &quot;meeple&quot; in the title to help understanding. Stryker outlined the talk&#x27;s premise about avoiding binary thinking when assessing security risks based on single variables like role or seniority.</p>
+
+            <h3>Security Approaches and Conference Experiences</h3>
+            <p>The group discussed security approaches and conference experiences. Jay shared his frustration with treating all employees the same from a security perspective, arguing for more tailored approaches based on job roles. Stryker agreed with this approach and emphasized the importance of making experienced professionals think differently about security assumptions. The conversation then shifted to discussing RSA Conference, with participants sharing their different experiences as vendors, participants, and C-suite attendees. Mackenzie, a new recruiter in the field, introduced herself and expressed interest in learning more about the security space.</p>
+
+            <h3>Cybersecurity Conference Diversity Discussion</h3>
+            <p>The group discussed conference experiences and diversity issues in cybersecurity events. D shared concerns about RSA&#x27;s oversight in not including a Black affinity group despite having Latino and LGBTQ groups, expressing disappointment with the explanation that there was no space. The conversation then shifted to comparing different cybersecurity conferences, with participants discussing the differences between Black Hat and DEF CON, noting that DEF CON is more inclusive and less corporate-focused, while Black Hat offers more industry-relevant content but at a higher cost. The discussion concluded with reflections on conference networking opportunities and entertainment, including experiences with corporate performances at security events.</p>
+
+            <h3>Conference Speaking Engagement Strategies</h3>
+            <p>The group discussed strategies for getting selected to speak at industry conferences like RSA. Jay suggested that being selected as a speaker makes it easier to justify attendance to employers since it becomes a business development opportunity rather than just personal networking. Stryker shared her experience getting GEICO to pay for conference attendance through speaking engagements, including her upcoming talks at various events. The discussion emphasized that speakers don&#x27;t need to be perfectly polished or experienced to present, with several participants sharing that passion and expertise are more important than formal credentials. The conversation concluded with advice for junior professionals like Issam, who expressed concerns about language barriers and experience level, with participants reassuring him that accent and experience level don&#x27;t impact reception in the industry.</p>
+
+            <h3>AI Technology and Engineering Discussion</h3>
+            <p>The meeting focused on supporting a participant named Issam who was preparing to give a talk, with Neil and others offering encouragement and reassurance that he didn&#x27;t need to speak if he wasn&#x27;t comfortable, and suggesting alternative paths to success in the industry. The group then had an extensive discussion about AI technology, particularly Claude, where they criticized its engineering approach and compared it to &quot;spaghetti code,&quot; questioning the wisdom of building complex systems without proper engineering oversight. The conversation included observations about cult-like behavior in the AI community and concerns about the lack of experienced security professionals in AI company leadership roles.</p>
+
+            <h3>LLM Limitations in Logical Tasks</h3>
+            <p>The team discussed the limitations and challenges of using large language models (LLMs) for logical tasks, particularly highlighting how LLMs often arrive at solutions in illogical ways that they cannot consistently explain. Jay explained their approach to multi-agentic AI systems, where LLMs are used primarily to generate human-friendly responses rather than perform deterministic tasks like flight bookings, which are handled through business connectors. The discussion emphasized that while LLMs have their place in creating natural language outputs, they should not be expected to perform automated, predictable logic tasks that are better suited for traditional systems.</p>
+
+            <h3>AI Governance and Security Measures</h3>
+            <p>The group discussed AI governance and security measures, with Jay emphasizing the importance of secure-by-design architecture and threat modeling based on business processes rather than just technical aspects. Milos shared his experience implementing taxonomy, ontology, and graph-based solutions to reduce hallucinations in AI systems, particularly in an insurance company in Peru, though Jay noted this approach was similar to their existing methods. The discussion concluded with Jay recommending a four-part series on AI security that includes separating planning from execution and implementing verification mechanisms for critical use cases.</p>
+
+            <h3>Secure Agentic AI Implementation Challenges</h3>
+            <p>Jay and Milos discussed challenges in implementing secure agentic AI systems, focusing on preventing system failures and managing user privileges. They highlighted the importance of deterministic processes, input validation, and the separation of planning and execution tasks to mitigate risks. Jay mentioned their team&#x27;s approach of building custom solutions due to limited vendor support and shared insights on threat modeling and security practices in the AI space. The conversation also touched on the difficulty of finding appropriate design partners and the need for accessible documentation on AI security measures.</p>
+
+            <h3>Graph Databases and Privileges</h3>
+            <p>Milos discussed his work with graph databases, particularly using py.dev as a harness and Neo4J as the preferred graph database. He shared his experience building custom models and the benefits of combining graph databases with semantic layers and ontologies. Jay addressed a question about user privileges in AI systems, explaining the current implementation of service accounts and user delegation, while noting challenges with privilege dropping. Milos suggested using an ontology to define atomic operations and their required privileges, which Jay acknowledged as a feasible approach that could potentially involve temporary role assignments.</p>
+
+            <h3>AI Security Implementation Strategies</h3>
+            <p>The group discussed approaches to implementing AI systems with appropriate security and access controls. Jay emphasized the importance of time-based or task-based privilege revocation, while Milos suggested applying principles of <a class="glossary-link" href="../glossary.html#term-jit">just-in-time access</a> and <a class="glossary-link" href="../glossary.html#term-least-privilege">least privilege</a>. They explored different frameworks, including Zero Knowledge Trust, and discussed the challenges of balancing security with practical implementation. The conversation also touched on the evolution of AI technology and its potential applications in business operations, particularly in areas like supply chain management and manufacturing.</p>
+
+            <h3>AI Research and Applications</h3>
+            <p>The group discussed various AI researchers and their approaches, with particular focus on Jan Lacun and his work on world models versus LLMs. Jay expressed preference for Jan&#x27;s clear communication style and practical approach, while criticizing Jeff Hinton&#x27;s shift toward more commercial positions. The conversation then shifted to broader AI topics, including concerns about AGI as a goal and discussions about Musk&#x27;s space-based data center plans, with the group expressing skepticism about the feasibility and practicality of such initiatives. The discussion concluded with reflections on current robotics applications, particularly highlighting warehouse robots and functional non-humanoid robots as more practical and effective than humanoid designs.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2026-03-27.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2026-04-10.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

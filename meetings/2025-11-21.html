@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="The meeting began with discussions about building a religion and welcoming new participants, including a GitHub walkthrough session and potential new…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2025-11-21, Friday Zoom, Religion Building and Hacking Discussion">
+    <title>Friday, November 21, 2025 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2025-11-21.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, November 21, 2025 CSOH Recap — Religion Building and Hacking Discussion">
+    <meta property="og:description" content="The meeting began with discussions about building a religion and welcoming new participants, including a GitHub walkthrough session and potential new…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2025-11-21.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, November 21, 2025 CSOH Recap">
+    <meta name="twitter:description" content="The meeting began with discussions about building a religion and welcoming new participants, including a GitHub walkthrough session and potential new…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Religion Building and Hacking Discussion',
+      "description": "The meeting began with discussions about building a religion and welcoming new participants, including a GitHub walkthrough session and potential new…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2025-11-21",
+      "dateModified": "2025-11-21",
+      "mainEntityOfPage": "https://csoh.org/meetings/2025-11-21.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, November 21, 2025',
+          "item": "https://csoh.org/meetings/2025-11-21.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, November 21, 2025</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, November 21, 2025 — Meeting Recap</h1>
+        <p>Religion Building and Hacking Discussion</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2025-11-21">Friday, November 21, 2025</time> — Religion Building and Hacking Discussion</h2>
+            <p><strong>Quick recap.</strong> The meeting began with discussions about building a religion and welcoming new participants, including a GitHub walkthrough session and potential new group member James Frasotti. The group explored leadership transitions and management styles, with several members sharing their experiences and strategies for successful career progression in tech. The conversation concluded with discussions about neurodiversity in IT and cybersecurity, career paths in tech, and the challenges of providing job referrals, emphasizing the importance of professional boundaries and networking.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2025-11</span><span class="tag">Conferences</span><span class="tag">Community</span></div>
+            <details class="meeting-topics">
+                <summary>Show 7 discussion topics</summary>
+            <h3>Religion Building and Hacking Discussion</h3>
+            <p>The meeting primarily involved a discussion about building a religion, with Shawn Nunley sharing a screen that included various images and text. Madeline introduced herself as a first-time attendee. Kyle shared his LinkedIn profile. The conversation included references to hacking sessions and late-night activities, with Shawn noting that every hacking session occurs late at night somewhere in the world. The conversation ended with confirmations and thank-yous.</p>
+            <h3>GitHub Walkthrough and Cloud Security</h3>
+            <p>The meeting began with a discussion about time zones and attendance, noting that some participants were in American time zones while others were not. Michael and Kyle presented a one-pager for a potential GitHub walkthrough session, which Shawn approved, suggesting it be scheduled for a Friday. Neil discussed the possibility of James Frasotti joining the group for a session, emphasizing his experience and insights in cloud security. The meeting also included welcoming new participants, including Mugilan from India, who expressed interest in becoming a cloud security professional. The group discussed various resources and networking opportunities available to members.</p>
+            <h3>Leadership Transition Strategies Discussed</h3>
+            <p>Ed shared his experience transitioning from a senior analyst/senior manager role to managing multiple senior analysts, noting his initial mistake of maintaining tight control and not leveraging his team&#x27;s expertise. The discussion explored strategies for successful leadership transitions, with Dave suggesting focusing on strategic vision while allowing tactical flexibility, and Kimberly recommending leading with curiosity and maintaining principles while being open to different approaches. Neil shared his personal journey of moving from an aggressive management style learned at Microsoft to a more open and supportive approach, emphasizing the importance of listening and providing respectful feedback.</p>
+            <h3>Cloud Security and Cultural Leadership</h3>
+            <p>The meeting focused on the importance of people and culture in cloud security, with Alex and others emphasizing that human factors often play a critical role in security issues. Mugilan shared his learning path in cloud security, which includes studying Linux, Python, and security labs. The group discussed the challenges of transitioning from doing a job to leading others, with Ed and Chris highlighting the importance of building trust and maintaining open communication with team members. The conversation also touched on the potential impact of neurodiversity in the cybersecurity field, with A. Stryker suggesting that many cybersecurity professionals may have ADHD or autism.</p>
+            <h3>Neurodiversity in IT Careers</h3>
+            <p>The group discussed neurodiversity in IT and cybersecurity, with several members sharing their personal experiences with ADHD, autism, and other neurodivergent conditions. Tyler emphasized that neurodivergent individuals have valuable skills and can succeed in IT careers, even if they struggle with traditional workplace social skills. The discussion highlighted how many neurodivergent traits, such as pattern recognition and hyperfocus, can be advantages in technical fields, and Tyler encouraged early-career professionals to embrace their unique abilities while seeking environments that accommodate their needs.</p>
+            <h3>Tech Career Growth Insights</h3>
+            <p>The group discussed career paths in tech, with Tyler sharing their experience transitioning from individual contributor to manager and back again, emphasizing that technical growth doesn&#x27;t always require management roles. Neil highlighted the importance of asking about career progression when interviewing at larger organizations, while Alhaji shared a personal experience about referring a candidate who prioritized salary over technical skills, leading to a discussion about how to approach career development while maintaining integrity.</p>
+            <h3>Job Referral Best Practices</h3>
+            <p>The group discussed the challenges and boundaries of providing job referrals, emphasizing the importance of knowing the person well before making a referral. They shared personal experiences and advice, highlighting the need for due diligence and maintaining professional boundaries. The conversation also touched on the difference between referrals and references, as well as the value of networking and offering guidance to job seekers.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2025-11-14.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2025-11-28.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

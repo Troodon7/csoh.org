@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="The meeting focused on discussing the recent Light LLM security compromise, where a Python package used by 97 million monthly users was compromised,…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2026-03-27, Friday Zoom, LiteLLM compromise, RSA attendance dip, supply-chain mitigations">
+    <title>Friday, March 27, 2026 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2026-03-27.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, March 27, 2026 CSOH Recap — LiteLLM compromise, RSA attendance dip, supply-chain mitigations">
+    <meta property="og:description" content="The meeting focused on discussing the recent Light LLM security compromise, where a Python package used by 97 million monthly users was compromised,…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2026-03-27.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, March 27, 2026 CSOH Recap">
+    <meta name="twitter:description" content="The meeting focused on discussing the recent Light LLM security compromise, where a Python package used by 97 million monthly users was compromised,…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'LiteLLM compromise, RSA attendance dip, supply-chain mitigations',
+      "description": "The meeting focused on discussing the recent Light LLM security compromise, where a Python package used by 97 million monthly users was compromised,…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-03-27",
+      "dateModified": "2026-03-27",
+      "mainEntityOfPage": "https://csoh.org/meetings/2026-03-27.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, March 27, 2026',
+          "item": "https://csoh.org/meetings/2026-03-27.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, March 27, 2026</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, March 27, 2026 — Meeting Recap</h1>
+        <p>LiteLLM compromise, RSA attendance dip, supply-chain mitigations</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2026-03-27">Friday, March 27, 2026</time> — LiteLLM compromise, RSA attendance dip, supply-chain mitigations</h2>
+            <p><strong>Quick recap.</strong> The meeting focused on discussing the recent Light <a class="glossary-link" href="../glossary.html#term-llm">LLM</a> security compromise, where a Python package used by 97 million monthly users was compromised, leading to the theft of credentials and sensitive information from affected systems. The group examined how the attack occurred through compromised GitHub repositories and discussed the role of security companies like Aqua and Checkmarx in the incident. Participants also shared their experiences from RSA conference, noting lower attendance and a higher concentration of vendors compared to previous years. The discussion touched on potential preventive measures including version pinning, air-gapped development environments, and the challenges of securing open-source dependencies. Additionally, the group welcomed new members including Mackenzie, a security recruiter, and Francois, a former colleague of Shawn&#x27;s from Fusion.IO.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2026-03</span><span class="tag">Supply Chain</span><span class="tag">Vulnerabilities</span><span class="tag">Conferences</span></div>
+            <details class="meeting-topics">
+                <summary>Show 7 discussion topics</summary>
+            <h3>RSA Conference Discussion</h3>
+            <p>The meeting began with casual conversation about RSA conference attendance, where Shawn and Juninho discussed their experiences, noting lower attendance and limited new innovations despite <a class="glossary-link" href="../glossary.html#term-ai">AI</a> being a prominent theme. The group welcomed new attendees and discussed the importance of networking through LinkedIn. No specific decisions or action items were outlined, and the session was designated as an open forum for questions and discussion.</p>
+
+            <h3>LiteLLM Security Vulnerability</h3>
+            <p>The meeting focused on a discussion about a significant security vulnerability in the LiteLLM Python package, which was compromised and led to the <a class="glossary-link" href="../glossary.html#term-exfiltration">exfiltration</a> of sensitive information from users&#x27; systems. Shawn shared a video explaining the details of the vulnerability, including how it affected systems and the role of package managers in security. The group also discussed the response on GitHub, where bot AI replies attempted to suppress the issue, and noted the irony that the compromised package was used for security by companies like Delve, which is currently facing allegations of misleading compliance reports.</p>
+
+            <h3>Light LLM Security Breach</h3>
+            <p>Shawn presented information about a security breach involving Light LLM and Trivy, where threat actors exfiltrated 300GB of credentials and are extorting multiple billion-dollar companies. Mackenzie introduced herself as a national risk and security recruiter from Tech Systems, offering to support the group with recruitment needs, particularly in cloud security roles for financial institutions and health services. Juninho provided additional context about how the Light LLM compromise occurred through a Trivy security scan, noting that Light LLM&#x27;s response was faster than competitors Aqua and Checkmarx.</p>
+
+            <h3>Open-Source Security Compromise</h3>
+            <p>The group discussed a security compromise involving open-source software, with Shawn noting that many developers were affected. Rev suggested that using vetted packaging from security companies could provide a delay in risk mitigation, while Shawn emphasized the importance of trusted open-source packages. Alex highlighted the need for human oversight in security processes, while Pavel proposed sandboxing sensitive information on developer machines to enhance security. Bartek suggested separating <a class="glossary-link" href="../glossary.html#term-ci">CI</a> from CD as a potential solution.</p>
+
+            <h3>Supply Chain Attack Prevention Measures</h3>
+            <p>Frederick discussed detection and prevention measures for supply chain attacks, mentioning IOCs such as specific domains and file paths. He noted the importance of endpoint detection and protection, especially for activities related to AI coding and malicious package downloads. Juninho added that Team PCP appears to be targeting supply chain companies, highlighting the risks faced by organizations in this sector.</p>
+
+            <h3>Software Supply Chain Vulnerabilities</h3>
+            <p>The group discussed security vulnerabilities in software supply chains, particularly focusing on the compromise of Trivy and other vulnerability scanners. They explored various mitigation strategies including version pinning, air-gapped development environments, and limiting external connections, though Rev noted that allowlisting external connections would be difficult to implement effectively due to the complex dependencies in GitHub Actions. The discussion highlighted the effectiveness of the attackers&#x27; approach, including spamming communication channels to disrupt the response process, and concluded with agreement that while no perfect solution exists, implementing multiple security measures including short-lived credentials and private maintainer channels could help improve resilience.</p>
+
+            <h3>RSA Conference and AI Compliance</h3>
+            <p>The group discussed their recent experiences at RSA conference, noting significantly lower attendance compared to previous years, with many attendees being vendors rather than security practitioners. Jay observed that the event felt empty despite ongoing vendor activities, leading to speculation about whether RSA might end after this year. The conversation then shifted to compliance and AI, where Brian raised questions about Light LLM&#x27;s security credentials and Delve&#x27;s compliance issues, leading to a discussion about the role of AI in compliance processes, with participants agreeing that human oversight remains essential in auditing and compliance verification.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2026-03-20.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2026-04-03.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

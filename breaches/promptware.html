@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="Researchers demonstrated a complete seven-stage kill chain targeting cloud-connected AI assistants — from a malicious Google Calendar invite to covert…">
+    <meta name="keywords" content="Promptware Kill Chain 2024–26, breach analysis, kill chain, MITRE ATT&CK, cloud security incident, post-mortem, 2024">
+    <title>Promptware Kill Chain 2024–26 (2024) Breach Kill Chain - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/breaches/promptware.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Promptware Kill Chain 2024–26 (2024) Breach Kill Chain">
+    <meta property="og:description" content="Researchers demonstrated a complete seven-stage kill chain targeting cloud-connected AI assistants — from a malicious Google Calendar invite to covert…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/breaches/promptware.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Promptware Kill Chain 2024–26 (2024) Breach Kill Chain">
+    <meta name="twitter:description" content="Researchers demonstrated a complete seven-stage kill chain targeting cloud-connected AI assistants — from a malicious Google Calendar invite to covert…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="breach-timeline.css?v=29fbd6a9" integrity="sha384-WrezLhCC8Bdnk6bhRviNG3f7jv+K1IW8/RCNel8OBIyPAd9wiZ4IMtSBG5Nu6Wja">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Promptware – Indirect Prompt Injection → Context Poisoning → Persistence → C2 → Covert Camera Livestream',
+      "description": "Researchers demonstrated a complete seven-stage kill chain targeting cloud-connected AI assistants — from a malicious Google Calendar invite to covert…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2024-01-01",
+      "dateModified": "2026-04-30",
+      "mainEntityOfPage": "https://csoh.org/breaches/promptware.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Cloud Security Breach Analysis"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Breach Kill Chains",
+          "item": "https://csoh.org/breach-timeline.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Promptware Kill Chain 2024–26',
+          "item": "https://csoh.org/breaches/promptware.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html" aria-current="page">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+            <li><span aria-current="page">Promptware Kill Chain 2024–26</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Promptware Kill Chain 2024–26 — 2024</h1>
+        <p>Step-by-step <a class="glossary-link" href="../glossary.html#term-kill-chain">kill chain</a> mapped to <a class="glossary-link" href="../glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud, sourced from official post-mortems and primary technical analyses.</p>
+    </section>
+
+    <main class="kc-main kc-page" id="main-content">
+        <div class="incident-panel active" role="article" id="promptware-2024">
+
+  <div class="inc-header">
+    <div class="inc-meta">
+      <span class="inc-year">2024–2026</span>
+      <span class="sev-badge sev-critical">Critical</span>
+      <span class="prov-tag prov-green"><a class="glossary-link" href="../glossary.html#term-ai">AI</a> · Cloud</span>
+    </div>
+    <h2 class="inc-title">Promptware – Indirect Prompt Injection → Context Poisoning → Persistence → C2 → Covert Camera Livestream</h2>
+    <p class="inc-summary">
+      Researchers demonstrated a complete seven-stage kill chain targeting cloud-connected AI assistants — from a malicious Google Calendar invite to covert Zoom video streaming, all triggered by the victim typing "thanks." Documented across 36 real-world incidents by Schneier, Nassi et al., the pattern — termed "<a class="glossary-link" href="../glossary.html#term-promptware">promptware</a>" — mirrors classical malware kill chains but executes entirely through the <a class="glossary-link" href="../glossary.html#term-llm">LLM</a> prompt layer. <a class="glossary-link" href="../glossary.html#term-c2">C2</a> was confirmed in the ChatGPT ZombAI attack (Oct 2024) and the Microsoft Copilot Reprompt attack (Jan 2026, <a class="glossary-link" href="../glossary.html#term-cve">CVE</a>-2026-24307), both patched after disclosure.
+    </p>
+    <div class="inc-stats">
+      <div class="inc-stat"><strong>36</strong> real-world incidents analysed</div>
+      <div class="inc-stat"><strong>21</strong> traverse 4+ kill chain stages</div>
+      <div class="inc-stat"><strong>73%</strong> of threat classes rated High–Critical</div>
+      <div class="inc-stat"><strong>Threat actor:</strong> Researchers (Nassi, Schneier et al.) / criminal adoption ongoing</div>
+    </div>
+    <a class="pm-link" href="https://arxiv.org/abs/2601.09625" target="_blank" rel="noopener">📄 arXiv:2601.09625 — The Promptware Kill Chain ↗</a>
+    <a class="pm-link" href="https://arxiv.org/abs/2508.12175" target="_blank" rel="noopener">📄 arXiv:2508.12175 — Invitation Is All You Need ↗</a>
+    <a class="pm-link" href="https://www.schneier.com/blog/archives/2026/02/the-promptware-kill-chain.html" target="_blank" rel="noopener">📄 Schneier on Security ↗</a>
+  </div>
+
+  <div class="kill-chain">
+
+    <div class="phase-lbl ph-init">⚡ <a class="glossary-link" href="../glossary.html#term-initial-access">Initial Access</a></div>
+    <div class="kc-step step-r">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Malicious prompt injected into Google Calendar invite title — victim never sees it</div>
+          <a class="mt mt-ta" href="https://attack.mitre.org/techniques/T1566/" target="_blank" rel="noopener">T1566 – Phishing</a>
+        </div>
+        <p class="step-desc">
+          Attacker sends the target a Google Calendar meeting invitation with a malicious prompt embedded in the event title. When the victim asks Gemini "What are my meetings today?", the Google Calendar Agent retrieves the event — including the poisoned title — and feeds it directly into Gemini's active context. The victim never sees the raw title; they only see Gemini's natural-language response. This is <a class="glossary-link" href="../glossary.html#term-indirect-prompt-injection">indirect prompt injection</a>: the attacker's instructions enter the LLM through a trusted, user-requested data retrieval, not through direct user input.
+        </p>
+        <div class="step-code">
+          <span class="hl">Delivery vector:</span> Google Calendar event title (shared workspace artifact)<br>
+          <span class="hl">Injection type:</span> Indirect — attacker content retrieved by the LLM on the victim's behalf<br>
+          <span class="hl">Why it works:</span> LLMs process all tokens — system prompts, user queries, retrieved data — as a single undifferentiated sequence; there is no code/data boundary
+        </div>
+        <div class="step-tags">
+          <span class="stag">Indirect <a class="glossary-link" href="../glossary.html#term-prompt-injection">Prompt Injection</a></span>
+          <span class="stag">Google Gemini</span>
+          <span class="stag">Google Calendar</span>
+          <span class="stag">T1566</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-priv">🔼 <a class="glossary-link" href="../glossary.html#term-privilege-escalation">Privilege Escalation</a> — Safety Guardrail Bypass</div>
+    <div class="kc-step step-o">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Delayed tool invocation defers execution until a benign user action — bypassing real-time <a class="glossary-link" href="../glossary.html#term-guardrails">guardrails</a></div>
+          <a class="mt mt-pe" href="https://attack.mitre.org/techniques/T1548/" target="_blank" rel="noopener">T1548 – Abuse Elevation Control Mechanism</a>
+        </div>
+        <p class="step-desc">
+          The injected prompt uses a technique called "delayed tool invocation": rather than triggering immediately (which would fire safety checks against the poison payload), the instructions stage the malicious action and wait for the user to perform a neutral follow-up — such as thanking Gemini. When the user types "thanks," Gemini re-enters a new inference step and the guardrails that evaluated the calendar retrieval do not re-evaluate the deferred instruction. The attacker's command executes with Gemini's full tool permissions.
+        </p>
+        <div class="step-code">
+          <span class="hl">Technique:</span> Delayed tool invocation — action staged at retrieval time, fired on next benign user turn<br>
+          <span class="hl">Guardrail failure:</span> Safety checks evaluated at prompt parse time, not at deferred execution time<br>
+          <span class="hl">Effect:</span> Attacker instructions treated as trusted system-level directives with full tool access
+        </div>
+        <div class="step-tags">
+          <span class="stag">Delayed Tool Invocation</span>
+          <span class="stag"><a class="glossary-link" href="../glossary.html#term-jailbreak">Jailbreak</a></span>
+          <span class="stag">Guardrail Bypass</span>
+          <span class="stag">T1548</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-recon">🔍 Reconnaissance — Enumerating Connected Services</div>
+    <div class="kc-step step-y">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">LLM queried for connected apps, available tools, and stored user memories — invisibly</div>
+          <a class="mt mt-di" href="https://attack.mitre.org/techniques/T1082/" target="_blank" rel="noopener">T1082 – System Information Discovery</a>
+        </div>
+        <p class="step-desc">
+          Following jailbreak, the injected prompt queries Gemini for its available tool inventory: connected agents (Google Calendar, Google Home, Gmail, Meet), installed mobile applications (Zoom, browser), and the user's stored memories and calendar data. Unlike classical malware reconnaissance — which precedes initial access — promptware recon occurs after context poisoning, because the LLM's tool inventory is only enumerable once the assistant is under attacker control. The enumeration results feed back into the attacker's context silently; nothing is displayed to the victim.
+        </p>
+        <div class="step-code">
+          <span class="hl">Information gathered:</span> Active agents (Calendar, Home, Meet), installed apps (Zoom, browser), user memories<br>
+          <span class="hl">Key difference from classical recon:</span> Occurs post-initial-access, not before — order is inverted<br>
+          <span class="hl">Visibility to victim:</span> None — responses go to model context, not rendered in the chat UI
+        </div>
+        <div class="step-tags">
+          <span class="stag">Tool Enumeration</span>
+          <span class="stag">Context Poisoning</span>
+          <span class="stag">Google Workspace</span>
+          <span class="stag">T1082</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-persist">💾 <a class="glossary-link" href="../glossary.html#term-persistence">Persistence</a> — Memory Poisoning</div>
+    <div class="kc-step step-p">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Malicious instructions written to long-term workspace memory — re-injected on every future session</div>
+          <a class="mt mt-p2" href="https://attack.mitre.org/techniques/T1546/" target="_blank" rel="noopener">T1546 – Event Triggered Execution</a>
+        </div>
+        <p class="step-desc">
+          Because the malicious prompt is embedded in a Google Calendar artifact, it persists in the workspace's long-term agent memory. Every subsequent session where Gemini accesses calendar data re-injects the attacker's instructions — turning a one-time event into a durable implant. The parallel ZombAI attack (ChatGPT, Oct 2024) demonstrated the same mechanism more explicitly: a prompt injection write to ChatGPT's persistent memory store caused the model to fetch C2 instructions from an attacker-controlled GitHub page at the start of every new conversation, indefinitely.
+        </p>
+        <div class="step-code">
+          <span class="hl">Calendar mechanism:</span> Poisoned event title re-retrieved on each calendar query across all future sessions<br>
+          <span class="hl">ZombAI mechanism:</span> Prompt injection → write to ChatGPT long-term memory → C2 instructions injected into every conversation<br>
+          <span class="hl">Defence gap:</span> No mechanism to audit, alert on, or require user consent for unexpected memory writes
+        </div>
+        <div class="step-tags">
+          <span class="stag">Memory Poisoning</span>
+          <span class="stag">ZombAI</span>
+          <span class="stag">ChatGPT Memory</span>
+          <span class="stag">Google Workspace</span>
+          <span class="stag">T1546</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-exfil">📡 Command &amp; Control</div>
+    <div class="kc-step step-b">
+      <div class="step-num">05</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">LLM beacons attacker-controlled server for updated instructions — C2 runs entirely through the prompt layer</div>
+          <a class="mt mt-co" href="https://attack.mitre.org/techniques/T1071/001/" target="_blank" rel="noopener">T1071.001 – Web Protocols</a>
+        </div>
+        <p class="step-desc">
+          ZombAI (Oct 2024): persisted memory instructs ChatGPT to fetch a GitHub Issues page at session start. The attacker posts updated instructions as sequential issues; a COUNTER increment in the payload defeats ChatGPT's page-caching so each beacon retrieves fresh commands. This was the first confirmed promptware-native C2 capability — the attacker remotely controlled the compromised ChatGPT instance with no conventional malware infrastructure. Reprompt (Jan 2026, CVE-2026-24307): a crafted Microsoft Copilot URL with a malicious <code>q</code> parameter caused Copilot to dynamically fetch follow-up instructions from an attacker server — exfiltrating session and profile data incrementally, with no limit on type or volume.
+        </p>
+        <div class="step-code">
+          <span class="hl">ZombAI C2 channel:</span> GitHub Issues page; COUNTER field increments to defeat cache (issue #1, #2, #3…)<br>
+          <span class="hl">Reprompt C2 channel:</span> Attacker HTTPS server; double-request technique bypasses Copilot guardrails on re-issue<br>
+          <span class="hl">What makes it novel:</span> C2 channel runs entirely through the LLM prompt layer — no injected binary, no network backdoor
+        </div>
+        <div class="step-tags">
+          <span class="stag">ZombAI</span>
+          <span class="stag">Reprompt</span>
+          <span class="stag">CVE-2026-24307</span>
+          <span class="stag">GitHub C2</span>
+          <span class="stag">T1071.001</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-impact">🔄 <a class="glossary-link" href="../glossary.html#term-lateral-movement">Lateral Movement</a> — Agent Pivot and Self-Replication</div>
+    <div class="kc-step step-c">
+      <div class="step-num">06</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Compromised Calendar agent pivots to Zoom and Google Home — or self-replicates to every contact via email</div>
+          <a class="mt mt-lm" href="https://attack.mitre.org/techniques/T1534/" target="_blank" rel="noopener">T1534 – Internal Spearphishing</a>
+        </div>
+        <p class="step-desc">
+          On-device lateral movement: the injected calendar prompt instructs Gemini to invoke a second agent or app. On mobile, Automatic App Invocation allows the assistant to launch Zoom, open a browser URL, or trigger Google Home actions (unlock smart windows, activate boiler) — all from a single compromised calendar entry. Off-device worm propagation: in a parallel threat class, a compromised email assistant is instructed to forward the poisoned payload to every address in the victim's contact book, achieving org-wide spread without any further attacker action. Nassi et al. demonstrated both paths; 73% of analysed threat classes were rated High–Critical.
+        </p>
+        <div class="step-code">
+          <span class="hl">On-device:</span> Calendar Agent → Google Home (turn on boiler, open windows) or → Zoom (launch and stream)<br>
+          <span class="hl">Off-device worm:</span> Infected email assistant self-replicates payload to entire contact list<br>
+          <span class="hl">Physical world impact:</span> Smart home device control demonstrated — digital breach crosses into physical environment
+        </div>
+        <div class="step-tags">
+          <span class="stag">Agent Pivot</span>
+          <span class="stag">Worm Propagation</span>
+          <span class="stag">Google Home</span>
+          <span class="stag">Automatic App Invocation</span>
+          <span class="stag">T1534</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-disco">🎯 Actions on Objective — Covert Video Capture</div>
+    <div class="kc-step step-g">
+      <div class="step-num">07</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Victim types "thanks" — Zoom launches silently and streams their camera to the attacker</div>
+          <a class="mt mt-ef" href="https://attack.mitre.org/techniques/T1125/" target="_blank" rel="noopener">T1125 – Video Capture</a>
+        </div>
+        <p class="step-desc">
+          When the user enters a benign follow-up response, the staged delayed invocation fires: Gemini automatically launches Zoom and initiates a video session, covertly streaming the victim's camera. No camera indicator activates before the session starts; the victim has no warning. In Reprompt data-<a class="glossary-link" href="../glossary.html#term-exfiltration">exfiltration</a> variants, the attacker's C2 server incrementally extracts session context, personal profile data, and any detail inferred from prior responses — with the attacker dynamically refining queries based on each reply. Nassi et al. also demonstrated sending spam email from the victim's account, publishing disinformation, and controlling physical home devices as alternative objectives.
+        </p>
+        <div class="step-code">
+          <span class="hl">Primary objective:</span> Covert Zoom video capture — triggered by victim typing "thanks"<br>
+          <span class="hl">Reprompt objective:</span> Incremental <a class="glossary-link" href="../glossary.html#term-data-exfiltration">data exfiltration</a> — attacker probes for sensitive details based on prior C2 replies<br>
+          <span class="hl">Discovery:</span> Google deployed mitigations after SafeBreach disclosure; Reprompt (CVE-2026-24307) patched Jan 13 2026
+        </div>
+        <div class="step-tags">
+          <span class="stag">Zoom Livestream</span>
+          <span class="stag">Data Exfiltration</span>
+          <span class="stag">T1125</span>
+          <span class="stag">T1530</span>
+          <span class="stag">Physical Impact</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="def-box">
+      <h3>🛡 How to Defend Against This Chain</h3>
+      <div class="def-items">
+        <div class="def-item"><strong>Require explicit user confirmation before any agentic tool execution involving external apps.</strong> LLM assistants should interrupt and surface a confirmation prompt — not silently infer intent — before invoking installed apps like Zoom, sending emails, or writing to long-term memory. Google deployed this as a specific mitigation after the Calendar attack disclosure. This single control would have broken the chain at Step 2.</div>
+        <div class="def-item"><strong>Treat all LLM-retrieved content as untrusted input.</strong> Calendar titles, email subjects, document names, and web page content must be sanitised before being added to context — analogous to parameterised SQL queries. Deploy content-inspection layers that detect instruction-like patterns (imperative sentences, tool invocation syntax) in retrieved workspace artifacts before they reach the model context.</div>
+        <div class="def-item"><strong>Audit and gate long-term memory writes.</strong> Alert on unexpected writes to AI persistent memory stores (ChatGPT Memory, Copilot, Gemini Saved Info). No prompt injection should be able to persist instructions without explicit user consent and a visible confirmation flow. Log all memory mutations with the source artifact that triggered them.</div>
+        <div class="def-item"><strong>Apply least-privilege to every AI agent's tool permissions.</strong> A calendar assistant should not have permission to launch video applications, send emails, or control smart home devices by default. Scope-limit every tool an LLM agent can invoke — apply the same discipline used for <a class="glossary-link" href="../glossary.html#term-iam">IAM</a> roles and OAuth scopes. Review and revoke over-broad agent permissions in Google Workspace, Microsoft 365 Copilot, and any enterprise AI integration.</div>
+        <div class="def-item"><strong>Block parameter-to-prompt URL patterns at the network and <a class="glossary-link" href="../glossary.html#term-dlp">DLP</a> layer.</strong> The Reprompt attack (CVE-2026-24307) used a <code>q=</code> URL parameter to prefill a malicious Copilot prompt. Enforce <a class="glossary-link" href="../glossary.html#term-purview">Microsoft Purview</a> DLP policies for Copilot, flag outbound requests where AI query parameters contain instruction-like text, and monitor for LLM sessions issuing sequential requests to external servers — the signature of C2 chain-request exfiltration.</div>
+      </div>
+    </div>
+
+    <div class="src-box">
+      <h4>Primary Sources</h4>
+      <div class="src-links">
+        <a class="src-link" href="https://arxiv.org/abs/2601.09625" target="_blank" rel="noopener">arXiv — Promptware Kill Chain</a>
+        <a class="src-link" href="https://arxiv.org/abs/2508.12175" target="_blank" rel="noopener">arXiv — Invitation Is All You Need</a>
+        <a class="src-link" href="https://www.lawfaremedia.org/article/the-promptware-kill-chain" target="_blank" rel="noopener">Lawfare</a>
+        <a class="src-link" href="https://www.safebreach.com/blog/invitation-is-all-you-need-hacking-gemini/" target="_blank" rel="noopener">SafeBreach — Gemini Attack</a>
+        <a class="src-link" href="https://embracethered.com/blog/posts/2025/spaiware-and-chatgpt-command-and-control-via-prompt-injection-zombai/" target="_blank" rel="noopener">Embrace The Red — ZombAI</a>
+        <a class="src-link" href="https://www.varonis.com/blog/reprompt" target="_blank" rel="noopener">Varonis — Reprompt</a>
+        <a class="src-link" href="https://blackhat.com/html/webcast/02262026.html" target="_blank" rel="noopener">Black Hat Webinar</a>
+      </div>
+    </div>
+
+  </div>
+        </div>
+
+        <nav class="incident-pager" aria-label="Other breach kill chains">
+            <a class="pager-link pager-prev" href="scattered-spider-mgm.html">← Previous breach</a>
+            <a class="pager-link pager-index" href="../breach-timeline.html">All breaches</a>
+            <a class="pager-link pager-next" href="snowflake-unc5537.html">Next breach →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="Cloud security best practices that actually work: IAM, network, data, detection, and supply-chain controls. Vendor-neutral, with the trade-offs called out.">
+    <meta name="keywords"
+        content="cloud security best practices, AWS security best practices, Azure security best practices, GCP security best practices, IAM best practices, cloud hardening, cloud security checklist">
+    <title>Cloud Security Best Practices - Cloud Security Office Hours</title>
+
+    <link rel="canonical" href="https://csoh.org/cloud-security-best-practices.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Cloud Security Best Practices - CSOH">
+    <meta property="og:description"
+        content="A practitioner's checklist of cloud security best practices: identity, network, data, detection, supply chain, and AI. Vendor-neutral, with trade-offs.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/cloud-security-best-practices.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cloud Security Best Practices">
+    <meta name="twitter:description"
+        content="The cloud security best practices that actually move the needle. Vendor-neutral.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Cloud Security Best Practices",
+      "description": "A practitioner's vendor-neutral checklist of cloud security best practices across IAM, network, data, detection, supply chain, and AI workloads.",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-04-30",
+      "dateModified": "2026-04-30",
+      "mainEntityOfPage": "https://csoh.org/cloud-security-best-practices.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Cloud Security Best Practices",
+          "item": "https://csoh.org/cloud-security-best-practices.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="cloud-security-best-practices.html" aria-current="page">Best Practices</a></li>
+                            <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="ctfs.html">CTFs</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="github-actions.html">GitHub Actions</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">News</a></li>
+                            <li><a href="threat-research.html">Threat Research</a></li>
+                            <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="sessions.html">Zoom Sessions</a></li>
+                            <li><a href="conferences.html">Conferences</a></li>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="contribute.html">Contribute Overview</a></li>
+                            <li><a href="contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Best Practices</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Cloud Security Best Practices</h1>
+        <p>The controls that actually prevent breaches, ranked by how often the absence of each one shows up in real cloud incident reports. Vendor-neutral, with the trade-offs called out.</p>
+        <div class="cta-buttons">
+            <a href="#identity" class="btn btn-primary">Start with Identity</a>
+            <a href="breach-timeline.html" class="btn btn-secondary">See Real Breaches</a>
+        </div>
+    </section>
+
+    <main class="container contribute-article" id="main-content">
+        <div class="info-box--blue">
+            <p><strong>The honest version:</strong> Most "cloud security best practices" lists are 100 items long and unranked, which is the same as not having a list. The bullets below are ordered by what actually appears as the root cause in our <a href="breach-timeline.html">breach kill chains</a>. Master the first three sections and you'll prevent the majority of cloud incidents seen in industry. The later sections are where mature programs differentiate.</p>
+            <p style="margin-top:0.75rem;">If a practice isn't here, that's not because it doesn't matter — it's because we're calling out the high-leverage ones. Pair this page with the <a href="what-is-cloud-security.html">cloud security overview</a> for foundational concepts and the <a href="cloud-security-certifications.html">certifications guide</a> if you want to formalize.</p>
+        </div>
+
+        <div class="toc">
+            <h3>📖 On this page</h3>
+            <ol>
+                <li><a href="#identity">Identity &amp; access (most important)</a></li>
+                <li><a href="#configuration">Configuration &amp; posture</a></li>
+                <li><a href="#network">Network controls</a></li>
+                <li><a href="#data">Data protection &amp; secrets</a></li>
+                <li><a href="#detection">Logging &amp; detection</a></li>
+                <li><a href="#supply-chain">Supply chain &amp; CI/CD</a></li>
+                <li><a href="#workloads">Workload &amp; container security</a></li>
+                <li><a href="#ai">AI &amp; LLM workloads</a></li>
+                <li><a href="#governance">Governance &amp; people</a></li>
+                <li><a href="#anti-patterns">Anti-patterns: things to stop doing</a></li>
+            </ol>
+        </div>
+
+        <section id="identity">
+            <h2>Identity &amp; access (most important)</h2>
+            <p>If you only fix one category, fix this one. Identity is the perimeter — every cloud breach we've documented involves an identity failure somewhere in the chain.</p>
+            <ul>
+                <li><strong><a class="glossary-link" href="glossary.html#term-phishing-resistant">Phishing-resistant MFA</a> on every human identity.</strong> Push prompts and SMS codes are bypassable (see <a href="breaches/uber.html">Uber 2022</a> and <a href="breaches/scattered-spider-mgm.html">Scattered Spider/MGM</a>). <a class="glossary-link" href="glossary.html#term-fido2">FIDO2</a> security keys, passkeys, and platform authenticators are the bar. Enforce via Conditional Access / <a class="glossary-link" href="glossary.html#term-iam">IAM</a> policies, not just policy documents.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-least-privilege">Least privilege</a> on every <a class="glossary-link" href="glossary.html#term-service-account">workload identity</a>.</strong> The Capital One breach happened because a <a class="glossary-link" href="glossary.html#term-waf">WAF</a> role had <a class="glossary-link" href="glossary.html#term-s3">S3</a> list and read across 700 buckets. Read-only-on-one-bucket would have stopped it. Use <a class="glossary-link" href="glossary.html#term-iam-access-analyzer">IAM Access Analyzer</a> (AWS), Microsoft Entra Privileged Identity Management, or Google's IAM Recommender to find and trim unused permissions continuously.</li>
+                <li><strong>Eliminate long-lived access keys.</strong> Use short-lived federated credentials via <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a> for <a class="glossary-link" href="glossary.html#term-ci">CI</a>/CD, workload-identity <a class="glossary-link" href="glossary.html#term-federation">federation</a> for service-to-service, and <a class="glossary-link" href="glossary.html#term-sso">SSO</a> for humans. Long-lived keys are the foundation of most credential-theft incidents.</li>
+                <li><strong>Enforce <a class="glossary-link" href="glossary.html#term-imds">IMDSv2</a> on every <a class="glossary-link" href="glossary.html#term-ec2">EC2</a> instance.</strong> The Capital One pattern (<a class="glossary-link" href="glossary.html#term-ssrf">SSRF</a> → IMDSv1 → temporary creds → S3 exfil) is closed by IMDSv2's session-token requirement. AWS defaults new instances to v2; enforce org-wide via <a class="glossary-link" href="glossary.html#term-scp">SCP</a>.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-jit">Just-in-time access</a> for privileged operations.</strong> Standing admin = standing risk. Use Microsoft PIM, AWS IAM Identity Center session policies, or Google Cloud Just-in-Time Access for elevation with approval and time bounds.</li>
+                <li><strong>Centralize identity with one <a class="glossary-link" href="glossary.html#term-idp">IdP</a>.</strong> Federate everything (cloud accounts, <a class="glossary-link" href="glossary.html#term-saas">SaaS</a>, internal tools) to one source of truth. Lifecycle events (joiner/mover/leaver) only need to fire in one place. Disconnected admin accounts are a common breach vector.</li>
+                <li><strong>Audit <a class="glossary-link" href="glossary.html#term-conditional-access">Conditional Access</a> / IAM policies regularly.</strong> Policies drift. Weekly automated reports of "users with no <a class="glossary-link" href="glossary.html#term-mfa">MFA</a>, accounts with no last-sign-in, roles with unused permissions" close gaps before attackers find them.</li>
+            </ul>
+        </section>
+
+        <section id="configuration">
+            <h2>Configuration &amp; posture</h2>
+            <p>Misconfigurations are the second-most-common breach root cause. The good news: posture management tools have made this category solvable for most organizations.</p>
+            <ul>
+                <li><strong>Continuous posture scanning across all accounts.</strong> Run a <a class="glossary-link" href="glossary.html#term-cspm">CSPM</a> tool (Prowler and ScoutSuite are the open-source defaults; commercial <a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a> platforms bundle this). Scan against <a class="glossary-link" href="glossary.html#term-cis-benchmarks">CIS benchmarks</a>, AWS Foundational Security Best Practices, or your provider's equivalent — and FIX the findings, don't just collect them.</li>
+                <li><strong>Default-deny on public access.</strong> S3 bucket public-access block, Azure storage firewall set to deny by default, GCS uniform bucket-level access. Revoke default-public IAM grants on day one of every new account.</li>
+                <li><strong>Encryption-at-rest defaults on every storage service.</strong> S3, EBS, RDS, Azure Storage, Cosmos DB, GCS, BigQuery — all support customer-managed keys. Enable. Enforce via SCP / Azure Policy / Org Policy so users can't disable.</li>
+                <li><strong>Tag everything for ownership and <a class="glossary-link" href="glossary.html#term-blast-radius">blast radius</a>.</strong> "Owner: team-name" + "data-classification: public/internal/confidential" tags let you scope incident response without a wiki lookup.</li>
+                <li><strong>Use guardrail accounts, not exception lists.</strong> Each business unit gets its own AWS account / Azure subscription / GCP project. SCPs / Azure Policy / Organization Policy enforce floor-level controls. Cross-account access is explicit, not implicit.</li>
+                <li><strong>Drift-detect <a class="glossary-link" href="glossary.html#term-iac">Infrastructure as Code</a>.</strong> Terraform plan in CI on every change. AWS Config, Azure Policy, or GCP Asset Inventory to catch console-mode "quick fixes" that diverge from code.</li>
+            </ul>
+        </section>
+
+        <section id="network">
+            <h2>Network controls</h2>
+            <p>Cloud networks aren't perimeters in the on-prem sense, but the controls still matter — especially for limiting <a class="glossary-link" href="glossary.html#term-lateral-movement">lateral movement</a> and <a class="glossary-link" href="glossary.html#term-exfiltration">exfiltration</a>.</p>
+            <ul>
+                <li><strong>Default-deny security groups / NSGs.</strong> Open inbound rules only for what you actually need, and only from the source CIDRs that need to reach you. <code>0.0.0.0/0</code> on port 22 or 3389 should not exist anywhere except deliberate jump hosts.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-vpc">VPC</a> endpoints / Private Link / <a class="glossary-link" href="glossary.html#term-privatelink">Private Service Connect</a>.</strong> Keep traffic to managed services off the public internet. Reduces attack surface and gives you flow logs you can actually audit.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-ingress">Egress</a> controls and DNS filtering.</strong> Most <a class="glossary-link" href="glossary.html#term-data-exfiltration">data exfiltration</a> goes out over HTTPS to attacker-controlled domains. Egress proxies, <a class="glossary-link" href="glossary.html#term-nat">NAT</a>-gateway logs, and DNS filtering (AWS Route 53 Resolver firewall, Azure DNS Private Resolver) catch this when log monitoring is wired up.</li>
+                <li><strong>Zero-trust between services.</strong> Use <a class="glossary-link" href="glossary.html#term-mtls">mTLS</a> via <a class="glossary-link" href="glossary.html#term-service-mesh">service mesh</a> (Istio, Linkerd) or workload-identity-based authorization. The LAN is hostile; assume an attacker is already on it.</li>
+                <li><strong>Web Application Firewalls with the modern rule sets.</strong> AWS WAF, Azure WAF, Cloudflare. Add explicit rules for SSRF (block requests targeting <code>169.254.169.254</code>) and the <a class="glossary-link" href="glossary.html#term-owasp">OWASP</a> Top 10 — defaults are not enough.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-ddos">DDoS</a> protection on internet-facing services.</strong> <a class="glossary-link" href="glossary.html#term-shield">AWS Shield</a> Standard is on by default; Shield Advanced is worth it for high-value targets. Azure Front Door / Cloudflare for edge protection.</li>
+            </ul>
+        </section>
+
+        <section id="data">
+            <h2>Data protection &amp; secrets</h2>
+            <ul>
+                <li><strong>Classify sensitive data and treat the classifications as load-bearing.</strong> <a class="glossary-link" href="glossary.html#term-purview">Microsoft Purview</a>, AWS Macie, Google <a class="glossary-link" href="glossary.html#term-dlp">DLP</a> can find PII, PCI, and PHI in storage. Classifications drive access policy, encryption requirements, and incident-response priority.</li>
+                <li><strong>Customer-managed keys (CMK) for sensitive data.</strong> Even though provider-managed keys are encrypted, CMK gives you key-rotation policy, deletion control, and a "stop the bleeding" lever during an incident.</li>
+                <li><strong>Secrets in a managed store, not in code.</strong> AWS <a class="glossary-link" href="glossary.html#term-secrets-manager">Secrets Manager</a>, Azure <a class="glossary-link" href="glossary.html#term-key-vault">Key Vault</a>, Google Secret Manager, HashiCorp Vault. Auto-rotate where supported. Never commit a secret — gitleaks, trufflehog, or GitHub secret scanning in CI.</li>
+                <li><strong>Encrypt <a class="glossary-link" href="glossary.html#term-encryption-at-rest">in transit</a>, end-to-end.</strong> <a class="glossary-link" href="glossary.html#term-tls">TLS</a> 1.2 minimum, 1.3 preferred. Enforce HTTPS-only on storage services. Internal service-to-service should be mTLS (see network section).</li>
+                <li><strong>Backup and restore — and TEST the restore.</strong> Cross-region replication for catastrophic-loss recovery; immutable backups for ransomware recovery. Untested backups don't count.</li>
+                <li><strong>DLP on data egress paths.</strong> Cloud DLP services flag bulk PII / PCI / PHI moving outside your boundary. Pair with egress controls so the alert fires before the data leaves.</li>
+            </ul>
+        </section>
+
+        <section id="detection">
+            <h2>Logging &amp; detection</h2>
+            <p>You can't respond to what you don't see. The SolarWinds, Capital One, and LastPass incidents all had detectable activity that nothing was watching for.</p>
+            <ul>
+                <li><strong>Enable <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> threat detection in every account.</strong> AWS <a class="glossary-link" href="glossary.html#term-guardduty">GuardDuty</a>, Microsoft Defender for Cloud, Google Security Command Center. They're the cheapest credible detection layer available — turn them on org-wide.</li>
+                <li><strong>Centralize control-plane logs.</strong> <a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a>, Azure Activity Log, GCP Audit Logs into a security data lake or <a class="glossary-link" href="glossary.html#term-siem">SIEM</a>. Retention long enough to investigate (90+ days for incident response, longer for compliance).</li>
+                <li><strong>Build detection content as code.</strong> <a class="glossary-link" href="glossary.html#term-sigma">Sigma</a> rules, KQL queries, Splunk SPL — versioned, peer-reviewed, regression-tested. Map each detection to <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud techniques so you can measure coverage.</li>
+                <li><strong>Alert on impossible behavior, not signatures.</strong> "Workload identity used from an unexpected IP," "S3 ListBucket volume anomaly," "Sign-in from impossible-travel locations." Behavior-based detections survive attacker tooling changes.</li>
+                <li><strong>Test your detections.</strong> Atomic <a class="glossary-link" href="glossary.html#term-red-team">Red Team</a>, Stratus Red Team, AWS GuardDuty Tester, Microsoft Attack Simulator. Detection content that hasn't been exercised in production conditions is detection content that probably doesn't fire.</li>
+                <li><strong>Practice your incident response.</strong> Tabletop exercises quarterly. Real exercises (Stratus Red Team in a sandbox account, with the <a class="glossary-link" href="glossary.html#term-soc">SOC</a> team responding) at least annually. Rehearse the embarrassing scenarios.</li>
+            </ul>
+        </section>
+
+        <section id="supply-chain">
+            <h2>Supply chain &amp; CI/CD</h2>
+            <p>Modern attackers pivot through your build pipeline. SolarWinds is the canonical case; the <a class="glossary-link" href="glossary.html#term-npm">npm</a>/<a class="glossary-link" href="glossary.html#term-pypi">PyPI</a> typosquats and the Codecov compromise are routine.</p>
+            <ul>
+                <li><strong>Pin dependencies to specific versions, not ranges.</strong> Lockfiles (<code>package-lock.json</code>, <code>poetry.lock</code>, <code>Pipfile.lock</code>) committed to source. Renovate or Dependabot for automated bumps with PR review.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-sbom">Software Bill of Materials</a> (SBOM) for every artifact.</strong> SPDX or CycloneDX format. Sign with <a class="glossary-link" href="glossary.html#term-sigstore">Sigstore</a>/cosign so you can prove a binary came from your build.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-slsa">SLSA</a>-style hardened build pipelines.</strong> Builds run in isolated, hermetic environments; <a class="glossary-link" href="glossary.html#term-provenance">provenance</a> attestations get signed; build inputs are restricted to declared sources.</li>
+                <li><strong>OIDC, not stored credentials, for cloud deploys.</strong> GitHub Actions → AWS / Azure / GCP via OIDC eliminates long-lived deploy keys. No secret to leak.</li>
+                <li><strong>Scope CI tokens minimally.</strong> A test-runner job doesn't need write access to production. Default-deny, then add only what's required.</li>
+                <li><strong>Pin GitHub Actions to a full SHA.</strong> Tags can be moved silently by a compromised maintainer. SHAs cannot. Dependabot or <a href="https://github.com/sethvargo/ratchet" target="_blank" rel="noopener noreferrer">ratchet</a> keeps SHAs current automatically.</li>
+            </ul>
+        </section>
+
+        <section id="workloads">
+            <h2>Workload &amp; container security</h2>
+            <ul>
+                <li><strong>Scan container images at build AND in registry.</strong> Trivy, Grype, Snyk, Wiz, Aqua. Block builds on critical CVEs in base layers. Re-scan registry periodically — a clean image at build can rot.</li>
+                <li><strong>Run containers as non-root with read-only root filesystems.</strong> Drop capabilities, seccomp profile, AppArmor or SELinux. <a class="glossary-link" href="glossary.html#term-pss">Pod Security Standards</a> "restricted" baseline on <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a>.</li>
+                <li><strong>Network Policies in Kubernetes.</strong> Default-deny inter-<a class="glossary-link" href="glossary.html#term-pod">pod</a> traffic; allow only what's declared. Cilium, Calico, or vanilla Kubernetes Network Policies. Without this, a compromised pod is on a flat network.</li>
+                <li><strong>Runtime threat detection on Linux workloads.</strong> <a class="glossary-link" href="glossary.html#term-falco">Falco</a> or <a class="glossary-link" href="glossary.html#term-tetragon">Tetragon</a> (<a class="glossary-link" href="glossary.html#term-ebpf">eBPF</a>-based) catch process-level anomalies — unexpected shell spawned, <a class="glossary-link" href="glossary.html#term-privilege-escalation">privilege escalation</a>, unusual syscall patterns.</li>
+                <li><strong>Patch the host plane and the workload plane.</strong> Managed Kubernetes (<a class="glossary-link" href="glossary.html#term-eks">EKS</a>/AKS/GKE) handles control-plane patching; you still own node-image refreshes and worker patching.</li>
+                <li><strong>Don't expose Kubernetes APIs directly to the internet.</strong> Private endpoints + bastion + audit logging. The kubelet API is a known attack target.</li>
+            </ul>
+        </section>
+
+        <section id="ai">
+            <h2>AI &amp; LLM workloads</h2>
+            <p>The newest category and the one with the most movement. Treat <a class="glossary-link" href="glossary.html#term-ai">AI</a> workloads as agentic systems with tool access — because that's what they are.</p>
+            <ul>
+                <li><strong>Treat every <a class="glossary-link" href="glossary.html#term-llm">LLM</a> input as untrusted.</strong> <a class="glossary-link" href="glossary.html#term-prompt-injection">Prompt injection</a> isn't theoretical; it's the default vulnerability of any system that lets a model see attacker-controllable text. <a class="glossary-link" href="glossary.html#term-guardrails">Guardrails</a> (input/output filters) help; they're not sufficient.</li>
+                <li><strong>Limit agent tool authority.</strong> If an agent can call APIs, scope those calls to least privilege — same discipline as IAM. <a class="glossary-link" href="glossary.html#term-confused-deputy">Confused-deputy</a> attacks are real.</li>
+                <li><strong>Sandbox <a class="glossary-link" href="glossary.html#term-indirect-prompt-injection">indirect prompt injection</a> sources.</strong> If your model retrieves web pages, emails, or PDFs, those are attacker-controlled. Strip HTML, summarize through a constrained sub-call, never feed raw retrieved content into a tool-calling context.</li>
+                <li><strong>Log model inputs, outputs, and tool calls.</strong> Same observability discipline as any other production workload. Tag with user identity for incident attribution.</li>
+                <li><strong>Don't pipe sensitive data through external model APIs without review.</strong> Production traffic to OpenAI / Anthropic / Google APIs goes through DLP. Use enterprise tier endpoints with no-training guarantees for sensitive workloads.</li>
+                <li><strong>Test against the <a class="glossary-link" href="glossary.html#term-owasp-llm-top-10">OWASP LLM Top 10</a>.</strong> Prompt injection, insecure output handling, training data poisoning, model DoS, supply chain — same shape as application security, different surface.</li>
+            </ul>
+        </section>
+
+        <section id="governance">
+            <h2>Governance &amp; people</h2>
+            <ul>
+                <li><strong>Document the shared responsibility line for every service you use.</strong> Most "cloud security failures" are misunderstandings of who's supposed to do what. See our <a href="shared-responsibility-model.html">shared responsibility model</a> page.</li>
+                <li><strong>Run cloud security through your SDLC, not as a separate program.</strong> Threat modeling at design, IaC scanning at PR, posture scanning at deploy, runtime monitoring in production. Security as a separate org becomes a bottleneck nobody calls.</li>
+                <li><strong>Train developers and admins continuously.</strong> Annual compliance training is theater. Hands-on labs (try our <a href="ctfs.html">CTF directory</a>), tabletop exercises, and breach-walkthrough sessions (we do these in <a href="sessions.html">Friday Zoom</a>) build genuine competence.</li>
+                <li><strong>Have an incident response plan and rehearse it.</strong> Roles, escalation paths, communication templates, legal/PR engagement triggers. The first call during a real incident shouldn't be the first time you've thought about who to call.</li>
+                <li><strong>Vendor risk for the vendors of your vendors.</strong> SaaS your SaaS uses can leak your data without you noticing. <a class="glossary-link" href="glossary.html#term-soc-2">SOC 2</a> reports of subprocessors, not just direct vendors.</li>
+            </ul>
+        </section>
+
+        <section id="anti-patterns">
+            <h2>Anti-patterns: things to stop doing</h2>
+            <p>The flip side. If you see any of these in your environment, fix them before working on more sophisticated controls.</p>
+            <ul>
+                <li><strong>Long-lived IAM access keys for service-to-service auth.</strong> Use <a class="glossary-link" href="glossary.html#term-oidc-federation">OIDC federation</a> or workload identity instead.</li>
+                <li><strong>Public S3 buckets for "convenience."</strong> Use signed URLs, CloudFront with OAC, or proper authentication. There is no legitimate reason for "make it public, it's just an internal staging environment."</li>
+                <li><strong>Wildcard IAM policies (<code>"Action": "*"</code>, <code>"Resource": "*"</code>).</strong> Even for "admin" roles, scope to actions and resources actually needed.</li>
+                <li><strong>SSH'ing into instances to debug.</strong> Use AWS Systems Manager Session Manager, Azure Bastion, or Google IAP — they leave audit trails and don't require open inbound 22.</li>
+                <li><strong>"Just give me admin and I'll figure out what I need later."</strong> The right answer is "let's find out what you need and grant exactly that." IAM Access Advisor / Access Analyzer answer the "what do I actually need" question after a trial period.</li>
+                <li><strong>Using the cloud-provider root account for daily work.</strong> Lock the root credentials in a vault, set hardware MFA, only break glass for billing or account closure. Day-to-day uses federated identities.</li>
+                <li><strong>Email as MFA.</strong> Email is push-bombable, phishable, and account-takeover-able. Use FIDO2 or platform authenticators.</li>
+                <li><strong>"We'll add monitoring later."</strong> If you're moving prod workloads to the cloud without GuardDuty / Defender / SCC enabled, you're flying blind from day one. Turn it on before you turn the workload on.</li>
+            </ul>
+        </section>
+
+        <section class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="shared-responsibility-model.html">Shared responsibility model</a> — what's yours to secure vs. what the provider does.</li>
+                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP vs CWPP</a> — the tool categories that implement most of these practices.</li>
+                <li><a href="breach-timeline.html">Breach kill chains</a> — see what happens when these aren't followed.</li>
+                <li><a href="learning-path.html">Learning path</a> — how to build the skills that turn these from a checklist into instinct.</li>
+                <li><a href="sessions.html">Friday Zoom</a> — practitioners debate every one of these decisions. Bring your edge cases.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="resources.html">All Resources</a></li>
+                    <li><a href="sessions.html">Zoom Sessions</a></li>
+                    <li><a href="presentations.html">Presentations</a></li>
+                    <li><a href="index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="The team discussed the recent Oracle security breach and its potential impact on Oracle's customers, emphasizing the importance of having a well-prepared…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2025-04-04, Friday Zoom, Shawn's Recovery Update and Team Discussion">
+    <title>Friday, April 4, 2025 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2025-04-04.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, April 4, 2025 CSOH Recap — Shawn's Recovery Update and Team Discussion">
+    <meta property="og:description" content="The team discussed the recent Oracle security breach and its potential impact on Oracle's customers, emphasizing the importance of having a well-prepared…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2025-04-04.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, April 4, 2025 CSOH Recap">
+    <meta name="twitter:description" content="The team discussed the recent Oracle security breach and its potential impact on Oracle's customers, emphasizing the importance of having a well-prepared…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Shawn's Recovery Update and Team Discussion",
+      "description": "The team discussed the recent Oracle security breach and its potential impact on Oracle's customers, emphasizing the importance of having a well-prepared…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2025-04-04",
+      "dateModified": "2025-04-04",
+      "mainEntityOfPage": "https://csoh.org/meetings/2025-04-04.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, April 4, 2025',
+          "item": "https://csoh.org/meetings/2025-04-04.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, April 4, 2025</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, April 4, 2025 — Meeting Recap</h1>
+        <p>Shawn's Recovery Update and Team Discussion</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2025-04-04">Friday, April 4, 2025</time> — Shawn&#x27;s Recovery Update and Team Discussion</h2>
+            <p><strong>Quick recap.</strong> The team discussed the recent Oracle security breach and its potential impact on Oracle&#x27;s customers, emphasizing the importance of having a well-prepared incident response plan. They also explored various approaches to improve vulnerability management, including targeting critical vulnerabilities, grouping and fixing multiple vulnerabilities simultaneously, and using more secure base images. Lastly, they discussed recent developments with the <a class="glossary-link" href="../glossary.html#term-nvd">National Vulnerability Database</a> and the challenges it poses for vulnerability management, as well as the need for alternative approaches and a new consortium to tackle vulnerability data.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2025-04</span><span class="tag"><a class="glossary-link" href="../glossary.html#term-ai">AI</a></span><span class="tag">Vulnerabilities</span><span class="tag">Community</span></div>
+            <details class="meeting-topics">
+                <summary>Show 6 discussion topics</summary>
+            <h3>Shawn&#x27;s Recovery Update and Team Discussion</h3>
+            <p>Shawn opens the meeting, greeting attendees and providing an update on his recovery from surgery. He mentions feeling better and plans to return fully next week after attending a President&#x27;s Club event in Mexico. The group is smaller than usual, with only 22 participants. Neil briefly mentions working on something related to a &quot;dark blockchain&quot; but doesn&#x27;t provide details. Dave notes that Shawn&#x27;s audio sounds distant, which Shawn attributes to his cat moving the microphone. Kaye joins and expresses happiness at seeing Shawn, who elaborates that his recovery has been more challenging than expected but he&#x27;s over the worst of it.</p>
+            <h3>Oracle Security Breach Concerns Discussed</h3>
+            <p>In the meeting, the team discussed the recent Oracle security breach. They expressed concerns about Oracle&#x27;s handling of the situation, particularly their initial denial of the breach. The team agreed that Oracle&#x27;s response was poorly managed and could damage their reputation. They also discussed the potential impact of the breach on Oracle&#x27;s customers, particularly those using Oracle Cloud. The team noted that Oracle&#x27;s market share is significant, and the breach could have serious consequences for their business. They also discussed the importance of having a well-prepared incident response plan in place to handle such situations effectively.</p>
+            <h3>New Members Introduce Themselves</h3>
+            <p>Shawn led the meeting, encouraging new participants to introduce themselves and share their interests. Dave offered to help new presenters create their decks and practice their presentations. Tomislav, a new member, shared his background and expressed interest in security topics. The group also discussed the possibility of running a tabletop exercise as a topic.</p>
+            <h3>Google Autopilot Limitations and GKE Maintenance</h3>
+            <p>Neil discussed his experience with Google&#x27;s autopilot feature for <a class="glossary-link" href="../glossary.html#term-kubernetes">Kubernetes</a>, noting that it was user-friendly but had limitations for larger organizations. Tomislav mentioned that Google Kubernetes Engine (<a class="glossary-link" href="../glossary.html#term-eks">GKE</a>) standard does not perform node maintenance, which can lead to issues over time. Shawn suggested exploring garden.io, a tool set for <a class="glossary-link" href="../glossary.html#term-ci">CI</a> pipelines, and emphasized the importance of asking questions, even if they seem trivial.</p>
+            <h3>Improving Vulnerability Management Strategies</h3>
+            <p>Neil discusses three approaches to improve vulnerability management beyond the current 10% patching rate. The first approach focuses on targeting the most critical vulnerabilities using asset context and risk data. The second approach, exemplified by EPSSG, aims to group and fix multiple vulnerabilities simultaneously for better efficiency. The third approach, represented by ChainGuard, involves starting with more secure base images to reduce the number of vulnerabilities introduced into systems. Shawn adds that prioritizing fixes with the highest payoff across multiple applications is another effective strategy. Jay emphasizes the importance of considering environmental factors like deployment frequency and attack paths when prioritizing vulnerabilities. Mischa notes the challenges of explaining complex vulnerability management approaches to auditors and the value of using hardened images to reduce overall vulnerability exposure.</p>
+            <h3>NVD Vulnerability Data Challenges Discussed</h3>
+            <p>The group discusses recent developments with the National Vulnerability Database (NVD). NVD announced they will no longer maintain vulnerabilities published before 2018 and the number of vulnerabilities awaiting analysis has increased significantly. This is causing stress in vulnerability management as many organizations rely on NVD data. The discussion touches on alternative approaches, including private companies filling the gap and the potential need for a new consortium to tackle vulnerability data. They also briefly discuss challenges with vulnerability scoring systems like CVSS and EPSS, as well as approaches to detecting anomalous behavior in <a class="glossary-link" href="../glossary.html#term-saas">SaaS</a> applications.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2025-03-28.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2025-04-11.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

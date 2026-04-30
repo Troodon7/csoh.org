@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="The team discussed the importance of considering the self-selected nature of data in security reports, particularly in relation to AI models and cloud…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2024-11-29, Friday Zoom, Addressing AI Risks in Security Reports">
+    <title>Friday, November 29, 2024 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2024-11-29.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, November 29, 2024 CSOH Recap — Addressing AI Risks in Security Reports">
+    <meta property="og:description" content="The team discussed the importance of considering the self-selected nature of data in security reports, particularly in relation to AI models and cloud…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2024-11-29.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, November 29, 2024 CSOH Recap">
+    <meta name="twitter:description" content="The team discussed the importance of considering the self-selected nature of data in security reports, particularly in relation to AI models and cloud…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Addressing AI Risks in Security Reports',
+      "description": "The team discussed the importance of considering the self-selected nature of data in security reports, particularly in relation to AI models and cloud…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2024-11-29",
+      "dateModified": "2024-11-29",
+      "mainEntityOfPage": "https://csoh.org/meetings/2024-11-29.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, November 29, 2024',
+          "item": "https://csoh.org/meetings/2024-11-29.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, November 29, 2024</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, November 29, 2024 — Meeting Recap</h1>
+        <p>Addressing <a class="glossary-link" href="../glossary.html#term-ai">AI</a> Risks in Security Reports</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2024-11-29">Friday, November 29, 2024</time> — Addressing AI Risks in Security Reports</h2>
+            <p><strong>Quick recap.</strong> The team discussed the importance of considering the self-selected nature of data in security reports, particularly in relation to AI models and cloud security solutions. They also explored the vulnerabilities in AI packages and components, the challenges of regulating AI, and the potential risks and benefits of AI in relation to security and regulation. The conversation ended with plans for a recap session the week after, and the team expressed concerns about protecting against AI model vulnerabilities and the need for human oversight in AI systems.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2024-11</span><span class="tag">AI</span><span class="tag">Supply Chain</span><span class="tag">Vulnerabilities</span><span class="tag">Conferences</span></div>
+            <details class="meeting-topics">
+                <summary>Show 9 discussion topics</summary>
+            <h3>Addressing AI Risks in Security Reports</h3>
+            <p>Neil discussed the importance of considering the self-selected nature of data in security reports, particularly when it comes to companies using cloud security solutions. He highlighted the need for security teams to be aware of the rapid adoption of AI models in custom applications by business units, despite potential risks. Neil also shared his personal experience with an AI product that generated inaccurate results, emphasizing the need for security teams to be proactive in addressing these issues. The team agreed to continue the discussion in the next meeting.</p>
+            <h3>AI Package Vulnerabilities and Security</h3>
+            <p>Neil discussed the vulnerabilities in AI packages and components, noting that while they are not currently publicly exploitable, he expects this to change as researchers focus on these areas. He highlighted a specific issue with Amazon Sagemaker, which automatically creates an <a class="glossary-link" href="../glossary.html#term-s3">S3</a> bucket for storing files, using a default naming convention that makes it easily discoverable. Neil emphasized that many new services, particularly those driven by developers, are not secure by default. He also pointed out that many organizations have exposed access keys to AI services, which could be exploited for malicious purposes.</p>
+            <h3>Secure Design and Default Settings</h3>
+            <p>Neil discussed the importance of secure design and default settings in cloud computing. He highlighted the risks of exposing secrets in Git commit history and the need for a plan to remove them. He also pointed out the vulnerabilities in using Sagemaker with admin privileges and the lack of configuration for <a class="glossary-link" href="../glossary.html#term-imds">IMDSv2</a> in many instances. Neil emphasized the need for secure practices, such as disabling route access from notebook instances and configuring private endpoints in Azure Openai. He concluded by noting the high percentage of instances without IMDSv2 configuration and the potential for significant security breaches.</p>
+            <h3>Addressing AI Security Risks and Challenges</h3>
+            <p>Neil discussed the challenges and risks associated with AI security, particularly in relation to Azure Open AI accounts. He highlighted that 27% of organizations have not configured their accounts to be privately accessible, making them publicly accessible. He also noted that most organizations are not encrypting their notebooks, training pipelines, or models, making them vulnerable to unauthorized access. Neil emphasized the need for better security measures, such as <a class="glossary-link" href="../glossary.html#term-iac">infrastructure as code</a>, vulnerability management, and secure data practices. He also mentioned the AI Goat project, an open-source initiative that aims to illustrate common security risks in AI applications.</p>
+            <h3>Exploring Cloud Security and Infrastructure</h3>
+            <p>Neil discussed the team&#x27;s desire for input and pull requests on a project, mentioning that it could be found on the Cloud Security Office hours website. Chris suggested sharing the project with others and noted that it could be a good entry point for those wanting to get hands-on experience. Kyle added that the internet was designed with security and privacy as afterthoughts, necessitating the addition of features like HTTPS and <a class="glossary-link" href="../glossary.html#term-tls">TLS</a>. Richard shared his experience with default passwords in mid-range systems and suggested exploring the infrastructure of the AS-400 series as a potential entry point. Shawn agreed that all this information exists in the cloud and will continue to do so.</p>
+            <h3>Managing System Access and Cybersecurity</h3>
+            <p>The team discussed the challenges of managing system access and security after employees leave an organization. They shared experiences of finding default passwords on firewalls and the difficulty of removing access from multiple systems. The conversation also touched on the use of online resources for learning cybersecurity, with a focus on TryHackMe and HackTheBox Academy. The team agreed that while these resources can provide foundational knowledge, practical experience is essential for deeper understanding. They also emphasized the importance of learning fundamentals first before diving into more advanced topics.</p>
+            <h3>Regulating AI and Vulnerability Challenges</h3>
+            <p>Neil discussed the challenges of regulating AI, noting that existing compliance frameworks like <a class="glossary-link" href="../glossary.html#term-gdpr">GDPR</a> are often reactive rather than proactive. He gave an example of how PCI certification requirements changed after an incident involving unencrypted credit card transactions. Juninho added that the lack of understanding about AI technology makes it difficult to create effective regulations. Nathaneal asked about the vulnerability of AI systems, particularly in relation to jailbreaking, and Neil clarified that while jailbreaking is a vulnerability, it is not the same as a <a class="glossary-link" href="../glossary.html#term-cve">CVE</a>-style vulnerability. Chris thanked Neil for his talk and encouraged others to introduce themselves. Juninho, who has been with Orca for a couple of months, introduced himself and shared his background in Google Cloud security.</p>
+            <h3>Addressing AI Model Vulnerabilities</h3>
+            <p>Brian expressed concerns about protecting against AI model vulnerabilities, such as model poisoning. He questioned the feasibility of implementing policies to prevent such issues and the difficulty of testing for them. Philippe shared his experience with building a chatbot using LangChain, which was initially difficult to pen test due to the need for multiple attempts for the attack to work. He suggested using observability tools to find prompts and responses, but noted that this method was not real-time and required significant time to find vulnerabilities. Shawn mentioned emerging technology for testing AI models programmatically to identify vulnerabilities. Philippe also discussed the challenges of limiting an AI model&#x27;s scope to specific tasks, such as mathematical questions, and the weakness of protection mechanisms like prompting techniques. He also shared his experience with Microsoft&#x27;s OpenAI interpreter, which he found to be vulnerable to certain attacks.</p>
+            <h3>AI Risks, Benefits, and Regulation</h3>
+            <p>In the meeting, the team discussed the potential risks and benefits of AI, particularly in relation to security and regulation. Steve expressed concerns about the security of AI systems and the need for human oversight, while Neil argued that AI is not as dangerous as often portrayed and that evidence-based discussions are needed. Shawn suggested that AI is a natural progression and that regulation is necessary to ensure responsible use. The team also discussed the need for government regulation and the importance of understanding the technology behind AI. The conversation ended with plans for a recap session the week after.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2024-11-22.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2024-12-13.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

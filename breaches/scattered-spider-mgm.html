@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="Scattered Spider (UNC3944) compromised MGM Resorts International in September 2023 using a single 10-minute phone call to the IT help desk. Attackers…">
+    <meta name="keywords" content="Scattered Spider / MGM 2023, breach analysis, kill chain, MITRE ATT&CK, cloud security incident, post-mortem, 2023">
+    <title>Scattered Spider / MGM 2023 (2023) Breach Kill Chain - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/breaches/scattered-spider-mgm.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Scattered Spider / MGM 2023 (2023) Breach Kill Chain">
+    <meta property="og:description" content="Scattered Spider (UNC3944) compromised MGM Resorts International in September 2023 using a single 10-minute phone call to the IT help desk. Attackers…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/breaches/scattered-spider-mgm.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Scattered Spider / MGM 2023 (2023) Breach Kill Chain">
+    <meta name="twitter:description" content="Scattered Spider (UNC3944) compromised MGM Resorts International in September 2023 using a single 10-minute phone call to the IT help desk. Attackers…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="breach-timeline.css?v=29fbd6a9" integrity="sha384-WrezLhCC8Bdnk6bhRviNG3f7jv+K1IW8/RCNel8OBIyPAd9wiZ4IMtSBG5Nu6Wja">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Scattered Spider / MGM Resorts – LinkedIn OSINT → Vishing Help Desk → Okta Super Admin → Azure AD → 100 ESXi Servers Encrypted',
+      "description": "Scattered Spider (UNC3944) compromised MGM Resorts International in September 2023 using a single 10-minute phone call to the IT help desk. Attackers…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2023-01-01",
+      "dateModified": "2026-04-30",
+      "mainEntityOfPage": "https://csoh.org/breaches/scattered-spider-mgm.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Cloud Security Breach Analysis"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Breach Kill Chains",
+          "item": "https://csoh.org/breach-timeline.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Scattered Spider / MGM 2023',
+          "item": "https://csoh.org/breaches/scattered-spider-mgm.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html" aria-current="page">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+            <li><span aria-current="page">Scattered Spider / MGM 2023</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Scattered Spider / MGM 2023 — 2023</h1>
+        <p>Step-by-step <a class="glossary-link" href="../glossary.html#term-kill-chain">kill chain</a> mapped to <a class="glossary-link" href="../glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud, sourced from official post-mortems and primary technical analyses.</p>
+    </section>
+
+    <main class="kc-main kc-page" id="main-content">
+        <div class="incident-panel active" role="article" id="scattered-spider">
+
+  <div class="inc-header">
+    <div class="inc-meta">
+      <span class="inc-year">September 2023</span>
+      <span class="sev-badge sev-critical">Critical</span>
+      <span class="prov-tag prov-azure">Okta</span>
+      <span class="prov-tag prov-blue"><a class="glossary-link" href="../glossary.html#term-entra-id">Azure AD</a></span>
+    </div>
+    <h2 class="inc-title">Scattered Spider / MGM Resorts – LinkedIn OSINT → Vishing Help Desk → Okta Super Admin → Azure AD → 100 ESXi Servers Encrypted</h2>
+    <p class="inc-summary">Scattered Spider (UNC3944) compromised MGM Resorts International in September 2023 using a single 10-minute phone call to the IT help desk. Attackers researched an MGM employee on LinkedIn, impersonated them to a help desk agent, obtained an <a class="glossary-link" href="../glossary.html#term-mfa">MFA</a> reset, and gained <a class="glossary-link" href="../glossary.html#term-initial-access">initial access</a>. From there they escalated to Okta Super Administrator, claimed Azure AD <a class="glossary-link" href="../glossary.html#term-tenant">tenant</a>-level control, moved laterally across the network, and encrypted over 100 ESXi hypervisors using ALPHV/BlackCat ransomware — causing $100M in losses and a 10-day outage. The entire initial access chain required no technical exploit whatsoever.</p>
+    <div class="inc-stats">
+      <div class="inc-stat"><strong>$100M+</strong> estimated losses</div>
+      <div class="inc-stat"><strong>10 days</strong> operational disruption</div>
+      <div class="inc-stat"><strong>100+</strong> ESXi hypervisors encrypted</div>
+      <div class="inc-stat"><strong>Threat actor:</strong> Scattered Spider (UNC3944) + ALPHV/BlackCat RaaS</div>
+    </div>
+    <a class="pm-link" href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a" target="_blank" rel="noopener">📄 FBI/CISA Joint Advisory AA23-320A ↗</a>
+    <a class="pm-link" href="https://attack.mitre.org/groups/G1015/" target="_blank" rel="noopener">📄 MITRE ATT&CK G1015 ↗</a>
+    <a class="pm-link" href="https://www.guidepointsecurity.com/blog/worldwide-web-an-analysis-of-tactics-and-techniques-attributed-to-scattered-spider/" target="_blank" rel="noopener">📄 GuidePoint GRIT Analysis ↗</a>
+    <a class="pm-link" href="https://www.crowdstrike.com/en-us/blog/analysis-of-intrusion-campaign-targeting-telecom-and-bpo-companies/" target="_blank" rel="noopener">📄 CrowdStrike — Not a SIMulation ↗</a>
+  </div>
+
+  <div class="kill-chain">
+
+    <div class="phase-lbl ph-recon">🔍 Reconnaissance — LinkedIn OSINT</div>
+    <div class="kc-step step-r">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Attacker researches MGM employee identity on LinkedIn to build convincing pretext</div>
+          <a class="mt mt-ta" href="https://attack.mitre.org/techniques/T1591/" target="_blank" rel="noopener">T1591 – Gather Victim Org Info</a>
+          <a class="mt mt-ta" href="https://attack.mitre.org/techniques/T1589/002/" target="_blank" rel="noopener">T1589.002 – Email Addresses</a>
+        </div>
+        <p class="step-desc">Before making any call, the attacker used LinkedIn to identify an MGM Resorts employee — gathering their full name, job title, and enough personal and professional detail to convincingly impersonate them to an IT help desk agent. Mandiant confirmed from forensic recordings of these call center attacks that the threat actors already possessed PII on their victims before calling — including SSN last four digits, dates of birth, and manager names — to pass standard help desk identity verification. Scattered Spider are native English speakers, removing any accent barrier that typically flags social engineering attempts from non-Western threat actors.</p>
+        <div class="step-code">
+          <span class="hl">Primary OSINT source:</span> LinkedIn — full name, job title, department, manager name<br>
+          <span class="hl">PII used to pass verification (Mandiant confirmed):</span> Last 4 digits of SSN, date of birth, manager name and job title<br>
+          <span class="hl">Why it worked:</span> Help desks are trained to be helpful — suspicion of an "employee" feels obstructive<br>
+          <span class="hl">Mandiant:</span> "The level of sophistication in these social engineering attacks is evident in both the extensive research performed on potential victims and the high success rate"
+        </div>
+        <div class="step-tags"><span class="stag">OSINT</span><span class="stag">LinkedIn</span><span class="stag">T1591</span><span class="stag">Native English Speaker</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-init">📞 Initial Access — Vishing the Help Desk</div>
+    <div class="kc-step step-r">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Single phone call to MGM IT help desk — attacker impersonates employee and requests MFA reset</div>
+          <a class="mt mt-ta" href="https://attack.mitre.org/techniques/T1566/004/" target="_blank" rel="noopener">T1566.004 – Phishing: Voice (Vishing)</a>
+          <a class="mt mt-ca" href="https://attack.mitre.org/techniques/T1656/" target="_blank" rel="noopener">T1656 – Impersonation</a>
+        </div>
+        <p class="step-desc">The attacker called MGM's IT help desk, impersonated the employee identified on LinkedIn, and requested a multi-factor authentication reset. Mandiant confirmed from forensic recordings that the consistent pretext used was claiming to be receiving a new phone — a routine scenario that naturally requires an MFA reset. The agent had no way to verify the caller's true identity beyond the PII provided, which matched what the attacker had gathered. The call lasted approximately 10 minutes.</p>
+        <div class="step-code">
+          <span class="hl">Attack vector:</span> Phone call (vishing) — zero technical skill required for this step<br>
+          <span class="hl">Pretext used (Mandiant confirmed):</span> "I'm receiving a new phone and need my MFA reset" — a routine, unsuspicious request<br>
+          <span class="hl">Verification bypassed with:</span> SSN last 4 digits, date of birth, manager name — all pre-researched<br>
+          <span class="hl">Verification failure:</span> Help desk had no <a class="glossary-link" href="../glossary.html#term-phishing">phishing</a>-resistant out-of-band identity verification<br>
+          <span class="hl">ALPHV statement:</span> "All SCATTERED SPIDER did to get into MGM was hop on LinkedIn, find an employee, then call the help desk"
+        </div>
+        <div class="step-tags"><span class="stag">Vishing</span><span class="stag">MFA Reset</span><span class="stag">New Phone Pretext</span><span class="stag">Help Desk Abuse</span><span class="stag">T1566.004</span><span class="stag">T1656</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-disco">🔍 Internal Reconnaissance — SharePoint Documentation Mining</div>
+    <div class="kc-step step-o">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Internal SharePoint searched for VPN, VDI, and remote access documentation</div>
+          <a class="mt mt-di" href="https://attack.mitre.org/techniques/T1213/002/" target="_blank" rel="noopener">T1213.002 – Sharepoint</a>
+          <a class="mt mt-di" href="https://attack.mitre.org/techniques/T1046/" target="_blank" rel="noopener">T1046 – Network Service Discovery</a>
+        </div>
+        <p class="step-desc">With initial account access, the attacker's first move was not to escalate immediately — it was to read. Mandiant confirmed that UNC3944 consistently searched victims' internal SharePoint sites for help guides and documentation covering VPNs, virtual desktop infrastructure (VDI), and remote telework utilities. This gave them a roadmap of the environment drawn entirely from the victim's own internal documentation, dramatically accelerating <a class="glossary-link" href="../glossary.html#term-lateral-movement">lateral movement</a> planning without triggering any security tooling.</p>
+        <div class="step-code">
+          <span class="hl">Platform searched:</span> Microsoft SharePoint — internal intranet and documentation portal<br>
+          <span class="hl">Content targeted (Mandiant confirmed):</span> VPN setup guides, VDI connection instructions, remote telework utilities documentation<br>
+          <span class="hl">Why effective:</span> Internal IT docs contain exactly the information an attacker needs — network topology, tool names, access paths<br>
+          <span class="hl">Detection gap:</span> SharePoint search activity by a recently-reset account is virtually indistinguishable from legitimate onboarding
+        </div>
+        <div class="step-tags"><span class="stag">SharePoint</span><span class="stag">Internal Recon</span><span class="stag">VPN Docs</span><span class="stag">VDI Docs</span><span class="stag">T1213.002</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-cred">🔑 Credential & Identity Access — Okta Super Admin</div>
+    <div class="kc-step step-y">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Okta Super Administrator access obtained via compromised account — MFA removed from admin accounts</div>
+          <a class="mt mt-pe" href="https://attack.mitre.org/techniques/T1078/004/" target="_blank" rel="noopener">T1078.004 – Cloud Accounts</a>
+          <a class="mt mt-pe" href="https://attack.mitre.org/techniques/T1098/" target="_blank" rel="noopener">T1098 – Account Manipulation</a>
+        </div>
+        <p class="step-desc">With initial account access, the attacker escalated to Okta Super Administrator. Mandiant additionally confirmed a technique not widely reported: UNC3944 used Okta's self-assignment feature to assign the compromised account to every application in the Okta instance — giving them <a class="glossary-link" href="../glossary.html#term-sso">SSO</a> access to every federated application simultaneously, and a visual inventory of every app tile available in the Okta portal. They also configured a second <a class="glossary-link" href="../glossary.html#term-idp">Identity Provider</a> as an impersonation app and stripped MFA from targeted admin accounts.</p>
+        <div class="step-code">
+          <span class="hl">Platform abused:</span> Okta — identity provider for MGM's entire enterprise application estate<br>
+          <span class="hl">Privilege achieved:</span> Super Administrator — full control over all identity for downstream applications<br>
+          <span class="hl">Mandiant confirmed technique:</span> Okta self-assignment to every app in the instance — instant access to all SSO-protected applications<br>
+          <span class="hl">IdP abuse:</span> Second Identity Provider configured as "impersonation app" — could act as any user in the org<br>
+          <span class="hl">MFA stripped:</span> Second-factor requirements removed from authentication policies for targeted accounts
+        </div>
+        <div class="step-tags"><span class="stag">Okta Super Admin</span><span class="stag">Self-Assignment All Apps</span><span class="stag">IdP Impersonation</span><span class="stag">MFA Stripped</span><span class="stag">T1078.004</span><span class="stag">T1098</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-priv">☁️ Cloud <a class="glossary-link" href="../glossary.html#term-privilege-escalation">Privilege Escalation</a> — Azure AD + New VM <a class="glossary-link" href="../glossary.html#term-persistence">Persistence</a></div>
+    <div class="kc-step step-p">
+      <div class="step-num">05</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Azure AD super administrator access claimed — new virtual machines created in vSphere/Azure for persistent foothold</div>
+          <a class="mt mt-pe" href="https://attack.mitre.org/techniques/T1078/004/" target="_blank" rel="noopener">T1078.004 – Cloud Accounts</a>
+          <a class="mt mt-pe" href="https://attack.mitre.org/techniques/T1578/002/" target="_blank" rel="noopener">T1578.002 – Create Cloud Instance</a>
+        </div>
+        <p class="step-desc">Having compromised Okta, the attacker pivoted to MGM's Azure AD tenant and claimed super administrator privileges including Tenant Root Group management permissions. Mandiant additionally confirmed a persistence technique specific to this group: UNC3944 accessed vSphere and Azure through SSO applications to create entirely new virtual machines, from which all follow-on activities were conducted. These attacker-controlled VMs had Microsoft Defender and Windows telemetry disabled, making forensic investigation significantly harder.</p>
+        <div class="step-code">
+          <span class="hl">Cloud platform:</span> Microsoft Azure AD — highest possible tenant permissions claimed<br>
+          <span class="hl">Mandiant confirmed persistence:</span> New VMs created in vSphere and Azure via SSO — used as clean base for all further activity<br>
+          <span class="hl">VM <a class="glossary-link" href="../glossary.html#term-hardening">hardening</a> by attacker:</span> MAS_AIO and privacy-script.bat used to remove Microsoft Defender and Windows telemetry<br>
+          <span class="hl">PCUnlocker <a class="glossary-link" href="../glossary.html#term-iso">ISO</a>:</span> Attached to existing VMs via vCenter to reset local admin passwords, bypassing domain controls<br>
+          <span class="hl">Impact:</span> Cloud activity sourced from inside the environment — malicious traffic indistinguishable from legitimate traffic
+        </div>
+        <div class="step-tags"><span class="stag">Azure AD Tenant Root</span><span class="stag">New VM Persistence</span><span class="stag">Defender Disabled</span><span class="stag">PCUnlocker</span><span class="stag">T1078.004</span><span class="stag">T1578.002</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-persist">🕵️ Lateral Movement & Persistence — <a class="glossary-link" href="../glossary.html#term-living-off-the-land">LOTL</a> + <a class="glossary-link" href="../glossary.html#term-saas">SaaS</a> Abuse</div>
+    <div class="kc-step step-b">
+      <div class="step-num">06</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Living-off-the-land lateral movement — RDP, CrowdStrike RTR abuse, Mimikatz, IMPACKET, multiple tunnelling tools</div>
+          <a class="mt mt-lm" href="https://attack.mitre.org/techniques/T1021/001/" target="_blank" rel="noopener">T1021.001 – Remote Desktop Protocol</a>
+          <a class="mt mt-de" href="https://attack.mitre.org/techniques/T1562/" target="_blank" rel="noopener">T1562 – Impair Defenses</a>
+        </div>
+        <p class="step-desc">With domain-level cloud access, the attacker moved laterally using legitimate tools already present in the environment. Mandiant confirmed several techniques not widely reported: UNC3944 created API keys inside CrowdStrike's external console to run commands (whoami, quser) via the Real Time Response module — effectively using the victim's own <a class="glossary-link" href="../glossary.html#term-edr">EDR</a> as a remote access tool. They also used Mimikatz, ADRecon, and IMPACKET from attacker-controlled VMs, along with multiple tunnelling tools for persistent <a class="glossary-link" href="../glossary.html#term-c2">C2</a>.</p>
+        <div class="step-code">
+          <span class="hl">CrowdStrike RTR abuse (Mandiant confirmed):</span> API keys created in CrowdStrike Falcon console — RTR module used to run whoami and quser<br>
+          <span class="hl">Credential theft:</span> Mimikatz, "SecretServerSecretStealer" PowerShell script, ADRecon<br>
+          <span class="hl">Tunnelling tools (Mandiant confirmed):</span> NGROK, RSOCX, Localtonet, Tailscale, Remmina<br>
+          <span class="hl">Python libraries:</span> IMPACKET installed on attacker VMs<br>
+          <span class="hl">EDR evasion:</span> BYOVD — <a class="glossary-link" href="../glossary.html#term-cve">CVE</a>-2015-2291 Intel driver used to disable endpoint security agents<br>
+          <span class="hl">SaaS accessed (Mandiant confirmed):</span> vCenter, CyberArk, Salesforce, Azure, CrowdStrike, AWS, GCP — all via Okta SSO
+        </div>
+        <div class="step-tags"><span class="stag">CrowdStrike RTR Abuse</span><span class="stag">Mimikatz</span><span class="stag">IMPACKET</span><span class="stag">NGROK</span><span class="stag">RSOCX</span><span class="stag">BYOVD</span><span class="stag">T1021.001</span><span class="stag">T1562</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-exfil">📤 <a class="glossary-link" href="../glossary.html#term-exfiltration">Exfiltration</a> — Data Theft Before Encryption</div>
+    <div class="kc-step step-c">
+      <div class="step-num">07</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Sensitive data exfiltrated ahead of ransomware deployment — double extortion strategy</div>
+          <a class="mt mt-ef" href="https://attack.mitre.org/techniques/T1657/" target="_blank" rel="noopener">T1657 – Financial Theft / Extortion</a>
+          <a class="mt mt-co" href="https://attack.mitre.org/techniques/T1530/" target="_blank" rel="noopener">T1530 – Data from Cloud Storage</a>
+        </div>
+        <p class="step-desc">Before deploying ransomware, the attacker exfiltrated sensitive data from MGM's environment — establishing the leverage needed for double extortion. They threatened to publish the stolen data unless the ransom was paid, independent of whether MGM could recover from encryption using backups. Caesars Entertainment, hit in a similar attack at the same time, paid approximately $15 million ransom to prevent data publication.</p>
+        <div class="step-code">
+          <span class="hl">Strategy:</span> Double extortion — encrypt AND threaten to leak, maximising pressure<br>
+          <span class="hl">Caesars parallel:</span> Caesars paid ~$15M ransom; MGM refused and incurred ~$100M in losses instead<br>
+          <span class="hl">ALPHV statement:</span> Claimed to still have access to MGM infrastructure and threatened further attacks<br>
+          <span class="hl">Data targeted:</span> Customer PII, loyalty programme data, internal credentials<br>
+          <span class="hl">Exfil method:</span> Legitimate cloud storage and remote access tools — no custom malware required
+        </div>
+        <div class="step-tags"><span class="stag">Double Extortion</span><span class="stag">Data Theft</span><span class="stag">T1657</span><span class="stag">T1530</span><span class="stag">Ransomware-as-a-Service</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-impact">💥 Impact — 100+ ESXi Hypervisors Encrypted</div>
+    <div class="kc-step step-g">
+      <div class="step-num">08</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">ALPHV/BlackCat ransomware deployed against 100+ ESXi hypervisors — 10-day outage</div>
+          <a class="mt mt-ex" href="https://attack.mitre.org/techniques/T1486/" target="_blank" rel="noopener">T1486 – Data Encrypted for Impact</a>
+          <a class="mt mt-ex" href="https://attack.mitre.org/techniques/T1490/" target="_blank" rel="noopener">T1490 – Inhibit System Recovery</a>
+        </div>
+        <p class="step-desc">On September 11, 2023 — after MGM failed to respond to the attacker's contact attempts — ALPHV/BlackCat ransomware was deployed against over 100 ESXi hypervisors across MGM's Las Vegas properties. The rapid encryption of 100+ VMware ESXi servers caused a 36+ hour initial outage and disrupted casino floor operations, hotel check-ins, digital room keys, ATMs, and slot machines for 10 days across multiple Las Vegas properties. MGM refused to pay the ransom.</p>
+        <div class="step-code">
+          <span class="hl">Ransomware:</span> ALPHV/BlackCat — deployed via RaaS affiliate relationship with Scattered Spider<br>
+          <span class="hl">Targets:</span> 100+ VMware ESXi hypervisors running MGM's production VMs<br>
+          <span class="hl">Timeline:</span> Deployed Sept 11, 2023 — after MGM ignored attacker contact attempts for 24hrs<br>
+          <span class="hl">Impact:</span> Casino floors, hotel check-ins, digital room keys, ATMs, slot machines — all disrupted<br>
+          <span class="hl">Financial impact:</span> ~$100M losses + $45M class-action lawsuit settlement<br>
+          <span class="hl">MGM decision:</span> Refused to pay ransom — incurred full remediation cost instead
+        </div>
+        <div class="step-tags"><span class="stag">ALPHV/BlackCat</span><span class="stag">ESXi Encryption</span><span class="stag">100+ Hypervisors</span><span class="stag">$100M Loss</span><span class="stag">T1486</span><span class="stag">T1490</span></div>
+      </div>
+    </div>
+
+    <div class="def-box">
+      <h3>🛡 How to Defend Against This Chain</h3>
+      <div class="def-items">
+        <div class="def-item"><strong>Implement <a class="glossary-link" href="../glossary.html#term-phishing-resistant">phishing-resistant MFA</a> (<a class="glossary-link" href="../glossary.html#term-fido2">FIDO2</a>/passkeys) and never allow help desk agents to reset MFA via phone.</strong> This single control breaks the entire initial access chain. The attack required no technical exploit — it required one help desk agent following standard procedure. Move MFA resets to an out-of-band workflow requiring manager approval and visual identity verification (video call with government ID).</div>
+        <div class="def-item"><strong>Treat Okta as a Tier 0 asset — the same way you treat <a class="glossary-link" href="../glossary.html#term-active-directory">Active Directory</a>.</strong> Super Administrator access in Okta gives an attacker control over every application federated to it. Require hardware security keys for all Okta admin access, enable Okta ThreatInsight, and alert immediately on new Identity Provider configuration or authenticator resets for admin accounts.</div>
+        <div class="def-item"><strong>Monitor and alert on Okta Org2Org <a class="glossary-link" href="../glossary.html#term-federation">federation</a> changes and new IdP configurations.</strong> The attacker configured a second Identity Provider to impersonate any user in the organisation. New IdP additions should require change control approval and trigger immediate <a class="glossary-link" href="../glossary.html#term-soc">SOC</a> review — they are almost never legitimate outside of planned migrations.</div>
+        <div class="def-item"><strong>Segment your ESXi environment from the corporate identity plane.</strong> ESXi hypervisors should not be reachable from identities that live in the same plane as corporate Okta and Azure AD. Separate management networks, dedicated credentials not linked to SSO, and jump hosts with hardware MFA are the minimum bar for <a class="glossary-link" href="../glossary.html#term-hypervisor">hypervisor</a> access.</div>
+        <div class="def-item"><strong>Detect LOTL tools in unusual contexts.</strong> ngrok, Tailscale, and Remmina are legitimate tools — but their presence on server infrastructure or in a SOC alert at 2am is not. Build detection rules for tunnelling tools on non-developer endpoints and alert on new VPN mesh clients enrolled outside your MDM.</div>
+        <div class="def-item"><strong>Have an offline, immutable backup of ESXi VM configurations and snapshots.</strong> The rapid encryption of 100+ hypervisors succeeded partly because MGM lacked good backup and restoration practices. Offline backups that can't be reached via domain credentials are the last line of defence when ransomware hits the hypervisor layer.</div>
+        <div class="def-item"><strong>Run tabletop exercises specifically for the "help desk social engineering → Okta → cloud" scenario.</strong> This is now the most documented and replicated attack chain in enterprise security. <a class="glossary-link" href="../glossary.html#term-cisa">CISA</a> and FBI have both published guidance on it. If your IR plan doesn't include a <a class="glossary-link" href="../glossary.html#term-runbook">playbook</a> for identity provider compromise as an initial step, update it today.</div>
+      </div>
+    </div>
+
+    <div class="src-box">
+      <h4>Primary Sources</h4>
+      <div class="src-links">
+        <a class="src-link" href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a" target="_blank" rel="noopener">FBI/CISA AA23-320A</a>
+        <a class="src-link" href="https://cloud.google.com/blog/topics/threat-intelligence/unc3944-targets-saas-applications" target="_blank" rel="noopener">Mandiant — UNC3944 SaaS Targeting</a>
+        <a class="src-link" href="https://cloud.google.com/blog/topics/threat-intelligence/unc3944-proactive-hardening-recommendations" target="_blank" rel="noopener">Mandiant — Hardening Guidance</a>
+        <a class="src-link" href="https://cloud.google.com/blog/topics/threat-intelligence/unc3944-sms-phishing-sim-swapping-ransomware" target="_blank" rel="noopener">Mandiant — SMS Phishing & SIM Swap</a>
+        <a class="src-link" href="https://attack.mitre.org/groups/G1015/" target="_blank" rel="noopener">MITRE ATT&CK G1015</a>
+        <a class="src-link" href="https://www.guidepointsecurity.com/blog/worldwide-web-an-analysis-of-tactics-and-techniques-attributed-to-scattered-spider/" target="_blank" rel="noopener">GuidePoint GRIT</a>
+        <a class="src-link" href="https://www.crowdstrike.com/en-us/blog/analysis-of-intrusion-campaign-targeting-telecom-and-bpo-companies/" target="_blank" rel="noopener">CrowdStrike</a>
+        <a class="src-link" href="https://www.fsisac.com/hubfs/Knowledge/ScatteredSpider&BlackCatRansomware-MitigationGuidance.pdf" target="_blank" rel="noopener">FS-ISAC Guidance</a>
+        <a class="src-link" href="https://panther.com/blog/the-scattered-spider-attack-safeguarding-your-okta-infrastructure" target="_blank" rel="noopener">Panther / Okta Analysis</a>
+        <a class="src-link" href="https://www.morphisec.com/blog/mgm-resorts-alphv-spider-ransomware-attack/" target="_blank" rel="noopener">Morphisec MGM Analysis</a>
+        <a class="src-link" href="https://attack.mitre.org/techniques/T1566/004/" target="_blank" rel="noopener">MITRE T1566.004</a>
+        <a class="src-link" href="https://attack.mitre.org/techniques/T1486/" target="_blank" rel="noopener">MITRE T1486</a>
+        <a class="src-link" href="https://attack.mitre.org/techniques/T1078/004/" target="_blank" rel="noopener">MITRE T1078.004</a>
+      </div>
+    </div>
+  </div>
+        </div>
+
+        <nav class="incident-pager" aria-label="Other breach kill chains">
+            <a class="pager-link pager-prev" href="microsoft-sas-leak.html">← Previous breach</a>
+            <a class="pager-link pager-index" href="../breach-timeline.html">All breaches</a>
+            <a class="pager-link pager-next" href="promptware.html">Next breach →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

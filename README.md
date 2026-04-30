@@ -60,6 +60,15 @@ Step-by-step roadmap from "no cloud experience" to working practitioner: prerequ
 ### 🎓 Cloud Security Certifications (`cloud-security-certifications.html`)
 Side-by-side comparison of the major cloud security certifications — CCSK, CCSP, AWS Security Specialty, Microsoft AZ-500/SC-100, Google PCSE, and CKS. Includes a comparison table, recommended paths by role (career switcher / established engineer / senior architect / detection specialist), and an FAQ.
 
+### ✅ Cloud Security Best Practices (`cloud-security-best-practices.html`)
+Practitioner's checklist of the controls that actually prevent breaches, ordered by what shows up as root cause in our breach kill chains. Covers identity, configuration, network, data, detection, supply chain, workloads, AI, governance — plus an explicit "anti-patterns" section.
+
+### ⚖️ Shared Responsibility Model (`shared-responsibility-model.html`)
+What the cloud provider secures vs. what you secure across IaaS, PaaS, SaaS, and FaaS. Includes the AWS / Azure / GCP differences (and Google's "shared fate" extension), a per-service-tier table, the contractual layer, and the gotchas behind every "who's responsible for X?" argument.
+
+### 🛠️ CSPM vs CNAPP vs CWPP vs CIEM vs DSPM (`cspm-vs-cnapp.html`)
+The acronym soup decoded. Side-by-side comparison of cloud-security tool categories with explicit "when do I need each" guidance, an open-source-only reference stack, and an FAQ on whether CNAPP is "just marketing" (mostly: no).
+
 ### ⚙️ How We Use GitHub Actions (`github-actions.html`)
 Learn-by-example explainer for GitHub Actions, using CSOH's seven workflow files as the teaching material. Covers triggers, concurrency, secrets, the GITHUB_TOKEN vs PAT distinction, the `workflow` scope gotcha, and a recommended reading order through our heavily-commented YAML.
 
@@ -280,7 +289,12 @@ csoh.org/
 ├── faq.html                    # Frequently asked questions (FAQPage schema)
 ├── code-of-conduct.html        # Community Code of Conduct
 ├── privacy.html                # Privacy Policy (no cookies, no marketing)
-├── breach-timeline.html        # Cloud breach kill chain library
+├── breach-timeline.html        # Index of breach kill chains (per-breach pages live in /breaches/)
+├── breaches/                   # 10 per-breach kill chain pages (Capital One, SolarWinds, etc.)
+├── meetings/                   # 91 per-meeting recap pages (split from meetings.html)
+├── cloud-security-best-practices.html  # Practitioner's controls checklist
+├── shared-responsibility-model.html    # Provider vs. customer security split
+├── cspm-vs-cnapp.html                  # Tool-category comparison
 ├── threat-research.html        # Curated cloud threat research directory
 ├── contribute.html             # General contributions guide
 ├── contribute-resources.html   # Resource submission web form / guide

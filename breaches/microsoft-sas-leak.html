@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="A Microsoft AI researcher shared a URL to open-source training data on a public GitHub repository. The URL contained an Azure Shared Access Signature…">
+    <meta name="keywords" content="Microsoft SAS Leak 2023, breach analysis, kill chain, MITRE ATT&CK, cloud security incident, post-mortem, 2023">
+    <title>Microsoft SAS Leak 2023 (2023) Breach Kill Chain - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/breaches/microsoft-sas-leak.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Microsoft SAS Leak 2023 (2023) Breach Kill Chain">
+    <meta property="og:description" content="A Microsoft AI researcher shared a URL to open-source training data on a public GitHub repository. The URL contained an Azure Shared Access Signature…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/breaches/microsoft-sas-leak.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Microsoft SAS Leak 2023 (2023) Breach Kill Chain">
+    <meta name="twitter:description" content="A Microsoft AI researcher shared a URL to open-source training data on a public GitHub repository. The URL contained an Azure Shared Access Signature…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="breach-timeline.css?v=29fbd6a9" integrity="sha384-WrezLhCC8Bdnk6bhRviNG3f7jv+K1IW8/RCNel8OBIyPAd9wiZ4IMtSBG5Nu6Wja">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Microsoft AI Research SAS Token — Over-Permissioned Token → Public GitHub → 38TB Internal Data Exposed for 3 Years',
+      "description": "A Microsoft AI researcher shared a URL to open-source training data on a public GitHub repository. The URL contained an Azure Shared Access Signature…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2023-01-01",
+      "dateModified": "2026-04-30",
+      "mainEntityOfPage": "https://csoh.org/breaches/microsoft-sas-leak.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Cloud Security Breach Analysis"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Breach Kill Chains",
+          "item": "https://csoh.org/breach-timeline.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Microsoft SAS Leak 2023',
+          "item": "https://csoh.org/breaches/microsoft-sas-leak.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html" aria-current="page">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+            <li><span aria-current="page">Microsoft SAS Leak 2023</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Microsoft SAS Leak 2023 — 2023</h1>
+        <p>Step-by-step <a class="glossary-link" href="../glossary.html#term-kill-chain">kill chain</a> mapped to <a class="glossary-link" href="../glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud, sourced from official post-mortems and primary technical analyses.</p>
+    </section>
+
+    <main class="kc-main kc-page" id="main-content">
+        <div class="incident-panel active" role="article" id="ms-sas">
+
+  <div class="inc-header">
+    <div class="inc-meta">
+      <span class="inc-year">July 2020 – June 2023 (3-year exposure)</span>
+      <span class="sev-badge sev-critical">Critical</span>
+      <span class="prov-tag prov-azure">Azure Blob Storage</span>
+    </div>
+    <h2 class="inc-title">Microsoft AI Research SAS Token — Over-Permissioned Token → Public GitHub → 38TB Internal Data Exposed for 3 Years</h2>
+    <p class="inc-summary">A Microsoft <a class="glossary-link" href="../glossary.html#term-ai">AI</a> researcher shared a URL to open-source training data on a public GitHub repository. The URL contained an Azure Shared Access Signature token — but instead of being scoped to a specific file or container, it was an Account SAS with full-control permissions to the entire storage account, set to expire in 2051. Anyone who found the URL could read, modify, or delete 38TB of internal Microsoft data including employee workstation backups, private keys, saved passwords, and 30,000+ internal Teams messages. Discovered and responsibly disclosed by Wiz Research in June 2023 after ~3 years of exposure.</p>
+    <div class="inc-stats">
+      <div class="inc-stat"><strong>38 TB</strong> exposed</div>
+      <div class="inc-stat"><strong>3 years</strong> exposure window</div>
+      <div class="inc-stat"><strong>Full control</strong> permissions (read + write + delete)</div>
+      <div class="inc-stat"><strong>Discovered by:</strong> Wiz Research (responsible disclosure)</div>
+    </div>
+    <a class="pm-link" href="https://www.wiz.io/blog/38-terabytes-of-private-data-accidentally-exposed-by-microsoft-ai-researchers" target="_blank" rel="noopener">📄 Wiz Research disclosure ↗</a>
+    <a class="pm-link" href="https://www.bleepingcomputer.com/news/microsoft/microsoft-leaks-38tb-of-private-data-via-unsecured-azure-storage/" target="_blank" rel="noopener">📄 BleepingComputer ↗</a>
+  </div>
+  <div class="kill-chain">
+
+    <div class="phase-lbl ph-init">🔧 Root Cause — Misconfigured SAS Token</div>
+    <div class="kc-step step-r">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Researcher creates Account SAS with full-control permissions, 30-year expiry</div>
+          <a class="mt mt-de" href="https://attack.mitre.org/techniques/T1098/004/" target="_blank" rel="noopener">T1098.004 – SSH Authorized Keys (analogous: overpermissioned access token)</a>
+        </div>
+        <p class="step-desc">When sharing open-source AI training data publicly, the researcher used Azure's SAS token feature but chose the broadest option — an Account SAS — rather than a narrowly-scoped Service SAS. They set permissions to "full control" (read, write, delete) and the expiry to October 2051. Azure does not audit SAS token generation, making this invisible to administrators.</p>
+        <div class="step-code">
+          <span class="hl">SAS type:</span> Account SAS (entire storage account) — should have been Service SAS (single container)<br>
+          <span class="hl">Permissions set:</span> Full control — read, write, delete, list everything<br>
+          <span class="hl">Expiry set:</span> October 6, 2051 (30+ years)<br>
+          <span class="hl">Azure's own warning:</span> "Not possible to audit generation of SAS tokens" — no admin visibility
+        </div>
+        <div class="step-tags"><span class="stag">Account SAS</span><span class="stag">Full Control</span><span class="stag">30-Year Expiry</span><span class="stag">Misconfiguration</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-exec">📢 Exposure — Committed to Public GitHub</div>
+    <div class="kc-step step-o">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Full SAS token URL committed to public GitHub repository README (July 20, 2020)</div>
+          <a class="mt mt-ca" href="https://attack.mitre.org/techniques/T1552/004/" target="_blank" rel="noopener">T1552.004 – Private Keys</a>
+        </div>
+        <p class="step-desc">The researcher committed the complete SAS token URL to the public GitHub repository "robust-models-transfer" as download instructions. GitHub's secret scanning did not cover Account SAS token patterns at the time. The URL was publicly visible for nearly 3 years. In October 2021, the token was renewed — with the expiry extended to October 2051.</p>
+        <div class="step-code">
+          <span class="hl">Repository:</span> github.com/microsoft/robust-models-transfer (public)<br>
+          <span class="hl">Exposed from:</span> July 20, 2020 to June 24, 2023 (2 years 11 months)<br>
+          <span class="hl">Token renewed:</span> October 2021 — expiry extended to 2051 (30 more years)<br>
+          <span class="hl">Scanning gap:</span> GitHub secret scanning did not cover Account SAS tokens until after this disclosure
+        </div>
+        <div class="step-tags"><span class="stag">GitHub</span><span class="stag">Public Repository</span><span class="stag">Secret in README</span><span class="stag">T1552.004</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-priv">📂 Data Accessible — 38TB Including Credentials</div>
+    <div class="kc-step step-p">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-hdr">
+          <div class="step-title">Full storage account accessible — 38TB including employee backups, keys, Teams messages</div>
+          <a class="mt mt-co" href="https://attack.mitre.org/techniques/T1530/" target="_blank" rel="noopener">T1530 – Data from Cloud Storage</a>
+        </div>
+        <p class="step-desc">Anyone with the URL had full access to an internal Azure Blob storage account — not just the intended training data folder. The account contained disk backups of two Microsoft employees' workstations with saved passwords, private keys, and an archive of 30,000+ internal Microsoft Teams messages. Full-control permissions also meant a malicious actor could have injected code into AI model files, creating a supply chain attack vector.</p>
+        <div class="step-code">
+          <span class="hl">Exposed data:</span><br>
+          → Disk backups of 2 employee workstations (passwords, private keys, personal data)<br>
+          → 30,000+ Microsoft Teams messages from 359 employees<br>
+          → Internal credentials and secret keys<br>
+          → Intended open-source AI training data<br>
+          <span class="hl">Supply chain risk:</span> Write access meant an attacker could have injected malicious code into AI model files
+        </div>
+        <div class="step-tags"><span class="stag">38TB</span><span class="stag">Employee Creds</span><span class="stag">Teams Messages</span><span class="stag">AI Supply Chain Risk</span><span class="stag">T1530</span></div>
+      </div>
+    </div>
+
+    <div class="phase-lbl ph-disco">🔬 Discovery — Wiz Research Internet Scan</div>
+    <div class="kc-step step-g">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <div class="step-hdr"><div class="step-title">Wiz Research discovers token while scanning GitHub for misconfigured cloud storage — June 22, 2023</div></div>
+        <p class="step-desc">Wiz Research runs an ongoing project scanning the internet and public repositories for misconfigured cloud storage. While reviewing Microsoft's public AI GitHub repositories, they found the SAS token URL, followed it, and discovered the full scope of exposure. They reported to Microsoft MSRC on June 22; the token was revoked on June 24, 2023 — 2 days later. Coordinated public disclosure followed on September 18, 2023.</p>
+        <div class="step-code">
+          <span class="hl">Discovered by:</span> Wiz Research (scanning public GitHub repos for cloud misconfigurations)<br>
+          <span class="hl">Reported:</span> June 22, 2023 | <span class="hl">Token revoked:</span> June 24, 2023 (48 hours)<br>
+          <span class="hl">GitHub URL updated:</span> July 7, 2023 | <span class="hl">Public disclosure:</span> September 18, 2023<br>
+          <span class="hl">No evidence:</span> Microsoft found no evidence of malicious <a class="glossary-link" href="../glossary.html#term-exfiltration">exfiltration</a> beyond Wiz's research
+        </div>
+        <div class="step-tags"><span class="stag">Responsible Disclosure</span><span class="stag">Wiz Research</span><span class="stag">3 Year Exposure</span><span class="stag">No Malicious Exfil Confirmed</span></div>
+      </div>
+    </div>
+
+    <div class="def-box">
+      <h3>🛡 How to Defend Against This Chain</h3>
+      <div class="def-items">
+        <div class="def-item"><strong>Never use Account SAS for external sharing — always use Service SAS with a Stored Access Policy.</strong> Service SAS scopes access to a single container. A Stored Access Policy allows central management and instant revocation without rotating the account key.</div>
+        <div class="def-item"><strong>Configure and enforce SAS expiration policies at the Azure storage account level.</strong> Azure allows you to set a maximum SAS token lifetime. A 30-year token should never be possible. Set limits (e.g., 24 hours for external sharing) and alert on violations.</div>
+        <div class="def-item"><strong>Run secret scanning across all repositories including SAS token patterns.</strong> Trufflehog, GitLeaks, and GitHub Advanced Security can detect SAS tokens in code. Microsoft added Account SAS token patterns to GitHub's secret scanning service following this disclosure.</div>
+        <div class="def-item"><strong>Separate internal data from public data at the storage account boundary.</strong> Open-source training data should live in a dedicated storage account with no internal data co-located. Misconfiguration then limits the <a class="glossary-link" href="../glossary.html#term-blast-radius">blast radius</a> to the public data account only.</div>
+        <div class="def-item"><strong>Monitor SAS-authenticated access via Azure Monitor and Storage Analytics logs.</strong> Alert on access from unexpected IPs or at unusual times for storage accounts holding sensitive data. Enable SAS token expiration policies to catch long-lived tokens automatically.</div>
+      </div>
+    </div>
+    <div class="src-box">
+      <h4>Primary Sources</h4>
+      <div class="src-links">
+        <a class="src-link" href="https://www.wiz.io/blog/38-terabytes-of-private-data-accidentally-exposed-by-microsoft-ai-researchers" target="_blank" rel="noopener">Wiz Research</a>
+        <a class="src-link" href="https://www.bleepingcomputer.com/news/microsoft/microsoft-leaks-38tb-of-private-data-via-unsecured-azure-storage/" target="_blank" rel="noopener">BleepingComputer</a>
+        <a class="src-link" href="https://blog.gitguardian.com/microsoft-ai-involuntarily-exposed-a-secret-giving-access-to-38tb-of-confidential-data-for-3-years/" target="_blank" rel="noopener">GitGuardian Analysis</a>
+        <a class="src-link" href="https://attack.mitre.org/techniques/T1552/004/" target="_blank" rel="noopener">MITRE T1552.004</a>
+        <a class="src-link" href="https://attack.mitre.org/techniques/T1530/" target="_blank" rel="noopener">MITRE T1530</a>
+      </div>
+    </div>
+  </div>
+        </div>
+
+        <nav class="incident-pager" aria-label="Other breach kill chains">
+            <a class="pager-link pager-prev" href="storm-0558.html">← Previous breach</a>
+            <a class="pager-link pager-index" href="../breach-timeline.html">All breaches</a>
+            <a class="pager-link pager-next" href="scattered-spider-mgm.html">Next breach →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

@@ -52,6 +52,9 @@ TARGET_PAGES = [
     "chat-resources.html",
     "what-is-cloud-security.html",
     "learning-path.html",
+    "cloud-security-best-practices.html",
+    "shared-responsibility-model.html",
+    "cspm-vs-cnapp.html",
     "cloud-security-certifications.html",
     "github-actions.html",
     "kevin-mitnick.html",
@@ -60,6 +63,16 @@ TARGET_PAGES = [
     "code-of-conduct.html",
     "privacy.html",
     "security-policy.html",
+]
+
+# Subdirectory pages (per-breach, per-meeting) are auto-discovered rather
+# than listed individually — there are 91 meeting pages and they update
+# as new sessions get added. Subdir pages need a "../" prefix to reach
+# glossary.html; the GLOSSARY_LINK_HREF_PREFIX is computed per-file based
+# on each path's depth (see crosslink_page below).
+SUBDIR_PATTERNS = [
+    "breaches/*.html",
+    "meetings/*.html",
 ]
 
 # Single-word terms common enough in English that linking them is more
@@ -116,6 +129,10 @@ DENYLIST = {
 
 # Sections of the file to skip wholesale (no links anywhere inside).
 SKIP_BLOCK_TAGS = (
+    # Skip the entire <head> — <title>, <meta>, JSON-LD <script>, OG tags etc.
+    # never contain user-visible prose and must not have <a> tags inserted.
+    # (Without this, text inside <title> and <meta description> gets linked.)
+    "head",
     "header",
     "footer",
     "nav",
@@ -131,9 +148,34 @@ SKIP_BLOCK_TAGS = (
     "h6",
     # An <a> inside a <button> is invalid HTML; skip button content entirely.
     "button",
+    # <title> belongs to <head>, but defensive — in case <head> is malformed
+    # or the linker is run on a fragment without <head>, still skip <title>.
+    "title",
 )
 
+# Default href prefix for glossary cross-links (root-level pages).
+# For pages in subdirectories (e.g. breaches/), we compute "../glossary.html#..."
+# instead — see _glossary_prefix_for() below.
 GLOSSARY_LINK_HREF_PREFIX = "glossary.html#"
+
+
+def _glossary_prefix_for(rel_path: str) -> str:
+    """Return the right href prefix for glossary cross-links, given the page's
+    path relative to the repo root. A page at root uses 'glossary.html#...';
+    a page in a one-level subdir like 'breaches/foo.html' needs
+    '../glossary.html#...' so the link works from there."""
+    depth = rel_path.count("/")
+    return ("../" * depth) + "glossary.html#"
+
+
+def _existing_link_pattern_for(prefix: str) -> re.Pattern[str]:
+    """Strip-existing pattern needs to know which prefix to look for so we
+    can re-link with a possibly different one. Used by unwrap_existing_links
+    when called per-page."""
+    return re.compile(
+        rf'<a\s+class="glossary-link"\s+href="{re.escape(prefix)}[^"]+">([^<]+)</a>',
+        re.IGNORECASE,
+    )
 
 
 def slugify(text: str) -> str:
@@ -248,10 +290,11 @@ def build_term_regexes(keys: list[str]) -> list[tuple[re.Pattern[str], bool]]:
 
 
 def unwrap_existing_links(content: str) -> tuple[str, int]:
-    """Strip every existing <a class="glossary-link" href="glossary.html#...">
-    so we can rebuild fresh."""
+    """Strip every existing <a class="glossary-link"> so we can rebuild fresh.
+    Matches any href ending in glossary.html#... (root-relative OR ../-relative
+    for pages in subdirectories)."""
     pattern = re.compile(
-        r'<a\s+class="glossary-link"\s+href="glossary\.html#[^"]+">([^<]+)</a>',
+        r'<a\s+class="glossary-link"\s+href="(?:\.\./)*glossary\.html#[^"]+">([^<]+)</a>',
         re.IGNORECASE,
     )
     removed = 0
@@ -322,6 +365,7 @@ def link_text_segments(
     content: str,
     patterns: list[tuple[re.Pattern[str], bool]],
     key_to_slug: dict[str, str],
+    href_prefix: str = "glossary.html#",
 ) -> tuple[str, list[str]]:
     """Walk masked content, only inserting links in text-between-tags.
     Records which slugs got linked (one per slug max — first per page)."""
@@ -335,7 +379,7 @@ def link_text_segments(
         if tm.start() > cursor:
             text_chunk = content[cursor : tm.start()]
             new_chunk = _link_chunk(
-                text_chunk, patterns, key_to_slug, linked_slugs, linked_words
+                text_chunk, patterns, key_to_slug, linked_slugs, linked_words, href_prefix
             )
             out.append(new_chunk)
         out.append(tm.group(0))
@@ -343,7 +387,7 @@ def link_text_segments(
     if cursor < len(content):
         out.append(
             _link_chunk(
-                content[cursor:], patterns, key_to_slug, linked_slugs, linked_words
+                content[cursor:], patterns, key_to_slug, linked_slugs, linked_words, href_prefix
             )
         )
     return "".join(out), linked_words
@@ -355,6 +399,7 @@ def _link_chunk(
     key_to_slug: dict[str, str],
     linked_slugs: set[str],
     linked_words: list[str],
+    href_prefix: str = "glossary.html#",
 ) -> str:
     """Find the earliest match across all patterns; iterate left-to-right."""
     if not text:
@@ -396,7 +441,7 @@ def _link_chunk(
         start, end, word, slug = best
         out.append(text[cursor:start])
         out.append(
-            f'<a class="glossary-link" href="{GLOSSARY_LINK_HREF_PREFIX}{slug}">{word}</a>'
+            f'<a class="glossary-link" href="{href_prefix}{slug}">{word}</a>'
         )
         linked_slugs.add(slug)
         linked_words.append(word)
@@ -429,9 +474,15 @@ def crosslink_page(
     key_to_slug: dict[str, str],
 ) -> dict:
     raw = path.read_text(encoding="utf-8")
+    # Compute the right glossary href prefix for this page based on how many
+    # directories deep it sits relative to the repo root. A subdir page like
+    # breaches/capital-one.html needs "../glossary.html#..." so the link
+    # actually resolves.
+    rel_path = str(path.relative_to(REPO_ROOT))
+    href_prefix = _glossary_prefix_for(rel_path)
     cleaned, removed = unwrap_existing_links(raw)
     masked, placeholders = mask_skip_zones(cleaned)
-    linked, linked_words = link_text_segments(masked, patterns, key_to_slug)
+    linked, linked_words = link_text_segments(masked, patterns, key_to_slug, href_prefix)
     final = unmask(linked, placeholders)
     if final != raw:
         path.write_text(final, encoding="utf-8")
@@ -460,9 +511,19 @@ def main() -> int:
 
     patterns = build_term_regexes(original_keys)
 
+    # Combine the explicit TARGET_PAGES list with any auto-discovered
+    # subdirectory pages (per-breach, per-meeting). Sort discovered pages
+    # for stable ordering across runs.
+    import glob as _glob
+    all_targets = list(TARGET_PAGES)
+    for pattern in SUBDIR_PATTERNS:
+        for path in sorted(_glob.glob(str(REPO_ROOT / pattern))):
+            rel = str(Path(path).relative_to(REPO_ROOT))
+            all_targets.append(rel)
+
     total_linked = 0
     total_pages_changed = 0
-    for name in TARGET_PAGES:
+    for name in all_targets:
         page = REPO_ROOT / name
         if not page.exists():
             print(f"  - skip (missing): {name}")

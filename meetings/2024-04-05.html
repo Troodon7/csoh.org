@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="The team discussed issues related to heavy rainfall, cloud security, and supply chain concerns, with a focus on the XZ backdoor and the Microsoft SSH…">
+    <meta name="keywords" content="cloud security meeting recap, CSOH, 2024-04-05, Friday Zoom, Heavy Rainfall and Cloud Security News">
+    <title>Friday, April 5, 2024 — CSOH Meeting Recap</title>
+
+    <link rel="canonical" href="https://csoh.org/meetings/2024-04-05.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Friday, April 5, 2024 CSOH Recap — Heavy Rainfall and Cloud Security News">
+    <meta property="og:description" content="The team discussed issues related to heavy rainfall, cloud security, and supply chain concerns, with a focus on the XZ backdoor and the Microsoft SSH…">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/meetings/2024-04-05.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Friday, April 5, 2024 CSOH Recap">
+    <meta name="twitter:description" content="The team discussed issues related to heavy rainfall, cloud security, and supply chain concerns, with a focus on the XZ backdoor and the Microsoft SSH…">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preload" href="/style.css?v=c80587a9" as="style"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+    <link rel="stylesheet" href="/style.css?v=c80587a9"
+        integrity="sha384-s9/6KM81DoiAQOtyoMaE2Wto/rI+5+SxD9Zv/4V1ebmUUePvLP1EE4ExWixHeZ80">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": 'Heavy Rainfall and Cloud Security News',
+      "description": "The team discussed issues related to heavy rainfall, cloud security, and supply chain concerns, with a focus on the XZ backdoor and the Microsoft SSH…",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2024-04-05",
+      "dateModified": "2024-04-05",
+      "mainEntityOfPage": "https://csoh.org/meetings/2024-04-05.html",
+      "image": "https://csoh.org/banner.png",
+      "articleSection": "Meeting Recaps"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Meeting Recaps",
+          "item": "https://csoh.org/meetings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": 'Friday, April 5, 2024',
+          "item": "https://csoh.org/meetings/2024-04-05.html"
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html" aria-current="page">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meetings.html">Meeting Recaps</a></li>
+            <li><span aria-current="page">Friday, April 5, 2024</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <h1>Friday, April 5, 2024 — Meeting Recap</h1>
+        <p>Heavy Rainfall and Cloud Security News</p>
+    </section>
+
+    <main class="container" id="main-content">
+        <article class="section meeting-page">
+<h2><time datetime="2024-04-05">Friday, April 5, 2024</time> — Heavy Rainfall and Cloud Security News</h2>
+            <p><strong>Quick recap.</strong> The team discussed issues related to heavy rainfall, cloud security, and supply chain concerns, with a focus on the XZ backdoor and the Microsoft SSH login issue. They also delved into the job interview process, with Josef drawing parallels between the sales campaign and job interview processes, and the team sharing their experiences and strategies for success. Lastly, they discussed the complexities of the sales process, lead generation, and the importance of self-reflection, humility, and feedback.</p>
+            <div class="resource-tags meeting-tags"><span class="tag">2024-04</span><span class="tag"><a class="glossary-link" href="../glossary.html#term-ai">AI</a></span><span class="tag">Supply Chain</span><span class="tag">Vulnerabilities</span><span class="tag">Industry News</span></div>
+            <details class="meeting-topics">
+                <summary>Show 8 discussion topics</summary>
+            <h3>Heavy Rainfall and Cloud Security News</h3>
+            <p>Shawn initiated a discussion about the ongoing issues with heavy rainfall in his area, and moved on to welcome new participants, particularly Troy from Iowa. The group then delved into the week&#x27;s cloud security news, discussing various topics of interest. Despite minor technical difficulties with the recording, the team managed to start the session on time and maintain a productive discussion throughout.</p>
+            <h3>XZ Backdoor, Supply Chain, and Microsoft SSH</h3>
+            <p>Shawn and Neil discussed the XZ backdoor and its potential consequences if not detected. Neil provided an analysis, indicating that most alerts were on container images and emphasized the need for systematic handling of supply chain issues in open-source. They also discussed the recent Microsoft SSH login issue, viewing it as a strength of the open-source community due to the quick identification and resolution. Furthermore, they deliberated on an operation involving outreach to maintainers at Red Hat and the addition of a Psy Ops portion. Lastly, Neil touched upon a <a class="glossary-link" href="../glossary.html#term-cisa">CISA</a> report, although the report&#x27;s specific details were not disclosed.</p>
+            <h3>Microsoft Security Incident and Transparency</h3>
+            <p>Neil discussed the major security incident involving Microsoft from last year, where an Chinese actor gained access to Microsoft&#x27;s signing key for authentication. He highlighted that the initial explanation from Microsoft about the origin of the signing key was untrue, and the exact method of compromise remains unknown. Neil also noted that this incident marked a decline in Microsoft&#x27;s security since its peak in 2014, attributing this to a lack of transparency and accountability in the company&#x27;s handling of the incident. He pointed out Microsoft&#x27;s strength in software engineering, but identified the need for improvement in operational security and engineering.</p>
+            <h3>Azure Subscriptions, Vulnerabilities, and Security</h3>
+            <p>Jay expressed his frustration and disbelief over Microsoft&#x27;s handling of the Azure subscriptions, citing an instance where a blog post seemed to suggest an uncontrolled race condition was possible. Neil also shared his personal feelings about the situation, and both highlighted the importance of protecting customers during the transition to cloud services. Shawn discussed a vulnerability discovered in Hugging Face, and Josef was about to present on the interview process for security engineers.</p>
+            <h3>Sales Campaign Process and Job Interviews</h3>
+            <p>Josef drew parallels between the sales campaign process and the job interview process, suggesting that the sales-qualifying steps could be applied to job interviews. He underscored the importance of targeting high-potential opportunities and leveraging AI tools to streamline the process, with a focus on the discovery and pitching stages. Josef also shared insights on job searching strategies, advising to delve deeper than others by examining customer feedback on the company&#x27;s product and analyzing customer requests. The team also discussed the importance of understanding a company&#x27;s unique aspects and pain points, the risks of sharing confidential information, and the value of having relevant work experience or demonstrating initiative.</p>
+            <h3>Maximizing Interview Success With Sales Pipeline</h3>
+            <p>Josef emphasized the importance of understanding and treating the interview process as a sales pipeline, highlighting the need to differentiate oneself and showcase unique qualities. The team discussed strategies for standing out in a competitive job interview process, including seeking a sponsor or mentor, demonstrating curiosity and a desire to learn, and understanding the interviewer&#x27;s perspective. Don stressed the importance of being prepared, continuously honing skills and knowledge, and being memorable during interviews or networking. The team also shared their personal experiences and offered feedback and advice to each other.</p>
+            <h3>Job Interview Experiences and Preparation</h3>
+            <p>Jeff, Chris, Neil, and Don discussed their experiences with job interviews, emphasizing the importance of feedback, preparation, and cultural fit. They highlighted the subjective nature of the interview process and shared insights on how to stand out in professional settings. Shawn had to leave the meeting early, but Chris agreed to stay on the call for an additional 5 minutes, and Shawn encouraged the team to continue the discussion. Chris confirmed that this was the last call.</p>
+            <h3>Sales Process, Lead Generation, and Feedback</h3>
+            <p>Jeff, Chris, and Ken discussed the complexities and subjectivity of the sales process and lead generation. Chris emphasized the importance of understanding the process, comparing it to learning pickup arts in dating. He further stressed the need for self-reflection, humility, and the utilization of feedback for improvement. Ken shared his successful job search strategy, which included personal conversations, demonstrating knowledge of the company, and maintaining relationships. The group also discussed the significance of non-verbal communication in professional interactions.</p>
+            </details>
+            <p class="small"><a href="../meetings.html">↑ All meeting recaps</a></p>
+        </article>
+
+        <nav class="incident-pager" aria-label="Other meeting recaps">
+            <a class="pager-link pager-prev" href="2024-03-01.html">← Older meeting</a>
+            <a class="pager-link pager-index" href="../meetings.html">All meetings</a>
+            <a class="pager-link pager-next" href="2024-04-26.html">Newer meeting →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../resources.html">All Resources</a></li>
+                    <li><a href="../sessions.html">Zoom Sessions</a></li>
+                    <li><a href="../presentations.html">Presentations</a></li>
+                    <li><a href="../index.html#about">About CSOH</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+                    <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Zoom Registration</a></li>
+                    <li><a href="https://www.paypal.com/biz/profile/cloudsec" target="_blank" rel="noopener noreferrer">Support CSOH</a></li>
+                    <li><a href="../code-of-conduct.html">Code of Conduct</a></li>
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contributing</h3>
+                <ul>
+                    <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                    <li><a href="../contribute.html">General Contributions</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About CSOH</h3>
+                <p>Vendor-neutral community for cloud security professionals. Weekly Zoom sessions, 200+ curated resources, and 120+ news articles.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours. All resources provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>
