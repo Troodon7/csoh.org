@@ -16,8 +16,15 @@ on:
   pull_request:
     paths:
       - '**.html'
-  # Weekly safety net at 07:00 UTC every Monday — catches any HTML that
-  # snuck into main without going through a PR (e.g., script-generated edits).
+  # On every push to main that touches an HTML file — catches direct commits
+  # that bypass the PR flow so we don't have to wait for the weekly cron.
+  push:
+    branches:
+      - main
+    paths:
+      - '**.html'
+  # Weekly safety net at 07:00 UTC every Monday — last line of defense for
+  # anything that somehow slipped past both PR and push triggers.
   schedule:
     - cron: '0 7 * * 1'   # cron format: min hour day-of-month month day-of-week
   # Lets you run the workflow manually from the Actions tab in GitHub.

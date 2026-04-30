@@ -177,6 +177,19 @@ If you changed shared files (`style.css`, `main.js`), verify these pages:
 - `http://localhost:8091/glossary.html` -- Glossary (separate JS, search + cross-links)
 - `http://localhost:8091/meetings.html` -- Meeting recaps (separate JS, speaker filter)
 - `http://localhost:8091/faq.html` -- FAQ (FAQPage schema, collapsible details)
+- `http://localhost:8091/what-is-cloud-security.html` -- Pillar overview (FAQ schema)
+- `http://localhost:8091/learning-path.html` -- Beginner → advanced roadmap (HowTo schema)
+- `http://localhost:8091/cloud-security-best-practices.html` -- Controls checklist
+- `http://localhost:8091/shared-responsibility-model.html` -- Provider vs. customer split
+- `http://localhost:8091/cspm-vs-cnapp.html` -- Tool category comparison
+- `http://localhost:8091/cloud-security-certifications.html` -- Certification comparison
+- `http://localhost:8091/conferences.html` -- Conference directory
+- `http://localhost:8091/ctfs.html` -- Cloud CTF directory
+- `http://localhost:8091/breach-timeline.html` -- Breach kill chain index (per-breach pages in `breaches/`)
+- `http://localhost:8091/threat-research.html` -- Cloud threat research source directory
+- `http://localhost:8091/github-actions.html` -- GitHub Actions explainer
+- `http://localhost:8091/code-of-conduct.html` -- Community standards
+- `http://localhost:8091/privacy.html` -- Privacy policy
 
 ### Automated Checks (run by CI on your PR)
 

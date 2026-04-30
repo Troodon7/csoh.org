@@ -188,6 +188,9 @@ Plain-English privacy policy. Short version: no cookies, no analytics, no market
 ### 🔒 Security Policy (`security-policy.html`)
 RFC 9116-compliant vulnerability disclosure policy. Mirrored at `/.well-known/security.txt`.
 
+### 🔬 Threat Research (`threat-research.html`)
+Curated directory of primary sources for cloud-focused threat intel — vendor research teams, annual threat reports, IOC feeds, attack frameworks, and government advisories. Companion to `breach-timeline.html`: kill chains cover specific historical incidents, threat-research is the living index of where defenders go for ongoing intel. See the full section below.
+
 ---
 
 ## 🔗 Breach Kill Chains (`breach-timeline.html`)

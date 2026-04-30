@@ -270,6 +270,23 @@ Whether you're fixing a typo or rewriting a section, the process is the same.
 **For other pages:**
 - [sessions.html](sessions.html) - Zoom sessions info
 - [presentations.html](presentations.html) - Past presentations
+- [meetings.html](meetings.html) - Weekly meeting recap index (per-meeting pages live in `meetings/`)
+- [what-is-cloud-security.html](what-is-cloud-security.html) - Pillar overview of the field
+- [learning-path.html](learning-path.html) - Beginner → advanced roadmap
+- [cloud-security-best-practices.html](cloud-security-best-practices.html) - Practitioner controls checklist
+- [shared-responsibility-model.html](shared-responsibility-model.html) - Provider vs. customer split
+- [cspm-vs-cnapp.html](cspm-vs-cnapp.html) - Tool category comparison
+- [cloud-security-certifications.html](cloud-security-certifications.html) - CCSK / CCSP / AWS / Azure / GCP / CKS comparison
+- [conferences.html](conferences.html) - Security and hacker conference directory
+- [ctfs.html](ctfs.html) - Cloud CTF directory
+- [glossary.html](glossary.html) - 200+ terms with cross-links
+- [faq.html](faq.html) - Frequently asked questions
+- [github-actions.html](github-actions.html) - GitHub Actions explainer
+- [breach-timeline.html](breach-timeline.html) - Breach kill chain index (per-breach pages live in `breaches/`)
+- [threat-research.html](threat-research.html) - Cloud threat research source directory
+- [code-of-conduct.html](code-of-conduct.html) - Community standards
+- [privacy.html](privacy.html) - Privacy policy
+- [security-policy.html](security-policy.html) - Vulnerability disclosure policy
 
 #### Step 2: Open the File for Editing
 
