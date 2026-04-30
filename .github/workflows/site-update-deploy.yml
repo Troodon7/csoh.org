@@ -21,6 +21,13 @@ on:
         required: false
         default: 'true'
 
+# Serialize runs of this workflow so two pushes don't race their commit-push
+# steps against each other. New runs queue rather than cancel — every push
+# still gets its deploy.
+concurrency:
+  group: site-update-deploy
+  cancel-in-progress: false
+
 jobs:
   update-sri-and-previews:
     runs-on: ubuntu-latest
@@ -58,7 +65,7 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add '*.html'
             git commit -m "chore: update SRI hashes for CSS/JS files [skip ci]"
-            git push
+            git push || (git pull --rebase origin main && git push)
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "SRI changes committed"
           fi
@@ -109,7 +116,7 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add '*.html'
             git commit -m "chore: normalize URLs (tracking params, redirects) [skip ci]"
-            git push
+            git push || (git pull --rebase origin main && git push)
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
@@ -125,7 +132,7 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add presentations.html
             git commit -m "chore: refresh presentations VideoObject schema [skip ci]"
-            git push
+            git push || (git pull --rebase origin main && git push)
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "Presentations schema changes committed"
           fi
@@ -142,7 +149,7 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add sitemap.xml
             git commit -m "chore: refresh sitemap lastmod dates [skip ci]"
-            git push
+            git push || (git pull --rebase origin main && git push)
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "Sitemap changes committed"
           fi
@@ -186,7 +193,7 @@ jobs:
             echo "No preview images to commit"
           else
             git commit -m "chore: auto-generate preview images for new resources [skip ci]"
-            git push
+            git push || (git pull --rebase origin main && git push)
           fi
 
       - name: Check for new chat-screenshots
@@ -226,15 +233,30 @@ jobs:
 
       - name: Deploy to FTP
         if: steps.deploy_needed.outputs.deploy == 'true'
+        # Hard cap so a hung lftp doesn't burn the 6-hour job budget.
+        timeout-minutes: 20
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASS: ${{ secrets.FTP_PASS }}
         run: |
-          LFTP_CONN="set ssl:verify-certificate no; set ftp:ssl-force true; set ftp:ssl-protect-data true; open -u ${FTP_USER},${FTP_PASS} ${FTP_HOST}"
+          # net:timeout      — fail any operation stuck >30s instead of hanging
+          # net:max-retries  — try twice then give up rather than retrying forever
+          # net:idle         — close idle control connections after 30s
+          # ssl:* / ftp:ssl  — preserved from the previous config
+          LFTP_CONN="set net:timeout 30; \
+                     set net:max-retries 2; \
+                     set net:reconnect-interval-base 5; \
+                     set net:idle 30; \
+                     set ssl:verify-certificate no; \
+                     set ftp:ssl-force true; \
+                     set ftp:ssl-protect-data true; \
+                     open -u ${FTP_USER},${FTP_PASS} ${FTP_HOST}"
+          # --parallel=2 is gentler on hosts that throttle concurrent transfers;
+          # the previous --parallel=4 stalled mid-mirror in late April 2026.
           # Pass 1: site files — everything except img/ and chat-screenshots/
           echo "==> Deploying site files..."
-          lftp -e "${LFTP_CONN}; mirror -R ./ /public_html/ --verbose=2 --parallel=4 \
+          lftp -e "${LFTP_CONN}; mirror -R ./ /public_html/ --verbose=2 --parallel=2 \
             --exclude .git/ --exclude .github/ --exclude .venv/ --exclude __pycache__/ \
             --exclude img/ --exclude chat-screenshots/ \
             --exclude-glob *.sh --exclude-glob *.pyc --exclude-glob *.pyo \
@@ -246,16 +268,16 @@ jobs:
           # images on the server that were regenerated in the repo without
           # triggering a `missing` signal.
           echo "==> Syncing preview images..."
-          lftp -e "${LFTP_CONN}; mirror -R ./img/previews/ /public_html/img/previews/ --verbose=2 --parallel=4 \
+          lftp -e "${LFTP_CONN}; mirror -R ./img/previews/ /public_html/img/previews/ --verbose=2 --parallel=2 \
             --exclude-glob .DS_Store; bye"
           # Pass 3: always sync news source banners (small, static set of ~19 images)
           echo "==> Syncing news banners..."
-          lftp -e "${LFTP_CONN}; mirror -R ./img/news-banners/ /public_html/img/news-banners/ --verbose=2 --parallel=4 \
+          lftp -e "${LFTP_CONN}; mirror -R ./img/news-banners/ /public_html/img/news-banners/ --verbose=2 --parallel=2 \
             --exclude-glob .DS_Store; bye"
           # Pass 4: only sync chat-screenshots/ when new ones were added this run
           if [[ "${{ steps.check_chat_screenshots.outputs.new }}" == "true" ]]; then
             echo "==> Syncing new chat-screenshots..."
-            lftp -e "${LFTP_CONN}; mirror -R ./chat-screenshots/ /public_html/chat-screenshots/ --verbose=2 --parallel=4 \
+            lftp -e "${LFTP_CONN}; mirror -R ./chat-screenshots/ /public_html/chat-screenshots/ --verbose=2 --parallel=2 \
               --exclude-glob .DS_Store; bye"
           else
             echo "==> No new chat-screenshots to sync, skipping."

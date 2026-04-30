@@ -127,6 +127,8 @@ SKIP_BLOCK_TAGS = (
     "h4",
     "h5",
     "h6",
+    # An <a> inside a <button> is invalid HTML; skip button content entirely.
+    "button",
 )
 
 GLOSSARY_LINK_HREF_PREFIX = "glossary.html#"
