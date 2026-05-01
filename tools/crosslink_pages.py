@@ -63,6 +63,7 @@ TARGET_PAGES = [
     "code-of-conduct.html",
     "privacy.html",
     "security-policy.html",
+    "about-shawn-nunley.html",
 ]
 
 # Subdirectory pages (per-breach, per-meeting) are auto-discovered rather
