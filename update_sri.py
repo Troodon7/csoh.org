@@ -213,6 +213,25 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
 
         content = glossary_script_pattern.sub(replace_glossary_script, content)
 
+    if '404.js' in hashes:
+        notfound_script_pattern = re.compile(
+            r'<script\b[^>]*\bsrc=(["\'])(?:\.?/)?404\.js(?:\?[^"\']*)?(\1)[^>]*>',
+            re.IGNORECASE,
+        )
+
+        def replace_notfound_script(match: re.Match) -> str:
+            tag = match.group(0)
+            tag = re.sub(
+                r'(src=["\'])(?:\.?/)?404\.js(?:\?[^"\']*)?(["\'])',
+                rf'\g<1>/404.js?v={cache_busts["404.js"]}\2',
+                tag,
+            )
+            tag = upsert_attr(tag, 'integrity', hashes['404.js'])
+            tag = remove_attr(tag, 'crossorigin')
+            return tag
+
+        content = notfound_script_pattern.sub(replace_notfound_script, content)
+
     if content != original_content:
         with open(html_path, 'w', encoding='utf-8') as f:
             f.write(content)
@@ -232,6 +251,7 @@ def main():
         'breach-timeline.js': repo_root / 'breach-timeline.js',
         'meetings.js': repo_root / 'meetings.js',
         'glossary.js': repo_root / 'glossary.js',
+        '404.js': repo_root / '404.js',
     }
 
     print("Calculating SRI hashes...")
