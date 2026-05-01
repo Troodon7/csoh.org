@@ -477,7 +477,7 @@ def render_card(entry: Dict[str, str], indent: str) -> str:
             f"<source srcset=\"img/news-banners/{source_slug}.webp\" type=\"image/webp\">"
             f"<img src=\"img/news-banners/{source_slug}.jpg\" "
             f"alt=\"{html.escape(entry['source'])}\" "
-            f"class=\"resource-preview\" loading=\"lazy\">"
+            f"class=\"resource-preview\" loading=\"lazy\" decoding=\"async\">"
             f"</picture>\n"
         )
 

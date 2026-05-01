@@ -168,8 +168,14 @@ def create_resource_html(name, url, description, tags, tooltip=''):
         escaped = tooltip.replace('&', '&amp;').replace('"', '&quot;')
         tooltip_attr = f' data-tooltip="{escaped}"'
 
+    # Predict the preview image filename using the same logic as generate_preview.py.
+    # The image may not exist yet at submission time; onerror hides the broken element.
+    img_filename = _predict_preview_filename(url)
+    alt_text = f"{name} preview".replace('"', '&quot;')
+
     html = f'''    <a href="{url}" target="_blank" class="card-link" rel="noopener noreferrer">
         <div class="resource-card"{tooltip_attr}>
+            <img src="img/previews/{img_filename}" alt="{alt_text}" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
             <h3>{name}</h3>
             <p>{description}</p>
             <div class="resource-tags">
@@ -179,6 +185,19 @@ def create_resource_html(name, url, description, tags, tooltip=''):
     </a>'''
 
     return html
+
+
+def _predict_preview_filename(url):
+    """Match generate_preview.generate_filename_from_url so submitted cards point at the right preview."""
+    from urllib.parse import urlparse
+    parsed = urlparse(url)
+    domain = parsed.netloc.replace('www.', '')
+    path = parsed.path.strip('/').replace('/', '-')
+    filename = f"{domain}-{path}" if path else domain
+    filename = filename.lower()
+    filename = ''.join(c if c.isalnum() or c in ['-', '_'] else '-' for c in filename)
+    filename = filename[:100]
+    return f"{filename}.jpg"
 
 def find_category_section(html_content, category_id):
     """Find the section for a specific category in the HTML."""

@@ -128,7 +128,7 @@ def create_ctf_card_html(name, url, description, tags, tooltip):
 
     return f'''<a href="{url}" class="card-link" target="_blank" rel="noopener noreferrer">
                     <div class="resource-card"{tooltip_attr}>
-                        <img src="img/previews/{img_filename}" alt="Preview" class="resource-preview" onerror="this.style.display='none'">
+                        <img src="img/previews/{img_filename}" alt="{name} preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>{name}</h3>
                         <p>{description}</p>
                         <div class="resource-tags">
