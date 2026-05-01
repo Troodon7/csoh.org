@@ -202,15 +202,19 @@ ServerSignature Off
     # social-media scrapers often don't, so they keep getting JPEG).
     RewriteCond %{HTTP_ACCEPT} image/webp
 
-    # And only when the .webp sibling actually exists on disk. The $1
-    # backreference resolves to the RewriteRule's first capture group
-    # (the path before the .jpg extension), so we check for /path/foo.webp
-    # — NOT /path/foo.jpg.webp — which is how generate_webp.py names them.
-    RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+    # The original .jpg must exist (so we don't rewrite missing files).
+    RewriteCond %{REQUEST_FILENAME} -f
 
-    # Rewrite the .jpg/.jpeg extension to .webp. T= sets the Content-Type
-    # header on the response so the browser parses it correctly.
-    RewriteRule ^(.+)\.jpe?g$ /$1.webp [T=image/webp,L]
+    # Capture the path-without-extension into %1, then check that the
+    # .webp sibling exists at that location. Using %N from a RewriteCond
+    # regex match is the universally-supported pattern; some Apache 2.4
+    # builds don't honor $N backreferences in RewriteCond reliably.
+    RewriteCond %{REQUEST_URI} ^(.+)\.jpe?g$
+    RewriteCond %{DOCUMENT_ROOT}%1.webp -f
+
+    # Rewrite to /path/foo.webp. T= sets Content-Type so the browser
+    # parses it as WebP regardless of the URL still ending in .jpg.
+    RewriteRule \.jpe?g$ %1.webp [T=image/webp,L]
 </IfModule>
 
 # Tell caches the response can vary by Accept (a Chrome cache shouldn't
