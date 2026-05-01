@@ -83,6 +83,14 @@ ServerSignature Off
     </IfModule>
 </Files>
 
+# EXCEPTION: PWA web app manifest must be publicly fetchable so browsers
+# can discover icons + display metadata for "Add to Home Screen".
+<Files "manifest.json">
+    <IfModule mod_authz_core.c>
+        Require all granted
+    </IfModule>
+</Files>
+
 # Block common backup/config files
 <FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op])|~)$">
     <IfModule mod_authz_core.c>
