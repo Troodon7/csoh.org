@@ -575,15 +575,76 @@ Workflows use a **Personal Access Token (PAT)** stored as a GitHub repo secret c
 
 ## 🔍 SEO & Search Optimization
 
-### Rich Snippets Enabled
-- ✅ **NewsArticle Schema** - Top articles on `news.html` regenerated each run for Google News carousel eligibility
-- ✅ **VideoObject Schema** - Each YouTube talk on `presentations.html` marked up for video-rich results
-- ✅ **FAQPage Schema** - 5 high-relevance Q&A pairs for featured snippets
-- ✅ **Organization Schema** - Domain authority signals (4.8★ rating, 2000+ members)
-- ✅ **CollectionPage Schema** - Resource pages eligible for rich results
-- ✅ **Event Schema** - Weekly Zoom session marked up for search visibility
-- ✅ **BreadcrumbList** - Navigation hierarchy for SERP display
-- ✅ **Fresh `<lastmod>` sitemap dates** - refreshed from git history on every deploy
+CSOH is engineered for organic discovery across traditional search (Google, Bing), AI search/answer engines (ChatGPT, Perplexity, Claude, Gemini), and social previews (LinkedIn, Twitter/X, Slack). The site uses no tracking, no analytics, and no third-party scripts — just clean semantic HTML, structured data, and disciplined metadata.
+
+### Schema.org structured data (25+ types)
+
+**Page-level schema** — each page declares what kind of thing it is:
+- ✅ **Article** / **NewsArticle** — pillar pages and the news index, with `datePublished`, `dateModified`, `author`, `publisher`
+- ✅ **HowTo** + **HowToStep** — step-by-step content (e.g. learning path, GitHub Actions guide)
+- ✅ **Course** + **CourseInstance** — learning-path roadmap and certifications comparison (Google Course rich result eligible)
+- ✅ **FAQPage** + **Question** / **Answer** — 6 pages with structured Q&A for featured snippets
+- ✅ **CollectionPage** — resource hub pages eligible for sitelinks rich results
+- ✅ **Event** + **VirtualLocation** + **Schedule** — weekly Friday Zoom session
+- ✅ **VideoObject** — each YouTube talk on `presentations.html` and meeting recaps
+- ✅ **DefinedTermSet** — the glossary, with 232 individual terms
+
+**Entity schema** — who/what is responsible for the content:
+- ✅ **Organization** — CSOH itself, with founding date, contact point, sameAs links, search action
+- ✅ **Person** + **ProfilePage** — founder bio with `jobTitle`, `worksFor`, `founder`, `knowsAbout`, `sameAs`
+- ✅ **Author attribution** — pillar articles credit the Person via `@id` reference (E-E-A-T signal)
+- ✅ **ItemList** — certifications comparison, news listings, and resource directories
+- ✅ **BreadcrumbList** — full navigation hierarchy on every content page
+
+### Author authority (E-E-A-T)
+
+- ✅ Dedicated bio page at `/about-shawn-nunley.html` with full Person schema
+- ✅ Visible "About the author" card at the bottom of all 7 pillar articles
+- ✅ Visible byline + footer "Founded by" link site-wide
+- ✅ `rel="author"` on every author link
+- ✅ `sameAs` external profile links (LinkedIn, GitHub, csoh.org)
+
+### Discoverability
+
+- ✅ **`sitemap.xml`** — 128 URLs, `<lastmod>` refreshed from git commit dates on every deploy ([tools/update_sitemap.py](tools/update_sitemap.py))
+- ✅ **`robots.txt`** — Allow: / for all major crawlers, plus explicit allow-rules for 21 AI/LLM bots (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, MistralAI-User, Cohere, etc.)
+- ✅ **RSS feed** (`feed.xml`) for the news aggregator
+- ✅ **`humans.txt`** for human-readable credits, linked via `<link rel="author">`
+- ✅ **`security.txt`** at the well-known location for vulnerability disclosure
+- ✅ Site-wide **canonical URLs** to consolidate ranking signals
+- ✅ **Glossary cross-linking** — first occurrence of each of 232 terms auto-linked to the glossary on every content page ([tools/crosslink_pages.py](tools/crosslink_pages.py))
+
+### Social previews
+
+- ✅ **Open Graph** + **Twitter Card** meta on every indexable page (title, description, type, url, image)
+- ✅ **Per-article social images** — 19 unique JPG previews under `img/og/` so each pillar page has its own LinkedIn/Slack/Twitter preview, not a generic site banner
+- ✅ **`og:type`: profile** on the bio page with `profile:first_name` / `profile:last_name`
+
+### Performance signals (Core Web Vitals)
+
+- ✅ **WebP everywhere** — homepage banner, all 29 news-source banners, and the author photo all serve WebP via `<picture>` with JPG/PNG fallback (≈40-60% smaller payloads)
+- ✅ **`<link rel="preload">`** for critical CSS, with **SRI integrity hashes** auto-updated on every deploy
+- ✅ **`loading="lazy"`** on below-the-fold images
+- ✅ **`width` / `height`** attributes on every `<img>` to prevent CLS
+- ✅ **`decoding="async"`** on hero images
+- ✅ **PWA manifest** (`manifest.json`) + 192/512 maskable icons → "Add to Home Screen" eligible
+
+### Content optimization discipline
+
+- ✅ Title tags 45–60 chars, meta descriptions 120–160 chars on every indexable page
+- ✅ One `<h1>` per page, semantic heading hierarchy
+- ✅ `alt` text on every content image
+- ✅ Skip links + ARIA labels for accessibility (which Google increasingly weighs)
+- ✅ `lang="en"` on `<html>` for international targeting
+
+### Privacy as an SEO signal
+
+- ✅ Zero cookies, zero trackers, zero third-party analytics
+- ✅ Strict Content-Security-Policy
+- ✅ HSTS preload-eligible
+- ✅ All external scripts blocked at the CSP layer
+
+The result: rich-snippet eligibility across Google's full catalog of result types, full author entity wiring for E-E-A-T, AI-search citation eligibility, and Core Web Vitals headroom from a static-HTML stack with no JS frameworks.
 
 ## 🤝 Contributing
 
