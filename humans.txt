@@ -1,0 +1,28 @@
+/* TEAM */
+
+Founder: Shawn Nunley
+Site: https://csoh.org/about-shawn-nunley.html
+LinkedIn: https://www.linkedin.com/in/nunley/
+From: Arroyo Grande, California, USA
+
+/* COMMUNITY */
+
+Name: Cloud Security Office Hours
+Site: https://csoh.org/
+Mailing list: https://sendfox.com/CSOH
+GitHub: https://github.com/CloudSecurityOfficeHours
+Contact: admin@csoh.org
+
+/* THANKS */
+
+Every contributor who has ever opened a PR, submitted a resource,
+joined a Friday Zoom session, or shared cloud security knowledge
+with the community. CSOH is built by its members.
+
+/* SITE */
+
+Standards: HTML5, CSS, vanilla JS
+Components: schema.org structured data, Open Graph, RSS
+Accessibility: WCAG 2.1 AA target, semantic HTML, skip-links
+Privacy: No tracking, no third-party analytics, no cookies
+Last update: 2026-04-30

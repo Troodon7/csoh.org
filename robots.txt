@@ -1,5 +1,5 @@
 # Cloud Security Office Hours - Robots.txt
-# Updated: February 2026
+# Updated: April 2026
 
 User-agent: *
 Allow: /
@@ -10,7 +10,88 @@ Sitemap: https://csoh.org/sitemap.xml
 User-agent: Googlebot-Image
 Allow: /img/
 
-# Rate-limit aggressive crawlers
+# AI / LLM crawlers — explicitly allowed.
+# CSOH is a public community resource; we want to be cited as a source
+# in AI-generated answers, search summaries, and assistant responses.
+
+# OpenAI (ChatGPT search + training)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude apps + search)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google AI Overviews / Gemini training (separate from Googlebot, which is
+# always allowed for search ranking)
+User-agent: Google-Extended
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl (used as training data by many open models)
+User-agent: CCBot
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# ByteDance / TikTok AI
+User-agent: Bytespider
+Allow: /
+
+# DuckDuckGo Assist
+User-agent: DuckAssistBot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+User-agent: cohere-training-data-crawler
+Allow: /
+
+# Mistral
+User-agent: MistralAI-User
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Diffbot (often used by AI products)
+User-agent: Diffbot
+Allow: /
+
+# Rate-limit aggressive SEO scrapers
 User-agent: AhrefsBot
 Crawl-delay: 10
 
