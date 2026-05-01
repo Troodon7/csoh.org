@@ -1776,7 +1776,7 @@ footer {
 .community-card {
     background-color: var(--white);
     padding: 1rem;
-    color: #1a232a;
+    color: var(--text-color);
     font-weight: 600;
     font-size: 1.05em;
     border-radius: 8px;
