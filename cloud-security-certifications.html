@@ -29,11 +29,20 @@
     <meta name="twitter:description"
         content="A practitioner's guide to the major cloud security certifications. Vendor-neutral.">
     <meta name="twitter:image" content="https://csoh.org/img/og/cloud-security-certifications.jpg">
+    <!-- Resource hints: warm up TCP+TLS to high-traffic external origins
+         (the Zoom signup, GitHub, sponsor link, and YouTube image CDN
+         that hosts the presentation card thumbnails). Saves 100-300ms
+         on the first navigation/hover-to-fetch to each. -->
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=fbb7e2fe" as="style"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
-    <link rel="stylesheet" href="/style.css?v=fbb7e2fe"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
+    <link rel="preload" href="/style.css?v=5fd3667a" as="style"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
+    <link rel="stylesheet" href="/style.css?v=5fd3667a"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
 
     <script type="application/ld+json">
     {
@@ -214,6 +223,54 @@
       ]
     }
     </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do certifications get you a job?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not by themselves. They get you past resume filters and signal commitment. Pair every cert with hands-on work — labs, CTFs, side projects, write-ups. A CCSK plus a portfolio of CloudGoat write-ups is far more compelling than three certs and no lab work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "CCSK or CCSP first?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CCSK first, almost always. It's open-book, online, and prepares you for CCSP. Some people skip straight to CCSP if they already have years of cloud experience and just want the senior credential."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are SANS / GIAC certifications worth the cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If your employer pays, yes — SANS courses are excellent. If you'd be paying out of pocket, the value-per-dollar is much better with CCSK + a provider specialty + practical lab work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a cert for every cloud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Pick the cloud you actually use. Most jobs are 80%+ one cloud. Cross-cloud knowledge from CCSK plus deep knowledge of one provider beats shallow knowledge of all three."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How current do these certs stay?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The provider specialties get refreshed every 1–3 years and the new versions matter (AWS SCS-C02 is meaningfully different from C01). CCSK gets revised when CSA publishes new guidance — v5 is the current generation. CCSP is the most stable."
+      }
+    }
+  ]
+}
+    </script>
 </head>
 
 <body>
@@ -287,7 +344,7 @@
     </nav>
 
     <section class="hero hero--compact">
-        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async"></picture>
+        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
         <h1>Cloud Security Certifications Compared</h1>
         <p>The major cloud security certifications side-by-side. What each one is worth, who should take it, what it costs, and what comes next. Vendor-neutral guidance from practitioners.</p>
         <div class="cta-buttons">
@@ -296,7 +353,9 @@
         </div>
     </section>
     <main class="container contribute-article" id="main-content">
-        <div class="info-box--blue">
+        
+        <p class="page-meta"><time datetime="2026-04-29">Last updated <strong>2026-04-29</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/cloud-security-certifications.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+<div class="info-box--blue">
             <p><strong>Quick guidance:</strong> Start with CCSK if you want a vendor-neutral foundation. Add a provider-specific cert (AWS, Azure, or GCP) for the cloud you actually work with. CCSP is the gold-standard senior credential — pursue it once you have a few years of cloud experience. CKS if <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a> is your day job. Don't pay for a bootcamp until you've tried the free official material.</p>
         </div>
 

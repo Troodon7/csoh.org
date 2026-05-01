@@ -3440,3 +3440,29 @@ footer {
 @media (max-width: 600px) {
     .meeting-list { grid-template-columns: 1fr; }
 }
+
+/* =========================================================================
+   Pillar-page meta line: Last updated + author + source link
+   Shown just below the hero on educational/pillar pages. Helps trust
+   (visible date), E-E-A-T (author byline), and openness (source link).
+   ========================================================================= */
+.page-meta {
+    color: var(--text-muted, #64748b);
+    font-size: 0.85rem;
+    margin: 0 0 1.25rem;
+    padding: 0.5rem 0 0.75rem;
+    border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+.page-meta strong { color: var(--text-color, #333); font-weight: 600; }
+.page-meta a {
+    color: var(--secondary-color, #3498db);
+    text-decoration: none;
+    font-weight: 500;
+}
+.page-meta a:hover { text-decoration: underline; }
+[data-theme="dark"] .page-meta {
+    color: #94a3b8;
+    border-bottom-color: #1e293b;
+}
+[data-theme="dark"] .page-meta strong { color: #e2e8f0; }
+[data-theme="dark"] .page-meta a { color: #38bdf8; }

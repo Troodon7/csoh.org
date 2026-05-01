@@ -29,11 +29,20 @@
     <meta name="twitter:description"
         content="A practitioner's comparison of the *PM family of cloud security tools.">
     <meta name="twitter:image" content="https://csoh.org/img/og/cspm-vs-cnapp.jpg">
+    <!-- Resource hints: warm up TCP+TLS to high-traffic external origins
+         (the Zoom signup, GitHub, sponsor link, and YouTube image CDN
+         that hosts the presentation card thumbnails). Saves 100-300ms
+         on the first navigation/hover-to-fetch to each. -->
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=fbb7e2fe" as="style"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
-    <link rel="stylesheet" href="/style.css?v=fbb7e2fe"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
+    <link rel="preload" href="/style.css?v=5fd3667a" as="style"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
+    <link rel="stylesheet" href="/style.css?v=5fd3667a"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
 
     <script type="application/ld+json">
     {
@@ -186,7 +195,7 @@
     </nav>
 
     <section class="hero hero--compact">
-        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async"></picture>
+        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
         <h1>CSPM vs CNAPP vs CWPP vs CIEM vs DSPM</h1>
         <p>The acronym soup, decoded. What each tool category actually does, when you need it, where they overlap, and how the consolidation push to "<a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a>" changes the buying decision. Vendor-neutral.</p>
         <div class="cta-buttons">
@@ -195,7 +204,9 @@
         </div>
     </section>
     <main class="container contribute-article" id="main-content">
-        <div class="info-box--blue">
+        
+        <p class="page-meta"><time datetime="2026-04-30">Last updated <strong>2026-04-30</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/cspm-vs-cnapp.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+<div class="info-box--blue">
             <p><strong>The 30-second version:</strong> <strong><a class="glossary-link" href="glossary.html#term-cspm">CSPM</a></strong> finds misconfigurations. <strong><a class="glossary-link" href="glossary.html#term-cwpp">CWPP</a></strong> protects what's running on your VMs and containers. <strong><a class="glossary-link" href="glossary.html#term-ciem">CIEM</a></strong> analyzes who can do what across your <a class="glossary-link" href="glossary.html#term-iam">IAM</a>. <strong><a class="glossary-link" href="glossary.html#term-dspm">DSPM</a></strong> finds and watches your sensitive data. <strong>CNAPP</strong> is the umbrella that bundles all of the above into one platform. <strong>SSPM</strong> does the same job as CSPM but for <a class="glossary-link" href="glossary.html#term-saas">SaaS</a> apps (Microsoft 365, Salesforce) instead of cloud accounts.</p>
             <p style="margin-top:0.75rem;">If you only buy one tool, buy a CSPM (or the CSPM module of a CNAPP). It addresses 60–70% of cloud-security findings. The other categories are layers you add as your environment matures.</p>
         </div>

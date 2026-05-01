@@ -29,11 +29,20 @@
     <meta name="twitter:description"
         content="The cloud security best practices that actually move the needle. Vendor-neutral.">
     <meta name="twitter:image" content="https://csoh.org/img/og/cloud-security-best-practices.jpg">
+    <!-- Resource hints: warm up TCP+TLS to high-traffic external origins
+         (the Zoom signup, GitHub, sponsor link, and YouTube image CDN
+         that hosts the presentation card thumbnails). Saves 100-300ms
+         on the first navigation/hover-to-fetch to each. -->
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=fbb7e2fe" as="style"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
-    <link rel="stylesheet" href="/style.css?v=fbb7e2fe"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
+    <link rel="preload" href="/style.css?v=5fd3667a" as="style"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
+    <link rel="stylesheet" href="/style.css?v=5fd3667a"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
 
     <script type="application/ld+json">
     {
@@ -154,7 +163,7 @@
     </nav>
 
     <section class="hero hero--compact">
-        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async"></picture>
+        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
         <h1>Cloud Security Best Practices</h1>
         <p>The controls that actually prevent breaches, ranked by how often the absence of each one shows up in real cloud incident reports. Vendor-neutral, with the trade-offs called out.</p>
         <div class="cta-buttons">
@@ -163,7 +172,9 @@
         </div>
     </section>
     <main class="container contribute-article" id="main-content">
-        <div class="info-box--blue">
+        
+        <p class="page-meta"><time datetime="2026-04-30">Last updated <strong>2026-04-30</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/cloud-security-best-practices.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+<div class="info-box--blue">
             <p><strong>The honest version:</strong> Most "cloud security best practices" lists are 100 items long and unranked, which is the same as not having a list. The bullets below are ordered by what actually appears as the root cause in our <a href="breach-timeline.html">breach kill chains</a>. Master the first three sections and you'll prevent the majority of cloud incidents seen in industry. The later sections are where mature programs differentiate.</p>
             <p style="margin-top:0.75rem;">If a practice isn't here, that's not because it doesn't matter — it's because we're calling out the high-leverage ones. Pair this page with the <a href="what-is-cloud-security.html">cloud security overview</a> for foundational concepts and the <a href="cloud-security-certifications.html">certifications guide</a> if you want to formalize.</p>
         </div>

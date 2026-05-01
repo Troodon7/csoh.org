@@ -23,11 +23,20 @@
     <meta name="twitter:title" content="Capital One 2019 (2019) Breach Kill Chain">
     <meta name="twitter:description" content="A former AWS engineer exploited a misconfigured WAF via server-side request forgery to reach the EC2 instance metadata service, stealing temporary IAM…">
     <meta name="twitter:image" content="https://csoh.org/banner.png">
+    <!-- Resource hints: warm up TCP+TLS to high-traffic external origins
+         (the Zoom signup, GitHub, sponsor link, and YouTube image CDN
+         that hosts the presentation card thumbnails). Saves 100-300ms
+         on the first navigation/hover-to-fetch to each. -->
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=fbb7e2fe" as="style"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
-    <link rel="stylesheet" href="/style.css?v=fbb7e2fe"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
+    <link rel="preload" href="/style.css?v=5fd3667a" as="style"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
+    <link rel="stylesheet" href="/style.css?v=5fd3667a"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
     <link rel="stylesheet" href="breach-timeline.css?v=29fbd6a9" integrity="sha384-WrezLhCC8Bdnk6bhRviNG3f7jv+K1IW8/RCNel8OBIyPAd9wiZ4IMtSBG5Nu6Wja">
 
     <script type="application/ld+json">
@@ -156,7 +165,7 @@
     </nav>
 
     <section class="hero hero--compact">
-        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async">
+        <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager">
         <h1>Capital One 2019 — 2019</h1>
         <p>Step-by-step <a class="glossary-link" href="../glossary.html#term-kill-chain">kill chain</a> mapped to <a class="glossary-link" href="../glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud, sourced from official post-mortems and primary technical analyses.</p>
     </section>

@@ -29,11 +29,20 @@
     <meta name="twitter:title" content="Shawn Nunley - Founder, Cloud Security Office Hours">
     <meta name="twitter:description" content="Founder of CSOH and Solutions Architect at Wiz. Cloud security across AWS, Azure, and GCP.">
     <meta name="twitter:image" content="https://csoh.org/banner.png">
+    <!-- Resource hints: warm up TCP+TLS to high-traffic external origins
+         (the Zoom signup, GitHub, sponsor link, and YouTube image CDN
+         that hosts the presentation card thumbnails). Saves 100-300ms
+         on the first navigation/hover-to-fetch to each. -->
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=fbb7e2fe" as="style"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
-    <link rel="stylesheet" href="/style.css?v=fbb7e2fe"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
+    <link rel="preload" href="/style.css?v=5fd3667a" as="style"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
+    <link rel="stylesheet" href="/style.css?v=5fd3667a"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
 
     <script type="application/ld+json">
     {
@@ -180,7 +189,7 @@
     </nav>
 
     <section class="hero hero--compact">
-        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async"></picture>
+        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
         <h1>👋 Shawn Nunley</h1>
         <p>Founder, Cloud Security Office Hours · Solutions Architect, Wiz</p>
     </section>
@@ -194,7 +203,7 @@
                          alt="Shawn Nunley, founder of Cloud Security Office Hours"
                          width="200" height="200"
                          style="border-radius:50%;object-fit:cover;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,0.15);"
-                         decoding="async">
+                         decoding="async" loading="lazy">
                 </picture>
                 <div style="flex:1;min-width:280px;">
                     <h2 style="margin-top:0;">About</h2>

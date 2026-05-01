@@ -184,6 +184,44 @@ ServerSignature Off
 </IfModule>
 
 # ---------------------------------------------------------------------------
+# 6b. WEBP CONTENT NEGOTIATION
+# ---------------------------------------------------------------------------
+#
+# When a browser requests foo.jpg AND signals it accepts WebP via the
+# Accept header AND a foo.webp file exists alongside, transparently serve
+# the .webp instead. Saves ~30-50% bandwidth on the card-heavy pages
+# (resources.html, ctfs.html, conferences.html) without requiring any
+# HTML changes — the <img src="...jpg"> tags stay as-is.
+#
+# Generation: tools/generate_webp.py creates the .webp siblings.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Only when the browser explicitly accepts WebP (modern browsers do;
+    # social-media scrapers often don't, so they keep getting JPEG).
+    RewriteCond %{HTTP_ACCEPT} image/webp
+
+    # And only when the .webp sibling actually exists on disk. Without
+    # this guard, we'd 404 instead of falling back to the JPEG.
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteCond %{REQUEST_FILENAME}\.webp -f [OR]
+    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI:s/\.jpe?g$/\.webp/} -f
+
+    # Rewrite the .jpg/.jpeg extension to .webp. T= sets the Content-Type
+    # header on the response so the browser parses it correctly.
+    RewriteRule ^(.+)\.(jpe?g)$ $1.webp [T=image/webp,L]
+</IfModule>
+
+# Tell caches the response can vary by Accept (a Chrome cache shouldn't
+# poison a Safari cache with a WebP if Safari didn't ask for it).
+<IfModule mod_headers.c>
+    <FilesMatch "\.(jpe?g|webp)$">
+        Header append Vary Accept
+    </FilesMatch>
+</IfModule>
+
+# ---------------------------------------------------------------------------
 # 7. DISABLE DIRECTORY LISTING
 # ---------------------------------------------------------------------------
 

@@ -11,7 +11,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="author" type="text/plain" href="/humans.txt">
     <meta name="theme-color" content="#2c3e50">
-    <link rel="stylesheet" href="/style.css?v=fbb7e2fe" integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
+    <link rel="stylesheet" href="/style.css?v=5fd3667a" integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
 
 
 </head>
@@ -87,22 +87,141 @@
     </nav>
 
     <section class="hero hero--compact">
-        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async"></picture>
+        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
         <h1>404 — Page Not Found</h1>
         <p>This page doesn't exist or has been moved.</p>
     </section>
 
-    <main id="main-content">
+    <main id="main-content" class="container">
         <div class="error-container">
             <p class="error-code">404</p>
             <p class="error-message">This page doesn't exist or has been moved.</p>
-            <p>The page you're looking for might have been removed, renamed, or is temporarily unavailable.</p>
+            <p>The page you're looking for might have been removed, renamed, or is temporarily unavailable. Here's where to go next.</p>
+
+            <!-- Smart-redirect hint: detects old URLs that we restructured
+                 (breach-timeline.html#X → /breaches/X.html, similar for
+                 meetings) and offers a one-click jump to the new URL.
+                 Hidden by default; the inline script at the bottom of this
+                 main element shows it when applicable. -->
+            <div id="redirect-hint" class="info-box--blue" style="display:none; margin: 1.5rem 0;">
+                <p>This URL looks like an older link we've restructured. <strong>Did you mean:</strong>
+                <a id="redirect-link" href="#" class="btn btn-primary" style="margin-left:0.5rem;">→ Take me there</a></p>
+            </div>
+
             <div class="error-links">
-                <a href="index.html" class="btn btn-primary">Go Home</a>
-                <a href="resources.html" class="btn btn-secondary">Browse Resources</a>
-                <a href="news.html" class="btn btn-secondary">Read News</a>
+                <a href="index.html" class="btn btn-primary">Home</a>
+                <a href="what-is-cloud-security.html" class="btn btn-secondary">What is Cloud Security?</a>
+                <a href="resources.html" class="btn btn-secondary">Resources</a>
+                <a href="glossary.html" class="btn btn-secondary">Glossary</a>
             </div>
         </div>
+
+        <section class="section" style="margin-top: 2.5rem;">
+            <h2>Popular destinations</h2>
+            <p>If you arrived from an external link that no longer works, the most common destinations are:</p>
+            <div class="resource-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.9rem;">
+                <a href="what-is-cloud-security.html" class="card-link">
+                    <div class="resource-card">
+                        <h3>What is Cloud Security?</h3>
+                        <p>The vendor-neutral foundation — shared responsibility, threats, tool landscape.</p>
+                    </div>
+                </a>
+                <a href="learning-path.html" class="card-link">
+                    <div class="resource-card">
+                        <h3>Learning Path</h3>
+                        <p>Beginner → working practitioner roadmap with milestones.</p>
+                    </div>
+                </a>
+                <a href="cloud-security-best-practices.html" class="card-link">
+                    <div class="resource-card">
+                        <h3>Best Practices</h3>
+                        <p>The controls that actually prevent breaches, ranked by real incident root cause.</p>
+                    </div>
+                </a>
+                <a href="resources.html" class="card-link">
+                    <div class="resource-card">
+                        <h3>Resources Directory</h3>
+                        <p>200+ tools, labs, CTFs, certifications, AI security materials.</p>
+                    </div>
+                </a>
+                <a href="breach-timeline.html" class="card-link">
+                    <div class="resource-card">
+                        <h3>Breach Kill Chains</h3>
+                        <p>10 real cloud breaches mapped to MITRE ATT&amp;CK.</p>
+                    </div>
+                </a>
+                <a href="glossary.html" class="card-link">
+                    <div class="resource-card">
+                        <h3>Glossary</h3>
+                        <p>230+ cloud-security terms, plain-English. Searchable.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="section" style="margin-top: 1.5rem;">
+            <h2>Search the site</h2>
+            <p>Each of these has its own search:</p>
+            <ul>
+                <li><a href="glossary.html">Glossary</a> — search 230+ cloud-security terms</li>
+                <li><a href="resources.html">Resources</a> — filter 200+ tools, labs and certifications</li>
+                <li><a href="meetings.html">Meeting recaps</a> — search 91 weekly Friday-Zoom recaps by topic or speaker</li>
+                <li><a href="news.html">News</a> — latest cloud-security news, refreshed every 3 hours</li>
+            </ul>
+        </section>
+
+        <script>
+        // Detect a few common old-URL patterns and offer the new URL.
+        // Runs purely on the client because the server returns this static
+        // 404 page — we don't have access to server logs from here.
+        // The original URL the user tried lives in document.referrer (if
+        // they followed a link) or window.location.search (if a 301-from-X
+        // landing page passed it through). Both are best-effort hints.
+        (function () {
+          const hint = document.getElementById('redirect-hint');
+          const link = document.getElementById('redirect-link');
+          if (!hint || !link) return;
+
+          // Prefer the hash from the location the user requested. We can't
+          // see the original requested path on a static 404, so we rely on
+          // window.location.hash if Apache is configured to forward it,
+          // and on a `?from=` query string if a server-side rewrite passes
+          // the original path. Both are graceful no-ops if absent.
+          const params = new URLSearchParams(location.search);
+          const oldPath = params.get('from') || '';
+          const oldHash = location.hash || '';
+
+          let target = null;
+
+          // Old: breach-timeline.html#capital-one  →  /breaches/capital-one.html
+          if (oldPath.includes('breach-timeline') || /breach-timeline/i.test(document.referrer)) {
+            const slug = (oldHash.replace('#', '') || '').toLowerCase();
+            const knownBreaches = [
+              'capital-one','solarwinds','uber','lastpass','storm-0558',
+              'microsoft-sas-leak','scattered-spider-mgm','promptware',
+              'snowflake-unc5537','mitnick-novell',
+            ];
+            if (knownBreaches.includes(slug)) {
+              target = '/breaches/' + slug + '.html';
+            } else {
+              target = '/breach-timeline.html';
+            }
+          }
+
+          // Old: meetings.html#meeting-2026-04-17  →  /meetings/2026-04-17.html
+          if (!target && (oldPath.includes('meetings') || /meetings\.html/i.test(document.referrer))) {
+            const m = oldHash.match(/meeting-(\d{4}-\d{2}-\d{2})/);
+            if (m) target = '/meetings/' + m[1] + '.html';
+            else if (oldPath.includes('meetings')) target = '/meetings.html';
+          }
+
+          if (target) {
+            link.href = target;
+            link.textContent = '→ ' + target;
+            hint.style.display = '';
+          }
+        })();
+        </script>
     </main>
 
     <footer>

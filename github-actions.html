@@ -29,11 +29,20 @@
     <meta name="twitter:description"
         content="GitHub Actions explained through CSOH's real, commented workflows.">
     <meta name="twitter:image" content="https://csoh.org/img/og/github-actions.jpg">
+    <!-- Resource hints: warm up TCP+TLS to high-traffic external origins
+         (the Zoom signup, GitHub, sponsor link, and YouTube image CDN
+         that hosts the presentation card thumbnails). Saves 100-300ms
+         on the first navigation/hover-to-fetch to each. -->
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=fbb7e2fe" as="style"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
-    <link rel="stylesheet" href="/style.css?v=fbb7e2fe"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
+    <link rel="preload" href="/style.css?v=5fd3667a" as="style"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
+    <link rel="stylesheet" href="/style.css?v=5fd3667a"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
 
     <script type="application/ld+json">
     {
@@ -154,7 +163,7 @@
     </nav>
 
     <section class="hero hero--compact">
-        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async"></picture>
+        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
         <h1>How We Use GitHub Actions</h1>
         <p>GitHub Actions explained against real, working production code — every concept tied to a specific line in CSOH's own workflows. If you learn better by reading other people's YAML than by reading the docs, this is for you.</p>
         <div class="cta-buttons">
@@ -163,7 +172,9 @@
         </div>
     </section>
     <main class="container contribute-article" id="main-content">
-        <div class="info-box--blue">
+        
+        <p class="page-meta"><time datetime="2026-04-30">Last updated <strong>2026-04-30</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/github-actions.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+<div class="info-box--blue">
             <p><strong>The honest version:</strong> GitHub Actions is the friendliest <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a>/CD platform you'll meet. It runs a script when something happens in your repo — a push, a pull request, a scheduled time, or a button click. That's it. Everything else is configuration. The docs are good but vast; the fastest way to actually <em>get</em> Actions is to read someone else's working YAML and trace what each line does. That's what this page is — every concept comes with a "go look at line N of this file in our repo" pointer.</p>
             <p style="margin-top:0.75rem;"><strong>What you'll need:</strong> a GitHub repository, comfort with git basics, and willingness to read shell. No prior CI/CD experience required.</p>
         </div>

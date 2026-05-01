@@ -29,11 +29,20 @@
     <meta name="twitter:description"
         content="The cloud security responsibility line, explained — with all three providers and the SaaS / managed-service edge cases.">
     <meta name="twitter:image" content="https://csoh.org/img/og/shared-responsibility-model.jpg">
+    <!-- Resource hints: warm up TCP+TLS to high-traffic external origins
+         (the Zoom signup, GitHub, sponsor link, and YouTube image CDN
+         that hosts the presentation card thumbnails). Saves 100-300ms
+         on the first navigation/hover-to-fetch to each. -->
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=fbb7e2fe" as="style"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
-    <link rel="stylesheet" href="/style.css?v=fbb7e2fe"
-        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
+    <link rel="preload" href="/style.css?v=5fd3667a" as="style"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
+    <link rel="stylesheet" href="/style.css?v=5fd3667a"
+        integrity="sha384-vlS6l2UodLqS99J5WC/GST2a1yaxcCkkF5BEUqoCht71D3XPpuZg2AIy4rSbNnIE">
 
     <script type="application/ld+json">
     {
@@ -186,7 +195,7 @@
     </nav>
 
     <section class="hero hero--compact">
-        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async"></picture>
+        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
         <h1>The Shared Responsibility Model</h1>
         <p>What the cloud provider secures versus what you secure — across <a class="glossary-link" href="glossary.html#term-iaas">IaaS</a>, <a class="glossary-link" href="glossary.html#term-paas">PaaS</a>, <a class="glossary-link" href="glossary.html#term-saas">SaaS</a>, <a class="glossary-link" href="glossary.html#term-serverless">serverless</a>, and the modern variants. With the gotchas, contractual fine print, and incident-response implications spelled out. Vendor-neutral.</p>
         <div class="cta-buttons">
@@ -195,7 +204,9 @@
         </div>
     </section>
     <main class="container contribute-article" id="main-content">
-        <div class="info-box--blue">
+        
+        <p class="page-meta"><time datetime="2026-04-30">Last updated <strong>2026-04-30</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/shared-responsibility-model.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+<div class="info-box--blue">
             <p><strong>The 30-second version:</strong> The cloud provider secures the underlying platform — physical data centers, <a class="glossary-link" href="glossary.html#term-hypervisor">hypervisor</a>, managed-service internals. You secure how you configure and use it — <a class="glossary-link" href="glossary.html#term-iam">IAM</a>, network rules, data, code, workloads. The dividing line shifts depending on whether you're using IaaS (you secure most of it), PaaS (less), SaaS (least), or serverless (somewhere in between). Most "cloud breaches" are misunderstandings of where the line sits — not provider failures.</p>
         </div>
 
