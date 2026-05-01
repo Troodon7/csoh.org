@@ -184,7 +184,7 @@ If you want to provide your own, save a JPG under ~150 KB with a clear name (e.g
 **Here's what a resource card looks like:**
 
 ```html
-<a href="PASTE_YOUR_URL_HERE" class="card-link" target="_blank">
+<a href="PASTE_YOUR_URL_HERE" class="card-link" target="_blank" rel="noopener noreferrer">
     <div class="resource-card" data-tooltip="Extended 2-3 sentence description that appears on hover. Cover what makes it unique, who benefits most, and any prerequisites or cost info.">
         <h3>Your Resource Name</h3>
         <p>Your resource description goes here. Keep it to 1-2 sentences explaining what it does and why it's useful.</p>

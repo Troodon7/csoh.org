@@ -36,7 +36,7 @@ AVAILABLE_TAGS = [
     'CTF', 'Labs & Training', 'Tool', 'Certification', 'Job Search',
     'Vulnerability Testing', 'Penetration Testing', 'Cloud Scanning',
     'Secrets Management', 'Compliance', 'AI Security', 'IAM', 'DevSecOps',
-    'NEW 2025', 'Free', 'Paid', 'Open Source'
+    'NEW 2026', 'Free', 'Paid', 'Open Source'
 ]
 
 def print_header(text):

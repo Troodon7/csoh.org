@@ -111,7 +111,7 @@ csoh.org/
 ├── breach-timeline.js      # Breach timeline page specific JS
 │
 ├── tools/                  # Python automation scripts (URL safety, normalization, previews, sitemap, presentations schema, glossary cross-linking)
-├── .github/workflows/      # CI/CD pipelines (6 workflows)
+├── .github/workflows/      # CI/CD pipelines (7 workflows)
 └── update_news.py          # News aggregation from 39 RSS feeds
 ```
 
@@ -145,7 +145,7 @@ csoh.org/
 - **You do not need to update SRI hashes manually** -- CI handles it on merge
 
 **News Aggregation**
-- `update_news.py` pulls from 32 RSS/Atom feeds every 3 hours (via GitHub Actions)
+- `update_news.py` pulls from 39 RSS/Atom feeds every 3 hours (via GitHub Actions)
 - Generates `news.html` and `feed.xml`, regenerates the `NewsArticle` JSON-LD block on `news.html`, and refreshes `sitemap.xml` lastmod dates
 - Preserves cards already on `news.html` across runs so today-dated items don't disappear when RSS feeds rotate
 - PRs are auto-created and auto-merged if only `news.html`, `feed.xml`, and `sitemap.xml` changed
