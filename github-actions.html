@@ -312,10 +312,17 @@ jobs:
             <h3>3. Concurrency: queue, cancel, or both?</h3>
             <p>Two common patterns, and getting them mixed up causes either lost runs or lost time:</p>
             <ul>
-                <li><strong>Queue (don't cancel):</strong> <code>cancel-in-progress: false</code>. Right for things you can't lose — deploys, content commits, anything that mutates state. Multiple triggers stack and run one after another. CSOH's deploy-pipeline group works this way.</li>
-                <li><strong>Cancel old runs:</strong> <code>cancel-in-progress: true</code>. Right for read-only checks per branch — validators, linters, link checkers. Push a fix, the old run dies, the new one starts. Saves time.</li>
+                <li><strong>Queue (don't cancel):</strong> <code>cancel-in-progress: false</code>. Right for things you can't lose — auto-PR creators, scheduled content jobs, manual deploys, anything you'd rather queue than drop. Multiple triggers stack and run one after another.</li>
+                <li><strong>Cancel old runs:</strong> <code>cancel-in-progress: true</code>. Right for read-only checks per branch — validators, linters, link checkers — and for idempotent deploys where the latest push is the one you want shipped. Push a fix, the old run dies, the new one starts.</li>
             </ul>
-            <p>Mistake we made: at first, our deploy workflow had no concurrency at all. Two news-update commits within a minute spawned two simultaneous deploys that interleaved their commits and corrupted the deployed site.</p>
+            <p>How CSOH currently splits these:</p>
+            <ul>
+                <li><strong><code>site-update-deploy</code> (deploy-pipeline group, cancel old):</strong> deploys are idempotent — the latest content is always the right thing to ship. Cancelling an in-flight deploy when a new push arrives avoids the "stale-content deploy wins the race" failure mode.</li>
+                <li><strong><code>manual-deploy</code> + <code>normalize-urls</code> (same deploy-pipeline group, queue):</strong> share the lock with site-update-deploy so an FTP transfer never collides with another, but stay queued because losing a manual deploy or a URL-normalization sweep would be silent and surprising.</li>
+                <li><strong><code>update-news</code> (its own group, queue):</strong> opens a PR on its own branch — doesn't push to main or run a deploy, so it doesn't need the deploy-pipeline lock. Keeping a separate group means a freshly queued site deploy doesn't cancel a news refresh mid-run.</li>
+                <li><strong>Per-PR check workflows (per-ref group, cancel old):</strong> push a fix, kill the stale check, start fresh on the new commit.</li>
+            </ul>
+            <p>Mistake we made: at first, our deploy workflow had no concurrency at all. Two news-update commits within a minute spawned two simultaneous deploys that interleaved their commits and corrupted the deployed site. Adding any concurrency group fixed the corruption; getting the queue/cancel split right took a few iterations.</p>
 
             <h3>4. <code>git push</code> from a runner can race with concurrent runs</h3>
             <p>Even with concurrency groups, you can race against <em>other workflows</em> in different groups (or against humans). A safer push pattern:</p>
