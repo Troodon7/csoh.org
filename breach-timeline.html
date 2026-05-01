@@ -19,16 +19,16 @@
     <meta property="og:description" content="Step-by-step cloud security breach kill chains mapped to MITRE ATT&CK Cloud — Capital One, SolarWinds, MGM, Snowflake and more, vendor-neutral.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://csoh.org/breach-timeline.html">
-    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta property="og:image" content="https://csoh.org/img/og/breach-timeline.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cloud Breach Kill Chains">
     <meta name="twitter:description" content="Step-by-step cloud security breach kill chains mapped to MITRE ATT&CK Cloud.">
-    <meta name="twitter:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:image" content="https://csoh.org/img/og/breach-timeline.jpg">
 
-    <link rel="preload" href="/style.css?v=cf18a7d8" as="style"
-        integrity="sha384-kRz7g4pwU4Axw8bzosxazAqxDTYPToBDgxbpqn1dyif9devQw+39xr8FEhGNQrDZ">
-    <link rel="stylesheet" href="/style.css?v=cf18a7d8"
-        integrity="sha384-kRz7g4pwU4Axw8bzosxazAqxDTYPToBDgxbpqn1dyif9devQw+39xr8FEhGNQrDZ">
+    <link rel="preload" href="/style.css?v=fbb7e2fe" as="style"
+        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
+    <link rel="stylesheet" href="/style.css?v=fbb7e2fe"
+        integrity="sha384-cxkKAVG98rEoNqA16WtWq8NWwvLhoeOGyfPGV0hleqva5z4EuqHlvH9V9kdhC2m0">
     <link rel="stylesheet" href="breach-timeline.css?v=29fbd6a9" integrity="sha384-WrezLhCC8Bdnk6bhRviNG3f7jv+K1IW8/RCNel8OBIyPAd9wiZ4IMtSBG5Nu6Wja">
 
     <script type="application/ld+json">
@@ -67,6 +67,77 @@
         }
       ]
     }
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Cloud Breach Kill Chains",
+  "description": "Step-by-step cloud security breach kill chains, mapped to MITRE ATT&CK.",
+  "numberOfItems": 10,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "url": "https://csoh.org/breaches/mitnick-novell.html",
+      "name": "Kevin Mitnick / Novell – OSINT → Pretexting → Phone Social Engineering → Dial-Up Access → NetWare Source Code Theft"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "url": "https://csoh.org/breaches/capital-one.html",
+      "name": "Capital One – SSRF → IMDSv1 → Over-Privileged IAM Role → 106M Record S3 Exfiltration"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "url": "https://csoh.org/breaches/solarwinds.html",
+      "name": "SolarWinds – Build System Compromise → SUNBURST Backdoor → On-Prem to Cloud Pivot → Golden SAML → US Government Espionage"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "url": "https://csoh.org/breaches/uber.html",
+      "name": "Uber – Dark Web Creds → MFA Push Fatigue → Hardcoded PAM Secret → Full AWS/GCP Admin"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "url": "https://csoh.org/breaches/lastpass.html",
+      "name": "LastPass – Dev Env Breach → Source Code Recon → DevOps Home PC (Plex Exploit) → Keylogger → AWS S3 Vault Backup Exfil"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "url": "https://csoh.org/breaches/storm-0558.html",
+      "name": "Storm-0558 – Compromised Engineer → Crash Dump → Stolen MSA Signing Key → Forged Tokens → Government Email Espionage"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "url": "https://csoh.org/breaches/microsoft-sas-leak.html",
+      "name": "Microsoft AI Research SAS Token — Over-Permissioned Token → Public GitHub → 38TB Internal Data Exposed for 3 Years"
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "url": "https://csoh.org/breaches/scattered-spider-mgm.html",
+      "name": "Scattered Spider / MGM Resorts – LinkedIn OSINT → Vishing Help Desk → Okta Super Admin → Azure AD → 100 ESXi Servers Encrypted"
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "url": "https://csoh.org/breaches/promptware.html",
+      "name": "Promptware – Indirect Prompt Injection → Context Poisoning → Persistence → C2 → Covert Camera Livestream"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "url": "https://csoh.org/breaches/snowflake-unc5537.html",
+      "name": "UNC5537 / Snowflake – Infostealer Creds → No MFA → SHOW TABLES → Bulk Exfil → 100+ Orgs Extorted"
+    }
+  ]
+}
     </script>
 </head>
 
@@ -340,6 +411,7 @@
           <p>Cloud Security Office Hours is a vendor-neutral community for cloud
           security professionals. We meet weekly on Zoom and maintain this curated
           collection of resources.</p>
+          <p style="margin-top:0.75rem;">Founded by <a href="/about-shawn-nunley.html">Shawn Nunley</a>.</p>
         </div>
       </div>
 

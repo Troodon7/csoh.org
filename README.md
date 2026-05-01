@@ -1,6 +1,8 @@
-# Cloud Security Office Hours (CSOH)
+# Cloud Security Office Hours
 
-A community-run cloud-security resource hub, built as a static website. Weekly Zoom sessions, a curated resources catalog, news aggregation, and an RSS feed.
+**Vendor-neutral cloud-security community. 2,000+ practitioners. Free weekly Zoom on Fridays. No marketing.**
+
+🌐 **[csoh.org](https://csoh.org)** · 📅 **[Friday Zoom 7am PT](https://sendfox.com/CSOH)** · 📡 **[RSS](https://csoh.org/feed.xml)**
 
 [![GitHub](https://img.shields.io/badge/GitHub-CloudSecurityOfficeHours/csoh.org-blue)](https://github.com/CloudSecurityOfficeHours/csoh.org)
 [![Mailing List](https://img.shields.io/badge/Mailing%20List-2000%2B%20Members-orange)](https://sendfox.com/CSOH)
@@ -8,36 +10,57 @@ A community-run cloud-security resource hub, built as a static website. Weekly Z
 
 ---
 
-## About CSOH
+## ⭐ Featured Guides
 
-Cloud Security Office Hours is a vendor-neutral, free community founded in February 2023. What's here:
+The vendor-neutral pillars of cloud security, written by practitioners:
 
-- Weekly Zoom sessions, Fridays at 7am PT with guest speakers.
-- A curated resources catalog (CTFs, labs, tools, certifications).
-- 1,000+ curated external links spanning 493 domains across the site.
-- Cloud-security news aggregated every 3 hours from 39 RSS feeds.
-- A 200+ term [glossary](glossary.html) and [FAQ](faq.html) for newcomers.
-- A community [Code of Conduct](code-of-conduct.html) and [Privacy Policy](privacy.html) — no cookies, no trackers, no marketing.
-- The RSS feed itself at [csoh.org/feed.xml](https://csoh.org/feed.xml).
-- Mailing list — sign up at [sendfox.com/CSOH](https://sendfox.com/CSOH) to get the weekly Zoom link and calendar info.
+| Guide | What it covers |
+|---|---|
+| 📚 [What is Cloud Security?](https://csoh.org/what-is-cloud-security.html) | The plain-English foundation — shared responsibility, threats, tool landscape |
+| 🛣️ [Cloud Security Learning Path](https://csoh.org/learning-path.html) | Beginner → working practitioner roadmap with milestones |
+| ✅ [Cloud Security Best Practices](https://csoh.org/cloud-security-best-practices.html) | The controls that actually prevent breaches, ranked by what shows up in real incidents |
+| ⚖️ [Shared Responsibility Model](https://csoh.org/shared-responsibility-model.html) | What the cloud provider secures vs. what you secure (AWS / Azure / GCP) |
+| 🛠️ [CSPM vs CNAPP vs CWPP vs CIEM vs DSPM](https://csoh.org/cspm-vs-cnapp.html) | The acronym soup decoded — when you need each tool |
+| 🎓 [Cloud Security Certifications](https://csoh.org/cloud-security-certifications.html) | CCSK, CCSP, AWS, Azure, GCP, CKS compared side by side |
+| ⚙️ [How We Use GitHub Actions](https://csoh.org/github-actions.html) | Learn CI/CD by reading our heavily-commented workflows |
+
+## 📚 Reference & Practice
+
+| Resource | Size |
+|---|---|
+| 📖 [Glossary](https://csoh.org/glossary.html) | 230+ cloud-security terms, plain-English |
+| 🛡️ [Resources Directory](https://csoh.org/resources.html) | 200+ tools, labs, CTFs, certifications |
+| 🚩 [CTF Challenges](https://csoh.org/ctfs.html) | 37+ hands-on cloud CTFs across AWS / Azure / GCP / Kubernetes / AI |
+| 🏟️ [Conferences](https://csoh.org/conferences.html) | 27 security & hacker conferences, with pros & cons |
+| 🔗 [Breach Kill Chains](https://csoh.org/breach-timeline.html) | 10 real cloud breaches mapped to MITRE ATT&CK |
+| 📰 [Cloud Security News](https://csoh.org/news.html) | 120+ articles, refreshed every 3 hours from 39 sources |
+| 📅 [Meeting Recaps](https://csoh.org/meetings.html) | 91 weekly session recaps, searchable |
+
+---
+
+## 🌐 About
+
+Cloud Security Office Hours is a vendor-neutral, free community founded in February 2023. We meet on Zoom every Friday at 7am PT, share what we're learning, and maintain this resource hub. Everything is free, nothing is sponsored, no trackers, no marketing.
+
+Sign up for the weekly Zoom link at **[sendfox.com/CSOH](https://sendfox.com/CSOH)**. Subscribe to our cloud-security news at **[csoh.org/feed.xml](https://csoh.org/feed.xml)** (or visit the [RSS subscribe page](https://csoh.org/rss.html) for setup help).
 
 ---
 
 ## 🎓 Getting Started
 
-**New to cloud security?** Cloud security is the practice of protecting data, applications, and infrastructure hosted in cloud environments like AWS, Azure, and Google Cloud. As organizations move to the cloud, securing these environments has become one of the fastest-growing and most in-demand areas in cybersecurity.
+**New to cloud security?** It's the practice of protecting data, applications, and infrastructure hosted in cloud environments like AWS, Azure, and Google Cloud — one of the fastest-growing areas in cybersecurity.
 
-Here's our recommended learning path:
+Our recommended learning sequence:
 
-1. **Get the Lay of the Land**: Read [What is Cloud Security?](what-is-cloud-security.html) — the vendor-neutral pillar overview of the field
-2. **Follow the Roadmap**: Walk the [Learning Path](learning-path.html) — beginner → advanced with milestones, free labs, and study targets
-3. **Decode the Acronyms**: Skim the [Glossary](glossary.html) — 200+ terms, every cross-reference hyperlinked
-4. **Read the FAQ**: The [FAQ](faq.html) covers how CSOH works — sessions, mailing list, recording policy, contributing
-5. **Start with Resources**: Browse [CTF Challenges](ctfs.html) and [Labs](resources.html#labs-training) for hands-on practice
-6. **Get Certified**: Compare options in the [Cloud Security Certifications guide](cloud-security-certifications.html) — CCSK, CCSP, AWS, Azure, GCP, CKS
-7. **Join the Mailing List**: Sign up at [sendfox.com/CSOH](https://sendfox.com/CSOH) to get the Zoom link for our weekly Friday sessions (7am PT)
-8. **Stay Updated**: Check [News](news.html) for latest threats and updates
-9. **Subscribe to RSS**: Add our [RSS feed](https://csoh.org/feed.xml) to your reader — see [RSS_FEED_README.md](RSS_FEED_README.md) for setup
+1. **Get the Lay of the Land**: [What is Cloud Security?](https://csoh.org/what-is-cloud-security.html) — vendor-neutral pillar overview of the field
+2. **Follow the Roadmap**: [Cloud Security Learning Path](https://csoh.org/learning-path.html) — beginner → advanced with milestones, free labs, study targets
+3. **Master the Fundamentals**: [Best Practices](https://csoh.org/cloud-security-best-practices.html) and the [Shared Responsibility Model](https://csoh.org/shared-responsibility-model.html)
+4. **Decode the Acronyms**: [Glossary](https://csoh.org/glossary.html) — 230+ terms, every cross-reference hyperlinked
+5. **Get Hands-On**: [CTF Challenges](https://csoh.org/ctfs.html) and [Resources](https://csoh.org/resources.html) for practice
+6. **Choose a Certification**: [Cloud Security Certifications guide](https://csoh.org/cloud-security-certifications.html) — CCSK, CCSP, AWS, Azure, GCP, CKS
+7. **Read Real Breaches**: [Breach Kill Chains](https://csoh.org/breach-timeline.html) — see how attacks actually happen
+8. **Join the Community**: [sendfox.com/CSOH](https://sendfox.com/CSOH) for the Friday Zoom link
+9. **Stay Updated**: [News](https://csoh.org/news.html), [RSS feed](https://csoh.org/feed.xml), or any [Friday Zoom recap](https://csoh.org/meetings.html)
 
 ---
 

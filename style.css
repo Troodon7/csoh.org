@@ -3240,9 +3240,15 @@ footer {
 
     .dropdown-menu {
         position: static;
-        background-color: rgba(0, 0, 0, 0.15);
+        /* Stronger tint + accent left bar make the "this is a sub-list"
+           relationship visually unambiguous on mobile. Without these,
+           sub-items at 2rem indent (e.g. "Best Practices") look almost
+           identical to top-level toggles like "Defend ▾", and a long
+           dropdown like Learn (10 items) becomes a flat wall of links. */
+        background-color: rgba(0, 0, 0, 0.28);
         box-shadow: none;
         border-radius: 0;
+        border-left: 3px solid var(--secondary-color, #3498db);
         padding: 0;
         min-width: 0;
         opacity: 1;
@@ -3255,7 +3261,9 @@ footer {
 
     .has-dropdown.open > .dropdown-menu {
         visibility: visible;
-        max-height: 600px;
+        /* Bumped from 600px so the Learn dropdown's 10 items don't clip on
+           narrow phones. */
+        max-height: 800px;
         transition: max-height 0.25s ease, visibility 0s;
     }
 
@@ -3275,9 +3283,25 @@ footer {
     }
 
     .dropdown-menu a {
-        padding: 0.6rem 1rem 0.6rem 2rem;
+        /* Deeper left padding (2.5rem) + a subtle ›-style chevron pseudo
+           gives sub-items a clearer "I am inside Learn / Defend / …"
+           feel that sets them apart from the top-level toggles above. */
+        padding: 0.55rem 1rem 0.55rem 2.5rem;
         font-size: 0.85rem;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
+        position: relative;
+        opacity: 0.92;
+    }
+    .dropdown-menu a::before {
+        content: "›";
+        position: absolute;
+        left: 1.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.5;
+        font-size: 0.95rem;
+        line-height: 1;
+        pointer-events: none;
     }
 
     /* Mobile: the current-page indicator keeps the row's full-width
@@ -3296,8 +3320,11 @@ footer {
 
     header .dropdown-menu a.active,
     header .dropdown-menu a[aria-current="page"] {
-        padding: 0.6rem 1rem 0.6rem 2rem;
+        /* Match the indented + chevron-prefixed shape of sibling sub-items
+           so the current-page row stays aligned in the open dropdown. */
+        padding: 0.55rem 1rem 0.55rem 2.5rem;
         border-radius: 0;
+        opacity: 1;
     }
 
     .has-dropdown::after {
