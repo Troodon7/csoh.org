@@ -473,9 +473,12 @@ def render_card(entry: Dict[str, str], indent: str) -> str:
     banner_img = ""
     if source_slug:
         banner_img = (
-            f"{indent}        <img src=\"img/news-banners/{source_slug}.jpg\" "
+            f"{indent}        <picture>"
+            f"<source srcset=\"img/news-banners/{source_slug}.webp\" type=\"image/webp\">"
+            f"<img src=\"img/news-banners/{source_slug}.jpg\" "
             f"alt=\"{html.escape(entry['source'])}\" "
-            f"class=\"resource-preview\" loading=\"lazy\">\n"
+            f"class=\"resource-preview\" loading=\"lazy\">"
+            f"</picture>\n"
         )
 
     return (

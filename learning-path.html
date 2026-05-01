@@ -14,6 +14,7 @@
     <link rel="canonical" href="https://csoh.org/learning-path.html">
     <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
     <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#2c3e50">
 
     <meta property="og:title" content="Cloud Security Learning Path - CSOH">
@@ -41,6 +42,22 @@
       "description": "A step-by-step roadmap for learning cloud security from beginner to advanced practitioner.",
       "totalTime": "P12M",
       "image": "https://csoh.org/banner.png",
+      "datePublished": "2024-09-01",
+      "dateModified": "2026-04-30",
+      "author": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
       "step": [
         {
           "@type": "HowToStep",
@@ -79,6 +96,53 @@
           "text": "Pick a specialization: detection engineering, incident response, IAM, Kubernetes security, AI security, or threat hunting. Deepen continuously."
         }
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Cloud Security Learning Path",
+      "description": "A vendor-neutral, step-by-step roadmap for learning cloud security from beginner to advanced practitioner — covering foundations, hands-on labs, certifications, and specialization tracks.",
+      "url": "https://csoh.org/learning-path.html",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "image": "https://csoh.org/banner.png",
+      "provider": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/",
+        "sameAs": "https://csoh.org/"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "educationalLevel": "Beginner to Advanced",
+      "learningResourceType": "Roadmap",
+      "teaches": [
+        "Cloud security fundamentals",
+        "Identity and access management (IAM)",
+        "Cloud network security",
+        "Container and Kubernetes security",
+        "Cloud incident response",
+        "Cloud penetration testing"
+      ],
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "Online",
+        "courseWorkload": "P12M",
+        "instructor": {
+          "@type": "Organization",
+          "name": "Cloud Security Office Hours"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "category": "Free"
+      }
     }
     </script>
     <script type="application/ld+json">
@@ -174,8 +238,7 @@
     </nav>
 
     <section class="hero hero--compact">
-        <img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img"
-            decoding="async">
+        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async"></picture>
         <h1>Cloud Security Learning Path</h1>
         <p>A practical roadmap from "I have no cloud experience" to working practitioner. Built from what actually works for the 2000+ people in the CSOH community — with milestones, free labs, and the certifications that matter.</p>
         <div class="cta-buttons">
