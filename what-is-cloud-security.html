@@ -283,7 +283,7 @@
             <ul>
                 <li><strong>Misconfiguration.</strong> Public buckets, exposed databases, open admin endpoints, missing logging.</li>
                 <li><strong>Over-privileged identities.</strong> A workload that has <code>*:*</code> when it should have read-only on one bucket. Capital One is the canonical example.</li>
-                <li><strong>Credential theft.</strong> <a class="glossary-link" href="glossary.html#term-phishing">Phishing</a>, malware, info-stealers, hardcoded secrets in source code, leaked tokens in <a class="glossary-link" href="glossary.html#term-ci">CI</a> logs. Snowflake/UNC5537 was almost entirely credential reuse.</li>
+                <li><strong>Credential theft.</strong> <a class="glossary-link" href="glossary.html#term-phishing">Phishing</a>, malware, info-stealers, hardcoded secrets in source code, leaked tokens in <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a> logs. Snowflake/UNC5537 was almost entirely credential reuse.</li>
                 <li><strong>Insecure APIs and <a class="glossary-link" href="glossary.html#term-ssrf">SSRF</a>.</strong> Web apps that can be coerced into calling internal endpoints, including the cloud metadata service. <a class="glossary-link" href="glossary.html#term-imds">IMDSv2</a> exists because of Capital One.</li>
                 <li><strong>Supply-chain compromise.</strong> A poisoned dependency, a compromised CI/CD step, a malicious GitHub Action. SolarWinds is the marquee case.</li>
                 <li><strong>Account takeover.</strong> <a class="glossary-link" href="glossary.html#term-mfa-fatigue">MFA fatigue</a>, session token theft, social engineering of helpdesks. Scattered Spider/MGM is the textbook example.</li>

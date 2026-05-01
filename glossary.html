@@ -297,7 +297,7 @@
                 <dd>The non-human principal a workload uses to authenticate (GCP service account, Azure managed identity, <a class="glossary-link" href="#term-kubernetes">Kubernetes</a> ServiceAccount → cloud role).</dd>
 
                 <dt id="term-oidc-federation">OIDC Federation (workload identity federation)</dt>
-                <dd>A workload presents a short-lived <a class="glossary-link" href="#term-oidc">OIDC</a> token from its host (e.g., GitHub Actions) which the cloud trusts to issue temporary credentials. Removes long-lived secrets from <a class="glossary-link" href="#term-ci">CI</a>.</dd>
+                <dd>A workload presents a short-lived <a class="glossary-link" href="#term-oidc">OIDC</a> token from its host (e.g., GitHub Actions) which the cloud trusts to issue temporary credentials. Removes long-lived secrets from <a class="glossary-link" href="#term-ci-cd">CI</a>.</dd>
 
                 <dt id="term-conditional-access">Conditional Access</dt>
                 <dd>Policy that grants access only when contextual conditions are met (device compliant, location, risk score).</dd>
@@ -819,7 +819,7 @@
                 <dt id="term-gitops">GitOps</dt>
                 <dd>Use Git as the source of truth for desired state; an <a class="glossary-link" href="#term-agent">agent</a> reconciles the live system to match.</dd>
 
-                <dt id="term-ci">CI/CD — Continuous Integration / Continuous Delivery</dt>
+                <dt id="term-ci-cd">CI/CD — Continuous Integration / Continuous Delivery</dt>
                 <dd>Pipelines that build, test, and deploy code automatically.</dd>
 
                 <dt id="term-immutable-infrastructure">Immutable Infrastructure</dt>
@@ -838,7 +838,7 @@
                 <dd>Long-lived API keys checked into repos, dumped in shell histories, or shared in chat. Cloud's most reliable attack source.</dd>
 
                 <dt id="term-shift-left">Shift Left / Shift Right</dt>
-                <dd>Doing security in dev/<a class="glossary-link" href="#term-ci">CI</a> (left) vs. runtime/production (right). Both are needed.</dd>
+                <dd>Doing security in dev/<a class="glossary-link" href="#term-ci-cd">CI</a> (left) vs. runtime/production (right). Both are needed.</dd>
 
                 <dt id="term-toil">Toil</dt>
                 <dd>Repetitive manual operational work. SRE term — the thing automation aims to eliminate.</dd>
@@ -886,7 +886,7 @@
                 <dd>The <a class="glossary-link" href="#term-kev">Known Exploited Vulnerabilities</a> catalog maintained by <a class="glossary-link" href="#term-cisa">CISA</a>. The authoritative "patch this now" list for vulnerabilities seen in real attacks.</dd>
 
                 <dt id="term-owasp-zap">OWASP ZAP</dt>
-                <dd>Open-source web-application security scanner from <a class="glossary-link" href="#term-owasp">OWASP</a>. Common in <a class="glossary-link" href="#term-ci">CI</a> pipelines for <a class="glossary-link" href="#term-sast">DAST</a>.</dd>
+                <dd>Open-source web-application security scanner from <a class="glossary-link" href="#term-owasp">OWASP</a>. Common in <a class="glossary-link" href="#term-ci-cd">CI</a> pipelines for <a class="glossary-link" href="#term-sast">DAST</a>.</dd>
 
                 <dt id="term-openssf-scorecard">OpenSSF Scorecard</dt>
                 <dd>Automated checks that score the security posture of an open-source project — signed releases, branch protection, dependency pinning, fuzzing — producing a 0–10 score.</dd>
