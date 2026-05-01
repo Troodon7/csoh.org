@@ -358,6 +358,19 @@ jobs:
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
+      # .htaccess is server config — when it changes (CSP rule tweak, new
+      # rewrite rule, etc.) we MUST redeploy or the live site keeps using
+      # the stale config. The HTML-only check above misses this.
+      - name: Check if .htaccess changed
+        id: htaccess_changed
+        run: |
+          ORIG_SHA="${{ steps.original_sha.outputs.sha }}"
+          if git diff --name-only "${ORIG_SHA}^" "${ORIG_SHA}" -- '.htaccess' | grep -q .; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
       # Decide whether the FTP deploy actually needs to run. We deploy when
       # ANY of these are true:
       #   - SRI hashes changed
@@ -365,13 +378,14 @@ jobs:
       #   - previews were generated
       #   - new chat-screenshots
       #   - any HTML changed
+      #   - .htaccess changed (server config — must push to live)
       #   - manual workflow_dispatch trigger
       # If none of the above, we skip the deploy entirely — saves the FTP
       # bandwidth and surface area for nothing-to-do runs.
       - name: Check if deploy is needed
         id: deploy_needed
         run: |
-          if [[ "${{ steps.sri.outputs.changed }}" == "true" || "${{ steps.sitemap.outputs.changed }}" == "true" || "${{ steps.check_previews.outputs.missing }}" == "true" || "${{ steps.check_chat_screenshots.outputs.new }}" == "true" || "${{ steps.html_changed.outputs.changed }}" == "true" || "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          if [[ "${{ steps.sri.outputs.changed }}" == "true" || "${{ steps.sitemap.outputs.changed }}" == "true" || "${{ steps.check_previews.outputs.missing }}" == "true" || "${{ steps.check_chat_screenshots.outputs.new }}" == "true" || "${{ steps.html_changed.outputs.changed }}" == "true" || "${{ steps.htaccess_changed.outputs.changed }}" == "true" || "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             echo "deploy=true" >> $GITHUB_OUTPUT
           else
             echo "deploy=false" >> $GITHUB_OUTPUT
