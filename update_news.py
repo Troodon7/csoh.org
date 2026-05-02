@@ -630,6 +630,136 @@ def _entry_date(entry: Dict[str, str]) -> dt.datetime:
     )
 
 
+# Tokens that are common across news headlines and don't carry topic signal.
+# 4-char minimum already filters most function words; this list trims the rest.
+NEAR_DUP_STOPWORDS = frozenset({
+    "about", "across", "after", "against", "amid", "among", "amongst",
+    "around", "before", "between", "could", "during", "from", "have",
+    "into", "just", "less", "more", "much", "over", "post", "said",
+    "says", "should", "such", "than", "that", "their", "them", "then",
+    "there", "these", "they", "this", "those", "throughout", "until",
+    "upon", "very", "were", "what", "when", "where", "which", "while",
+    "with", "would", "appeared", "first", "second", "third", "today",
+    "year", "years", "week", "weeks", "month", "months", "monday",
+    "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
+    "amid", "amidst", "also", "back", "been", "being", "down", "each",
+    "ever", "even", "from", "into", "like", "made", "make", "many",
+    "much", "must", "near", "next", "only", "other", "some", "soon",
+    "still", "take", "took", "used", "using", "well", "your", "yours",
+})
+
+
+# Long tokens that show up across unrelated cybersec headlines and so don't
+# imply same-event when shared. Excluded from the "distinctive" signature.
+# (Vendor names, product names, attack names, and topic anchors like
+# "ransomware"/"kubernetes"/"vulnerability" are deliberately *not* listed —
+# sharing those across two articles is a real signal.)
+NEAR_DUP_GENERIC_LONG = frozenset({
+    "addressing", "affecting", "announced", "announces", "announcing",
+    "announcement", "application", "applications", "assessment",
+    "assessments", "automated", "automation", "businesses",
+    "compliance", "configuration", "configurations", "continuous",
+    "continuously", "critical", "customer", "customers", "developer",
+    "developers", "discovered", "discovers", "engineering", "engineers",
+    "enterprise", "enterprises", "feature", "features", "generation",
+    "generations", "hundreds", "identity", "identities", "industry",
+    "industries", "introduced", "introduces", "introducing", "millions",
+    "multiple", "operation", "operations", "organization",
+    "organizations", "patch", "patched", "patches", "patching",
+    "platform", "platforms", "practices", "preventing", "process",
+    "processes", "product", "products", "professional", "professionals",
+    "providing", "regulations", "regulatory", "release", "released",
+    "releases", "releasing", "research", "researcher", "researchers",
+    "sensitive", "service", "services", "specific", "strengthens",
+    "subscription", "subscriptions", "successful", "successfully",
+    "techniques", "thousands", "update", "updated", "updates",
+    "updating", "vulnerabilities", "vulnerability", "vulnerable",
+    "workload", "workloads",
+})
+
+
+def _signature_tokens(text: str) -> frozenset:
+    tokens = re.findall(r"[a-z0-9]{4,}", text.lower())
+    return frozenset(t for t in tokens if t not in NEAR_DUP_STOPWORDS)
+
+
+def near_dup_signature(entry: Dict[str, str]) -> Tuple[frozenset, frozenset, frozenset]:
+    """Return (all-tokens, distinctive-tokens, title-tokens) fingerprints.
+
+    `distinctive` keeps tokens of length >= 8 minus generic cybersec filler,
+    so its members are typically named entities, product names, or topic
+    anchors (BlackCat, kubernetes, anthropic, ransomware, vulnerability).
+    `title_tokens` lets us catch same-event coverage where summaries diverge
+    but headlines still share the topic anchors.
+    """
+    title = strip_html(html.unescape(entry.get("title", "")))
+    summary = strip_html(html.unescape(entry.get("summary", "")))[:300]
+    all_tokens = _signature_tokens(f"{title} {summary}")
+    distinctive = frozenset(
+        t for t in all_tokens if len(t) >= 8 and t not in NEAR_DUP_GENERIC_LONG
+    )
+    # Title set drops generic content words too — "AWS Patches Critical X
+    # Vulnerability" headlines shouldn't count {patches, critical, vulnerability}
+    # toward an event-match against a different vendor's bulletin.
+    title_significant = frozenset(
+        t for t in _signature_tokens(title) if t not in NEAR_DUP_GENERIC_LONG
+    )
+    return all_tokens, distinctive, title_significant
+
+
+def is_near_duplicate(
+    sig: Tuple[frozenset, frozenset, frozenset],
+    kept: Iterable[Tuple[frozenset, frozenset, frozenset]],
+) -> bool:
+    """True if `sig` shares enough significant tokens with any `kept` signature.
+
+    Four layered tests catch different shapes of same-event coverage:
+      - Jaccard >= 0.30 on all tokens (broad overlap)
+      - smaller-side overlap >= 0.55 (one outlet had a long summary)
+      - shared distinctive (8+ char, non-generic) tokens >= 3 (same named
+        entities/topic anchors even when wording diverges)
+      - shared title tokens >= 3 (different summaries, similar headlines)
+    """
+    sig_all, sig_distinctive, sig_title = sig
+    if len(sig_all) < 5:
+        return False
+    for other_all, other_distinctive, other_title in kept:
+        if len(other_all) < 5:
+            continue
+        intersection = len(sig_all & other_all)
+        if intersection >= 3:
+            union = len(sig_all | other_all)
+            if union and intersection / union >= 0.30:
+                return True
+            smaller = min(len(sig_all), len(other_all))
+            if smaller and intersection / smaller >= 0.55:
+                return True
+            if len(sig_distinctive & other_distinctive) >= 3:
+                return True
+        if len(sig_title & other_title) >= 3:
+            return True
+    return False
+
+
+def dedupe_near_entries(entries: List[Dict[str, str]]) -> Tuple[List[Dict[str, str]], int]:
+    """Drop entries whose title+summary tokens overlap heavily with one already kept.
+
+    Iterates in input order, so callers should pre-sort (typically newest-first
+    so the most recent rendering of an event wins). Returns (kept, dropped_count).
+    """
+    kept: List[Dict[str, str]] = []
+    kept_sigs: List[Tuple[frozenset, frozenset, frozenset]] = []
+    dropped = 0
+    for entry in entries:
+        sig = near_dup_signature(entry)
+        if is_near_duplicate(sig, kept_sigs):
+            dropped += 1
+            continue
+        kept.append(entry)
+        kept_sigs.append(sig)
+    return kept, dropped
+
+
 def build_entries(
     news_path: str,
     resources_path: str,
@@ -690,6 +820,7 @@ def build_entries(
         raise ValueError("No news items found from feeds or preserved page")
 
     all_entries.sort(key=_entry_date, reverse=True)
+    all_entries, near_dropped = dedupe_near_entries(all_entries)
     selected: List[Dict[str, str]] = all_entries[:max_articles]
 
     today_count = sum(1 for e in selected if _entry_date(e).date() == today_date)
@@ -706,6 +837,8 @@ def build_entries(
         if extras:
             all_entries = extras + all_entries
             all_entries.sort(key=_entry_date, reverse=True)
+            all_entries, extra_dropped = dedupe_near_entries(all_entries)
+            near_dropped += extra_dropped
             selected = all_entries[:max_articles]
             fallback_used = len(extras)
             today_count = sum(1 for e in selected if _entry_date(e).date() == today_date)
@@ -726,7 +859,8 @@ def build_entries(
     print(
         f"Selected {len(selected)} entries ({today_count} from today, "
         f"{len(preserved)} preserved, {len(collected)} new from feeds, "
-        f"{fallback_used} relaxed-filter today top-ups).",
+        f"{fallback_used} relaxed-filter today top-ups, "
+        f"{near_dropped} near-duplicates dropped).",
         file=sys.stderr,
     )
 
