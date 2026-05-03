@@ -273,5 +273,9 @@ RewriteRule ^conc8/index\.php/cloud-security-resources(/.*)?$ /resources.html [R
 RewriteRule ^conc8(/.*)?$ / [R=301,L]
 RewriteRule ^index\.php/?$ / [R=301,L]
 
-# --- Old top-level pages that no longer exist ---
-RewriteRule ^meetings\.html$ /sessions.html [R=301,L]
+# (Removed: meetings.html -> sessions.html redirect.
+#  meetings.html is a real page with 91 weekly recap entries — distinct
+#  content from sessions.html. The redirect was a stale leftover from
+#  before the meetings index was built and was silently consolidating
+#  the two pages in search engines. If you re-add a redirect here,
+#  remember to also remove meetings.html from sitemap.xml.)
