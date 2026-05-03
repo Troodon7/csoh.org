@@ -5,6 +5,7 @@ Track audit scores over time. Add a new row each time `/seo-audit` is run. Lower
 | Date | Overall | Technical | On-Page | Content | Performance | Mobile/A11y | Critical | Warnings | Report |
 |---|---|---|---|---|---|---|---|---|---|
 | 2026-04-30 | **88** | 95 | 90 | 88 | 75 | 95 | 2 | 6 | [baseline](2026-04-30-baseline.md) |
+| 2026-05-03 | **96** | 97 | 95 | 96 | 92 | 96 | 0 | 1 | [report](2026-05-03.md) |
 
 ## How to use
 
