@@ -168,8 +168,28 @@ def is_meaningful_redirect(original, resolved):
 # --- Main logic ----------------------------------------------------------
 
 
+def is_own_domain(url):
+    """Return True for URLs pointing at csoh.org itself.
+
+    These must never be rewritten by this script — canonical, og:url,
+    twitter:image, internal navigation, RSS alternate links, etc. all
+    reference our own domain. Following a 301 from /meetings.html to
+    /sessions.html (a real same-site redirect) and "normalizing" the
+    canonical to point at the redirect target would silently consolidate
+    two distinct pages into one in search engines.
+    """
+    try:
+        host = urlparse(url).netloc.lower()
+    except Exception:
+        return False
+    return host == 'csoh.org' or host.endswith('.csoh.org')
+
+
 def collect_all_urls():
-    """Scan all HTML files and return {filepath: [urls]} and deduplicated list."""
+    """Scan all HTML files and return {filepath: [urls]} and deduplicated list.
+
+    Same-domain (csoh.org) URLs are excluded — see is_own_domain for why.
+    """
     workspace = Path(__file__).parent.parent
     html_files = sorted(workspace.glob('*.html'))
 
@@ -178,7 +198,7 @@ def collect_all_urls():
     seen = set()
 
     for path in html_files:
-        urls = extract_urls_from_html(path)
+        urls = [u for u in extract_urls_from_html(path) if not is_own_domain(u)]
         file_urls[path] = urls
         for url in urls:
             if url not in seen:
