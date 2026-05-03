@@ -7,6 +7,8 @@ Track audit scores over time. Add a new row each time `/seo-audit` is run. Lower
 | 2026-04-30 | **88** | 95 | 90 | 88 | 75 | 95 | 2 | 6 | [baseline](2026-04-30-baseline.md) |
 | 2026-05-03 | **96** | 97 | 95 | 96 | 92 | 96 | 0 | 1 | [report](2026-05-03.md) |
 | 2026-05-03 (rerun) | **96** | 95 | 96 | 97 | 93 | 96 | 1 | 1 | [report](2026-05-03-rerun.md) |
+| 2026-05-03 (final) | **97** | 98 | 98 | 97 | 94 | 96 | 0 | 2 | [report](2026-05-03-final.md) |
+| 2026-05-03 (followup) | **98** | 99 | 99 | 99 | 94 | 96 | 0 | 0 | [report](2026-05-03-followup.md) |
 
 ## How to use
 
