@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="Step-by-step walkthrough for building a 3-account AWS Organization with IAM Identity Center, baseline guardrail SCPs, and centralized CloudTrail — as a cloud security portfolio project.">
+    <meta name="keywords" content="aws organization tutorial, scp guardrails, multi-account aws, terraform aws organization, aws identity center, cloud security portfolio project, baseline scps">
+    <title>Build a multi-account AWS Org with SCPs - Cloud Security Portfolio Project - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/portfolio/aws-org-scps.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Build a multi-account AWS Org with SCPs - CSOH Portfolio Project">
+    <meta property="og:description" content="Step-by-step walkthrough for building a 3-account AWS Organization with IAM Identity Center, baseline guardrail SCPs, and centralized CloudTrail — as a cloud security portfolio project.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/portfolio/aws-org-scps.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Build a multi-account AWS Org with SCPs">
+    <meta name="twitter:description" content="Step-by-step walkthrough for building a 3-account AWS Organization with IAM Identity Center, baseline guardrail SCPs, and centralized CloudTrail — as a cloud security portfolio project.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
+
+    <link rel="preload" href="/style.css?v=88ae4643" as="style"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+    <link rel="stylesheet" href="/style.css?v=88ae4643"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Build a multi-account AWS Org with SCPs",
+      "description": "Step-by-step walkthrough for building a 3-account AWS Organization with IAM Identity Center, baseline guardrail SCPs, and centralized CloudTrail — as a cloud security portfolio project.",
+      "totalTime": "PT8H",
+      "image": "https://csoh.org/banner.png",
+      "datePublished": "2026-05-04",
+      "dateModified": "2026-05-04",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/",
+        "logo": { "@type": "ImageObject", "url": "https://csoh.org/banner.png" }
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://csoh.org/" },
+        { "@type": "ListItem", "position": 2, "name": "Portfolio Projects", "item": "https://csoh.org/cloud-security-portfolio-projects.html" },
+        { "@type": "ListItem", "position": 3, "name": "Multi-account AWS Org", "item": "https://csoh.org/portfolio/aws-org-scps.html" }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="../cloud-security-careers.html">Careers</a></li>
+                            <li><a href="../cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="../cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+                            <li><a href="../cloud-security-reading-list.html">Reading List</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../community.html">Community &amp; Signal</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+            <li><span aria-current="page">Multi-account AWS Org</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <picture><source srcset="../banner.webp" type="image/webp"><img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
+        <h1>Build a multi-account AWS Org with SCPs</h1>
+        <p>Terraform a 3-account organization with IAM Identity Center, baseline guardrail SCPs, and centralized CloudTrail. Real production-shape work.</p>
+        <div class="cta-buttons">
+            <a href="#steps" class="btn btn-primary">Walkthrough</a>
+            <a href="../cloud-security-portfolio-projects.html" class="btn btn-secondary">All Portfolio Projects</a>
+        </div>
+    </section>
+    <main class="container contribute-article" id="main-content">
+
+        <p class="page-meta"><time datetime="2026-05-04">Last updated <strong>2026-05-04</strong></time> · <a href="../about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/portfolio/aws-org-scps.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>Time:</strong> ~6 hours &nbsp;·&nbsp; <strong>Difficulty:</strong> Intermediate &nbsp;·&nbsp; <strong>Stack:</strong> AWS · Terraform · IAM Identity Center · SCPs</p>
+        </div>
+
+        <section id="intro">
+            <p>Most cloud security work in real companies starts at the <em>Org level</em>: account vending, guardrails, federated access. Building a tiny version of that yourself proves you can think at that altitude — which is exactly what hiring managers screen for in mid-level and senior interviews.</p><p>The artifact is a public Terraform repo that, given a fresh AWS account, will provision a minimal-but-real production-shaped organization in 15 minutes. Hiring managers love this one.</p>
+        </section>
+
+        <div class="toc">
+            <h2>📖 On this page</h2>
+            <ol>
+                <li><a href="#deliverables">What you'll have at the end</a></li>
+                <li><a href="#prereqs">Prerequisites</a></li>
+                <li><a href="#steps">Step-by-step</a></li>
+                <li><a href="#managers">What hiring managers look for</a></li>
+                <li><a href="#mistakes">Common mistakes</a></li>
+                <li><a href="#publish">Where to publish</a></li>
+                <li><a href="#next">Where next</a></li>
+            </ol>
+        </div>
+
+        <section id="deliverables">
+            <h2>What you'll have at the end</h2>
+            <ul>
+                <li>A public Terraform repo that spins up a 3-account AWS Organization (management + workload + audit).</li>
+                <li>IAM Identity Center configured with one permission set and one assignment.</li>
+                <li>A baseline of SCPs covering: deny root usage, require MFA, deny region usage outside a chosen region, enforce IMDSv2.</li>
+                <li>Centralized CloudTrail in the audit account writing to an S3 bucket with object-lock.</li>
+                <li>A README explaining each design choice and the trade-off you considered.</li>
+            </ul>
+        </section>
+
+        <section id="prereqs">
+            <h2>Prerequisites</h2>
+            <ul>
+                <li>An AWS account that will become your Organization management account (use a separate email; don't use your existing personal account).</li>
+                <li><a href="/cloud-security-home-lab.html">Budget guardrails</a> on the management account.</li>
+                <li>Terraform 1.x and the AWS provider.</li>
+                <li>Comfort with HCL and the AWS console; this isn't a beginner project.</li>
+            </ul>
+        </section>
+
+        <section id="steps">
+            <h2>Step-by-step</h2>
+            <h3>1. Plan the account layout on paper first</h3>
+            <p>Sketch it: <code>management</code>, <code>workload-prod</code>, <code>workload-dev</code>, <code>audit</code>. (You can collapse <code>workload-prod/dev</code> for cost.) Decide which account owns CloudTrail, which OU each account lives in, and which SCPs apply at the OU vs root level.</p>
+            <h3>2. Bootstrap the management account</h3>
+            <p>In the management account, enable AWS Organizations and create a Terraform IAM user (or, better, a role assumed via federated SSO). Store its credentials in <code>~/.aws/credentials</code> as a named profile.</p>
+            <h3>3. Terraform the OU structure</h3>
+            <p>Create three OUs: <code>Workloads</code>, <code>Audit</code>, <code>Sandbox</code>. The <code>aws_organizations_organizational_unit</code> resource is what you want.</p><pre><code>resource "aws_organizations_organization" "this" {
+  feature_set = "ALL"
+  enabled_policy_types = ["SERVICE_CONTROL_POLICY"]
+}
+
+resource "aws_organizations_organizational_unit" "workloads" {
+  name      = "Workloads"
+  parent_id = aws_organizations_organization.this.roots[0].id
+}</code></pre>
+            <h3>4. Create the member accounts</h3>
+            <p>Use <code>aws_organizations_account</code> to create the workload and audit accounts. AWS issues each one a unique email (use Gmail's <code>+</code> aliasing or a catch-all).</p>
+            <h3>5. Write your first SCP</h3>
+            <p>Start with <strong>deny root user activity</strong> — the simplest non-trivial guardrail. Then add: deny disabling CloudTrail, deny regions other than us-east-1, require IMDSv2 on EC2 launches, require MFA for sensitive actions. Apply at the Workloads OU.</p>
+            <h3>6. Set up IAM Identity Center</h3>
+            <p>Enable Identity Center in the management account, create one permission set called <code>AdminAccess</code>, create one user (yourself), and assign that user to one account via the permission set. Sign in to the user portal and confirm SSO works end-to-end.</p>
+            <h3>7. Centralize CloudTrail in the audit account</h3>
+            <p>Enable an organization trail from the management account writing to a bucket <em>in the audit account</em>. Configure the bucket with object-lock (compliance mode, short retention so you can delete the lab later) and bucket policies that prevent deletion.</p>
+            <h3>8. Test the guardrails by trying to violate them</h3>
+            <p>Sign into a workload account, try to launch an instance in a forbidden region, try to disable CloudTrail, try to launch with IMDSv1. The SCPs should block each one. Screenshot every denial.</p>
+            <h3>9. Document the design decisions</h3>
+            <p>In the README: why three accounts? Why these SCPs? What's the threat model each one addresses? What would you add for production? What did you skip and why? This is the section hiring managers actually read.</p>
+            <h3>10. Tear down (or keep)</h3>
+            <p>This lab can stay running cheaply if you keep CloudTrail volume low — the org itself costs nothing. Or destroy when done; closing accounts in Organizations takes 90 days though, so factor that in.</p>
+        </section>
+
+        <section id="managers">
+            <h2>What hiring managers look for</h2>
+            <ul>
+                <li>Your Terraform is modular and re-usable, not one giant <code>main.tf</code>.</li>
+                <li>Your SCPs include comments explaining the threat each one addresses.</li>
+                <li>You used <code>aws_iam_policy_document</code> data sources rather than inlining JSON — shows you've worked with IAM at scale.</li>
+                <li>Your README discusses trade-offs ("I considered ControlTower but chose hand-rolled SCPs because…").</li>
+                <li>You can speak to what you'd change for production scale (account vending automation, AFT, Service Catalog, etc.).</li>
+            </ul>
+        </section>
+
+        <section id="mistakes">
+            <h2>Common mistakes</h2>
+            <ul>
+                <li>Trying to use a hand-clicked org. Use Terraform from the start; it's the artifact.</li>
+                <li>Granting <code>AdministratorAccess</code> to your SSO user without a JIT pattern. Pretend it's real — use a less-privileged default and elevate when needed.</li>
+                <li>Skipping the SCP-violation testing. The screenshots of denied actions are some of the most compelling evidence of working guardrails.</li>
+                <li>Forgetting that closing AWS accounts takes 90 days. Plan the teardown.</li>
+                <li>Hard-coding account IDs into your Terraform. Use data sources or variables.</li>
+            </ul>
+        </section>
+
+        <section id="publish">
+            <h2>Where to publish</h2>
+            <p>The full publishing playbook is on the <a href="../cloud-security-portfolio-projects.html#publish">portfolio hub page</a>. The short version: a public GitHub repo with a thorough README is the strongest single signal; pair it with a LinkedIn post and (optionally) a 5-minute lightning talk at a CSOH <a href="../sessions.html">Friday Zoom</a>.</p>
+        </section>
+
+        <section id="next" class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="../cloud-security-portfolio-projects.html">All 7 portfolio projects</a> — pick your next one.</li>
+                <li><a href="../cloud-security-home-lab.html">Home lab setup</a> — the safe environment this project runs in.</li>
+                <li><a href="../cloud-security-careers.html">Careers guide</a> — how this project fits into the hiring story.</li>
+                <li><a href="../community.html">Friday Zoom + Signal chat</a> — share your write-up with practitioners.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Learn</h3>
+          <ul>
+            <li><a href="/what-is-cloud-security.html">What is Cloud Security?</a></li>
+            <li><a href="/learning-path.html">Learning Path</a></li>
+            <li><a href="/cloud-security-degree-programs.html">Degree Programs</a></li>
+            <li><a href="/cloud-security-careers.html">Careers</a></li>
+            <li><a href="/cloud-security-home-lab.html">Home Lab</a></li>
+            <li><a href="/cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+            <li><a href="/cloud-security-reading-list.html">Reading List</a></li>
+            <li><a href="/cloud-security-best-practices.html">Best Practices</a></li>
+            <li><a href="/shared-responsibility-model.html">Shared Responsibility</a></li>
+            <li><a href="/cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+            <li><a href="/cloud-security-certifications.html">Certifications</a></li>
+            <li><a href="/glossary.html">Glossary</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Defend</h3>
+          <ul>
+            <li><a href="/news.html">News</a></li>
+            <li><a href="/threat-research.html">Threat Research</a></li>
+            <li><a href="/breach-timeline.html">Breach Kill Chains</a></li>
+            <li><a href="/resources.html">All Resources</a></li>
+            <li><a href="/ctfs.html">Cloud CTFs</a></li>
+            <li><a href="/github-actions.html">GitHub Actions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Attend</h3>
+          <ul>
+            <li><a href="/sessions.html">Zoom Sessions</a></li>
+            <li><a href="/community.html">Community &amp; Signal</a></li>
+            <li><a href="/conferences.html">Conferences</a></li>
+            <li><a href="/meetings.html">Meeting Recaps</a></li>
+            <li><a href="/presentations.html">Presentations</a></li>
+            <li><a href="/chat-resources.html">Chat Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+            <li><a href="/community.html">Signal Chat</a></li>
+            <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+            <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="/contribute.html">Contribute</a></li>
+            <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/security-policy.html">Security Policy</a></li>
+            <li><a href="/rss.html">RSS Feed</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>About CSOH</h3>
+          <p>Cloud Security Office Hours is a vendor-neutral community for cloud
+          security professionals. We meet weekly on Zoom and maintain this curated
+          collection of resources.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023-2026 Cloud Security Office Hours. All resources are provided as-is for educational purposes.</p>
+      </div>
+    </footer>
+
+    <script src="/main.js?v=fc5df335" integrity="sha384-6mAKmFSe49u7DZwulVLU50VmLdFh0WoBsOzxSE9pcssQ/8K2yRlZefC7BZ8GKL2h"
+        defer></script>
+</body>
+
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="Trial 3 CNAPP platforms against the same vulnerable AWS account, compare findings, false-positive rate, remediation guidance, and price. Step-by-step walkthrough for a portfolio project.">
+    <meta name="keywords" content="cnapp comparison, wiz vs orca, cnapp evaluation, cspm comparison, cnapp portfolio project, cloud security tool comparison">
+    <title>Write a CNAPP comparison - Cloud Security Portfolio Project - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/portfolio/cnapp-comparison.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Write a CNAPP comparison - CSOH Portfolio Project">
+    <meta property="og:description" content="Trial 3 CNAPP platforms against the same vulnerable AWS account, compare findings, false-positive rate, remediation guidance, and price. Step-by-step walkthrough for a portfolio project.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/portfolio/cnapp-comparison.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Write a CNAPP comparison">
+    <meta name="twitter:description" content="Trial 3 CNAPP platforms against the same vulnerable AWS account, compare findings, false-positive rate, remediation guidance, and price. Step-by-step walkthrough for a portfolio project.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
+
+    <link rel="preload" href="/style.css?v=88ae4643" as="style"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+    <link rel="stylesheet" href="/style.css?v=88ae4643"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Write a CNAPP comparison",
+      "description": "Trial 3 CNAPP platforms against the same vulnerable AWS account, compare findings, false-positive rate, remediation guidance, and price. Step-by-step walkthrough for a portfolio project.",
+      "totalTime": "PT8H",
+      "image": "https://csoh.org/banner.png",
+      "datePublished": "2026-05-04",
+      "dateModified": "2026-05-04",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/",
+        "logo": { "@type": "ImageObject", "url": "https://csoh.org/banner.png" }
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://csoh.org/" },
+        { "@type": "ListItem", "position": 2, "name": "Portfolio Projects", "item": "https://csoh.org/cloud-security-portfolio-projects.html" },
+        { "@type": "ListItem", "position": 3, "name": "CNAPP comparison", "item": "https://csoh.org/portfolio/cnapp-comparison.html" }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="../cloud-security-careers.html">Careers</a></li>
+                            <li><a href="../cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="../cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+                            <li><a href="../cloud-security-reading-list.html">Reading List</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../community.html">Community &amp; Signal</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+            <li><span aria-current="page">CNAPP comparison</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <picture><source srcset="../banner.webp" type="image/webp"><img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
+        <h1>Write a CNAPP comparison</h1>
+        <p>Trial 3 CNAPPs against the same vulnerable account. Compare findings, false-positive rate, remediation guidance, and price-to-value. Honest write-up wins.</p>
+        <div class="cta-buttons">
+            <a href="#steps" class="btn btn-primary">Walkthrough</a>
+            <a href="../cloud-security-portfolio-projects.html" class="btn btn-secondary">All Portfolio Projects</a>
+        </div>
+    </section>
+    <main class="container contribute-article" id="main-content">
+
+        <p class="page-meta"><time datetime="2026-05-04">Last updated <strong>2026-05-04</strong></time> · <a href="../about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/portfolio/cnapp-comparison.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>Time:</strong> ~10 hours &nbsp;·&nbsp; <strong>Difficulty:</strong> Intermediate &nbsp;·&nbsp; <strong>Stack:</strong> AWS · 3 CNAPP free trials · Markdown</p>
+        </div>
+
+        <section id="intro">
+            <p>The cloud security tooling market is opaque on purpose — every vendor claims to do everything, comparisons are gated behind sales calls, and most published reviews are sponsored. An honest, hands-on, vendor-neutral comparison from a practitioner is genuinely scarce content. It also signals that you understand the tool category every modern cloud security team uses, which is exactly what hiring managers screen for.</p><p>This is the longest project on the list because waiting for sales-engineer scheduling adds calendar time. Plan accordingly.</p>
+        </section>
+
+        <div class="toc">
+            <h2>📖 On this page</h2>
+            <ol>
+                <li><a href="#deliverables">What you'll have at the end</a></li>
+                <li><a href="#prereqs">Prerequisites</a></li>
+                <li><a href="#steps">Step-by-step</a></li>
+                <li><a href="#managers">What hiring managers look for</a></li>
+                <li><a href="#mistakes">Common mistakes</a></li>
+                <li><a href="#publish">Where to publish</a></li>
+                <li><a href="#next">Where next</a></li>
+            </ol>
+        </div>
+
+        <section id="deliverables">
+            <h2>What you'll have at the end</h2>
+            <ul>
+                <li>A markdown report comparing 3 CNAPP platforms across 6+ dimensions (findings volume, finding quality, false-positive rate, remediation guidance, IaC scanning, runtime detection, IAM analysis, UX, price model).</li>
+                <li>Screenshots from each platform of the same finding, side-by-side.</li>
+                <li>A scorecard summary at the top that someone can read in 60 seconds.</li>
+                <li>A short "who should pick which" section.</li>
+                <li>A reflection on what you learned about the CNAPP category itself.</li>
+            </ul>
+        </section>
+
+        <section id="prereqs">
+            <h2>Prerequisites</h2>
+            <ul>
+                <li>An AWS account with a deliberately mixed posture — some real findings, some clean. Use your <a href="/cloud-security-home-lab.html">home lab</a>, ideally one already populated by a Prowler audit or CloudGoat run.</li>
+                <li>Time to schedule sales calls. Most CNAPPs gate trials behind a 30-min demo. Plan 2-3 weeks calendar.</li>
+                <li>Comfort writing balanced product comparisons (not advocacy).</li>
+            </ul>
+        </section>
+
+        <section id="steps">
+            <h2>Step-by-step</h2>
+            <h3>1. Pick three CNAPPs to evaluate</h3>
+            <p>Cover the major categories. Recommended starter set:</p><ul><li><strong>Wiz</strong> — agentless, broad coverage, market leader.</li><li><strong>Orca</strong> — agentless, originated the SideScanning pattern.</li><li><strong>Microsoft Defender for Cloud</strong> — bundled with Azure (and now AWS/GCP), strong free tier.</li></ul><p>Or substitute Lacework, Prisma Cloud, Aqua, Sysdig, or Tenable Cloud Security. Three is the right number — more becomes a research project, fewer isn't a comparison.</p>
+            <h3>2. Define your evaluation dimensions BEFORE you start</h3>
+            <p>Decide what you'll grade on, in writing, before you see any product. This prevents post-hoc rationalization. Suggested dimensions:</p><ul><li>Time-to-first-finding after onboarding.</li><li>Number of findings on the same account.</li><li>Finding quality / actionability (judged by a rubric).</li><li>False-positive rate (sample 10 random findings, validate each).</li><li>Remediation guidance specificity.</li><li>IaC scanning capability.</li><li>Runtime / workload protection capability.</li><li>IAM analysis capability.</li><li>UX (rate 1–5 with brief notes).</li><li>Price model (where published).</li></ul>
+            <h3>3. Schedule the demos</h3>
+            <p>Be honest with each vendor: "I'm doing a vendor-neutral comparison for a public write-up; I'd like to evaluate against my own AWS account." Most vendors will say yes — you're free practitioner marketing.</p>
+            <h3>4. Onboard each one</h3>
+            <p>Connect each CNAPP to the same AWS account. Document time-from-signup-to-first-result for each.</p>
+            <h3>5. Compare the same findings side by side</h3>
+            <p>Pick 5 specific issues you know are in the account (a public S3 bucket, an over-privileged IAM role, a missing IMDSv2 enforcement, etc.). For each, capture how each platform surfaces it: severity, description, remediation guidance, screenshot. This is the most-read section of your write-up.</p>
+            <h3>6. Sample false positives honestly</h3>
+            <p>Pick 10 random findings per platform. Investigate each. Tag as confirmed-true / confirmed-false / can't-tell. Report the percentages. False-positive rate is the silent killer of CSPM tools and the data point everyone wants but few publish.</p>
+            <h3>7. Write the scorecard</h3>
+            <p>One-screen summary at the top of the write-up. Scoring 1–5 across your dimensions. Ranking, with the caveat that ranking depends on the buyer's context.</p>
+            <h3>8. Write the "who should pick which" section</h3>
+            <p>Resist the urge to crown a winner. Different orgs have different needs (Azure-heavy → Defender; cloud-only → Wiz / Orca; multi-cloud + workload → Lacework / Prisma; etc.). Demonstrate that judgment.</p>
+            <h3>9. Publish carefully</h3>
+            <p>Vendors will read this. Be technically accurate, be fair, cite versions and dates, and be willing to update if a vendor disputes a specific data point. The goal is a write-up you can stand behind in 12 months, not a hot take.</p>
+        </section>
+
+        <section id="managers">
+            <h2>What hiring managers look for</h2>
+            <ul>
+                <li>Your evaluation dimensions were defined upfront — shows methodological maturity.</li>
+                <li>Your false-positive analysis is honest. Most public comparisons skip this; including it elevates yours instantly.</li>
+                <li>You don't crown a winner — you say "depends on context, here's how to choose." This is what staff engineers actually do.</li>
+                <li>You scaled the depth to the time available. Good triage, not exhaustive analysis paralysis.</li>
+                <li>You can speak to the CNAPP category, not just the three products. Shows you understand the market shape.</li>
+            </ul>
+        </section>
+
+        <section id="mistakes">
+            <h2>Common mistakes</h2>
+            <ul>
+                <li>Picking products you've already worked with. Half the value is the fresh-eyes evaluation.</li>
+                <li>Skipping the false-positive sampling. Without it, the comparison is a feature checklist.</li>
+                <li>Using only the demo data each vendor provides. Hook each one to the same real account.</li>
+                <li>Letting a sales engineer drive the demo for the whole eval period. Use the trial yourself in self-serve mode.</li>
+                <li>Publishing a hot take. Vendors will engage; you want to defend a careful position.</li>
+                <li>Failing to disclose if any vendor gave you anything (extended trial, swag, free seats). Disclose at the top of the write-up.</li>
+            </ul>
+        </section>
+
+        <section id="publish">
+            <h2>Where to publish</h2>
+            <p>The full publishing playbook is on the <a href="../cloud-security-portfolio-projects.html#publish">portfolio hub page</a>. The short version: a public GitHub repo with a thorough README is the strongest single signal; pair it with a LinkedIn post and (optionally) a 5-minute lightning talk at a CSOH <a href="../sessions.html">Friday Zoom</a>.</p>
+        </section>
+
+        <section id="next" class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="../cloud-security-portfolio-projects.html">All 7 portfolio projects</a> — pick your next one.</li>
+                <li><a href="../cloud-security-home-lab.html">Home lab setup</a> — the safe environment this project runs in.</li>
+                <li><a href="../cloud-security-careers.html">Careers guide</a> — how this project fits into the hiring story.</li>
+                <li><a href="../community.html">Friday Zoom + Signal chat</a> — share your write-up with practitioners.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Learn</h3>
+          <ul>
+            <li><a href="/what-is-cloud-security.html">What is Cloud Security?</a></li>
+            <li><a href="/learning-path.html">Learning Path</a></li>
+            <li><a href="/cloud-security-degree-programs.html">Degree Programs</a></li>
+            <li><a href="/cloud-security-careers.html">Careers</a></li>
+            <li><a href="/cloud-security-home-lab.html">Home Lab</a></li>
+            <li><a href="/cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+            <li><a href="/cloud-security-reading-list.html">Reading List</a></li>
+            <li><a href="/cloud-security-best-practices.html">Best Practices</a></li>
+            <li><a href="/shared-responsibility-model.html">Shared Responsibility</a></li>
+            <li><a href="/cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+            <li><a href="/cloud-security-certifications.html">Certifications</a></li>
+            <li><a href="/glossary.html">Glossary</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Defend</h3>
+          <ul>
+            <li><a href="/news.html">News</a></li>
+            <li><a href="/threat-research.html">Threat Research</a></li>
+            <li><a href="/breach-timeline.html">Breach Kill Chains</a></li>
+            <li><a href="/resources.html">All Resources</a></li>
+            <li><a href="/ctfs.html">Cloud CTFs</a></li>
+            <li><a href="/github-actions.html">GitHub Actions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Attend</h3>
+          <ul>
+            <li><a href="/sessions.html">Zoom Sessions</a></li>
+            <li><a href="/community.html">Community &amp; Signal</a></li>
+            <li><a href="/conferences.html">Conferences</a></li>
+            <li><a href="/meetings.html">Meeting Recaps</a></li>
+            <li><a href="/presentations.html">Presentations</a></li>
+            <li><a href="/chat-resources.html">Chat Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+            <li><a href="/community.html">Signal Chat</a></li>
+            <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+            <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="/contribute.html">Contribute</a></li>
+            <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/security-policy.html">Security Policy</a></li>
+            <li><a href="/rss.html">RSS Feed</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>About CSOH</h3>
+          <p>Cloud Security Office Hours is a vendor-neutral community for cloud
+          security professionals. We meet weekly on Zoom and maintain this curated
+          collection of resources.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023-2026 Cloud Security Office Hours. All resources are provided as-is for educational purposes.</p>
+      </div>
+    </footer>
+
+    <script src="/main.js?v=fc5df335" integrity="sha384-6mAKmFSe49u7DZwulVLU50VmLdFh0WoBsOzxSE9pcssQ/8K2yRlZefC7BZ8GKL2h"
+        defer></script>
+</body>
+
+</html>

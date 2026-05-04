@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="A cloud security portfolio playbook — 7 projects you can build in your home lab and write up to land your first (or next) cloud security job. Step-by-step walkthroughs, vendor-neutral.">
+    <meta name="keywords"
+        content="cloud security portfolio, cloud security projects, cloud security home lab projects, cloud security resume projects, AWS security portfolio, cloudgoat write-up, recreate capital one, prowler audit">
+    <title>Cloud Security Portfolio Projects - Cloud Security Office Hours</title>
+
+    <link rel="canonical" href="https://csoh.org/cloud-security-portfolio-projects.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Cloud Security Portfolio Projects - CSOH">
+    <meta property="og:description"
+        content="7 step-by-step portfolio projects to build cloud security skills hiring managers actually look for. Vendor-neutral, free, ship the write-up.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/cloud-security-portfolio-projects.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cloud Security Portfolio Projects">
+    <meta name="twitter:description"
+        content="The 7 projects worth building. Each one with prerequisites, steps, deliverables, and what hiring managers want to see in your write-up.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
+
+    <link rel="preload" href="/style.css?v=88ae4643" as="style"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+    <link rel="stylesheet" href="/style.css?v=88ae4643"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Cloud Security Portfolio Projects",
+      "description": "A vendor-neutral playbook of 7 portfolio projects to build cloud security skills hiring managers actually look for, with step-by-step walkthroughs and write-up guidance.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": { "@type": "ImageObject", "url": "https://csoh.org/banner.png" }
+      },
+      "datePublished": "2026-05-04",
+      "dateModified": "2026-05-04",
+      "mainEntityOfPage": "https://csoh.org/cloud-security-portfolio-projects.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://csoh.org/" },
+        { "@type": "ListItem", "position": 2, "name": "Portfolio Projects", "item": "https://csoh.org/cloud-security-portfolio-projects.html" }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="cloud-security-careers.html">Careers</a></li>
+                            <li><a href="cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="cloud-security-portfolio-projects.html" aria-current="page">Portfolio Projects</a></li>
+                            <li><a href="cloud-security-reading-list.html">Reading List</a></li>
+                            <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="ctfs.html">CTFs</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="github-actions.html">GitHub Actions</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">News</a></li>
+                            <li><a href="threat-research.html">Threat Research</a></li>
+                            <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="sessions.html">Zoom Sessions</a></li>
+                            <li><a href="community.html">Community &amp; Signal</a></li>
+                            <li><a href="conferences.html">Conferences</a></li>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="contribute.html">Contribute Overview</a></li>
+                            <li><a href="contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Portfolio Projects</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
+        <h1>Portfolio Projects</h1>
+        <p>Seven projects that turn "I'm studying cloud security" into "here's the work I've shipped." Each one is doable in a weekend or two of focused effort, costs nothing if you set up your <a href="cloud-security-home-lab.html">home lab</a> right, and produces an artifact you can hand a hiring manager.</p>
+        <div class="cta-buttons">
+            <a href="#projects" class="btn btn-primary">See the Projects</a>
+            <a href="cloud-security-careers.html" class="btn btn-secondary">Careers Guide</a>
+        </div>
+    </section>
+    <main class="container contribute-article" id="main-content">
+
+        <p class="page-meta"><time datetime="2026-05-04">Last updated <strong>2026-05-04</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/cloud-security-portfolio-projects.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>The honest version:</strong> A portfolio of three solid public write-ups beats three certifications with no practical work — every cloud security hiring manager we know agrees on this. The projects below are what we'd want to see in a candidate's GitHub or blog. Pick three you find interesting, do them well, publish each one, and link them prominently from your LinkedIn and resume.</p>
+            <p style="margin-top:0.75rem;">All seven are doable on the free tier of one cloud (or entirely locally for some) with the guardrails on the <a href="cloud-security-home-lab.html">home lab page</a>. Total cost: $0–$15 across all of them if you tear down resources at end of session.</p>
+        </div>
+
+        <div class="toc">
+            <h2>📖 On this page</h2>
+            <ol>
+                <li><a href="#projects">The 7 projects</a></li>
+                <li><a href="#publish">Where to publish your write-ups</a></li>
+                <li><a href="#interviews">How to talk about them in interviews</a></li>
+                <li><a href="#mistakes">Common mistakes</a></li>
+            </ol>
+        </div>
+
+        <section id="projects">
+            <h2>The 7 projects</h2>
+            <p>Each card links to a step-by-step walkthrough with prerequisites, deliverables, success criteria, and what hiring managers look for in the write-up.</p>
+
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3><a href="portfolio/cloudgoat.html">Walk every CloudGoat scenario</a></h3>
+                    <p>The canonical AWS-attack lab. Pick a scenario, exploit it end-to-end, then write up the kill chain and remediation. Repeat for every scenario.</p>
+                    <div class="resource-tags"><span class="tag">Beginner</span><span class="tag">AWS</span><span class="tag">~6h per scenario</span></div>
+                </div>
+                <div class="resource-card">
+                    <h3><a href="portfolio/aws-org-scps.html">Build a multi-account AWS Org with SCPs</a></h3>
+                    <p>Terraform a 3-account organization with IAM Identity Center, baseline guardrail SCPs, and centralized CloudTrail. Real production-shape work.</p>
+                    <div class="resource-tags"><span class="tag">Intermediate</span><span class="tag">AWS</span><span class="tag">IaC</span><span class="tag">~6h</span></div>
+                </div>
+                <div class="resource-card">
+                    <h3><a href="portfolio/prowler-audit.html">Prowler audit + remediation</a></h3>
+                    <p>Run Prowler against your own account, document every finding, and Terraform the fix for each one. Before/after screenshots are gold.</p>
+                    <div class="resource-tags"><span class="tag">Beginner</span><span class="tag">AWS</span><span class="tag">CSPM</span><span class="tag">~4h</span></div>
+                </div>
+                <div class="resource-card">
+                    <h3><a href="portfolio/detection-lab.html">Build 5 detections in a lab SIEM</a></h3>
+                    <p>Stand up Wazuh / Elastic / Matano, ship CloudTrail to it, write Sigma rules for 5 MITRE ATT&amp;CK Cloud techniques, validate with Stratus Red Team.</p>
+                    <div class="resource-tags"><span class="tag">Intermediate</span><span class="tag">Detection</span><span class="tag">~10h</span></div>
+                </div>
+                <div class="resource-card">
+                    <h3><a href="portfolio/recreate-capital-one.html">Recreate the Capital One breach in your lab</a></h3>
+                    <p>Build the vulnerable architecture (WAF + SSRF-able service + IMDSv1 + over-privileged role), exploit it, then build the controls and detections that close it.</p>
+                    <div class="resource-tags"><span class="tag">Advanced</span><span class="tag">AWS</span><span class="tag">IAM</span><span class="tag">~12h</span></div>
+                </div>
+                <div class="resource-card">
+                    <h3><a href="portfolio/open-source-contribution.html">Contribute to an open-source cloud security tool</a></h3>
+                    <p>Prowler, Cloud Custodian, Pacu, ROADtools, Steampipe, KICS — pick one, fix a "good first issue," ship the PR, write up what you learned.</p>
+                    <div class="resource-tags"><span class="tag">Intermediate</span><span class="tag">Open Source</span><span class="tag">~6h</span></div>
+                </div>
+                <div class="resource-card">
+                    <h3><a href="portfolio/cnapp-comparison.html">Write a CNAPP comparison</a></h3>
+                    <p>Trial 3 CNAPPs against the same vulnerable account. Compare findings, false-positive rate, remediation guidance, and price-to-value. Honest write-up wins.</p>
+                    <div class="resource-tags"><span class="tag">Intermediate</span><span class="tag">CNAPP</span><span class="tag">~10h</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="publish">
+            <h2>Where to publish your write-ups</h2>
+            <p>The project is half the value; publishing it is the other half. Pick one or two surfaces — don't spread yourself across five.</p>
+            <ul>
+                <li><strong>GitHub repo with a thorough README.</strong> The default and the strongest single signal. Include screenshots, the Terraform / scripts you wrote, and a "what I learned" section. Pin the repo on your profile.</li>
+                <li><strong>Personal blog (GitHub Pages, Substack, dev.to, Hashnode).</strong> Long-form write-up. SEO-discoverable; recruiters Google candidates.</li>
+                <li><strong>LinkedIn post linking back to the write-up.</strong> Where most cloud security hiring managers actually live. One post per project.</li>
+                <li><strong>5-minute lightning talk at a CSOH <a href="sessions.html">Friday Zoom</a>.</strong> Highest-bandwidth way to make your work visible to working practitioners. We routinely run them.</li>
+                <li><strong>Conference CFP.</strong> BSides cities, fwd:cloudsec, DEF CON Cloud Village all welcome first-time speakers. A CloudGoat write-up has been the entry-point talk for many people in our community.</li>
+            </ul>
+        </section>
+
+        <section id="interviews">
+            <h2>How to talk about them in interviews</h2>
+            <p>Hiring managers ask "tell me about a project you're proud of." This is the answer. Frame each one as a STAR-style story you can tell in 90 seconds:</p>
+            <ul>
+                <li><strong>Situation:</strong> what you set out to learn or demonstrate.</li>
+                <li><strong>Task:</strong> the specific decision points (which scenario, which controls, which IAM design).</li>
+                <li><strong>Action:</strong> what you actually did, including a moment where you had to debug something non-obvious.</li>
+                <li><strong>Result:</strong> what the artifact looks like, what you'd do differently, what surprised you.</li>
+            </ul>
+            <p>The "what surprised me" beat is the one most candidates miss and the one most interviewers grade on. It signals you actually did the work and reflected on it.</p>
+        </section>
+
+        <section id="mistakes">
+            <h2>Common mistakes</h2>
+            <ul>
+                <li><strong>Building a "cloud security dashboard" toy webapp.</strong> Hiring managers see hundreds. Build operational artifacts that look like real production work, not portfolio bait.</li>
+                <li><strong>Cloning someone else's CloudGoat write-up and republishing it.</strong> Recognizable instantly. Always make the kill-chain and remediation in your own voice, with your own screenshots.</li>
+                <li><strong>Doing the project but not publishing.</strong> Half the value is the write-up. If it's not public, it doesn't exist for the hiring funnel.</li>
+                <li><strong>Picking seven projects and finishing none.</strong> Pick three. Ship each one. Then add more.</li>
+                <li><strong>Hiding work because "it's not perfect yet."</strong> Publish at 80%. The act of publishing is what teaches you.</li>
+                <li><strong>Listing the project on your resume but not linking to it.</strong> A recruiter has 20 seconds. Hyperlink directly to the GitHub repo or write-up.</li>
+            </ul>
+        </section>
+
+        <section class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="cloud-security-home-lab.html">Set up your home lab</a> — most projects need a real cloud account with budget guardrails.</li>
+                <li><a href="cloud-security-careers.html">Careers guide</a> — what hiring managers look for and how the portfolio fits in.</li>
+                <li><a href="ctfs.html">CTF directory</a> — the lab platforms many of these projects use.</li>
+                <li><a href="learning-path.html">Learning path</a> — where the projects fit into the bigger arc.</li>
+                <li><a href="community.html">Friday Zoom + Signal chat</a> — share your write-up and get feedback from working practitioners.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Learn</h3>
+          <ul>
+            <li><a href="/what-is-cloud-security.html">What is Cloud Security?</a></li>
+            <li><a href="/learning-path.html">Learning Path</a></li>
+            <li><a href="/cloud-security-degree-programs.html">Degree Programs</a></li>
+            <li><a href="/cloud-security-careers.html">Careers</a></li>
+            <li><a href="/cloud-security-home-lab.html">Home Lab</a></li>
+            <li><a href="/cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+            <li><a href="/cloud-security-reading-list.html">Reading List</a></li>
+            <li><a href="/cloud-security-best-practices.html">Best Practices</a></li>
+            <li><a href="/shared-responsibility-model.html">Shared Responsibility</a></li>
+            <li><a href="/cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+            <li><a href="/cloud-security-certifications.html">Certifications</a></li>
+            <li><a href="/glossary.html">Glossary</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Defend</h3>
+          <ul>
+            <li><a href="/news.html">News</a></li>
+            <li><a href="/threat-research.html">Threat Research</a></li>
+            <li><a href="/breach-timeline.html">Breach Kill Chains</a></li>
+            <li><a href="/resources.html">All Resources</a></li>
+            <li><a href="/ctfs.html">Cloud CTFs</a></li>
+            <li><a href="/github-actions.html">GitHub Actions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Attend</h3>
+          <ul>
+            <li><a href="/sessions.html">Zoom Sessions</a></li>
+            <li><a href="/community.html">Community &amp; Signal</a></li>
+            <li><a href="/conferences.html">Conferences</a></li>
+            <li><a href="/meetings.html">Meeting Recaps</a></li>
+            <li><a href="/presentations.html">Presentations</a></li>
+            <li><a href="/chat-resources.html">Chat Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+            <li><a href="/community.html">Signal Chat</a></li>
+            <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+            <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="/contribute.html">Contribute</a></li>
+            <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/security-policy.html">Security Policy</a></li>
+            <li><a href="/rss.html">RSS Feed</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>About CSOH</h3>
+          <p>Cloud Security Office Hours is a vendor-neutral community for cloud
+          security professionals. We meet weekly on Zoom and maintain this curated
+          collection of resources.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023-2026 Cloud Security Office Hours. All resources are provided as-is for educational purposes.</p>
+      </div>
+    </footer>
+
+    <script src="/main.js?v=fc5df335" integrity="sha384-6mAKmFSe49u7DZwulVLU50VmLdFh0WoBsOzxSE9pcssQ/8K2yRlZefC7BZ8GKL2h"
+        defer></script>
+</body>
+
+</html>

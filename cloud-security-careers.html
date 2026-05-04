@@ -154,6 +154,7 @@
                             <li><a href="cloud-security-degree-programs.html">Degree Programs</a></li>
                             <li><a href="cloud-security-careers.html" aria-current="page">Careers</a></li>
                             <li><a href="cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
                             <li><a href="cloud-security-reading-list.html">Reading List</a></li>
                             <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
                             <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
@@ -393,15 +394,17 @@
         <section id="portfolio">
             <h2>Portfolio projects worth building</h2>
             <p>Your portfolio is your interview. Pick three of these, do them well, write each one up publicly. A blog (Substack, GitHub Pages, dev.to) plus a public GitHub is enough — no fancy site needed.</p>
+            <p>Each link below is a step-by-step walkthrough — prerequisites, the actual steps, what hiring managers look for in the write-up, and the common mistakes to avoid:</p>
             <ol>
-                <li><strong>Walk every CloudGoat scenario.</strong> Publish your kill chain, screenshots, and remediation for each. This is the canonical project — most interviewers have done it themselves and will recognize you've done the work.</li>
-                <li><strong>Build a multi-account AWS Organization with SCPs.</strong> Terraform a master account, two sub-accounts, IAM Identity Center, and a baseline of SCPs (deny root usage, enforce IMDSv2, deny region usage, require MFA). Push the code to GitHub. This is real production-shaped work.</li>
-                <li><strong>Run Prowler / ScoutSuite against your own account and remediate everything.</strong> Document the before/after. Bonus: turn the remediation into Terraform.</li>
-                <li><strong>Build 5 detections in a lab SIEM.</strong> Spin up Wazuh, Elastic, or send CloudTrail to <a href="https://docs.matanolabs.com/" target="_blank" rel="noopener noreferrer">Matano</a>. Pick five MITRE ATT&amp;CK Cloud techniques and write Sigma or vendor-specific detections for each.</li>
-                <li><strong>Take a real breach, rebuild it in a lab.</strong> Pick one from our <a href="breach-timeline.html">breach kill chains</a>. Recreate the vulnerable setup in your own account, exploit it end-to-end, then build the controls and detections that would have stopped it. Best single portfolio piece you can ship.</li>
-                <li><strong>Contribute to an open-source cloud security tool.</strong> Prowler, Cloud Custodian, Pacu, ROADtools, KICS, Steampipe — all welcome contributors. Even a small PR is a strong signal.</li>
-                <li><strong>Write a CNAPP comparison.</strong> Most interviewers care that you understand the tool category. Pick three (Wiz, Orca, Defender for Cloud, Prisma, Lacework) and write an honest comparison. Bonus points for hands-on trial work.</li>
+                <li><strong><a href="portfolio/cloudgoat.html">Walk every CloudGoat scenario</a>.</strong> Publish your kill chain, screenshots, and remediation for each. The canonical project — most interviewers have done it themselves and will recognize you've done the work.</li>
+                <li><strong><a href="portfolio/aws-org-scps.html">Build a multi-account AWS Organization with SCPs</a>.</strong> Terraform a 3-account org, IAM Identity Center, and a baseline of SCPs. Push the code to GitHub. Real production-shaped work.</li>
+                <li><strong><a href="portfolio/prowler-audit.html">Run Prowler against your own account and remediate everything</a>.</strong> Document the before/after. Bonus: turn the remediation into Terraform.</li>
+                <li><strong><a href="portfolio/detection-lab.html">Build 5 detections in a lab SIEM</a>.</strong> Spin up Wazuh, Elastic, or Matano; pick five MITRE ATT&amp;CK Cloud techniques and write Sigma rules; validate with Stratus Red Team.</li>
+                <li><strong><a href="portfolio/recreate-capital-one.html">Take a real breach, rebuild it in a lab</a>.</strong> Recreate the Capital One architecture in your own account, exploit it end-to-end, then build the controls and detections that would have stopped it. Best single portfolio piece you can ship.</li>
+                <li><strong><a href="portfolio/open-source-contribution.html">Contribute to an open-source cloud security tool</a>.</strong> Prowler, Cloud Custodian, Pacu, ROADtools, KICS, Steampipe — all welcome contributors. Even a small PR is a strong signal.</li>
+                <li><strong><a href="portfolio/cnapp-comparison.html">Write a CNAPP comparison</a>.</strong> Pick three (Wiz, Orca, Defender for Cloud, Prisma, Lacework) and write an honest comparison. Hands-on trial work, false-positive sampling, and a who-should-pick-which section.</li>
             </ol>
+            <p>See the full <a href="cloud-security-portfolio-projects.html">portfolio playbook</a> for time estimates, difficulty, and how to talk about each one in interviews.</p>
             <p>What <em>not</em> to do: don't build a "cloud security dashboard" toy webapp. Hiring managers see hundreds. Build operational artifacts that look like real work.</p>
         </section>
 
@@ -481,6 +484,7 @@
             <li><a href="/cloud-security-degree-programs.html">Degree Programs</a></li>
             <li><a href="/cloud-security-careers.html">Careers</a></li>
             <li><a href="/cloud-security-home-lab.html">Home Lab</a></li>
+            <li><a href="/cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
             <li><a href="/cloud-security-reading-list.html">Reading List</a></li>
             <li><a href="/cloud-security-best-practices.html">Best Practices</a></li>
             <li><a href="/shared-responsibility-model.html">Shared Responsibility</a></li>

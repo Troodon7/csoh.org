@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="Stand up a free SIEM, ship CloudTrail to it, write Sigma rules for 5 MITRE ATT&CK Cloud techniques, and validate with Stratus Red Team. Step-by-step walkthrough.">
+    <meta name="keywords" content="detection engineering portfolio, cloud detection lab, sigma rules aws, mitre attack cloud, stratus red team, cloud siem lab, cloudtrail detections">
+    <title>Build 5 detections in a lab SIEM - Cloud Security Portfolio Project - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/portfolio/detection-lab.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Build 5 detections in a lab SIEM - CSOH Portfolio Project">
+    <meta property="og:description" content="Stand up a free SIEM, ship CloudTrail to it, write Sigma rules for 5 MITRE ATT&CK Cloud techniques, and validate with Stratus Red Team. Step-by-step walkthrough.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/portfolio/detection-lab.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Build 5 detections in a lab SIEM">
+    <meta name="twitter:description" content="Stand up a free SIEM, ship CloudTrail to it, write Sigma rules for 5 MITRE ATT&CK Cloud techniques, and validate with Stratus Red Team. Step-by-step walkthrough.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
+
+    <link rel="preload" href="/style.css?v=88ae4643" as="style"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+    <link rel="stylesheet" href="/style.css?v=88ae4643"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Build 5 detections in a lab SIEM",
+      "description": "Stand up a free SIEM, ship CloudTrail to it, write Sigma rules for 5 MITRE ATT&CK Cloud techniques, and validate with Stratus Red Team. Step-by-step walkthrough.",
+      "totalTime": "PT8H",
+      "image": "https://csoh.org/banner.png",
+      "datePublished": "2026-05-04",
+      "dateModified": "2026-05-04",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/",
+        "logo": { "@type": "ImageObject", "url": "https://csoh.org/banner.png" }
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://csoh.org/" },
+        { "@type": "ListItem", "position": 2, "name": "Portfolio Projects", "item": "https://csoh.org/cloud-security-portfolio-projects.html" },
+        { "@type": "ListItem", "position": 3, "name": "Detection lab", "item": "https://csoh.org/portfolio/detection-lab.html" }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="../cloud-security-careers.html">Careers</a></li>
+                            <li><a href="../cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="../cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+                            <li><a href="../cloud-security-reading-list.html">Reading List</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../community.html">Community &amp; Signal</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+            <li><span aria-current="page">Detection lab</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <picture><source srcset="../banner.webp" type="image/webp"><img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
+        <h1>Build 5 detections in a lab SIEM</h1>
+        <p>Stand up a free SIEM, ship CloudTrail to it, write Sigma rules for 5 MITRE ATT&CK Cloud techniques, validate with Stratus Red Team.</p>
+        <div class="cta-buttons">
+            <a href="#steps" class="btn btn-primary">Walkthrough</a>
+            <a href="../cloud-security-portfolio-projects.html" class="btn btn-secondary">All Portfolio Projects</a>
+        </div>
+    </section>
+    <main class="container contribute-article" id="main-content">
+
+        <p class="page-meta"><time datetime="2026-05-04">Last updated <strong>2026-05-04</strong></time> · <a href="../about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/portfolio/detection-lab.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>Time:</strong> ~10 hours &nbsp;·&nbsp; <strong>Difficulty:</strong> Intermediate &nbsp;·&nbsp; <strong>Stack:</strong> AWS · CloudTrail · SIEM (Wazuh / Elastic / Matano) · Sigma · Stratus Red Team</p>
+        </div>
+
+        <section id="intro">
+            <p>Detection engineering is the cloud security specialty with the lowest barrier-to-entry portfolio in the field. The pattern: get attack telemetry into a SIEM, write detections, prove they fire on the real attack technique. Doing this once on your own — and publishing it — puts you ahead of 80% of detection-engineer applicants.</p>
+        </section>
+
+        <div class="toc">
+            <h2>📖 On this page</h2>
+            <ol>
+                <li><a href="#deliverables">What you'll have at the end</a></li>
+                <li><a href="#prereqs">Prerequisites</a></li>
+                <li><a href="#steps">Step-by-step</a></li>
+                <li><a href="#managers">What hiring managers look for</a></li>
+                <li><a href="#mistakes">Common mistakes</a></li>
+                <li><a href="#publish">Where to publish</a></li>
+                <li><a href="#next">Where next</a></li>
+            </ol>
+        </div>
+
+        <section id="deliverables">
+            <h2>What you'll have at the end</h2>
+            <ul>
+                <li>A working SIEM (Wazuh, Elastic, or Matano) ingesting CloudTrail from your own account.</li>
+                <li>5 Sigma rules (or vendor-specific equivalents) mapped to MITRE ATT&amp;CK Cloud techniques.</li>
+                <li>Validation evidence: a Stratus Red Team run that triggered each detection.</li>
+                <li>A write-up explaining the rationale, the false-positive analysis, and the tuning you did.</li>
+                <li>Bonus: a one-pager mapping your coverage against the MITRE ATT&amp;CK Cloud matrix.</li>
+            </ul>
+        </section>
+
+        <section id="prereqs">
+            <h2>Prerequisites</h2>
+            <ul>
+                <li>An AWS account with CloudTrail enabled.</li>
+                <li><a href="/cloud-security-home-lab.html">Home lab guardrails</a> — this project generates extra log volume and you don't want a runaway bill.</li>
+                <li>Comfort with Linux and at least one query language (KQL, SPL, Lucene, or SQL).</li>
+                <li>Docker (for the SIEM stack).</li>
+            </ul>
+        </section>
+
+        <section id="steps">
+            <h2>Step-by-step</h2>
+            <h3>1. Pick your SIEM</h3>
+            <p>Three solid free options:</p><ul><li><strong><a href="https://wazuh.com/" target="_blank" rel="noopener noreferrer">Wazuh</a></strong> — free, self-hosted, includes the analytics layer. Good if you want to run everything on one EC2 box.</li><li><strong><a href="https://www.elastic.co/security" target="_blank" rel="noopener noreferrer">Elastic Security</a></strong> — free tier on Elastic Cloud or self-hosted. Mature rule library; what most enterprises run.</li><li><strong><a href="https://docs.matanolabs.com/" target="_blank" rel="noopener noreferrer">Matano</a></strong> — serverless, S3-native, written for cloud detection from the ground up. Best signal-to-resume-noise ratio.</li></ul>
+            <h3>2. Stand up the SIEM</h3>
+            <p>For Wazuh: <code>docker compose up -d</code> with the official compose file gets you running locally in 10 minutes. For Matano: deploy via AWS CDK to a new sub-account.</p>
+            <h3>3. Wire CloudTrail into it</h3>
+            <p>Configure CloudTrail to write to S3, then have the SIEM read from S3 (Matano native; Wazuh + Filebeat for the others). Confirm events are flowing by signing into the AWS console and verifying the sign-in event lands in the SIEM within ~5 minutes.</p>
+            <h3>4. Pick 5 ATT&CK techniques to cover</h3>
+            <p>Don't pick at random. Choose techniques that are (a) common, (b) detectable in CloudTrail, and (c) mapped to real attacker behavior. Recommended starter set:</p><ul><li><strong>T1078.004</strong> — Valid Accounts: Cloud Accounts (impossible-travel sign-ins).</li><li><strong>T1098.001</strong> — Account Manipulation: Additional Cloud Credentials (CreateAccessKey on an existing user).</li><li><strong>T1530</strong> — Data from Cloud Storage (large S3 GetObject volume from a single principal).</li><li><strong>T1562.008</strong> — Impair Defenses: Disable Cloud Logs (CloudTrail StopLogging or DeleteTrail).</li><li><strong>T1538</strong> — Cloud Service Dashboard (unusual ConsoleLogin from a service account).</li></ul>
+            <h3>5. Write the detections</h3>
+            <p>For each technique, write the rule in <a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener noreferrer">Sigma</a> and compile it to your SIEM's native query language. Commit both versions to your repo. Annotate each rule with the MITRE ID and a short "why this matters" note.</p>
+            <h3>6. Test with Stratus Red Team</h3>
+            <p><a href="https://github.com/DataDog/stratus-red-team" target="_blank" rel="noopener noreferrer">Stratus Red Team</a> from Datadog emulates real attack techniques against AWS. For each of your 5 detections, run the corresponding stratus technique and confirm your rule fires.</p><pre><code>stratus list aws
+stratus warmup aws.credential-access.ec2-get-password-data
+stratus detonate aws.credential-access.ec2-get-password-data</code></pre>
+            <h3>7. Tune false positives</h3>
+            <p>Run the rules against a week of normal CloudTrail and document every false positive. Tune. Document the tuning logic in your write-up. This is the part that separates real detection engineering from "I copied a rule from a blog."</p>
+            <h3>8. Build the coverage map</h3>
+            <p>Use the <a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK Navigator</a> to colour the techniques you cover. Export as JSON, commit to the repo, embed the screenshot in the write-up.</p>
+        </section>
+
+        <section id="managers">
+            <h2>What hiring managers look for</h2>
+            <ul>
+                <li>You used Sigma as the source-of-truth for detection logic — portable, reviewable, vendor-agnostic.</li>
+                <li>You validated the detections with Stratus Red Team or equivalent. "It fires when the technique runs" is the only proof that matters.</li>
+                <li>Your false-positive analysis is honest. Detection engineering is mostly tuning.</li>
+                <li>Your rule names and descriptions are good. Detection content is read by humans at 3am — clarity matters.</li>
+                <li>You can speak to what you'd add next and how you'd measure coverage over time.</li>
+            </ul>
+        </section>
+
+        <section id="mistakes">
+            <h2>Common mistakes</h2>
+            <ul>
+                <li>Picking 5 techniques because they're easy, not because they're important. Cover what attackers actually do.</li>
+                <li>Writing the rule and never running the attack. If you didn't validate it fires, you don't know it fires.</li>
+                <li>Skipping the false-positive analysis. Untuned detections are alert-fatigue factories.</li>
+                <li>Hardcoding usernames or account IDs into rules. Use variables / parameters.</li>
+                <li>Standing up the SIEM and never tearing it down. Wazuh on an idle EC2 instance bills 24/7.</li>
+            </ul>
+        </section>
+
+        <section id="publish">
+            <h2>Where to publish</h2>
+            <p>The full publishing playbook is on the <a href="../cloud-security-portfolio-projects.html#publish">portfolio hub page</a>. The short version: a public GitHub repo with a thorough README is the strongest single signal; pair it with a LinkedIn post and (optionally) a 5-minute lightning talk at a CSOH <a href="../sessions.html">Friday Zoom</a>.</p>
+        </section>
+
+        <section id="next" class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="../cloud-security-portfolio-projects.html">All 7 portfolio projects</a> — pick your next one.</li>
+                <li><a href="../cloud-security-home-lab.html">Home lab setup</a> — the safe environment this project runs in.</li>
+                <li><a href="../cloud-security-careers.html">Careers guide</a> — how this project fits into the hiring story.</li>
+                <li><a href="../community.html">Friday Zoom + Signal chat</a> — share your write-up with practitioners.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Learn</h3>
+          <ul>
+            <li><a href="/what-is-cloud-security.html">What is Cloud Security?</a></li>
+            <li><a href="/learning-path.html">Learning Path</a></li>
+            <li><a href="/cloud-security-degree-programs.html">Degree Programs</a></li>
+            <li><a href="/cloud-security-careers.html">Careers</a></li>
+            <li><a href="/cloud-security-home-lab.html">Home Lab</a></li>
+            <li><a href="/cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+            <li><a href="/cloud-security-reading-list.html">Reading List</a></li>
+            <li><a href="/cloud-security-best-practices.html">Best Practices</a></li>
+            <li><a href="/shared-responsibility-model.html">Shared Responsibility</a></li>
+            <li><a href="/cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+            <li><a href="/cloud-security-certifications.html">Certifications</a></li>
+            <li><a href="/glossary.html">Glossary</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Defend</h3>
+          <ul>
+            <li><a href="/news.html">News</a></li>
+            <li><a href="/threat-research.html">Threat Research</a></li>
+            <li><a href="/breach-timeline.html">Breach Kill Chains</a></li>
+            <li><a href="/resources.html">All Resources</a></li>
+            <li><a href="/ctfs.html">Cloud CTFs</a></li>
+            <li><a href="/github-actions.html">GitHub Actions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Attend</h3>
+          <ul>
+            <li><a href="/sessions.html">Zoom Sessions</a></li>
+            <li><a href="/community.html">Community &amp; Signal</a></li>
+            <li><a href="/conferences.html">Conferences</a></li>
+            <li><a href="/meetings.html">Meeting Recaps</a></li>
+            <li><a href="/presentations.html">Presentations</a></li>
+            <li><a href="/chat-resources.html">Chat Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+            <li><a href="/community.html">Signal Chat</a></li>
+            <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+            <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="/contribute.html">Contribute</a></li>
+            <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/security-policy.html">Security Policy</a></li>
+            <li><a href="/rss.html">RSS Feed</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>About CSOH</h3>
+          <p>Cloud Security Office Hours is a vendor-neutral community for cloud
+          security professionals. We meet weekly on Zoom and maintain this curated
+          collection of resources.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023-2026 Cloud Security Office Hours. All resources are provided as-is for educational purposes.</p>
+      </div>
+    </footer>
+
+    <script src="/main.js?v=fc5df335" integrity="sha384-6mAKmFSe49u7DZwulVLU50VmLdFh0WoBsOzxSE9pcssQ/8K2yRlZefC7BZ8GKL2h"
+        defer></script>
+</body>
+
+</html>

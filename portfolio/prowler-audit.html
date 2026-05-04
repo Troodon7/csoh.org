@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="Run Prowler against your own AWS account, document every finding, and Terraform the fix for each one. Step-by-step walkthrough for a cloud security portfolio project.">
+    <meta name="keywords" content="prowler tutorial, prowler aws, cspm portfolio, aws security audit, prowler walkthrough, cloud security posture">
+    <title>Prowler audit + remediation - Cloud Security Portfolio Project - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/portfolio/prowler-audit.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Prowler audit + remediation - CSOH Portfolio Project">
+    <meta property="og:description" content="Run Prowler against your own AWS account, document every finding, and Terraform the fix for each one. Step-by-step walkthrough for a cloud security portfolio project.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/portfolio/prowler-audit.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prowler audit + remediation">
+    <meta name="twitter:description" content="Run Prowler against your own AWS account, document every finding, and Terraform the fix for each one. Step-by-step walkthrough for a cloud security portfolio project.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
+
+    <link rel="preload" href="/style.css?v=88ae4643" as="style"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+    <link rel="stylesheet" href="/style.css?v=88ae4643"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Prowler audit + remediation",
+      "description": "Run Prowler against your own AWS account, document every finding, and Terraform the fix for each one. Step-by-step walkthrough for a cloud security portfolio project.",
+      "totalTime": "PT8H",
+      "image": "https://csoh.org/banner.png",
+      "datePublished": "2026-05-04",
+      "dateModified": "2026-05-04",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/",
+        "logo": { "@type": "ImageObject", "url": "https://csoh.org/banner.png" }
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://csoh.org/" },
+        { "@type": "ListItem", "position": 2, "name": "Portfolio Projects", "item": "https://csoh.org/cloud-security-portfolio-projects.html" },
+        { "@type": "ListItem", "position": 3, "name": "Prowler audit", "item": "https://csoh.org/portfolio/prowler-audit.html" }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="../cloud-security-careers.html">Careers</a></li>
+                            <li><a href="../cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="../cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+                            <li><a href="../cloud-security-reading-list.html">Reading List</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../community.html">Community &amp; Signal</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+            <li><span aria-current="page">Prowler audit</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <picture><source srcset="../banner.webp" type="image/webp"><img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
+        <h1>Prowler audit + remediation</h1>
+        <p>Run Prowler against your own account, document every finding, and Terraform the fix for each one. Before/after screenshots are gold.</p>
+        <div class="cta-buttons">
+            <a href="#steps" class="btn btn-primary">Walkthrough</a>
+            <a href="../cloud-security-portfolio-projects.html" class="btn btn-secondary">All Portfolio Projects</a>
+        </div>
+    </section>
+    <main class="container contribute-article" id="main-content">
+
+        <p class="page-meta"><time datetime="2026-05-04">Last updated <strong>2026-05-04</strong></time> · <a href="../about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/portfolio/prowler-audit.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>Time:</strong> ~4 hours &nbsp;·&nbsp; <strong>Difficulty:</strong> Beginner &nbsp;·&nbsp; <strong>Stack:</strong> AWS · Prowler · Terraform</p>
+        </div>
+
+        <section id="intro">
+            <p><a href="https://github.com/prowler-cloud/prowler" target="_blank" rel="noopener noreferrer">Prowler</a> is the open-source CSPM tool everyone in cloud security has touched at some point. Running it against a real account, walking through every finding, and writing the Terraform that closes each one teaches you what "posture management" actually means in practice — and produces a write-up that demonstrates exactly the work a CSPM analyst does on day one.</p>
+        </section>
+
+        <div class="toc">
+            <h2>📖 On this page</h2>
+            <ol>
+                <li><a href="#deliverables">What you'll have at the end</a></li>
+                <li><a href="#prereqs">Prerequisites</a></li>
+                <li><a href="#steps">Step-by-step</a></li>
+                <li><a href="#managers">What hiring managers look for</a></li>
+                <li><a href="#mistakes">Common mistakes</a></li>
+                <li><a href="#publish">Where to publish</a></li>
+                <li><a href="#next">Where next</a></li>
+            </ol>
+        </div>
+
+        <section id="deliverables">
+            <h2>What you'll have at the end</h2>
+            <ul>
+                <li>A baseline Prowler scan of your own AWS account (HTML report committed to the repo).</li>
+                <li>A categorized list of findings (critical / high / medium / low / informational) with brief notes on each.</li>
+                <li>Terraform or AWS CLI snippets that remediate each finding worth fixing.</li>
+                <li>A second Prowler scan after remediation, showing the delta.</li>
+                <li>A short "what I learned" reflection — which findings were noise, which were real.</li>
+            </ul>
+        </section>
+
+        <section id="prereqs">
+            <h2>Prerequisites</h2>
+            <ul>
+                <li>An AWS account with at least a few real resources (not a totally empty one — Prowler is most interesting when it has things to find).</li>
+                <li>Python 3.9+ and <code>pip</code>.</li>
+                <li>AWS CLI configured with read-only credentials (Prowler ships a least-privilege policy you can attach).</li>
+                <li>Terraform if you want to script the fixes (recommended).</li>
+            </ul>
+        </section>
+
+        <section id="steps">
+            <h2>Step-by-step</h2>
+            <h3>1. Install Prowler</h3>
+            <pre><code>pip install prowler
+prowler --version</code></pre>
+            <h3>2. Create read-only credentials for Prowler</h3>
+            <p>Don't run Prowler with admin. Create an IAM user / role with the policy in the Prowler repo's <code>permissions/</code> directory. Configure a dedicated AWS profile for it.</p>
+            <h3>3. Run the baseline scan</h3>
+            <pre><code>prowler aws --profile prowler-readonly --output-formats html json-ocsf</code></pre><p>This produces a comprehensive scan against ~400 checks. Commit the HTML and JSON outputs to your repo as the <em>before</em> snapshot. Don't worry if the report is alarming on first run — that's the point.</p>
+            <h3>4. Triage the findings</h3>
+            <p>Open the HTML report. Group findings into four buckets:</p><ul><li><strong>Real problems to fix</strong> — public S3 buckets, IAM users with no MFA, unused access keys, etc.</li><li><strong>Real but accepted</strong> — e.g., a region you're using and don't want to restrict.</li><li><strong>Noise</strong> — checks that don't apply to your setup.</li><li><strong>I don't understand this one</strong> — research and document.</li></ul><p>Document each bucket in your README. The triage <em>is</em> the skill being demonstrated.</p>
+            <h3>5. Remediate the real problems</h3>
+            <p>For each "real problem to fix," write the Terraform (or AWS CLI command) that closes it. Examples:</p><ul><li>Block public access on S3 at the account level (<code>aws_s3_account_public_access_block</code>).</li><li>Enable IMDSv2-only on EC2 launch templates.</li><li>Enable default encryption on EBS volumes (<code>aws_ebs_encryption_by_default</code>).</li><li>Set a strong password policy (<code>aws_iam_account_password_policy</code>).</li><li>Enable GuardDuty (<code>aws_guardduty_detector</code>).</li></ul><p>Apply the Terraform. Document each fix with a code snippet in the write-up.</p>
+            <h3>6. Re-run Prowler</h3>
+            <p>Run Prowler again with the same flags. Save the second HTML/JSON as the <em>after</em> snapshot. Commit a diff or summary of which findings flipped from FAIL to PASS.</p>
+            <h3>7. Write the "what I learned" section</h3>
+            <p>Most valuable section of the write-up. What surprised you? Which checks turned out to be more nuanced than they appeared? Did Prowler find anything you'd missed? Did it flag something that turned out to be a false positive?</p>
+            <h3>8. (Optional) Schedule it</h3>
+            <p>For bonus points: package the Prowler run into a GitHub Actions workflow that scans your account weekly and posts the diff as an issue. This is one of the most-asked interview question patterns: "how would you operate this at scale?"</p>
+        </section>
+
+        <section id="managers">
+            <h2>What hiring managers look for</h2>
+            <ul>
+                <li>You demonstrate triage skill, not just "ran the tool." Anyone can run a tool. Knowing what's noise vs. signal is the actual job.</li>
+                <li>You wrote the fixes, not just listed them. Terraform diffs prove you closed the loop.</li>
+                <li>Your before/after numbers are real. "Reduced FAIL findings from 84 to 12 in 4 hours" is the kind of bullet that lands on a resume.</li>
+                <li>You used least-privilege credentials for Prowler — shows you practice what you preach.</li>
+                <li>You can speak to which findings you'd treat as critical at a real org and which you'd accept with a documented exception.</li>
+            </ul>
+        </section>
+
+        <section id="mistakes">
+            <h2>Common mistakes</h2>
+            <ul>
+                <li>Running Prowler with admin credentials. The point of CSPM is least privilege; live it.</li>
+                <li>Listing every finding instead of triaging. A 1,200-line README is a liability, not an asset.</li>
+                <li>Fixing things in the console without Terraforming. The Terraform is the reusable artifact.</li>
+                <li>Not capturing the before/after delta. The compelling number is the change, not the absolute count.</li>
+                <li>Treating every finding as critical. Demonstrating mature judgment about what to accept is part of the signal.</li>
+            </ul>
+        </section>
+
+        <section id="publish">
+            <h2>Where to publish</h2>
+            <p>The full publishing playbook is on the <a href="../cloud-security-portfolio-projects.html#publish">portfolio hub page</a>. The short version: a public GitHub repo with a thorough README is the strongest single signal; pair it with a LinkedIn post and (optionally) a 5-minute lightning talk at a CSOH <a href="../sessions.html">Friday Zoom</a>.</p>
+        </section>
+
+        <section id="next" class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="../cloud-security-portfolio-projects.html">All 7 portfolio projects</a> — pick your next one.</li>
+                <li><a href="../cloud-security-home-lab.html">Home lab setup</a> — the safe environment this project runs in.</li>
+                <li><a href="../cloud-security-careers.html">Careers guide</a> — how this project fits into the hiring story.</li>
+                <li><a href="../community.html">Friday Zoom + Signal chat</a> — share your write-up with practitioners.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Learn</h3>
+          <ul>
+            <li><a href="/what-is-cloud-security.html">What is Cloud Security?</a></li>
+            <li><a href="/learning-path.html">Learning Path</a></li>
+            <li><a href="/cloud-security-degree-programs.html">Degree Programs</a></li>
+            <li><a href="/cloud-security-careers.html">Careers</a></li>
+            <li><a href="/cloud-security-home-lab.html">Home Lab</a></li>
+            <li><a href="/cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+            <li><a href="/cloud-security-reading-list.html">Reading List</a></li>
+            <li><a href="/cloud-security-best-practices.html">Best Practices</a></li>
+            <li><a href="/shared-responsibility-model.html">Shared Responsibility</a></li>
+            <li><a href="/cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+            <li><a href="/cloud-security-certifications.html">Certifications</a></li>
+            <li><a href="/glossary.html">Glossary</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Defend</h3>
+          <ul>
+            <li><a href="/news.html">News</a></li>
+            <li><a href="/threat-research.html">Threat Research</a></li>
+            <li><a href="/breach-timeline.html">Breach Kill Chains</a></li>
+            <li><a href="/resources.html">All Resources</a></li>
+            <li><a href="/ctfs.html">Cloud CTFs</a></li>
+            <li><a href="/github-actions.html">GitHub Actions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Attend</h3>
+          <ul>
+            <li><a href="/sessions.html">Zoom Sessions</a></li>
+            <li><a href="/community.html">Community &amp; Signal</a></li>
+            <li><a href="/conferences.html">Conferences</a></li>
+            <li><a href="/meetings.html">Meeting Recaps</a></li>
+            <li><a href="/presentations.html">Presentations</a></li>
+            <li><a href="/chat-resources.html">Chat Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+            <li><a href="/community.html">Signal Chat</a></li>
+            <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+            <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="/contribute.html">Contribute</a></li>
+            <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/security-policy.html">Security Policy</a></li>
+            <li><a href="/rss.html">RSS Feed</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>About CSOH</h3>
+          <p>Cloud Security Office Hours is a vendor-neutral community for cloud
+          security professionals. We meet weekly on Zoom and maintain this curated
+          collection of resources.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023-2026 Cloud Security Office Hours. All resources are provided as-is for educational purposes.</p>
+      </div>
+    </footer>
+
+    <script src="/main.js?v=fc5df335" integrity="sha384-6mAKmFSe49u7DZwulVLU50VmLdFh0WoBsOzxSE9pcssQ/8K2yRlZefC7BZ8GKL2h"
+        defer></script>
+</body>
+
+</html>

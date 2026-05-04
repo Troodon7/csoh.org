@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description" content="Build the vulnerable Capital One architecture in your lab — WAF + SSRF + IMDSv1 + over-privileged role — exploit it end-to-end, then build the controls and detections that close it.">
+    <meta name="keywords" content="capital one breach lab, ssrf imdsv1, recreate capital one, aws breach lab, breach recreation portfolio, cloud security portfolio capital one">
+    <title>Recreate the Capital One breach in your lab - Cloud Security Portfolio Project - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/portfolio/recreate-capital-one.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Recreate the Capital One breach in your lab - CSOH Portfolio Project">
+    <meta property="og:description" content="Build the vulnerable Capital One architecture in your lab — WAF + SSRF + IMDSv1 + over-privileged role — exploit it end-to-end, then build the controls and detections that close it.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/portfolio/recreate-capital-one.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Recreate the Capital One breach in your lab">
+    <meta name="twitter:description" content="Build the vulnerable Capital One architecture in your lab — WAF + SSRF + IMDSv1 + over-privileged role — exploit it end-to-end, then build the controls and detections that close it.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
+
+    <link rel="preload" href="/style.css?v=88ae4643" as="style"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+    <link rel="stylesheet" href="/style.css?v=88ae4643"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Recreate the Capital One breach in your lab",
+      "description": "Build the vulnerable Capital One architecture in your lab — WAF + SSRF + IMDSv1 + over-privileged role — exploit it end-to-end, then build the controls and detections that close it.",
+      "totalTime": "PT8H",
+      "image": "https://csoh.org/banner.png",
+      "datePublished": "2026-05-04",
+      "dateModified": "2026-05-04",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/",
+        "logo": { "@type": "ImageObject", "url": "https://csoh.org/banner.png" }
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://csoh.org/" },
+        { "@type": "ListItem", "position": 2, "name": "Portfolio Projects", "item": "https://csoh.org/cloud-security-portfolio-projects.html" },
+        { "@type": "ListItem", "position": 3, "name": "Recreate Capital One", "item": "https://csoh.org/portfolio/recreate-capital-one.html" }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="../learning-path.html">Learning Path</a></li>
+                            <li><a href="../cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="../cloud-security-careers.html">Careers</a></li>
+                            <li><a href="../cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="../cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+                            <li><a href="../cloud-security-reading-list.html">Reading List</a></li>
+                            <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="../cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="../resources.html">Resources</a></li>
+                            <li><a href="../ctfs.html">CTFs</a></li>
+                            <li><a href="../cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="../github-actions.html">GitHub Actions</a></li>
+                            <li><a href="../glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../news.html">News</a></li>
+                            <li><a href="../threat-research.html">Threat Research</a></li>
+                            <li><a href="../breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../sessions.html">Zoom Sessions</a></li>
+                            <li><a href="../community.html">Community &amp; Signal</a></li>
+                            <li><a href="../conferences.html">Conferences</a></li>
+                            <li><a href="../meetings.html">Meeting Recaps</a></li>
+                            <li><a href="../presentations.html">Presentations</a></li>
+                            <li><a href="../chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../contribute.html">Contribute Overview</a></li>
+                            <li><a href="../contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../faq.html">FAQ</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+            <li><span aria-current="page">Recreate Capital One</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <picture><source srcset="../banner.webp" type="image/webp"><img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
+        <h1>Recreate the Capital One breach in your lab</h1>
+        <p>Build the vulnerable architecture (WAF + SSRF-able service + IMDSv1 + over-privileged role), exploit it, then build the controls and detections that close it.</p>
+        <div class="cta-buttons">
+            <a href="#steps" class="btn btn-primary">Walkthrough</a>
+            <a href="../cloud-security-portfolio-projects.html" class="btn btn-secondary">All Portfolio Projects</a>
+        </div>
+    </section>
+    <main class="container contribute-article" id="main-content">
+
+        <p class="page-meta"><time datetime="2026-05-04">Last updated <strong>2026-05-04</strong></time> · <a href="../about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/portfolio/recreate-capital-one.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>Time:</strong> ~12 hours &nbsp;·&nbsp; <strong>Difficulty:</strong> Advanced &nbsp;·&nbsp; <strong>Stack:</strong> AWS · Terraform · WAF · IAM · GuardDuty</p>
+        </div>
+
+        <section id="intro">
+            <p>Recreating a real breach end-to-end is the single most compelling portfolio piece in cloud security. The <a href="/breaches/capital-one.html">2019 Capital One breach</a> is the canonical AWS choice — the kill chain is well-documented, every step maps to a control you can demonstrate, and most cloud security engineers can pattern-match on it instantly.</p><p>The artifact is a public repo that, given an AWS account, will deploy the vulnerable setup, walk you through the exploit, then deploy the fixes — all via Terraform. Hiring managers will remember this one.</p>
+        </section>
+
+        <div class="toc">
+            <h2>📖 On this page</h2>
+            <ol>
+                <li><a href="#deliverables">What you'll have at the end</a></li>
+                <li><a href="#prereqs">Prerequisites</a></li>
+                <li><a href="#steps">Step-by-step</a></li>
+                <li><a href="#managers">What hiring managers look for</a></li>
+                <li><a href="#mistakes">Common mistakes</a></li>
+                <li><a href="#publish">Where to publish</a></li>
+                <li><a href="#next">Where next</a></li>
+            </ol>
+        </div>
+
+        <section id="deliverables">
+            <h2>What you'll have at the end</h2>
+            <ul>
+                <li>A Terraform module that deploys the vulnerable architecture (a server with SSRF, IMDSv1 enabled, an over-privileged IAM role, S3 buckets accessible from that role).</li>
+                <li>A walkthrough of the exploit: SSRF → IMDSv1 → temporary creds → S3 list / get.</li>
+                <li>A Terraform module that deploys the fixed architecture (IMDSv2 only, scoped IAM role, WAF SSRF rule, S3 access logging, GuardDuty enabled).</li>
+                <li>GuardDuty findings + CloudTrail evidence showing the original attack would now be detected.</li>
+                <li>A write-up mapping each fix to the original breach root cause.</li>
+            </ul>
+        </section>
+
+        <section id="prereqs">
+            <h2>Prerequisites</h2>
+            <ul>
+                <li>Strong comfort with Terraform and AWS. This is an advanced project.</li>
+                <li>Read the <a href="/breaches/capital-one.html">CSOH Capital One kill chain</a> and the original Krebs / DOJ write-ups first.</li>
+                <li><a href="/cloud-security-home-lab.html">Home lab guardrails</a> — this project spins up a NAT gateway and an EC2 instance; tear them down at end of session.</li>
+                <li>An ethical reminder: this is for self-education in your own lab account. Don't replicate against anything you don't own.</li>
+            </ul>
+        </section>
+
+        <section id="steps">
+            <h2>Step-by-step</h2>
+            <h3>1. Re-read the breach in detail</h3>
+            <p>Read the <a href="/breaches/capital-one.html">CSOH kill chain</a>, the DOJ indictment, and the AWS official statement. Make a four-step diagram on paper: ingress → SSRF → IMDS → S3 exfil.</p>
+            <h3>2. Terraform the vulnerable architecture</h3>
+            <p>Deploy: VPC with public subnet, EC2 instance running a deliberately-SSRF-vulnerable web app (a one-line Python Flask app that does <code>requests.get(request.args['url'])</code>), the EC2 instance launched with <code>http_tokens = optional</code> (IMDSv1 allowed), an instance profile with overly-broad S3 read/list across multiple buckets, and three S3 buckets with sample data.</p><p>Important: this code is intentionally vulnerable. Comment that loudly in the repo's top-level README, and add an automatic teardown script.</p>
+            <h3>3. Execute the exploit</h3>
+            <p>From your laptop, hit the SSRF endpoint to fetch <code>http://169.254.169.254/latest/meta-data/iam/security-credentials/&lt;role-name&gt;</code>. You should get back temporary credentials. Use <code>aws configure</code> with those creds, then <code>aws s3 ls</code> across the buckets. Screenshot every step.</p>
+            <h3>4. Capture the CloudTrail of your own attack</h3>
+            <p>Pull the CloudTrail events your exploit generated. Note: the IMDS call itself doesn't show in CloudTrail — only the subsequent <code>sts:AssumeRole</code> (if any) and the S3 calls do. This is itself a teaching moment about the limits of AWS detection.</p>
+            <h3>5. Now build the fixes — one at a time</h3>
+            <p>Walk through the Capital One root causes and Terraform a fix per cause:</p><ul><li><strong>IMDSv2 enforcement</strong> via <code>http_tokens = required</code> at the launch template, plus an SCP that denies launching with v1.</li><li><strong>Scoped IAM role</strong> — read access on one bucket, no list-buckets, no cross-account.</li><li><strong>WAF rule</strong> blocking requests targeting <code>169.254.169.254</code> (or other internal IPs).</li><li><strong>Egress restrictions</strong> — VPC endpoint for S3 + NAT egress restricted to known destinations.</li><li><strong>S3 access logging</strong> + bucket policies preventing exfiltration.</li><li><strong>GuardDuty</strong> enabled with the relevant findings turned on.</li></ul>
+            <h3>6. Re-run the exploit against the fixed architecture</h3>
+            <p>Try the SSRF again. With IMDSv2 enforced, the simple SSRF can't get credentials (it needs to PUT first to get a session token). With the WAF rule, the request is blocked at the edge. Document each "now blocked" outcome with a screenshot.</p>
+            <h3>7. Validate detection</h3>
+            <p>Use Stratus Red Team or your own CloudTrail queries to confirm GuardDuty + CloudTrail surface the original attack pattern when run against the fixed architecture. Map findings to MITRE ATT&amp;CK Cloud.</p>
+            <h3>8. Write the kill chain in your own voice</h3>
+            <p>Use our <a href="/breach-timeline.html">kill chain template</a> as inspiration but write it as your own analysis, with your own diagrams, your own commands, and the lessons you took from doing it hands-on.</p>
+            <h3>9. Tear down (immediately)</h3>
+            <p>This lab leaves nothing useful running. <code>terraform destroy</code> the moment the write-up is recorded.</p>
+        </section>
+
+        <section id="managers">
+            <h2>What hiring managers look for</h2>
+            <ul>
+                <li>You actually did the exploit, not just described it. The screenshots show CLI output, not theory.</li>
+                <li>Your fixes are technically specific and Terraformed — not generic "apply least privilege."</li>
+                <li>You map each fix to the original root cause; this proves you understood the breach, not just memorized it.</li>
+                <li>You demonstrate awareness that defense in depth means multiple controls — IMDSv2 + scoped IAM + WAF + egress, not just one.</li>
+                <li>You speak to what GuardDuty would and wouldn't catch — shows mature understanding of detection limits.</li>
+            </ul>
+        </section>
+
+        <section id="mistakes">
+            <h2>Common mistakes</h2>
+            <ul>
+                <li>Doing this in a non-lab account. <em>Never</em> deploy intentionally vulnerable code to a production-shaped environment.</li>
+                <li>Forgetting the SCP layer. Per-account fixes are fragile; org-level guardrails are the durable answer.</li>
+                <li>Skipping the detection validation. Recreating the breach without proving you'd catch it next time misses the point.</li>
+                <li>Not tearing down. NAT gateways are silent killers.</li>
+                <li>Glossing over IMDSv2's design (the session-token requirement is what makes it SSRF-resistant; explain it in the write-up).</li>
+            </ul>
+        </section>
+
+        <section id="publish">
+            <h2>Where to publish</h2>
+            <p>The full publishing playbook is on the <a href="../cloud-security-portfolio-projects.html#publish">portfolio hub page</a>. The short version: a public GitHub repo with a thorough README is the strongest single signal; pair it with a LinkedIn post and (optionally) a 5-minute lightning talk at a CSOH <a href="../sessions.html">Friday Zoom</a>.</p>
+        </section>
+
+        <section id="next" class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="../cloud-security-portfolio-projects.html">All 7 portfolio projects</a> — pick your next one.</li>
+                <li><a href="../cloud-security-home-lab.html">Home lab setup</a> — the safe environment this project runs in.</li>
+                <li><a href="../cloud-security-careers.html">Careers guide</a> — how this project fits into the hiring story.</li>
+                <li><a href="../community.html">Friday Zoom + Signal chat</a> — share your write-up with practitioners.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Learn</h3>
+          <ul>
+            <li><a href="/what-is-cloud-security.html">What is Cloud Security?</a></li>
+            <li><a href="/learning-path.html">Learning Path</a></li>
+            <li><a href="/cloud-security-degree-programs.html">Degree Programs</a></li>
+            <li><a href="/cloud-security-careers.html">Careers</a></li>
+            <li><a href="/cloud-security-home-lab.html">Home Lab</a></li>
+            <li><a href="/cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+            <li><a href="/cloud-security-reading-list.html">Reading List</a></li>
+            <li><a href="/cloud-security-best-practices.html">Best Practices</a></li>
+            <li><a href="/shared-responsibility-model.html">Shared Responsibility</a></li>
+            <li><a href="/cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+            <li><a href="/cloud-security-certifications.html">Certifications</a></li>
+            <li><a href="/glossary.html">Glossary</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Defend</h3>
+          <ul>
+            <li><a href="/news.html">News</a></li>
+            <li><a href="/threat-research.html">Threat Research</a></li>
+            <li><a href="/breach-timeline.html">Breach Kill Chains</a></li>
+            <li><a href="/resources.html">All Resources</a></li>
+            <li><a href="/ctfs.html">Cloud CTFs</a></li>
+            <li><a href="/github-actions.html">GitHub Actions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Attend</h3>
+          <ul>
+            <li><a href="/sessions.html">Zoom Sessions</a></li>
+            <li><a href="/community.html">Community &amp; Signal</a></li>
+            <li><a href="/conferences.html">Conferences</a></li>
+            <li><a href="/meetings.html">Meeting Recaps</a></li>
+            <li><a href="/presentations.html">Presentations</a></li>
+            <li><a href="/chat-resources.html">Chat Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+            <li><a href="/community.html">Signal Chat</a></li>
+            <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+            <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="/contribute.html">Contribute</a></li>
+            <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/security-policy.html">Security Policy</a></li>
+            <li><a href="/rss.html">RSS Feed</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>About CSOH</h3>
+          <p>Cloud Security Office Hours is a vendor-neutral community for cloud
+          security professionals. We meet weekly on Zoom and maintain this curated
+          collection of resources.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023-2026 Cloud Security Office Hours. All resources are provided as-is for educational purposes.</p>
+      </div>
+    </footer>
+
+    <script src="/main.js?v=fc5df335" integrity="sha384-6mAKmFSe49u7DZwulVLU50VmLdFh0WoBsOzxSE9pcssQ/8K2yRlZefC7BZ8GKL2h"
+        defer></script>
+</body>
+
+</html>
