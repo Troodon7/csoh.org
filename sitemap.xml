@@ -49,7 +49,7 @@
   <!-- Cloud Security Degree Programs - Pillar page -->
   <url>
     <loc>https://csoh.org/cloud-security-degree-programs.html</loc>
-    <lastmod>2026-05-03</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -57,7 +57,7 @@
   <!-- Cloud Security Home Lab - Practical guide -->
   <url>
     <loc>https://csoh.org/cloud-security-home-lab.html</loc>
-    <lastmod>2026-05-03</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -121,7 +121,7 @@
   <!-- News - Updates very frequently -->
   <url>
     <loc>https://csoh.org/news.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
