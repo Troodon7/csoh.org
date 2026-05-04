@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="A practical roadmap for cloud security pros to learn AI: fundamentals, prompt engineering, AI/LLM security, agentic systems, hands-on labs, books, courses, and free CTFs. Vendor-neutral.">
+    <meta name="keywords"
+        content="learn AI, AI for security professionals, AI security learning path, LLM security training, prompt engineering for security, AI red teaming, agentic AI, MCP, AI CTF, OWASP LLM Top 10, NIST AI RMF, AI for SOC, AI for blue team">
+    <title>Learn AI: A Roadmap for Cloud Security Pros - Cloud Security Office Hours</title>
+
+    <link rel="canonical" href="https://csoh.org/ai-learning.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Learn AI: A Roadmap for Cloud Security Pros - CSOH">
+    <meta property="og:description"
+        content="From 'I've used ChatGPT' to 'I can secure agentic systems in production.' A practical, opinionated AI learning path built for cloud security practitioners.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/ai-learning.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Learn AI: A Roadmap for Cloud Security Pros">
+    <meta name="twitter:description"
+        content="The CSOH AI learning roadmap — fundamentals, prompt craft, LLM/agent security, hands-on labs and the certifications worth chasing.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
+
+    <link rel="preload" href="/style.css?v=88ae4643" as="style"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+    <link rel="stylesheet" href="/style.css?v=88ae4643"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Learn AI as a Cloud Security Professional",
+      "description": "A practical roadmap for cloud security practitioners to learn AI: fundamentals, prompt engineering, LLM/agent security, and hands-on practice.",
+      "totalTime": "P9M",
+      "image": "https://csoh.org/banner.png",
+      "datePublished": "2026-05-03",
+      "dateModified": "2026-05-03",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Use AI every day for two weeks",
+          "text": "Pick one frontier model (Claude, ChatGPT, or Gemini) and use it for real work daily. Learn what it's good at, what it isn't, and how prompt phrasing changes outputs."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Learn the fundamentals",
+          "text": "Understand tokens, context windows, temperature, embeddings, RAG, fine-tuning, and how transformers actually generate text. Skip the hype, focus on mechanics."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Build something with the API",
+          "text": "Write a small project that calls a model API. A retrieval-augmented chatbot over your own notes is the canonical first build."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Study AI/LLM security",
+          "text": "Read the OWASP LLM Top 10, NIST AI RMF, and MITRE ATLAS. Understand prompt injection, training-data extraction, and agent abuse paths."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Practice on AI CTFs",
+          "text": "Work through Prompt Airlines, Gandalf, AI Goat, and Doublespeak. Document each attack and defense in writing."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "Specialize",
+          "text": "Pick a track: AI red teaming, defending agentic systems, AI governance, MLSecOps, or building AI-native security tooling."
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "AI Learning Path for Cloud Security Pros",
+      "description": "A vendor-neutral, opinionated roadmap for security practitioners to gain working AI literacy and AI security skill — covering foundations, prompt craft, LLM/agent security, hands-on labs, and specialization tracks.",
+      "url": "https://csoh.org/ai-learning.html",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "image": "https://csoh.org/banner.png",
+      "provider": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/",
+        "sameAs": "https://csoh.org/"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "Security practitioner learning AI"
+      },
+      "educationalLevel": "Beginner to Advanced",
+      "learningResourceType": "Roadmap",
+      "teaches": [
+        "AI and LLM fundamentals",
+        "Prompt engineering",
+        "Retrieval-augmented generation (RAG)",
+        "AI/LLM security and OWASP LLM Top 10",
+        "Agentic system security",
+        "AI red teaming",
+        "AI governance and risk management"
+      ],
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "Online",
+        "courseWorkload": "P9M",
+        "instructor": {
+          "@type": "Organization",
+          "name": "Cloud Security Office Hours"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "category": "Free"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI Learning",
+          "item": "https://csoh.org/ai-learning.html"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "AI Learning Path for Cloud Security Pros",
+      "description": "Vendor-neutral roadmap for cloud security practitioners learning AI — fundamentals, prompt engineering, LLM/agent security, hands-on labs, certifications.",
+      "url": "https://csoh.org/ai-learning.html",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "learningResourceType": "Roadmap",
+      "educationalLevel": "Beginner to Advanced",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "Security professional learning AI"
+      },
+      "teaches": [
+        "AI and LLM fundamentals",
+        "Prompt engineering",
+        "RAG and embeddings",
+        "AI/LLM security",
+        "Agentic system security",
+        "AI red teaming",
+        "AI governance"
+      ],
+      "provider": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      }
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="ai-learning.html" aria-current="page">AI Learning</a></li>
+                            <li><a href="cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="cloud-security-careers.html">Careers</a></li>
+                            <li><a href="cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="cloud-security-reading-list.html">Reading List</a></li>
+                            <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="ctfs.html">CTFs</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="github-actions.html">GitHub Actions</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">News</a></li>
+                            <li><a href="threat-research.html">Threat Research</a></li>
+                            <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="sessions.html">Zoom Sessions</a></li>
+                            <li><a href="community.html">Community &amp; Signal</a></li>
+                            <li><a href="conferences.html">Conferences</a></li>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="contribute.html">Contribute Overview</a></li>
+                            <li><a href="contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">AI Learning</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
+        <h1>Learn AI: A Roadmap for Cloud Security Pros</h1>
+        <p>From "I've used ChatGPT a few times" to "I can defend an agentic system in production." A practical, opinionated path for security people who want real AI fluency — not buzzwords.</p>
+        <div class="cta-buttons">
+            <a href="#stage-1" class="btn btn-primary">Start Here</a>
+            <a href="#why-now" class="btn btn-secondary">Why Bother?</a>
+        </div>
+    </section>
+    <main class="container contribute-article" id="main-content">
+
+        <p class="page-meta"><time datetime="2026-05-03">Last updated <strong>2026-05-03</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/ai-learning.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>The honest version:</strong> Most security professionals don't need to train models from scratch. You need to understand how LLMs actually work, how to use them well, and how they fail — because soon you will be asked to defend an agent that has access to your production cloud. This roadmap is the shortest path I'd recommend to a working <a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a> engineer, detection engineer, or cloud architect who has used ChatGPT but hasn't yet built or attacked anything with an LLM.</p>
+        </div>
+
+        <div class="toc">
+            <h2>📖 The Path</h2>
+            <ol>
+                <li><a href="#why-now">Why bother (and why now)</a></li>
+                <li><a href="#prerequisites">Prerequisites</a></li>
+                <li><a href="#stage-1">Stage 1: Become a daily user (Weeks 0–2)</a></li>
+                <li><a href="#stage-2">Stage 2: Mental model (Weeks 2–6)</a></li>
+                <li><a href="#stage-3">Stage 3: Build something (Months 1.5–3)</a></li>
+                <li><a href="#stage-4">Stage 4: AI/LLM security (Months 3–6)</a></li>
+                <li><a href="#stage-5">Stage 5: Agents &amp; MCP (Months 5–8)</a></li>
+                <li><a href="#stage-6">Stage 6: Specialize</a></li>
+                <li><a href="#labs">Hands-on labs &amp; CTFs</a></li>
+                <li><a href="#books">Books &amp; courses</a></li>
+                <li><a href="#follow">People &amp; newsletters to follow</a></li>
+                <li><a href="#certs">Certifications worth your time</a></li>
+                <li><a href="#projects">Project ideas to actually build</a></li>
+                <li><a href="#frameworks">Frameworks &amp; standards to know cold</a></li>
+                <li><a href="#stay-current">Stay current</a></li>
+                <li><a href="#mistakes">Common mistakes</a></li>
+            </ol>
+        </div>
+
+        <section id="why-now">
+            <h2>Why bother (and why now)</h2>
+            <p>Three reasons this is on a cloud-security site:</p>
+            <ul>
+                <li><strong>Agents are landing in your cloud.</strong> An <a class="glossary-link" href="glossary.html#term-agent">agent</a> with an IAM role and a browser tool has the <a class="glossary-link" href="glossary.html#term-blast-radius">blast radius</a> of a compromised admin. Defending that is a cloud-security problem, not a separate AI team's problem.</li>
+                <li><strong>Your job is changing.</strong> Detection engineers are writing prompts to triage alerts. IR teams are using LLMs to summarize CloudTrail. Pen testers are using AI to draft attacks faster than humans can review. If you can't read a system prompt, you can't review what your team ships.</li>
+                <li><strong>The attack surface is genuinely new.</strong> <a class="glossary-link" href="glossary.html#term-prompt-injection">Prompt injection</a> isn't XSS. RAG isn't SQL. Most of the OWASP LLM Top 10 has no clean analog from the appsec world. You have to learn it on its own terms.</li>
+            </ul>
+            <p>You don't need to become a machine-learning researcher. You need <em>working</em> AI literacy: enough to use these tools well, build small things, and reason about how they break.</p>
+        </section>
+
+        <section id="prerequisites">
+            <h2>Prerequisites</h2>
+            <p>You'll have a much easier time if you already have:</p>
+            <ul>
+                <li><strong>Comfort in a terminal and one scripting language.</strong> Python is the lingua franca of the AI world. You don't need to be fluent — you need to read other people's notebooks and modify them.</li>
+                <li><strong>HTTP and JSON intuition.</strong> Every model API is a POST request returning JSON. If you can hit an API with <code>curl</code>, you have what you need.</li>
+                <li><strong>Cloud security fundamentals.</strong> If you're new to cloud security, do the <a href="learning-path.html">cloud security learning path</a> first. AI security is a layer <em>on top of</em> cloud security, not a substitute for it.</li>
+                <li><strong>A credit card with a $20–50/month budget.</strong> You'll burn this on API calls. It's the cheapest tuition in tech.</li>
+            </ul>
+            <p>That's it. You do not need linear algebra, calculus, or a PyTorch tattoo to be useful here.</p>
+        </section>
+
+        <section id="stage-1">
+            <h2>Stage 1: Become a daily user (Weeks 0–2)</h2>
+            <p><strong>Goal:</strong> Build instinct for what frontier models can and can't do. You can't defend a tool you've never used in anger.</p>
+
+            <h3>1. Pick one frontier model and pay for it</h3>
+            <p>Claude (Anthropic), ChatGPT (OpenAI), or Gemini (Google). Pay the $20/month — the gap between the free and paid tier is enormous, and the gap between "occasional user" and "daily user" is bigger still. Don't try to evaluate three at once; you'll learn more by going deep on one.</p>
+
+            <h3>2. Use it for everything for two weeks</h3>
+            <ul>
+                <li>Drafting Slack messages and emails.</li>
+                <li>Reading a CloudTrail log dump and explaining what an attacker just did.</li>
+                <li>Writing the boilerplate of a Terraform module before you fix it by hand.</li>
+                <li>Summarizing a security paper or vendor whitepaper.</li>
+                <li>Explaining a concept you almost-but-not-quite understand.</li>
+            </ul>
+            <p>Notice when it's confidently wrong. Notice when it saves you an hour. Notice how rephrasing a prompt changes the answer. That instinct is the foundation of everything below.</p>
+
+            <h3>3. Try a coding agent</h3>
+            <p>Use Claude Code, Cursor, GitHub Copilot, or Codex on a real task in a real repo. Write a small tool, debug a Lambda, refactor a script. The leap from "chat assistant" to "agent that edits files and runs commands" is exactly the shift you'll later need to defend.</p>
+
+            <p><strong>Stage 1 milestone:</strong> You instinctively reach for an LLM for the right kinds of tasks and avoid it for the wrong ones. You can describe — to a colleague — three things this model does well and three it fails at.</p>
+        </section>
+
+        <section id="stage-2">
+            <h2>Stage 2: Mental model (Weeks 2–6)</h2>
+            <p><strong>Goal:</strong> Understand what's actually happening when you press send. No more magic.</p>
+
+            <h3>1. The 30-minute mental model</h3>
+            <p>You don't need to derive attention from scratch. You <em>do</em> need crisp answers to:</p>
+            <ul>
+                <li>What is a <strong>token</strong>, and why does it cost money?</li>
+                <li>What is the <strong>context window</strong> and what happens when you exceed it?</li>
+                <li>What does <strong>temperature</strong> actually change?</li>
+                <li>What is an <strong>embedding</strong> and how is it different from a token?</li>
+                <li>What's the difference between <strong>fine-tuning</strong>, <strong>RAG</strong>, and <strong>prompting</strong> — and when do you reach for each?</li>
+                <li>What is a <strong>system prompt</strong> and why is it not a security boundary?</li>
+                <li>Why do models <strong>hallucinate</strong>, and what kinds of hallucinations are dangerous?</li>
+            </ul>
+
+            <h3>2. Recommended primers</h3>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank" rel="noopener noreferrer">Andrej Karpathy — "Intro to Large Language Models"</a> (1 hour, free). The single best onboarding video. Watch it twice.</li>
+                <li><a href="https://www.deeplearning.ai/short-courses/" target="_blank" rel="noopener noreferrer">DeepLearning.AI Short Courses</a> — free, 1–2 hours each. Start with "ChatGPT Prompt Engineering for Developers" and "Building Systems with the ChatGPT API."</li>
+                <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener noreferrer">Anthropic's prompt-engineering docs</a> and <a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank" rel="noopener noreferrer">OpenAI's prompt-engineering guide</a> — vendor docs, but unusually high signal.</li>
+                <li><a href="https://github.com/anthropics/courses" target="_blank" rel="noopener noreferrer">Anthropic Courses (GitHub)</a> — interactive Jupyter notebooks for prompt engineering, tool use, RAG, evals.</li>
+            </ul>
+
+            <h3>3. Prompt engineering, briefly</h3>
+            <p>Most "prompt engineering" content online is hype. The 80/20:</p>
+            <ul>
+                <li>Be specific. Vague input, vague output.</li>
+                <li>Show, don't tell. Few-shot examples beat instructions almost every time.</li>
+                <li>Ask the model to think step by step (chain of thought) for hard reasoning, then ask it to verify its own answer.</li>
+                <li>Constrain the output format. JSON schemas and clear delimiters reduce variance.</li>
+                <li>Iterate. The first prompt is rarely the right prompt.</li>
+            </ul>
+
+            <p><strong>Stage 2 milestone:</strong> You can read a prompt-engineering blog post or a model evaluation paper and not get lost in the jargon. You stop calling LLMs "AI" in casual conversation because the precision matters.</p>
+        </section>
+
+        <section id="stage-3">
+            <h2>Stage 3: Build something with the API (Months 1.5–3)</h2>
+            <p><strong>Goal:</strong> Get past consumer-app polish and into raw model behavior.</p>
+
+            <h3>1. The canonical first project: RAG over your own notes</h3>
+            <p>Build a retrieval-augmented Q&amp;A bot that answers questions about a corpus you control — your blog posts, last year's incident write-ups, every CloudTrail finding from a CTF, your runbooks, whatever. You will:</p>
+            <ul>
+                <li>Embed documents into a vector store (start with FAISS or Chroma locally — don't reach for Pinecone yet).</li>
+                <li>Implement retrieval: top-k similarity, then a re-ranker.</li>
+                <li>Stuff the results into a prompt with a system message.</li>
+                <li>Stream the response back.</li>
+            </ul>
+            <p>It will work badly the first time. Fixing it is where the real learning lives.</p>
+
+            <h3>2. Your second project: an evaluation harness</h3>
+            <p>Pick a security task — "extract IOCs from this incident report," "classify this CloudTrail event as benign or suspicious," "summarize this CVE in three bullets." Build a small dataset of ~30 examples with ground truth. Run the same prompt against it on every change. Watch your changes regress things. This is what real AI engineering feels like.</p>
+
+            <h3>3. Recommended starting kits</h3>
+            <ul>
+                <li><a href="https://github.com/openai/openai-cookbook" target="_blank" rel="noopener noreferrer">OpenAI Cookbook</a> — runnable recipes for almost everything.</li>
+                <li><a href="https://github.com/anthropics/anthropic-cookbook" target="_blank" rel="noopener noreferrer">Anthropic Cookbook</a> — same idea, Claude-flavored.</li>
+                <li><a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener noreferrer">LangChain</a> if you like batteries included; the raw SDK if you want to actually understand what's happening (recommended).</li>
+                <li><a href="https://huggingface.co/learn" target="_blank" rel="noopener noreferrer">Hugging Face Learn</a> — free, deeper into the ML side if you want to go there.</li>
+            </ul>
+
+            <p><strong>Stage 3 milestone:</strong> You've shipped two things you wrote yourself, in code, that call a model API. You have an opinion about model providers based on real use, not Twitter takes.</p>
+        </section>
+
+        <section id="stage-4">
+            <h2>Stage 4: AI/LLM security (Months 3–6)</h2>
+            <p><strong>Goal:</strong> Move from "I can build" to "I can break, and I can defend."</p>
+
+            <h3>1. Read the canon</h3>
+            <ul>
+                <li><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" rel="noopener noreferrer">OWASP Top 10 for LLM Applications</a>. Read every entry. Re-read it next quarter — it's a living document.</li>
+                <li><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">NIST AI Risk Management Framework</a> (AI RMF 1.0). Govern / Map / Measure / Manage. Boring, important.</li>
+                <li><a href="https://atlas.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATLAS</a> — the ATT&amp;CK equivalent for ML systems. Map techniques to detections.</li>
+                <li><a href="https://www.iso.org/standard/81230.html" target="_blank" rel="noopener noreferrer">ISO/IEC 42001</a> — AI management systems standard. Useful when GRC inevitably knocks.</li>
+                <li><a href="https://research.google/pubs/" target="_blank" rel="noopener noreferrer">Google's Secure AI Framework (SAIF)</a> and <a href="https://www.cisa.gov/sites/default/files/2024-01/Guidelines-for-secure-AI-system-development.pdf" target="_blank" rel="noopener noreferrer">CISA "Guidelines for Secure AI System Development"</a>.</li>
+            </ul>
+
+            <h3>2. The attack classes you must understand</h3>
+            <ul>
+                <li><strong><a class="glossary-link" href="glossary.html#term-prompt-injection">Prompt injection</a> (direct and indirect).</strong> The defining LLM vulnerability. An attacker hides instructions in retrieved content, a webpage, an email, a calendar invite — and the model executes them.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-jailbreak">Jailbreaks.</a></strong> Inputs that defeat safety training. Different from injection; sometimes overlapping.</li>
+                <li><strong>Training-data extraction.</strong> Coercing a model into reproducing memorized training data — secrets, PII, proprietary code.</li>
+                <li><strong>Model denial of service.</strong> Inputs that blow up token budgets or latency.</li>
+                <li><strong>Insecure output handling.</strong> The model returns code, SQL, or shell that gets executed downstream. The model is now an attack proxy.</li>
+                <li><strong>Supply-chain attacks.</strong> Tampered model weights, poisoned datasets, malicious Hugging Face repos.</li>
+                <li><strong>Excessive agency.</strong> An agent given more tools, scopes, or authority than the threat model warrants.</li>
+            </ul>
+
+            <h3>3. Defenses you'll build (or buy)</h3>
+            <ul>
+                <li>Input/output filtering — Llama Guard, Lakera, Prompt Guard, Rebuff, NeMo Guardrails. Helpful, never sufficient.</li>
+                <li>Strong system prompts paired with structured output and schema validation.</li>
+                <li>Tight tool scoping — never give an agent write access to anything you wouldn't give a junior contractor on day one.</li>
+                <li>Logging every prompt, completion, tool call, and model identity. You can't investigate what you didn't record.</li>
+                <li>Human-in-the-loop for irreversible actions. "Send email," "delete resource," "pay invoice" should not be one prompt away.</li>
+            </ul>
+
+            <p><strong>Stage 4 milestone:</strong> You can review an LLM-powered feature in your company's product and produce a credible threat model. You stop treating "the LLM is powerful" as a magic explanation.</p>
+        </section>
+
+        <section id="stage-5">
+            <h2>Stage 5: Agents &amp; MCP (Months 5–8)</h2>
+            <p><strong>Goal:</strong> Internalize what changes when an LLM stops talking and starts <em>doing</em>.</p>
+            <p>Agents are LLMs in a loop with tools. <a class="glossary-link" href="glossary.html#term-mcp">Model Context Protocol</a> (MCP) is the emerging open standard for plugging tools and data into them. Together they are the most consequential security shift since cloud itself, and most companies have no idea yet.</p>
+
+            <h3>1. Build an agent end-to-end</h3>
+            <ul>
+                <li>Pick a small, well-scoped goal: "summarize my unread security newsletters" or "open a GitHub issue when a new high-severity CVE matches our stack."</li>
+                <li>Implement tool calling against the raw API. Watch the agent loop in your terminal.</li>
+                <li>Add a "max steps" cap, a budget cap, and a require-confirmation hook for destructive actions. Notice how often you would have nuked something without them.</li>
+            </ul>
+
+            <h3>2. Set up MCP locally</h3>
+            <ul>
+                <li>Install Claude Desktop or another MCP-capable client.</li>
+                <li>Connect at least two MCP servers — file system, GitHub, a database, etc.</li>
+                <li>Read the spec. Note that the security boundary is the <em>client</em>, not the protocol.</li>
+                <li>Now design an injection attack: a malicious file/issue/row that flips the agent's intent. Try it on your own setup.</li>
+            </ul>
+
+            <h3>3. Read the agent-security canon</h3>
+            <ul>
+                <li>Simon Willison's writing on <a href="https://simonwillison.net/series/prompt-injection/" target="_blank" rel="noopener noreferrer">prompt injection</a> — the most important running commentary on this attack class.</li>
+                <li><a href="https://embracethered.com/blog/" target="_blank" rel="noopener noreferrer">Embrace The Red</a> (Johann Rehberger) — practical agent and assistant exploits.</li>
+                <li><a href="https://anthropic.com/news/agentic-misalignment" target="_blank" rel="noopener noreferrer">Anthropic's research on agentic misuse and misalignment</a>.</li>
+                <li>The CSOH <a href="breach-timeline.html">Breach Kill Chains</a> — agent-related incidents are starting to show up here. Read them as they land.</li>
+            </ul>
+
+            <p><strong>Stage 5 milestone:</strong> You can sketch the threat model for an agentic system on a whiteboard, identify the three highest-blast-radius tools, and explain to an exec why "but the system prompt forbids that" is not a control.</p>
+        </section>
+
+        <section id="stage-6">
+            <h2>Stage 6: Specialize</h2>
+            <p>Pick the lane your career and curiosity pull you toward:</p>
+            <ul>
+                <li><strong>AI red teaming.</strong> Build offensive skill against LLM apps and agents. Adversarial prompting, jailbreak research, agent-tool exploitation, multi-modal attacks. Communities: HackerOne AI Safety Fund, AI Village at DEF CON.</li>
+                <li><strong>Defending agentic systems.</strong> Detection content for prompt-injection patterns, tool-misuse anomalies, model-identity tracking, and the analogue of CloudTrail for AI control planes.</li>
+                <li><strong>AI governance &amp; risk.</strong> Map NIST AI RMF and ISO 42001 onto your existing GRC stack. Run AI inventories. Approve and review use cases. Talk to legal regularly.</li>
+                <li><strong>MLSecOps.</strong> Pipeline security — model registry, dataset lineage, signed weights, deployment guardrails. The ML world's answer to <a class="glossary-link" href="glossary.html#term-devsecops">DevSecOps</a>.</li>
+                <li><strong>Building AI-native security tooling.</strong> Triage agents for the SOC, alert summarization, IaC review, autonomous IR copilots. The market is wide open.</li>
+                <li><strong>AI-APP / runtime protection.</strong> The emerging category — see Wiz's <a class="glossary-link" href="glossary.html#term-ai-app">AI-APP</a> framing — for monitoring deployed model endpoints, prompts, completions, and agent behavior in production.</li>
+            </ul>
+        </section>
+
+        <section id="labs">
+            <h2>Hands-on labs &amp; CTFs</h2>
+            <p>You can read for a year and learn less than you do in one weekend of CTFs. The full list lives in the <a href="ctfs.html">CSOH CTF directory</a>; here's what to start with:</p>
+            <ul>
+                <li><a href="https://gandalf.lakera.ai/" target="_blank" rel="noopener noreferrer">Gandalf (Lakera)</a> — eight levels of prompt-injection puzzles. The free, browser-based gateway drug. Do all eight.</li>
+                <li><a href="https://promptairlines.com/" target="_blank" rel="noopener noreferrer">Prompt Airlines</a> — trick a customer-service chatbot into giving you a free flight. Realistic.</li>
+                <li><a href="https://doublespeak.chat/" target="_blank" rel="noopener noreferrer">Doublespeak</a> — extract a secret from an AI character with deception-resistant defenses.</li>
+                <li><a href="https://github.com/orcasecurity-research/AIGoat" target="_blank" rel="noopener noreferrer">AI Goat (Orca Research)</a> — Terraform-based vulnerable AI/ML pipeline in AWS. Model poisoning, insecure endpoints, exfil paths.</li>
+                <li><a href="https://crucible.dreadnode.io/" target="_blank" rel="noopener noreferrer">Dreadnode Crucible</a> — adversarial-ML challenges, free tier, leaderboards.</li>
+                <li><a href="https://github.com/PaloAltoNetworks/aiboot" target="_blank" rel="noopener noreferrer">Wiz / Lakera / Hugging Face CTF events</a> — watch the <a href="ctfs.html">CTF directory</a> for live challenges; AI-themed events are happening multiple times a year now.</li>
+                <li><a href="https://huggingface.co/spaces" target="_blank" rel="noopener noreferrer">Hugging Face Spaces</a> — find a small open-source LLM, run it locally, try to break your own deployment.</li>
+            </ul>
+            <p>For each lab, write up what you tried, what worked, and what didn't. Public write-ups are the highest-leverage portfolio item in this field right now.</p>
+        </section>
+
+        <section id="books">
+            <h2>Books &amp; courses</h2>
+            <p>The published-book layer is thinner than for cloud, but a few are worth it. The <a href="cloud-security-reading-list.html">CSOH reading list</a> tracks updates; here's a focused starter set:</p>
+            <ul>
+                <li><strong><em>Hands-On Large Language Models</em></strong> — Jay Alammar &amp; Maarten Grootendorst (O'Reilly, 2024). The clearest end-to-end "what's actually happening" book.</li>
+                <li><strong><em>Adversarial AI Attacks, Mitigations, and Defense Strategies</em></strong> — John Sotiropoulos (Packt, 2024). Explicitly security-focused.</li>
+                <li><strong><em>The Developer's Playbook for Large Language Model Security</em></strong> — Steve Wilson (O'Reilly, 2024). Aligned with the OWASP LLM Top 10 (the author leads it).</li>
+                <li><strong><em>Generative AI Security</em></strong> — Ken Huang et al. (Springer, 2024). Heavier, more reference-style.</li>
+                <li><strong><em>AI Engineering</em></strong> — Chip Huyen (O'Reilly, 2024). Best book on building production systems on top of foundation models. Not security-specific, but you can't secure what you can't build.</li>
+            </ul>
+            <p>Free courses worth your evenings:</p>
+            <ul>
+                <li><a href="https://www.deeplearning.ai/short-courses/" target="_blank" rel="noopener noreferrer">DeepLearning.AI Short Courses</a> — start with prompt engineering, then the agentic and red-teaming tracks.</li>
+                <li><a href="https://huggingface.co/learn" target="_blank" rel="noopener noreferrer">Hugging Face NLP Course &amp; Agents Course</a>.</li>
+                <li><a href="https://github.com/dair-ai/Prompt-Engineering-Guide" target="_blank" rel="noopener noreferrer">DAIR.AI Prompt Engineering Guide</a> — open-source, frequently updated.</li>
+                <li><a href="https://github.com/microsoft/generative-ai-for-beginners" target="_blank" rel="noopener noreferrer">Microsoft "Generative AI for Beginners"</a> — free, 21 lessons.</li>
+            </ul>
+        </section>
+
+        <section id="follow">
+            <h2>People &amp; newsletters to follow</h2>
+            <p>The half-life of an AI blog post is about six weeks. Follow people, not blog posts:</p>
+            <ul>
+                <li><a href="https://simonwillison.net/" target="_blank" rel="noopener noreferrer">Simon Willison</a> — the most reliable signal source for prompt injection, agent capabilities, and what frontier models can actually do.</li>
+                <li><a href="https://embracethered.com/blog/" target="_blank" rel="noopener noreferrer">Johann Rehberger / Embrace The Red</a> — original agent/assistant exploit research.</li>
+                <li><a href="https://www.latent.space/" target="_blank" rel="noopener noreferrer">Latent Space (swyx)</a> — newsletter and podcast, the "what changed this week" feed for AI engineers.</li>
+                <li><a href="https://newsletter.pragmaticengineer.com/" target="_blank" rel="noopener noreferrer">The Pragmatic Engineer</a> — Gergely Orosz writes the most grounded coverage of AI in real engineering teams.</li>
+                <li><a href="https://importai.substack.com/" target="_blank" rel="noopener noreferrer">Jack Clark — Import AI</a> — weekly, policy + capabilities.</li>
+                <li><a href="https://www.interconnects.ai/" target="_blank" rel="noopener noreferrer">Nathan Lambert — Interconnects</a> — model evaluation and post-training, deeper end of the pool.</li>
+                <li><a href="https://www.oneusefulthing.org/" target="_blank" rel="noopener noreferrer">Ethan Mollick — One Useful Thing</a> — "what does this mean for normal humans" framing.</li>
+                <li><a href="https://lilianweng.github.io/" target="_blank" rel="noopener noreferrer">Lilian Weng</a> — long-form technical surveys; the prompt-engineering and agents posts are canonical.</li>
+                <li><a href="https://www.anthropic.com/news" target="_blank" rel="noopener noreferrer">Anthropic</a>, <a href="https://openai.com/news/" target="_blank" rel="noopener noreferrer">OpenAI</a>, and <a href="https://blog.google/technology/ai/" target="_blank" rel="noopener noreferrer">Google AI</a> blogs — read the model cards and system cards, not the marketing posts.</li>
+            </ul>
+        </section>
+
+        <section id="certs">
+            <h2>Certifications worth your time</h2>
+            <p>The AI security cert market is young. Most of the value is still in the work, not the badges. That said:</p>
+            <ul>
+                <li><strong>ISC2 / CSA Certificate of Competence in AI/ML Security (CCAIML)</strong> and the <strong>CSA AI Security Certificate</strong> — cheap, vendor-neutral, sane curricula.</li>
+                <li><strong>OWASP LLM Top 10 working-group resources</strong> — not a cert, but reading the whole canon and engaging with the community has more signal than most paid certs.</li>
+                <li><strong>SANS SEC545 (Cloud Security Architecture and Operations)</strong> and the newer <strong>SANS AI &amp; LLM training</strong> tracks — pricey, but the SANS quality bar is high.</li>
+                <li><strong>Provider-specific:</strong> AWS now has AI Practitioner and ML Engineer associate certs; Azure has AI-102; Google has the Generative AI Leader path. Useful if you work in that cloud — skippable otherwise.</li>
+                <li><strong>Don't pay for an "AI security expert" cert from a vendor you've never heard of.</strong> The market is full of them. Wait six months and ask people whose work you respect.</li>
+            </ul>
+            <p>See also the <a href="cloud-security-certifications.html">CSOH cloud security certifications guide</a>.</p>
+        </section>
+
+        <section id="projects">
+            <h2>Project ideas to actually build</h2>
+            <p>The portfolio that matters in 2026 is a small handful of running, public, AI-flavored projects. Pick one or two:</p>
+            <ul>
+                <li><strong>CloudTrail summarizer.</strong> Stream events, summarize the interesting ones to Slack with explanations a tier-1 analyst can act on.</li>
+                <li><strong>IAM policy reviewer.</strong> Take an arbitrary IAM policy and explain in English what it allows, what it implicitly denies, and the three closest privilege-escalation paths.</li>
+                <li><strong>IaC linter.</strong> An LLM pass on Terraform / Bicep / Helm that flags risky patterns the static linters miss (because they need context to judge).</li>
+                <li><strong>Phishing-email triage agent.</strong> Classify, extract IOCs, draft a response. Local model, no data leaves the box.</li>
+                <li><strong>Prompt-injection canary.</strong> A small site or document with hidden instructions; track which assistants execute them and report back.</li>
+                <li><strong>Local-only RAG over your runbooks.</strong> Ollama + Llama 3.x + a vector store. Useful, private, and a great way to feel the limits of small models.</li>
+                <li><strong>An "AI security review checklist" generator</strong> for a given application architecture, mapped to OWASP LLM Top 10 and MITRE ATLAS.</li>
+            </ul>
+            <p>Publish the code. Write up what worked and what didn't. That artifact will outrun any cert in interviews.</p>
+        </section>
+
+        <section id="frameworks">
+            <h2>Frameworks &amp; standards to know cold</h2>
+            <p>You'll be asked about all of these in interviews and audits. Skim them now, deep-read the ones your job touches:</p>
+            <ul>
+                <li><strong>OWASP Top 10 for LLM Applications</strong> — the working list of the things that go wrong.</li>
+                <li><strong>NIST AI Risk Management Framework (AI RMF 1.0)</strong> — Govern / Map / Measure / Manage. The closest thing to NIST CSF for AI.</li>
+                <li><strong>NIST AI 600-1: Generative AI Profile</strong> — applies the AI RMF to GenAI specifically.</li>
+                <li><strong>MITRE ATLAS</strong> — adversarial techniques, mapped like ATT&amp;CK.</li>
+                <li><strong>ISO/IEC 42001</strong> — AI management system standard, increasingly asked for in vendor questionnaires.</li>
+                <li><strong>EU AI Act</strong> — risk-tiered regulation; you'll touch this if your company sells in the EU.</li>
+                <li><strong>Google SAIF</strong> and <strong>Microsoft's Responsible AI Standard</strong> — vendor frameworks, useful as templates.</li>
+                <li><strong>CSA AI Controls Matrix</strong> — practical control mappings.</li>
+            </ul>
+        </section>
+
+        <section id="stay-current">
+            <h2>Stay current</h2>
+            <p>This field changes faster than cloud, which is saying something. A sustainable rhythm:</p>
+            <ul>
+                <li><strong>Daily:</strong> use a frontier model on real work. Skim Simon Willison.</li>
+                <li><strong>Weekly:</strong> read Latent Space and Import AI. Skim the <a href="news.html">CSOH news feed</a> for AI-tagged items. Show up to <a href="sessions.html">Friday Zoom</a>.</li>
+                <li><strong>Monthly:</strong> read one model card or system card start to finish. Try the newest frontier model.</li>
+                <li><strong>Quarterly:</strong> ship something. A new lab, a new project, a new write-up.</li>
+                <li><strong>Annually:</strong> re-read the OWASP LLM Top 10. Refresh your AI RMF mapping. Audit your company's AI inventory.</li>
+            </ul>
+        </section>
+
+        <section id="mistakes">
+            <h2>Common mistakes</h2>
+            <ul>
+                <li><strong>Treating the system prompt as a security boundary.</strong> It isn't. Anything you tell the model in the system prompt, an attacker can convince it to ignore.</li>
+                <li><strong>Confusing fluency with capability.</strong> Models that sound confident are sometimes wrong; models that hedge are sometimes right. Calibrate on outcomes, not vibes.</li>
+                <li><strong>Going wide before going deep.</strong> One serious project beats six toy demos.</li>
+                <li><strong>Skipping the API in favor of just chatting.</strong> The chat product hides the levers. Spend time at the raw API at least once.</li>
+                <li><strong>Ignoring evals.</strong> If you can't measure it, you can't improve it. Build a small dataset before you build a feature.</li>
+                <li><strong>Granting agents broad cloud roles "just to demo."</strong> Demos become production. Scope tightly from day one.</li>
+                <li><strong>Trusting any single benchmark.</strong> Benchmarks leak into training data. Trust your own evals on your own task.</li>
+                <li><strong>Believing AI security is unrelated to cloud security.</strong> Almost every interesting AI system runs in someone's cloud, with cloud identities, talking to cloud APIs. The two are converging fast.</li>
+            </ul>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to start?</h2>
+            <ul>
+                <li>If you haven't done it yet, do the <a href="learning-path.html">cloud security learning path</a> first — AI security stacks on top of it.</li>
+                <li>Pick one frontier model, pay for a month, and use it for everything.</li>
+                <li>Watch <a href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank" rel="noopener noreferrer">Karpathy's "Intro to Large Language Models"</a> tonight.</li>
+                <li>Beat <a href="https://gandalf.lakera.ai/" target="_blank" rel="noopener noreferrer">all eight Gandalf levels</a> this weekend.</li>
+                <li>Browse the <a href="ctfs.html">CSOH CTF directory</a> — filter for AI/ML.</li>
+                <li>Bookmark the <a href="cloud-security-reading-list.html">reading list</a> — it tracks AI security additions as they land.</li>
+                <li>Skim the <a href="glossary.html#ai">AI &amp; LLM section of the CSOH glossary</a> — every term is defined for security people.</li>
+                <li>Join us on <a href="sessions.html">Friday Zoom</a> — AI-related topics show up most weeks now.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Learn</h3>
+          <ul>
+            <li><a href="/what-is-cloud-security.html">What is Cloud Security?</a></li>
+            <li><a href="/learning-path.html">Learning Path</a></li>
+            <li><a href="/ai-learning.html">AI Learning</a></li>
+            <li><a href="/cloud-security-degree-programs.html">Degree Programs</a></li>
+            <li><a href="/cloud-security-careers.html">Careers</a></li>
+            <li><a href="/cloud-security-home-lab.html">Home Lab</a></li>
+            <li><a href="/cloud-security-reading-list.html">Reading List</a></li>
+            <li><a href="/cloud-security-best-practices.html">Best Practices</a></li>
+            <li><a href="/shared-responsibility-model.html">Shared Responsibility</a></li>
+            <li><a href="/cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+            <li><a href="/cloud-security-certifications.html">Certifications</a></li>
+            <li><a href="/glossary.html">Glossary</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Defend</h3>
+          <ul>
+            <li><a href="/news.html">News</a></li>
+            <li><a href="/threat-research.html">Threat Research</a></li>
+            <li><a href="/breach-timeline.html">Breach Kill Chains</a></li>
+            <li><a href="/resources.html">All Resources</a></li>
+            <li><a href="/ctfs.html">Cloud CTFs</a></li>
+            <li><a href="/github-actions.html">GitHub Actions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Attend</h3>
+          <ul>
+            <li><a href="/sessions.html">Zoom Sessions</a></li>
+            <li><a href="/community.html">Community &amp; Signal</a></li>
+            <li><a href="/conferences.html">Conferences</a></li>
+            <li><a href="/meetings.html">Meeting Recaps</a></li>
+            <li><a href="/presentations.html">Presentations</a></li>
+            <li><a href="/chat-resources.html">Chat Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+            <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+            <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="/contribute.html">Contribute</a></li>
+            <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/security-policy.html">Security Policy</a></li>
+            <li><a href="/rss.html">RSS Feed</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>About CSOH</h3>
+          <p>Cloud Security Office Hours is a vendor-neutral community for cloud
+          security professionals. We meet weekly on Zoom and maintain this curated
+          collection of resources.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023-2026 Cloud Security Office Hours. All resources are provided as-is for educational purposes.</p>
+      </div>
+    </footer>
+
+    <script src="/main.js?v=fc5df335" integrity="sha384-6mAKmFSe49u7DZwulVLU50VmLdFh0WoBsOzxSE9pcssQ/8K2yRlZefC7BZ8GKL2h"
+        defer></script>
+</body>
+
+</html>
