@@ -273,6 +273,9 @@ Whether you're fixing a typo or rewriting a section, the process is the same.
 - [meetings.html](meetings.html) - Weekly meeting recap index (per-meeting pages live in `meetings/`)
 - [what-is-cloud-security.html](what-is-cloud-security.html) - Pillar overview of the field
 - [learning-path.html](learning-path.html) - Beginner → advanced roadmap
+- [cloud-security-degree-programs.html](cloud-security-degree-programs.html) - Academic paths and university programs
+- [cloud-security-careers.html](cloud-security-careers.html) - Roles, salaries, interviews, portfolio
+- [cloud-security-home-lab.html](cloud-security-home-lab.html) - Free-tier setups and guardrails
 - [cloud-security-best-practices.html](cloud-security-best-practices.html) - Practitioner controls checklist
 - [shared-responsibility-model.html](shared-responsibility-model.html) - Provider vs. customer split
 - [cspm-vs-cnapp.html](cspm-vs-cnapp.html) - Tool category comparison

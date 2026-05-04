@@ -18,6 +18,9 @@ The vendor-neutral pillars of cloud security, written by practitioners:
 |---|---|
 | 📚 [What is Cloud Security?](https://csoh.org/what-is-cloud-security.html) | The plain-English foundation — shared responsibility, threats, tool landscape |
 | 🛣️ [Cloud Security Learning Path](https://csoh.org/learning-path.html) | Beginner → working practitioner roadmap with milestones |
+| 🎓 [Cloud Security Degree Programs](https://csoh.org/cloud-security-degree-programs.html) | Academic paths, what to look for in a program, and US/international universities with strong cybersecurity reputations |
+| 🧭 [Cloud Security Careers](https://csoh.org/cloud-security-careers.html) | Roles, salary bands, interview formats, portfolio projects, and how to translate from adjacent jobs |
+| 🧰 [Cloud Security Home Lab](https://csoh.org/cloud-security-home-lab.html) | Free-tier setups, budget guardrails, and kill-switches so you learn without a surprise bill |
 | ✅ [Cloud Security Best Practices](https://csoh.org/cloud-security-best-practices.html) | The controls that actually prevent breaches, ranked by what shows up in real incidents |
 | ⚖️ [Shared Responsibility Model](https://csoh.org/shared-responsibility-model.html) | What the cloud provider secures vs. what you secure (AWS / Azure / GCP) |
 | 🛠️ [CSPM vs CNAPP vs CWPP vs CIEM vs DSPM](https://csoh.org/cspm-vs-cnapp.html) | The acronym soup decoded — when you need each tool |
@@ -79,6 +82,15 @@ Vendor-neutral pillar page introducing the field — shared responsibility model
 
 ### 🛣️ Learning Path (`learning-path.html`)
 Step-by-step roadmap from "no cloud experience" to working practitioner: prerequisites, beginner / intermediate / advanced stages with milestones, specialization tracks, and a "stay current" rhythm. Marked up with `HowTo` schema. Built from what actually works for the 2000+ members of the community.
+
+### 🎓 Cloud Security Degree Programs (`cloud-security-degree-programs.html`)
+Academic paths for cloud security: when a degree pays off, degree types and what they fit, what to look for in a program, NSA/CISA CAE and equivalent designations, named US universities (research, federal-track, applied), online and professional master's, and international programs (UK, EU, Canada, Australia, Israel, Asia). FAQ schema.
+
+### 🧭 Cloud Security Careers (`cloud-security-careers.html`)
+Roles and salary bands, what hiring managers actually look for, interview formats, portfolio projects, and how to translate from adjacent roles. FAQ schema.
+
+### 🧰 Cloud Security Home Lab (`cloud-security-home-lab.html`)
+Free-tier setups across AWS / Azure / GCP, budget guardrails, kill-switches, and the lab progression that builds a real portfolio without a surprise bill.
 
 ### 🎓 Cloud Security Certifications (`cloud-security-certifications.html`)
 Side-by-side comparison of the major cloud security certifications — CCSK, CCSP, AWS Security Specialty, Microsoft AZ-500/SC-100, Google PCSE, and CKS. Includes a comparison table, recommended paths by role (career switcher / established engineer / senior architect / detection specialist), and an FAQ.
@@ -300,6 +312,9 @@ csoh.org/
 ├── index.html                  # Homepage with hero section & category overview
 ├── what-is-cloud-security.html # Pillar: vendor-neutral cloud-security overview (FAQ schema)
 ├── learning-path.html          # Beginner→advanced roadmap (HowTo schema)
+├── cloud-security-degree-programs.html # Academic paths and university programs (FAQ schema)
+├── cloud-security-careers.html        # Roles, salaries, interviews, portfolio (FAQ schema)
+├── cloud-security-home-lab.html       # Free-tier setups, budget guardrails, kill-switches
 ├── cloud-security-certifications.html # CCSK / CCSP / AWS / Azure / GCP / CKS comparison
 ├── github-actions.html         # Learn GitHub Actions via our heavily-commented workflows
 ├── resources.html              # Main resource directory (200+ resources in 6 categories)

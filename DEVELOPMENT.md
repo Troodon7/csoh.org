@@ -76,6 +76,9 @@ csoh.org/
 ├── index.html              # Homepage
 ├── what-is-cloud-security.html      # Pillar: vendor-neutral cloud security overview
 ├── learning-path.html               # Beginner→advanced learning roadmap (HowTo schema)
+├── cloud-security-degree-programs.html # Academic paths + university programs (FAQ schema)
+├── cloud-security-careers.html      # Roles, salaries, interviews, portfolio (FAQ schema)
+├── cloud-security-home-lab.html     # Free-tier setups, budget guardrails, kill-switches
 ├── cloud-security-certifications.html # CCSK/CCSP/AWS/Azure/GCP/CKS comparison
 ├── cloud-security-best-practices.html # Practitioner's controls checklist
 ├── shared-responsibility-model.html   # Provider vs. customer security split
@@ -179,6 +182,9 @@ If you changed shared files (`style.css`, `main.js`), verify these pages:
 - `http://localhost:8091/faq.html` -- FAQ (FAQPage schema, collapsible details)
 - `http://localhost:8091/what-is-cloud-security.html` -- Pillar overview (FAQ schema)
 - `http://localhost:8091/learning-path.html` -- Beginner → advanced roadmap (HowTo schema)
+- `http://localhost:8091/cloud-security-degree-programs.html` -- Academic paths + universities (FAQ schema)
+- `http://localhost:8091/cloud-security-careers.html` -- Roles, salaries, interviews, portfolio (FAQ schema)
+- `http://localhost:8091/cloud-security-home-lab.html` -- Free-tier setups, budget guardrails
 - `http://localhost:8091/cloud-security-best-practices.html` -- Controls checklist
 - `http://localhost:8091/shared-responsibility-model.html` -- Provider vs. customer split
 - `http://localhost:8091/cspm-vs-cnapp.html` -- Tool category comparison
