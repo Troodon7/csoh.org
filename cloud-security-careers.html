@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="Cloud security careers: roles and salary bands, what hiring managers look for, interview formats, portfolio projects, and how to translate from adjacent roles. Vendor-neutral.">
+    <meta name="keywords"
+        content="cloud security jobs, cloud security careers, cloud security engineer salary, cloud security interview, cloud security portfolio, break into cloud security, cloud security resume">
+    <title>Cloud Security Careers - Cloud Security Office Hours</title>
+
+    <link rel="canonical" href="https://csoh.org/cloud-security-careers.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Cloud Security Careers - CSOH">
+    <meta property="og:description"
+        content="Roles, salary bands, interview formats, portfolio projects, and how to land your first cloud security job. Vendor-neutral, written by practitioners.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/cloud-security-careers.html">
+    <meta property="og:image" content="https://csoh.org/img/og/cloud-security-careers.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cloud Security Careers">
+    <meta name="twitter:description"
+        content="The roles, the salaries, the interviews, the portfolio. How to break into cloud security.">
+    <meta name="twitter:image" content="https://csoh.org/img/og/cloud-security-careers.jpg">
+
+    <link rel="preconnect" href="https://sendfox.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
+    <link rel="dns-prefetch" href="https://img.youtube.com">
+
+    <link rel="preload" href="/style.css?v=88ae4643" as="style"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+    <link rel="stylesheet" href="/style.css?v=88ae4643"
+        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Cloud Security Careers",
+      "description": "A vendor-neutral guide to cloud security roles, salary bands, interview formats, portfolio projects, and how to translate from adjacent roles into your first cloud security job.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-05-03",
+      "dateModified": "2026-05-03",
+      "mainEntityOfPage": "https://csoh.org/cloud-security-careers.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://csoh.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Cloud Security Careers",
+          "item": "https://csoh.org/cloud-security-careers.html"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does a cloud security engineer actually do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Day-to-day work splits across configuring and reviewing IAM policies, running posture management tools (CSPM/CNAPP) and triaging the findings, building detections in the SIEM, responding to alerts from GuardDuty/Defender/SCC, reviewing cloud architectures for security issues, automating guardrails (SCPs, Azure Policy, Org Policy), and writing runbooks. Less cloud-console clicking than people expect; more code review, IaC review, and arguing with engineers about least privilege."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much do cloud security engineers make?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the US, mid-level cloud security engineers (2-5 years) typically earn $140K-$190K base. Senior roles (5-8 years) run $180K-$240K base. Staff and principal levels often clear $250K base, with total comp of $350K+ at large tech companies. Numbers are lower outside major tech hubs and significantly lower outside the US. Contractor day rates run $800-$1,500 in the US."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a degree to get into cloud security?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The field is unusually credential-friendly: hands-on portfolio (CloudGoat write-ups, public repos, blog posts) plus a relevant cert (CCSK, AWS Security Specialty, or AZ-500) consistently outperforms a degree without practical work. Many practitioners come from sysadmin, SRE, dev, or SOC backgrounds with no cloud-security degree. A degree helps in regulated industries (defense, finance) and is occasionally a hard filter for federal roles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the best way to break into cloud security with no experience?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pick one cloud (AWS by default), get hands-on in your free-tier account, complete 5+ CTF scenarios from CloudGoat or similar and publish write-ups, earn one foundational cert (CCSK or your provider's fundamentals), then target adjacent-role pivots first: DevOps engineer, SOC analyst, or junior cloud engineer with a security focus. Pure 'cloud security engineer' roles rarely take true beginners; the pivot path is faster than the cold application path."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle active" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="cloud-security-careers.html" aria-current="page">Careers</a></li>
+                            <li><a href="cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="ctfs.html">CTFs</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="github-actions.html">GitHub Actions</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">News</a></li>
+                            <li><a href="threat-research.html">Threat Research</a></li>
+                            <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="sessions.html">Zoom Sessions</a></li>
+                            <li><a href="community.html">Community &amp; Signal</a></li>
+                            <li><a href="conferences.html">Conferences</a></li>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="contribute.html">Contribute Overview</a></li>
+                            <li><a href="contribute-resources.html">Add a Resource</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Careers</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--compact">
+        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
+        <h1>Cloud Security Careers</h1>
+        <p>Roles, salary bands, interview formats, portfolio projects, and how to translate from adjacent jobs into your first cloud security role. Written for the person trying to break in — and the practitioner figuring out the next step.</p>
+        <div class="cta-buttons">
+            <a href="#roles" class="btn btn-primary">See the Roles</a>
+            <a href="learning-path.html" class="btn btn-secondary">Learning Path</a>
+        </div>
+    </section>
+    <main class="container contribute-article" id="main-content">
+
+        <p class="page-meta"><time datetime="2026-05-03">Last updated <strong>2026-05-03</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/cloud-security-careers.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>The honest version:</strong> "Cloud security engineer" isn't one job — it's at least seven, with very different day-to-day work, hiring bars, and pay bands. Most rejections come from applying to the wrong shape of role for your background, not from being underqualified. Read the role taxonomy first, then work backwards from the one that fits.</p>
+            <p style="margin-top:0.75rem;">All numbers below are US-centric, late-2025 / early-2026, and approximate. Adjust for region, industry, and company size. Outside the US, halve and add a question mark.</p>
+        </div>
+
+        <div class="toc">
+            <h2>📖 On this page</h2>
+            <ol>
+                <li><a href="#roles">The roles (and what they actually do)</a></li>
+                <li><a href="#salary">Salary bands</a></li>
+                <li><a href="#signals">What hiring managers look for</a></li>
+                <li><a href="#interviews">Interview formats</a></li>
+                <li><a href="#portfolio">Portfolio projects worth building</a></li>
+                <li><a href="#pivots">Translating from adjacent roles</a></li>
+                <li><a href="#applications">The application game</a></li>
+                <li><a href="#mistakes">Common mistakes</a></li>
+                <li><a href="#next">Where next</a></li>
+            </ol>
+        </div>
+
+        <section id="roles">
+            <h2>The roles (and what they actually do)</h2>
+            <p>Job titles vary wildly — "Cloud Security Engineer" at one company is "Detection Engineer" at another. Read the responsibilities, not the title. Most teams have at least two of these, sometimes blended into one person.</p>
+
+            <p>Each role below includes a <strong>"Natural fit if you currently…"</strong> note — the backgrounds and day-to-day work that map cleanly into that role. If two or three of the bullets describe your current job, that's the role you'll ramp fastest into.</p>
+
+            <h3>Cloud Security Engineer (generalist)</h3>
+            <p>The default role. Configures and reviews IAM, owns the <a class="glossary-link" href="glossary.html#term-cspm">CSPM</a> tool and triages findings, writes guardrail policies (<a class="glossary-link" href="glossary.html#term-scp">SCPs</a>, Azure Policy, Org Policy), reviews cloud architectures during design, automates security tooling. Half the day is in code review and Terraform PRs; the other half is in IAM consoles and the SIEM. Demands breadth over depth.</p>
+            <p><strong>Natural fit if you currently:</strong></p>
+            <ul>
+                <li>Work as a DevOps / cloud / platform engineer and already write Terraform or CDK against a real cloud account</li>
+                <li>Are a sysadmin who has moved workloads to AWS/Azure/GCP and now manages security groups, IAM, and patching there</li>
+                <li>Did Security+ / SSCP / Network+ training and want a role that mixes security with infrastructure</li>
+                <li>Came from a SOC and want broader scope than alert triage</li>
+            </ul>
+
+            <h3>Detection Engineer (cloud-focused)</h3>
+            <p>Builds and maintains the rules that catch attackers in cloud environments. Writes <a class="glossary-link" href="glossary.html#term-sigma">Sigma</a> / KQL / SPL detections, maps coverage to <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud, tunes false positives, runs purple-team exercises with Stratus Red Team / Atomic Red Team. Highly technical, mostly written in code. Strong career arc into senior IC tracks.</p>
+            <p><strong>Natural fit if you currently:</strong></p>
+            <ul>
+                <li>Work as a SOC analyst (Tier 2/3) and have written or tuned Splunk / Sentinel / Chronicle / Elastic queries</li>
+                <li>Did the SANS blue-team track (SEC555, SEC511, SEC503) or studied for GCDA / GCIA</li>
+                <li>Were a threat hunter and enjoy the "what would I look for" thought experiment</li>
+                <li>Are a developer or data engineer comfortable in SQL and event-stream pipelines and want to apply it to security</li>
+            </ul>
+
+            <h3>Cloud Incident Responder / DFIR</h3>
+            <p>The pager-carriers. When GuardDuty fires or a customer reports a leak, this is who investigates. Knows what evidence each cloud actually retains (and what it doesn't), reads <a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a> at speed, scopes blast radius, drives containment and recovery. Often blended with detection engineering at smaller orgs.</p>
+            <p><strong>Natural fit if you currently:</strong></p>
+            <ul>
+                <li>Work in traditional DFIR and want to add cloud to your range — most of the SANS DFIR (FOR500, FOR508, FOR572) skills carry directly</li>
+                <li>Studied or hold GCFA / GCIH / GCFE</li>
+                <li>Are a SRE who has handled high-pressure on-call and wants the security flavor of the same skill</li>
+                <li>Came from a SOC and want to own end-to-end investigations rather than triage</li>
+            </ul>
+
+            <h3>Cloud Penetration Tester / Red Team</h3>
+            <p>Offensive. Audits cloud environments by attacking them, often via consultancy or as an internal red team. Lives in <a href="https://github.com/RhinoSecurityLabs/pacu" target="_blank" rel="noopener noreferrer">Pacu</a>, <a href="https://github.com/dirkjanm/ROADtools" target="_blank" rel="noopener noreferrer">ROADtools</a>, custom scripts. Reports look like breach kill chains. Smaller market than defensive roles, but high pay and prestige at the senior end.</p>
+            <p><strong>Natural fit if you currently:</strong></p>
+            <ul>
+                <li>Do traditional pentesting / web app testing and hold OSCP, OSEP, OSWE, or PNPT</li>
+                <li>Did the SANS offensive track (SEC560, SEC588 — the cloud pentest course is the most direct on-ramp)</li>
+                <li>Compete in CTFs and especially the cloud-focused ones (CloudGoat, IAM Vulnerable, AWSGoat) and write up your work</li>
+                <li>Were a red-teamer in on-prem environments and want to add cloud to the engagement scope</li>
+            </ul>
+
+            <h3>CSPM / CNAPP Analyst</h3>
+            <p>Lives inside Wiz, Orca, Lacework, Prisma Cloud, Defender for Cloud, or similar. Triages findings, drives remediation, builds custom policies, runs reporting for leadership. Common entry-level role at companies that bought a CNAPP and need humans to make it useful. Underrated path in.</p>
+            <p><strong>Natural fit if you currently:</strong></p>
+            <ul>
+                <li>Are an IT auditor or junior GRC analyst who already maps controls to evidence and wants more technical depth</li>
+                <li>Did vulnerability management in an on-prem environment (Tenable, Qualys, Rapid7) — same skill, cloud-shaped</li>
+                <li>Hold AWS Cloud Practitioner / AZ-900 / Cloud Digital Leader and want a first technical security role</li>
+                <li>Were a NOC or ops engineer used to dashboards-and-tickets workflows</li>
+            </ul>
+
+            <h3>IAM / Identity Architect</h3>
+            <p>The most strategically important specialization right now. Designs identity boundaries (cross-account access, federation, conditional access, service-to-service auth), builds least-privilege policy frameworks at scale, owns the <a class="glossary-link" href="glossary.html#term-idp">IdP</a> integration. Senior IC track in most large orgs, often the closest thing to "Cloud Security Architect" with a real job to do.</p>
+            <p><strong>Natural fit if you currently:</strong></p>
+            <ul>
+                <li>Are an Active Directory / Entra ID admin and have lived in group policy, conditional access, and PIM</li>
+                <li>Did Okta / Auth0 / Ping admin work or hold the Okta Certified Professional/Administrator track</li>
+                <li>Built or maintained an SSO integration and understand SAML, OIDC, and OAuth 2 at depth</li>
+                <li>Came from network security and want a specialty that's becoming more important, not less</li>
+            </ul>
+
+            <h3>Cloud AppSec / IaC Security</h3>
+            <p>Sits between security and the application teams. Owns IaC scanning (Checkov, Terrascan, KICS, tfsec), container image scanning, dependency review in CI/CD, secret scanning, supply-chain controls. Strong fit for developers moving into security — very PR-driven, very code-centric.</p>
+            <p><strong>Natural fit if you currently:</strong></p>
+            <ul>
+                <li>Are a software engineer who already does code review and wants security as the deeper specialty</li>
+                <li>Did web AppSec work, OWASP top-10 testing, or hold Burp Suite Certified Practitioner / GWAPT</li>
+                <li>Are a build / release engineer who lives in GitHub Actions / GitLab CI / Jenkins pipelines</li>
+                <li>Trained on the SANS DevSecOps track (SEC540) or did Snyk / GitGuardian / Semgrep work</li>
+            </ul>
+
+            <h3>Cloud GRC / Compliance Engineer</h3>
+            <p>Translates frameworks (<a class="glossary-link" href="glossary.html#term-soc-2">SOC 2</a>, ISO 27001, FedRAMP, HIPAA, PCI) into cloud controls. Owns the audit relationship, automates evidence collection (Drata, Vanta, Secureframe), maps controls to AWS Config / Azure Policy rules. Less code-heavy, more cross-functional. Paths to security leadership.</p>
+            <p><strong>Natural fit if you currently:</strong></p>
+            <ul>
+                <li>Hold CISA, CRISC, ISO 27001 LA/LI, or have worked at a Big 4 audit practice</li>
+                <li>Are a project manager or program manager who's run cross-functional security work</li>
+                <li>Did paralegal / privacy / compliance work and want a more technical specialty (CIPP/T pairs well)</li>
+                <li>Hold CISSP and want the management-track flavor of cloud security rather than the IC track</li>
+            </ul>
+
+            <h3>Security SRE / Platform Security</h3>
+            <p>Builds the security platform other engineers use: shared SIEM pipelines, secret rotation services, golden VPC patterns, account-vending automation. The "security as a product" team. Often the highest-leverage role on a security org.</p>
+            <p><strong>Natural fit if you currently:</strong></p>
+            <ul>
+                <li>Work as an SRE / platform engineer and already think in terms of golden paths, error budgets, and self-service</li>
+                <li>Are a backend engineer who has built and operated production services at scale</li>
+                <li>Did data-engineering work and want to apply pipeline / event-bus skills to security telemetry</li>
+                <li>Hold AWS / Azure / GCP DevOps Pro and want a security specialty next</li>
+            </ul>
+
+            <h3>Cloud Security Architect / Staff+ IC</h3>
+            <p>Senior strategic role. Sets technical direction, reviews high-stakes designs, owns the security roadmap for a business unit or product area. Usually 8+ years of operational experience first. Often has no individual deliverables — the deliverable is alignment.</p>
+            <p><strong>Natural fit if you currently:</strong></p>
+            <ul>
+                <li>Hold CISSP-ISSAP, CCSP, or AWS / Azure / GCP solutions architect professional and have used those certs at depth</li>
+                <li>Have 5+ years as a senior cloud security engineer in any of the IC tracks above and want broader scope without the manager track</li>
+                <li>Were a TOGAF-trained enterprise architect and want a security focus</li>
+                <li>Already act as the "go-to" security voice in design reviews even though it's not your title</li>
+            </ul>
+        </section>
+
+        <section id="salary">
+            <h2>Salary bands (US, late 2025 / early 2026)</h2>
+            <p>Approximate ranges for general industry. Big-tech total comp can be 1.5-2x these numbers. Federal contractors and consulting firms tend lower on base, sometimes higher on cash bonus.</p>
+            <ul>
+                <li><strong>Junior / Associate (0-2 yrs)</strong>: $95K-$135K base. Often a SOC analyst or DevOps engineer with a security focus, not titled "cloud security."</li>
+                <li><strong>Mid-level (2-5 yrs)</strong>: $140K-$190K base. The first true "Cloud Security Engineer" role for most people.</li>
+                <li><strong>Senior (5-8 yrs)</strong>: $180K-$240K base. Owns a domain (IAM, detection, CSPM, etc.), mentors others.</li>
+                <li><strong>Staff / Principal (8+ yrs)</strong>: $230K-$320K base, often $400K+ TC at large tech.</li>
+                <li><strong>Manager / Director</strong>: $180K-$260K base, plus larger bonus and equity components than IC at the same level.</li>
+                <li><strong>Consultant / contractor</strong>: $800-$1,500/day in the US, occasionally higher for incident response or specialty offensive work.</li>
+            </ul>
+            <p>For real numbers, check <a href="https://www.levels.fyi/" target="_blank" rel="noopener noreferrer">levels.fyi</a> for big-tech comp, the <a href="https://www.bls.gov/oes/current/oes151212.htm" target="_blank" rel="noopener noreferrer">BLS information security analysts</a> data for general industry, and recent salary threads on <a href="https://www.reddit.com/r/cybersecurity/" target="_blank" rel="noopener noreferrer">r/cybersecurity</a> for anecdata. Bring real numbers to negotiations.</p>
+        </section>
+
+        <section id="signals">
+            <h2>What hiring managers actually look for</h2>
+            <p>Distilled from interviewing hundreds of cloud security candidates and from years of conversations with hiring peers. The order matters.</p>
+            <ol>
+                <li><strong>Hands-on evidence with the cloud you'll be working in.</strong> Public CloudGoat write-ups, blog posts, GitHub repos, conference talks. One CTF write-up beats three certs every time.</li>
+                <li><strong>The ability to explain IAM precisely.</strong> If you can't explain the difference between an identity-based and a resource-based policy, or between AssumeRole and trust policies, you fail the technical screen at most shops.</li>
+                <li><strong>Comfort with the command line and Terraform/CDK/Pulumi.</strong> Cloud security is API-first. The console is for hiring managers, not engineers.</li>
+                <li><strong>One cloud at depth, not three at surface.</strong> "I know AWS well, Azure passably, GCP barely" beats "I know AWS, Azure, and GCP" 90% of the time. Pick one.</li>
+                <li><strong>Specific incident or breach knowledge.</strong> Be able to walk through Capital One, MOVEit, MGM/Scattered Spider, or whatever's recent. The <a href="breach-timeline.html">breach kill chains</a> are interview fodder.</li>
+                <li><strong>A relevant cert as a baseline filter.</strong> Recruiters use certs to pass the resume screen. CCSK or your cloud's security specialty does the job. See the <a href="cloud-security-certifications.html">certifications guide</a>.</li>
+                <li><strong>Communication.</strong> Most senior cloud security work is influence — convincing engineering teams to fix things. Candidates who write well and explain trade-offs without jargon stand out fast.</li>
+                <li><strong>Curiosity and momentum.</strong> "What did you learn last month?" If the answer is "nothing in particular," that's a no.</li>
+            </ol>
+        </section>
+
+        <section id="interviews">
+            <h2>Interview formats you'll actually see</h2>
+            <p>Loops vary, but the modules below cover ~90% of what shows up. Practice each one before you need to.</p>
+            <ul>
+                <li><strong>Recruiter screen (30 min).</strong> Past experience, comp expectations, why this company. Bring a number.</li>
+                <li><strong>Hiring-manager screen (45-60 min).</strong> Deeper dive on your background and motivation. Often includes one technical question to filter obvious bluffers.</li>
+                <li><strong>Live IAM policy review.</strong> They paste an AWS or Azure policy. You read it and explain what it grants, what's wrong, and how you'd fix it. Practice with the AWS policy simulator and real-world examples from <a href="https://github.com/SummitRoute/aws_exposable_resources" target="_blank" rel="noopener noreferrer">SummitRoute resources</a>.</li>
+                <li><strong>Architecture review.</strong> They sketch a system (or share a real one). You identify the threats, controls, and trade-offs. <a class="glossary-link" href="glossary.html#term-stride">STRIDE</a> as a mental model. Don't be afraid to ask clarifying questions — interviewers are watching how you scope.</li>
+                <li><strong>Take-home lab.</strong> Increasingly common. Format is usually "here's a vulnerable AWS account or repo — find the issues, write up the kill chain and remediation." 4-8 hours of work, expect a follow-up call to walk through it.</li>
+                <li><strong>Live debugging / log analysis.</strong> They drop you in a CloudTrail / Sentinel / SCC console with a scenario ("user reports they think they were compromised"). You investigate aloud. Tests how you actually think.</li>
+                <li><strong>Detection design / threat modeling exercise.</strong> "Write a detection for this attack technique" or "what alerts would you build for this service?" Expect to map to MITRE ATT&amp;CK.</li>
+                <li><strong>Behavioral / leadership.</strong> STAR-format stories. Specific, recent, with measurable outcomes. Have one for: a contentious security decision you won, one you lost, an incident you led, a time you changed your mind.</li>
+                <li><strong>Bar-raiser / cross-functional panel.</strong> Common at big tech. Less technical, more "would I want to work with this person." Don't underestimate.</li>
+            </ul>
+        </section>
+
+        <section id="portfolio">
+            <h2>Portfolio projects worth building</h2>
+            <p>Your portfolio is your interview. Pick three of these, do them well, write each one up publicly. A blog (Substack, GitHub Pages, dev.to) plus a public GitHub is enough — no fancy site needed.</p>
+            <ol>
+                <li><strong>Walk every CloudGoat scenario.</strong> Publish your kill chain, screenshots, and remediation for each. This is the canonical project — most interviewers have done it themselves and will recognize you've done the work.</li>
+                <li><strong>Build a multi-account AWS Organization with SCPs.</strong> Terraform a master account, two sub-accounts, IAM Identity Center, and a baseline of SCPs (deny root usage, enforce IMDSv2, deny region usage, require MFA). Push the code to GitHub. This is real production-shaped work.</li>
+                <li><strong>Run Prowler / ScoutSuite against your own account and remediate everything.</strong> Document the before/after. Bonus: turn the remediation into Terraform.</li>
+                <li><strong>Build 5 detections in a lab SIEM.</strong> Spin up Wazuh, Elastic, or send CloudTrail to <a href="https://docs.matanolabs.com/" target="_blank" rel="noopener noreferrer">Matano</a>. Pick five MITRE ATT&amp;CK Cloud techniques and write Sigma or vendor-specific detections for each.</li>
+                <li><strong>Take a real breach, rebuild it in a lab.</strong> Pick one from our <a href="breach-timeline.html">breach kill chains</a>. Recreate the vulnerable setup in your own account, exploit it end-to-end, then build the controls and detections that would have stopped it. Best single portfolio piece you can ship.</li>
+                <li><strong>Contribute to an open-source cloud security tool.</strong> Prowler, Cloud Custodian, Pacu, ROADtools, KICS, Steampipe — all welcome contributors. Even a small PR is a strong signal.</li>
+                <li><strong>Write a CNAPP comparison.</strong> Most interviewers care that you understand the tool category. Pick three (Wiz, Orca, Defender for Cloud, Prisma, Lacework) and write an honest comparison. Bonus points for hands-on trial work.</li>
+            </ol>
+            <p>What <em>not</em> to do: don't build a "cloud security dashboard" toy webapp. Hiring managers see hundreds. Build operational artifacts that look like real work.</p>
+        </section>
+
+        <section id="pivots">
+            <h2>Translating from an adjacent role</h2>
+            <p>Most people don't enter cloud security cold. They pivot. The fastest path is usually one role-step from where you are now, not a leap straight to "Cloud Security Engineer."</p>
+
+            <h3>From SOC analyst</h3>
+            <p>You already understand alerts, triage, and incident workflow. Add: cloud-native log sources (CloudTrail, Activity Log, Audit Logs), GuardDuty / Defender / SCC, and one cloud's IAM model. Target: cloud-focused SOC roles or detection engineering.</p>
+
+            <h3>From DevOps / SRE</h3>
+            <p>You already know IaC, CI/CD, and at least one cloud at depth. Add: IAM specifics, threat modeling, posture management, common misconfigurations. Target: Cloud AppSec, IaC security, or platform security. Often the fastest pivot — security teams are desperate for engineers who can actually ship code.</p>
+
+            <h3>From software developer</h3>
+            <p>You know systems and code review. Add: AppSec fundamentals (OWASP Top 10), IaC scanning, supply-chain controls, container security. Target: Cloud AppSec, secure-by-design consulting roles. Strong pivot if you're a senior dev — security pays similarly and the work is varied.</p>
+
+            <h3>From sysadmin / network engineer</h3>
+            <p>You understand systems, networks, and "how things actually break." Add: IaC, the cloud-native equivalents of what you already do (security groups vs. firewall rules, IAM vs. AD, etc.), and one cloud's services. Target: cloud security generalist or network-security-in-cloud roles.</p>
+
+            <h3>From traditional security (on-prem, GRC, AppSec)</h3>
+            <p>You have the security mental model. Add: at least one cloud at operational depth, cloud-specific tooling, IaC. Target: the equivalent of your current role but cloud-flavored. Easiest pivot conceptually, hardest practically because hiring managers look hard for hands-on cloud evidence.</p>
+
+            <h3>From totally outside tech</h3>
+            <p>Longest road, but doable. Stage 1: get into IT (helpdesk, sysadmin, junior cloud). Stage 2: pivot to security from there. Trying to leap directly into a cloud security role is rarely successful. Plan for 18-36 months.</p>
+        </section>
+
+        <section id="applications">
+            <h2>The application game</h2>
+            <ul>
+                <li><strong>Resume: results, not responsibilities.</strong> "Reduced critical CSPM findings from 1,200 to 80 in 6 months" beats "responsible for cloud security posture." Numbers force specificity.</li>
+                <li><strong>One page if you're early-career, two pages max otherwise.</strong> Recruiters skim for 20 seconds. Make every line count.</li>
+                <li><strong>Tailor to the JD.</strong> Mirror the language of the posting (within reason). ATS systems literally pattern-match keywords.</li>
+                <li><strong>LinkedIn matters more than people admit.</strong> Recruiters source heavily from LinkedIn. Headline, banner, and "About" should make it obvious in 5 seconds what you do and what you want next. Post your write-ups there.</li>
+                <li><strong>Cold applications work, but referrals work better.</strong> Roughly 5-10x conversion rate from referral vs. cold apply. Coffee chats with people at companies you want to work at are the highest-leverage hour you'll spend in a job search.</li>
+                <li><strong>Show up where hiring happens.</strong> CSOH Friday Zoom, fwd:cloudsec, BSides, DEF CON Cloud Village, local meetups. Half of cloud security hiring happens through someone who knows someone.</li>
+                <li><strong>Negotiate.</strong> Always. The first number is rarely the best number. "Based on my research and other conversations, I was hoping for X" is the whole script.</li>
+            </ul>
+        </section>
+
+        <section id="mistakes">
+            <h2>Common mistakes</h2>
+            <ul>
+                <li><strong>Stacking certs without a portfolio.</strong> Three certs and zero CTF write-ups looks worse than one cert plus a public CloudGoat repo.</li>
+                <li><strong>Applying only to "cloud security engineer" roles.</strong> The titles you can land first might be "DevSecOps Engineer," "Security Analyst II," or "Cloud Engineer (Security focus)." Same work, broader funnel.</li>
+                <li><strong>Chasing big-tech FAANG comp before you have the experience.</strong> Big tech raises the bar; mid-market companies will hire you sooner and pay you to learn. You can move up later.</li>
+                <li><strong>Going dark for 6 months to "get ready."</strong> You learn faster in a job adjacent to your target than you do studying alone. Take the SOC role; pivot in 12 months.</li>
+                <li><strong>Treating the interview as a test.</strong> It's a conversation. The interviewer is also being evaluated by you — ask the questions you'd want answered before accepting.</li>
+                <li><strong>Skipping the take-home.</strong> If they ask for one, it usually means they value evidence over interviews. Strongest signal you can send.</li>
+                <li><strong>Not asking about the team's actual work.</strong> "What's the team's biggest unsolved problem this year?" tells you everything about whether you'd be happy. Ask it every loop.</li>
+            </ul>
+        </section>
+
+        <section id="next" class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="learning-path.html">Cloud security learning path</a> — the skills foundation underneath the hiring story.</li>
+                <li><a href="cloud-security-home-lab.html">Build a safe home lab</a> — the free-tier playground where the portfolio actually gets made.</li>
+                <li><a href="cloud-security-certifications.html">Certifications guide</a> — which credential per career stage.</li>
+                <li><a href="ctfs.html">Cloud CTF directory</a> — what to put in the portfolio.</li>
+                <li><a href="resources.html?category=job">Job-search resources</a> — boards, recruiters, and references.</li>
+                <li><a href="sessions.html">Friday Zoom sessions</a> — practitioners who hire and people who got hired. The single highest-leverage hour for a cloud security job-seeker.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Learn</h3>
+          <ul>
+            <li><a href="/what-is-cloud-security.html">What is Cloud Security?</a></li>
+            <li><a href="/learning-path.html">Learning Path</a></li>
+            <li><a href="/cloud-security-degree-programs.html">Degree Programs</a></li>
+            <li><a href="/cloud-security-careers.html">Careers</a></li>
+            <li><a href="/cloud-security-home-lab.html">Home Lab</a></li>
+            <li><a href="/cloud-security-best-practices.html">Best Practices</a></li>
+            <li><a href="/shared-responsibility-model.html">Shared Responsibility</a></li>
+            <li><a href="/cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+            <li><a href="/cloud-security-certifications.html">Certifications</a></li>
+            <li><a href="/glossary.html">Glossary</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Defend</h3>
+          <ul>
+            <li><a href="/news.html">News</a></li>
+            <li><a href="/threat-research.html">Threat Research</a></li>
+            <li><a href="/breach-timeline.html">Breach Kill Chains</a></li>
+            <li><a href="/resources.html">All Resources</a></li>
+            <li><a href="/ctfs.html">Cloud CTFs</a></li>
+            <li><a href="/github-actions.html">GitHub Actions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Attend</h3>
+          <ul>
+            <li><a href="/sessions.html">Zoom Sessions</a></li>
+            <li><a href="/community.html">Community &amp; Signal</a></li>
+            <li><a href="/conferences.html">Conferences</a></li>
+            <li><a href="/meetings.html">Meeting Recaps</a></li>
+            <li><a href="/presentations.html">Presentations</a></li>
+            <li><a href="/chat-resources.html">Chat Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="mailto:admin@csoh.org">Contact Us</a></li>
+            <li><a href="https://sendfox.com/CSOH" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+            <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="/contribute.html">Contribute</a></li>
+            <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/security-policy.html">Security Policy</a></li>
+            <li><a href="/rss.html">RSS Feed</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>About CSOH</h3>
+          <p>Cloud Security Office Hours is a vendor-neutral community for cloud
+          security professionals. We meet weekly on Zoom and maintain this curated
+          collection of resources.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023-2026 Cloud Security Office Hours. All resources are provided as-is for educational purposes.</p>
+      </div>
+    </footer>
+
+    <script src="/main.js?v=16a0410e" integrity="sha384-yKrYcDmXkjnhwLqJrPgzLbWCCQufgcwyWkce0cE3TRVgIFcU436ZzqRL1L+M/NAH"
+        defer></script>
+</body>
+
+</html>

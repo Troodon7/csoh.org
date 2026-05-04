@@ -38,6 +38,38 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Cloud Security Careers - Pillar page -->
+  <url>
+    <loc>https://csoh.org/cloud-security-careers.html</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cloud Security Degree Programs - Pillar page -->
+  <url>
+    <loc>https://csoh.org/cloud-security-degree-programs.html</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cloud Security Home Lab - Practical guide -->
+  <url>
+    <loc>https://csoh.org/cloud-security-home-lab.html</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Community & Signal chat - Async surface -->
+  <url>
+    <loc>https://csoh.org/community.html</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Cloud Security Best Practices - Pillar page -->
   <url>
     <loc>https://csoh.org/cloud-security-best-practices.html</loc>
