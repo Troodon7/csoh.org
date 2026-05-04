@@ -390,7 +390,9 @@ function filterBySource(slug) {
 let previewMap = {};
 
 function loadPreviewMap() {
-    return fetch('preview-mapping.json')
+    // Bypass HTTP cache so fresh entries (added on every PR by the workflow)
+    // are picked up without waiting for the browser's cache to expire.
+    return fetch('preview-mapping.json', { cache: 'no-cache' })
         .then(resp => {
             if (!resp.ok) return {};
             return resp.json();
@@ -447,9 +449,22 @@ function addIconsToCards() {
         
         let icon = '🔐'; // default security icon
         let iconClass = '';
-        
-        // Determine icon based on tags and content
-        if (tags.some(tag => tag.includes('ctf')) || title.includes('ctf') || title.includes('goat') || title.includes('vulnerable')) {
+
+        // Helper: exact tag match (case-insensitive). Avoids substring false-positives
+        // like "Daily" matching "ai" or "Chain" matching "ai".
+        const tagEquals = (needle) => tags.some(tag => tag === needle);
+
+        // Determine icon based on tags and content. Order matters — earlier matches win.
+        if (tagEquals('newsletter')) {
+            icon = '📬';
+            iconClass = 'newsletter';
+        } else if (tagEquals('blog')) {
+            icon = '✍️';
+            iconClass = 'blog';
+        } else if (tagEquals('podcast')) {
+            icon = '🎙️';
+            iconClass = 'podcast';
+        } else if (tags.some(tag => tag.includes('ctf')) || title.includes('ctf') || title.includes('goat') || title.includes('vulnerable')) {
             icon = '🎯';
             iconClass = 'ctf';
         } else if (tags.some(tag => tag.includes('tool')) || tags.some(tag => tag.includes('cspm')) || tags.some(tag => tag.includes('cnapp'))) {
@@ -464,7 +479,7 @@ function addIconsToCards() {
         } else if (tags.some(tag => tag.includes('kubernetes') || tag.includes('k8s')) || title.includes('kubernetes')) {
             icon = '☸️';
             iconClass = 'kubernetes';
-        } else if (tags.some(tag => tag.includes('ai') || tag.includes('ml')) || title.includes('ai')) {
+        } else if (tagEquals('ai') || tagEquals('ml') || tagEquals('ai-security') || tagEquals('ai security') || /\bai\b/.test(title)) {
             icon = '🤖';
             iconClass = 'ai';
         } else if (title.includes('aws')) {

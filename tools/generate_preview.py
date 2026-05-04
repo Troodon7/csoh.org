@@ -388,8 +388,14 @@ def extract_urls_from_resources_html():
         repo_root / 'ctfs.html',
         repo_root / 'threat-research.html',
         repo_root / 'conferences.html',
+        repo_root / 'cloud-security-reading-list.html',
     ]
-    pattern = re.compile(r'<a\s+href="([^"]+)"[^>]*class="card-link"')
+    # Match either `<a class="card-link" href="...">` (resources/ctfs/etc.)
+    # or `<h3><a href="...">` inside a .resource-card (reading-list pattern).
+    patterns = [
+        re.compile(r'<a\s+href="([^"]+)"[^>]*class="card-link"'),
+        re.compile(r'<div\s+class="resource-card"[^>]*>\s*<h3>\s*<a\s+href="([^"]+)"', re.DOTALL),
+    ]
 
     all_urls = []
     seen = set()
@@ -397,13 +403,14 @@ def extract_urls_from_resources_html():
         if not page.exists():
             continue
         content = page.read_text(encoding='utf-8')
-        for url in pattern.findall(content):
-            # Skip relative / internal links — we only screenshot external URLs
-            if not url.startswith(('http://', 'https://')):
-                continue
-            if url not in seen:
-                seen.add(url)
-                all_urls.append(url)
+        for pattern in patterns:
+            for url in pattern.findall(content):
+                # Skip relative / internal links — we only screenshot external URLs
+                if not url.startswith(('http://', 'https://')):
+                    continue
+                if url not in seen:
+                    seen.add(url)
+                    all_urls.append(url)
 
     urls_needing_previews = [
         u for u in all_urls
