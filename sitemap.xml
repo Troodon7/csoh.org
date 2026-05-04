@@ -41,7 +41,7 @@
   <!-- AI Learning Path - Roadmap page -->
   <url>
     <loc>https://csoh.org/ai-learning.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -73,7 +73,7 @@
   <!-- Cloud Security Reading List & People to Follow - Curated list -->
   <url>
     <loc>https://csoh.org/cloud-security-reading-list.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -81,7 +81,7 @@
   <!-- Cloud Security Portfolio Projects - Hub page for 7 walkthroughs -->
   <url>
     <loc>https://csoh.org/cloud-security-portfolio-projects.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -89,43 +89,43 @@
   <!-- Per-project portfolio walkthroughs -->
   <url>
     <loc>https://csoh.org/portfolio/cloudgoat.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://csoh.org/portfolio/aws-org-scps.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://csoh.org/portfolio/prowler-audit.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://csoh.org/portfolio/detection-lab.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://csoh.org/portfolio/recreate-capital-one.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://csoh.org/portfolio/open-source-contribution.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://csoh.org/portfolio/cnapp-comparison.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
