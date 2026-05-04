@@ -496,7 +496,7 @@ function addPreviewImagesToCards() {
     cards.forEach(card => {
         // Skip if card marked as no-preview (e.g., index page category cards)
         if (card.hasAttribute('data-no-preview')) return;
-        
+
         // avoid duplicating previews
         if (card.querySelector('.resource-preview')) return;
 
@@ -505,6 +505,10 @@ function addPreviewImagesToCards() {
 
         const url = link.href;
         if (!url) return;
+
+        // Skip cards with no local preview available — no third-party fallback.
+        // (Avoids inserting an empty <img> that renders as a broken-image placeholder.)
+        if (!previewMap[url]) return;
 
         const img = document.createElement('img');
         img.className = 'resource-preview';
@@ -516,14 +520,8 @@ function addPreviewImagesToCards() {
         img.width = 600;
         img.height = 160;
 
-
-        // Use local preview when available; no third-party fallback.
-        if (previewMap[url]) {
-            img.src = previewMap[url];
-            img.onerror = function() { img.remove(); };
-        } else {
-            img.remove();
-        }
+        img.src = previewMap[url];
+        img.onerror = function() { img.remove(); };
 
         // Place the preview after any icon but before the title
         const icon = card.querySelector('.resource-card-icon');
