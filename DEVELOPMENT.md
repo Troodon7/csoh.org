@@ -341,6 +341,37 @@ Every script in `tools/` (and `update_sri.py`, `update_news.py` at the repo root
 
 If your script needs to be sure it overwrote even an identical file (e.g., to re-run a destructive transformation), do that work explicitly — don't make it the default.
 
+### Tracking SEO performance
+
+Two complementary signals — both matter, neither alone is enough.
+
+#### 1. The codebase scorecard (this repo)
+
+Lives in `seo-audits/SCORECARD.md`. Updated weekly by a remote agent (Mondays 1am PT, configured at <https://claude.ai/code/routines>). Each row records on-site/codebase health: meta tags, headings, structured data, image hygiene, etc. Run `/seo-audit` locally or invoke the seo-auditor agent to add a row off-cycle.
+
+What this catches: missing meta tags, broken JSON-LD, generic alt text, heading-hierarchy skips, OG-image regressions, stale `<meta>` content, etc. What it can't see: actual rankings or real-user performance.
+
+#### 2. Google Search Console (external truth)
+
+<https://search.google.com/search-console> → property `csoh.org` (verified via `google66d489593949bd4c.html` in the repo root).
+
+Four reports to check on a recurring cadence:
+
+| Report | Path | Cadence | What to do |
+|---|---|---|---|
+| **Performance** | Reports → Performance → Search results | Weekly | Set comparison to "Last 28 days vs previous period." Sort queries by impressions. Pages in positions 5-15 with cloud-security terms = your low-hanging-fruit list for content tweaks. High impressions + low CTR = improve title/meta description. |
+| **Pages (Indexing)** | Indexing → Pages | After every deploy | Confirm nothing landed in "Page with redirect" (the recurring `.htaccess` gotcha) or "Crawled - currently not indexed." Anything in "Excluded by 'noindex' tag" should match what we deliberately noindex (`chat-resources.html`). |
+| **Sitemaps** | Indexing → Sitemaps | One-time submit | Submit `https://csoh.org/sitemap.xml` once. After that GSC shows submitted-vs-indexed gap automatically. |
+| **Core Web Vitals** | Experience → Core Web Vitals | Monthly | Real Chrome user data (CrUX). LCP < 2.5s, INP < 200ms, CLS < 0.1. This is the data the codebase audit can't see — only real users generate it. |
+
+**Set up GSC email alerts** under Settings → Email preferences. GSC will email you when coverage drops or new errors appear.
+
+After every deploy that touches HTML structure or `.htaccess`, spot-check live URLs in the **URL Inspection** tool (top search bar in GSC) — paste a URL, click "Request Indexing" if you want Google to re-crawl sooner than its default cadence (~days).
+
+#### When the two disagree
+
+Codebase scorecard says 100, GSC says traffic dropped → something at the server/CDN/redirect layer is undoing what the HTML claims. That's how we caught the `.htaccess` `meetings.html → sessions.html` stale redirect: HTML had the right canonical, but the live site was 301'ing away from it. Always trust GSC's view of the live site over the codebase scorecard.
+
 ---
 
 ## File Reference
