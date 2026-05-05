@@ -3697,6 +3697,40 @@ footer {
 /* =========================================================================
    CNAPP umbrella diagram container.
    ========================================================================= */
+/* Page photos — Pexels-sourced JPGs with webp fallback. */
+.page-photo {
+    margin: 2rem 0;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.page-photo picture, .page-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+}
+.page-photo figcaption {
+    padding: 0.6rem 1rem;
+    font-size: 0.78rem;
+    color: #777;
+    background: rgba(0,0,0,0.02);
+    text-align: right;
+    font-style: italic;
+}
+[data-theme="dark"] .page-photo {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.10);
+}
+[data-theme="dark"] .page-photo figcaption {
+    color: #94a3b8;
+    background: rgba(255,255,255,0.02);
+}
+
 .cnapp-figure, .killchain-figure, .arch-figure, .workflow-figure {
     background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
     border: 1px solid var(--border-color);
