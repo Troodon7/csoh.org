@@ -16,6 +16,18 @@ from check_url_safety import URLSafetyChecker, resolve_urls_concurrent
 
 def extract_urls_from_html(file_path):
     """Extract all URLs from an HTML file."""
+    # XML namespace URIs are identifiers, not fetchable URLs — never normalize.
+    # The SVG/XLink/XHTML/XML/MathML namespaces are spec-defined as the http://
+    # form and rejected by HTML5 validators if rewritten to https://.
+    XML_NAMESPACE_URIS = {
+        'http://www.w3.org/2000/svg',
+        'http://www.w3.org/1999/xlink',
+        'http://www.w3.org/1999/xhtml',
+        'http://www.w3.org/XML/1998/namespace',
+        'http://www.w3.org/1998/Math/MathML',
+        'http://www.w3.org/2001/xml-events',
+    }
+
     urls = []
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -37,10 +49,14 @@ def extract_urls_from_html(file_path):
     except Exception as e:
         print(f"  Warning: Error reading {file_path}: {e}")
 
-    # Remove duplicates while preserving order
+    # Remove duplicates while preserving order, and drop XML namespace URIs
+    # (which are identifiers, not fetchable links) so the URL normalizer
+    # never tries to "upgrade" them to https://.
     seen = set()
     unique_urls = []
     for url in urls:
+        if url in XML_NAMESPACE_URIS:
+            continue
         if url not in seen:
             seen.add(url)
             unique_urls.append(url)
