@@ -87,12 +87,6 @@ def main():
 
         resolved_count = sum(1 for u, (r, _) in resolution_map.items() if r != u)
         error_count = sum(1 for _, (_, e) in resolution_map.items() if e)
-        skipped_count = len(all_unique_urls) - len([
-            u for u in all_unique_urls
-            if resolution_map.get(u, (u, None)) != (u, None)
-            or resolution_map.get(u, (None, None))[1] is not None
-            or resolution_map.get(u, (u, None))[0] != u
-        ])
         print(f"  Resolved: {resolved_count} URLs redirected to different destinations")
         if error_count:
             print(f"  Errors: {error_count} URLs could not be resolved (checking original)")
@@ -114,7 +108,7 @@ def main():
         print(f"Checking: {html_file.name}")
 
         if not urls:
-            print(f"   No URLs found\n")
+            print("   No URLs found\n")
             continue
 
         print(f"   Found {len(urls)} URL(s)")

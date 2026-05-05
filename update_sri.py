@@ -10,7 +10,7 @@ import base64
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 
 
 def upsert_attr(tag: str, attr: str, value: str) -> str:
@@ -287,7 +287,7 @@ def main():
             modified_count += 1
         else:
             print(f"  - Unchanged: {html_path.name}")
-    
+
     print(f"\n✓ Done! Modified {modified_count} of {len(html_files)} files.")
     return 0
 

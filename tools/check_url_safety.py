@@ -21,7 +21,6 @@ import urllib.request
 import urllib.error
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urlparse
-import json
 from typing import Dict, List, Optional, Tuple
 
 # Suspicious patterns that might indicate malicious URLs

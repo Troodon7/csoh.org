@@ -1,0 +1,27 @@
+# =============================================================================
+# Project config — used only by the linter (ruff). The site itself is static
+# HTML; the .py files in this repo are housekeeping scripts (build sitemap,
+# refresh SRI hashes, generate previews, etc.) that ride on top of GitHub
+# Actions runners. We don't ship a Python package.
+# =============================================================================
+
+[tool.ruff]
+# Match the existing house style across .py files in this repo.
+line-length = 120
+target-version = "py311"
+extend-exclude = ["__pycache__", ".venv", "venv"]
+
+[tool.ruff.lint]
+# Default ruff rule set: pyflakes (F) catches real bugs (unused imports,
+# undefined names, f-strings missing placeholders); pycodestyle errors (E)
+# and warnings (W) catch the structural style issues that actually matter
+# (bare except, lambda-assignment, ambiguous names). We're intentionally
+# NOT enabling the full PEP 8 set — that would surface hundreds of style
+# nits that don't affect correctness.
+select = ["E", "F", "W"]
+
+# E501 (line too long) is disabled site-wide. The .py files in this repo
+# are tooling scripts that embed large HTML templates, regex patterns, and
+# data dicts inline; wrapping those at 120 columns hurts readability with
+# no real upside. Logic-level issues (E7xx) are still checked.
+ignore = ["E501"]

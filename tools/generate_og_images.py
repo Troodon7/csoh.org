@@ -162,7 +162,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 
 def serve_repo(port: int) -> socketserver.ThreadingTCPServer:
-    handler = lambda *args, **kwargs: Handler(*args, directory=str(REPO_ROOT), **kwargs)
+    def handler(*args, **kwargs):
+        return Handler(*args, directory=str(REPO_ROOT), **kwargs)
     server = socketserver.ThreadingTCPServer(("127.0.0.1", port), handler)
     threading.Thread(target=server.serve_forever, daemon=True).start()
     return server
@@ -220,7 +221,7 @@ def main() -> int:
     if args.pages:
         targets = [p for p in PAGES if p[0] in args.pages]
         if not targets:
-            print(f"No matching pages in PAGES list", file=sys.stderr)
+            print("No matching pages in PAGES list", file=sys.stderr)
             return 1
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)

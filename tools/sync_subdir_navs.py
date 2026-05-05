@@ -23,9 +23,7 @@ Inserts the missing entries:
 
 All inserts are idempotent — checks for existing entry before adding.
 """
-import os
 import re
-import sys
 from pathlib import Path
 
 REPO = Path('/Users/shawn/csoh.org')

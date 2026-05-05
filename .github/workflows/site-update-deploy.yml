@@ -72,7 +72,7 @@ jobs:
       # original push actually changed.
       - name: Save original commit SHA
         id: original_sha
-        run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       # A fresh `actions/checkout` gives every file the SAME mtime — the
       # moment of the checkout. lftp's `mirror` decides what to upload
@@ -124,7 +124,7 @@ jobs:
           # `git diff --quiet` exits 0 if there's nothing changed, 1 if there is.
           if git diff --quiet; then
             # Set a step output so later steps can ask "did SRI change?"
-            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No SRI changes to commit"
           else
             # Configure git as the bot identity, then commit & push.
@@ -138,7 +138,7 @@ jobs:
             # If push fails (race with another deploy-pipeline run), pull
             # with rebase and retry. See file header for context.
             git push || (git pull --rebase origin main && git push)
-            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "changed=true" >> "$GITHUB_OUTPUT"
             echo "SRI changes committed"
           fi
 
@@ -154,10 +154,10 @@ jobs:
             # `::error::` makes GitHub Actions render this as a red error
             # annotation in the run summary.
             echo "::error::Unsafe URLs detected — blocking normalization and deploy"
-            echo "safe=false" >> $GITHUB_OUTPUT
+            echo "safe=false" >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo "safe=true" >> $GITHUB_OUTPUT
+            echo "safe=true" >> "$GITHUB_OUTPUT"
           fi
 
       # Save the safety report so reviewers can read it. `if: always()` =
@@ -184,13 +184,13 @@ jobs:
           NORM_EXIT=${PIPESTATUS[0]}
           # Exit code 2 from normalize_urls.py = a redirect went to an
           # unsafe destination. Don't deploy; surface as a hard error.
-          if [ $NORM_EXIT -eq 2 ]; then
+          if [ "$NORM_EXIT" -eq 2 ]; then
             echo "::error::Normalization detected redirects to unsafe destinations — blocking deploy"
             exit 1
           fi
           # Other nonzero exits are warnings (couldn't resolve some URLs);
           # `::warning::` shows them as yellow annotations but doesn't fail.
-          if [ $NORM_EXIT -ne 0 ]; then
+          if [ "$NORM_EXIT" -ne 0 ]; then
             echo "::warning::URL normalization exited with code $NORM_EXIT — some redirects may not have been resolved"
           fi
           # Scope the diff check to HTML files only — other steps (URL safety)
@@ -199,14 +199,14 @@ jobs:
           # followed by `git commit` fails under `bash -e` and blocks deploy.
           if git diff --quiet -- '*.html'; then
             echo "No URL changes"
-            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add '*.html'
             git commit -m "chore: normalize URLs (tracking params, redirects) [skip ci]"
             git push || (git pull --rebase origin main && git push)
-            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
       # presentations.html embeds JSON-LD VideoObject schema for each YouTube
@@ -218,7 +218,7 @@ jobs:
           python3 tools/update_presentations_schema.py
           # Only commit if presentations.html actually changed.
           if git diff --quiet -- presentations.html; then
-            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No presentations schema changes"
           else
             git config user.name "github-actions[bot]"
@@ -226,7 +226,7 @@ jobs:
             git add presentations.html
             git commit -m "chore: refresh presentations VideoObject schema [skip ci]"
             git push || (git pull --rebase origin main && git push)
-            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "changed=true" >> "$GITHUB_OUTPUT"
             echo "Presentations schema changes committed"
           fi
 
@@ -239,7 +239,7 @@ jobs:
         run: |
           python3 tools/build_meetings_search_index.py
           if git diff --quiet -- meetings-search-index.json; then
-            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No meetings search index changes"
           else
             git config user.name "github-actions[bot]"
@@ -247,7 +247,7 @@ jobs:
             git add meetings-search-index.json
             git commit -m "chore: rebuild meetings search index [skip ci]"
             git push || (git pull --rebase origin main && git push)
-            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "changed=true" >> "$GITHUB_OUTPUT"
             echo "Meetings search index changes committed"
           fi
 
@@ -258,7 +258,7 @@ jobs:
         run: |
           python3 tools/update_sitemap.py
           if git diff --quiet -- sitemap.xml; then
-            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No sitemap changes to commit"
           else
             git config user.name "github-actions[bot]"
@@ -266,7 +266,7 @@ jobs:
             git add sitemap.xml
             git commit -m "chore: refresh sitemap lastmod dates [skip ci]"
             git push || (git pull --rebase origin main && git push)
-            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "changed=true" >> "$GITHUB_OUTPUT"
             echo "Sitemap changes committed"
           fi
 
@@ -280,10 +280,10 @@ jobs:
           # we just want the report to grep.
           python3 tools/generate_preview.py --check > preview-check.txt || true
           if grep -q "Found.*resources without previews" preview-check.txt; then
-            echo "missing=true" >> $GITHUB_OUTPUT
+            echo "missing=true" >> "$GITHUB_OUTPUT"
             echo "Found resources without previews"
           else
-            echo "missing=false" >> $GITHUB_OUTPUT
+            echo "missing=false" >> "$GITHUB_OUTPUT"
             echo "All resources have previews"
           fi
           cat preview-check.txt
@@ -340,10 +340,10 @@ jobs:
           # `${ORIG_SHA}^` = the parent of the original commit. Diff between
           # that and the original commit shows what THIS push introduced.
           if git diff --name-only "${ORIG_SHA}^" "${ORIG_SHA}" -- 'chat-screenshots/' | grep -q .; then
-            echo "new=true" >> $GITHUB_OUTPUT
+            echo "new=true" >> "$GITHUB_OUTPUT"
             echo "New chat-screenshots detected"
           else
-            echo "new=false" >> $GITHUB_OUTPUT
+            echo "new=false" >> "$GITHUB_OUTPUT"
             echo "No new chat-screenshots"
           fi
 
@@ -353,9 +353,9 @@ jobs:
         run: |
           ORIG_SHA="${{ steps.original_sha.outputs.sha }}"
           if git diff --name-only "${ORIG_SHA}^" "${ORIG_SHA}" -- '*.html' | grep -q .; then
-            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           else
-            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
       # .htaccess is server config — when it changes (CSP rule tweak, new
@@ -366,9 +366,9 @@ jobs:
         run: |
           ORIG_SHA="${{ steps.original_sha.outputs.sha }}"
           if git diff --name-only "${ORIG_SHA}^" "${ORIG_SHA}" -- '.htaccess' | grep -q .; then
-            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           else
-            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
       # Decide whether the FTP deploy actually needs to run. We deploy when
@@ -386,9 +386,9 @@ jobs:
         id: deploy_needed
         run: |
           if [[ "${{ steps.sri.outputs.changed }}" == "true" || "${{ steps.sitemap.outputs.changed }}" == "true" || "${{ steps.check_previews.outputs.missing }}" == "true" || "${{ steps.check_chat_screenshots.outputs.new }}" == "true" || "${{ steps.html_changed.outputs.changed }}" == "true" || "${{ steps.htaccess_changed.outputs.changed }}" == "true" || "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            echo "deploy=true" >> $GITHUB_OUTPUT
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
           else
-            echo "deploy=false" >> $GITHUB_OUTPUT
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
           fi
 
       # Install lftp only if we're actually going to deploy.

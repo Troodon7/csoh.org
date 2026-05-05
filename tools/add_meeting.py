@@ -88,7 +88,6 @@ def parse_html_note(raw: str) -> dict:
     sections: list[tuple[str, str]] = []  # (heading, body_html)
     # Skip leading text; iterate in groups of 3
     for i in range(1, len(pieces), 3):
-        lvl = pieces[i]
         heading_html = pieces[i + 1]
         body_html = pieces[i + 2] if i + 2 < len(pieces) else ""
         heading = clean_text(strip_tags(heading_html))

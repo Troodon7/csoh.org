@@ -31,7 +31,6 @@ import socket
 import socketserver
 import sys
 import threading
-import time
 from pathlib import Path
 from typing import Optional
 
@@ -96,7 +95,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 def serve_repo(port: int) -> socketserver.ThreadingTCPServer:
     """Start a tiny static server rooted at the repo. Returns the server
     so the caller can shut it down."""
-    handler = lambda *args, **kwargs: Handler(*args, directory=str(REPO_ROOT), **kwargs)
+    def handler(*args, **kwargs):
+        return Handler(*args, directory=str(REPO_ROOT), **kwargs)
     server = socketserver.ThreadingTCPServer(("127.0.0.1", port), handler)
     threading.Thread(target=server.serve_forever, daemon=True).start()
     return server
