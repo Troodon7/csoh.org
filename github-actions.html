@@ -291,7 +291,7 @@ jobs:
         </section>
 
         <section id="workflows-tour">
-            <h2>A tour of CSOH's seven workflows</h2>
+            <h2>A tour of CSOH's eight workflows</h2>
             <p>Each one solves a single, named problem. Click through to read the source — every file is heavily commented for new readers.</p>
 
             <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/site-update-deploy.yml" target="_blank" rel="noopener noreferrer">site-update-deploy.yml</a> — The big one</h3>
@@ -308,6 +308,9 @@ jobs:
 
             <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/validate-html.yml" target="_blank" rel="noopener noreferrer">validate-html.yml</a> — PR check</h3>
             <p>Runs the <a href="https://github.com/Cyb3r-Jak3/html5validator-action" target="_blank" rel="noopener noreferrer">W3C HTML5 validator</a> on every HTML-touching PR. Posts a comment on failure with the first 50 lines of the error log. Read this for <strong>PR comments via github-script</strong> and <strong>conditional posting (<code>if: failure() &amp;&amp; github.event_name == 'pull_request'</code>)</strong>.</p>
+
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/lint.yml" target="_blank" rel="noopener noreferrer">lint.yml</a> — Code &amp; workflow lint</h3>
+            <p>Quality gate that runs on every push and PR. Three parallel jobs: <a href="https://github.com/rhysd/actionlint" target="_blank" rel="noopener noreferrer">actionlint</a> for workflow YAML (with bundled shellcheck on inline <code>run:</code> blocks), <a href="https://github.com/astral-sh/ruff" target="_blank" rel="noopener noreferrer">ruff</a> for the Python housekeeping scripts, and <a href="https://github.com/adrienverge/yamllint" target="_blank" rel="noopener noreferrer">yamllint</a> for structural YAML sanity. Read this for <strong>parallel jobs in one workflow</strong>, <strong>SHA-pinned third-party actions</strong>, and how to relax <code>yamllint</code>'s defaults to play nicely with GitHub Actions YAML (see <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.yamllint.yml" target="_blank" rel="noopener noreferrer">.yamllint.yml</a>).</p>
 
             <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/check-broken-links.yml" target="_blank" rel="noopener noreferrer">check-broken-links.yml</a> — External link rot</h3>
             <p>Crawls every link in the site with <a href="https://github.com/lycheeverse/lychee" target="_blank" rel="noopener noreferrer">lychee</a>, weekly and per-PR. Caches HTTP responses for 3 days so it's fast. Read this for <strong>cache restoration</strong> and a non-blocking check (<code>fail: false</code>) — link rot is everywhere and shouldn't gate merges.</p>

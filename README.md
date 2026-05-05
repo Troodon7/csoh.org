@@ -105,7 +105,7 @@ What the cloud provider secures vs. what you secure across IaaS, PaaS, SaaS, and
 The acronym soup decoded. Side-by-side comparison of cloud-security tool categories with explicit "when do I need each" guidance, an open-source-only reference stack, and an FAQ on whether CNAPP is "just marketing" (mostly: no).
 
 ### ⚙️ How We Use GitHub Actions (`github-actions.html`)
-Learn-by-example explainer for GitHub Actions, using CSOH's seven workflow files as the teaching material. Covers triggers, concurrency, secrets, the GITHUB_TOKEN vs PAT distinction, the `workflow` scope gotcha, and a recommended reading order through our heavily-commented YAML.
+Learn-by-example explainer for GitHub Actions, using CSOH's eight workflow files as the teaching material. Covers triggers, concurrency, secrets, the GITHUB_TOKEN vs PAT distinction, the `workflow` scope gotcha, and a recommended reading order through our heavily-commented YAML.
 
 ### 📚 Resources (`resources.html`)
 Comprehensive catalog of **200+ cloud security resources** organized by 6 categories:
@@ -406,6 +406,7 @@ csoh.org/
 │   ├── check-url-safety.yml         # URL safety validation on PRs + weekly
 │   ├── normalize-urls.yml           # Monthly URL normalization (tracking params, redirects)
 │   ├── validate-html.yml            # HTML5 validation on PRs + weekly
+│   ├── lint.yml                     # actionlint + ruff + yamllint on every push/PR
 │   ├── check-broken-links.yml       # Broken link checker (PRs + weekly)
 │   ├── manual-deploy.yml            # On-demand full site deploy (manual trigger only)
 │   └── CHECK_URL_SAFETY_WORKFLOW.md # Workflow configuration notes
@@ -418,6 +419,8 @@ csoh.org/
 ├── docker-compose.yml          # Compose config for the Dockerized site
 ├── .env.example                # Template for Zoom OAuth + other secrets (.env is gitignored)
 ├── .lychee.toml                # Config for the broken-link-checker workflow
+├── .yamllint.yml               # Config for the yamllint job in lint.yml
+├── pyproject.toml              # Config for the ruff job in lint.yml (Python lint)
 ├── .editorconfig               # Editor consistency rules
 ├── .dockerignore               # Files excluded from the Docker build context
 │

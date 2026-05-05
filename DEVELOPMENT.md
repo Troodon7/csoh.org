@@ -114,7 +114,7 @@ csoh.org/
 ├── breach-timeline.js      # Breach timeline page specific JS
 │
 ├── tools/                  # Python automation scripts (URL safety, normalization, previews, sitemap, presentations schema, glossary cross-linking)
-├── .github/workflows/      # CI/CD pipelines (7 workflows)
+├── .github/workflows/      # CI/CD pipelines (8 workflows)
 └── update_news.py          # News aggregation from 39 RSS feeds
 ```
 
@@ -214,6 +214,25 @@ python3 tools/normalize_urls.py
 # Apply changes:
 python3 tools/normalize_urls.py --apply
 ```
+
+### Linting (run by `lint.yml` on every push/PR)
+
+```bash
+# One-time install (Homebrew on macOS; Linux: apt or pip equivalents)
+brew install actionlint ruff yamllint shellcheck
+
+# Lint GitHub Actions YAML + the inline shell inside each `run:` block
+actionlint
+
+# Lint Python (the housekeeping scripts in tools/ and the repo root)
+ruff check .
+ruff check --fix .   # auto-fix the easy stuff (unused imports, whitespace, etc.)
+
+# Lint every YAML file (config in .yamllint.yml)
+yamllint .
+```
+
+Configs: `pyproject.toml` (ruff) and `.yamllint.yml` (yamllint). All three commands should exit 0 before opening a PR.
 
 ---
 

@@ -566,6 +566,7 @@ Before you submit, make sure:
 - ✅ **Light & dark mode** - Verify your changes look good in both themes (use the 🌙 toggle)
 - ✅ **Commit message is helpful** - Clearly describe what you did
 - ✅ **You're not changing too much** - Keep each PR focused on one thing
+- ✅ **CI is green** - The `lint.yml` workflow runs `actionlint`, `ruff`, and `yamllint` on every PR; the `validate-html.yml` workflow runs the W3C validator on HTML changes. See [DEVELOPMENT.md#linting](DEVELOPMENT.md#linting-run-by-lintyml-on-every-pushpr) for the local commands.
 
 
 ### What happens after your PR merges
