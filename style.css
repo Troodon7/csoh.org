@@ -3697,6 +3697,75 @@ footer {
 /* =========================================================================
    CNAPP umbrella diagram container.
    ========================================================================= */
+/* breach-list divider variant: a non-card list item that just hosts a page-photo */
+.breach-divider { list-style: none; padding: 0; margin: 0; }
+
+/* H2 accent — small colored bar above each section's h2 on long pillar pages.
+   Adds visual rhythm so each section starts with a clear anchor instead of
+   landing in another wall of text. Scoped to <main class="contribute-article">
+   so listing/utility pages keep their existing styling. */
+.contribute-article section > h2 {
+    position: relative;
+    padding-top: 0.75rem;
+    margin-top: 2.5rem;
+}
+.contribute-article section > h2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 56px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-color), transparent);
+    border-radius: 2px;
+}
+[data-theme="dark"] .contribute-article section > h2::before {
+    background: linear-gradient(90deg, #38bdf8, transparent);
+}
+
+/* Pull-quote callout — pulls a key sentence out of paragraph runs into a
+   visually-distinct, magazine-style block. Use sparingly, ~1 per long page. */
+.pull-quote {
+    margin: 2.25rem 0;
+    padding: 1.25rem 1.5rem 1.25rem 2.75rem;
+    border-left: 4px solid var(--secondary-color);
+    background: linear-gradient(135deg, rgba(52,152,219,0.06) 0%, transparent 100%);
+    border-radius: 0 12px 12px 0;
+    font-size: 1.18rem;
+    line-height: 1.55;
+    color: var(--text-color);
+    font-style: italic;
+    position: relative;
+    font-weight: 500;
+}
+.pull-quote::before {
+    content: '\201C';
+    position: absolute;
+    left: 0.7rem;
+    top: -0.25rem;
+    font-size: 3.2rem;
+    color: var(--secondary-color);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: normal;
+    line-height: 1;
+    opacity: 0.8;
+}
+.pull-quote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted, #777);
+    font-style: normal;
+    font-weight: 400;
+}
+[data-theme="dark"] .pull-quote {
+    background: linear-gradient(135deg, rgba(56,189,248,0.10) 0%, transparent 100%);
+    border-left-color: #38bdf8;
+    color: #e2e8f0;
+}
+[data-theme="dark"] .pull-quote::before { color: #38bdf8; }
+[data-theme="dark"] .pull-quote cite { color: #94a3b8; }
+
 /* Page photos — Pexels-sourced JPGs with webp fallback. */
 .page-photo {
     margin: 2rem 0;

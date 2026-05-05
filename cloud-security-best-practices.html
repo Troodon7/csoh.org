@@ -39,10 +39,10 @@
     <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
     <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=afacc220" as="style"
-        integrity="sha384-+/VFlzCGBnZLpw1roiscCqvZa/Bj4v0wH9FkU0tpGiEd+IpfnWX+bHO8iFKiktLM">
-    <link rel="stylesheet" href="/style.css?v=afacc220"
-        integrity="sha384-+/VFlzCGBnZLpw1roiscCqvZa/Bj4v0wH9FkU0tpGiEd+IpfnWX+bHO8iFKiktLM">
+    <link rel="preload" href="/style.css?v=d15b1435" as="style"
+        integrity="sha384-K35b2KrIfFSR9HMBSjaLu6gRid3QMW4HB8cbGCRJ+sP+PeoL0GthQXD3X42URuoT">
+    <link rel="stylesheet" href="/style.css?v=d15b1435"
+        integrity="sha384-K35b2KrIfFSR9HMBSjaLu6gRid3QMW4HB8cbGCRJ+sP+PeoL0GthQXD3X42URuoT">
 
     <script type="application/ld+json">
     {
@@ -209,6 +209,14 @@
     </section>
     <main class="container contribute-article" id="main-content">
         
+                <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/checklist.webp" type="image/webp">
+            <img src="/img/photos/checklist.jpg" alt="Close-up of a checklist with green checkmarks" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Photo by Towfiqu barbhuiya on Pexels</figcaption>
+        </figure>
+
         <p class="page-meta"><time datetime="2026-04-30">Last updated <strong>2026-04-30</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/cloud-security-best-practices.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
 <div class="info-box--blue">
             <p><strong>The honest version:</strong> Most "cloud security best practices" lists are 100 items long and unranked, which is the same as not having a list. The bullets below are ordered by what actually appears as the root cause in our <a href="breach-timeline.html">breach kill chains</a>. Master the first three sections and you'll prevent the majority of cloud incidents seen in industry. The later sections are where mature programs differentiate.</p>
@@ -284,6 +292,11 @@
             </ul>
         </section>
 
+        <blockquote class="pull-quote">
+          In the cloud, identity is the new perimeter — and most cloud breaches involve at least one identity failure.
+          <cite>— why the section above is first, not last</cite>
+        </blockquote>
+
         <section id="configuration">
             <h2>Configuration &amp; posture</h2>
             <p>Misconfigurations are the second-most-common breach root cause. The good news: posture management tools have made this category solvable for most organizations.</p>
@@ -321,6 +334,14 @@
                 <li><strong>DLP on data egress paths.</strong> Cloud DLP services flag bulk PII / PCI / PHI moving outside your boundary. Pair with egress controls so the alert fires before the data leaves.</li>
             </ul>
         </section>
+
+        <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/analyst-charts.webp" type="image/webp">
+            <img src="/img/photos/analyst-charts.jpg" alt="A business analyst reviews a colorful bar chart and documents at a desk" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Photo by RDNE Stock project on Pexels</figcaption>
+        </figure>
 
         <section id="detection">
             <h2>Logging &amp; detection</h2>

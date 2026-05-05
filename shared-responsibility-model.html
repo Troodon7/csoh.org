@@ -39,10 +39,10 @@
     <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
     <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=afacc220" as="style"
-        integrity="sha384-+/VFlzCGBnZLpw1roiscCqvZa/Bj4v0wH9FkU0tpGiEd+IpfnWX+bHO8iFKiktLM">
-    <link rel="stylesheet" href="/style.css?v=afacc220"
-        integrity="sha384-+/VFlzCGBnZLpw1roiscCqvZa/Bj4v0wH9FkU0tpGiEd+IpfnWX+bHO8iFKiktLM">
+    <link rel="preload" href="/style.css?v=d15b1435" as="style"
+        integrity="sha384-K35b2KrIfFSR9HMBSjaLu6gRid3QMW4HB8cbGCRJ+sP+PeoL0GthQXD3X42URuoT">
+    <link rel="stylesheet" href="/style.css?v=d15b1435"
+        integrity="sha384-K35b2KrIfFSR9HMBSjaLu6gRid3QMW4HB8cbGCRJ+sP+PeoL0GthQXD3X42URuoT">
 
     <script type="application/ld+json">
     {
@@ -241,6 +241,14 @@
     </section>
     <main class="container contribute-article" id="main-content">
         
+                <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/handshake.webp" type="image/webp">
+            <img src="/img/photos/handshake.jpg" alt="A close-up of two people shaking hands in a professional setting" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Photo by Monstera Production on Pexels</figcaption>
+        </figure>
+
         <p class="page-meta"><time datetime="2026-04-30">Last updated <strong>2026-04-30</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/shared-responsibility-model.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
 <div class="info-box--blue">
             <p><strong>The 30-second version:</strong> The cloud provider secures the underlying platform — physical data centers, <a class="glossary-link" href="glossary.html#term-hypervisor">hypervisor</a>, managed-service internals. You secure how you configure and use it — <a class="glossary-link" href="glossary.html#term-iam">IAM</a>, network rules, data, code, workloads. The dividing line shifts depending on whether you're using IaaS (you secure most of it), PaaS (less), SaaS (least), or serverless (somewhere in between). Most "cloud breaches" are misunderstandings of where the line sits — not provider failures.</p>
@@ -373,6 +381,11 @@
             <p>The catch: you can't run an <a class="glossary-link" href="glossary.html#term-edr">EDR</a> agent on Lambda. <a class="glossary-link" href="glossary.html#term-cwpp">CWPP</a> coverage of serverless workloads relies almost entirely on provider-side telemetry (CloudTrail, function logs, X-Ray) — there's no syscall stream to monitor. This shifts more of the practical detection burden onto the provider's logging without explicitly shifting the contractual responsibility.</p>
         </section>
 
+        <blockquote class="pull-quote">
+          Most "cloud breaches" are misunderstandings of where the line sits — not provider failures.
+          <cite>— the through-line for everything below</cite>
+        </blockquote>
+
         <section id="by-provider">
             <h2>By provider: AWS, Azure, GCP differences</h2>
             <p>The shape is the same; the framings, language, and edge cases vary. Quick tour:</p>
@@ -498,6 +511,14 @@
             <h3>Storm-0558: a rare provider-side breach</h3>
             <p>Most cloud breaches are customer-side. Storm-0558 (2023) is one of the few high-profile exceptions: Microsoft's signing key for Outlook web access was compromised, allowing the attacker to forge tokens for victim accounts. Microsoft owned the failure. Even so, the customer-side investigation question — "did the attacker access OUR mailboxes" — was left to customers because Microsoft initially didn't have the logging customers needed. That experience caused Microsoft to change which audit-log fields are available without paid tiers. Read the <a href="breaches/storm-0558.html">full Storm-0558 kill chain</a>.</p>
         </section>
+
+        <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/contract-signing.webp" type="image/webp">
+            <img src="/img/photos/contract-signing.jpg" alt="Detailed view of a hand writing a signature on an official document with a ballpoint pen" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Photo by Tima Miroshnichenko on Pexels</figcaption>
+        </figure>
 
         <section id="contractual">
             <h2>The contractual layer (and why it matters)</h2>
