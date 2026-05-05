@@ -3466,3 +3466,285 @@ footer {
 }
 [data-theme="dark"] .page-meta strong { color: #e2e8f0; }
 [data-theme="dark"] .page-meta a { color: #38bdf8; }
+
+
+/* =========================================================================
+   Illustrated hero — gradient + dot pattern + side-by-side text & SVG art.
+   Used on pillar pages to replace the generic banner.
+   ========================================================================= */
+.hero--illustrated {
+    background:
+        radial-gradient(ellipse 80% 60% at 78% 18%, rgba(56,189,248,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 18% 82%, rgba(139,92,246,0.18) 0%, transparent 60%),
+        linear-gradient(135deg, #0b1729 0%, #1e293b 55%, #1e3a8a 100%);
+    color: #fff;
+    padding: 2.5rem 1.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+.hero--illustrated::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.07) 1px, transparent 0);
+    background-size: 28px 28px;
+    pointer-events: none;
+    mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
+}
+.hero--illustrated .hero-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.4fr 0.85fr;
+    gap: 2rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+.hero--illustrated .hero-illustration { max-width: 360px; justify-self: end; }
+.hero--illustrated h1 {
+    font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+    line-height: 1.15;
+    margin: 0 0 0.75rem;
+    color: #fff;
+    letter-spacing: -0.015em;
+}
+.hero--illustrated p {
+    font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+    line-height: 1.55;
+    color: #cbd5e1;
+    margin: 0 0 1.25rem;
+    max-width: 58ch;
+}
+.hero--illustrated .cta-buttons { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+.hero--illustrated .btn-primary {
+    background: #38bdf8;
+    color: #0b1729;
+    border: 2px solid #38bdf8;
+}
+.hero--illustrated .btn-primary:hover { background: #7dd3fc; border-color: #7dd3fc; }
+.hero--illustrated .btn-secondary {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.35);
+}
+.hero--illustrated .btn-secondary:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.6); }
+.hero-illustration { width: 100%; position: relative; }
+.hero-illustration svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 18px 40px rgba(0,0,0,0.35));
+}
+@media (max-width: 880px) {
+    .hero--illustrated { padding: 2.5rem 1rem 3rem; }
+    .hero--illustrated .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-illustration { max-width: 420px; margin: 0 auto; }
+}
+
+/* =========================================================================
+   Pillar-card grid — color-coded gradient icon tiles for pillar pages.
+   ========================================================================= */
+.pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.25rem 0 2rem;
+}
+.pillar-card {
+    --card-accent: #3498db;
+    --card-accent-soft: rgba(52,152,219,0.13);
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.1rem 1.1rem 1.15rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.pillar-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: var(--card-accent);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.pillar-card:hover, .pillar-card:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.10);
+    border-color: var(--card-accent);
+    outline: none;
+}
+.pillar-card:hover::before, .pillar-card:focus-visible::before { opacity: 1; }
+.pillar-icon {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--card-accent-soft);
+    color: var(--card-accent);
+    position: relative;
+    overflow: hidden;
+}
+.pillar-icon::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--card-accent) 0%, transparent 70%);
+    opacity: 0.18;
+}
+.pillar-icon svg { width: 22px; height: 22px; stroke-width: 1.85; position: relative; z-index: 1; }
+.pillar-card h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--primary-color);
+    line-height: 1.3;
+}
+.pillar-card p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.5;
+}
+.pillar-card-iam        { --card-accent: #8b5cf6; --card-accent-soft: rgba(139,92,246,0.13); }
+.pillar-card-posture    { --card-accent: #10b981; --card-accent-soft: rgba(16,185,129,0.13); }
+.pillar-card-network    { --card-accent: #06b6d4; --card-accent-soft: rgba(6,182,212,0.13); }
+.pillar-card-data       { --card-accent: #f59e0b; --card-accent-soft: rgba(245,158,11,0.15); }
+.pillar-card-workload   { --card-accent: #f43f5e; --card-accent-soft: rgba(244,63,94,0.13); }
+.pillar-card-detect     { --card-accent: #6366f1; --card-accent-soft: rgba(99,102,241,0.13); }
+.pillar-card-compliance { --card-accent: #14b8a6; --card-accent-soft: rgba(20,184,166,0.13); }
+.pillar-card-customer   { --card-accent: #e11d48; --card-accent-soft: rgba(225,29,72,0.10); }
+.pillar-card-provider   { --card-accent: #059669; --card-accent-soft: rgba(5,150,105,0.10); }
+.pillar-card-supply     { --card-accent: #db2777; --card-accent-soft: rgba(219,39,119,0.13); }
+.pillar-card-ai         { --card-accent: #0ea5e9; --card-accent-soft: rgba(14,165,233,0.13); }
+
+/* Roadmap-stage cards */
+.pillar-card-stage1 { --card-accent: #10b981; --card-accent-soft: rgba(16,185,129,0.13); }
+.pillar-card-stage2 { --card-accent: #06b6d4; --card-accent-soft: rgba(6,182,212,0.13); }
+.pillar-card-stage3 { --card-accent: #6366f1; --card-accent-soft: rgba(99,102,241,0.13); }
+.pillar-card-stage4 { --card-accent: #db2777; --card-accent-soft: rgba(219,39,119,0.13); }
+
+/* Dark-mode fix: colored table cells (red/green/yellow inline backgrounds)
+   need dark text since their bg stays light in dark mode. */
+[data-theme="dark"] table td[style*="background"] { color: #1e293b; }
+[data-theme="dark"] table th { color: #e2e8f0; }
+
+[data-theme="dark"] .pillar-card {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.10);
+}
+[data-theme="dark"] .pillar-card h3 { color: #e2e8f0; }
+[data-theme="dark"] .pillar-card p { color: #94a3b8; }
+
+/* =========================================================================
+   Threats grid — illustrated tiles with red accent for breach patterns.
+   ========================================================================= */
+.threats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.85rem;
+    margin: 1.25rem 0 1.75rem;
+}
+.threat-tile {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0.95rem 1rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.threat-tile:hover { border-color: #f43f5e; box-shadow: 0 8px 20px rgba(244,63,94,0.10); }
+.threat-icon {
+    width: 34px; height: 34px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(244,63,94,0.10);
+    color: #e11d48;
+}
+.threat-icon svg { width: 18px; height: 18px; stroke-width: 1.85; }
+.threat-tile h4 {
+    margin: 0 0 0.15rem;
+    font-size: 0.92rem;
+    color: var(--primary-color);
+    line-height: 1.3;
+}
+.threat-tile p {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #555;
+    line-height: 1.45;
+}
+[data-theme="dark"] .threat-tile {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.10);
+}
+[data-theme="dark"] .threat-tile h4 { color: #e2e8f0; }
+[data-theme="dark"] .threat-tile p { color: #94a3b8; }
+
+/* =========================================================================
+   CNAPP umbrella diagram container.
+   ========================================================================= */
+.cnapp-figure {
+    background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem 1rem 1rem;
+    margin: 1.5rem 0;
+}
+.cnapp-figure svg { width: 100%; height: auto; display: block; max-width: 580px; margin: 0 auto; }
+.cnapp-figure figcaption {
+    text-align: center;
+    font-size: 0.83rem;
+    color: #555;
+    font-style: italic;
+    margin-top: 0.6rem;
+}
+[data-theme="dark"] .cnapp-figure {
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    border-color: rgba(255,255,255,0.10);
+}
+[data-theme="dark"] .cnapp-figure figcaption { color: #94a3b8; }
+
+/* =========================================================================
+   Inline SVG diagram figure — wraps responsive SVG with caption.
+   ========================================================================= */
+.diagram-figure {
+    margin: 1.5rem 0;
+    padding: 1.25rem;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.diagram-figure svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 640px;
+    margin: 0 auto;
+}
+.diagram-figure figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.88rem;
+    color: #555;
+    text-align: center;
+    font-style: italic;
+}
+[data-theme="dark"] .diagram-figure {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.12);
+}
+[data-theme="dark"] .diagram-figure figcaption { color: #94a3b8; }

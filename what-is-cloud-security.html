@@ -39,10 +39,10 @@
     <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
     <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=88ae4643" as="style"
-        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
-    <link rel="stylesheet" href="/style.css?v=88ae4643"
-        integrity="sha384-Bsys+8wtzqALQlXVy+HInF3hPqBhPM/PZtrjlp6OuTvTJJ6sPcLdj7wf0W5dUlzO">
+    <link rel="preload" href="/style.css?v=36a9b6de" as="style"
+        integrity="sha384-g6N1UkD53/wvqrHo381s9ixQvl5FrfWsgYPjzGXaiBauphpb6tXSc9UJlvxplGqZ">
+    <link rel="stylesheet" href="/style.css?v=36a9b6de"
+        integrity="sha384-g6N1UkD53/wvqrHo381s9ixQvl5FrfWsgYPjzGXaiBauphpb6tXSc9UJlvxplGqZ">
 
     <script type="application/ld+json">
     {
@@ -222,14 +222,119 @@
         </ol>
     </nav>
 
-    <section class="hero hero--compact">
-        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
-        <h1>What is Cloud Security?</h1>
-        <p>The vendor-neutral guide. What it is, who's responsible for what, the threats that matter, the tool landscape, and how to start learning — written by practitioners, not a vendor's marketing team.</p>
-        <div class="cta-buttons">
-            <a href="learning-path.html" class="btn btn-primary">Learning Path</a>
+    <section class="hero hero--illustrated">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1>What is Cloud Security?</h1>
+          <p>The vendor-neutral guide. What it is, who's responsible for what, the threats that matter, the tool landscape, and how to start learning — written by practitioners, not a vendor's marketing team.</p>
+          <div class="cta-buttons">
+            <a href="learning-path.html" class="btn btn-primary">Learning Path →</a>
             <a href="resources.html" class="btn btn-secondary">Browse Resources</a>
+          </div>
         </div>
+        <div class="hero-illustration" aria-hidden="true">
+          <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a central cloud and shield surrounded by orbiting tiles representing security concepts">
+            <defs>
+              <linearGradient id="cloud-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#bae6fd"/>
+                <stop offset="60%" stop-color="#38bdf8"/>
+                <stop offset="100%" stop-color="#2563eb"/>
+              </linearGradient>
+              <linearGradient id="shield-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#fde68a"/>
+                <stop offset="100%" stop-color="#f97316"/>
+              </linearGradient>
+              <linearGradient id="tile-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#1e293b"/>
+                <stop offset="100%" stop-color="#0f172a"/>
+              </linearGradient>
+              <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.5"/>
+                <stop offset="60%" stop-color="#7dd3fc" stop-opacity="0.05"/>
+                <stop offset="100%" stop-color="#7dd3fc" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="300" cy="240" r="190" fill="url(#halo)"/>
+            <g opacity="0.7">
+              <circle cx="80" cy="50"  r="2"   fill="#7dd3fc"/>
+              <circle cx="540" cy="80" r="1.5" fill="#fbbf24"/>
+              <circle cx="40"  cy="260" r="1.5" fill="#a78bfa"/>
+              <circle cx="565" cy="300" r="2"   fill="#7dd3fc"/>
+              <circle cx="55"  cy="430" r="1.5" fill="#34d399"/>
+              <circle cx="555" cy="450" r="1.5" fill="#fbbf24"/>
+              <circle cx="300" cy="20"  r="1.5" fill="#fff"/>
+              <circle cx="300" cy="460" r="1.5" fill="#fff"/>
+            </g>
+            <g stroke="#7dd3fc" stroke-width="1.5" stroke-dasharray="3 5" opacity="0.4" fill="none">
+              <line x1="300" y1="240" x2="100" y2="100"/>
+              <line x1="300" y1="240" x2="500" y2="100"/>
+              <line x1="300" y1="240" x2="500" y2="240"/>
+              <line x1="300" y1="240" x2="500" y2="380"/>
+              <line x1="300" y1="240" x2="100" y2="380"/>
+              <line x1="300" y1="240" x2="100" y2="240"/>
+            </g>
+            <g>
+              <path d="M 200,260 a 50,50 0 0,1 60,-60 a 70,70 0 0,1 130,0 a 50,50 0 0,1 50,30 a 45,45 0 0,1 -25,80 H 220 a 45,45 0 0,1 -20,-50 z"
+                    fill="url(#cloud-grad)" stroke="#fff" stroke-width="1.5" stroke-opacity="0.4"/>
+            </g>
+            <g transform="translate(300, 235)">
+              <path d="M -32 -36 L 32 -36 L 32 8 a 32 38 0 0 1 -32 32 a 32 38 0 0 1 -32 -32 z"
+                    fill="url(#shield-grad)" stroke="#fff" stroke-width="2.5"/>
+              <path d="M -13 -3 L -3 9 L 16 -16" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <g transform="translate(60, 60)">
+              <rect width="80" height="80" rx="16" fill="url(#tile-grad)" stroke="rgba(255,255,255,0.18)"/>
+              <g transform="translate(40, 40)" stroke="#a78bfa" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="-13" y="-2" width="26" height="20" rx="3"/>
+                <path d="M -8 -2 v -10 a 8 10 0 0 1 16 0 v 10"/>
+                <circle cx="0" cy="9" r="1.5" fill="#a78bfa" stroke="none"/>
+              </g>
+            </g>
+            <g transform="translate(460, 60)">
+              <rect width="80" height="80" rx="16" fill="url(#tile-grad)" stroke="rgba(255,255,255,0.18)"/>
+              <g transform="translate(40, 40)" stroke="#fbbf24" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="-7" cy="2" r="7"/>
+                <path d="M 0 2 L 16 2 M 11 2 v 6 M 16 2 v -5"/>
+              </g>
+            </g>
+            <g transform="translate(460, 200)">
+              <rect width="80" height="80" rx="16" fill="url(#tile-grad)" stroke="rgba(255,255,255,0.18)"/>
+              <g transform="translate(40, 40)" stroke="#7dd3fc" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="-15" y="-13" width="30" height="11" rx="2"/>
+                <rect x="-15" y="2"   width="30" height="11" rx="2"/>
+                <circle cx="-10" cy="-7.5" r="1" fill="#22d3ee" stroke="none"/>
+                <circle cx="-10" cy="7.5"  r="1" fill="#22d3ee" stroke="none"/>
+              </g>
+            </g>
+            <g transform="translate(460, 340)">
+              <rect width="80" height="80" rx="16" fill="url(#tile-grad)" stroke="rgba(255,255,255,0.18)"/>
+              <g transform="translate(40, 40)" stroke="#34d399" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M -17 0 c 4 -9 12 -13 17 -13 c 5 0 13 4 17 13 c -4 9 -12 13 -17 13 c -5 0 -13 -4 -17 -13 z"/>
+                <circle cx="0" cy="0" r="4.5"/>
+              </g>
+            </g>
+            <g transform="translate(60, 340)">
+              <rect width="80" height="80" rx="16" fill="url(#tile-grad)" stroke="rgba(255,255,255,0.18)"/>
+              <g transform="translate(40, 40)" stroke="#06b6d4" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="0" cy="-13" r="3.5"/>
+                <circle cx="-13" cy="11" r="3.5"/>
+                <circle cx="13"  cy="11" r="3.5"/>
+                <line x1="-1.5" y1="-10" x2="-11" y2="9"/>
+                <line x1="1.5"  y1="-10" x2="11"  y2="9"/>
+                <line x1="-9"   y1="11"  x2="9"   y2="11"/>
+              </g>
+            </g>
+            <g transform="translate(60, 200)">
+              <rect width="80" height="80" rx="16" fill="url(#tile-grad)" stroke="rgba(255,255,255,0.18)"/>
+              <g transform="translate(40, 40)" stroke="#fb7185" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M -9 -10 L -17 0 L -9 10"/>
+                <path d="M 9 -10 L 17 0 L 9 10"/>
+                <line x1="-3" y1="13" x2="3" y2="-13"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
     </section>
     <main class="container contribute-article" id="main-content">
         
@@ -279,47 +384,185 @@
             <h2>The core pillars of cloud security</h2>
             <p>You can carve up cloud security a dozen ways. The pillars below are the ones most teams organize around.</p>
 
-            <h3>Identity and access management (IAM)</h3>
+            <div class="pillar-grid" role="list">
+                <a class="pillar-card pillar-card-iam" href="#pillar-iam" role="listitem">
+                    <span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg></span>
+                    <h3>Identity &amp; Access</h3>
+                    <p>Identity is the new perimeter — least-privilege roles, MFA, and continuous review.</p>
+                </a>
+                <a class="pillar-card pillar-card-posture" href="#pillar-posture" role="listitem">
+                    <span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6v7c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+                    <h3>Configuration &amp; Posture</h3>
+                    <p>Find misconfigurations across accounts at scale — public buckets, open ports, missing logs.</p>
+                </a>
+                <a class="pillar-card pillar-card-network" href="#pillar-network" role="listitem">
+                    <span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="2"/><circle cx="5" cy="19.5" r="2"/><circle cx="19" cy="19.5" r="2"/><path d="M12 6.5 5.8 17.7"/><path d="m12 6.5 6.2 11.2"/><path d="M7 19.5h10"/></svg></span>
+                    <h3>Network Security</h3>
+                    <p>VPCs, segmentation, private endpoints, traffic monitoring — segment, restrict, observe.</p>
+                </a>
+                <a class="pillar-card pillar-card-data" href="#pillar-data" role="listitem">
+                    <span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg></span>
+                    <h3>Data Protection</h3>
+                    <p>Encryption, key management, classification, and exfiltration prevention — including for AI.</p>
+                </a>
+                <a class="pillar-card pillar-card-workload" href="#pillar-workload" role="listitem">
+                    <span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5"/><path d="M12 22V12"/></svg></span>
+                    <h3>App &amp; Workload Security</h3>
+                    <p>Secure code, container hardening, runtime protection across VMs, K8s, and serverless.</p>
+                </a>
+                <a class="pillar-card pillar-card-detect" href="#pillar-detect" role="listitem">
+                    <span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                    <h3>Detection &amp; Response</h3>
+                    <p>Logs, SIEM, cloud-native detections mapped to MITRE ATT&amp;CK, and a response runbook.</p>
+                </a>
+                <a class="pillar-card pillar-card-compliance" href="#pillar-compliance" role="listitem">
+                    <span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2.5" width="8" height="4" rx="1"/><path d="M16 4.5h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span>
+                    <h3>Compliance &amp; Governance</h3>
+                    <p>SOC 2, ISO 27001, PCI, HIPAA, FedRAMP — proven by the configuration evidence the cloud already produces.</p>
+                </a>
+            </div>
+
+            <h3 id="pillar-iam">Identity and access management (IAM)</h3>
             <p>In the cloud, identity is the new perimeter. Every API call is authenticated and authorized against an identity — a user, a role, a <a class="glossary-link" href="glossary.html#term-service-principal">service principal</a>, a <a class="glossary-link" href="glossary.html#term-service-account">workload identity</a>. Strong IAM means least-privilege policies, no long-lived access keys where you can avoid them, <a class="glossary-link" href="glossary.html#term-mfa">MFA</a> everywhere, and continuous review of who can do what. Most cloud breaches involve at least one identity failure: an over-privileged role, a leaked key, a phished session token.</p>
 
-            <h3>Configuration and posture</h3>
+            <h3 id="pillar-posture">Configuration and posture</h3>
             <p>The cloud is a giant configuration surface. Public <a class="glossary-link" href="glossary.html#term-s3">S3</a> buckets, open security groups, unencrypted disks, disabled logging, weak password policies — these are the day-to-day failure modes. CSPM tools exist to find them at scale and keep them fixed.</p>
 
-            <h3>Network security</h3>
+            <h3 id="pillar-network">Network security</h3>
             <p>VPCs, subnets, security groups, network ACLs, private endpoints, transit gateways, service meshes. The principles are familiar — segment, restrict, monitor — but the implementation is provider-specific and changes constantly.</p>
 
-            <h3>Data protection</h3>
+            <h3 id="pillar-data">Data protection</h3>
             <p>Encrypt data at rest and <a class="glossary-link" href="glossary.html#term-encryption-at-rest">in transit</a>, manage keys (<a class="glossary-link" href="glossary.html#term-kms">KMS</a>, <a class="glossary-link" href="glossary.html#term-key-vault">Key Vault</a>, <a class="glossary-link" href="glossary.html#term-cloud-kms">Cloud KMS</a>), classify what's sensitive, and prevent <a class="glossary-link" href="glossary.html#term-exfiltration">exfiltration</a>. Increasingly this also means thinking about what data you let LLMs and <a class="glossary-link" href="glossary.html#term-ai">AI</a> services see.</p>
 
-            <h3>Application and workload security</h3>
+            <h3 id="pillar-workload">Application and workload security</h3>
             <p>Secure code, dependency scanning, container image <a class="glossary-link" href="glossary.html#term-hardening">hardening</a>, runtime protection for VMs and <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a>, <a class="glossary-link" href="glossary.html#term-serverless">serverless</a> function security. CWPP and CNAPP platforms cover much of this.</p>
 
-            <h3>Threat detection and response</h3>
+            <h3 id="pillar-detect">Threat detection and response</h3>
             <p><a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a>, Azure Activity Log, GCP Audit Logs feeding a <a class="glossary-link" href="glossary.html#term-siem">SIEM</a>. Provider-native services like <a class="glossary-link" href="glossary.html#term-guardduty">GuardDuty</a>, Defender for Cloud, and Security Command Center. Detection content mapped to <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud techniques. A response <a class="glossary-link" href="glossary.html#term-runbook">runbook</a> for when something fires.</p>
 
-            <h3>Compliance and governance</h3>
+            <h3 id="pillar-compliance">Compliance and governance</h3>
             <p><a class="glossary-link" href="glossary.html#term-soc">SOC</a> 2, <a class="glossary-link" href="glossary.html#term-iso">ISO</a> 27001, <a class="glossary-link" href="glossary.html#term-pci-dss">PCI DSS</a>, <a class="glossary-link" href="glossary.html#term-hipaa">HIPAA</a>, <a class="glossary-link" href="glossary.html#term-fedramp">FedRAMP</a>, <a class="glossary-link" href="glossary.html#term-gdpr">GDPR</a>, the <a class="glossary-link" href="glossary.html#term-nis2">NIS2 Directive</a>. Most of this is "did you implement controls and can you prove it" — and most of the proof comes from configuration evidence the cloud already produces.</p>
         </section>
 
         <section id="threats">
             <h2>The threats that matter</h2>
             <p>Forget "advanced persistent threats" for a minute. The breaches that actually happen tend to come from a small set of repeatable patterns:</p>
-            <ul>
-                <li><strong>Misconfiguration.</strong> Public buckets, exposed databases, open admin endpoints, missing logging.</li>
-                <li><strong>Over-privileged identities.</strong> A workload that has <code>*:*</code> when it should have read-only on one bucket. Capital One is the canonical example.</li>
-                <li><strong>Credential theft.</strong> <a class="glossary-link" href="glossary.html#term-phishing">Phishing</a>, malware, info-stealers, hardcoded secrets in source code, leaked tokens in <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a> logs. Snowflake/UNC5537 was almost entirely credential reuse.</li>
-                <li><strong>Insecure APIs and <a class="glossary-link" href="glossary.html#term-ssrf">SSRF</a>.</strong> Web apps that can be coerced into calling internal endpoints, including the cloud metadata service. <a class="glossary-link" href="glossary.html#term-imds">IMDSv2</a> exists because of Capital One.</li>
-                <li><strong>Supply-chain compromise.</strong> A poisoned dependency, a compromised CI/CD step, a malicious GitHub Action. SolarWinds is the marquee case.</li>
-                <li><strong>Account takeover.</strong> <a class="glossary-link" href="glossary.html#term-mfa-fatigue">MFA fatigue</a>, session token theft, social engineering of helpdesks. Scattered Spider/MGM is the textbook example.</li>
-                <li><strong>Insider risk.</strong> Departing engineers, over-broad access, audit gaps.</li>
-                <li><strong>AI/<a class="glossary-link" href="glossary.html#term-llm">LLM</a>-specific risks.</strong> <a class="glossary-link" href="glossary.html#term-prompt-injection">Prompt injection</a>, data leakage through model outputs, agentic systems with too much authority.</li>
-            </ul>
+            <div class="threats-grid">
+                <div class="threat-tile">
+                    <span class="threat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></span>
+                    <div><h4>Misconfiguration</h4><p>Public buckets, exposed databases, open admin endpoints, missing logging.</p></div>
+                </div>
+                <div class="threat-tile">
+                    <span class="threat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-1a7 7 0 0 1 14 0v1"/><path d="M16 6l3-2"/></svg></span>
+                    <div><h4>Over-privileged identities</h4><p>A workload with <code>*:*</code> when it needed read-only on one bucket. Capital One.</p></div>
+                </div>
+                <div class="threat-tile">
+                    <span class="threat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="14" r="5"/><path d="m21 3-9 9"/><path d="m15 9 3 3 3-3-3-3"/></svg></span>
+                    <div><h4>Credential theft</h4><p><a class="glossary-link" href="glossary.html#term-phishing">Phishing</a>, info-stealers, hardcoded secrets, leaked <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a> tokens. Snowflake/UNC5537.</p></div>
+                </div>
+                <div class="threat-tile">
+                    <span class="threat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/><path d="m9 12 2 2 4-4"/></svg></span>
+                    <div><h4>Insecure APIs &amp; <a class="glossary-link" href="glossary.html#term-ssrf">SSRF</a></h4><p>Apps coerced into calling internal endpoints, including the metadata service. <a class="glossary-link" href="glossary.html#term-imds">IMDSv2</a>.</p></div>
+                </div>
+                <div class="threat-tile">
+                    <span class="threat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h18"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="17" cy="17" r="1.5" fill="currentColor"/></svg></span>
+                    <div><h4>Supply-chain compromise</h4><p>Poisoned dependency, compromised CI step, malicious GitHub Action. SolarWinds.</p></div>
+                </div>
+                <div class="threat-tile">
+                    <span class="threat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6z"/><path d="M9 12h6M12 9v6"/></svg></span>
+                    <div><h4>Account takeover</h4><p><a class="glossary-link" href="glossary.html#term-mfa-fatigue">MFA fatigue</a>, session theft, helpdesk social engineering. Scattered Spider/MGM.</p></div>
+                </div>
+                <div class="threat-tile">
+                    <span class="threat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M3 21a9 9 0 0 1 18 0"/><path d="m16 4 4 4M20 4l-4 4"/></svg></span>
+                    <div><h4>Insider risk</h4><p>Departing engineers, over-broad access, audit gaps no one was watching.</p></div>
+                </div>
+                <div class="threat-tile">
+                    <span class="threat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><path d="M2 12h2M20 12h2M12 2v2M12 20v2"/></svg></span>
+                    <div><h4>AI/<a class="glossary-link" href="glossary.html#term-llm">LLM</a>-specific risks</h4><p><a class="glossary-link" href="glossary.html#term-prompt-injection">Prompt injection</a>, data leakage via outputs, agents with too much authority.</p></div>
+                </div>
+            </div>
             <p>Real attacks chain several of these together. To see exactly how, walk through the <a href="breach-timeline.html">cloud breach kill chains</a>, all mapped to MITRE ATT&amp;CK Cloud techniques.</p>
         </section>
 
         <section id="tools">
             <h2>The tool landscape (CSPM, CNAPP, CWPP, CIEM)</h2>
             <p>The acronym soup is real. Here's a working map of the major categories:</p>
+            <figure class="cnapp-figure" id="cnapp-umbrella">
+              <svg viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cnapp-fig-title cnapp-fig-desc">
+                <title id="cnapp-fig-title">The CNAPP umbrella</title>
+                <desc id="cnapp-fig-desc">CNAPP is the umbrella category that bundles CSPM, CWPP, CIEM, DSPM, and IaC scanning into a single platform.</desc>
+                <defs>
+                  <linearGradient id="cnapp-pill" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#1e3a8a"/>
+                    <stop offset="100%" stop-color="#0b1729"/>
+                  </linearGradient>
+                </defs>
+                <path d="M 60 130 Q 360 20 660 130" stroke="#3b82f6" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M 60 130 Q 360 50 660 130 L 660 135 Q 360 55 60 135 z" fill="#3b82f6" opacity="0.10"/>
+                <line x1="360" y1="20" x2="360" y2="55" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+                <rect x="270" y="55" width="180" height="62" rx="31" fill="url(#cnapp-pill)" stroke="#3b82f6" stroke-width="1.5"/>
+                <text x="360" y="83" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">CNAPP</text>
+                <text x="360" y="103" text-anchor="middle" font-size="10.5" fill="#cbd5e1" letter-spacing="0.3">Cloud-Native App Protection</text>
+                <g stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.6" fill="none">
+                  <path d="M 110 132 V 188"/>
+                  <path d="M 235 132 V 188"/>
+                  <path d="M 360 132 V 188"/>
+                  <path d="M 485 132 V 188"/>
+                  <path d="M 610 132 V 188"/>
+                </g>
+                <g transform="translate(60, 188)">
+                  <rect width="100" height="118" rx="12" fill="#fff" stroke="#10b981" stroke-width="2"/>
+                  <rect width="100" height="34" rx="12" fill="#10b981"/>
+                  <rect y="22" width="100" height="12" fill="#10b981"/>
+                  <text x="50" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">CSPM</text>
+                  <text x="50" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Posture</text>
+                  <text x="50" y="80" text-anchor="middle" font-size="9" fill="#475569">Public buckets,</text>
+                  <text x="50" y="92" text-anchor="middle" font-size="9" fill="#475569">open SGs,</text>
+                  <text x="50" y="104" text-anchor="middle" font-size="9" fill="#475569">missing logs</text>
+                </g>
+                <g transform="translate(185, 188)">
+                  <rect width="100" height="118" rx="12" fill="#fff" stroke="#f59e0b" stroke-width="2"/>
+                  <rect width="100" height="34" rx="12" fill="#f59e0b"/>
+                  <rect y="22" width="100" height="12" fill="#f59e0b"/>
+                  <text x="50" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">CWPP</text>
+                  <text x="50" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Workload</text>
+                  <text x="50" y="80" text-anchor="middle" font-size="9" fill="#475569">VMs, containers,</text>
+                  <text x="50" y="92" text-anchor="middle" font-size="9" fill="#475569">runtime,</text>
+                  <text x="50" y="104" text-anchor="middle" font-size="9" fill="#475569">vuln scan</text>
+                </g>
+                <g transform="translate(310, 188)">
+                  <rect width="100" height="118" rx="12" fill="#fff" stroke="#8b5cf6" stroke-width="2"/>
+                  <rect width="100" height="34" rx="12" fill="#8b5cf6"/>
+                  <rect y="22" width="100" height="12" fill="#8b5cf6"/>
+                  <text x="50" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">CIEM</text>
+                  <text x="50" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Identities</text>
+                  <text x="50" y="80" text-anchor="middle" font-size="9" fill="#475569">Who can do</text>
+                  <text x="50" y="92" text-anchor="middle" font-size="9" fill="#475569">what; unused</text>
+                  <text x="50" y="104" text-anchor="middle" font-size="9" fill="#475569">privileges</text>
+                </g>
+                <g transform="translate(435, 188)">
+                  <rect width="100" height="118" rx="12" fill="#fff" stroke="#06b6d4" stroke-width="2"/>
+                  <rect width="100" height="34" rx="12" fill="#06b6d4"/>
+                  <rect y="22" width="100" height="12" fill="#06b6d4"/>
+                  <text x="50" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">DSPM</text>
+                  <text x="50" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Data</text>
+                  <text x="50" y="80" text-anchor="middle" font-size="9" fill="#475569">Find, classify,</text>
+                  <text x="50" y="92" text-anchor="middle" font-size="9" fill="#475569">track sensitive</text>
+                  <text x="50" y="104" text-anchor="middle" font-size="9" fill="#475569">data</text>
+                </g>
+                <g transform="translate(560, 188)">
+                  <rect width="100" height="118" rx="12" fill="#fff" stroke="#f43f5e" stroke-width="2"/>
+                  <rect width="100" height="34" rx="12" fill="#f43f5e"/>
+                  <rect y="22" width="100" height="12" fill="#f43f5e"/>
+                  <text x="50" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">IaC scan</text>
+                  <text x="50" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Pre-deploy</text>
+                  <text x="50" y="80" text-anchor="middle" font-size="9" fill="#475569">Terraform,</text>
+                  <text x="50" y="92" text-anchor="middle" font-size="9" fill="#475569">CFN, K8s</text>
+                  <text x="50" y="104" text-anchor="middle" font-size="9" fill="#475569">manifests</text>
+                </g>
+              </svg>
+              <figcaption>CNAPP bundles the previously separate categories into one platform. The market is consolidating fast.</figcaption>
+            </figure>
             <ul>
                 <li><strong>CSPM — Cloud Security Posture Management.</strong> Continuously scans your cloud accounts for misconfigurations against a benchmark like CIS or your own policies. Examples: Prowler, ScoutSuite, Steampipe, plus commercial platforms.</li>
                 <li><strong>CWPP — Cloud Workload Protection Platform.</strong> Protects the running workload — VMs, containers, serverless. Includes vulnerability scanning, runtime detection, file integrity monitoring.</li>
