@@ -457,6 +457,11 @@ jobs:
           echo "==> Syncing PWA icons..."
           lftp -e "${LFTP_CONN}; mirror -R ./img/icons/ /public_html/img/icons/ --verbose=2 --parallel=2 \
             --exclude-glob .DS_Store; bye"
+          # Pass 3c: always sync per-page Pexels-sourced photos used in <picture>
+          # blocks across pillar / community / listing pages.
+          echo "==> Syncing page photos..."
+          lftp -e "${LFTP_CONN}; mirror -R ./img/photos/ /public_html/img/photos/ --verbose=2 --parallel=2 \
+            --exclude-glob .DS_Store; bye"
           # Pass 4: only sync chat-screenshots/ when new ones were added this run
           # (they're large; skip the full mirror when nothing changed).
           if [[ "${{ steps.check_chat_screenshots.outputs.new }}" == "true" ]]; then
