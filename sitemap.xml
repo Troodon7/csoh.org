@@ -5,7 +5,7 @@
   <!-- Homepage - Highest priority -->
   <url>
     <loc>https://csoh.org/</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -41,7 +41,7 @@
   <!-- AI Learning Path - Roadmap page -->
   <url>
     <loc>https://csoh.org/ai-learning.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -49,7 +49,7 @@
   <!-- Cloud Security Careers - Pillar page -->
   <url>
     <loc>https://csoh.org/cloud-security-careers.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -57,7 +57,7 @@
   <!-- Cloud Security Degree Programs - Pillar page -->
   <url>
     <loc>https://csoh.org/cloud-security-degree-programs.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -65,7 +65,7 @@
   <!-- Cloud Security Home Lab - Practical guide -->
   <url>
     <loc>https://csoh.org/cloud-security-home-lab.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -73,7 +73,7 @@
   <!-- Cloud Security Reading List & People to Follow - Curated list -->
   <url>
     <loc>https://csoh.org/cloud-security-reading-list.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -81,7 +81,7 @@
   <!-- Cloud Security Portfolio Projects - Hub page for 7 walkthroughs -->
   <url>
     <loc>https://csoh.org/cloud-security-portfolio-projects.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -165,7 +165,7 @@
   <!-- Cloud Security Certifications - Comparison page -->
   <url>
     <loc>https://csoh.org/cloud-security-certifications.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -173,7 +173,7 @@
   <!-- GitHub Actions - Educational page on CI/CD via our workflows -->
   <url>
     <loc>https://csoh.org/github-actions.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -761,7 +761,7 @@
   <!-- Breach Kill Chains - Cloud breach analysis -->
   <url>
     <loc>https://csoh.org/breach-timeline.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -831,7 +831,7 @@
   <!-- Threat Research - Curated cloud threat research directory -->
   <url>
     <loc>https://csoh.org/threat-research.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
