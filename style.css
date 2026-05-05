@@ -3697,13 +3697,24 @@ footer {
 /* =========================================================================
    CNAPP umbrella diagram container.
    ========================================================================= */
-.cnapp-figure {
+.cnapp-figure, .killchain-figure, .arch-figure, .workflow-figure {
     background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 1.25rem 1rem 1rem;
     margin: 1.5rem 0;
 }
+.killchain-figure svg, .arch-figure svg, .workflow-figure svg { width: 100%; height: auto; display: block; max-width: 820px; margin: 0 auto; }
+.killchain-figure figcaption, .arch-figure figcaption, .workflow-figure figcaption {
+    text-align: center; font-size: 0.83rem; color: #555; font-style: italic; margin-top: 0.6rem;
+}
+[data-theme="dark"] .killchain-figure, [data-theme="dark"] .arch-figure, [data-theme="dark"] .workflow-figure {
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    border-color: rgba(255,255,255,0.10);
+}
+[data-theme="dark"] .killchain-figure figcaption,
+[data-theme="dark"] .arch-figure figcaption,
+[data-theme="dark"] .workflow-figure figcaption { color: #94a3b8; }
 .cnapp-figure svg { width: 100%; height: auto; display: block; max-width: 580px; margin: 0 auto; }
 .cnapp-figure figcaption {
     text-align: center;
