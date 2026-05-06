@@ -73,7 +73,7 @@
   <!-- Cloud Security Reading List & People to Follow - Curated list -->
   <url>
     <loc>https://csoh.org/cloud-security-reading-list.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -839,7 +839,7 @@
   <!-- CTFs - Cloud security CTF challenge directory -->
   <url>
     <loc>https://csoh.org/ctfs.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -918,7 +918,7 @@
   <!-- Glossary -->
   <url>
     <loc>https://csoh.org/glossary.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
