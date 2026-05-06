@@ -92,10 +92,10 @@
     <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
     <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=77d47270" as="style"
-        integrity="sha384-ujsUjeNocY/HwhFJIXvng7sqZJcc+vIUobX2ZMrtxfcWIB8dNZDmPRPSvtCULHKg">
-    <link rel="stylesheet" href="/style.css?v=77d47270"
-        integrity="sha384-ujsUjeNocY/HwhFJIXvng7sqZJcc+vIUobX2ZMrtxfcWIB8dNZDmPRPSvtCULHKg">
+    <link rel="preload" href="/style.css?v=c600867a" as="style"
+        integrity="sha384-1lcLdxfPtS/4YVIxQjRulBWkgI0YGdPdg/Uz9NcswL+7Ybo1wMRm878TjE1cGjkc">
+    <link rel="stylesheet" href="/style.css?v=c600867a"
+        integrity="sha384-1lcLdxfPtS/4YVIxQjRulBWkgI0YGdPdg/Uz9NcswL+7Ybo1wMRm878TjE1cGjkc">
 
 </head>
 
@@ -181,150 +181,201 @@
         </ol>
     </nav>
 
-    <section class="hero hero--compact">
-        <picture><source srcset="banner.webp" type="image/webp"><img src="banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager"></picture>
-        <h1>Kevin Mitnick — In Memoriam</h1>
-        <p>A personal tribute by Shawn Nunley.</p>
+    <section class="memorial-hero" aria-labelledby="memorial-name">
+      <picture class="memorial-hero-bg">
+        <source srcset="/img/kevin-mitnick/kev-09.webp" type="image/webp">
+        <img src="/img/kevin-mitnick/kev-09.jpg" alt="Shawn and Kevin at Black Hat Las Vegas, 2018" width="1880" height="1253" decoding="async" loading="eager">
+      </picture>
+      <div class="memorial-hero-overlay">
+        <p class="memorial-hero-eyebrow">In Memoriam</p>
+        <h1 id="memorial-name">Kevin Mitnick</h1>
+        <p class="memorial-hero-dates">August 6, 1963 &mdash; July 16, 2023</p>
+        <p class="memorial-hero-subtitle">A personal tribute by Shawn Nunley &middot; from adversaries to brothers</p>
+      </div>
     </section>
 
-    <main class="container" id="main-content">
-        <section class="section">
-            <h2 class="memorial-title">Kevin Mitnick</h2>
-            <p class="memorial-subtitle">1963 - 2023</p>
+    <main class="container contribute-article" id="main-content">
+        <section class="content-section">
+            <p class="lede">Kevin Mitnick was a very dear friend of mine, even though I played a part in putting him in federal prison for five years. I also helped get him out. It&rsquo;s a long story.</p>
 
-            <div class="memorial-content">
-                <p>Kevin Mitnick was a very dear friend of mine, even though I played a part in putting him in federal
-                    prison for five years. I also helped get him out. It's a long story.</p>
+            <p>He passed away in July of 2023, and I have a ton of stories to tell about him.</p>
 
-                <p>He passed away in July of 2023, and I have a ton of stories to tell about him.</p>
+            <figure class="page-photo">
+              <picture>
+                <source srcset="/img/kevin-mitnick/kev-14.webp" type="image/webp">
+                <img src="/img/kevin-mitnick/kev-14.jpg" alt="Kevin Mitnick and Shawn Nunley at a Fusion-io party in the early days" width="1880" height="1253" loading="lazy" decoding="async">
+              </picture>
+              <figcaption>Kevin and me at a Fusion-io party, earlier days &mdash; long after the trial, deep into the friendship.</figcaption>
+            </figure>
 
-                <img src="img/IMG_0228_1.jpeg" alt="Kevin Mitnick" class="memorial-image" loading="lazy" decoding="async">
+            <h2>Adversaries</h2>
 
-                <p>Back in the 80s, Kevin was trying very hard to hack into Novell's network. I was a network
-                    administrator. Of course, we had no idea it was Kevin, but things were happening that made it fairly
-                    obvious we had a persistent threat. Phones ringing sequentially throughout the building (war
-                    dialing) and all sorts of other signs... we knew something was up.</p>
+            <p>Back in the 80s, Kevin was trying very hard to hack into Novell&rsquo;s network. I was a network administrator. Of course, we had no idea it was Kevin, but things were happening that made it fairly obvious we had a persistent threat. Phones ringing sequentially throughout the building (war dialing) and all sorts of other signs&hellip; we knew something was up.</p>
 
-                <p>Late one night at home, I got a phone call from a Novell employee named Gabe Nault. The "employee"
-                    wanted direct inbound dial access. Since I was responsible for the entire network's inbound
-                    connectivity, I knew this type of request was abnormal and against policy. I had a secure dial-back
-                    system for modems where you couldn't make a connection unless you were calling from a known phone
-                    number. Not only that, any access required approval by a manager, and this guy had a story about
-                    working on a top-secret project called Snowbird (real) and needing to make some emergency code
-                    changes, but he was on vacation in Vail at a hotel. He needed the coveted, policy-breaking, direct
-                    inbound modem access. Right. He even mentioned his vacation in Vail, which conveniently matched the
-                    greeting on Gabe Nault's voicemail. But it all felt wrong.</p>
+            <p>Late one night at home, I got a phone call from a Novell employee named Gabe Nault. The &ldquo;employee&rdquo; wanted direct inbound dial access. Since I was responsible for the entire network&rsquo;s inbound connectivity, I knew this type of request was abnormal and against policy. I had a secure dial-back system for modems where you couldn&rsquo;t make a connection unless you were calling from a known phone number. Not only that, any access required approval by a manager, and this guy had a story about working on a top-secret project called Snowbird (real) and needing to make some emergency code changes, but he was on vacation in Vail at a hotel. He needed the coveted, policy-breaking, direct inbound modem access. Right. He even mentioned his vacation in Vail, which conveniently matched the greeting on Gabe Nault&rsquo;s voicemail. But it all felt wrong.</p>
 
-                <p>With a feeling of suspicion creeping in, I played it cool. I said, "Hey man, I'd love to help you
-                    out, but I can't do what you want from here at home anyway, so I'll have to do it in the morning as
-                    soon as I get to the office. But in case I forget, please leave me a voicemail." He agreed, and that
-                    was that.</p>
+            <p>With a feeling of suspicion creeping in, I played it cool. I said, &ldquo;Hey man, I&rsquo;d love to help you out, but I can&rsquo;t do what you want from here at home anyway, so I&rsquo;ll have to do it in the morning as soon as I get to the office. But in case I forget, please leave me a voicemail.&rdquo; He agreed, and that was that.</p>
 
-                <p>When I got to work, the voicemail was there, and I immediately recorded it onto a cassette recorder
-                    for safekeeping. That recording became the primary evidence in Kevin's case. It took some time to
-                    actually catch Kevin, though. There's a whole other story about how Tsutomu Shimomura apprehended
-                    him in Raleigh, North Carolina.</p>
+            <p>When I got to work, the voicemail was there, and I immediately recorded it onto a cassette recorder for safekeeping. That recording became the primary evidence in Kevin&rsquo;s case. It took some time to actually catch Kevin, though. There&rsquo;s a whole other story about how Tsutomu Shimomura apprehended him in Raleigh, North Carolina.</p>
 
-                <p>When he was caught, I found out that my voicemail was the only real evidence, and I would be the
-                    primary witness in this high-profile trial. So, I worked very closely with the prosecutors,
-                    including Christopher Painter and Ken McGuire, for five years. Eventually, I became fed up with the
-                    delays and concerned that Kevin hadn't even been given a chance to argue for bail or access
-                    evidence. I questioned the long delays. I said, "There are people who believe you are violating his
-                    civil right to due process." The prosecutor's response sent chills down my spine. As a strong
-                    believer in the rule of law, I couldn't accept his words. Here was a top prosecutor at the DOJ
-                    basically telling me, "They say we are violating his rights, but we are sending a message to other
-                    would-be hackers."</p>
+            <h2>The trial &mdash; and parting ways with the DOJ</h2>
 
-                <p><strong>Think about that.</strong></p>
+            <p>When he was caught, I found out that my voicemail was the only real evidence, and I would be the primary witness in this high-profile trial. So, I worked very closely with the prosecutors, including Christopher Painter and Ken McGuire, for five years. Eventually, I became fed up with the delays and concerned that Kevin hadn&rsquo;t even been given a chance to argue for bail or access evidence. I questioned the long delays. I said, &ldquo;There are people who believe you are violating his civil right to due process.&rdquo;</p>
 
-                <p>Our right to due process is the foundation of a just society. This was unacceptable. If this was
-                    acceptable, it meant they could put anyone in prison just to intimidate people.</p>
+            <blockquote class="pull-quote">
+              &ldquo;They say we are violating his rights, but we are sending a message to other would-be hackers.&rdquo;
+              <cite>&mdash; a top DOJ prosecutor, to me, on the record. Think about that.</cite>
+            </blockquote>
 
-                <p>The conversation turned into a heated debate about my idealistic beliefs, and I ended up parting ways
-                    with the DOJ. I immediately tried to contact Kevin's lawyers, but since all they knew was that I was
-                    the star witness on the opposing side, they weren't interested in talking. I finally left a
-                    convincing voicemail, which resulted in a call with both of his lawyers and Kevin himself the very
-                    next day. Keep in mind, up until that phone call, Kevin and I were adversaries. Up until then, I had
-                    done everything possible to ensure a conviction.</p>
+            <p>The prosecutor&rsquo;s response sent chills down my spine. As a strong believer in the rule of law, I couldn&rsquo;t accept his words. Our right to due process is the foundation of a just society. This was unacceptable. If this was acceptable, it meant they could put anyone in prison just to intimidate people.</p>
 
-                <p>Soon after, Kevin was released from prison with a plea deal. While he did bring a lot of this on
-                    himself, that doesn't justify the government acting like an oppressive regime.</p>
+            <p>The conversation turned into a heated debate about my idealistic beliefs, and I ended up parting ways with the DOJ. I immediately tried to contact Kevin&rsquo;s lawyers, but since all they knew was that I was the star witness on the opposing side, they weren&rsquo;t interested in talking. I finally left a convincing voicemail, which resulted in a call with both of his lawyers and Kevin himself the very next day. Keep in mind, up until that phone call, Kevin and I were adversaries. Up until then, I had done everything possible to ensure a conviction.</p>
 
-                <p>A short time later, I got a sincere apology from Kevin. We decided to meet face-to-face. Of all
-                    places, it ended up being at RSA in San Francisco, and a reporter named Eleanor Abrue was there. She
-                    wrote an article about our meeting, and it went kind of viral. The only thing I disliked about the
-                    article was the misleading headline, "Mitnick Meets His Pigeon." If you know anything about the
-                    case, that's the exact opposite of what happened.</p>
+            <p>Soon after, Kevin was released from prison with a plea deal. While he did bring a lot of this on himself, that doesn&rsquo;t justify the government acting like an oppressive regime.</p>
 
-                <p>The truth is, I was the only person in the entire case who managed to trick him into leaving a
-                    crucial piece of evidence: the voice print from the voicemail. It ended up being the only direct
-                    evidence linking the 'crimes' to Kevin. Everything else was circumstantial. You can't cross-examine
-                    a keystroke.</p>
+            <h2>From adversaries to brothers</h2>
 
-                <p>Anyway, we hit it off when we met. Somehow, we became great friends in the process, and I have had a
-                    wonderful time watching him develop into a real man. I am truly sad he is gone as he was a big part
-                    of my life for the last quarter century.</p>
+            <p>A short time later, I got a sincere apology from Kevin. We decided to meet face-to-face. Of all places, it ended up being at RSA in San Francisco, and a reporter named Eleanor Abreu was there. She wrote an article about our meeting, and it went kind of viral. The only thing I disliked about the article was the misleading headline, &ldquo;Mitnick Meets His Pigeon.&rdquo; If you know anything about the case, that&rsquo;s the exact opposite of what happened.</p>
 
-                <p>I have to say, I loved this man like a brother and I will miss him more than I can say. I have
-                    promised to make sure his soon-to-be-born son is trained in the ways of the Jedi, Amateur Radio, and
-                    maybe a bit about staying out of prison. RIP Kev.</p>
+            <blockquote class="pull-quote">
+              I was the only person in the entire case who managed to trick him into leaving a crucial piece of evidence. You can&rsquo;t cross-examine a keystroke.
+              <cite>&mdash; on who was the &ldquo;pigeon&rdquo;</cite>
+            </blockquote>
 
-                <img src="img/5FE5991A-2790-433D-B20B-620DE0851C19.jpeg" alt="Kevin hacking my MacBook at Black Hat"
-                    class="memorial-image" title="Kevin hacking my MacBook at Black Hat" loading="lazy" decoding="async">
+            <p>Anyway, we hit it off when we met. Somehow, we became great friends in the process, and I have had a wonderful time watching him develop into a real man. I am truly sad he is gone as he was a big part of my life for the last quarter century.</p>
 
-                <p class="signature">Kevin literally breaking into my laptop with a zero-day</p>
+            <figure class="page-photo">
+              <picture>
+                <source srcset="/img/kevin-mitnick/kev-06.webp" type="image/webp">
+                <img src="/img/kevin-mitnick/kev-06.jpg" alt="Kevin Mitnick and Shawn Nunley at a restaurant with Kevin's book Ghost in the Wires on the table" width="1880" height="1253" loading="lazy" decoding="async">
+              </picture>
+              <figcaption>Sharing a drink with Kevin &mdash; <em>Ghost in the Wires</em>, his second NYT-bestselling memoir, on the table between us.</figcaption>
+            </figure>
 
-                <h2>The Federal Indictment</h2>
-                <div class="iframe-container">
-                    <iframe
-                        src="https://web.archive.org/web/20140518042134/http://servv89pn0aj.sn.sourcedns.com/~gbpprorg/2600/mitnick_is_guilty/indictment.html"
-                        title="Archived indictment" loading="lazy" referrerpolicy="no-referrer"
-                        sandbox="allow-same-origin"></iframe>
-                </div>
+            <p>I have to say, I loved this man like a brother and I will miss him more than I can say. I have promised to make sure his soon-to-be-born son is trained in the ways of the Jedi, Amateur Radio, and maybe a bit about staying out of prison. RIP Kev.</p>
 
-                <h2>The Free Kevin Movement</h2>
-                <div class="iframe-container">
-                    <iframe src="https://web.archive.org/web/20060424153130/http://www.freekevin.com/about.html"
-                        title="Archived Free Kevin movement page" loading="lazy" referrerpolicy="no-referrer"
-                        sandbox="allow-same-origin"></iframe>
-                </div>
+            <p class="signature">&mdash; Shawn</p>
+        </section>
 
-                <h2>When We Met at RSA</h2>
-                <p>Here is the story published in Wired about when Kevin and I met face-to-face for the first time.
-                    There's some significant factual errors in there, but that's the news for you. It was the beginning
-                    of a great friendship. Kevin came to see me present on his favorite topic, Social Engineering.
-                    Afterwards, he said he liked my slide deck so much that he wanted permission to use parts of it. To
-                    be honest, I didn't even think twice before I said yes. Kevin went on to be a captivating and
-                    sought-after speaker.</p>
+        <section class="content-section">
+            <h2>The federal indictment</h2>
+            <div class="iframe-container">
+                <iframe src="https://web.archive.org/web/20140518042134/http://servv89pn0aj.sn.sourcedns.com/~gbpprorg/2600/mitnick_is_guilty/indictment.html" title="Archived federal indictment of Kevin Mitnick" referrerpolicy="no-referrer" sandbox="allow-same-origin"></iframe>
+            </div>
+        </section>
 
-                <a href="https://www.wired.com/2002/02/mitnick-meets-his-pigeon/" target="_blank" rel="noopener"
-                    class="wired-card-link">
-                    <div class="wired-card">
-                        <div class="wired-card-inner">
-                            <div class="wired-card-icon">🔗</div>
-                            <div>
-                                <div class="wired-card-label">WIRED MAGAZINE</div>
-                                <div class="wired-card-title">Mitnick Meets His Pigeon</div>
-                                <div class="wired-card-desc">February 2002 — Read the full story about meeting Kevin at
-                                    RSA</div>
-                            </div>
+        <section class="content-section">
+            <h2>The Free Kevin movement</h2>
+            <div class="iframe-container">
+                <iframe src="https://web.archive.org/web/20060424153130/http://www.freekevin.com/about.html" title="Archived Free Kevin movement page" referrerpolicy="no-referrer" sandbox="allow-same-origin"></iframe>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>When we met at RSA</h2>
+            <p>Here is the story published in <em>Wired</em> about when Kevin and I met face-to-face for the first time. There are some significant factual errors in there, but that&rsquo;s the news for you. It was the beginning of a great friendship. Kevin came to see me present on his favorite topic, Social Engineering. Afterwards, he said he liked my slide deck so much that he wanted permission to use parts of it. To be honest, I didn&rsquo;t even think twice before I said yes. Kevin went on to be a captivating and sought-after speaker.</p>
+
+            <a href="https://www.wired.com/2002/02/mitnick-meets-his-pigeon/" target="_blank" rel="noopener noreferrer" class="wired-card-link">
+                <div class="wired-card">
+                    <div class="wired-card-inner">
+                        <div class="wired-card-icon">🔗</div>
+                        <div>
+                            <div class="wired-card-label">WIRED MAGAZINE</div>
+                            <div class="wired-card-title">Mitnick Meets His Pigeon</div>
+                            <div class="wired-card-desc">February 2002 &mdash; Read the full story about meeting Kevin at RSA</div>
                         </div>
                     </div>
-                </a>
+                </div>
+            </a>
+        </section>
 
-                <p>Many years later, we were at RSA again, and I insisted on taking Kevin and his wonderful wife
-                    Kimberley to Alcatraz. He was such a great sport about it.</p>
+        <section class="content-section">
+            <h2>The Alcatraz tour</h2>
+            <p>Many years later, we were at RSA again, and I insisted on taking Kevin and his wonderful wife Kimberley to Alcatraz. He was such a great sport about it.</p>
 
-                <img src="img/alcatraz.jpg" alt="Kevin and Kimberley at Alcatraz" class="memorial-image" loading="lazy" decoding="async">
+            <figure class="page-photo">
+              <picture>
+                <source srcset="/img/kevin-mitnick/kev-13.webp" type="image/webp">
+                <img src="/img/kevin-mitnick/kev-13.jpg" alt="Shawn, Kevin, and Kimberley with Alcatraz Island in the background" width="1880" height="1253" loading="lazy" decoding="async">
+              </picture>
+              <figcaption>The three of us with Alcatraz behind, on the way out to the island.</figcaption>
+            </figure>
 
-                <img src="img/facebook-746.jpg" alt="Kevin" class="memorial-image" loading="lazy" decoding="async">
+            <figure class="page-photo">
+              <picture>
+                <source srcset="/img/kevin-mitnick/kev-11.webp" type="image/webp">
+                <img src="/img/kevin-mitnick/kev-11.jpg" alt="Kevin Mitnick sitting in an empty Alcatraz prison cell" width="1880" height="1253" loading="lazy" decoding="async">
+              </picture>
+              <figcaption>Kevin, sitting in an Alcatraz cell, smiling. The tour guide didn&rsquo;t recognize him.</figcaption>
+            </figure>
+        </section>
 
-                <img src="img/IMG_2660.jpeg" alt="Kevin" class="memorial-image" loading="lazy" decoding="async">
+        <section class="content-section">
+            <h2>A few more, from the years between</h2>
+            <p>Kevin&rsquo;s life was full. A few moments from across the years.</p>
 
-                <img src="img/facebook-444.jpg" alt="Kevin" class="memorial-image" loading="lazy" decoding="async">
+            <div class="kev-gallery">
+                <figure class="page-photo">
+                  <picture>
+                    <source srcset="/img/kevin-mitnick/kev-02.webp" type="image/webp">
+                    <img src="/img/kevin-mitnick/kev-02.jpg" alt="Kevin Mitnick and Steve Wozniak at dinner" width="1880" height="1253" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Kevin with Steve Wozniak at dinner. Two phone-phreaks-turned-icons.</figcaption>
+                </figure>
 
-                <img src="img/IMG_0366.jpeg" alt="At Alcatraz" class="memorial-image" loading="lazy" decoding="async">
+                <figure class="page-photo">
+                  <picture>
+                    <source srcset="/img/kevin-mitnick/kev-01.webp" type="image/webp">
+                    <img src="/img/kevin-mitnick/kev-01.jpg" alt="Kevin Mitnick with Drew Carey at Steve Wozniak's 6.2 birthday party" width="1880" height="1253" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Kevin and Drew Carey at Woz&rsquo;s &ldquo;Happy 6.2&rdquo; birthday bash.</figcaption>
+                </figure>
+
+                <figure class="page-photo">
+                  <picture>
+                    <source srcset="/img/kevin-mitnick/kev-03.webp" type="image/webp">
+                    <img src="/img/kevin-mitnick/kev-03.jpg" alt="Shawn Nunley wearing a pink boa with Kevin Mitnick at Steve Wozniak's birthday party" width="1880" height="1253" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Same Woz birthday bash. The pink boa was apparently mandatory.</figcaption>
+                </figure>
+
+                <figure class="page-photo">
+                  <picture>
+                    <source srcset="/img/kevin-mitnick/kev-04.webp" type="image/webp">
+                    <img src="/img/kevin-mitnick/kev-04.jpg" alt="Kevin Mitnick working on an iPad at a security conference" width="1880" height="1253" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Kevin doing what Kevin did. Conference lounge, iPad, doing his thing.</figcaption>
+                </figure>
+
+                <figure class="page-photo">
+                  <picture>
+                    <source srcset="/img/kevin-mitnick/kev-05.webp" type="image/webp">
+                    <img src="/img/kevin-mitnick/kev-05.jpg" alt="Kevin Mitnick autographing a copy of his book at a restaurant table" width="1880" height="1253" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Signing copies of his book at dinner. He always took the time.</figcaption>
+                </figure>
+
+                <figure class="page-photo">
+                  <picture>
+                    <source srcset="/img/IMG_0228_1.jpeg" type="image/jpeg">
+                    <img src="/img/IMG_0228_1.jpeg" alt="Kevin Mitnick" width="1880" height="1253" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Kevin, in his element.</figcaption>
+                </figure>
             </div>
+        </section>
+
+        <section class="content-section">
+            <h2>And one more</h2>
+            <figure class="page-photo">
+              <picture>
+                <source srcset="/img/5FE5991A-2790-433D-B20B-620DE0851C19.jpeg" type="image/jpeg">
+                <img src="/img/5FE5991A-2790-433D-B20B-620DE0851C19.jpeg" alt="Kevin Mitnick using Shawn's MacBook to demonstrate a zero-day exploit at Black Hat" width="1880" height="1253" loading="lazy" decoding="async">
+              </picture>
+              <figcaption>Kevin literally breaking into my laptop with a zero-day at Black Hat. Of course he was.</figcaption>
+            </figure>
+
+            <p class="signature signature--final">RIP, Kev. The world is a quieter place without you.</p>
         </section>
     </main>
 
