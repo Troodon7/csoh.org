@@ -819,6 +819,8 @@ function initTooltips() {
     var tooltip = document.createElement('div');
     tooltip.className = 'resource-tooltip';
     tooltip.setAttribute('role', 'tooltip');
+    tooltip.setAttribute('aria-label', 'Resource description');
+    tooltip.setAttribute('aria-hidden', 'true');
     tooltip.id = 'resourceTooltip';
     document.body.appendChild(tooltip);
 
@@ -838,17 +840,24 @@ function initTooltips() {
         showTimeout = setTimeout(function () {
             tooltip.textContent = card.dataset.tooltip;
             card.setAttribute('aria-describedby', 'resourceTooltip');
+            tooltip.setAttribute('aria-hidden', 'false');
             tooltip.classList.add('visible');
+            requestAnimationFrame(function () {
+                cachedTw = tooltip.offsetWidth || 360;
+                cachedTh = tooltip.offsetHeight || 60;
+            });
         }, 300);
     });
 
+    var cachedTw = 360;
+    var cachedTh = 60;
     container.addEventListener('mousemove', function (e) {
         if (!tooltip.classList.contains('visible') && !showTimeout) return;
 
         var pad = 12;
         var edge = 8;
-        var tw = tooltip.offsetWidth || 360;
-        var th = tooltip.offsetHeight || 60;
+        var tw = cachedTw;
+        var th = cachedTh;
 
         var x = e.clientX + pad;
         var y = e.clientY + pad;
@@ -873,6 +882,7 @@ function initTooltips() {
         showTimeout = null;
         currentCard = null;
         tooltip.classList.remove('visible');
+        tooltip.setAttribute('aria-hidden', 'true');
         card.removeAttribute('aria-describedby');
     });
 }

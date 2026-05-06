@@ -12,10 +12,6 @@
     content="cloud security, AWS security, Azure security, GCP security, kubernetes security, CTF challenges, CSPM, CNAPP, cloud security training, security certifications, penetration testing, cloud security community">
   <title>Cloud Security Office Hours (CSOH)</title>
 
-  <!-- Resource Hints for Performance -->
-  <link rel="preconnect" href="https://sendfox.com" crossorigin>
-  <link rel="preconnect" href="https://www.paypal.com/us/home" crossorigin>
-
   <!-- Canonical URL -->
   <link rel="canonical" href="https://csoh.org/">
   <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
@@ -39,22 +35,20 @@
     content="A community for cloud security professionals with curated resources, CTF challenges, training labs, and weekly Zoom sessions.">
   <meta name="twitter:image" content="https://csoh.org/img/og/index.jpg">
 
-  <!-- Preload Critical Assets -->
-    <!-- Resource hints: warm up TCP+TLS to high-traffic external origins
-         (the Zoom signup, GitHub, sponsor link, and YouTube image CDN
-         that hosts the presentation card thumbnails). Saves 100-300ms
-         on the first navigation/hover-to-fetch to each. -->
-    <link rel="preconnect" href="https://sendfox.com" crossorigin>
-    <link rel="preconnect" href="https://github.com" crossorigin>
     <link rel="dns-prefetch" href="https://github.com">
-    <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
+    <link rel="dns-prefetch" href="https://sendfox.com">
+    <link rel="dns-prefetch" href="https://www.paypal.com">
     <link rel="dns-prefetch" href="https://img.youtube.com">
 
-  <link rel="preload" href="/style.css?v=c600867a" as="style"
-    integrity="sha384-1lcLdxfPtS/4YVIxQjRulBWkgI0YGdPdg/Uz9NcswL+7Ybo1wMRm878TjE1cGjkc">
+  <link rel="preload" as="image" type="image/webp"
+    imagesrcset="/img/photos/homepage-team-1200.webp 1200w, /img/photos/homepage-team.webp 1880w"
+    imagesizes="(max-width: 1200px) 100vw, 1136px" fetchpriority="high">
 
-  <link rel="stylesheet" href="/style.css?v=c600867a"
-    integrity="sha384-1lcLdxfPtS/4YVIxQjRulBWkgI0YGdPdg/Uz9NcswL+7Ybo1wMRm878TjE1cGjkc">
+  <link rel="preload" href="/style.css?v=00c7245c" as="style"
+    integrity="sha384-4AZB/PKAjmUqHAs33a955BQrnJFlyzT/H2P183T9zYzwES5tNyeGjLAvZEEZrvFc">
+
+  <link rel="stylesheet" href="/style.css?v=00c7245c"
+    integrity="sha384-4AZB/PKAjmUqHAs33a955BQrnJFlyzT/H2P183T9zYzwES5tNyeGjLAvZEEZrvFc">
 
   <!-- Structured Data for SEO -->
   <script type="application/ld+json">
@@ -312,8 +306,8 @@
   <main class="container" id="main-content">
         <figure class="page-photo">
           <picture>
-            <source srcset="/img/photos/homepage-team.webp" type="image/webp">
-            <img src="/img/photos/homepage-team.jpg" alt="Diverse team discussing ideas around a table in a modern office with laptops and tablets" width="1880" height="1253" loading="lazy" decoding="async">
+            <source srcset="/img/photos/homepage-team-1200.webp 1200w, /img/photos/homepage-team.webp 1880w" sizes="(max-width: 1200px) 100vw, 1136px" type="image/webp">
+            <img src="/img/photos/homepage-team.jpg" alt="Diverse team discussing ideas around a table in a modern office with laptops and tablets" width="1880" height="1253" fetchpriority="high" decoding="async">
           </picture>
           <figcaption>Photo by Ketut Subiyanto on Pexels</figcaption>
         </figure>
@@ -483,7 +477,7 @@
 
         <figure class="page-photo">
           <picture>
-            <source srcset="/img/photos/data-cables.webp" type="image/webp">
+            <source srcset="/img/photos/data-cables-1200.webp 1200w, /img/photos/data-cables.webp 1880w" sizes="(max-width: 1200px) 100vw, 1136px" type="image/webp">
             <img src="/img/photos/data-cables.jpg" alt="From above contemporary server cable trays in a modern data center" width="1880" height="1253" loading="lazy" decoding="async">
           </picture>
           <figcaption>Photo by Brett Sayles on Pexels</figcaption>
@@ -696,7 +690,7 @@
     </div>
   </footer>
 
-  <script src="/main.js?v=fc5df335" integrity="sha384-6mAKmFSe49u7DZwulVLU50VmLdFh0WoBsOzxSE9pcssQ/8K2yRlZefC7BZ8GKL2h"
+  <script src="/main.js?v=b517f39d" integrity="sha384-8/1Y6zmSmGcKtdeoSJDd4JadBZUwI1F4M7uqeUVQt8uwrLkszhyRCqoPGfhKfKA7"
     defer></script>
 </body>
 

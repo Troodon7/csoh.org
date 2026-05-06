@@ -391,11 +391,15 @@ document.addEventListener('DOMContentLoaded', function() {
         var tooltip = document.createElement('div');
         tooltip.className = 'resource-tooltip';
         tooltip.setAttribute('role', 'tooltip');
+        tooltip.setAttribute('aria-label', 'Resource description');
+        tooltip.setAttribute('aria-hidden', 'true');
         tooltip.id = 'resourceTooltip';
         document.body.appendChild(tooltip);
 
         var showTimeout = null;
         var currentCard = null;
+        var cachedTw = 360;
+        var cachedTh = 60;
 
         var container = document.getElementById('main-content');
         if (!container) return;
@@ -415,7 +419,12 @@ document.addEventListener('DOMContentLoaded', function() {
             showTimeout = setTimeout(function () {
                 tooltip.textContent = text;
                 card.setAttribute('aria-describedby', 'resourceTooltip');
+                tooltip.setAttribute('aria-hidden', 'false');
                 tooltip.classList.add('visible');
+                requestAnimationFrame(function () {
+                    cachedTw = tooltip.offsetWidth || 360;
+                    cachedTh = tooltip.offsetHeight || 60;
+                });
             }, 300);
         });
 
@@ -424,8 +433,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             var pad = 12;
             var edge = 8;
-            var tw = tooltip.offsetWidth || 360;
-            var th = tooltip.offsetHeight || 60;
+            var tw = cachedTw;
+            var th = cachedTh;
 
             var x = e.clientX + pad;
             var y = e.clientY + pad;
@@ -450,6 +459,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showTimeout = null;
             currentCard = null;
             tooltip.classList.remove('visible');
+            tooltip.setAttribute('aria-hidden', 'true');
             card.removeAttribute('aria-describedby');
         });
     }

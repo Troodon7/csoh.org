@@ -198,12 +198,12 @@ nav a:focus {
 }
 
 .btn-primary {
-    background-color: var(--accent-color);
+    background-color: #c0392b;
     color: var(--white);
 }
 
 .btn-primary:hover {
-    background-color: #c0392b;
+    background-color: #a93226;
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
@@ -862,7 +862,7 @@ nav a:focus {
 
 .tag.ctf {
     background-color: #fff3e0;
-    color: #e65100;
+    color: #9a3412;
 }
 
 .tag.certification {
@@ -1822,7 +1822,8 @@ footer {
 }
 
 .memorial-link {
-    color: var(--secondary-color);
+    color: #1d4ed8;
+    text-decoration: underline;
 }
 
 /* =========================================================================
@@ -2690,7 +2691,7 @@ footer {
 
 [data-theme="dark"] .hero .btn-primary,
 [data-theme="dark"] .hero--compact .btn-primary {
-    background-color: var(--accent-color);
+    background-color: #c0392b;
     color: #ffffff !important;
 }
 
@@ -2708,12 +2709,12 @@ footer {
 }
 
 [data-theme="dark"] .btn-primary {
-    background-color: var(--accent-color);
+    background-color: #c0392b;
     color: #ffffff;
 }
 
 [data-theme="dark"] .btn-primary:hover {
-    background-color: #e05545;
+    background-color: #a93226;
 }
 
 [data-theme="dark"] footer {
@@ -3910,7 +3911,7 @@ footer {
 .page-photo figcaption {
     padding: 0.6rem 1rem;
     font-size: 0.78rem;
-    color: #777;
+    color: #595959;
     background: rgba(0,0,0,0.02);
     text-align: right;
     font-style: italic;
