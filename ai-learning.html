@@ -348,8 +348,8 @@
             <p>Three reasons this is on a cloud-security site:</p>
             <ul>
                 <li><strong>Agents are landing in your cloud.</strong> An <a class="glossary-link" href="glossary.html#term-agent">agent</a> with an IAM role and a browser tool has the <a class="glossary-link" href="glossary.html#term-blast-radius">blast radius</a> of a compromised admin. Defending that is a cloud-security problem, not a separate AI team's problem.</li>
-                <li><strong>Your job is changing.</strong> Detection engineers are writing prompts to triage alerts. IR teams are using LLMs to summarize CloudTrail. Pen testers are using AI to draft attacks faster than humans can review. If you can't read a system prompt, you can't review what your team ships.</li>
-                <li><strong>The attack surface is genuinely new.</strong> <a class="glossary-link" href="glossary.html#term-prompt-injection">Prompt injection</a> isn't XSS. RAG isn't SQL. Most of the OWASP LLM Top 10 has no clean analog from the appsec world. You have to learn it on its own terms.</li>
+                <li><strong>Your job is changing.</strong> <a class="glossary-link" href="glossary.html#term-detection-engineering">Detection engineers</a> are writing prompts to triage alerts. <a class="glossary-link" href="glossary.html#term-incident-response">IR</a> teams are using <a class="glossary-link" href="glossary.html#term-llm">LLMs</a> to summarize <a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a>. Pen testers are using AI to draft attacks faster than humans can review. If you can't read a system prompt, you can't review what your team ships.</li>
+                <li><strong>The <a class="glossary-link" href="glossary.html#term-attack-surface">attack surface</a> is genuinely new.</strong> <a class="glossary-link" href="glossary.html#term-prompt-injection">Prompt injection</a> isn't <a class="glossary-link" href="glossary.html#term-xss">XSS</a>. <a class="glossary-link" href="glossary.html#term-rag">RAG</a> isn't SQL. Most of the <a class="glossary-link" href="glossary.html#term-owasp-llm-top-10">OWASP LLM Top 10</a> has no clean analog from the appsec world. You have to learn it on its own terms.</li>
             </ul>
             <p>You don't need to become a machine-learning researcher. You need <em>working</em> AI literacy: enough to use these tools well, build small things, and reason about how they break.</p>
         </section>
@@ -377,14 +377,14 @@
             <ul>
                 <li>Drafting Slack messages and emails.</li>
                 <li>Reading a CloudTrail log dump and explaining what an attacker just did.</li>
-                <li>Writing the boilerplate of a Terraform module before you fix it by hand.</li>
+                <li>Writing the boilerplate of a <a class="glossary-link" href="glossary.html#term-terraform">Terraform</a> module before you fix it by hand.</li>
                 <li>Summarizing a security paper or vendor whitepaper.</li>
                 <li>Explaining a concept you almost-but-not-quite understand.</li>
             </ul>
             <p>Notice when it's confidently wrong. Notice when it saves you an hour. Notice how rephrasing a prompt changes the answer. That instinct is the foundation of everything below.</p>
 
             <h3>3. Try a coding agent</h3>
-            <p>Use Claude Code, Cursor, GitHub Copilot, or Codex on a real task in a real repo. Write a small tool, debug a Lambda, refactor a script. The leap from "chat assistant" to "agent that edits files and runs commands" is exactly the shift you'll later need to defend.</p>
+            <p>Use Claude Code, Cursor, GitHub Copilot, or Codex on a real task in a real repo. Write a small tool, debug a <a class="glossary-link" href="glossary.html#term-lambda">Lambda</a>, refactor a script. The leap from "chat assistant" to "agent that edits files and runs commands" is exactly the shift you'll later need to defend.</p>
 
             <p><strong>Stage 1 milestone:</strong> You instinctively reach for an LLM for the right kinds of tasks and avoid it for the wrong ones. You can describe — to a colleague — three things this model does well and three it fails at.</p>
         </section>
@@ -407,8 +407,8 @@
                 <li>What is a <strong>token</strong>, and why does it cost money?</li>
                 <li>What is the <strong>context window</strong> and what happens when you exceed it?</li>
                 <li>What does <strong>temperature</strong> actually change?</li>
-                <li>What is an <strong>embedding</strong> and how is it different from a token?</li>
-                <li>What's the difference between <strong>fine-tuning</strong>, <strong>RAG</strong>, and <strong>prompting</strong> — and when do you reach for each?</li>
+                <li>What is an <strong><a class="glossary-link" href="glossary.html#term-embedding">embedding</a></strong> and how is it different from a token?</li>
+                <li>What's the difference between <strong><a class="glossary-link" href="glossary.html#term-fine-tuning">fine-tuning</a></strong>, <strong>RAG</strong>, and <strong>prompting</strong> — and when do you reach for each?</li>
                 <li>What is a <strong>system prompt</strong> and why is it not a security boundary?</li>
                 <li>Why do models <strong>hallucinate</strong>, and what kinds of hallucinations are dangerous?</li>
             </ul>
@@ -503,7 +503,7 @@
                 <li><strong>Training-data extraction.</strong> Coercing a model into reproducing memorized training data — secrets, PII, proprietary code.</li>
                 <li><strong>Model denial of service.</strong> Inputs that blow up token budgets or latency.</li>
                 <li><strong>Insecure output handling.</strong> The model returns code, SQL, or shell that gets executed downstream. The model is now an attack proxy.</li>
-                <li><strong>Supply-chain attacks.</strong> Tampered model weights, poisoned datasets, malicious Hugging Face repos.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-supply-chain">Supply-chain attacks</a>.</strong> Tampered model weights, poisoned datasets, malicious Hugging Face repos.</li>
                 <li><strong>Excessive agency.</strong> An agent given more tools, scopes, or authority than the threat model warrants.</li>
             </ul>
 
@@ -566,7 +566,7 @@
                 <li><strong>Defending agentic systems.</strong> Detection content for prompt-injection patterns, tool-misuse anomalies, model-identity tracking, and the analogue of CloudTrail for AI control planes.</li>
                 <li><strong>AI governance &amp; risk.</strong> Map NIST AI RMF and ISO 42001 onto your existing GRC stack. Run AI inventories. Approve and review use cases. Talk to legal regularly.</li>
                 <li><strong>MLSecOps.</strong> Pipeline security — model registry, dataset lineage, signed weights, deployment guardrails. The ML world's answer to <a class="glossary-link" href="glossary.html#term-devsecops">DevSecOps</a>.</li>
-                <li><strong>Building AI-native security tooling.</strong> Triage agents for the SOC, alert summarization, IaC review, autonomous IR copilots. The market is wide open.</li>
+                <li><strong>Building AI-native security tooling.</strong> Triage agents for the <a class="glossary-link" href="glossary.html#term-soc">SOC</a>, alert summarization, <a class="glossary-link" href="glossary.html#term-iac">IaC</a> review, autonomous IR copilots. The market is wide open.</li>
                 <li><strong>AI-APP / runtime protection.</strong> The emerging category — see Wiz's <a class="glossary-link" href="glossary.html#term-ai-app">AI-APP</a> framing — for monitoring deployed model endpoints, prompts, completions, and agent behavior in production.</li>
             </ul>
         </section>

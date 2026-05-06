@@ -299,6 +299,9 @@
 
                 <dt id="term-tetragon">Tetragon</dt>
                 <dd>Open-source <a class="glossary-link" href="#term-ebpf">eBPF</a>-based runtime security from Isovalent. Provides <a class="glossary-link" href="#term-kubernetes">Kubernetes</a>-aware process, network, and file observability with optional inline enforcement.</dd>
+
+                <dt id="term-container-security">Container Security</dt>
+                <dd>The practice of securing the full <a class="glossary-link" href="#term-container">container</a> lifecycle — base <a class="glossary-link" href="#term-image">image</a> hardening, registry scanning, signed builds, admission control, runtime detection, and <a class="glossary-link" href="#term-pod">pod</a>-level isolation in <a class="glossary-link" href="#term-kubernetes">Kubernetes</a>. Sits at the intersection of <a class="glossary-link" href="#term-cwpp">CWPP</a>, <a class="glossary-link" href="#term-kspm">KSPM</a>, and <a class="glossary-link" href="#term-supply-chain">supply-chain</a> tooling.</dd>
             </dl>
 
             <h2 id="iam">🔑 Identity &amp; Access Management (IAM)</h2>
@@ -584,6 +587,12 @@
 
                 <dt id="term-threat-hunting">Threat Hunting</dt>
                 <dd>Hypothesis-driven search through telemetry for adversary activity that hasn't tripped an alert. Hunting tests detection coverage, surfaces dwell-time issues, and produces new detection-engineering content.</dd>
+
+                <dt id="term-incident-response">Incident Response (IR)</dt>
+                <dd>The end-to-end process of preparing for, detecting, containing, eradicating, and recovering from security incidents — plus the post-mortem that feeds back into <a class="glossary-link" href="#term-detection-engineering">detection engineering</a>. <a class="glossary-link" href="#term-dfir">DFIR</a> is the forensics-heavy variant; IR is the umbrella program. Codified by NIST SP 800-61 and SANS PICERL.</dd>
+
+                <dt id="term-threat-intelligence">Threat Intelligence (CTI)</dt>
+                <dd>Collected, analyzed information about adversaries, their <a class="glossary-link" href="#term-ttp">TTPs</a>, infrastructure, and victims — used to prioritize defenses and inform <a class="glossary-link" href="#term-detection-engineering">detection engineering</a>. Tactical (<a class="glossary-link" href="#term-ioc">IOCs</a>), operational (campaigns), strategic (motives, geopolitics). Feeds: vendor reports, ISACs, OSINT, and internal incident telemetry.</dd>
             </dl>
 
             <h2 id="posture">🧭 Posture, Policy &amp; the *PM Family</h2>
@@ -635,6 +644,12 @@
 
                 <dt id="term-ctem">CTEM — Continuous Threat Exposure Management</dt>
                 <dd>Gartner-coined program model that unifies vulnerability management, attack-surface management, identity-risk analysis, and red-team validation into one continuous loop. Increasingly the framing replacing traditional "patch the <a class="glossary-link" href="#term-cve">CVE</a>" vulnerability programs.</dd>
+
+                <dt id="term-prowler">Prowler</dt>
+                <dd>Open-source multi-cloud security assessment tool. Runs hundreds of <a class="glossary-link" href="#term-cspm">CSPM</a>-style checks against AWS, Azure, GCP, and <a class="glossary-link" href="#term-kubernetes">Kubernetes</a> mapped to CIS, NIST, PCI, and other frameworks. The default starting point for someone learning cloud posture without a commercial <a class="glossary-link" href="#term-cnapp">CNAPP</a>.</dd>
+
+                <dt id="term-attack-surface">Attack Surface</dt>
+                <dd>The sum of all points where an unauthenticated or low-privilege actor can interact with your systems — public IPs, exposed APIs, leaked credentials, third-party SaaS integrations, signed artifacts, employee inboxes. Attack Surface Management (ASM) is the discipline of continuously discovering and reducing it.</dd>
             </dl>
 
             <h2 id="vuln">🐛 Vulnerability &amp; Supply-Chain Security</h2>
@@ -689,6 +704,9 @@
 
                 <dt id="term-cwe">CWE — Common Weakness Enumeration</dt>
                 <dd><a class="glossary-link" href="#term-mitre">MITRE</a>'s catalog of weakness types (e.g., CWE-79 = <a class="glossary-link" href="#term-xss">XSS</a>, CWE-89 = SQL injection). CVEs are concrete instances; CWEs are the categories.</dd>
+
+                <dt id="term-vulnerability-management">Vulnerability Management</dt>
+                <dd>The program of discovering, prioritizing, remediating, and verifying vulnerabilities across an environment. Modern cloud VM blends <a class="glossary-link" href="#term-cve">CVE</a> data with <a class="glossary-link" href="#term-epss">EPSS</a>, <a class="glossary-link" href="#term-kev">KEV</a>, reachability, runtime evidence, and ownership routing — moving toward <a class="glossary-link" href="#term-ctem">CTEM</a> rather than chasing every <a class="glossary-link" href="#term-cvss">CVSS</a> 7+.</dd>
             </dl>
 
             <h2 id="compliance">📜 Compliance Frameworks</h2>
@@ -816,6 +834,15 @@
 
                 <dt id="term-shadow-it">Shadow IT / Shadow AI</dt>
                 <dd>Unsanctioned services / <a class="glossary-link" href="#term-ai">AI</a> tools adopted by employees, outside the visibility of security and IT.</dd>
+
+                <dt id="term-stratus-red-team">Stratus Red Team</dt>
+                <dd>Open-source cloud attack-emulation tool from DataDog. Lets defenders trigger a catalog of granular <a class="glossary-link" href="#term-mitre-att-ck">MITRE ATT&amp;CK</a>-mapped techniques (S3 exfil, IAM persistence, EC2 IMDS abuse, etc.) against a real cloud account to validate <a class="glossary-link" href="#term-detection-engineering">detection engineering</a> coverage.</dd>
+
+                <dt id="term-cloudgoat">CloudGoat</dt>
+                <dd>Rhino Security Labs' intentionally vulnerable AWS environment. Spins up scenario-based scenarios (privilege escalation paths, IAM misconfigurations, exposed services) you attack and learn from — the de facto starter CTF for AWS pentesting.</dd>
+
+                <dt id="term-flaws">flAWS / flAWS2</dt>
+                <dd>Scott Piper's classic AWS-focused security CTFs. Each level teaches a real misconfiguration class — public S3 buckets, EC2 metadata, IAM trust policies, federated identity. Free, browser-driven, and still the most-recommended on-ramp into AWS attacker thinking.</dd>
             </dl>
 
             <h2 id="ai">🤖 AI, LLM &amp; Agentic-System Security</h2>
@@ -915,6 +942,12 @@
 
                 <dt id="term-runbook">Runbook / Playbook</dt>
                 <dd>Documented procedures for handling specific operational or security events.</dd>
+
+                <dt id="term-terraform">Terraform / OpenTofu</dt>
+                <dd>HashiCorp's <a class="glossary-link" href="#term-iac">IaC</a> tool — declarative HCL configurations applied via a state file to provision cloud resources. OpenTofu is the open-source fork after the 2023 license change. Most cloud-security findings ultimately get fixed in Terraform; <a class="glossary-link" href="#term-iac">IaC</a> scanners (Checkov, tfsec, KICS, Terrascan) catch issues before <code>apply</code>.</dd>
+
+                <dt id="term-devsecops">DevSecOps</dt>
+                <dd>Embedding security checks into the developer workflow — <a class="glossary-link" href="#term-sast">SAST</a>, <a class="glossary-link" href="#term-sca">SCA</a>, <a class="glossary-link" href="#term-iac">IaC</a> scanning, secret scanning, and policy gates running in <a class="glossary-link" href="#term-ci-cd">CI</a> rather than as a pre-prod review. The cultural goal is shared ownership; the practical goal is finding issues at the <a class="glossary-link" href="#term-shift-left">left</a> end of the pipeline where they're cheapest to fix.</dd>
             </dl>
 
             <h2 id="orgs">🏛️ Standards Bodies &amp; Authorities</h2>
