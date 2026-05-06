@@ -3700,6 +3700,39 @@ footer {
 /* breach-list divider variant: a non-card list item that just hosts a page-photo */
 .breach-divider { list-style: none; padding: 0; margin: 0; }
 
+/* Profile-page stats chips (about-shawn-nunley.html hero). */
+.profile-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 1.25rem;
+}
+.profile-stat {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: #cbd5e1;
+}
+.profile-stat strong {
+    color: #fbbf24;
+    font-weight: 700;
+}
+
+/* Lede paragraph: emphasized intro on profile/showcase pages. */
+.lede {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+}
+[data-theme="dark"] .lede { color: #e2e8f0; }
+
 /* H2 accent — small colored bar above each section's h2 on long pillar pages.
    Adds visual rhythm so each section starts with a clear anchor instead of
    landing in another wall of text. Scoped to <main class="contribute-article">

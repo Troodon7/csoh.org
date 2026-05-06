@@ -39,10 +39,10 @@
     <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
     <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=d15b1435" as="style"
-        integrity="sha384-K35b2KrIfFSR9HMBSjaLu6gRid3QMW4HB8cbGCRJ+sP+PeoL0GthQXD3X42URuoT">
-    <link rel="stylesheet" href="/style.css?v=d15b1435"
-        integrity="sha384-K35b2KrIfFSR9HMBSjaLu6gRid3QMW4HB8cbGCRJ+sP+PeoL0GthQXD3X42URuoT">
+    <link rel="preload" href="/style.css?v=77d47270" as="style"
+        integrity="sha384-ujsUjeNocY/HwhFJIXvng7sqZJcc+vIUobX2ZMrtxfcWIB8dNZDmPRPSvtCULHKg">
+    <link rel="stylesheet" href="/style.css?v=77d47270"
+        integrity="sha384-ujsUjeNocY/HwhFJIXvng7sqZJcc+vIUobX2ZMrtxfcWIB8dNZDmPRPSvtCULHKg">
 
     <script type="application/ld+json">
     {
@@ -452,6 +452,116 @@ jobs:
           <figcaption>Every control should run as early in the pipeline as it can — but the late-stage controls don't go away, they catch what slipped through.</figcaption>
         </figure>
 
+        <figure class="workflow-figure">
+          <svg viewBox="0 0 820 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="orch-title orch-desc">
+            <title id="orch-title">CSOH&rsquo;s GitHub Actions deploy pipeline</title>
+            <desc id="orch-desc">End-to-end flow from a developer&rsquo;s git push through path filtering, concurrency locking, sequential build steps, validation, FTP mirror, and final deploy to production.</desc>
+            <defs><marker id="orch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/></marker></defs>
+            <text x="410" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">From <tspan font-family="monospace">git push</tspan> to live on csoh.org — what actually happens</text>
+
+            <rect x="280" y="40" width="260" height="48" rx="24" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+            <text x="410" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="monospace">git push origin main</text>
+            <text x="410" y="78" text-anchor="middle" font-size="9" fill="#94a3b8">developer commits land on the default branch</text>
+
+            <path d="M 410 88 L 410 108" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
+
+            <path d="M 410 110 L 530 150 L 410 190 L 290 150 z" fill="#fff" stroke="#f59e0b" stroke-width="2"/>
+            <text x="410" y="143" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">Did paths match?</text>
+            <text x="410" y="158" text-anchor="middle" font-size="9" fill="#475569" font-family="monospace">*.html, style.css,</text>
+            <text x="410" y="170" text-anchor="middle" font-size="9" fill="#475569" font-family="monospace">main.js, .htaccess, …</text>
+            <text x="410" y="185" text-anchor="middle" font-size="8" fill="#92400e" font-style="italic">no &#8594; skip deploy</text>
+
+            <path d="M 410 190 L 410 210" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
+
+            <rect x="280" y="212" width="260" height="44" rx="8" fill="#fff" stroke="#dc2626" stroke-width="2"/>
+            <rect x="280" y="212" width="260" height="14" rx="8" fill="#dc2626"/>
+            <text x="410" y="223" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">CONCURRENCY GATE</text>
+            <text x="410" y="240" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a" font-family="monospace">group: deploy-pipeline</text>
+            <text x="410" y="252" text-anchor="middle" font-size="9" fill="#475569">queues serially with normalize-urls + manual-deploy</text>
+
+            <path d="M 410 256 L 410 276" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
+
+            <rect x="280" y="278" width="260" height="34" rx="6" fill="#fff" stroke="#06b6d4" stroke-width="2"/>
+            <text x="410" y="294" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Checkout repository (PAT-authed)</text>
+            <text x="410" y="307" text-anchor="middle" font-size="9" fill="#475569">actions/checkout — full history for SRI diff</text>
+
+            <path d="M 410 312 L 410 332" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
+
+            <rect x="280" y="334" width="260" height="34" rx="6" fill="#fff" stroke="#06b6d4" stroke-width="2"/>
+            <text x="410" y="350" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Update SRI integrity hashes</text>
+            <text x="410" y="363" text-anchor="middle" font-size="9" fill="#475569" font-family="monospace">tools/update_sri.py — rewrites all *.html if css/js changed</text>
+
+            <path d="M 410 368 L 410 388" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
+
+            <rect x="280" y="390" width="260" height="34" rx="6" fill="#fff" stroke="#06b6d4" stroke-width="2"/>
+            <text x="410" y="406" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Generate preview images</text>
+            <text x="410" y="419" text-anchor="middle" font-size="9" fill="#475569" font-family="monospace">img/previews — for new pages</text>
+
+            <path d="M 410 424 L 410 444" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
+
+            <rect x="280" y="446" width="260" height="48" rx="6" fill="#fff" stroke="#8b5cf6" stroke-width="2"/>
+            <text x="410" y="462" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Normalize URLs (apply)</text>
+            <text x="410" y="475" text-anchor="middle" font-size="9" fill="#475569" font-family="monospace">tools/normalize_urls.py --apply</text>
+            <text x="410" y="488" text-anchor="middle" font-size="9" fill="#475569">strips utm_*, upgrades http→https, follows redirects</text>
+
+            <path d="M 410 494 L 410 514" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
+
+            <rect x="280" y="516" width="260" height="34" rx="6" fill="#fff" stroke="#10b981" stroke-width="2"/>
+            <text x="410" y="532" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">URL safety check (gate)</text>
+            <text x="410" y="545" text-anchor="middle" font-size="9" fill="#475569">unsafe destination &#8594; halt deploy</text>
+
+            <path d="M 410 550 L 410 570" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
+
+            <rect x="280" y="572" width="260" height="34" rx="6" fill="#fff" stroke="#10b981" stroke-width="2"/>
+            <text x="410" y="588" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Commit + push any changes back</text>
+            <text x="410" y="601" text-anchor="middle" font-size="9" fill="#475569" font-family="monospace">[skip ci] — avoids loop</text>
+
+            <path d="M 410 606 L 410 626" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
+
+            <rect x="280" y="628" width="260" height="58" rx="6" fill="#fff" stroke="#f43f5e" stroke-width="2"/>
+            <text x="410" y="645" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">lftp mirror &#8594; /public_html/</text>
+            <text x="410" y="660" text-anchor="middle" font-size="9" fill="#475569">5 passes: site files · previews · news-banners · OG images · author photos · icons · photos</text>
+            <text x="410" y="676" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">+ chat-screenshots if any new ones</text>
+
+            <path d="M 410 686 L 410 706" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
+
+            <rect x="270" y="708" width="280" height="44" rx="22" fill="#10b981" stroke="#065f46" stroke-width="2"/>
+            <text x="410" y="728" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">🌐 LIVE ON CSOH.ORG</text>
+            <text x="410" y="744" text-anchor="middle" font-size="9" fill="#d1fae5">total pipeline time: ~2-3 minutes</text>
+
+            <g transform="translate(40, 110)">
+              <rect width="180" height="170" rx="10" fill="#fff" stroke="#94a3b8" stroke-dasharray="4 3"/>
+              <text x="90" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor">Other triggers</text>
+              <line x1="20" y1="32" x2="160" y2="32" stroke="#e5e7eb"/>
+              <text x="20" y="50" font-size="10" font-weight="600" fill="#0f172a">PR opened/updated</text>
+              <text x="20" y="63" font-size="9" fill="#475569" font-family="monospace">→ lint.yml + validate-html.yml</text>
+              <text x="20" y="86" font-size="10" font-weight="600" fill="#0f172a">Daily cron 8am UTC</text>
+              <text x="20" y="99" font-size="9" fill="#475569" font-family="monospace">→ update-news.yml</text>
+              <text x="20" y="122" font-size="10" font-weight="600" fill="#0f172a">Monthly cron 1st</text>
+              <text x="20" y="135" font-size="9" fill="#475569" font-family="monospace">→ normalize-urls.yml (PR)</text>
+              <text x="20" y="158" font-size="10" font-weight="600" fill="#0f172a">workflow_dispatch</text>
+              <text x="20" y="160" font-size="0" fill="transparent">.</text>
+            </g>
+
+            <g transform="translate(600, 280)">
+              <rect width="200" height="190" rx="10" fill="#fff" stroke="#94a3b8" stroke-dasharray="4 3"/>
+              <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor">Why this order matters</text>
+              <line x1="20" y1="32" x2="180" y2="32" stroke="#e5e7eb"/>
+              <text x="20" y="50" font-size="9" fill="#475569">SRI hashes are derived from</text>
+              <text x="20" y="62" font-size="9" fill="#475569">the final css/js, so they run</text>
+              <text x="20" y="74" font-size="9" fill="#475569"><tspan font-weight="600">before</tspan> previews and URL fixes.</text>
+              <text x="20" y="98" font-size="9" fill="#475569">URL normalization rewrites</text>
+              <text x="20" y="110" font-size="9" fill="#475569">links, so its safety check</text>
+              <text x="20" y="122" font-size="9" fill="#475569">runs <tspan font-weight="600">before</tspan> any commit-back.</text>
+              <text x="20" y="146" font-size="9" fill="#475569">Concurrency group prevents</text>
+              <text x="20" y="158" font-size="9" fill="#475569">races between this pipeline,</text>
+              <text x="20" y="170" font-size="9" fill="#475569">manual-deploy, and the</text>
+              <text x="20" y="182" font-size="9" fill="#475569">monthly normalize PR.</text>
+            </g>
+          </svg>
+          <figcaption>This pipeline replaces a traditional CI server. Every box is a real <code>step</code> in <code>site-update-deploy.yml</code>; the side panels show what else can trigger the same surface.</figcaption>
+        </figure>
+
         <section id="workflows-tour">
             <h2>A tour of CSOH's eight workflows</h2>
             <p>Each one solves a single, named problem. Click through to read the source — every file is heavily commented for new readers.</p>
@@ -546,6 +656,11 @@ jobs:
 done</pre></div>
             <p>See it in <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/site-update-deploy.yml" target="_blank" rel="noopener noreferrer">site-update-deploy.yml</a>. Pairs with a discipline rule for housekeeping scripts: <strong>only write a file when its content actually changes</strong> (<code>if new == old: skip</code>). Together they mean a no-op deploy actually does nothing.</p>
         </section>
+
+        <blockquote class="pull-quote">
+          <code>GITHUB_TOKEN</code> is read-only by default for a reason — every workflow that needs more should justify it in a comment.
+          <cite>— the rule we apply across CSOH&rsquo;s eight workflows</cite>
+        </blockquote>
 
         <section id="security">
             <h2>Security baseline</h2>
