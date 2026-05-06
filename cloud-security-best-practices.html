@@ -278,9 +278,143 @@
             </div>
         </section>
 
+        <figure class="workflow-figure">
+          <svg viewBox="0 0 820 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="csm-title csm-desc">
+            <title id="csm-title">Cloud security maturity model</title>
+            <desc id="csm-desc">Four stages from reactive to optimized, each with characteristic practices and tooling.</desc>
+            <defs><marker id="csm-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker></defs>
+            <text x="410" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Cloud security maturity — most teams sit between Stage 2 and 3</text>
+            <g transform="translate(20, 50)">
+              <rect width="180" height="200" rx="12" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
+              <rect width="180" height="36" rx="12" fill="#94a3b8"/>
+              <rect y="24" width="180" height="12" fill="#94a3b8"/>
+              <text x="90" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">1. REACTIVE</text>
+              <text x="90" y="64" text-anchor="middle" font-size="10" font-weight="600" fill="#0f172a" font-style="italic">"Find out from a breach"</text>
+              <text x="90" y="92" text-anchor="middle" font-size="10" fill="#475569">Manual fixes only</text>
+              <text x="90" y="110" text-anchor="middle" font-size="10" fill="#475569">No central logging</text>
+              <text x="90" y="128" text-anchor="middle" font-size="10" fill="#475569">Ad-hoc IAM</text>
+              <text x="90" y="146" text-anchor="middle" font-size="10" fill="#475569">No posture scans</text>
+              <text x="90" y="180" text-anchor="middle" font-size="9" fill="#6b7280" font-style="italic">"We'll figure it out"</text>
+            </g>
+            <path d="M 200 150 L 220 150" stroke="#94a3b8" stroke-width="2" marker-end="url(#csm-arrow)"/>
+            <g transform="translate(225, 50)">
+              <rect width="180" height="200" rx="12" fill="#fff" stroke="#f59e0b" stroke-width="2"/>
+              <rect width="180" height="36" rx="12" fill="#f59e0b"/>
+              <rect y="24" width="180" height="12" fill="#f59e0b"/>
+              <text x="90" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">2. DEFINED</text>
+              <text x="90" y="64" text-anchor="middle" font-size="10" font-weight="600" fill="#0f172a" font-style="italic">"Written policies"</text>
+              <text x="90" y="92" text-anchor="middle" font-size="10" fill="#475569">CIS benchmarks</text>
+              <text x="90" y="110" text-anchor="middle" font-size="10" fill="#475569">Periodic scans</text>
+              <text x="90" y="128" text-anchor="middle" font-size="10" fill="#475569">Centralized logs</text>
+              <text x="90" y="146" text-anchor="middle" font-size="10" fill="#475569">Quarterly reviews</text>
+              <text x="90" y="180" text-anchor="middle" font-size="9" fill="#6b7280" font-style="italic">PDFs nobody reads</text>
+            </g>
+            <path d="M 405 150 L 425 150" stroke="#94a3b8" stroke-width="2" marker-end="url(#csm-arrow)"/>
+            <g transform="translate(430, 50)">
+              <rect width="180" height="200" rx="12" fill="#fff" stroke="#3b82f6" stroke-width="2"/>
+              <rect width="180" height="36" rx="12" fill="#3b82f6"/>
+              <rect y="24" width="180" height="12" fill="#3b82f6"/>
+              <text x="90" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">3. MANAGED</text>
+              <text x="90" y="64" text-anchor="middle" font-size="10" font-weight="600" fill="#0f172a" font-style="italic">"Continuous detection"</text>
+              <text x="90" y="92" text-anchor="middle" font-size="10" fill="#475569">CSPM / CNAPP live</text>
+              <text x="90" y="110" text-anchor="middle" font-size="10" fill="#475569">IaC scanning</text>
+              <text x="90" y="128" text-anchor="middle" font-size="10" fill="#475569">Auto-tickets</text>
+              <text x="90" y="146" text-anchor="middle" font-size="10" fill="#475569">ATT&amp;CK-mapped</text>
+              <text x="90" y="180" text-anchor="middle" font-size="9" fill="#6b7280" font-style="italic">SLA-tracked alerts</text>
+            </g>
+            <path d="M 610 150 L 630 150" stroke="#94a3b8" stroke-width="2" marker-end="url(#csm-arrow)"/>
+            <g transform="translate(635, 50)">
+              <rect width="180" height="200" rx="12" fill="#fff" stroke="#10b981" stroke-width="2"/>
+              <rect width="180" height="36" rx="12" fill="#10b981"/>
+              <rect y="24" width="180" height="12" fill="#10b981"/>
+              <text x="90" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">4. OPTIMIZED</text>
+              <text x="90" y="64" text-anchor="middle" font-size="10" font-weight="600" fill="#0f172a" font-style="italic">"Self-healing"</text>
+              <text x="90" y="92" text-anchor="middle" font-size="10" fill="#475569">Toxic-combo detect</text>
+              <text x="90" y="110" text-anchor="middle" font-size="10" fill="#475569">Auto-remediation</text>
+              <text x="90" y="128" text-anchor="middle" font-size="10" fill="#475569">Threat hunting</text>
+              <text x="90" y="146" text-anchor="middle" font-size="10" fill="#475569">Resilience drills</text>
+              <text x="90" y="180" text-anchor="middle" font-size="9" fill="#6b7280" font-style="italic">Few teams reach here</text>
+            </g>
+          </svg>
+          <figcaption>The practices below are roughly ordered by where they show up in this maturity ladder — start with the Stage 2 essentials, layer Stage 3 tooling once those are in place.</figcaption>
+        </figure>
+
         <section id="identity">
             <h2>Identity &amp; access (most important)</h2>
             <p>If you only fix one category, fix this one. Identity is the perimeter — every cloud breach we've documented involves an identity failure somewhere in the chain.</p>
+
+            <figure class="cnapp-figure">
+              <svg viewBox="0 0 820 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ih-title ih-desc">
+                <title id="ih-title">Cloud identity hierarchy</title>
+                <desc id="ih-desc">Top-down view of how cloud identity nests: Organization at the top, then accounts, then roles and service principals, then identities, then permissions.</desc>
+                <text x="410" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Cloud identity hierarchy — controls cascade down, blast radius cascades up</text>
+                <g transform="translate(310, 40)">
+                  <rect width="200" height="42" rx="10" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
+                  <text x="100" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">ORGANIZATION</text>
+                  <text x="100" y="35" text-anchor="middle" font-size="9" fill="#cbd5e1">SCPs / Org policies / Tenant root</text>
+                </g>
+                <line x1="180" y1="98" x2="180" y2="120" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="410" y1="98" x2="410" y2="120" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="640" y1="98" x2="640" y2="120" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="180" y1="98" x2="640" y2="98" stroke="#94a3b8" stroke-width="1.5"/>
+                <g transform="translate(80, 120)">
+                  <rect width="200" height="42" rx="8" fill="#fff" stroke="#f59e0b" stroke-width="2"/>
+                  <text x="100" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">AWS Account</text>
+                  <text x="100" y="34" text-anchor="middle" font-size="9" fill="#475569">workload-isolation boundary</text>
+                </g>
+                <g transform="translate(310, 120)">
+                  <rect width="200" height="42" rx="8" fill="#fff" stroke="#0ea5e9" stroke-width="2"/>
+                  <text x="100" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#0c4a6e">Azure Subscription</text>
+                  <text x="100" y="34" text-anchor="middle" font-size="9" fill="#475569">billing + RBAC scope</text>
+                </g>
+                <g transform="translate(540, 120)">
+                  <rect width="200" height="42" rx="8" fill="#fff" stroke="#10b981" stroke-width="2"/>
+                  <text x="100" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#065f46">GCP Project</text>
+                  <text x="100" y="34" text-anchor="middle" font-size="9" fill="#475569">resource container</text>
+                </g>
+                <line x1="180" y1="162" x2="180" y2="180" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="410" y1="162" x2="410" y2="180" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="640" y1="162" x2="640" y2="180" stroke="#94a3b8" stroke-width="1.5"/>
+                <g transform="translate(40, 180)">
+                  <rect width="280" height="42" rx="8" fill="#fff" stroke="#8b5cf6" stroke-width="2"/>
+                  <text x="140" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#5b21b6">IAM Roles &amp; Service Principals</text>
+                  <text x="140" y="34" text-anchor="middle" font-size="9" fill="#475569">trust policy + permission policy</text>
+                </g>
+                <g transform="translate(330, 180)">
+                  <rect width="160" height="42" rx="8" fill="#fff" stroke="#8b5cf6" stroke-width="2"/>
+                  <text x="80" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#5b21b6">Managed Identities</text>
+                  <text x="80" y="34" text-anchor="middle" font-size="9" fill="#475569">+ App Registrations</text>
+                </g>
+                <g transform="translate(500, 180)">
+                  <rect width="280" height="42" rx="8" fill="#fff" stroke="#8b5cf6" stroke-width="2"/>
+                  <text x="140" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#5b21b6">Service Accounts &amp; Workload ID</text>
+                  <text x="140" y="34" text-anchor="middle" font-size="9" fill="#475569">project-scoped + GKE WI</text>
+                </g>
+                <line x1="410" y1="222" x2="410" y2="240" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="200" y1="240" x2="620" y2="240" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="200" y1="240" x2="200" y2="252" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="410" y1="240" x2="410" y2="252" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="620" y1="240" x2="620" y2="252" stroke="#94a3b8" stroke-width="1.5"/>
+                <g transform="translate(120, 252)">
+                  <rect width="160" height="38" rx="8" fill="#fff" stroke="#06b6d4" stroke-width="2"/>
+                  <text x="80" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#155e75">Human users</text>
+                  <text x="80" y="31" text-anchor="middle" font-size="9" fill="#475569">SSO + MFA + JIT</text>
+                </g>
+                <g transform="translate(330, 252)">
+                  <rect width="160" height="38" rx="8" fill="#fff" stroke="#06b6d4" stroke-width="2"/>
+                  <text x="80" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#155e75">Workload identities</text>
+                  <text x="80" y="31" text-anchor="middle" font-size="9" fill="#475569">no long-lived keys</text>
+                </g>
+                <g transform="translate(540, 252)">
+                  <rect width="160" height="38" rx="8" fill="#fff" stroke="#06b6d4" stroke-width="2"/>
+                  <text x="80" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#155e75">External / federated</text>
+                  <text x="80" y="31" text-anchor="middle" font-size="9" fill="#475569">OIDC, SAML</text>
+                </g>
+                <text x="20"  y="310" font-size="10" font-style="italic" fill="currentColor" opacity="0.7">Down ↓ controls (least privilege at every level)</text>
+                <text x="800" y="310" text-anchor="end" font-size="10" font-style="italic" fill="currentColor" opacity="0.7">Up ↑ blast radius (one over-privileged role can break the org)</text>
+              </svg>
+              <figcaption>The deeper a permission lives, the more painful misconfiguration is at the top. SCP / org-policy at the root is the cheapest control by orders of magnitude.</figcaption>
+            </figure>
             <ul>
                 <li><strong><a class="glossary-link" href="glossary.html#term-phishing-resistant">Phishing-resistant MFA</a> on every human identity.</strong> Push prompts and SMS codes are bypassable (see <a href="breaches/uber.html">Uber 2022</a> and <a href="breaches/scattered-spider-mgm.html">Scattered Spider/MGM</a>). <a class="glossary-link" href="glossary.html#term-fido2">FIDO2</a> security keys, passkeys, and platform authenticators are the bar. Enforce via Conditional Access / <a class="glossary-link" href="glossary.html#term-iam">IAM</a> policies, not just policy documents.</li>
                 <li><strong><a class="glossary-link" href="glossary.html#term-least-privilege">Least privilege</a> on every <a class="glossary-link" href="glossary.html#term-service-account">workload identity</a>.</strong> The Capital One breach happened because a <a class="glossary-link" href="glossary.html#term-waf">WAF</a> role had <a class="glossary-link" href="glossary.html#term-s3">S3</a> list and read across 700 buckets. Read-only-on-one-bucket would have stopped it. Use <a class="glossary-link" href="glossary.html#term-iam-access-analyzer">IAM Access Analyzer</a> (AWS), Microsoft Entra Privileged Identity Management, or Google's IAM Recommender to find and trim unused permissions continuously.</li>
@@ -394,6 +528,55 @@
             </ul>
         </section>
 
+        <figure class="cnapp-figure">
+          <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="zt-title zt-desc">
+            <title id="zt-title">Zero Trust core principles</title>
+            <desc id="zt-desc">The three foundational principles of zero trust: verify explicitly, use least privilege access, and assume breach.</desc>
+            <text x="360" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Zero Trust — three principles, applied everywhere</text>
+            <rect x="240" y="42" width="240" height="44" rx="22" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
+            <text x="360" y="62" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">ZERO TRUST</text>
+            <text x="360" y="78" text-anchor="middle" font-size="9.5" fill="#cbd5e1">"Never trust, always verify"</text>
+            <line x1="120" y1="130" x2="120" y2="100" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="360" y1="86" x2="360" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="600" y1="100" x2="600" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="120" y1="100" x2="600" y2="100" stroke="#94a3b8" stroke-width="1.5"/>
+            <g transform="translate(20, 130)">
+              <rect width="200" height="160" rx="12" fill="#fff" stroke="#06b6d4" stroke-width="2"/>
+              <rect width="200" height="36" rx="12" fill="#06b6d4"/>
+              <rect y="24" width="200" height="12" fill="#06b6d4"/>
+              <text x="100" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">VERIFY EXPLICITLY</text>
+              <text x="100" y="62" text-anchor="middle" font-size="10" font-weight="600" fill="#0f172a">Every request, every time</text>
+              <text x="100" y="86" text-anchor="middle" font-size="10" fill="#475569">• Phishing-resistant MFA</text>
+              <text x="100" y="104" text-anchor="middle" font-size="10" fill="#475569">• Device posture checks</text>
+              <text x="100" y="122" text-anchor="middle" font-size="10" fill="#475569">• Conditional access</text>
+              <text x="100" y="140" text-anchor="middle" font-size="10" fill="#475569">• Continuous re-auth</text>
+            </g>
+            <g transform="translate(260, 130)">
+              <rect width="200" height="160" rx="12" fill="#fff" stroke="#8b5cf6" stroke-width="2"/>
+              <rect width="200" height="36" rx="12" fill="#8b5cf6"/>
+              <rect y="24" width="200" height="12" fill="#8b5cf6"/>
+              <text x="100" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">LEAST PRIVILEGE</text>
+              <text x="100" y="62" text-anchor="middle" font-size="10" font-weight="600" fill="#0f172a">Just enough, just in time</text>
+              <text x="100" y="86" text-anchor="middle" font-size="10" fill="#475569">• Role-based access</text>
+              <text x="100" y="104" text-anchor="middle" font-size="10" fill="#475569">• JIT elevation (PIM)</text>
+              <text x="100" y="122" text-anchor="middle" font-size="10" fill="#475569">• Short-lived credentials</text>
+              <text x="100" y="140" text-anchor="middle" font-size="10" fill="#475569">• Continuous review</text>
+            </g>
+            <g transform="translate(500, 130)">
+              <rect width="200" height="160" rx="12" fill="#fff" stroke="#f43f5e" stroke-width="2"/>
+              <rect width="200" height="36" rx="12" fill="#f43f5e"/>
+              <rect y="24" width="200" height="12" fill="#f43f5e"/>
+              <text x="100" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">ASSUME BREACH</text>
+              <text x="100" y="62" text-anchor="middle" font-size="10" font-weight="600" fill="#0f172a">Limit blast radius</text>
+              <text x="100" y="86" text-anchor="middle" font-size="10" fill="#475569">• Micro-segmentation</text>
+              <text x="100" y="104" text-anchor="middle" font-size="10" fill="#475569">• Encrypt everything</text>
+              <text x="100" y="122" text-anchor="middle" font-size="10" fill="#475569">• Detection &amp; response</text>
+              <text x="100" y="140" text-anchor="middle" font-size="10" fill="#475569">• Tabletop drills</text>
+            </g>
+          </svg>
+          <figcaption>Apply all three at every layer of the defense-in-depth stack — at the perimeter, at the network, at identity, at workloads, at data.</figcaption>
+        </figure>
+
         <section id="governance">
             <h2>Governance &amp; people</h2>
             <ul>
@@ -404,6 +587,36 @@
                 <li><strong>Vendor risk for the vendors of your vendors.</strong> SaaS your SaaS uses can leak your data without you noticing. <a class="glossary-link" href="glossary.html#term-soc-2">SOC 2</a> reports of subprocessors, not just direct vendors.</li>
             </ul>
         </section>
+
+        <figure class="cnapp-figure">
+          <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cv-title cv-desc">
+            <title id="cv-title">Compliance framework overlap</title>
+            <desc id="cv-desc">Three-circle Venn diagram showing how SOC 2, ISO 27001, and PCI DSS share a common control core, with framework-specific extensions on the outside.</desc>
+            <text x="300" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Compliance frameworks share more than they don't</text>
+            <circle cx="220" cy="225" r="135" fill="#3b82f6" fill-opacity="0.30" stroke="#1e3a8a" stroke-width="2"/>
+            <circle cx="380" cy="225" r="135" fill="#10b981" fill-opacity="0.30" stroke="#065f46" stroke-width="2"/>
+            <circle cx="300" cy="335" r="135" fill="#f59e0b" fill-opacity="0.30" stroke="#92400e" stroke-width="2"/>
+            <text x="135" y="135" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">SOC 2</text>
+            <text x="135" y="151" text-anchor="middle" font-size="9" fill="#1e3a8a">trust services criteria</text>
+            <text x="465" y="135" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46">ISO 27001</text>
+            <text x="465" y="151" text-anchor="middle" font-size="9" fill="#065f46">ISMS standard</text>
+            <text x="300" y="455" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">PCI DSS</text>
+            <text x="300" y="470" text-anchor="middle" font-size="9" fill="#92400e">card-data specific</text>
+            <text x="155" y="225" text-anchor="middle" font-size="9" font-weight="600" fill="#1e3a8a">Auditor</text>
+            <text x="155" y="237" text-anchor="middle" font-size="9" font-weight="600" fill="#1e3a8a">attestation</text>
+            <text x="445" y="225" text-anchor="middle" font-size="9" font-weight="600" fill="#065f46">Risk register</text>
+            <text x="445" y="237" text-anchor="middle" font-size="9" font-weight="600" fill="#065f46">+ Annex A</text>
+            <text x="300" y="395" text-anchor="middle" font-size="9" font-weight="600" fill="#92400e">Network seg, no</text>
+            <text x="300" y="407" text-anchor="middle" font-size="9" font-weight="600" fill="#92400e">stored PAN</text>
+            <text x="220" y="290" text-anchor="middle" font-size="9" fill="#1e293b">+ Encryption at rest</text>
+            <text x="380" y="290" text-anchor="middle" font-size="9" fill="#1e293b">+ Vuln management</text>
+            <text x="300" y="195" text-anchor="middle" font-size="9" fill="#1e293b">+ Change mgmt</text>
+            <text x="300" y="252" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">SHARED CORE</text>
+            <text x="300" y="266" text-anchor="middle" font-size="9" fill="#0f172a">access control · MFA</text>
+            <text x="300" y="278" text-anchor="middle" font-size="9" fill="#0f172a">logging · backups</text>
+          </svg>
+          <figcaption>Most cloud configuration evidence (CloudTrail, IAM policies, encryption settings) maps to all three frameworks. Build the controls once; tag them per-framework for the auditor.</figcaption>
+        </figure>
 
         <section id="anti-patterns">
             <h2>Anti-patterns: things to stop doing</h2>
