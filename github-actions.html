@@ -372,6 +372,86 @@ jobs:
             </ul>
         </section>
 
+        <figure class="workflow-figure">
+          <svg viewBox="0 0 820 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sl-title sl-desc">
+            <title id="sl-title">DevSecOps shift-left timeline</title>
+            <desc id="sl-desc">Six SDLC stages from Plan to Monitor with the security controls that fit at each stage. Earlier in the pipeline = cheaper to fix.</desc>
+            <defs><marker id="sl-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1e293b"/></marker></defs>
+            <text x="410" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Shift-left — bug found in Plan costs $1, found in Monitor costs $1,000</text>
+            <line x1="40" y1="55" x2="780" y2="55" stroke="#1e293b" stroke-width="2" marker-end="url(#sl-arrow)"/>
+            <text x="40"  y="48" font-size="10" font-weight="600" fill="#10b981">CHEAPER TO FIX</text>
+            <text x="780" y="48" text-anchor="end" font-size="10" font-weight="600" fill="#dc2626">EXPENSIVE TO FIX</text>
+            <g transform="translate(20, 70)">
+              <rect width="120" height="46" rx="10" fill="#10b981"/>
+              <text x="60" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">PLAN</text>
+              <text x="60" y="38" text-anchor="middle" font-size="9" fill="#d1fae5">design / model</text>
+              <rect y="60" width="120" height="170" rx="8" fill="#fff" stroke="#10b981" stroke-width="1.5"/>
+              <text x="60" y="78" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">Threat model</text>
+              <text x="60" y="94" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">Trust boundaries</text>
+              <text x="60" y="110" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">Data classification</text>
+              <text x="60" y="135" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">STRIDE</text>
+              <text x="60" y="148" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">PASTA</text>
+            </g>
+            <g transform="translate(150, 70)">
+              <rect width="120" height="46" rx="10" fill="#06b6d4"/>
+              <text x="60" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">CODE</text>
+              <text x="60" y="38" text-anchor="middle" font-size="9" fill="#cffafe">developer IDE</text>
+              <rect y="60" width="120" height="170" rx="8" fill="#fff" stroke="#06b6d4" stroke-width="1.5"/>
+              <text x="60" y="78" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">SAST in IDE</text>
+              <text x="60" y="94" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">Pre-commit hooks</text>
+              <text x="60" y="110" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">Secrets scan</text>
+              <text x="60" y="135" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">Semgrep</text>
+              <text x="60" y="148" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">gitleaks</text>
+            </g>
+            <g transform="translate(280, 70)">
+              <rect width="120" height="46" rx="10" fill="#0ea5e9"/>
+              <text x="60" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">BUILD</text>
+              <text x="60" y="38" text-anchor="middle" font-size="9" fill="#e0f2fe">CI pipeline</text>
+              <rect y="60" width="120" height="170" rx="8" fill="#fff" stroke="#0ea5e9" stroke-width="1.5"/>
+              <text x="60" y="78" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">Dep scanning</text>
+              <text x="60" y="94" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">SBOM generation</text>
+              <text x="60" y="110" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">Image hardening</text>
+              <text x="60" y="135" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">Dependabot</text>
+              <text x="60" y="148" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">Trivy / Grype</text>
+            </g>
+            <g transform="translate(410, 70)">
+              <rect width="120" height="46" rx="10" fill="#6366f1"/>
+              <text x="60" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">TEST</text>
+              <text x="60" y="38" text-anchor="middle" font-size="9" fill="#e0e7ff">staging gates</text>
+              <rect y="60" width="120" height="170" rx="8" fill="#fff" stroke="#6366f1" stroke-width="1.5"/>
+              <text x="60" y="78" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">DAST / fuzz</text>
+              <text x="60" y="94" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">IaC scan</text>
+              <text x="60" y="110" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">License check</text>
+              <text x="60" y="135" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">Checkov</text>
+              <text x="60" y="148" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">tfsec</text>
+            </g>
+            <g transform="translate(540, 70)">
+              <rect width="120" height="46" rx="10" fill="#a855f7"/>
+              <text x="60" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">DEPLOY</text>
+              <text x="60" y="38" text-anchor="middle" font-size="9" fill="#f3e8ff">to cloud</text>
+              <rect y="60" width="120" height="170" rx="8" fill="#fff" stroke="#a855f7" stroke-width="1.5"/>
+              <text x="60" y="78" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">Signed artifacts</text>
+              <text x="60" y="94" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">Admission control</text>
+              <text x="60" y="110" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">Drift detection</text>
+              <text x="60" y="135" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">cosign / sigstore</text>
+              <text x="60" y="148" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">OPA / Gatekeeper</text>
+            </g>
+            <g transform="translate(670, 70)">
+              <rect width="120" height="46" rx="10" fill="#f59e0b"/>
+              <text x="60" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">MONITOR</text>
+              <text x="60" y="38" text-anchor="middle" font-size="9" fill="#fef3c7">production</text>
+              <rect y="60" width="120" height="170" rx="8" fill="#fff" stroke="#f59e0b" stroke-width="1.5"/>
+              <text x="60" y="78" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">Runtime CSPM</text>
+              <text x="60" y="94" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">CDR / EDR</text>
+              <text x="60" y="110" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">Anomaly detect</text>
+              <text x="60" y="135" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">CloudTrail / SIEM</text>
+              <text x="60" y="148" text-anchor="middle" font-size="9" fill="#475569" font-style="italic">GuardDuty / Falco</text>
+            </g>
+            <text x="410" y="290" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7" font-style="italic">A misconfig caught at Plan is a comment in a doc; the same misconfig caught at Monitor is an incident retro.</text>
+          </svg>
+          <figcaption>Every control should run as early in the pipeline as it can — but the late-stage controls don't go away, they catch what slipped through.</figcaption>
+        </figure>
+
         <section id="workflows-tour">
             <h2>A tour of CSOH's eight workflows</h2>
             <p>Each one solves a single, named problem. Click through to read the source — every file is heavily commented for new readers.</p>

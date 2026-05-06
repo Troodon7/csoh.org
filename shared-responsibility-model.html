@@ -390,6 +390,82 @@
             <h2>By provider: AWS, Azure, GCP differences</h2>
             <p>The shape is the same; the framings, language, and edge cases vary. Quick tour:</p>
 
+            <figure class="cnapp-figure">
+              <svg viewBox="0 0 820 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svc-title svc-desc">
+                <title id="svc-title">AWS / Azure / GCP service-name translator</title>
+                <desc id="svc-desc">Equivalent service names across the three major clouds, by category.</desc>
+                <text x="410" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Same shape, different names — service equivalents at a glance</text>
+                <rect x="20"  y="40" width="200" height="32" rx="6" fill="#f59e0b"/>
+                <rect x="225" y="40" width="200" height="32" rx="6" fill="#0ea5e9"/>
+                <rect x="430" y="40" width="200" height="32" rx="6" fill="#10b981"/>
+                <rect x="635" y="40" width="160" height="32" rx="6" fill="#475569"/>
+                <text x="120" y="61" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">AWS</text>
+                <text x="325" y="61" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">Azure</text>
+                <text x="530" y="61" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">GCP</text>
+                <text x="715" y="61" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Category</text>
+                <g font-size="11" fill="currentColor">
+                  <rect x="20" y="80" width="775" height="30" rx="4" fill="#f8fafc" opacity="0.5"/>
+                  <text x="120" y="100" text-anchor="middle">EC2</text>
+                  <text x="325" y="100" text-anchor="middle">Virtual Machines</text>
+                  <text x="530" y="100" text-anchor="middle">Compute Engine</text>
+                  <text x="715" y="100" text-anchor="middle" font-weight="600">VM compute</text>
+                </g>
+                <g font-size="11" fill="currentColor">
+                  <text x="120" y="130" text-anchor="middle">Lambda</text>
+                  <text x="325" y="130" text-anchor="middle">Azure Functions</text>
+                  <text x="530" y="130" text-anchor="middle">Cloud Functions</text>
+                  <text x="715" y="130" text-anchor="middle" font-weight="600">Serverless / FaaS</text>
+                </g>
+                <g font-size="11" fill="currentColor">
+                  <rect x="20" y="140" width="775" height="30" rx="4" fill="#f8fafc" opacity="0.5"/>
+                  <text x="120" y="160" text-anchor="middle">EKS / ECS / Fargate</text>
+                  <text x="325" y="160" text-anchor="middle">AKS / Container Apps</text>
+                  <text x="530" y="160" text-anchor="middle">GKE / Cloud Run</text>
+                  <text x="715" y="160" text-anchor="middle" font-weight="600">Containers</text>
+                </g>
+                <g font-size="11" fill="currentColor">
+                  <text x="120" y="190" text-anchor="middle">S3</text>
+                  <text x="325" y="190" text-anchor="middle">Blob Storage</text>
+                  <text x="530" y="190" text-anchor="middle">Cloud Storage</text>
+                  <text x="715" y="190" text-anchor="middle" font-weight="600">Object storage</text>
+                </g>
+                <g font-size="11" fill="currentColor">
+                  <rect x="20" y="200" width="775" height="30" rx="4" fill="#f8fafc" opacity="0.5"/>
+                  <text x="120" y="220" text-anchor="middle">RDS / Aurora</text>
+                  <text x="325" y="220" text-anchor="middle">SQL Database</text>
+                  <text x="530" y="220" text-anchor="middle">Cloud SQL / Spanner</text>
+                  <text x="715" y="220" text-anchor="middle" font-weight="600">Managed DB</text>
+                </g>
+                <g font-size="11" fill="currentColor">
+                  <text x="120" y="250" text-anchor="middle">IAM</text>
+                  <text x="325" y="250" text-anchor="middle">Entra ID + Azure RBAC</text>
+                  <text x="530" y="250" text-anchor="middle">Cloud IAM</text>
+                  <text x="715" y="250" text-anchor="middle" font-weight="600">Identity</text>
+                </g>
+                <g font-size="11" fill="currentColor">
+                  <rect x="20" y="260" width="775" height="30" rx="4" fill="#f8fafc" opacity="0.5"/>
+                  <text x="120" y="280" text-anchor="middle">VPC + SGs</text>
+                  <text x="325" y="280" text-anchor="middle">VNet + NSGs</text>
+                  <text x="530" y="280" text-anchor="middle">VPC + Firewall rules</text>
+                  <text x="715" y="280" text-anchor="middle" font-weight="600">Networking</text>
+                </g>
+                <g font-size="11" fill="currentColor">
+                  <text x="120" y="310" text-anchor="middle">CloudTrail + Config</text>
+                  <text x="325" y="310" text-anchor="middle">Activity Log + Defender</text>
+                  <text x="530" y="310" text-anchor="middle">Audit Logs + SCC</text>
+                  <text x="715" y="310" text-anchor="middle" font-weight="600">Audit / posture</text>
+                </g>
+                <g font-size="11" fill="currentColor">
+                  <rect x="20" y="320" width="775" height="30" rx="4" fill="#f8fafc" opacity="0.5"/>
+                  <text x="120" y="340" text-anchor="middle">KMS / Secrets Manager</text>
+                  <text x="325" y="340" text-anchor="middle">Key Vault</text>
+                  <text x="530" y="340" text-anchor="middle">Cloud KMS / Sec Mgr</text>
+                  <text x="715" y="340" text-anchor="middle" font-weight="600">Keys / secrets</text>
+                </g>
+              </svg>
+              <figcaption>Translation isn't 1:1 — Azure splits IAM into Entra ID (identity) and Azure RBAC (authorization), and "Cloud Run" sits halfway between Lambda and ECS. Use this to read across vendors, not as a hard equivalence.</figcaption>
+            </figure>
+
             <h3>AWS — the cleanest documented model</h3>
             <p>AWS coined the phrase "security <em>of</em> the cloud" vs. "security <em>in</em> the cloud" and runs with it. They publish a per-service responsibility breakdown — for each AWS service (EC2, RDS, S3, Lambda, etc.) they describe what they handle and what you handle. The documentation is good; the AWS Well-Architected Security Pillar codifies the customer side.</p>
             <p><strong>Notable AWS quirks:</strong></p>

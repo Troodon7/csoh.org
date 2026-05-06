@@ -434,6 +434,54 @@
           <cite>— what bundling actually buys you</cite>
         </blockquote>
 
+        <figure class="cnapp-figure">
+          <svg viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cc-title cc-desc">
+            <title id="cc-title">Cost vs coverage scatter for cloud security tools</title>
+            <desc id="cc-desc">Approximate position of major cloud security tool categories on a cost (Y) versus coverage (X) plane.</desc>
+            <text x="360" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Cost vs coverage — where cloud security tools land</text>
+            <line x1="80"  y1="50"  x2="80"  y2="400" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="80"  y1="400" x2="680" y2="400" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="40"  y="60"  font-size="10" font-weight="600" fill="currentColor" transform="rotate(-90, 40, 60)">HIGH</text>
+            <text x="40"  y="395" font-size="10" font-weight="600" fill="currentColor" transform="rotate(-90, 40, 395)">LOW</text>
+            <text x="14"  y="225" font-size="11" font-weight="700" fill="currentColor" transform="rotate(-90, 14, 225)">COST →</text>
+            <text x="80"  y="425" font-size="10" font-weight="600" fill="currentColor">NARROW</text>
+            <text x="680" y="425" text-anchor="end" font-size="10" font-weight="600" fill="currentColor">BROAD</text>
+            <text x="380" y="450" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor">COVERAGE →</text>
+            <line x1="80" y1="225" x2="680" y2="225" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="3 4" opacity="0.4"/>
+            <line x1="380" y1="50" x2="380" y2="400" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="3 4" opacity="0.4"/>
+            <text x="380" y="42" text-anchor="middle" font-size="9" fill="currentColor" opacity="0.55" font-style="italic">"premium broad" — best-in-class CNAPP</text>
+            <circle cx="180" cy="350" r="14" fill="#10b981"/>
+            <text x="180" y="354" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">OS</text>
+            <text x="180" y="380" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">Open-source</text>
+            <text x="180" y="392" text-anchor="middle" font-size="9" fill="currentColor" opacity="0.7">Prowler, ScoutSuite</text>
+            <circle cx="280" cy="280" r="14" fill="#0ea5e9"/>
+            <text x="280" y="284" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">PN</text>
+            <text x="280" y="310" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">Provider native</text>
+            <text x="280" y="322" text-anchor="middle" font-size="9" fill="currentColor" opacity="0.7">Security Hub, Defender</text>
+            <circle cx="320" cy="190" r="14" fill="#06b6d4"/>
+            <text x="320" y="194" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">D</text>
+            <text x="320" y="160" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">DSPM specialist</text>
+            <text x="320" y="172" text-anchor="middle" font-size="9" fill="currentColor" opacity="0.7">Cyera, Sentra, Symmetry</text>
+            <circle cx="400" cy="200" r="14" fill="#f59e0b"/>
+            <text x="400" y="204" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">CS</text>
+            <text x="400" y="170" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">Best-of-breed CSPM</text>
+            <text x="400" y="182" text-anchor="middle" font-size="9" fill="currentColor" opacity="0.7">point-tool vendors</text>
+            <circle cx="540" cy="120" r="20" fill="#f43f5e"/>
+            <text x="540" y="125" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">CNAPP</text>
+            <text x="540" y="92" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">Full CNAPP platform</text>
+            <text x="540" y="104" text-anchor="middle" font-size="9" fill="currentColor" opacity="0.7">Wiz, Orca, Prisma</text>
+            <circle cx="600" cy="100" r="14" fill="#dc2626"/>
+            <text x="600" y="104" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">SIEM</text>
+            <text x="600" y="74" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">SIEM / SOAR</text>
+            <text x="600" y="86" text-anchor="middle" font-size="9" fill="currentColor" opacity="0.7">Splunk, Sentinel</text>
+            <circle cx="220" cy="220" r="11" fill="#a855f7"/>
+            <text x="220" y="224" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">CIEM</text>
+            <text x="220" y="245" text-anchor="middle" font-size="9" font-weight="600" fill="currentColor">CIEM specialist</text>
+            <text x="220" y="256" text-anchor="middle" font-size="9" fill="currentColor" opacity="0.7">identity entitlements</text>
+          </svg>
+          <figcaption>Two patterns: open-source covers a slice cheaply, full CNAPP covers everything but costs the most. Most teams blend a CNAPP with the provider-native free tier and one specialist (usually DSPM or CIEM) for what the CNAPP doesn't do well.</figcaption>
+        </figure>
+
         <section id="cnapp">
             <h2>CNAPP — the umbrella category</h2>
             <p>Coined by Gartner in 2021. CNAPP doesn't replace any of the above — it bundles them. A CNAPP platform typically includes CSPM + CWPP + CIEM + IaC scanning + container vuln + (increasingly) DSPM, with a unified data model and one console.</p>
