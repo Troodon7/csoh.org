@@ -42,9 +42,9 @@ on:
         default: 'true'
 
 # Read-only on the auto-injected GITHUB_TOKEN. Every step that pushes
-# commits (SRI, sitemap, previews, etc.) uses an installation token minted
-# from the csoh-ci GitHub App, and the FTP deploy uses secrets.FTP_*. The
-# default token only needs to clone the repo.
+# commits (SRI, sitemap, previews, etc.) explicitly uses secrets.PAT_TOKEN,
+# and the FTP deploy uses secrets.FTP_*. The default token only needs to
+# clone the repo.
 permissions:
   contents: read
 
@@ -65,25 +65,14 @@ jobs:
   update-sri-and-previews:
     runs-on: ubuntu-latest
     steps:
-      # Mint a short-lived (~1h) installation token from the csoh-ci GitHub
-      # App. Replaces the long-lived PAT_TOKEN we used to use here. We need a
-      # non-default token (not the auto-injected GITHUB_TOKEN) because the
-      # housekeeping steps below push commits to main and we want those to
-      # trigger downstream workflows — GITHUB_TOKEN-authored commits do not.
-      - name: Mint installation token
-        id: app-token
-        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3  # v3.1.1
-        with:
-          app-id: ${{ secrets.CSOH_CI_APP_ID }}
-          private-key: ${{ secrets.CSOH_CI_PRIVATE_KEY }}
-
-      # App-authenticated full clone. fetch-depth: 0 = no shallow clone, so
-      # `git diff` and `git log` see full history (needed for the mtime
-      # restore step and the diff-against-original-SHA checks below).
+      # PAT-authenticated full clone. We need the PAT (not the default
+      # GITHUB_TOKEN) because some of the steps below push commits and we
+      # want those to fire downstream workflows. fetch-depth: 0 = no shallow
+      # clone, so `git diff` and `git log` see full history.
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
-          token: ${{ steps.app-token.outputs.token }}
+          token: ${{ secrets.PAT_TOKEN }}
           fetch-depth: 0
 
       # Remember the commit SHA we started from. Later steps push new commits
@@ -326,18 +315,17 @@ jobs:
           find img/previews -name "*.jpg" -exec jpegoptim --strip-all --max=85 {} \;
 
       # Commit and push the new preview JPGs + the mapping file. We swap the
-      # remote URL to use a token-authenticated form because the App token
-      # we minted at the top of the job has permissions the default origin
-      # doesn't (and triggers downstream workflows on the resulting commit).
+      # remote URL to use a token-authenticated form because PAT_TOKEN may
+      # have permissions the default origin doesn't.
       - name: Commit and push preview images
         if: steps.check_previews.outputs.missing == 'true'
         env:
-          APP_TOKEN: ${{ steps.app-token.outputs.token }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Rewrite the origin URL to embed the App token for HTTPS push auth.
-          git remote set-url origin "https://x-access-token:${APP_TOKEN}@github.com/${{ github.repository }}.git"
+          # Rewrite the origin URL to embed the PAT for HTTPS push auth.
+          git remote set-url origin "https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git"
           # `|| true` lets the step continue if there are no JPGs to add.
           git add img/previews/*.jpg || true
           git add preview-mapping.json || true
