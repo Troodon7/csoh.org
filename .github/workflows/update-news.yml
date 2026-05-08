@@ -52,12 +52,12 @@ jobs:
       # Mint a short-lived (~1h) installation token from the csoh-ci GitHub
       # App. The App's permissions (contents:write, pull-requests:write) are
       # scoped to this repo only — much smaller blast radius than a PAT if
-      # the token leaks. APPROVAL_PAT_TOKEN below is still a PAT: GitHub
-      # blocks self-approval, AND empirically GitHub's auto-merge feature
-      # does NOT honor the ruleset bypass list for the approval requirement
-      # (verified in PR #650, 2026-05-08 — checks all green, App on bypass,
-      # auto-merge stayed BLOCKED on REVIEW_REQUIRED). So a second identity
-      # approving the PR is the only way to drive auto-merge to completion.
+      # the token leaks. CSOH_PAT below is still a PAT: GitHub blocks
+      # self-approval, AND empirically GitHub's auto-merge feature does NOT
+      # honor the ruleset bypass list for the approval requirement (verified
+      # in PR #650, 2026-05-08 — checks all green, App on bypass, auto-merge
+      # stayed BLOCKED on REVIEW_REQUIRED). So a second identity approving
+      # the PR is the only way to drive auto-merge to completion.
       - name: Mint installation token
         id: app-token
         uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3  # v3.1.1
@@ -149,18 +149,20 @@ jobs:
           delete-branch: true                            # clean up after merge
           labels: automated, content
 
-      # Approve our own PR using a SECOND PAT (different identity), because
-      # GitHub won't let an actor approve a PR it opened. APPROVAL_PAT_TOKEN
-      # belongs to a separate identity for this single purpose. Note: the
-      # `csoh-ci` App is on the main-branch ruleset bypass list, but
-      # auto-merge does not consult the bypass list when checking the
-      # approval requirement — only direct API merges do. So we still need
-      # this approval step to drive auto-merge below to completion.
+      # Approve our own PR using a fine-grained org-level PAT (different
+      # identity), because GitHub won't let an actor approve a PR it opened.
+      # CSOH_PAT belongs to a separate identity for this single purpose
+      # and should be scoped to csoh.org with permissions limited to
+      # `Pull requests: Read & Write`. Note: the `csoh-ci` App is on the
+      # main-branch ruleset bypass list, but auto-merge does not consult
+      # the bypass list when checking the approval requirement — only
+      # direct API merges do. So this approval step is still needed to
+      # drive auto-merge below to completion.
       - name: Auto approve
         if: steps.cpr.outputs.pull-request-number != ''
         run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
         env:
-          GH_TOKEN: ${{ secrets.APPROVAL_PAT_TOKEN }}
+          GH_TOKEN: ${{ secrets.CSOH_PAT }}
 
       # Only enable auto-merge when the diff is purely news content. If the
       # script accidentally touches anything else, the PR stays open until a
