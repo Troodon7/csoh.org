@@ -183,7 +183,7 @@ CI workflows authenticate to GitHub via a **GitHub App** (`csoh-ci`) rather than
 
 | Workflow | Auth | Pushes to main? |
 |----------|------|------|
-| `update-news.yml` | `csoh-ci` App | via PR + auto-merge (App bypasses approval rule) |
+| `update-news.yml` | `csoh-ci` App + `APPROVAL_PAT_TOKEN` (for auto-approve) | via PR + auto-merge |
 | `normalize-urls.yml` | `csoh-ci` App | via PR (human reviews + merges) |
 | `site-update-deploy.yml` | `csoh-ci` App | direct (App is on ruleset bypass) |
 | `manual-deploy.yml` | none (FTP only) | no |
@@ -237,19 +237,22 @@ Every workflow that needs write access starts with the same step:
 
 Subsequent steps reference `${{ steps.app-token.outputs.token }}` wherever they previously used `${{ secrets.PAT_TOKEN }}` (e.g., `actions/checkout`'s `token:` input, `peter-evans/create-pull-request`'s `token:` input, `git remote set-url origin "https://x-access-token:${TOKEN}@..."`).
 
-### How the App auto-merges its own PRs
+### Why one PAT remains: GitHub auto-merge does not honor ruleset bypass
 
-GitHub does not allow an actor to approve its own PRs (this restriction applies to GitHub Apps too — an App that opens a PR cannot approve it). The original migration kept a small second-identity PAT (`APPROVAL_PAT_TOKEN`) just to satisfy the "1 required approval" rule on `main`.
+GitHub does not allow an actor to approve its own PRs (this restriction applies to GitHub Apps too — an App that opens a PR cannot approve it). The main-branch ruleset has a `pull_request` rule requiring 1 approval before merging.
 
-That PAT has been removed. Instead, the `csoh-ci` App is on the main-branch ruleset's **bypass list** with mode `Always`. Bypass actors bypass *all* rules in the ruleset — including the `pull_request` rule's approval requirement. So the App can:
+We initially expected that putting the `csoh-ci` App on the ruleset's **bypass list** with mode `Always` would let the App auto-merge its own PRs without any approval — the bypass should apply to *all* rules including `pull_request`, and the merge action is performed by the App. **Empirically, this is not the case.** Verified on 2026-05-08 with PR #650:
 
-- Open a PR
-- Enable auto-merge
-- Auto-merge without any external approval, as soon as required status checks pass
+- All required status checks: passing
+- App on bypass list with `mode: always`
+- Auto-merge enabled by the App
+- Result: `mergeStateStatus: BLOCKED`, `reviewDecision: REVIEW_REQUIRED` — auto-merge sat indefinitely
 
-This works because the App's identity is only ever minted from inside this repo's workflow files. To change what the App pushes, you have to modify a workflow file (or `update_news.py`, etc.), and that change must itself go through the normal human-review PR flow — humans cannot bypass the same ruleset the App can. So the App's "approval bypass" doesn't undermine code review for human-authored changes.
+GitHub's auto-merge feature evaluates `reviewDecision` independently and does not consult the bypass list. (Bypass *does* work for direct API merges by the same actor — it's specific to the auto-merge scheduler.) So `APPROVAL_PAT_TOKEN` remains: a narrowly scoped PAT belonging to a separate identity, used exclusively to approve PRs that the App has just opened, satisfying the approval rule so that auto-merge can fire.
 
-`normalize-urls.yml` keeps its "human reviews + merges" flow; the auto-approve step there was a one-click convenience and added no real safety. Removing it is a strict improvement.
+`normalize-urls.yml` keeps its "human reviews + merges" flow without an auto-approve step; the auto-approve there was a one-click convenience and added no real safety. Removing it is a strict improvement (humans now click both "approve" and "merge" instead of just "merge").
+
+`site-update-deploy.yml` is unaffected — it does direct in-place commits to `main` (not via PR), and the App's bypass *does* apply to direct pushes.
 
 ### Repository secrets currently in use
 
@@ -257,10 +260,13 @@ This works because the App's identity is only ever minted from inside this repo'
 |--------|---------|------|
 | `CSOH_CI_CLIENT_ID` | GitHub App's Client ID (`Iv23.*`) | identifier (not sensitive on its own) |
 | `CSOH_CI_PRIVATE_KEY` | GitHub App's RSA private key | high-sensitivity |
+| `APPROVAL_PAT_TOKEN` | Approve App-opened PRs (auto-merge driver) | medium-sensitivity (narrow scope) |
 | `FTP_HOST`, `FTP_USER`, `FTP_PASS` | FTPS deploy credentials | high-sensitivity |
 | `SSH_PRIVATE_KEY` | Reserved for future use | high-sensitivity |
 
-`PAT_TOKEN` (the original CI PAT), `CSOH_CI_APP_ID` (deprecated numeric input, replaced by `CSOH_CI_CLIENT_ID`), and `APPROVAL_PAT_TOKEN` (former self-approve PAT, eliminated by the ruleset bypass) have all been removed.
+`PAT_TOKEN` (the original CI PAT) and `CSOH_CI_APP_ID` (deprecated numeric input, replaced by `CSOH_CI_CLIENT_ID`) have been removed.
+
+`APPROVAL_PAT_TOKEN` should ideally be a **fine-grained PAT** scoped to `CloudSecurityOfficeHours/csoh.org` only, with permissions limited to **Pull requests: Read & Write** (no contents, no actions, no anything else). Even if it leaks, the only damage an attacker can do is approve PRs — they cannot push, merge by themselves, or read code beyond what's already in the public repo.
 
 ### Rotation guidance
 
@@ -268,6 +274,7 @@ This works because the App's identity is only ever minted from inside this repo'
 |------|-----------------|---------|
 | App installation token | Automatic, every ~1 hour | None — handled by GitHub |
 | App private key | Annually or on suspected compromise | Generate new key in App settings; replace `CSOH_CI_PRIVATE_KEY` secret; revoke old key |
+| `APPROVAL_PAT_TOKEN` | Every 6–12 months | Generate new fine-grained PAT (scope: pull-requests: write only); replace secret |
 | `FTP_PASS` | Every 6–12 months | Rotate via hosting panel; replace secret |
 
 ---
