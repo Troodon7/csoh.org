@@ -81,11 +81,12 @@ jobs:
           }
           # LFTP_CONN is the connection setup string passed to every lftp
           # invocation. Each `set` is a session option:
-          #   ssl:verify-certificate no  — don't fail on self-signed certs
+          #   ssl:verify-certificate yes — validate cert chain + hostname.
+          #     Was `no` until 2026-05-08; closes finding 1.2.
           #   ftp:ssl-force true         — refuse plain-text FTP
           #   ftp:ssl-protect-data true  — encrypt the data channel too
           # `open host` connects (credentials read from ~/.netrc).
-          LFTP_CONN="set ssl:verify-certificate no; set ftp:ssl-force true; set ftp:ssl-protect-data true; open ${FTP_HOST}"
+          LFTP_CONN="set ssl:verify-certificate yes; set ftp:ssl-force true; set ftp:ssl-protect-data true; open ${FTP_HOST}"
           echo "==> Deploying all site files..."
 
           # `mirror -R` = REVERSE mirror — local → remote (the default is

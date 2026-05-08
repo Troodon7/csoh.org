@@ -439,12 +439,17 @@ jobs:
           # net:timeout      — fail any operation stuck >30s instead of hanging
           # net:max-retries  — try twice then give up rather than retrying forever
           # net:idle         — close idle control connections after 30s
-          # ssl:* / ftp:ssl  — preserved from the previous config
+          # ssl:verify-certificate yes — actually validate the FTP host's TLS
+          #   cert (chain + hostname). Was previously `no`; flipped to `yes`
+          #   on 2026-05-08 after FTP_HOST was updated to match the cert's
+          #   subject. Closes finding 1.2 from the security review.
+          # ftp:ssl-force          — refuse plaintext FTP
+          # ftp:ssl-protect-data   — encrypt the data channel too
           LFTP_CONN="set net:timeout 30; \
                      set net:max-retries 2; \
                      set net:reconnect-interval-base 5; \
                      set net:idle 30; \
-                     set ssl:verify-certificate no; \
+                     set ssl:verify-certificate yes; \
                      set ftp:ssl-force true; \
                      set ftp:ssl-protect-data true; \
                      open ${FTP_HOST}"
