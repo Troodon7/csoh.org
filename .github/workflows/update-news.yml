@@ -25,11 +25,11 @@ on:
 
 # Read-only on the auto-injected GITHUB_TOKEN. Every step that needs write
 # access (push commits, open PRs, enable auto-merge) uses an installation
-# token from the csoh-ci GitHub App. APPROVAL_PAT_TOKEN is still in play
-# for the auto-approve step because GitHub's auto-merge feature does NOT
-# honor the App's ruleset bypass when evaluating the "1 required approval"
-# rule (empirically verified, see "Auto approve" step comments). The
-# default token never needs more than "clone the repo."
+# token from the csoh-ci GitHub App. CSOH_PAT (a fine-grained org-scoped
+# PAT) drives the auto-approve step because GitHub's auto-merge feature
+# does NOT honor the App's ruleset bypass when evaluating the "1 required
+# approval" rule (empirically verified, see "Auto approve" step comments).
+# The default token never needs more than "clone the repo."
 permissions:
   contents: read
 
