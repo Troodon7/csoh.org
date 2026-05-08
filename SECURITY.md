@@ -290,9 +290,11 @@ GitHub's auto-merge feature evaluates `reviewDecision` independently and does no
 ### FTPS Deployment
 
 The site deploys via FTPS (FTP over TLS) using `lftp` from GitHub Actions:
-- `ftp:ssl-force true` — enforces TLS encryption on the data channel
+- `ssl:verify-certificate yes` — **validates the FTP host's TLS cert chain and hostname.** An on-path attacker cannot present a forged cert and capture the FTP credentials.
+- `ftp:ssl-force true` — enforces TLS encryption on the control channel (refuses plaintext FTP)
 - `ftp:ssl-protect-data true` — encrypts file transfers, not just the control channel
-- Credentials are stored as GitHub repository secrets (`FTP_HOST`, `FTP_USER`, `FTP_PASS`)
+- Credentials are written to a temporary `~/.netrc` (mode 600) at job start and lftp picks them up from there. They are **not** passed on the command line, so `FTP_PASS` never appears in `/proc/<pid>/cmdline`.
+- Credentials are stored as GitHub repository secrets (`FTP_HOST`, `FTP_USER`, `FTP_PASS`).
 
 The deploy workflow (`site-update-deploy.yml`) authenticates to GitHub via the `csoh-ci` App for its housekeeping commits (SRI hash updates, sitemap refreshes, etc.) — see [CI/CD Authentication](#cicd-authentication) above. FTP credentials are entirely separate and not affected by App-token rotation.
 
