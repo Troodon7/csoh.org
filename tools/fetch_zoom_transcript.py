@@ -56,8 +56,23 @@ ZOOM_OAUTH_URL = "https://zoom.us/oauth/token"
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
+# Allowlist of keys this script will consume from .env. Anything else in
+# the file is ignored — protects against an attacker (or a careless edit)
+# slipping LD_PRELOAD, PATH, PYTHONPATH, etc. into .env and altering how
+# this script runs. Practical risk is near zero (you author .env yourself),
+# but the cost of the allowlist is one tiny set lookup.
+_DOTENV_ALLOWED_KEYS = frozenset({
+    "ZOOM_ACCOUNT_ID",
+    "ZOOM_CLIENT_ID",
+    "ZOOM_CLIENT_SECRET",
+})
+
+
 def load_dotenv(path: Path) -> None:
-    """Populate os.environ from a KEY=VALUE file. Silent if missing."""
+    """Populate os.environ from a KEY=VALUE file. Silent if missing.
+
+    Only keys in _DOTENV_ALLOWED_KEYS are loaded; everything else is dropped.
+    """
     if not path.exists():
         return
     for line in path.read_text(encoding="utf-8").splitlines():
@@ -66,6 +81,8 @@ def load_dotenv(path: Path) -> None:
             continue
         k, _, v = s.partition("=")
         k = k.strip()
+        if k not in _DOTENV_ALLOWED_KEYS:
+            continue
         v = v.strip().strip('"').strip("'")
         # Don't override already-set env vars.
         os.environ.setdefault(k, v)
@@ -180,6 +197,20 @@ def transcript_file(meeting: dict) -> dict | None:
 
 
 def download_file(url: str, token: str) -> bytes:
+    """Download from a Zoom-controlled URL with the bearer token attached.
+
+    SECURITY: validate the host before sending the bearer. If Zoom ever
+    returns a `download_url` pointing somewhere off-domain (compromised
+    response, MITM, parser bug), refusing to send the bearer prevents
+    leaking the token to the wrong host. We accept *.zoom.us and zoom.us.
+    """
+    parsed = urllib.parse.urlparse(url)
+    host = (parsed.hostname or "").lower()
+    if host != "zoom.us" and not host.endswith(".zoom.us"):
+        raise ValueError(
+            f"Refusing to download from non-Zoom host {host!r}; "
+            "expected zoom.us or *.zoom.us"
+        )
     req = urllib.request.Request(
         url,
         headers={"Authorization": f"Bearer {token}"},

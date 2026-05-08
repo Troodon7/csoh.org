@@ -34,7 +34,7 @@ style-src 'self';
 img-src 'self' https://csoh.org https://img.youtube.com https://i.ytimg.com data:;
 font-src 'self';
 connect-src 'self';
-frame-src https://www.youtube.com https://web.archive.org https://www.wired.com;
+frame-src https://www.youtube.com https://web.archive.org;
 frame-ancestors 'none';
 base-uri 'self';
 form-action 'self';
@@ -48,6 +48,12 @@ Key points:
 - **`object-src 'none'`** — blocks Flash, Java applets, and other plugin content
 - Only YouTube and Web Archive are allowed as iframe sources
 - Only YouTube thumbnail domains are allowed as external image sources
+- The `.htaccess` and `nginx.conf` CSPs are byte-identical (no drift)
+
+In addition to CSP, the following cross-origin isolation headers are set:
+
+- `Cross-Origin-Opener-Policy: same-origin` — only same-origin windows can hold a reference to ours; defends against cross-origin info leaks via `window.opener` and Spectre-class side channels.
+- `Cross-Origin-Resource-Policy: same-origin` — resources from this origin can only be loaded by same-origin contexts; stops arbitrary sites from embedding our images/scripts/etc.
 
 ---
 
