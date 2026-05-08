@@ -80,7 +80,20 @@ def resolve_url(url: str, timeout: int = 5) -> Tuple[str, Optional[str]]:
     """Follow redirects and return (final_url, error_or_none).
 
     Uses HEAD first; falls back to GET if HEAD gets 405 Method Not Allowed.
+
+    SECURITY: only http/https schemes are accepted. urllib.request.urlopen
+    will happily handle file://, ftp://, gopher://, etc., which would let a
+    malicious URL in HTML trigger SSRF / local-file-read on the CI runner
+    (and potentially leak content into a PR comment via the safety report).
+    Reject anything that isn't a real web URL before issuing any request.
     """
+    try:
+        scheme = urlparse(url).scheme.lower()
+    except Exception:
+        return url, "unparseable URL"
+    if scheme not in {"http", "https"}:
+        return url, f"unsupported scheme: {scheme or '(none)'}"
+
     headers = {
         "User-Agent": (
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "

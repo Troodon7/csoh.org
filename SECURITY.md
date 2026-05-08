@@ -183,8 +183,8 @@ CI workflows authenticate to GitHub via a **GitHub App** (`csoh-ci`) rather than
 
 | Workflow | Auth | Pushes to main? |
 |----------|------|------|
-| `update-news.yml` | `csoh-ci` App + `APPROVAL_PAT_TOKEN` | via PR + auto-merge |
-| `normalize-urls.yml` | `csoh-ci` App + `APPROVAL_PAT_TOKEN` | via PR (human review) |
+| `update-news.yml` | `csoh-ci` App | via PR + auto-merge (App bypasses approval rule) |
+| `normalize-urls.yml` | `csoh-ci` App | via PR (human reviews + merges) |
 | `site-update-deploy.yml` | `csoh-ci` App | direct (App is on ruleset bypass) |
 | `manual-deploy.yml` | none (FTP only) | no |
 | `lint.yml`, `validate-html.yml`, `check-broken-links.yml`, `check-url-safety.yml` | auto-injected `GITHUB_TOKEN` | no |
@@ -237,11 +237,19 @@ Every workflow that needs write access starts with the same step:
 
 Subsequent steps reference `${{ steps.app-token.outputs.token }}` wherever they previously used `${{ secrets.PAT_TOKEN }}` (e.g., `actions/checkout`'s `token:` input, `peter-evans/create-pull-request`'s `token:` input, `git remote set-url origin "https://x-access-token:${TOKEN}@..."`).
 
-### Why one PAT remains
+### How the App auto-merges its own PRs
 
-`APPROVAL_PAT_TOKEN` is a narrowly scoped PAT belonging to a separate identity, used exclusively to approve PRs that the App has just opened. GitHub does not allow an actor to approve its own PRs, and this restriction applies to GitHub Apps too — the App that opens the PR cannot approve it. Until we move to **rulesets-based bypass for bot-only path diffs** (where a ruleset would let the App bypass the "requires approval" check on PRs whose diff is contained to a specific allowlist of files), `APPROVAL_PAT_TOKEN` covers the gap.
+GitHub does not allow an actor to approve its own PRs (this restriction applies to GitHub Apps too — an App that opens a PR cannot approve it). The original migration kept a small second-identity PAT (`APPROVAL_PAT_TOKEN`) just to satisfy the "1 required approval" rule on `main`.
 
-The follow-up work is tracked in the security review at `seo-audits/SECURITY_REVIEW_2026-05-07.md` (recommendation 9). When that lands, the PAT can be deleted entirely.
+That PAT has been removed. Instead, the `csoh-ci` App is on the main-branch ruleset's **bypass list** with mode `Always`. Bypass actors bypass *all* rules in the ruleset — including the `pull_request` rule's approval requirement. So the App can:
+
+- Open a PR
+- Enable auto-merge
+- Auto-merge without any external approval, as soon as required status checks pass
+
+This works because the App's identity is only ever minted from inside this repo's workflow files. To change what the App pushes, you have to modify a workflow file (or `update_news.py`, etc.), and that change must itself go through the normal human-review PR flow — humans cannot bypass the same ruleset the App can. So the App's "approval bypass" doesn't undermine code review for human-authored changes.
+
+`normalize-urls.yml` keeps its "human reviews + merges" flow; the auto-approve step there was a one-click convenience and added no real safety. Removing it is a strict improvement.
 
 ### Repository secrets currently in use
 
@@ -249,11 +257,10 @@ The follow-up work is tracked in the security review at `seo-audits/SECURITY_REV
 |--------|---------|------|
 | `CSOH_CI_CLIENT_ID` | GitHub App's Client ID (`Iv23.*`) | identifier (not sensitive on its own) |
 | `CSOH_CI_PRIVATE_KEY` | GitHub App's RSA private key | high-sensitivity |
-| `APPROVAL_PAT_TOKEN` | Self-approve bot PRs | medium-sensitivity (narrow scope) |
 | `FTP_HOST`, `FTP_USER`, `FTP_PASS` | FTPS deploy credentials | high-sensitivity |
 | `SSH_PRIVATE_KEY` | Reserved for future use | high-sensitivity |
 
-`PAT_TOKEN` (the original CI PAT) and `CSOH_CI_APP_ID` (the deprecated numeric input, replaced by `CSOH_CI_CLIENT_ID`) have been removed.
+`PAT_TOKEN` (the original CI PAT), `CSOH_CI_APP_ID` (deprecated numeric input, replaced by `CSOH_CI_CLIENT_ID`), and `APPROVAL_PAT_TOKEN` (former self-approve PAT, eliminated by the ruleset bypass) have all been removed.
 
 ### Rotation guidance
 
@@ -261,7 +268,6 @@ The follow-up work is tracked in the security review at `seo-audits/SECURITY_REV
 |------|-----------------|---------|
 | App installation token | Automatic, every ~1 hour | None — handled by GitHub |
 | App private key | Annually or on suspected compromise | Generate new key in App settings; replace `CSOH_CI_PRIVATE_KEY` secret; revoke old key |
-| `APPROVAL_PAT_TOKEN` | Every 6–12 months | Generate new fine-grained PAT; replace secret |
 | `FTP_PASS` | Every 6–12 months | Rotate via hosting panel; replace secret |
 
 ---

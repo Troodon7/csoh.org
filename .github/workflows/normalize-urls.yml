@@ -38,9 +38,9 @@ jobs:
 
     steps:
       # Mint a short-lived installation token from the csoh-ci GitHub App.
-      # Replaces the PAT_TOKEN we used to use to push the normalize-urls
-      # branch and open the PR. APPROVAL_PAT_TOKEN below is still a PAT —
-      # GitHub blocks self-approval, so the App can't approve its own PR.
+      # Used to push the normalize-urls branch and open the PR. We do NOT
+      # auto-approve the PR — a human reads the diff before merging because
+      # cross-domain redirects need attention.
       - name: Mint installation token
         id: app-token
         uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3  # v3.1.1
@@ -117,15 +117,12 @@ jobs:
           delete-branch: true
           labels: automated, content
 
-      # Approve via the second PAT (so we don't violate "can't approve your
-      # own PR" rules). Note we DO NOT auto-merge here — a human reviews
-      # before this lands, because cross-domain redirects can change link
-      # destinations in ways that need attention.
-      - name: Auto approve
-        if: steps.cpr.outputs.pull-request-number != ''
-        run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
-        env:
-          GH_TOKEN: ${{ secrets.APPROVAL_PAT_TOKEN }}
+      # No auto-approve step. We deliberately leave the PR un-approved so
+      # that a human has to read the diff and click both "approve" and
+      # "merge" — important because cross-domain redirects can change link
+      # destinations in ways that need attention. (The earlier auto-approve
+      # via APPROVAL_PAT_TOKEN was just a one-click convenience and added
+      # no real safety; removing it is a strict improvement.)
 
       # Save the normalization log too — useful when reviewing the PR to see
       # exactly what the script did and why.

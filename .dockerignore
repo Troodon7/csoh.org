@@ -1,8 +1,63 @@
+# Files excluded from the Docker build context.
+#
+# The build context is what `docker build` sends to the daemon — anything
+# listed here is never seen by COPY in the Dockerfile, so it cannot end up
+# in any image layer (even one that's later deleted, since deleted files
+# still live in lower layers and can be extracted).
+#
+# Security-critical exclusions go first: secrets, private keys, anything
+# that could leak credentials or internal data if the image were exfiltrated.
+
+# --- Secrets and keys (must never enter the image) ---
+.env
+.env.*
+*.pem
+*.key
+*.crt
+.aws/
+.ssh/
+
+# --- Repo metadata and CI ---
 .git
 .github
 .claude
+.gitignore
+.dockerignore
+.editorconfig
+.lychee.toml
+.yamllint.yml
+
+# --- Python build / cache / dev artefacts ---
 __pycache__
 *.pyc
-chat-screenshots
-chat-url-safety-report.txt
+*.pyo
+.venv
+.ruff_cache
+pyproject.toml
+
+# --- Internal tooling and audit reports (not for serving) ---
+tools/
+seo-audits/
+*-report.txt
+preview-check.txt
+normalize-output.txt
+
+# --- Docs and contributor files ---
+README.md
+LICENSE
+CONTRIBUTING*.md
+DEVELOPMENT.md
+SECURITY.md
+RSS_FEED_README.md
+
+# --- Docker-specific files ---
+Dockerfile
+docker-compose.yml
+nginx.conf
+
+# --- macOS metadata ---
 .DS_Store
+
+# --- Large dev-only directories that don't need to be in the image ---
+chat-screenshots
+email-screenshots
