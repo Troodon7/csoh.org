@@ -69,7 +69,10 @@ The `.htaccess` and `nginx.conf` block direct access to sensitive files:
 | `.*-report\.txt$` | 403 | Internal URL safety report files |
 | `\.(bak\|config\|sh\|sql\|log\|ini)$` | 403 | Backups, configs, scripts, logs |
 
-**Exceptions:** `preview-mapping.json` is explicitly allowed because the site's JavaScript needs to fetch it.
+**Exceptions:** three JSON files are explicitly allowlisted because the site needs to fetch them:
+- `preview-mapping.json` — resource preview thumbnails (`main.js`)
+- `manifest.json` — PWA "Add to Home Screen" metadata
+- `meetings-search-index.json` — meetings.html full-text search index (`meetings.js`)
 
 Directory listing is disabled globally (`Options -Indexes` / `autoindex off`).
 
@@ -152,6 +155,7 @@ All third-party GitHub Actions are pinned to exact commit SHAs rather than mutab
 | `actions/setup-python` | `a309ff8b426b58ec0e2a45f0f869d46889d02405` | v6.2.0 |
 | `actions/upload-artifact` | `bbbca2ddaa5d8feaa63e36b76fdaad77386f024f` | v7.0.0 |
 | `actions/github-script` | `ed597411d8f924073f98dfc5c65a23a2325f34cd` | v8.0.0 |
+| `actions/cache` | `27d5ce7f107fe9357f9df03efb73ab90386fccae` | v5.0.5 |
 | `actions/create-github-app-token` | `1b10c78c7865c340bc4f6099eb2f838309f1e8c3` | v3.1.1 |
 | `peter-evans/create-pull-request` | `c0f553fe549906ede9cf27b5156039d195d2ece0` | v8.1.0 |
 | `peter-evans/enable-pull-request-automerge` | `a660677d5469627102a1c1e11409dd063606628d` | v3.0.0 |
@@ -160,12 +164,10 @@ All third-party GitHub Actions are pinned to exact commit SHAs rather than mutab
 | `lycheeverse/lychee-action` | `8646ba30535128ac92d33dfc9133794bfdd9b411` | v2.8.0 |
 | `Cyb3r-Jak3/html5validator-action` | `443b108eb8e134b63a1f8a8ba0c942d552608ed7` | master 2025-09-19 |
 
-To update a pinned action, look up the commit SHA for the new tag:
+Every third-party action used by the workflows is pinned by SHA — no remaining `@v*` major-tag references. To update a pinned action, look up the commit SHA for the new tag:
 ```bash
 curl -s "https://api.github.com/repos/actions/checkout/git/ref/tags/v6.0.2" | grep sha
 ```
-
-The one exception is `actions/cache@v4` (used in `check-broken-links.yml`), which is currently pinned to a major-version tag rather than a SHA — tracked for tightening.
 
 ### No External Dependencies (Client-Side)
 
@@ -339,6 +341,6 @@ We take security seriously — especially as a cloud security community.
 
 | Item | Status | Notes |
 |------|--------|-------|
-| FTP cert verification disabled | Accepted risk | `ssl:verify-certificate no` is set because the server lacks an FQDN-matching certificate. TLS encryption is still enforced. |
 | `Server: LiteSpeed` on HTTP redirect | Hosting limitation | The HTTP (port 80) redirect response leaks the server type. The HTTPS response correctly strips it. Requires hosting panel config to suppress. |
+| `cancel-in-progress: true` on deploy | Accepted trade-off | If a newer deploy is queued while one is running, the older run is cancelled mid-mirror. Avoids stale-content races but can leave the FTP server with a few files at the new state and others at the old until the next run completes. Worth revisiting if/when we move to a blue-green deploy. |
 | `http://flaws.cloud` link | Intentional | This AWS security training site only serves over HTTP. The link is intentional. |

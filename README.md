@@ -587,7 +587,7 @@ A manual-trigger-only workflow that force-pushes the entire site to the FTP host
 
 ### Setup Note
 
-Workflows use a **Personal Access Token (PAT)** stored as a GitHub repo secret called `PAT_TOKEN`. If workflows start failing with permission errors, the PAT may need to be rotated — see setup instructions in [tools/UPDATE_NEWS_README.md](tools/UPDATE_NEWS_README.md#setup-requirements).
+Workflows authenticate to GitHub via a **GitHub App** (`csoh-ci`) that mints short-lived (~1h) installation tokens at job start, plus a small fine-grained PAT (`CSOH_PAT`) used only to approve App-opened PRs (GitHub blocks self-approval). The full model — App config, ruleset bypass, why one PAT remains — is documented in [SECURITY.md → CI/CD Authentication](SECURITY.md#cicd-authentication). Setup / rotation steps for the PAT are in [tools/UPDATE_NEWS_README.md](tools/UPDATE_NEWS_README.md#setup-requirements).
 
 ---
 

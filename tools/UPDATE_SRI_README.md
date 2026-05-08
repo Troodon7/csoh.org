@@ -147,30 +147,27 @@ openssl dgst -sha384 -binary style.css | openssl base64 -A
 | CSS not loading on mobile | SRI fingerprint doesn't match the file content | Run `python3 update_sri.py` and deploy |
 | CSS not loading despite correct hash | `crossorigin="anonymous"` attribute present | Remove `crossorigin` from the HTML tags — the script does this automatically |
 | Visitors seeing old styles after a CSS update | Browser cache serving the old file | The `?v=` cache-busting parameter should prevent this — run `update_sri.py` to regenerate |
-| Workflow can't push commits | Missing or expired PAT | Create a new fine-grained PAT with Contents permissions and save it as the `PAT_TOKEN` repo secret |
+| Workflow fails at "Mint installation token" | App private key missing/expired/revoked | Generate a new key in the `csoh-ci` GitHub App settings and update the `CSOH_CI_PRIVATE_KEY` org-level secret |
+| Workflow fails at "Auto approve" with HTTP 401 | `CSOH_PAT` expired or revoked | Regenerate the fine-grained PAT (see `UPDATE_NEWS_README.md` → Setup Requirements) and replace the `CSOH_PAT` org secret |
 
 ---
 
 ## Setup Requirements
 
-### GitHub Secrets
+### Authentication and secrets
 
-The workflow requires the following secrets under **Settings > Secrets and variables > Actions**:
+The workflow now uses a **GitHub App** (`csoh-ci`) rather than a long-lived PAT for committing back to `main` and managing PRs. The full model is documented in [SECURITY.md → CI/CD Authentication](../SECURITY.md#cicd-authentication). What matters here:
 
-| Secret | Purpose |
-|--------|---------|
-| `PAT_TOKEN` | Fine-grained PAT for committing SRI/preview changes and managing PRs |
-| `APPROVAL_PAT_TOKEN` | Separate PAT used to auto-approve news PRs (must be a different user) |
-| `FTP_HOST` | FTP hostname of the web server |
-| `FTP_USER` | FTP username on the web server |
-| `FTP_PASS` | FTP password for the web server |
+| Secret | Where it lives | Purpose |
+|--------|---------------|---------|
+| `CSOH_CI_CLIENT_ID` | Org-level | GitHub App's Client ID (`Iv23.*`); used to mint short-lived installation tokens |
+| `CSOH_CI_PRIVATE_KEY` | Org-level | GitHub App's RSA private key (PEM); used to sign the JWT for token minting |
+| `CSOH_PAT` | Org-level | Fine-grained PAT scoped to `csoh.org` with `Pull requests: Read & Write` only — used solely to auto-approve App-opened PRs (GitHub blocks self-approval) |
+| `FTP_HOST` | Repo-level | FTP hostname of the web server (must match the host's TLS cert subject) |
+| `FTP_USER` | Repo-level | FTP username |
+| `FTP_PASS` | Repo-level | FTP password |
 
-### Setting up `PAT_TOKEN`
-
-1. Go to [GitHub Token Settings](https://github.com/settings/tokens) and create a **fine-grained token**
-2. Grant it access to the `CloudSecurityOfficeHours/csoh.org` repository
-3. Give it **Contents** (read/write) and **Pull requests** (read/write) permissions
-4. Save it as `PAT_TOKEN` in repo secrets
+`PAT_TOKEN` and `APPROVAL_PAT_TOKEN` (the previous two long-lived PATs) have been removed.
 
 ### Setting up the FTP credentials
 

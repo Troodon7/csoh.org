@@ -185,7 +185,8 @@ If the page still falls short of the target after the top-up, the script prints 
 
 | Problem | Cause | Fix |
 |---------|-------|-----|
-| Workflow fails with "not permitted to create pull requests" | Missing or expired PAT | Create a new fine-grained PAT with Contents + Pull Requests permissions and save it as the `PAT_TOKEN` repo secret |
+| Workflow fails at "Mint installation token" | App private key revoked / expired / `CSOH_CI_PRIVATE_KEY` secret missing | Generate a new private key in the `csoh-ci` GitHub App settings and replace the `CSOH_CI_PRIVATE_KEY` org secret |
+| Workflow fails at "Auto approve" with HTTP 401 | `CSOH_PAT` expired or revoked | Regenerate the fine-grained PAT (see Setup Requirements below) and replace the `CSOH_PAT` org secret |
 | Script exits with "fewer than 10 sources" | Too many feeds are down or unreachable | Usually temporary — wait for the next scheduled run |
 | No PR created | No new articles found since last run | Normal — means news is already up to date |
 | PR not auto-merging | Files other than `news.html` and `feed.xml` changed | Review the PR manually — the script may have been updated |
@@ -195,11 +196,24 @@ If the page still falls short of the target after the top-up, the script prints 
 
 ## Setup Requirements
 
-The workflow uses a **Personal Access Token (PAT)** stored as a GitHub repo secret called `PAT_TOKEN`. This is needed because the GitHub organization restricts what the default `GITHUB_TOKEN` can do.
+The workflow authenticates to GitHub via two credentials, both stored as **organization-level** Actions secrets (under https://github.com/organizations/CloudSecurityOfficeHours/settings/secrets/actions):
 
-To set up or rotate the token:
+1. **`csoh-ci` GitHub App** — used for opening the PR, pushing commits, and enabling auto-merge. Stored as two secrets:
+   - `CSOH_CI_CLIENT_ID` — the App's Client ID (`Iv23.*`)
+   - `CSOH_CI_PRIVATE_KEY` — the App's RSA private key (PEM, multi-line)
 
-1. Go to [GitHub Token Settings](https://github.com/settings/tokens) and create a **fine-grained token**
-2. Grant it access to the `CloudSecurityOfficeHours/csoh.org` repository
-3. Give it **Contents** (read/write) and **Pull requests** (read/write) permissions
-4. Go to the repo's **Settings > Secrets and variables > Actions** and save it as `PAT_TOKEN`
+   The App is on the main-branch ruleset bypass list so its direct pushes (from `site-update-deploy.yml`) are accepted, and it has `contents: read+write` and `pull-requests: read+write` permissions scoped to this repo only. Tokens minted from the App are short-lived (~1h) and rotate automatically.
+
+2. **`CSOH_PAT` fine-grained Personal Access Token** — used only to approve PRs the App opened. GitHub blocks self-approval, and empirically GitHub's auto-merge feature does not consult the App's ruleset bypass when checking the approval requirement, so a second-identity PAT is required to drive auto-merge to completion.
+
+   To rotate `CSOH_PAT`:
+
+   1. Go to https://github.com/settings/personal-access-tokens/new (signed in as a maintainer).
+   2. **Resource owner:** `CloudSecurityOfficeHours` (the org, not your personal account).
+   3. **Expiration:** 1 year max; shorter is fine.
+   4. **Repository access:** Only select repositories → `csoh.org`.
+   5. **Repository permissions:** **Pull requests: Read and write**. Leave everything else at "No access."
+   6. Generate, approve via the org PAT-approval flow if prompted, copy the `github_pat_*` value.
+   7. Replace the `CSOH_PAT` org-level Actions secret with the new value.
+
+For the full authentication model and rationale, see [SECURITY.md → CI/CD Authentication](../SECURITY.md#cicd-authentication).
