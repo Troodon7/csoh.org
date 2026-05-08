@@ -309,7 +309,7 @@ Same-week follow-up after report delivery. The fixes applied:
 
 | # | Finding | Status |
 |---|---------|--------|
-| 1.1 | Live Zoom credentials in cleartext on disk | ⚠️ **Partial** — `ZOOM_CLIENT_SECRET` rotation guidance delivered; awaiting confirmation that the user rotated the secret and ran `chmod 600 .env`. Move to Keychain still open. |
+| 1.1 | Live Zoom credentials in cleartext on disk | ✅ **Resolved** — `ZOOM_CLIENT_SECRET` rotated in Zoom Marketplace (2026-05-08); `.env` permissions tightened to 600 (`-rw-------`). Future enhancement: migrate the secret out of `.env` into macOS Keychain so the dotenv only carries non-sensitive identifiers. |
 | 1.5 | PAT scope opaque + auto-approve loop | ✅ **Largely resolved** — migrated all three write-capable workflows from `PAT_TOKEN` to a `csoh-ci` GitHub App with installation tokens (~1 h lifetime, scoped to one repo). `PAT_TOKEN` deleted. `APPROVAL_PAT_TOKEN` retained for self-approval until rulesets-based bypass is configured. See SECURITY.md → "CI/CD Authentication" for the full new model. |
 | 2.1 | Missing top-level `permissions:` blocks | ✅ **Resolved** — `update-news.yml`, `site-update-deploy.yml`, `manual-deploy.yml` now declare `permissions: contents: read` for the auto-injected `GITHUB_TOKEN`. All write access flows through the App. |
 | 7.2 | Stale "Pinned GitHub Actions" table in SECURITY.md | ✅ **Resolved** — table updated to current SHAs and expanded to include the four actions previously omitted (`actions/create-github-app-token`, `raven-actions/actionlint`, `astral-sh/ruff-action`, `lycheeverse/lychee-action`, `Cyb3r-Jak3/html5validator-action`). |
