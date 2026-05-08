@@ -142,17 +142,24 @@ All third-party GitHub Actions are pinned to exact commit SHAs rather than mutab
 
 | Action | Pinned SHA | Version |
 |--------|-----------|---------|
-| `actions/checkout` | `34e114876b0b11c390a56381ad16ebd13914f8d5` | v4.3.1 |
-| `actions/setup-python` | `a26af69be951a213d495a4c3e4e4022e16d87065` | v5.6.0 |
-| `actions/upload-artifact` | `ea165f8d65b6e75b540449e92b4886f43607fa02` | v4.6.2 |
-| `actions/github-script` | `f28e40c7f34bde8b3046d885e986cb6290c5673b` | v7.1.0 |
-| `peter-evans/create-pull-request` | `c5a7806660adbe173f04e3e038b0ccdcd758773c` | v6.1.0 |
+| `actions/checkout` | `de0fac2e4500dabe0009e67214ff5f5447ce83dd` | v6.0.2 |
+| `actions/setup-python` | `a309ff8b426b58ec0e2a45f0f869d46889d02405` | v6.2.0 |
+| `actions/upload-artifact` | `bbbca2ddaa5d8feaa63e36b76fdaad77386f024f` | v7.0.0 |
+| `actions/github-script` | `ed597411d8f924073f98dfc5c65a23a2325f34cd` | v8.0.0 |
+| `actions/create-github-app-token` | `1b10c78c7865c340bc4f6099eb2f838309f1e8c3` | v3.1.1 |
+| `peter-evans/create-pull-request` | `c0f553fe549906ede9cf27b5156039d195d2ece0` | v8.1.0 |
 | `peter-evans/enable-pull-request-automerge` | `a660677d5469627102a1c1e11409dd063606628d` | v3.0.0 |
+| `raven-actions/actionlint` | `205b530c5d9fa8f44ae9ed59f341a0db994aa6f8` | v2.1.2 |
+| `astral-sh/ruff-action` | `0ce1b0bf8b818ef400413f810f8a11cdbda0034b` | v4.0.0 |
+| `lycheeverse/lychee-action` | `8646ba30535128ac92d33dfc9133794bfdd9b411` | v2.8.0 |
+| `Cyb3r-Jak3/html5validator-action` | `443b108eb8e134b63a1f8a8ba0c942d552608ed7` | master 2025-09-19 |
 
 To update a pinned action, look up the commit SHA for the new tag:
 ```bash
-curl -s "https://api.github.com/repos/actions/checkout/git/ref/tags/v4.3.1" | grep sha
+curl -s "https://api.github.com/repos/actions/checkout/git/ref/tags/v6.0.2" | grep sha
 ```
+
+The one exception is `actions/cache@v4` (used in `check-broken-links.yml`), which is currently pinned to a major-version tag rather than a SHA — tracked for tightening.
 
 ### No External Dependencies (Client-Side)
 
@@ -164,6 +171,98 @@ The CI tooling uses only:
 - Python standard library (`urllib`, `hashlib`, `xml.etree.ElementTree`)
 - `Playwright` (for screenshot generation)
 - `Pillow` (for image optimization)
+- `yamllint` (lint job, pinned version)
+
+---
+
+## CI/CD Authentication
+
+CI workflows authenticate to GitHub via a **GitHub App** (`csoh-ci`) rather than a personal access token. This section explains the model, the migration rationale, and what's still on a PAT.
+
+### Authentication model
+
+| Workflow | Auth | Pushes to main? |
+|----------|------|------|
+| `update-news.yml` | `csoh-ci` App + `APPROVAL_PAT_TOKEN` | via PR + auto-merge |
+| `normalize-urls.yml` | `csoh-ci` App + `APPROVAL_PAT_TOKEN` | via PR (human review) |
+| `site-update-deploy.yml` | `csoh-ci` App | direct (App is on ruleset bypass) |
+| `manual-deploy.yml` | none (FTP only) | no |
+| `lint.yml`, `validate-html.yml`, `check-broken-links.yml`, `check-url-safety.yml` | auto-injected `GITHUB_TOKEN` | no |
+
+Every workflow declares an explicit top-level `permissions:` block scoping the auto-injected `GITHUB_TOKEN`. The four read-only check workflows use `contents: read` (plus `pull-requests: write` where they post comments). The four write-capable workflows (`update-news`, `normalize-urls`, `site-update-deploy`, `manual-deploy`) declare `contents: read` for the auto-injected token, because they handle write access through the App or PAT instead — keeping the default token strictly minimal.
+
+### Why we migrated from PATs to a GitHub App
+
+The original CI design used two personal access tokens belonging to a human (Shawn): `PAT_TOKEN` (push, open PRs, enable auto-merge) and `APPROVAL_PAT_TOKEN` (approve the bot's own PRs, since GitHub blocks self-approval with the same identity). PATs are functional but carry several security properties we wanted to improve:
+
+1. **Long-lived.** PATs don't expire unless you set an explicit expiry. Once granted, the token is valid until manually revoked. A leaked PAT remains useful to an attacker for as long as it takes you to notice.
+
+2. **Broadly scoped (classic PATs especially).** A classic PAT with `repo` scope can read and write *every* repository the owning user has access to — public, private, and forked. Even fine-grained PATs are awkward to constrain to one repository while still permitting all the operations a busy CI pipeline needs.
+
+3. **Tied to a personal identity.** Bot commits authored under a PAT show up as the human account on the audit log, blurring the distinction between automation and operator action. If the human leaves the project (or the org), every workflow that depends on their PAT breaks.
+
+4. **No native rotation.** Rotating a PAT means generating a new one, updating every secret, and revoking the old one — a manual process that tends to get postponed.
+
+A GitHub App fixes all four:
+
+1. **Short-lived tokens.** The App's installation tokens are valid for ~1 hour. A workflow run requests a fresh token at job start; that token is the only thing exposed to the workflow log redaction layer. After the run finishes, the token is useless.
+
+2. **Per-repo scoping by default.** The App is installed on the single `CloudSecurityOfficeHours/csoh.org` repository with the minimum permissions needed (`contents: read+write`, `pull-requests: read+write`). The token GitHub mints from those install settings cannot do more than the App's installation scope allows.
+
+3. **Independent identity.** The App is its own first-class GitHub principal (`csoh-ci[bot]`). Audit logs cleanly distinguish bot pushes from human pushes. The App outlives any individual contributor.
+
+4. **Automatic rotation.** Tokens rotate every hour with no human intervention. The only long-lived secret is the App's RSA private key, which only needs rotating when you suspect it's compromised (or as part of a periodic key-rotation hygiene pass).
+
+In numbers: blast radius of a leaked CI token went from "everything Shawn's PAT can touch, until manual revocation" → "one repo, one workflow run's worth of actions, ~1 hour."
+
+### App configuration
+
+- **Installation:** `csoh-ci` is installed on `CloudSecurityOfficeHours/csoh.org` only — not at the org-wide level.
+- **Repository permissions:** `contents: read & write`, `pull-requests: read & write`. No other permissions granted.
+- **Webhooks:** disabled. The App is purely an authentication identity; it does not consume events.
+- **Branch protection / rulesets:** `csoh-ci` is on the main-branch ruleset bypass list with mode "Always," because `site-update-deploy.yml` does direct in-place commits to `main` (with `[skip ci]` markers) for housekeeping (SRI hashes, sitemap dates, normalized URLs, generated preview images). PRs from `update-news.yml` and `normalize-urls.yml` go through the normal merge path and don't need the bypass.
+
+### Token retrieval pattern
+
+Every workflow that needs write access starts with the same step:
+
+```yaml
+- name: Mint installation token
+  id: app-token
+  uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3  # v3.1.1
+  with:
+    client-id: ${{ secrets.CSOH_CI_CLIENT_ID }}
+    private-key: ${{ secrets.CSOH_CI_PRIVATE_KEY }}
+```
+
+Subsequent steps reference `${{ steps.app-token.outputs.token }}` wherever they previously used `${{ secrets.PAT_TOKEN }}` (e.g., `actions/checkout`'s `token:` input, `peter-evans/create-pull-request`'s `token:` input, `git remote set-url origin "https://x-access-token:${TOKEN}@..."`).
+
+### Why one PAT remains
+
+`APPROVAL_PAT_TOKEN` is a narrowly scoped PAT belonging to a separate identity, used exclusively to approve PRs that the App has just opened. GitHub does not allow an actor to approve its own PRs, and this restriction applies to GitHub Apps too — the App that opens the PR cannot approve it. Until we move to **rulesets-based bypass for bot-only path diffs** (where a ruleset would let the App bypass the "requires approval" check on PRs whose diff is contained to a specific allowlist of files), `APPROVAL_PAT_TOKEN` covers the gap.
+
+The follow-up work is tracked in the security review at `seo-audits/SECURITY_REVIEW_2026-05-07.md` (recommendation 9). When that lands, the PAT can be deleted entirely.
+
+### Repository secrets currently in use
+
+| Secret | Purpose | Type |
+|--------|---------|------|
+| `CSOH_CI_CLIENT_ID` | GitHub App's Client ID (`Iv23.*`) | identifier (not sensitive on its own) |
+| `CSOH_CI_PRIVATE_KEY` | GitHub App's RSA private key | high-sensitivity |
+| `APPROVAL_PAT_TOKEN` | Self-approve bot PRs | medium-sensitivity (narrow scope) |
+| `FTP_HOST`, `FTP_USER`, `FTP_PASS` | FTPS deploy credentials | high-sensitivity |
+| `SSH_PRIVATE_KEY` | Reserved for future use | high-sensitivity |
+
+`PAT_TOKEN` (the original CI PAT) and `CSOH_CI_APP_ID` (the deprecated numeric input, replaced by `CSOH_CI_CLIENT_ID`) have been removed.
+
+### Rotation guidance
+
+| Item | Rotation cadence | Process |
+|------|-----------------|---------|
+| App installation token | Automatic, every ~1 hour | None — handled by GitHub |
+| App private key | Annually or on suspected compromise | Generate new key in App settings; replace `CSOH_CI_PRIVATE_KEY` secret; revoke old key |
+| `APPROVAL_PAT_TOKEN` | Every 6–12 months | Generate new fine-grained PAT; replace secret |
+| `FTP_PASS` | Every 6–12 months | Rotate via hosting panel; replace secret |
 
 ---
 
@@ -175,6 +274,8 @@ The site deploys via FTPS (FTP over TLS) using `lftp` from GitHub Actions:
 - `ftp:ssl-force true` — enforces TLS encryption on the data channel
 - `ftp:ssl-protect-data true` — encrypts file transfers, not just the control channel
 - Credentials are stored as GitHub repository secrets (`FTP_HOST`, `FTP_USER`, `FTP_PASS`)
+
+The deploy workflow (`site-update-deploy.yml`) authenticates to GitHub via the `csoh-ci` App for its housekeeping commits (SRI hash updates, sitemap refreshes, etc.) — see [CI/CD Authentication](#cicd-authentication) above. FTP credentials are entirely separate and not affected by App-token rotation.
 
 ### Deployment Exclusions
 

@@ -303,4 +303,25 @@ if k not in ALLOWED:
 
 ---
 
+## Appendix A — Status update (2026-05-08)
+
+Same-week follow-up after report delivery. The fixes applied:
+
+| # | Finding | Status |
+|---|---------|--------|
+| 1.1 | Live Zoom credentials in cleartext on disk | ⚠️ **Partial** — `ZOOM_CLIENT_SECRET` rotation guidance delivered; awaiting confirmation that the user rotated the secret and ran `chmod 600 .env`. Move to Keychain still open. |
+| 1.5 | PAT scope opaque + auto-approve loop | ✅ **Largely resolved** — migrated all three write-capable workflows from `PAT_TOKEN` to a `csoh-ci` GitHub App with installation tokens (~1 h lifetime, scoped to one repo). `PAT_TOKEN` deleted. `APPROVAL_PAT_TOKEN` retained for self-approval until rulesets-based bypass is configured. See SECURITY.md → "CI/CD Authentication" for the full new model. |
+| 2.1 | Missing top-level `permissions:` blocks | ✅ **Resolved** — `update-news.yml`, `site-update-deploy.yml`, `manual-deploy.yml` now declare `permissions: contents: read` for the auto-injected `GITHUB_TOKEN`. All write access flows through the App. |
+| 7.2 | Stale "Pinned GitHub Actions" table in SECURITY.md | ✅ **Resolved** — table updated to current SHAs and expanded to include the four actions previously omitted (`actions/create-github-app-token`, `raven-actions/actionlint`, `astral-sh/ruff-action`, `lycheeverse/lychee-action`, `Cyb3r-Jak3/html5validator-action`). |
+
+Open items prioritized for the next cleanup pass:
+
+- 1.2 / 1.3 / 1.4 — FTPS cert verification, lftp credentials in argv, PAT-in-URL pattern (the latter now uses the App token but the `git remote set-url` shape remains)
+- 2.2 — pin `actions/cache@v4` by SHA
+- 2.6 — scheme allowlist on `tools/check_url_safety.py:resolve_url`
+- 6.1 / 6.2 — pin `nginx:alpine` by digest, expand `.dockerignore`
+- 9 (recommendation) — migrate `APPROVAL_PAT_TOKEN` to a rulesets-based bypass so the last PAT can be deleted
+
+---
+
 *End of report.*
