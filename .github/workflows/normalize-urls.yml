@@ -37,12 +37,23 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      # PAT-authenticated checkout so the create-PR step has the right
-      # permissions to push branches and trigger downstream CI on the PR.
+      # Mint a short-lived installation token from the csoh-ci GitHub App.
+      # Replaces the PAT_TOKEN we used to use to push the normalize-urls
+      # branch and open the PR. APPROVAL_PAT_TOKEN below is still a PAT —
+      # GitHub blocks self-approval, so the App can't approve its own PR.
+      - name: Mint installation token
+        id: app-token
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3  # v3.1.1
+        with:
+          app-id: ${{ secrets.CSOH_CI_APP_ID }}
+          private-key: ${{ secrets.CSOH_CI_PRIVATE_KEY }}
+
+      # App-authenticated checkout so the create-PR step has push access and
+      # triggers downstream CI on the PR (the default GITHUB_TOKEN does not).
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
 
       # Install Python — both safety check and normalizer are Python scripts.
       - name: Set up Python
@@ -86,7 +97,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0  # v8.1.0
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
           commit-message: 'chore: normalize redirecting URLs'
           title: 'chore: Normalize redirecting URLs'
           body: |

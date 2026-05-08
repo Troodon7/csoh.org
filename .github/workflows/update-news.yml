@@ -24,9 +24,10 @@ on:
       - 'update_news.py'
 
 # Read-only on the auto-injected GITHUB_TOKEN. Every step that needs write
-# access (push commits, open PRs, approve, enable auto-merge) explicitly
-# passes secrets.PAT_TOKEN or secrets.APPROVAL_PAT_TOKEN, so the default
-# token never needs more than "clone the repo."
+# access (push commits, open PRs, enable auto-merge) uses an installation
+# token from the csoh-ci GitHub App; the auto-approve step still uses
+# secrets.APPROVAL_PAT_TOKEN because GitHub blocks self-approval. The
+# default token never needs more than "clone the repo."
 permissions:
   contents: read
 
@@ -46,14 +47,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Full clone with our PAT (Personal Access Token) so the create-PR
-      # action below has the elevated permissions it needs. The default
-      # GITHUB_TOKEN can't trigger downstream workflows on PRs it creates,
-      # which is why we use the PAT instead.
+      # Mint a short-lived (~1h) installation token from the csoh-ci GitHub
+      # App. Replaces the long-lived PAT_TOKEN we used to use here. The App's
+      # permissions (contents:write, pull-requests:write) are scoped to this
+      # repo only — much smaller blast radius than a PAT if the token leaks.
+      # APPROVAL_PAT_TOKEN is still a PAT for now: GitHub blocks self-approval,
+      # so the same identity that opens the PR can't approve it.
+      - name: Mint installation token
+        id: app-token
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3  # v3.1.1
+        with:
+          app-id: ${{ secrets.CSOH_CI_APP_ID }}
+          private-key: ${{ secrets.CSOH_CI_PRIVATE_KEY }}
+
+      # Full clone using the App's installation token so the create-PR action
+      # below has push access. Unlike the auto-injected GITHUB_TOKEN, an App
+      # token CAN trigger downstream workflows on PRs it creates — which is
+      # why we don't just use the default token.
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
           fetch-depth: 0
 
       # Install Python — update_news.py is a Python script.
@@ -110,7 +124,7 @@ jobs:
         if: steps.changes.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0  # v8.1.0
         with:
-          token: ${{ secrets.PAT_TOKEN }}               # PAT so downstream CI runs
+          token: ${{ steps.app-token.outputs.token }}   # App token so downstream CI runs
           commit-message: 'chore: update news feed content'
           title: 'chore: Update news articles'
           # Multi-line PR body. `|` keeps newlines literal.
@@ -144,6 +158,6 @@ jobs:
         if: steps.changes.outputs.only_news_files == 'true' && steps.cpr.outputs.pull-request-number != ''
         uses: peter-evans/enable-pull-request-automerge@a660677d5469627102a1c1e11409dd063606628d  # v3.0.0
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           merge-method: squash                          # one tidy commit on main
