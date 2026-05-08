@@ -339,5 +339,4 @@ We take security seriously — especially as a cloud security community.
 |------|--------|-------|
 | FTP cert verification disabled | Accepted risk | `ssl:verify-certificate no` is set because the server lacks an FQDN-matching certificate. TLS encryption is still enforced. |
 | `Server: LiteSpeed` on HTTP redirect | Hosting limitation | The HTTP (port 80) redirect response leaks the server type. The HTTPS response correctly strips it. Requires hosting panel config to suppress. |
-| `www.csoh.org` no canonical redirect | Hosting limitation | `www.csoh.org` serves content directly instead of redirecting to `csoh.org`. Requires DNS/hosting config. |
 | `http://flaws.cloud` link | Intentional | This AWS security training site only serves over HTTP. The link is intentional. |
