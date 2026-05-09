@@ -283,7 +283,7 @@ Cloud Armor decisions, LB 4xx/5xx, IAM admin activity, audit logs
             <p>Net effect: we start from <em>known bytes</em> (the digest pin) and end with <em>current packages</em> (the apk upgrade). The Trivy scan in the next step verifies we haven't slipped on either dimension.</p>
 
             <h3>3. The CI build artifact</h3>
-            <p>Every PR's container goes through <a href="http://trivy.dev/" target="_blank" rel="noopener noreferrer">Trivy</a>:</p>
+            <p>Every PR's container goes through <a href="https://trivy.dev/" target="_blank" rel="noopener noreferrer">Trivy</a>:</p>
 <pre style="background:var(--code-bg, #f5f5f5);padding:0.75rem;border-radius:6px;font-size:0.85rem;">trivy image \
   --exit-code 1 \
   --ignore-unfixed \
