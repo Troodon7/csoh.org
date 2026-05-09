@@ -282,7 +282,7 @@ Cloud Armor decisions, LB 4xx/5xx, IAM admin activity, audit logs
             <p>Net effect: we start from <em>known bytes</em> (the digest pin) and end with <em>current packages</em> (the apk upgrade). The Trivy scan in the next step verifies we haven't slipped on either dimension.</p>
 
             <h3>3. The CI build artifact</h3>
-            <p>Every PR's container goes through <a href="https://aquasecurity.github.io/trivy/" target="_blank" rel="noopener noreferrer">Trivy</a>:</p>
+            <p>Every PR's container goes through <a href="http://trivy.dev/" target="_blank" rel="noopener noreferrer">Trivy</a>:</p>
 <pre style="background:var(--code-bg, #f5f5f5);padding:0.75rem;border-radius:6px;font-size:0.85rem;">trivy image \
   --exit-code 1 \
   --ignore-unfixed \
@@ -392,10 +392,10 @@ OR protoPayload.@type="type.googleapis.com/google.cloud.audit.AuditLog"</pre>
                 <li><strong>GitHub side</strong> — see <a href="github-actions.html">How We Use GitHub Actions</a> for the full workflow tour.</li>
                 <li><strong>External</strong>:
                     <ul>
-                        <li><a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank" rel="noopener noreferrer">GCP — Workload Identity Federation overview</a></li>
+                        <li><a href="https://docs.cloud.google.com/iam/docs/workload-identity-federation" target="_blank" rel="noopener noreferrer">GCP — Workload Identity Federation overview</a></li>
                         <li><a href="https://github.com/google-github-actions/auth" target="_blank" rel="noopener noreferrer">google-github-actions/auth</a> — the action that does the OIDC exchange</li>
-                        <li><a href="https://cloud.google.com/armor/docs/cloud-armor-overview" target="_blank" rel="noopener noreferrer">GCP — Cloud Armor overview</a></li>
-                        <li><a href="https://cloud.google.com/run/docs/securing/ingress" target="_blank" rel="noopener noreferrer">GCP — Cloud Run ingress controls</a></li>
+                        <li><a href="https://docs.cloud.google.com/armor/docs/cloud-armor-overview" target="_blank" rel="noopener noreferrer">GCP — Cloud Armor overview</a></li>
+                        <li><a href="https://docs.cloud.google.com/run/docs/securing/ingress" target="_blank" rel="noopener noreferrer">GCP — Cloud Run ingress controls</a></li>
                         <li><a href="https://slsa.dev/" target="_blank" rel="noopener noreferrer">SLSA</a> — the provenance framework we'll add next</li>
                     </ul>
                 </li>
