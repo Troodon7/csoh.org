@@ -202,6 +202,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Cloud SOC & Threat Monitoring - reference page -->
+  <url>
+    <loc>https://csoh.org/cloud-soc.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- CI/CD for Cloud Deployments - reference page -->
   <url>
     <loc>https://csoh.org/ci-cd.html</loc>

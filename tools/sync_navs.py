@@ -43,6 +43,7 @@ DROPDOWNS = [
     ('Threat Research', [
         ('threat-research.html', 'Threat Research'),
         ('breach-timeline.html', 'Breach Kill Chains'),
+        ('cloud-soc.html', 'Cloud SOC'),
         ('ctfs.html', 'CTFs'),
     ]),
     ('Attend', [
