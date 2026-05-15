@@ -451,7 +451,7 @@
             <ul>
                 <li><strong>AWS — <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html" target="_blank" rel="noopener noreferrer">IAM Roles for Service Accounts (IRSA)</a></strong> — EKS cluster runs an OIDC issuer; you annotate a Kubernetes service account with an IAM role; pods using that SA exchange the SA token for a scoped role session. <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html" target="_blank" rel="noopener noreferrer">EKS Pod Identity</a> is the newer, simpler alternative.</li>
                 <li><strong>Azure — <a href="https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview" target="_blank" rel="noopener noreferrer">AKS Workload Identity</a></strong> — federated to Entra ID, same OIDC pattern.</li>
-                <li><strong>GCP — <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank" rel="noopener noreferrer">GKE Workload Identity</a></strong> — Kubernetes SAs map to Google service accounts via Workload Identity Federation.</li>
+                <li><strong>GCP — <a href="https://docs.cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank" rel="noopener noreferrer">GKE Workload Identity</a></strong> — Kubernetes SAs map to Google service accounts via Workload Identity Federation.</li>
             </ul>
             <p>Once workload identity is configured, also <strong>block IMDS from pods</strong>. On EKS, enforce IMDSv2 with hop-limit 1 (so containers can't reach the metadata interface through the host). On AKS and GKE, the network plugin / hostNetwork enforcement does the equivalent.</p>
             <p>Finally — <strong>disable automatic service-account token mounting</strong> for pods that don't need to talk to the API server. <code>automountServiceAccountToken: false</code> on every workload that isn't an operator. This removes one of the attacker's default tools.</p>
@@ -541,7 +541,7 @@
             <p>For richer rules — beyond what PSS covers — install a policy engine:</p>
             <ul>
                 <li><a href="https://kyverno.io/" target="_blank" rel="noopener noreferrer">Kyverno</a> — Kubernetes-native (policies are Kubernetes resources, no separate language). Easier to adopt; the dominant choice in 2026.</li>
-                <li><a href="https://www.openpolicyagent.org/docs/latest/kubernetes-introduction/" target="_blank" rel="noopener noreferrer">OPA Gatekeeper</a> — OPA + Rego. More expressive, steeper learning curve.</li>
+                <li><a href="https://www.openpolicyagent.org/docs/kubernetes" target="_blank" rel="noopener noreferrer">OPA Gatekeeper</a> — OPA + Rego. More expressive, steeper learning curve.</li>
             </ul>
             <h3>Policies worth running on day one</h3>
             <ul>
@@ -704,7 +704,7 @@
                 <li><a href="https://kubernetes.io/docs/concepts/security/" target="_blank" rel="noopener noreferrer">Kubernetes documentation — Security</a></li>
                 <li><a href="https://docs.aws.amazon.com/eks/latest/best-practices/security.html" target="_blank" rel="noopener noreferrer">EKS Best Practices — Security</a></li>
                 <li><a href="https://learn.microsoft.com/en-us/azure/aks/concepts-security" target="_blank" rel="noopener noreferrer">AKS — security concepts</a></li>
-                <li><a href="https://cloud.google.com/kubernetes-engine/docs/concepts/security-overview" target="_blank" rel="noopener noreferrer">GKE — security overview</a></li>
+                <li><a href="https://docs.cloud.google.com/kubernetes-engine/docs/concepts/security-overview" target="_blank" rel="noopener noreferrer">GKE — security overview</a></li>
             </ul>
             <h3>Benchmarks &amp; guidance</h3>
             <ul>
@@ -716,10 +716,10 @@
             <h3>Tooling</h3>
             <ul>
                 <li><a href="https://kyverno.io/" target="_blank" rel="noopener noreferrer">Kyverno</a> — Kubernetes-native policy</li>
-                <li><a href="https://www.openpolicyagent.org/docs/latest/kubernetes-introduction/" target="_blank" rel="noopener noreferrer">OPA Gatekeeper</a></li>
+                <li><a href="https://www.openpolicyagent.org/docs/kubernetes" target="_blank" rel="noopener noreferrer">OPA Gatekeeper</a></li>
                 <li><a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a> — runtime security</li>
                 <li><a href="https://cilium.io/" target="_blank" rel="noopener noreferrer">Cilium</a> &amp; <a href="https://tetragon.io/" target="_blank" rel="noopener noreferrer">Tetragon</a> — eBPF networking and observability</li>
-                <li><a href="https://argo-cd.readthedocs.io" target="_blank" rel="noopener noreferrer">Argo CD</a> / <a href="https://fluxcd.io" target="_blank" rel="noopener noreferrer">Flux</a> — GitOps</li>
+                <li><a href="https://argo-cd.readthedocs.io/en/stable/" target="_blank" rel="noopener noreferrer">Argo CD</a> / <a href="https://fluxcd.io" target="_blank" rel="noopener noreferrer">Flux</a> — GitOps</li>
             </ul>
             <h3>Related CSOH pages</h3>
             <ul>

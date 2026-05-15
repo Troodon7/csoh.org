@@ -402,7 +402,7 @@
             <ul>
                 <li>AWS — <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html" target="_blank" rel="noopener noreferrer">IAM Roles for Service Accounts (IRSA)</a> on EKS, <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html" target="_blank" rel="noopener noreferrer">EKS Pod Identity</a>, task roles on ECS, function roles on Lambda.</li>
                 <li>Azure — <a href="https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview" target="_blank" rel="noopener noreferrer">Workload Identity</a> on AKS (federated to Entra), managed identity per Container Apps revision.</li>
-                <li>GCP — <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank" rel="noopener noreferrer">Workload Identity Federation</a> on GKE, per-revision service account on Cloud Run.</li>
+                <li>GCP — <a href="https://docs.cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank" rel="noopener noreferrer">Workload Identity Federation</a> on GKE, per-revision service account on Cloud Run.</li>
             </ul>
             <p>With per-workload identity, the container has only the permissions it needs. A compromise gets you that workload's credentials — not the VM's.</p>
             <p><strong>2. Block IMDS from containers entirely.</strong> Belt-and-suspenders: even with workload identity in place, the host's IMDS shouldn't be reachable from containers.</p>
@@ -602,18 +602,18 @@
             <h3>Tooling</h3>
             <ul>
                 <li><a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a> — runtime security</li>
-                <li><a href="https://aquasecurity.github.io/trivy/" target="_blank" rel="noopener noreferrer">Trivy</a> — vulnerability and IaC scanning</li>
+                <li><a href="http://trivy.dev/" target="_blank" rel="noopener noreferrer">Trivy</a> — vulnerability and IaC scanning</li>
                 <li><a href="https://www.sigstore.dev/" target="_blank" rel="noopener noreferrer">Sigstore</a> &amp; Cosign — signing &amp; provenance</li>
                 <li><a href="https://gvisor.dev/" target="_blank" rel="noopener noreferrer">gVisor</a> — user-space kernel sandbox</li>
                 <li><a href="https://katacontainers.io/" target="_blank" rel="noopener noreferrer">Kata Containers</a> — VM-isolated containers</li>
-                <li><a href="https://github.com/GoogleContainerTools/distroless" target="_blank" rel="noopener noreferrer">Distroless</a> &amp; <a href="https://chainguard.dev/" target="_blank" rel="noopener noreferrer">Chainguard Images</a></li>
+                <li><a href="https://github.com/GoogleContainerTools/distroless" target="_blank" rel="noopener noreferrer">Distroless</a> &amp; <a href="https://www.chainguard.dev/" target="_blank" rel="noopener noreferrer">Chainguard Images</a></li>
             </ul>
             <h3>Vendor docs</h3>
             <ul>
-                <li><a href="https://docs.aws.amazon.com/AmazonECS/latest/bestpracticesguide/security.html" target="_blank" rel="noopener noreferrer">AWS ECS security best practices</a></li>
+                <li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security.html" target="_blank" rel="noopener noreferrer">AWS ECS security best practices</a></li>
                 <li><a href="https://docs.aws.amazon.com/eks/latest/best-practices/security.html" target="_blank" rel="noopener noreferrer">EKS Best Practices — Security</a></li>
                 <li><a href="https://learn.microsoft.com/en-us/azure/container-instances/container-instances-image-security" target="_blank" rel="noopener noreferrer">Azure — container security</a></li>
-                <li><a href="https://cloud.google.com/architecture/best-practices-for-operating-containers" target="_blank" rel="noopener noreferrer">GCP — best practices for operating containers</a></li>
+                <li><a href="https://docs.cloud.google.com/architecture/application-development" target="_blank" rel="noopener noreferrer">GCP — best practices for operating containers</a></li>
             </ul>
             <h3>Related CSOH pages</h3>
             <ul>
