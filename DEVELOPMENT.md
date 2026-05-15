@@ -83,6 +83,10 @@ csoh.org/
 ├── cloud-security-best-practices.html # Practitioner's controls checklist
 ├── shared-responsibility-model.html   # Provider vs. customer security split
 ├── cspm-vs-cnapp.html                 # Tool-category comparison (CSPM/CNAPP/CWPP/CIEM/DSPM)
+├── landing-zones.html                 # Cloud foundations (AWS Control Tower / Azure CAF / GCP blueprint)
+├── containers.html                    # Container security: boundary, escapes, IMDS, supply chain
+├── kubernetes.html                    # Kubernetes & managed K8s (EKS / AKS / GKE) security
+├── ci-cd.html                         # CI/CD pipelines for cloud (OIDC federation, deploy strategies)
 ├── github-actions.html              # Learn-by-example GitHub Actions explainer
 ├── breaches/                        # 10 per-breach kill chain pages (split from breach-timeline.html)
 ├── meetings/                        # 91 per-meeting recap pages (split from meetings.html)
@@ -188,6 +192,10 @@ If you changed shared files (`style.css`, `main.js`), verify these pages:
 - `http://localhost:8091/cloud-security-best-practices.html` -- Controls checklist
 - `http://localhost:8091/shared-responsibility-model.html` -- Provider vs. customer split
 - `http://localhost:8091/cspm-vs-cnapp.html` -- Tool category comparison
+- `http://localhost:8091/landing-zones.html` -- Cloud foundations (AWS / Azure / GCP)
+- `http://localhost:8091/containers.html` -- Container security
+- `http://localhost:8091/kubernetes.html` -- Kubernetes & managed Kubernetes
+- `http://localhost:8091/ci-cd.html` -- CI/CD for cloud deployments
 - `http://localhost:8091/cloud-security-certifications.html` -- Certification comparison
 - `http://localhost:8091/conferences.html` -- Conference directory
 - `http://localhost:8091/ctfs.html` -- Cloud CTF directory

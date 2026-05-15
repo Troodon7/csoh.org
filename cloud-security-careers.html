@@ -161,7 +161,7 @@
                       </ul>
                     </li>
                     <li class="has-dropdown">
-                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Reference <span class="caret" aria-hidden="true">▾</span></button>
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Topics <span class="caret" aria-hidden="true">▾</span></button>
                       <ul class="dropdown-menu">
                         <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
                         <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
@@ -169,20 +169,16 @@
                         <li><a href="landing-zones.html">Landing Zones</a></li>
                         <li><a href="containers.html">Containers</a></li>
                         <li><a href="kubernetes.html">Kubernetes</a></li>
-                        <li><a href="cloud-security-reading-list.html">Reading List</a></li>
-                        <li><a href="ctfs.html">CTFs</a></li>
                         <li><a href="ci-cd.html">CI/CD</a></li>
-                        <li><a href="github-actions.html">GitHub Actions</a></li>
-                        <li><a href="cloud-deployment.html">Cloud Deployment</a></li>
-                        <li><a href="resources.html">Resources</a></li>
-                        <li><a href="glossary.html">Glossary</a></li>
+                        <li><a href="cloud-security-reading-list.html">Reading List</a></li>
                       </ul>
                     </li>
                     <li class="has-dropdown">
-                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Threats &amp; Practice <span class="caret" aria-hidden="true">▾</span></button>
                       <ul class="dropdown-menu">
                         <li><a href="threat-research.html">Threat Research</a></li>
                         <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
                       </ul>
                     </li>
                     <li class="has-dropdown">
@@ -203,7 +199,14 @@
                         <li><a href="contribute-resources.html">Add a Resource</a></li>
                       </ul>
                     </li>
-                    <li><a href="faq.html">FAQ</a></li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Lookup <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="glossary.html">Glossary</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                      </ul>
+                    </li>
                     <li><a href="index.html#about">About</a></li>
                 </ul>
             </nav>
@@ -374,7 +377,7 @@
             </ul>
 
             <h3>Cloud AppSec / IaC Security</h3>
-            <p>Sits between security and the application teams. Owns <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scanning (Checkov, Terrascan, KICS, tfsec), <a class="glossary-link" href="glossary.html#term-container">container</a> image scanning, dependency review in <a class="glossary-link" href="glossary.html#term-ci-cd">CI/CD</a>, secret scanning, <a class="glossary-link" href="glossary.html#term-supply-chain">supply-chain</a> controls. Strong fit for developers moving into security — very PR-driven, very code-centric.</p>
+            <p>Sits between security and the application teams. Owns <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scanning (Checkov, Terrascan, KICS, tfsec), <a href="containers.html">container image security</a>, dependency review in <a href="ci-cd.html">CI/CD</a>, secret scanning, <a class="glossary-link" href="glossary.html#term-supply-chain">supply-chain</a> controls, and <a href="kubernetes.html">Kubernetes admission &amp; workload identity</a>. Strong fit for developers moving into security — very PR-driven, very code-centric.</p>
             <p><strong>Natural fit if you currently:</strong></p>
             <ul>
                 <li>Are a software engineer who already does code review and wants security as the deeper specialty</li>

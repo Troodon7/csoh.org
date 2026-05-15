@@ -154,7 +154,7 @@
                       </ul>
                     </li>
                     <li class="has-dropdown">
-                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Reference <span class="caret" aria-hidden="true">▾</span></button>
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Topics <span class="caret" aria-hidden="true">▾</span></button>
                       <ul class="dropdown-menu">
                         <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
                         <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
@@ -162,20 +162,16 @@
                         <li><a href="landing-zones.html">Landing Zones</a></li>
                         <li><a href="containers.html">Containers</a></li>
                         <li><a href="kubernetes.html">Kubernetes</a></li>
-                        <li><a href="cloud-security-reading-list.html">Reading List</a></li>
-                        <li><a href="ctfs.html">CTFs</a></li>
                         <li><a href="ci-cd.html">CI/CD</a></li>
-                        <li><a href="github-actions.html">GitHub Actions</a></li>
-                        <li><a href="cloud-deployment.html">Cloud Deployment</a></li>
-                        <li><a href="resources.html">Resources</a></li>
-                        <li><a href="glossary.html">Glossary</a></li>
+                        <li><a href="cloud-security-reading-list.html">Reading List</a></li>
                       </ul>
                     </li>
                     <li class="has-dropdown">
-                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Threats &amp; Practice <span class="caret" aria-hidden="true">▾</span></button>
                       <ul class="dropdown-menu">
                         <li><a href="threat-research.html">Threat Research</a></li>
                         <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
                       </ul>
                     </li>
                     <li class="has-dropdown">
@@ -196,7 +192,14 @@
                         <li><a href="contribute-resources.html">Add a Resource</a></li>
                       </ul>
                     </li>
-                    <li><a href="faq.html">FAQ</a></li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Lookup <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="glossary.html">Glossary</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                      </ul>
+                    </li>
                     <li><a href="index.html#about">About</a></li>
                 </ul>
             </nav>
@@ -346,8 +349,8 @@
                 <li><strong>Want to learn IAM, services, and the cloud console at depth.</strong> You need a real account in your chosen cloud. Use the free tier with the guardrails below.</li>
                 <li><strong>Want to practice CTFs (CloudGoat, IAM Vulnerable, etc.).</strong> Real account. The CTFs deploy real resources via Terraform — that's the point.</li>
                 <li><strong>Want to learn AWS APIs and SDKs.</strong> <a href="https://www.localstack.cloud/" target="_blank" rel="noopener noreferrer">LocalStack</a> gets you 90% of the way for free.</li>
-                <li><strong>Want to practice Kubernetes security.</strong> Local kind / minikube / k3s. No cloud needed for the fundamentals; only spin up a managed cluster (EKS/AKS/GKE) when you specifically need cloud-IAM-to-cluster integration.</li>
-                <li><strong>Want to study container and image security.</strong> Local Docker. Trivy, Grype, Dockle all run against local images.</li>
+                <li><strong>Want to practice Kubernetes security.</strong> Local kind / minikube / k3s. No cloud needed for the fundamentals; only spin up a managed cluster (EKS/AKS/GKE) when you specifically need cloud-IAM-to-cluster integration. Start from the <a href="kubernetes.html">Kubernetes &amp; managed Kubernetes</a> reference for what to focus on.</li>
+                <li><strong>Want to study container and image security.</strong> Local Docker. Trivy, Grype, Dockle all run against local images. The <a href="containers.html">Containers &amp; cloud security</a> page has the threat-model context — escapes, identity chaining, supply chain.</li>
                 <li><strong>Want to build detection content.</strong> Local SIEM (Wazuh, Elastic, <a href="https://docs.matanolabs.com/" target="_blank" rel="noopener noreferrer">Matano</a> in a free-tier account) plus a small cloud account generating real CloudTrail.</li>
                 <li><strong>Want to learn IaC scanning.</strong> Local. Checkov, KICS, Terrascan, tfsec all scan files — no deploy required.</li>
             </ul>

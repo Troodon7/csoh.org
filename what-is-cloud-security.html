@@ -172,7 +172,7 @@
                       </ul>
                     </li>
                     <li class="has-dropdown">
-                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Reference <span class="caret" aria-hidden="true">▾</span></button>
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Topics <span class="caret" aria-hidden="true">▾</span></button>
                       <ul class="dropdown-menu">
                         <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
                         <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
@@ -180,20 +180,16 @@
                         <li><a href="landing-zones.html">Landing Zones</a></li>
                         <li><a href="containers.html">Containers</a></li>
                         <li><a href="kubernetes.html">Kubernetes</a></li>
-                        <li><a href="cloud-security-reading-list.html">Reading List</a></li>
-                        <li><a href="ctfs.html">CTFs</a></li>
                         <li><a href="ci-cd.html">CI/CD</a></li>
-                        <li><a href="github-actions.html">GitHub Actions</a></li>
-                        <li><a href="cloud-deployment.html">Cloud Deployment</a></li>
-                        <li><a href="resources.html">Resources</a></li>
-                        <li><a href="glossary.html">Glossary</a></li>
+                        <li><a href="cloud-security-reading-list.html">Reading List</a></li>
                       </ul>
                     </li>
                     <li class="has-dropdown">
-                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Threats &amp; Practice <span class="caret" aria-hidden="true">▾</span></button>
                       <ul class="dropdown-menu">
                         <li><a href="threat-research.html">Threat Research</a></li>
                         <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
                       </ul>
                     </li>
                     <li class="has-dropdown">
@@ -214,7 +210,14 @@
                         <li><a href="contribute-resources.html">Add a Resource</a></li>
                       </ul>
                     </li>
-                    <li><a href="faq.html">FAQ</a></li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Lookup <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="glossary.html">Glossary</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                      </ul>
+                    </li>
                     <li><a href="index.html#about">About</a></li>
                 </ul>
             </nav>
@@ -454,7 +457,7 @@
             <p>Encrypt data at rest and <a class="glossary-link" href="glossary.html#term-encryption-at-rest">in transit</a>, manage keys (<a class="glossary-link" href="glossary.html#term-kms">KMS</a>, <a class="glossary-link" href="glossary.html#term-key-vault">Key Vault</a>, <a class="glossary-link" href="glossary.html#term-cloud-kms">Cloud KMS</a>), classify what's sensitive, and prevent <a class="glossary-link" href="glossary.html#term-exfiltration">exfiltration</a>. Increasingly this also means thinking about what data you let LLMs and <a class="glossary-link" href="glossary.html#term-ai">AI</a> services see.</p>
 
             <h3 id="pillar-workload">Application and workload security</h3>
-            <p>Secure code, dependency scanning, container image <a class="glossary-link" href="glossary.html#term-hardening">hardening</a>, runtime protection for VMs and <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a>, <a class="glossary-link" href="glossary.html#term-serverless">serverless</a> function security. CWPP and CNAPP platforms cover much of this.</p>
+            <p>Secure code, dependency scanning, <a href="containers.html">container image hardening</a>, runtime protection for VMs and <a href="kubernetes.html">Kubernetes</a>, <a class="glossary-link" href="glossary.html#term-serverless">serverless</a> function security, and the <a href="ci-cd.html">CI/CD pipeline</a> that ships all of it. CWPP and CNAPP platforms cover much of this.</p>
 
             <h3 id="pillar-detect">Threat detection and response</h3>
             <p><a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a>, Azure Activity Log, GCP Audit Logs feeding a <a class="glossary-link" href="glossary.html#term-siem">SIEM</a>. Provider-native services like <a class="glossary-link" href="glossary.html#term-guardduty">GuardDuty</a>, Defender for Cloud, and Security Command Center. Detection content mapped to <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud techniques. A response <a class="glossary-link" href="glossary.html#term-runbook">runbook</a> for when something fires.</p>

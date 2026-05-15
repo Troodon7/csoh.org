@@ -241,7 +241,7 @@
                       </ul>
                     </li>
                     <li class="has-dropdown">
-                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Reference <span class="caret" aria-hidden="true">▾</span></button>
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Topics <span class="caret" aria-hidden="true">▾</span></button>
                       <ul class="dropdown-menu">
                         <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
                         <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
@@ -249,20 +249,16 @@
                         <li><a href="landing-zones.html">Landing Zones</a></li>
                         <li><a href="containers.html">Containers</a></li>
                         <li><a href="kubernetes.html">Kubernetes</a></li>
-                        <li><a href="cloud-security-reading-list.html">Reading List</a></li>
-                        <li><a href="ctfs.html">CTFs</a></li>
                         <li><a href="ci-cd.html">CI/CD</a></li>
-                        <li><a href="github-actions.html">GitHub Actions</a></li>
-                        <li><a href="cloud-deployment.html">Cloud Deployment</a></li>
-                        <li><a href="resources.html">Resources</a></li>
-                        <li><a href="glossary.html">Glossary</a></li>
+                        <li><a href="cloud-security-reading-list.html">Reading List</a></li>
                       </ul>
                     </li>
                     <li class="has-dropdown">
-                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Defend <span class="caret" aria-hidden="true">▾</span></button>
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Threats &amp; Practice <span class="caret" aria-hidden="true">▾</span></button>
                       <ul class="dropdown-menu">
                         <li><a href="threat-research.html">Threat Research</a></li>
                         <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
                       </ul>
                     </li>
                     <li class="has-dropdown">
@@ -283,7 +279,14 @@
                         <li><a href="contribute-resources.html">Add a Resource</a></li>
                       </ul>
                     </li>
-                    <li><a href="faq.html">FAQ</a></li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Lookup <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="glossary.html">Glossary</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                      </ul>
+                    </li>
                     <li><a href="index.html#about">About</a></li>
                 </ul>
             </nav>
@@ -503,13 +506,16 @@
             <h3>3. IAM at scale</h3>
             <p>Master IAM policy evaluation, condition keys, and cross-account access patterns. Read every word of the <a href="https://aws.amazon.com/blogs/security/" target="_blank" rel="noopener noreferrer">AWS Security Blog</a> on identity. Use IAM Access Analyzer to find unused permissions in real environments. Study privilege-escalation paths via tools like Pacu.</p>
 
-            <h3>4. Kubernetes security</h3>
-            <p>If your environment uses <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a>, get comfortable with cluster <a class="glossary-link" href="glossary.html#term-hardening">hardening</a>, <a class="glossary-link" href="glossary.html#term-pss">pod security standards</a>, network policies, and runtime security tools (<a class="glossary-link" href="glossary.html#term-falco">Falco</a>, <a class="glossary-link" href="glossary.html#term-tetragon">Tetragon</a>). Pursue CKS as your hands-on credential.</p>
+            <h3>4. Containers and Kubernetes security</h3>
+            <p>Most cloud-native workloads land in containers, and most non-trivial deployments land in Kubernetes. Start with the <a href="containers.html">Containers</a> page (the trust boundary, escape paths, IMDS-based identity chaining, supply chain). Then move to <a href="kubernetes.html">Kubernetes &amp; managed Kubernetes</a> for the cluster-specific risks — workload identity (IRSA / WIF), <a class="glossary-link" href="glossary.html#term-pss">pod security standards</a>, RBAC, network policies, and runtime tools (<a class="glossary-link" href="glossary.html#term-falco">Falco</a>, <a class="glossary-link" href="glossary.html#term-tetragon">Tetragon</a>). Pursue CKS as your hands-on credential.</p>
 
-            <h3>5. AI / LLM security</h3>
+            <h3>5. CI/CD and supply-chain security</h3>
+            <p>The pipeline is now the soft underbelly of cloud security — its credentials are the keys to production. Read the <a href="ci-cd.html">CI/CD for cloud deployments</a> page for the OIDC-federation pattern that replaces long-lived cloud keys, plus pipeline hardening (signed artifacts, SLSA provenance, branch protection, ephemeral runners).</p>
+
+            <h3>6. AI / LLM security</h3>
             <p>Increasingly relevant. Read the <a class="glossary-link" href="glossary.html#term-owasp">OWASP</a> Top 10 for LLMs. Practice on <a class="glossary-link" href="glossary.html#term-ai">AI</a>-focused CTFs in our <a href="ctfs.html">CTF directory</a>. Study agentic-system risks and <a class="glossary-link" href="glossary.html#term-prompt-injection">prompt injection</a> in production scenarios.</p>
 
-            <h3>6. Senior credentials</h3>
+            <h3>7. Senior credentials</h3>
             <p>If you're going the architect/consultant route, CCSP from ISC2 once you hit five years of relevant experience. SC-100 if you're heavy in Microsoft.</p>
 
             <p><strong>Stage 3 milestone:</strong> You're shipping detection content, presenting at meetups, or leading an aspect of cloud security at your job.</p>
@@ -523,7 +529,7 @@
                 <li><strong><a class="glossary-link" href="glossary.html#term-detection-engineering">Detection engineering</a></strong> — building the rules that catch the next breach.</li>
                 <li><strong>Identity and IAM architecture</strong> — increasingly the most important specialty in cloud security.</li>
                 <li><strong>Cloud penetration testing / <a class="glossary-link" href="glossary.html#term-red-team">red team</a></strong> — offensive cloud work, often as a consultant.</li>
-                <li><strong>Application security in <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> environments</strong> — <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scanning, supply-chain, container hardening.</li>
+                <li><strong>Application security in <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> environments</strong> — <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scanning, supply-chain, <a href="containers.html">container hardening</a>, <a href="ci-cd.html">CI/CD pipeline security</a>.</li>
                 <li><strong>Compliance and governance at scale</strong> — multi-account <a class="glossary-link" href="glossary.html#term-guardrails">guardrails</a>, control frameworks, audit automation.</li>
                 <li><strong>Cloud <a class="glossary-link" href="glossary.html#term-soc">SOC</a> / managed detection &amp; response</strong> — running a 24x7 monitoring practice.</li>
                 <li><strong>AI security</strong> — prompt injection, model security, agent risk.</li>

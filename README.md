@@ -24,6 +24,9 @@ The vendor-neutral pillars of cloud security, written by practitioners:
 | ✅ [Cloud Security Best Practices](https://csoh.org/cloud-security-best-practices.html) | The controls that actually prevent breaches, ranked by what shows up in real incidents |
 | ⚖️ [Shared Responsibility Model](https://csoh.org/shared-responsibility-model.html) | What the cloud provider secures vs. what you secure (AWS / Azure / GCP) |
 | 🛠️ [CSPM vs CNAPP vs CWPP vs CIEM vs DSPM](https://csoh.org/cspm-vs-cnapp.html) | The acronym soup decoded — when you need each tool |
+| 📦 [Containers & Cloud Security](https://csoh.org/containers.html) | The trust boundary, escape paths, identity chaining via IMDS, supply chain |
+| ☸️ [Kubernetes & Managed Kubernetes](https://csoh.org/kubernetes.html) | EKS / AKS / GKE — shared responsibility, workload identity, RBAC, admission |
+| 🔄 [CI/CD for Cloud Deployments](https://csoh.org/ci-cd.html) | Pipeline anatomy, OIDC federation, AWS/Azure/GCP toolchains |
 | 🎓 [Cloud Security Certifications](https://csoh.org/cloud-security-certifications.html) | CCSK, CCSP, AWS, Azure, GCP, CKS compared side by side |
 | ⚙️ [How We Use GitHub Actions](https://csoh.org/github-actions.html) | Learn CI/CD by reading our heavily-commented workflows |
 
@@ -103,6 +106,15 @@ What the cloud provider secures vs. what you secure across IaaS, PaaS, SaaS, and
 
 ### 🛠️ CSPM vs CNAPP vs CWPP vs CIEM vs DSPM (`cspm-vs-cnapp.html`)
 The acronym soup decoded. Side-by-side comparison of cloud-security tool categories with explicit "when do I need each" guidance, an open-source-only reference stack, and an FAQ on whether CNAPP is "just marketing" (mostly: no).
+
+### 📦 Containers & Cloud Security (`containers.html`)
+Vendor-neutral guide to containers in the cloud — what they actually are, why the boundary is process-isolation rather than tenant-isolation, the real escape paths (privileged flags, kernel CVEs, hostPath, docker.sock), identity chaining via the instance metadata service, flat networking, supply chain, minimal/hardened base images (Chainguard, Minimus, Wiz, Distroless), runtime detection, and an AWS/Azure/GCP service comparison.
+
+### ☸️ Kubernetes & Managed Kubernetes (`kubernetes.html`)
+Practitioner's guide to EKS / AKS / GKE — what's managed vs. what you still own, the pod-to-node-to-cloud threat arc, workload identity (IRSA / WIF / AKS Workload Identity), RBAC sprawl, Pod Security Standards, default-flat pod networking, admission control (Kyverno / OPA Gatekeeper), and a side-by-side comparison of the three managed offerings.
+
+### 🔄 CI/CD for Cloud Deployments (`ci-cd.html`)
+Vendor-neutral CI/CD reference focused on cloud — pipeline anatomy, OIDC federation (replacing long-lived cloud keys), AWS / Azure / GCP per-cloud deep dives, deployment strategies (blue/green, canary, rolling), securing the pipeline itself, IaC in the pipeline, and the DORA-aligned bootstrapping path.
 
 ### ⚙️ How We Use GitHub Actions (`github-actions.html`)
 Learn-by-example explainer for GitHub Actions, using CSOH's eight workflow files as the teaching material. Covers triggers, concurrency, secrets, the GITHUB_TOKEN vs PAT distinction, the `workflow` scope gotcha, and a recommended reading order through our heavily-commented YAML.
@@ -336,6 +348,10 @@ csoh.org/
 ├── cloud-security-best-practices.html  # Practitioner's controls checklist
 ├── shared-responsibility-model.html    # Provider vs. customer security split
 ├── cspm-vs-cnapp.html                  # Tool-category comparison
+├── landing-zones.html                  # Cloud foundations (AWS / Azure / GCP reference designs)
+├── containers.html                     # Container security: boundary, escapes, IMDS, supply chain
+├── kubernetes.html                     # Kubernetes & managed K8s (EKS / AKS / GKE) security
+├── ci-cd.html                          # CI/CD pipelines for cloud, OIDC federation, deploy strategies
 ├── threat-research.html        # Curated cloud threat research directory
 ├── contribute.html             # General contributions guide
 ├── contribute-resources.html   # Resource submission web form / guide

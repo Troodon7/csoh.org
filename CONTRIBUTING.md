@@ -279,12 +279,17 @@ Whether you're fixing a typo or rewriting a section, the process is the same.
 - [cloud-security-best-practices.html](cloud-security-best-practices.html) - Practitioner controls checklist
 - [shared-responsibility-model.html](shared-responsibility-model.html) - Provider vs. customer split
 - [cspm-vs-cnapp.html](cspm-vs-cnapp.html) - Tool category comparison
+- [landing-zones.html](landing-zones.html) - Cloud foundations (AWS / Azure / GCP reference designs)
+- [containers.html](containers.html) - Container security: boundary, escapes, IMDS, supply chain
+- [kubernetes.html](kubernetes.html) - Kubernetes & managed K8s (EKS / AKS / GKE) security
+- [ci-cd.html](ci-cd.html) - CI/CD pipelines for cloud (OIDC federation, deploy strategies)
 - [cloud-security-certifications.html](cloud-security-certifications.html) - CCSK / CCSP / AWS / Azure / GCP / CKS comparison
 - [conferences.html](conferences.html) - Security and hacker conference directory
 - [ctfs.html](ctfs.html) - Cloud CTF directory
 - [glossary.html](glossary.html) - 200+ terms with cross-links
 - [faq.html](faq.html) - Frequently asked questions
 - [github-actions.html](github-actions.html) - GitHub Actions explainer
+- [cloud-deployment.html](cloud-deployment.html) - How csoh.org itself deploys to GCP
 - [breach-timeline.html](breach-timeline.html) - Breach kill chain index (per-breach pages live in `breaches/`)
 - [threat-research.html](threat-research.html) - Cloud threat research source directory
 - [code-of-conduct.html](code-of-conduct.html) - Community standards
