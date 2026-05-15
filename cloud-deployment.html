@@ -113,6 +113,7 @@
                         <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
                         <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
                         <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                        <li><a href="landing-zones.html">Landing Zones</a></li>
                         <li><a href="cloud-security-reading-list.html">Reading List</a></li>
                         <li><a href="ctfs.html">CTFs</a></li>
                         <li><a href="github-actions.html">GitHub Actions</a></li>
@@ -756,6 +757,7 @@ OR protoPayload.@type="type.googleapis.com/google.cloud.audit.AuditLog"</pre>
                 <li><strong>Multi-region failover.</strong> Cloud Run is single-region. The CDN absorbs most load, and the site is static (no DB to replicate), so a region outage means stale content from CDN edges, not downtime. Global multi-region adds cost + complexity that doesn't pay off until you have global DAU.</li>
                 <li><strong>SIEM integration / real-time alerting.</strong> Logs are retained; we'd notice an attack on the next dashboard check. We don't get woken up at 3am. For a community site, that's the right call. For something with real users and revenue, you'd want at least PagerDuty integration on the most-critical filters.</li>
                 <li><strong>Custom VPC-SC service perimeter.</strong> GCP's heaviest network-isolation feature — useful when you have services holding sensitive data and want to forbid all data egress outside a defined boundary. Our runtime SA has access to nothing, so there's nothing to perimeterize.</li>
+                <li><strong>An enterprise-style <a class="glossary-link" href="glossary.html#term-landing-zone">landing zone / cloud foundation</a>.</strong> Everything on this page lives in one GCP project. An enterprise foundation is a different shape: a folder hierarchy of dozens of projects separated by environment and business unit, a Shared VPC owned by a platform team, Cloud Identity sync from your IdP, aggregated org-wide log sinks into a dedicated security project, Cloud KMS and Secret Manager owned by separate teams, org-policy constraints that pre-block risky configs everywhere, and a Cloud Build / Terraform pipeline that's the only thing allowed to write to prod. We're a single static site with one deployer (Shawn) — we don't need any of that. If you're standing up GCP at company scale, the patterns we did <em>not</em> use are documented in the <a href="landing-zones.html">landing zones &amp; cloud foundations guide</a>.</li>
             </ul>
         </section>
 
@@ -811,6 +813,7 @@ OR protoPayload.@type="type.googleapis.com/google.cloud.audit.AuditLog"</pre>
                         <li><a href="https://github.com/google-github-actions/auth" target="_blank" rel="noopener noreferrer">google-github-actions/auth</a> — the action that does the OIDC exchange</li>
                         <li><a href="https://docs.cloud.google.com/armor/docs/cloud-armor-overview" target="_blank" rel="noopener noreferrer">GCP — Cloud Armor overview</a></li>
                         <li><a href="https://docs.cloud.google.com/run/docs/securing/ingress" target="_blank" rel="noopener noreferrer">GCP — Cloud Run ingress controls</a></li>
+                        <li><a href="https://docs.cloud.google.com/architecture/blueprints/security-foundations" target="_blank" rel="noopener noreferrer">GCP — Enterprise foundations blueprint</a> — what this same defense-in-depth model looks like at organization scale: folder hierarchy, Shared VPC, aggregated log sinks, Cloud KMS, Security Command Center, and the org-policy constraints we don't need for a single static site</li>
                         <li><a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a> — the canonical list of common web app vulnerabilities</li>
                         <li><a href="https://slsa.dev/" target="_blank" rel="noopener noreferrer">SLSA</a> — the supply-chain provenance framework we'll add next</li>
                     </ul>
@@ -848,6 +851,7 @@ OR protoPayload.@type="type.googleapis.com/google.cloud.audit.AuditLog"</pre>
             <li><a href="/cloud-security-best-practices.html">Best Practices</a></li>
             <li><a href="/shared-responsibility-model.html">Shared Responsibility</a></li>
             <li><a href="/cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+            <li><a href="/landing-zones.html">Landing Zones</a></li>
             <li><a href="/cloud-security-reading-list.html">Reading List</a></li>
             <li><a href="/ctfs.html">CTFs</a></li>
             <li><a href="/github-actions.html">GitHub Actions</a></li>

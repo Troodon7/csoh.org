@@ -90,6 +90,7 @@
                         <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
                         <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
                         <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                        <li><a href="landing-zones.html">Landing Zones</a></li>
                         <li><a href="cloud-security-reading-list.html">Reading List</a></li>
                         <li><a href="ctfs.html">CTFs</a></li>
                         <li><a href="github-actions.html">GitHub Actions</a></li>
@@ -929,6 +930,9 @@
                 <dt id="term-iac">IaC — Infrastructure as Code</dt>
                 <dd>Declaring infrastructure in versioned code. Terraform / OpenTofu, CloudFormation, Bicep, Pulumi, Crossplane.</dd>
 
+                <dt id="term-landing-zone">Landing Zone / Cloud Foundation</dt>
+                <dd>The baseline of accounts, identities, networks, logging sinks, and guardrails that workloads land into. Each major cloud has a reference design: AWS <a href="https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html" target="_blank" rel="noopener noreferrer">Control Tower / Landing Zone Accelerator</a>, Azure <a href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/" target="_blank" rel="noopener noreferrer">Cloud Adoption Framework landing zones</a>, GCP <a href="https://docs.cloud.google.com/architecture/blueprints/security-foundations" target="_blank" rel="noopener noreferrer">Enterprise Foundations Blueprint</a>. The goal is that the second, fifth, and five-hundredth workload all start with the same identity model, network segmentation, log aggregation, and <a class="glossary-link" href="#term-policy-as-code">policy-as-code</a> guardrails — not whatever the team that built it decided in the moment. See our <a href="landing-zones.html">landing zones guide</a>.</dd>
+
                 <dt id="term-gitops">GitOps</dt>
                 <dd>Use Git as the source of truth for desired state; an <a class="glossary-link" href="#term-agent">agent</a> reconciles the live system to match.</dd>
 
@@ -1045,6 +1049,7 @@
             <li><a href="/cloud-security-best-practices.html">Best Practices</a></li>
             <li><a href="/shared-responsibility-model.html">Shared Responsibility</a></li>
             <li><a href="/cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+            <li><a href="/landing-zones.html">Landing Zones</a></li>
             <li><a href="/cloud-security-reading-list.html">Reading List</a></li>
             <li><a href="/ctfs.html">CTFs</a></li>
             <li><a href="/github-actions.html">GitHub Actions</a></li>

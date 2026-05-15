@@ -162,6 +162,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Landing Zones & Cloud Foundations - reference page -->
+  <url>
+    <loc>https://csoh.org/landing-zones.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Cloud Security Certifications - Comparison page -->
   <url>
     <loc>https://csoh.org/cloud-security-certifications.html</loc>
