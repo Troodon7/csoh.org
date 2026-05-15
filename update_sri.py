@@ -147,7 +147,7 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
             tag = match.group(0)
             tag = re.sub(
                 r'(href=["\'])(?:\.?/)?breach-timeline\.css(?:\?[^"\']*)?(["\'])',
-                rf'\g<1>breach-timeline.css?v={cache_busts["breach-timeline.css"]}\2',
+                rf'\g<1>/breach-timeline.css?v={cache_busts["breach-timeline.css"]}\2',
                 tag,
             )
             tag = upsert_attr(tag, 'integrity', hashes['breach-timeline.css'])
@@ -166,7 +166,7 @@ def update_html_file(html_path: Path, hashes: Dict[str, str],
             tag = match.group(0)
             tag = re.sub(
                 r'(src=["\'])(?:\.?/)?breach-timeline\.js(?:\?[^"\']*)?(["\'])',
-                rf'\g<1>breach-timeline.js?v={cache_busts["breach-timeline.js"]}\2',
+                rf'\g<1>/breach-timeline.js?v={cache_busts["breach-timeline.js"]}\2',
                 tag,
             )
             tag = upsert_attr(tag, 'integrity', hashes['breach-timeline.js'])
