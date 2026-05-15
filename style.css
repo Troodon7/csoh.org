@@ -1078,11 +1078,17 @@ footer {
     /* Navigation - HAMBURGER TOGGLE WITH NO-JS FALLBACK */
     .hamburger {
         display: block;
-        order: 2;
+        order: 3;
+        margin-left: 0;
     }
 
     .theme-toggle {
-        order: 1;
+        order: 2;
+        margin-left: auto;
+        margin-right: 0.25rem;
+        width: 2.4rem;
+        height: 2.4rem;
+        font-size: 1.05rem;
     }
 
     /* Without JS: nav stays visible as fallback */
@@ -2286,17 +2292,23 @@ footer {
 
     .hamburger {
         display: block;
-        order: 2;
+        order: 3;
+        margin-left: 0;
     }
 
     .theme-toggle {
-        order: 1;
+        order: 2;
+        margin-left: auto;
+        margin-right: 0.25rem;
+        width: 2.4rem;
+        height: 2.4rem;
+        font-size: 1.05rem;
     }
 
     header nav {
         display: block;
         width: 100%;
-        order: 3;
+        order: 4;
     }
 
     .js-enabled header nav {
@@ -2396,23 +2408,38 @@ footer {
 
 /* Dark mode toggle button in header */
 .theme-toggle {
-    background: none;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
     color: var(--white);
     cursor: pointer;
-    padding: 0.35rem 0.5rem;
-    font-size: 1.1rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    font-size: 1rem;
     line-height: 1;
-    transition: border-color 0.3s, background-color 0.3s;
-    display: flex;
+    transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-left: auto;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
 }
 
 .theme-toggle:hover {
-    border-color: rgba(255, 255, 255, 0.6);
-    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.55);
+    background-color: rgba(255, 255, 255, 0.14);
+    transform: scale(1.06);
+}
+
+.theme-toggle:active {
+    transform: scale(0.96);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.85);
+    outline-offset: 2px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -2765,8 +2792,24 @@ footer {
     color: var(--secondary-color);
 }
 
+[data-theme="dark"] .breadcrumb-nav {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
 [data-theme="dark"] .breadcrumb-nav ol {
     color: #a0adb8;
+}
+
+[data-theme="dark"] .breadcrumb-nav a {
+    color: #6fc3ff;
+}
+
+[data-theme="dark"] .breadcrumb-nav a:hover {
+    background-color: rgba(111, 195, 255, 0.12);
+}
+
+[data-theme="dark"] .breadcrumb-nav [aria-current="page"] {
+    color: #f0f3f7;
 }
 
 [data-theme="dark"] .breadcrumb-nav li + li::before {
@@ -2891,51 +2934,68 @@ footer {
 .breadcrumb-nav {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0.75rem 2rem 0;
+    padding: 0.6rem 2rem 0.7rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .breadcrumb-nav ol {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
     list-style: none;
-    column-gap: 0.4rem;
-    row-gap: 0.15rem;
-    font-size: 0.875rem;
+    column-gap: 0.5rem;
+    row-gap: 0.2rem;
+    font-size: 0.85rem;
     line-height: 1.4;
-    color: #666;
+    color: #6b7785;
     margin: 0;
     padding: 0;
 }
 
 .breadcrumb-nav li {
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
 }
 
 .breadcrumb-nav li + li::before {
-    content: '›';
-    color: #999;
-    padding-right: 0.4rem;
+    content: '/';
+    color: #c5ccd4;
+    padding-right: 0.5rem;
+    font-weight: 300;
 }
 
 .breadcrumb-nav a {
     color: var(--secondary-color);
     text-decoration: none;
+    padding: 0.15rem 0.35rem;
+    margin: -0.15rem -0.35rem;
+    border-radius: 4px;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .breadcrumb-nav a:hover {
-    text-decoration: underline;
+    background-color: rgba(52, 152, 219, 0.08);
+    text-decoration: none;
+}
+
+.breadcrumb-nav a:focus-visible {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 1px;
 }
 
 .breadcrumb-nav [aria-current="page"] {
     color: var(--text-color);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 @media (max-width: 768px) {
     .breadcrumb-nav {
-        padding: 0.5rem 0.75rem 0;
+        padding: 0.5rem 0.75rem 0.55rem;
         font-size: 0.8rem;
+    }
+    .breadcrumb-nav li + li::before {
+        padding-right: 0.35rem;
     }
 }
 
