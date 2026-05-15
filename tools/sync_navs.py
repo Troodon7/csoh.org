@@ -36,6 +36,7 @@ DROPDOWNS = [
         ('landing-zones.html', 'Landing Zones'),
         ('containers.html', 'Containers'),
         ('kubernetes.html', 'Kubernetes'),
+        ('serverless.html', 'Serverless'),
         ('ci-cd.html', 'CI/CD'),
         ('cloud-security-reading-list.html', 'Reading List'),
     ]),

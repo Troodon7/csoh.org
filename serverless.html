@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="Serverless functions (Lambda, Azure Functions, Cloud Functions) — what they are, why they're attractive, where they fail, and the security implications: event injection, identity sprawl, supply chain, secrets handling, denial of wallet. Vendor-neutral.">
+    <meta name="keywords"
+        content="serverless, FaaS, AWS Lambda, Azure Functions, Google Cloud Functions, serverless security, event injection, denial of wallet, function URL, Lambda IAM, cold start, serverless framework">
+    <title>Serverless Functions &amp; Cloud Security - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/serverless.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Serverless Functions &amp; Cloud Security - CSOH">
+    <meta property="og:description"
+        content="A practitioner's guide to serverless functions in the cloud — what they are, why they're attractive, where they fall short, and the security risks unique to event-driven, short-lived compute.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/serverless.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Serverless Functions &amp; Cloud Security">
+    <meta name="twitter:description"
+        content="Vendor-neutral guide to serverless function security — event injection, identity sprawl, supply chain, secrets, denial of wallet.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://csoh.kit.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+
+    <link rel="preload" href="/style.css?v=0d8fc81d" as="style"
+        integrity="sha384-T2RglkzlwLN3tjrobi8W8V4aTwvuaVZzMON0R16FuXpbTuQimufZPvR4j4UupkNE">
+    <link rel="stylesheet" href="/style.css?v=0d8fc81d"
+        integrity="sha384-T2RglkzlwLN3tjrobi8W8V4aTwvuaVZzMON0R16FuXpbTuQimufZPvR4j4UupkNE">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Serverless Functions & Cloud Security",
+      "description": "A vendor-neutral practitioner's guide to serverless functions in the cloud — Lambda, Azure Functions, Google Cloud Functions — covering the model, the tradeoffs, and the security implications of event-driven, short-lived compute.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-05-15",
+      "dateModified": "2026-05-15",
+      "mainEntityOfPage": "https://csoh.org/serverless.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csoh.org/"},
+        {"@type": "ListItem", "position": 2, "name": "Serverless", "item": "https://csoh.org/serverless.html"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a serverless function?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A serverless function is a piece of code that the cloud runs in response to an event — an HTTP request, a queue message, a file upload, a scheduled timer — without you provisioning, patching, or managing the server underneath. The cloud handles allocation, scaling, OS patching, and runtime upgrades; you upload code and an event configuration. AWS Lambda, Azure Functions, and Google Cloud Functions are the dominant offerings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is serverless more secure than running a container or VM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In some dimensions, yes — the cloud handles the OS, the runtime, the host-level patching, and the workload runs in a per-invocation micro-VM (Firecracker on Lambda, similar on the others), so kernel-level attack surface and patching toil basically disappear. In other dimensions it's worse: the attack surface shifts to identity (functions accumulate IAM permissions), event triggers (malicious payloads from S3, SQS, EventBridge, public function URLs), supply chain (every npm/pip package becomes a runtime risk), and cost-as-DoS. Serverless trades classic infra risks for cloud-specific ones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is denial of wallet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Denial of wallet is the serverless equivalent of denial of service: instead of taking your application offline, an attacker drives up your invocation count or compute time until your cloud bill is the problem. Public function URLs, unrate-limited APIs in front of functions, and recursive event loops (a function writes to S3 which triggers itself) are the classic vectors. Defenses are the same as the cost-control playbook: per-function concurrency limits, throttles at the API gateway, budget alarms, and reserved concurrency caps."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a serverless function be exploited the same way a web app can?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Injection vulnerabilities, deserialization bugs, path traversal, server-side request forgery, broken access control — every OWASP class applies to function code. The execution environment is shorter-lived and the IAM blast radius is usually narrower, but the application-layer bugs are the same. Add event-source-specific injection (a malicious S3 object key, a poisoned SQS message body) as a category that doesn't exist for traditional web servers."
+          }
+        }
+      ]
+    }
+    </script>
+  <noscript><style>.js-enabled header nav{display:block !important}</style></noscript>
+</head>
+
+<body class="js-enabled">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                        <li><a href="learning-path.html">Learning Path</a></li>
+                        <li><a href="ai-learning.html">AI Learning</a></li>
+                        <li><a href="cloud-security-degree-programs.html">Degree Programs</a></li>
+                        <li><a href="cloud-security-careers.html">Careers</a></li>
+                        <li><a href="cloud-security-home-lab.html">Home Lab</a></li>
+                        <li><a href="cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+                        <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle active" aria-expanded="true" aria-haspopup="true">Topics <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
+                        <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
+                        <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                        <li><a href="landing-zones.html">Landing Zones</a></li>
+                        <li><a href="containers.html">Containers</a></li>
+                        <li><a href="kubernetes.html">Kubernetes</a></li>
+                        <li><a href="serverless.html" aria-current="page">Serverless</a></li>
+                        <li><a href="ci-cd.html">CI/CD</a></li>
+                        <li><a href="cloud-security-reading-list.html">Reading List</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Threat Research <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="threat-research.html">Threat Research</a></li>
+                        <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Attend <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="sessions.html">Zoom Sessions</a></li>
+                        <li><a href="community.html">Community &amp; Signal</a></li>
+                        <li><a href="conferences.html">Conferences</a></li>
+                        <li><a href="meetings.html">Meeting Recaps</a></li>
+                        <li><a href="presentations.html">Presentations</a></li>
+                        <li><a href="chat-resources.html">Chat Resources</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="contribute.html">Contribute Overview</a></li>
+                        <li><a href="contribute-resources.html">Add a Resource</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">About <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="glossary.html">Glossary</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="github-actions.html">How We Use GitHub Actions</a></li>
+                        <li><a href="cloud-deployment.html">How We Deploy to GCP</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Serverless</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--illustrated">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1>Serverless Functions &amp; Cloud Security</h1>
+          <p>Code that runs only when something happens — an HTTP request, a queue message, a file landing in storage — and disappears when it's done. Vendor-neutral guide to AWS Lambda, Azure Functions, and Google Cloud Functions: what they are, where they shine, where they fail, and the security implications of event-driven, short-lived compute.</p>
+          <div class="cta-buttons">
+            <a href="#risks" class="btn btn-primary">Security risks →</a>
+            <a href="#comparison" class="btn btn-secondary">AWS / Azure / GCP comparison</a>
+          </div>
+        </div>
+        <div class="hero-illustration" aria-hidden="true">
+          <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of events flowing into ephemeral serverless function executions in the cloud">
+            <defs>
+              <linearGradient id="sl-cloud" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="60%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
+              <linearGradient id="sl-fn" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#4c1d95"/></linearGradient>
+              <linearGradient id="sl-event" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient>
+              <radialGradient id="sl-halo" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.35"/><stop offset="100%" stop-color="#7dd3fc" stop-opacity="0"/></radialGradient>
+            </defs>
+            <circle cx="300" cy="240" r="200" fill="url(#sl-halo)"/>
+            <!-- Cloud at top -->
+            <path d="M 200,80 a 50,50 0 0,1 60,-50 a 70,70 0 0,1 130,0 a 50,50 0 0,1 50,30 a 45,45 0 0,1 -25,80 H 220 a 45,45 0 0,1 -20,-60 z" fill="url(#sl-cloud)" stroke="#fff" stroke-width="1.5" stroke-opacity="0.4"/>
+            <text x="300" y="95" text-anchor="middle" fill="#0c4a6e" font-size="14" font-weight="700">Managed runtime</text>
+            <!-- Event sources on the left -->
+            <g>
+              <rect x="40" y="180" width="100" height="32" rx="6" fill="url(#sl-event)" stroke="#b45309" stroke-width="1"/>
+              <text x="90" y="201" text-anchor="middle" fill="#451a03" font-size="11" font-weight="700">HTTP request</text>
+              <rect x="40" y="225" width="100" height="32" rx="6" fill="url(#sl-event)" stroke="#b45309" stroke-width="1"/>
+              <text x="90" y="246" text-anchor="middle" fill="#451a03" font-size="11" font-weight="700">Queue msg</text>
+              <rect x="40" y="270" width="100" height="32" rx="6" fill="url(#sl-event)" stroke="#b45309" stroke-width="1"/>
+              <text x="90" y="291" text-anchor="middle" fill="#451a03" font-size="11" font-weight="700">S3 upload</text>
+              <rect x="40" y="315" width="100" height="32" rx="6" fill="url(#sl-event)" stroke="#b45309" stroke-width="1"/>
+              <text x="90" y="336" text-anchor="middle" fill="#451a03" font-size="11" font-weight="700">Schedule ⏰</text>
+            </g>
+            <!-- Function executions (ephemeral micro-VMs) -->
+            <g>
+              <rect x="220" y="170" width="120" height="60" rx="10" fill="url(#sl-fn)" stroke="#a78bfa" stroke-width="2"/>
+              <text x="280" y="195" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">fn() #1</text>
+              <text x="280" y="215" text-anchor="middle" fill="#e2e8f0" font-size="10">~50ms exec</text>
+
+              <rect x="220" y="240" width="120" height="60" rx="10" fill="url(#sl-fn)" stroke="#a78bfa" stroke-width="2"/>
+              <text x="280" y="265" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">fn() #2</text>
+              <text x="280" y="285" text-anchor="middle" fill="#e2e8f0" font-size="10">cold-start ❄</text>
+
+              <rect x="220" y="310" width="120" height="60" rx="10" fill="url(#sl-fn)" stroke="#a78bfa" stroke-width="2" opacity="0.3"/>
+              <text x="280" y="335" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">fn() #N</text>
+              <text x="280" y="355" text-anchor="middle" fill="#e2e8f0" font-size="10">scaling out</text>
+            </g>
+            <!-- Targets on right -->
+            <g>
+              <rect x="420" y="180" width="120" height="32" rx="6" fill="#0d1424" stroke="#34d399" stroke-width="1.5"/>
+              <text x="480" y="201" text-anchor="middle" fill="#34d399" font-size="11" font-weight="700">DynamoDB</text>
+              <rect x="420" y="225" width="120" height="32" rx="6" fill="#0d1424" stroke="#38bdf8" stroke-width="1.5"/>
+              <text x="480" y="246" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="700">3rd-party API</text>
+              <rect x="420" y="270" width="120" height="32" rx="6" fill="#0d1424" stroke="#fb7185" stroke-width="1.5"/>
+              <text x="480" y="291" text-anchor="middle" fill="#fb7185" font-size="11" font-weight="700">S3 bucket</text>
+              <rect x="420" y="315" width="120" height="32" rx="6" fill="#0d1424" stroke="#fbbf24" stroke-width="1.5"/>
+              <text x="480" y="336" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">SQS / SNS</text>
+            </g>
+            <!-- Arrows -->
+            <g stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="3 4" fill="none" opacity="0.6">
+              <line x1="142" y1="196" x2="218" y2="196"/>
+              <line x1="142" y1="241" x2="218" y2="241"/>
+              <line x1="142" y1="286" x2="218" y2="286"/>
+              <line x1="342" y1="196" x2="418" y2="196"/>
+              <line x1="342" y1="241" x2="418" y2="241"/>
+              <line x1="342" y1="286" x2="418" y2="286"/>
+            </g>
+            <!-- IAM role callout -->
+            <g>
+              <rect x="200" y="400" width="200" height="45" rx="8" fill="#0f172a" stroke="#fb7185" stroke-width="1.5"/>
+              <text x="300" y="420" text-anchor="middle" fill="#fb7185" font-size="11" font-weight="700">Per-function IAM role</text>
+              <text x="300" y="436" text-anchor="middle" fill="#e2e8f0" font-size="10">scoped to one workload</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <main class="container contribute-article" id="main-content">
+
+        <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/data-cables.webp" type="image/webp">
+            <img src="/img/photos/data-cables.jpg" alt="From above contemporary server cable trays in a modern data center" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Photo by Brett Sayles on Pexels</figcaption>
+        </figure>
+
+        <p class="page-meta"><time datetime="2026-05-15">Last updated <strong>2026-05-15</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/serverless.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>The 30-second version:</strong> A <strong>serverless function</strong> (a.k.a. <strong>FaaS</strong>) is code the cloud runs in response to an event — HTTP request, queue message, file upload, schedule — without you provisioning, patching, or managing a server. AWS <strong>Lambda</strong>, Azure <strong>Functions</strong>, and Google <strong>Cloud Functions</strong> are the dominant products. The platform owns the OS, the runtime, the scaling, and the host-level isolation; you own the code, the IAM role, the event configuration, and the dependencies.</p>
+            <p style="margin-top:0.75rem;">Security shifts accordingly. Kernel-level attack surface largely disappears. What replaces it: <strong>event injection</strong> from untrusted sources, <strong>identity sprawl</strong> across hundreds of small functions, <strong>supply-chain risk</strong> in every dependency, and <strong>denial of wallet</strong> as the new flavor of DoS.</p>
+        </div>
+
+        <div class="toc">
+            <h2>📖 On this page</h2>
+            <ol>
+                <li><a href="#what-is">What a serverless function actually is</a></li>
+                <li><a href="#why-cloud">Why use serverless</a></li>
+                <li><a href="#good-bad">The good and the bad</a></li>
+                <li><a href="#boundary">The trust boundary</a></li>
+                <li><a href="#risks">The seven risk categories that matter</a></li>
+                <li><a href="#event-injection">Event injection — untrusted payloads</a></li>
+                <li><a href="#identity">Identity sprawl &amp; per-function roles</a></li>
+                <li><a href="#supply-chain">Supply chain — every dep is runtime</a></li>
+                <li><a href="#secrets">Secrets, env vars, and config</a></li>
+                <li><a href="#networking">Networking, egress, and VPCs</a></li>
+                <li><a href="#wallet">Denial of wallet</a></li>
+                <li><a href="#observability">Logging &amp; observability</a></li>
+                <li><a href="#comparison">AWS, Azure, and GCP side-by-side</a></li>
+                <li><a href="#hardening">Hardening checklist</a></li>
+                <li><a href="#pitfalls">Common pitfalls</a></li>
+                <li><a href="#further">Further reading</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ol>
+        </div>
+
+        <section id="what-is">
+            <h2>What a serverless function actually is</h2>
+            <p>Strip the marketing off and a serverless function is three things:</p>
+            <ol>
+                <li><strong>A short piece of code</strong> — usually one entry point that takes an event object and returns a result. JavaScript, Python, Go, Java, .NET, Ruby, custom runtimes via a thin shim. Code lives in a deploy package (zip, container image, or a managed runtime layer).</li>
+                <li><strong>An event configuration</strong> — declaring what causes the function to run. HTTP routes via an API gateway, queue messages, blob/object events, scheduled timers, database streams, message-bus events, identity events.</li>
+                <li><strong>An execution role</strong> — the cloud identity the function assumes when it runs. Permissions for whatever services the code needs to call (read a row from DynamoDB, write to S3, call SQS, etc.).</li>
+            </ol>
+            <p>When an event arrives, the platform allocates an isolated execution environment (a per-invocation micro-VM on AWS — Firecracker — and equivalents on Azure and GCP), copies your code in, runs it for at most a few minutes (varies by provider; Lambda caps at 15 minutes), and discards the environment. From your side: no servers visible, no nodes to patch, no operating system to maintain. The platform handles all of that.</p>
+            <p>The <em>serverless</em> name is a marketing term — there are obviously servers underneath. The accurate framing is <strong>functions as a service</strong>: the unit of deployment is a function, the unit of billing is the millisecond of execution, and the platform owns everything between your code and the silicon.</p>
+        </section>
+
+        <section id="why-cloud">
+            <h2>Why use serverless</h2>
+            <p>The model maps cleanly onto a specific shape of workload — event-driven, intermittent, with bursty concurrency:</p>
+            <ul>
+                <li><strong>Pay only when running.</strong> No idle compute charges. A function invoked 1,000 times a day costs cents to dollars rather than the monthly minimum of a small VM.</li>
+                <li><strong>Scale-to-zero and scale-to-thousands automatically.</strong> No provisioning capacity ahead of demand. Spikes that would have required pre-warming a fleet are handled by the platform.</li>
+                <li><strong>No server patching.</strong> The cloud upgrades the OS, runtime, and language version on a published schedule. You take the deprecation hit when your runtime reaches EOL, but day-to-day patching disappears.</li>
+                <li><strong>Tight integration with cloud event sources.</strong> S3 → Lambda, Blob → Function, GCS → Cloud Function is a one-line wiring that would have required a polling daemon a decade ago.</li>
+                <li><strong>Smaller per-workload security surface.</strong> No kernel to share, no node to compromise, no DaemonSet to misconfigure. The unit of compromise is one function execution.</li>
+                <li><strong>Fast development loop.</strong> Deploy in seconds, roll back in seconds, version every change. Great for glue code, internal tools, and event-driven plumbing.</li>
+            </ul>
+            <p>The typical fit: API endpoints that don't need persistent state, ETL pipelines that fire when a file lands, scheduled jobs, fan-out and fan-in patterns, lightweight integrations between SaaS services, and any "respond to this cloud event" use case.</p>
+        </section>
+
+        <section id="good-bad">
+            <h2>The good and the bad</h2>
+            <p>Serverless is good for some shapes, bad for others. The honest tradeoff matrix:</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Dimension</th>
+                            <th scope="col">The good</th>
+                            <th scope="col">The bad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Cost (low traffic)</th>
+                            <td>Pennies. Truly free at small scale.</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Cost (sustained high traffic)</th>
+                            <td>—</td>
+                            <td>Above a few thousand QPS continuously, a long-running container or VM is usually 3–10× cheaper.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Operational toil</th>
+                            <td>No nodes, no patches, no OS to manage.</td>
+                            <td>Debugging a misbehaving function in production is harder — no shell, no <code>kubectl exec</code>, only logs and traces.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Scaling</th>
+                            <td>Zero to thousands in seconds, automatic.</td>
+                            <td>Concurrency limits, cold starts, downstream-dependency throttling. The platform scales; the database the function calls may not.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Latency</th>
+                            <td>Warm invocations are fast (single-digit ms overhead).</td>
+                            <td>Cold starts add 100ms–several seconds. Bad for latency-sensitive paths unless provisioned concurrency is used (which costs more).</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Long-running work</th>
+                            <td>—</td>
+                            <td>Hard caps: Lambda 15 min, Cloud Functions 60 min (v2), Azure Functions Premium 60 min default. Work that exceeds these doesn't fit.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Stateful work</th>
+                            <td>Stateful operators can run side-by-side (Step Functions, Durable Functions, Workflows).</td>
+                            <td>Functions themselves are stateless; state goes to external storage on every invocation.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Local dev / testing</th>
+                            <td>Frameworks like SAM, Serverless Framework, Azure Functions Core Tools.</td>
+                            <td>Local emulators always diverge from prod in subtle ways — event format differences, IAM behavior, throttling.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Vendor lock</th>
+                            <td>Code itself is portable.</td>
+                            <td>Event wiring, IAM, observability, and Step-Functions-equivalent orchestration are not. Migrating between clouds is real work.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Security surface</th>
+                            <td>No host kernel to share; no nodes to compromise.</td>
+                            <td>Attack surface shifts to identity, events, dependencies, and cost. Same total surface — different shape.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>A working heuristic: if your workload is event-driven, intermittent, mostly stateless, and finishes in under 15 minutes, serverless is usually the right default. If it's sustained throughput, long-running, or has a hard latency budget under 100ms p99, containers or VMs are usually a better fit.</p>
+        </section>
+
+        <section id="boundary">
+            <h2>The trust boundary</h2>
+            <p>For each function invocation, the security-relevant boundary is straightforward:</p>
+            <ul>
+                <li><strong>The execution environment is per-invocation, hypervisor-isolated.</strong> On AWS, every Lambda invocation runs in a Firecracker micro-VM dedicated to one customer. Azure and GCP have similar isolation. Two of your functions cannot share a kernel; two customers' functions definitely cannot.</li>
+                <li><strong>The function's identity is its execution role.</strong> Whatever permissions that role has, the function has. There is no node identity, no shared service-account token, no host-level credentials to fall back to.</li>
+                <li><strong>The event source is the entry point.</strong> Whatever calls the function — API Gateway, an HTTP function URL, S3 events, queue messages — is the threat surface. Untrusted input enters the function via the event payload.</li>
+                <li><strong>The function's outbound calls are bounded by its role.</strong> If the role can read a single DynamoDB table, that's the blast radius. Per-function least-privilege roles are the difference between "one function compromised" and "one function got the keys to everything."</li>
+            </ul>
+            <p>The platform genuinely makes the boundary stronger than a long-lived container or VM in some ways — fresh execution environment per invocation, hypervisor isolation by default, no host to patch. It also makes some kinds of compromise <em>cheaper</em>: stealing a function's IAM credentials and using them outside the function is easy if the function leaks them, and the function only needs to be compromised once to do that.</p>
+        </section>
+
+        <section id="risks">
+            <h2>The seven risk categories that matter</h2>
+            <p>Serverless security in the cloud collapses into seven categories. The names differ across vendors; the threats don't.</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-iam">
+                    <h3>1. Event injection</h3>
+                    <p>Untrusted data lands in the function via an event payload — S3 object metadata, SQS message body, API Gateway request, EventBridge event. Same OWASP injection classes, new entry points.</p>
+                </div>
+                <div class="pillar-card pillar-card-posture">
+                    <h3>2. Identity sprawl</h3>
+                    <p>Hundreds of functions, each with its own role, each accumulating "just in case" permissions. Hard to audit; high blast radius when one role escalates.</p>
+                </div>
+                <div class="pillar-card pillar-card-supply">
+                    <h3>3. Supply chain</h3>
+                    <p>Every npm / pip / Maven dependency is loaded into the runtime on every cold start. A poisoned package is in production within one deploy.</p>
+                </div>
+                <div class="pillar-card pillar-card-data">
+                    <h3>4. Secrets handling</h3>
+                    <p>Secrets in env vars are visible via the console, logs, error stacks, and any code that prints <code>process.env</code>. The "obviously easy" pattern is the leakiest one.</p>
+                </div>
+                <div class="pillar-card pillar-card-network">
+                    <h3>5. Network egress</h3>
+                    <p>Default-egress-to-the-internet is the standard. A compromised function calls home; nothing in the platform stops it unless you put it in a VPC with restricted egress.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3>6. Denial of wallet</h3>
+                    <p>Public function URLs, unrate-limited APIs, recursive event loops. The attack target isn't uptime — it's your invoice. A weekend of fuzzing can produce a five-figure bill.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>7. Observability gap</h3>
+                    <p>No shell, no <code>kubectl exec</code>, no host-level forensics. If you didn't log it, it didn't happen — and an attacker who knows that has every reason to keep their activity inside that gap.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="event-injection">
+            <h2>Event injection — untrusted payloads</h2>
+            <p>The most underestimated serverless risk. A function triggered by an event receives a structured payload — and that payload often contains attacker-controlled fields.</p>
+            <p>Some real entry points:</p>
+            <ul>
+                <li><strong>S3 / Blob object events.</strong> The object key is in the event. An attacker who can upload a file with a path like <code>../../etc/passwd</code> or a name containing shell metacharacters has just gotten that string into your function.</li>
+                <li><strong>SQS / queue message bodies.</strong> If anything outside your control can write to the queue (cross-account, public SQS via SNS, a chain of services), the message body is attacker-controlled.</li>
+                <li><strong>API Gateway / HTTP requests.</strong> Same as any web app — headers, body, path, query, cookies. Function URLs (no API Gateway) skip even basic input validation that gateway features provide.</li>
+                <li><strong>EventBridge / event-bus events.</strong> Sources you trust can be compromised; sources you didn't realize were writing to the bus can inject too.</li>
+                <li><strong>Database streams.</strong> A record inserted by a vulnerable upstream service flows into the stream and into your function.</li>
+                <li><strong>Cognito / Auth events.</strong> User-controlled fields (custom attributes, names) get passed to post-confirmation Lambda triggers.</li>
+            </ul>
+            <h3>Defenses</h3>
+            <ul>
+                <li><strong>Validate every field of the event before using it.</strong> Even fields the docs say are "system-generated" — they often include user-supplied strings.</li>
+                <li><strong>Schema-validate at the function entry.</strong> JSON Schema, Pydantic, Zod. Reject malformed input fast and loudly.</li>
+                <li><strong>Treat event-source IDs as untrusted.</strong> An object key, a message ID, a record ID — even those need to be sanitized before they flow into a shell command, a SQL query, a path operation.</li>
+                <li><strong>Don't <code>eval</code> event data.</strong> Sounds obvious; happens anyway in glue functions that dynamically construct paths or queries from event fields.</li>
+                <li><strong>Constrain who can push to the source.</strong> Bucket policies, queue policies, event-bus rules. A queue that should only receive messages from one account shouldn't be writable cross-account.</li>
+            </ul>
+        </section>
+
+        <section id="identity">
+            <h2>Identity sprawl &amp; per-function roles</h2>
+            <p>The right pattern: one IAM role per function, each scoped to the minimum permissions that function needs. The frequent reality: a small number of broad "this role works for most of our Lambdas" roles, reused across dozens of functions, all over-permissioned.</p>
+            <p>Why this drifts:</p>
+            <ul>
+                <li>Defining a tight role requires knowing exactly which APIs the function calls. As the function evolves, the role doesn't.</li>
+                <li>Copy-pasting an existing role is faster than authoring a new one.</li>
+                <li>"It works locally with admin; let's deploy and tune later." There is no "later."</li>
+                <li>Resource-level conditions are verbose to write; wildcards win.</li>
+            </ul>
+            <p>The blast-radius math: if 50 functions share one role with <code>s3:*</code> on <code>*</code>, then any of those 50 functions being compromised gives the attacker access to every S3 bucket in the account. With 50 distinct roles each scoped to one bucket, the blast radius is one function's worth of data.</p>
+            <h3>Defenses</h3>
+            <ul>
+                <li><strong>One role per function.</strong> Generate via IaC (Terraform / SAM / Bicep / CDK) so authoring is automatic and consistent.</li>
+                <li><strong>Tighten with Access Analyzer / unused permissions.</strong> Each cloud now has a tool that reports which permissions in a role have actually been used in the last N days. Cut the unused ones.</li>
+                <li><strong>Resource-level constraints.</strong> Not <code>s3:GetObject</code> on <code>*</code>; <code>s3:GetObject</code> on the specific bucket ARN, with a key prefix condition if possible.</li>
+                <li><strong>Permission boundaries.</strong> On AWS, set a permission boundary on every function role so it cannot escalate even if its inline policy gets modified.</li>
+                <li><strong>Detect role drift.</strong> SIEM-side detections for "role got a new permission" or "function role used outside the function's typical region/time." Both are signals worth alerting on.</li>
+            </ul>
+        </section>
+
+        <section id="supply-chain">
+            <h2>Supply chain — every dep is runtime</h2>
+            <p>In a long-lived container, dependencies are pulled at build time and frozen. In a serverless function, dependencies are still pulled at build time — but the cold-start surface means every dependency is loaded on every fresh execution environment. The attack window is identical, but the velocity of "I just upgraded a dependency and it shipped to prod" is higher because deploy cycles are shorter.</p>
+            <p>Real serverless supply-chain incidents:</p>
+            <ul>
+                <li><strong>Typosquatted npm packages</strong> — <code>request</code> vs <code>requst</code>, <code>aws-sdk</code> vs <code>aws-sdk-js</code>. A function that depends on the wrong package by one letter exfiltrates credentials on the first cold start.</li>
+                <li><strong>Dependency-confusion attacks</strong> — a public registry name that shadows an internal package. Pull resolves to the public (malicious) copy.</li>
+                <li><strong>Compromised maintainer accounts</strong> — <a href="https://blog.npmjs.org/post/175824896885/incident-report-npm-inadvertently-removed-event" target="_blank" rel="noopener noreferrer">event-stream (2018)</a>, <a href="https://socket.dev/blog/the-npm-shai-hulud-worm-attack" target="_blank" rel="noopener noreferrer">Shai-Hulud / chalk (2025)</a>, repeated PyPI / npm token leaks. Function gets a new transitive dependency on the next deploy.</li>
+                <li><strong>Lambda Layers</strong> from third parties — public layers are convenient and almost never audited. Trust here is trust in the layer publisher's pipeline.</li>
+            </ul>
+            <h3>Defenses</h3>
+            <ul>
+                <li><strong>Lockfiles, pinned by hash.</strong> <code>package-lock.json</code>, <code>requirements.txt</code> with hashes, <code>go.sum</code>. <code>npm ci</code> / <code>pip install --require-hashes</code> in your build.</li>
+                <li><strong>Scan dependencies in CI.</strong> Trivy, Snyk, Dependabot, OSV-Scanner, OpenSSF Scorecard. Fail the build on HIGH/CRITICAL CVEs.</li>
+                <li><strong>SBOM per deploy.</strong> Track exactly what shipped. When the next CVE drops, query the SBOM rather than rebuild-and-pray.</li>
+                <li><strong>Signed packages.</strong> Cosign / Sigstore for container-image functions. AWS Signer for Lambda zips on AWS. Verify at the deploy boundary.</li>
+                <li><strong>Use a private mirror or proxy.</strong> Verdaccio, Artifactory, JFrog, GitHub Packages. The proxy is the chokepoint where you enforce policy.</li>
+                <li><strong>Avoid third-party Lambda Layers in prod</strong> unless you have ownership or verifiable provenance.</li>
+            </ul>
+            <p>See the <a href="ci-cd.html">CI/CD page</a> for the pipeline side of this same problem.</p>
+        </section>
+
+        <section id="secrets">
+            <h2>Secrets, env vars, and config</h2>
+            <p>Every serverless platform offers "environment variables" as the easy way to inject configuration. They're convenient, they're standard, and they're the wrong place for secrets.</p>
+            <p>Why env vars are leaky:</p>
+            <ul>
+                <li>Visible in the console to anyone with read access on the function. That's almost always a wider audience than "people who should know the production database password."</li>
+                <li>Visible in CloudFormation / Terraform / Bicep templates — and those templates live in source control. Even encrypted-at-rest, they're decrypted when applied.</li>
+                <li>Visible in <code>aws lambda get-function-configuration</code> / equivalent. Any principal with that permission gets the secret.</li>
+                <li>Easy to log accidentally. <code>console.log(process.env)</code>, an error stack with environment dump, a verbose-mode telemetry payload.</li>
+                <li>Hard to rotate without redeploying.</li>
+            </ul>
+            <h3>Defenses</h3>
+            <ul>
+                <li><strong>Use a secrets store.</strong> AWS Secrets Manager / SSM Parameter Store (SecureString), Azure Key Vault, Google Secret Manager. Fetch at function init; cache for the warm-execution lifetime.</li>
+                <li><strong>Use the cloud's "extension" pattern.</strong> Lambda Extensions, the Azure Functions secret-manager binding, GCP's volume-mount of Secret Manager. Secrets never touch env vars.</li>
+                <li><strong>Encrypt env vars at rest with a KMS key you control,</strong> not the default service key. Logs the decryption to CloudTrail; you can see when anyone reads them.</li>
+                <li><strong>Don't ship secrets in env vars even for "non-prod."</strong> Non-prod credentials have a way of becoming prod credentials.</li>
+                <li><strong>Scan logs for secrets continuously.</strong> A function that accidentally logged its API key once will keep doing it. Detect and rotate.</li>
+            </ul>
+        </section>
+
+        <section id="networking">
+            <h2>Networking, egress, and VPCs</h2>
+            <p>By default, a serverless function runs outside your VPC. It has internet egress (which means it can call any external API) and can be invoked over the internet through an API Gateway or Function URL. The "outside the VPC" default is a security choice with two faces:</p>
+            <ul>
+                <li><strong>The good face:</strong> functions can scale to thousands of concurrent executions without exhausting your VPC's IP space. They can call public APIs without a NAT gateway. Cold-start latency is lower because no ENI attachment is needed.</li>
+                <li><strong>The bad face:</strong> any compromise has unrestricted outbound to the internet. Egress filtering at the platform level is minimal. Calling an external command-and-control server, exfiltrating data, or hitting an external API key validator is unimpeded.</li>
+            </ul>
+            <h3>When you should attach the function to a VPC</h3>
+            <ul>
+                <li>Function needs to reach a private resource — an RDS instance, an internal API, a private DynamoDB endpoint, an EFS mount.</li>
+                <li>You want to enforce egress controls via NAT gateway with allow-list rules or via a transit gateway with a firewall.</li>
+                <li>Compliance requires "all traffic stays within our network perimeter."</li>
+                <li>You want VPC Flow Logs to capture function network behavior.</li>
+            </ul>
+            <h3>When the VPC isn't worth it</h3>
+            <ul>
+                <li>Function only calls public AWS APIs (S3, DynamoDB, SQS) — those can be reached via VPC endpoints when needed but don't require VPC attachment for general use.</li>
+                <li>Function is purely event-glue and never makes outbound network calls.</li>
+                <li>Cold-start latency budget can't absorb the ENI attach time (much faster than it used to be — Lambda Hyperplane ENIs reduced this dramatically — but still non-zero).</li>
+            </ul>
+            <p>Whether or not you VPC-attach, egress to known-bad destinations should be blocked at some layer — a NAT gateway allow-list, a managed firewall (AWS Network Firewall, Azure Firewall, Cloud NGFW), or runtime egress policy if your CNAPP supports it.</p>
+        </section>
+
+        <section id="wallet">
+            <h2>Denial of wallet</h2>
+            <p>The serverless equivalent of DDoS. Instead of taking your application offline, the attacker drives up your invocation count and your cloud bill becomes the casualty. Recent incidents have reported five-figure damages from a single weekend.</p>
+            <p>Common vectors:</p>
+            <ul>
+                <li><strong>Public function URLs.</strong> A URL like <code>https://abc.lambda-url.us-east-1.on.aws/</code> with no authentication is a free invocation source for anyone with the URL.</li>
+                <li><strong>Unrate-limited APIs.</strong> An API Gateway in front of a function with no throttling — every request is one paid invocation, every response is one paid response.</li>
+                <li><strong>Recursive event loops.</strong> Function writes to S3; S3 event triggers the same function. Without a deduplication step or output-prefix isolation, this is an infinite loop billed per invocation.</li>
+                <li><strong>Amplification through dependencies.</strong> Function invokes another service per request that costs money — Comprehend, Translate, Bedrock, third-party APIs you pay per call. One attacker request, multiple paid downstream calls.</li>
+                <li><strong>SQS / Kafka pile-ons.</strong> Producer floods a queue; the function scales to drain it; bill is the function-invocation count.</li>
+                <li><strong>Cold start as a budget vector.</strong> A pattern designed to keep forcing cold starts (different deploy versions, scale-out faster than warm-pool replenishment) costs more per invocation than a warm one would.</li>
+            </ul>
+            <h3>Defenses</h3>
+            <ul>
+                <li><strong>Reserved / max concurrency per function.</strong> A hard cap on concurrent executions. The function can be 100% used by the attack — but no more than that.</li>
+                <li><strong>API Gateway throttling.</strong> Per-route rate limits, per-API-key quotas, usage plans. The 1990s WAF-grade throttle is back in style for the right reason.</li>
+                <li><strong>Budget alarms and auto-pause.</strong> AWS Budgets with anomaly detection, Azure Cost Alerts, GCP Budgets — wire them to SNS / EventBridge / Pub/Sub and trigger a Lambda that pauses concurrency or revokes the function URL.</li>
+                <li><strong>Idempotency keys.</strong> Detect and short-circuit duplicate work before it bills compute.</li>
+                <li><strong>Output prefix isolation.</strong> If your function reads from <code>bucket/input/</code> and writes to <code>bucket/output/</code>, configure the S3 event trigger to filter on <code>input/</code> only. No recursion possible.</li>
+                <li><strong>Authentication on every public-facing function.</strong> Lambda Function URLs default to authenticated. Don't switch them to <code>NONE</code> unless you've thought about why.</li>
+                <li><strong>WAF in front of public API Gateways.</strong> Rate-based rules, IP allow/deny, AWS Managed Rules. The same WAF that protects your web apps catches the serverless DoW path.</li>
+            </ul>
+        </section>
+
+        <section id="observability">
+            <h2>Logging &amp; observability</h2>
+            <p>The serverless equivalent of "did anything weird run last month?" is "do we have the logs to answer that?" — and the default answer is often no.</p>
+            <p>What's missing relative to a VM or container:</p>
+            <ul>
+                <li>No persistent host to inspect after the fact. The execution environment is gone.</li>
+                <li>No <code>kubectl exec</code> / SSH for a live forensics session.</li>
+                <li>No host-level process / network logs unless you opt in.</li>
+                <li>Function logs are scoped to your <code>console.log</code> / <code>print</code> calls — by default, that's it.</li>
+            </ul>
+            <h3>What good looks like</h3>
+            <ul>
+                <li><strong>Structured logging.</strong> Every log line is JSON with consistent keys (request ID, function name, version, latency, status). Searchable, aggregatable, useful in incident.</li>
+                <li><strong>Centralized log shipping.</strong> CloudWatch Logs → S3 / SIEM, Azure Functions → Log Analytics, Cloud Functions → Cloud Logging. Logs leave the cloud's default 7-day retention immediately.</li>
+                <li><strong>Distributed tracing.</strong> AWS X-Ray, Azure Application Insights, Cloud Trace, or OpenTelemetry. A request that touches three functions and four services should be traceable end-to-end.</li>
+                <li><strong>Per-function alarms.</strong> Error rate &gt; threshold, duration spike, throttle count rising. Cheap to set up; high value when something goes sideways.</li>
+                <li><strong>Audit-log the management plane.</strong> CloudTrail / Activity Log / Cloud Audit Logs for function create / update / role-change events. A new function with admin IAM is a SIEM-worthy signal.</li>
+                <li><strong>Runtime telemetry tools.</strong> Datadog, Dynatrace, Lumigo, Thundra, the cloud-native CNAPP runtime add-ons. They instrument the runtime to capture syscall-level and dependency-call telemetry without code changes.</li>
+            </ul>
+        </section>
+
+        <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/dashboard-graphs.webp" type="image/webp">
+            <img src="/img/photos/dashboard-graphs.jpg" alt="Man analyzing business data and financial graphs on a laptop" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Photo by Kaboompics on Pexels</figcaption>
+        </figure>
+
+        <section id="comparison">
+            <h2>AWS, Azure, and GCP side-by-side</h2>
+            <p>Three major FaaS platforms, broadly similar in shape, different in details.</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Building block</th>
+                            <th scope="col" class="ct-aws"><span class="ct-dot ct-dot-aws" aria-hidden="true"></span> AWS Lambda</th>
+                            <th scope="col" class="ct-azure"><span class="ct-dot ct-dot-azure" aria-hidden="true"></span> Azure Functions</th>
+                            <th scope="col" class="ct-gcp"><span class="ct-dot ct-dot-gcp" aria-hidden="true"></span> Cloud Functions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Max execution time</th>
+                            <td>15 min</td>
+                            <td>5 min (Consumption) / unlimited (Premium &amp; Dedicated)</td>
+                            <td>60 min (v2 / Cloud Run-based)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Per-invocation isolation</th>
+                            <td>Firecracker micro-VM</td>
+                            <td>Sandboxed worker (Consumption); container (Premium)</td>
+                            <td>gVisor on Cloud Run infrastructure</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Identity model</th>
+                            <td>IAM execution role per function</td>
+                            <td>Managed identity per function app</td>
+                            <td>Per-function service account</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Public invocation</th>
+                            <td>Function URL, API Gateway, ALB</td>
+                            <td>HTTP trigger, API Management</td>
+                            <td>HTTPS trigger, API Gateway</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Secrets integration</th>
+                            <td>Secrets Manager / SSM via env var or extension</td>
+                            <td>Key Vault reference syntax in app settings</td>
+                            <td>Secret Manager via env var or runtime fetch</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">VPC attach</th>
+                            <td>Optional; Hyperplane ENIs minimize cold-start cost</td>
+                            <td>Premium &amp; Dedicated only</td>
+                            <td>VPC connector / direct VPC egress</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Concurrency control</th>
+                            <td>Reserved &amp; provisioned concurrency</td>
+                            <td>Function-app scale-out limits</td>
+                            <td>Max instances per function</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Signing</th>
+                            <td>AWS Signer for code packages</td>
+                            <td>Container image signing on Premium</td>
+                            <td>Binary Authorization (container deploys)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Native observability</th>
+                            <td>CloudWatch Logs, X-Ray, Lambda Insights</td>
+                            <td>Application Insights, Azure Monitor</td>
+                            <td>Cloud Logging, Cloud Trace</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Runtime threat detection</th>
+                            <td>GuardDuty Lambda Protection</td>
+                            <td>Defender for Cloud / App Service</td>
+                            <td>Security Command Center (Cloud Run-shared signals)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>The three converge over time as each picks up the others' best ideas. The differences worth caring about: max execution time (15 min cap on Lambda is sometimes a deal-breaker), VPC attach behavior (Lambda's Hyperplane is the cleanest of the three), and how secrets are referenced (Azure's Key Vault reference syntax is the most ergonomic).</p>
+        </section>
+
+        <section id="hardening">
+            <h2>Hardening checklist</h2>
+            <p>The non-negotiable serverless hardening list:</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-stage1">
+                    <h3>Identity</h3>
+                    <p>One execution role per function. Resource-level permissions where possible. Permission boundary on every role. No wildcards in production.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage2">
+                    <h3>Input</h3>
+                    <p>Schema-validate every event at the entry point. Treat user-controlled and "system" fields alike as untrusted. Constrain who can push to event sources.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage3">
+                    <h3>Supply chain</h3>
+                    <p>Lockfile-pinned dependencies, hash-verified at install. CI scanning that fails on HIGH/CRITICAL CVEs. Signed deployments verified at the deploy boundary.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage4">
+                    <h3>Operational guardrails</h3>
+                    <p>Reserved concurrency. API Gateway throttling. Budget alarms with auto-pause. Centralized logging + traces. Auth on every public function.</p>
+                </div>
+            </div>
+            <p>Layer on top: a secrets store for anything sensitive (never env vars), egress controls if the function is internet-callable, and runtime / CNAPP telemetry for the things logs can't show you.</p>
+        </section>
+
+        <section id="pitfalls">
+            <h2>Common pitfalls</h2>
+            <ul>
+                <li><strong>Shared "generic Lambda role" across many functions.</strong> One leaky function compromises all the others. Per-function roles.</li>
+                <li><strong>Secrets in env vars.</strong> Console-readable, log-leakable, hard to rotate. Secrets store instead.</li>
+                <li><strong>Public function URLs with AuthType: NONE.</strong> Easy to set up; weekend-sized cloud bills when fuzzed. Authenticate or rate-limit, ideally both.</li>
+                <li><strong>No reserved concurrency or budget alarms.</strong> The platform will happily scale your function (and your bill) into the stratosphere on attack.</li>
+                <li><strong>Recursive S3 event loops.</strong> Function writes to the same bucket prefix it reads from. Either filter the trigger to a different prefix or write to a different bucket.</li>
+                <li><strong>Trusting <code>event</code> fields the docs call "system-generated."</strong> Many of those include user-controlled strings. Validate.</li>
+                <li><strong>Third-party Lambda Layers / extensions without provenance review.</strong> They run inside your execution environment with your IAM credentials. They're as much your code as your code is.</li>
+                <li><strong>Deploying from a developer laptop with long-lived keys.</strong> Same anti-pattern as the rest of cloud. See the <a href="ci-cd.html">CI/CD page</a> for the OIDC-federation fix.</li>
+                <li><strong>No centralized logging.</strong> Default retention is short; without shipping logs out, you have no after-the-fact forensics.</li>
+                <li><strong>Trying to make a long-running batch job fit in a function.</strong> If the work takes 14 minutes today, it'll take 16 tomorrow. Use Step Functions / Durable Functions / Workflows or move to a container.</li>
+            </ul>
+        </section>
+
+        <section id="further">
+            <h2>Further reading</h2>
+            <h3>Vendor docs &amp; best practices</h3>
+            <ul>
+                <li><a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-security.html" target="_blank" rel="noopener noreferrer">AWS Lambda — security overview</a></li>
+                <li><a href="https://docs.aws.amazon.com/lambda/latest/operatorguide/security.html" target="_blank" rel="noopener noreferrer">AWS Lambda Operator Guide — Security</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/azure-functions/security-concepts" target="_blank" rel="noopener noreferrer">Azure Functions — security concepts</a></li>
+                <li><a href="https://cloud.google.com/functions/docs/securing" target="_blank" rel="noopener noreferrer">Google Cloud Functions — securing your function</a></li>
+            </ul>
+            <h3>Standards &amp; frameworks</h3>
+            <ul>
+                <li><a href="https://owasp.org/www-project-serverless-top-10/" target="_blank" rel="noopener noreferrer">OWASP Serverless Top 10</a></li>
+                <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Serverless_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer">OWASP Serverless Cheat Sheet</a></li>
+                <li><a href="https://www.cisa.gov/sites/default/files/2024-09/csi-serverless-cloud-security-mitigations-best-practices-508c.pdf" target="_blank" rel="noopener noreferrer">CISA — Serverless Cloud Security Mitigations &amp; Best Practices</a> (PDF)</li>
+            </ul>
+            <h3>Frameworks &amp; tooling</h3>
+            <ul>
+                <li><a href="https://www.serverless.com/" target="_blank" rel="noopener noreferrer">Serverless Framework</a></li>
+                <li><a href="https://aws.amazon.com/serverless/sam/" target="_blank" rel="noopener noreferrer">AWS SAM</a></li>
+                <li><a href="https://aws.amazon.com/cdk/" target="_blank" rel="noopener noreferrer">AWS CDK</a></li>
+                <li><a href="https://www.protego.io/" target="_blank" rel="noopener noreferrer">Check Point CloudGuard Workload</a> &amp; other serverless-runtime tools (most CNAPPs ship one)</li>
+            </ul>
+            <h3>Related CSOH pages</h3>
+            <ul>
+                <li><a href="containers.html">Containers &amp; cloud security</a> — what serverless functions move workloads <em>away</em> from.</li>
+                <li><a href="kubernetes.html">Kubernetes &amp; managed Kubernetes</a> — the other dominant cloud-native compute model.</li>
+                <li><a href="ci-cd.html">CI/CD for cloud deployments</a> — the pipeline that ships function code.</li>
+                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> — the tools that watch function fleets in production.</li>
+                <li><a href="glossary.html">Glossary</a> — every term on this page, defined.</li>
+            </ul>
+        </section>
+
+        <section id="faq">
+            <h2>FAQ</h2>
+
+            <h3>Is "serverless" the same as "FaaS"?</h3>
+            <p>Functions-as-a-service is the specific form this page covers — Lambda, Azure Functions, Cloud Functions. <em>Serverless</em> is the marketing umbrella that also includes serverless containers (Cloud Run, Fargate, Container Apps), serverless databases (DynamoDB on-demand, Aurora Serverless, Cloud Spanner), and a growing list of "no infrastructure to manage" services. This page is FaaS-specific; the <a href="containers.html">Containers page</a> covers the serverless-container variants.</p>
+
+            <h3>Should I write everything as serverless functions?</h3>
+            <p>No. Functions are great for event-driven, intermittent, mostly stateless workloads that finish in under 15 minutes. They get expensive at high sustained throughput, awkward for long-running work, and lock you to one cloud's event-source wiring. The "rebuild everything as Lambdas" pattern from 2018 burned a lot of teams — most have since migrated steady-state services back to containers, kept serverless for the parts where it actually fits.</p>
+
+            <h3>How is cold-start security-relevant?</h3>
+            <p>Two ways. First, every cold start re-loads all dependencies — meaning a compromised dependency activates on every cold start (not just at deploy). Second, init-time code paths (loading secrets, opening connections) run differently from steady-state warm code paths — bugs that only happen during init can be harder to catch.</p>
+
+            <h3>Can a function be exploited like a regular web app?</h3>
+            <p>Yes. Injection, deserialization, broken access control, SSRF — every OWASP-class issue applies. The execution environment is shorter-lived and the IAM blast radius is usually narrower, but the application-layer surface is the same. Add event-source-specific injection as an extra category that doesn't exist for traditional servers.</p>
+
+            <h3>How does this relate to <a class="glossary-link" href="glossary.html#term-zero-trust">zero trust</a>?</h3>
+            <p>Serverless makes some zero-trust principles trivially easy and others harder. Per-invocation isolation and per-function identity are zero trust by default — "verify explicitly" and "least privilege" come almost for free. What's harder: network-level segmentation (the platform abstracts the network away) and continuous verification (no host to inspect, no agent to run, so you depend on the platform's telemetry and your own logging).</p>
+        </section>
+
+        <section class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="containers.html">Containers &amp; cloud security</a> — the other half of "cloud-native compute."</li>
+                <li><a href="kubernetes.html">Kubernetes</a> — the orchestrator most non-serverless cloud workloads live in.</li>
+                <li><a href="ci-cd.html">CI/CD for cloud deployments</a> — the pipeline shape that ships function code safely.</li>
+                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> — runtime visibility for function fleets.</li>
+                <li><a href="sessions.html">Friday Zoom</a> — serverless misconfiguration stories are a regular topic. Drop in.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section footer-about">
+        <h3>CSOH</h3>
+        <p>A vendor-neutral community for cloud security professionals. Weekly Zoom sessions and curated resources.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="/learning-path.html">Learning Path</a></li>
+          <li><a href="/resources.html">Resources</a></li>
+          <li><a href="/news.html">News</a></li>
+          <li><a href="/sessions.html">Zoom Sessions</a></li>
+          <li><a href="/meetings.html">Meeting Recaps</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="mailto:admin@csoh.org">Contact</a></li>
+          <li><a href="https://csoh.kit.com/39feb4f397" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+          <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="/rss.html">RSS Feed</a></li>
+          <li><a href="/contribute.html">Contribute</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023-2026 Cloud Security Office Hours</p>
+      <ul class="footer-legal">
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/code-of-conduct.html">Code of Conduct</a></li>
+        <li><a href="/security-policy.html">Security</a></li>
+      </ul>
+    </div>
+  </footer>
+
+    <script src="/main.js?v=b517f39d" integrity="sha384-8/1Y6zmSmGcKtdeoSJDd4JadBZUwI1F4M7uqeUVQt8uwrLkszhyRCqoPGfhKfKA7"
+        defer></script>
+</body>
+
+</html>
