@@ -178,6 +178,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- CI/CD for Cloud Deployments - reference page -->
+  <url>
+    <loc>https://csoh.org/ci-cd.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- GitHub Actions - Educational page on CI/CD via our workflows -->
   <url>
     <loc>https://csoh.org/github-actions.html</loc>
