@@ -1022,32 +1022,49 @@ nav a:focus {
 footer {
     background-color: var(--primary-color);
     color: var(--white);
-    padding: 3rem 2rem 1rem;
-    margin-top: 4rem;
+    padding: 2.25rem 2rem 1rem;
+    margin-top: 3rem;
+    font-size: 0.875rem;
 }
 
 .footer-content {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto 1.25rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1.5rem 2rem;
 }
 
 .footer-section h3 {
-    margin-bottom: 1rem;
-    color: var(--white);
+    margin: 0 0 0.6rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .footer-section ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1.85;
+}
+
+.footer-section li {
+    margin: 0;
+}
+
+.footer-section p {
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
 }
 
 .footer-section a {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.75);
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color 0.2s ease;
 }
 
 .footer-section a:hover {
@@ -1055,10 +1072,17 @@ footer {
 }
 
 .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
     text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.8rem;
+}
+
+.footer-bottom p {
+    margin: 0;
 }
 
 /* Responsive Design */
@@ -1280,17 +1304,23 @@ footer {
 
     /* Footer */
     footer {
-        padding: 2rem 1rem 1rem;
+        padding: 1.75rem 1rem 0.85rem;
     }
 
     .footer-content {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        text-align: center;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem 1rem;
+        text-align: left;
     }
 
     .footer-section ul {
         padding: 0;
+        line-height: 1.75;
+    }
+
+    .footer-section h3 {
+        font-size: 0.72rem;
+        margin-bottom: 0.4rem;
     }
 
     /* Memorial page specific */
@@ -2414,8 +2444,8 @@ footer {
     }
 
     .footer-content {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem 1rem;
     }
 }
 
