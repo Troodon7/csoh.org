@@ -468,7 +468,7 @@
             <p>Continuous threat detection across CloudTrail, VPC Flow Logs, DNS, S3, EKS audit, Lambda, Runtime Monitoring, and Malware Protection. The <code>UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration</code> finding catches the exact pattern that produced the Capital One breach (see the <a href="breaches/capital-one.html">kill chain</a>). Org-wide via delegated admin to your audit account.</p>
             <h3><a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Cloud</a></h3>
             <p>CSPM + workload protection, with plans for servers, app services, databases, storage, key vault, DNS, containers, APIs. Recommendations + alerts; integrates with Sentinel. The "everything" plan is expensive at scale; most orgs enable the workload-protection plans on prod subs only.</p>
-            <h3><a href="https://cloud.google.com/security-command-center" target="_blank" rel="noopener noreferrer">Google Security Command Center</a></h3>
+            <h3><a href="https://cloud.google.com/security/products/security-command-center" target="_blank" rel="noopener noreferrer">Google Security Command Center</a></h3>
             <p>SCC Premium / Enterprise includes Event Threat Detection (CloudTrail-equivalent analysis), Container Threat Detection, Virtual Machine Threat Detection, and a CNAPP-style posture layer. Standard tier is free and covers basic findings; Premium / Enterprise are paid.</p>
             <h3>What native detection is good for</h3>
             <ul>
@@ -494,9 +494,9 @@
                 <li><strong><a href="https://www.splunk.com/en_us/products/enterprise-security.html" target="_blank" rel="noopener noreferrer">Splunk Enterprise Security</a></strong> — the heavyweight. Mature, expensive, SPL is its own language with a real learning curve. Strong in enterprise environments that have run Splunk for a decade.</li>
                 <li><strong><a href="https://azure.microsoft.com/en-us/products/microsoft-sentinel/" target="_blank" rel="noopener noreferrer">Microsoft Sentinel</a></strong> — cloud-native SIEM on Log Analytics. KQL is the query language. Strong in Microsoft-heavy environments; Defender XDR + Sentinel is a credible end-to-end stack.</li>
                 <li><strong><a href="https://www.elastic.co/security" target="_blank" rel="noopener noreferrer">Elastic Security</a></strong> — Elastic stack + SIEM + EDR. Strong open-source roots; ESQL / EQL query languages. Cost-effective at scale relative to Splunk.</li>
-                <li><strong><a href="https://chronicle.security/" target="_blank" rel="noopener noreferrer">Google Security Operations</a></strong> (Chronicle) — flat-fee SIEM, YARA-L for detection content, deep Google-scale infrastructure underneath. Strong in cloud-native shops.</li>
-                <li><strong><a href="https://www.crowdstrike.com/platform/next-gen-siem/" target="_blank" rel="noopener noreferrer">CrowdStrike Falcon Next-Gen SIEM</a></strong> (formerly Humio / LogScale) — fast ingest, low-overhead retention, integrated with the EDR side.</li>
-                <li><strong><a href="https://www.datadoghq.com/product/cloud-security-management/cloud-siem/" target="_blank" rel="noopener noreferrer">Datadog Cloud SIEM</a></strong> — built on the observability platform, attractive for orgs that already run Datadog.</li>
+                <li><strong><a href="https://cloud.google.com/security/products/security-operations" target="_blank" rel="noopener noreferrer">Google Security Operations</a></strong> (Chronicle) — flat-fee SIEM, YARA-L for detection content, deep Google-scale infrastructure underneath. Strong in cloud-native shops.</li>
+                <li><strong><a href="https://www.crowdstrike.com/en-us/platform/next-gen-siem/" target="_blank" rel="noopener noreferrer">CrowdStrike Falcon Next-Gen SIEM</a></strong> (formerly Humio / LogScale) — fast ingest, low-overhead retention, integrated with the EDR side.</li>
+                <li><strong><a href="https://www.datadoghq.com/product/cloud-siem/" target="_blank" rel="noopener noreferrer">Datadog Cloud SIEM</a></strong> — built on the observability platform, attractive for orgs that already run Datadog.</li>
                 <li><strong>Panther, Sumo Logic, IBM QRadar, Exabeam, Hunters, Devo</strong> — credible mid-market or specialty options.</li>
             </ul>
             <h3>How to pick</h3>
@@ -732,8 +732,8 @@
             <h3>Frameworks &amp; guidance</h3>
             <ul>
                 <li><a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK Cloud</a></li>
-                <li><a href="https://www.sans.org/blog/" target="_blank" rel="noopener noreferrer">SANS DFIR &amp; SOC blog</a></li>
-                <li><a href="https://attackiq.com/blog/" target="_blank" rel="noopener noreferrer">AttackIQ research</a></li>
+                <li><a href="https://www.sans.org/blog" target="_blank" rel="noopener noreferrer">SANS DFIR &amp; SOC blog</a></li>
+                <li><a href="https://www.attackiq.com:443/blog/" target="_blank" rel="noopener noreferrer">AttackIQ research</a></li>
                 <li><a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer">NIST Cybersecurity Framework</a> — Detect / Respond functions</li>
             </ul>
             <h3>Detection content sources</h3>
@@ -749,7 +749,7 @@
             <ul>
                 <li><a href="https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html" target="_blank" rel="noopener noreferrer">AWS GuardDuty documentation</a></li>
                 <li><a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Cloud</a></li>
-                <li><a href="https://cloud.google.com/security-command-center/docs" target="_blank" rel="noopener noreferrer">Google Security Command Center</a></li>
+                <li><a href="https://cloud.google.com/security/products/security-command-center/docs" target="_blank" rel="noopener noreferrer">Google Security Command Center</a></li>
                 <li><a href="https://learn.microsoft.com/en-us/azure/sentinel/" target="_blank" rel="noopener noreferrer">Microsoft Sentinel</a></li>
             </ul>
             <h3>Related CSOH pages</h3>
