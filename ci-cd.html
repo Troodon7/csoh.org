@@ -518,8 +518,8 @@
 
         <section id="gcp">
             <h2>GCP — Cloud Build and Workload Identity Federation</h2>
-            <p>Google ships <a href="https://cloud.google.com/build" target="_blank" rel="noopener noreferrer">Cloud Build</a> (CI), <a href="https://cloud.google.com/deploy" target="_blank" rel="noopener noreferrer">Cloud Deploy</a> (continuous delivery for GKE and Cloud Run), and <a href="https://cloud.google.com/artifact-registry" target="_blank" rel="noopener noreferrer">Artifact Registry</a> (artifact storage). They integrate cleanly, and Cloud Build runs as a Google-managed service account in your project — so for fully-in-GCP pipelines, no federation is needed.</p>
-            <p>For GitHub Actions deploying to GCP, the pattern is <a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank" rel="noopener noreferrer">Workload Identity Federation</a>.</p>
+            <p>Google ships <a href="https://cloud.google.com/build" target="_blank" rel="noopener noreferrer">Cloud Build</a> (CI), <a href="https://cloud.google.com/deploy" target="_blank" rel="noopener noreferrer">Cloud Deploy</a> (continuous delivery for GKE and Cloud Run), and <a href="https://docs.cloud.google.com/artifact-registry/docs" target="_blank" rel="noopener noreferrer">Artifact Registry</a> (artifact storage). They integrate cleanly, and Cloud Build runs as a Google-managed service account in your project — so for fully-in-GCP pipelines, no federation is needed.</p>
+            <p>For GitHub Actions deploying to GCP, the pattern is <a href="https://docs.cloud.google.com/iam/docs/workload-identity-federation" target="_blank" rel="noopener noreferrer">Workload Identity Federation</a>.</p>
             <h3>The Workload Identity Federation setup</h3>
             <p>Create a workload identity pool in your GCP project. Add a provider for <code>token.actions.githubusercontent.com</code> with attribute mappings that pull the GitHub subject into a Google identity. Grant the IAM service account permission to be impersonated by the pool subject, scoped to your repo. In GitHub Actions, use <a href="https://github.com/google-github-actions/auth" target="_blank" rel="noopener noreferrer">google-github-actions/auth</a> with <code>workload_identity_provider</code> and <code>service_account</code> — no JSON service-account keys.</p>
             <h3>The key GCP-specific decisions</h3>
@@ -639,11 +639,11 @@
             <h3>Cloud-native references</h3>
             <ul>
                 <li><a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html" target="_blank" rel="noopener noreferrer">AWS CodePipeline documentation</a></li>
-                <li><a href="https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services" target="_blank" rel="noopener noreferrer">GitHub — OIDC to AWS</a></li>
+                <li><a href="https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-aws" target="_blank" rel="noopener noreferrer">GitHub — OIDC to AWS</a></li>
                 <li><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/" target="_blank" rel="noopener noreferrer">Azure Pipelines documentation</a></li>
                 <li><a href="https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation" target="_blank" rel="noopener noreferrer">Entra ID workload identity federation</a></li>
-                <li><a href="https://cloud.google.com/build/docs" target="_blank" rel="noopener noreferrer">Google Cloud Build documentation</a></li>
-                <li><a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank" rel="noopener noreferrer">GCP Workload Identity Federation</a></li>
+                <li><a href="https://docs.cloud.google.com/build/docs" target="_blank" rel="noopener noreferrer">Google Cloud Build documentation</a></li>
+                <li><a href="https://docs.cloud.google.com/iam/docs/workload-identity-federation" target="_blank" rel="noopener noreferrer">GCP Workload Identity Federation</a></li>
             </ul>
             <h3>Supply chain &amp; pipeline security</h3>
             <ul>
@@ -655,8 +655,8 @@
             <h3>Practice &amp; metrics</h3>
             <ul>
                 <li><a href="https://dora.dev" target="_blank" rel="noopener noreferrer">DORA</a> — DevOps Research and Assessment metrics</li>
-                <li><a href="https://docs.github.com/en/actions/deployment/about-deployments/deploying-with-github-actions" target="_blank" rel="noopener noreferrer">GitHub Actions — deploying</a></li>
-                <li><a href="https://argo-cd.readthedocs.io" target="_blank" rel="noopener noreferrer">Argo CD</a> — GitOps for Kubernetes</li>
+                <li><a href="https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/control-deployments" target="_blank" rel="noopener noreferrer">GitHub Actions — deploying</a></li>
+                <li><a href="https://argo-cd.readthedocs.io/en/stable/" target="_blank" rel="noopener noreferrer">Argo CD</a> — GitOps for Kubernetes</li>
                 <li><a href="https://fluxcd.io" target="_blank" rel="noopener noreferrer">Flux</a> — GitOps for Kubernetes</li>
             </ul>
             <h3>Related CSOH pages</h3>
