@@ -294,6 +294,7 @@
                 <li><a href="#identity">Identity chaining — IMDS and stolen cloud roles</a></li>
                 <li><a href="#networking">Networking — flat by default</a></li>
                 <li><a href="#supply-chain">Supply chain — images, registries, signing</a></li>
+                <li><a href="#minimal">Minimal &amp; hardened base images</a></li>
                 <li><a href="#runtime">Runtime detection</a></li>
                 <li><a href="#comparison">AWS, Azure, and GCP container services</a></li>
                 <li><a href="#hardening">Hardening checklist</a></li>
@@ -454,6 +455,66 @@
                 <li><strong>SLSA provenance</strong> — emit attestations describing which builder built the image from which source. Reject images without provenance in prod.</li>
             </ul>
             <p>The pipeline that builds the image is part of the supply chain. See the <a href="ci-cd.html">CI/CD page</a> for how to lock that down.</p>
+        </section>
+
+        <section id="minimal">
+            <h2>Minimal &amp; hardened base images</h2>
+            <p>A standard Ubuntu or Debian base ships with hundreds of packages your application doesn't use — a shell, a package manager, network tools, build toolchains. Every one of those packages is potential CVE surface and potential attacker tooling. The biggest single lever you have to reduce both is to start from a minimal base image.</p>
+            <p>The category has grown into a small market of its own. Each vendor takes a slightly different cut at the same problem: ship the smallest, most-current, most-trustworthy base image possible, so the application is the only thing left to harden.</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-supply">
+                    <h3><a href="https://github.com/GoogleContainerTools/distroless" target="_blank" rel="noopener noreferrer">Distroless</a></h3>
+                    <p>Google's open-source minimal images — language runtimes only, <em>no shell, no package manager, no busybox</em>. The original "remove everything you don't need" base. Free, well-maintained, but rebuild cadence is community-paced and CVE coverage is best-effort.</p>
+                </div>
+                <div class="pillar-card pillar-card-iam">
+                    <h3><a href="https://chainguard.dev/" target="_blank" rel="noopener noreferrer">Chainguard Images</a></h3>
+                    <p>Commercial-grade minimal images built on the <a href="https://github.com/wolfi-dev" target="_blank" rel="noopener noreferrer">Wolfi</a> "undistribution." Daily rebuilds, signed with Sigstore, SLSA L2 provenance, SBOM attached, often zero known CVEs at any moment. Free tier for older versions; paid for current and LTS.</p>
+                </div>
+                <div class="pillar-card pillar-card-network">
+                    <h3><a href="https://www.minimus.io/" target="_blank" rel="noopener noreferrer">Minimus</a></h3>
+                    <p>Newer entrant focused on minimal, continuously-rebuilt images plus a remediation workflow — they ship CVE-free replacements for your existing base images and track which of your workloads still ship vulnerable bases. Commercial; the value proposition is "one click to a clean fleet."</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3><a href="https://www.wiz.io/" target="_blank" rel="noopener noreferrer">Wiz</a> secured images</h3>
+                    <p>Wiz ships hardened base images bundled with their CNAPP — minimal, signed, scanned in the same plane as the runtime workloads they observe. Differentiator is the closed loop: the image, the registry scan, and the production-runtime detection are all in one product.</p>
+                </div>
+                <div class="pillar-card pillar-card-posture">
+                    <h3><a href="https://rapidfort.com/" target="_blank" rel="noopener noreferrer">RapidFort</a></h3>
+                    <p>Profiles your container's actual syscall and file usage in CI, then strips out everything the workload never touches. Less of a "use my image" play, more of a "shrink whatever image you already have" approach.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3><a href="https://www.docker.com/products/hardened-images/" target="_blank" rel="noopener noreferrer">Docker Hardened Images</a></h3>
+                    <p>Docker's own commercial minimal-image line, integrated with Docker Hub and Scout. Same general shape — minimal, signed, rebuilt — sold through the registry you already pull from.</p>
+                </div>
+            </div>
+
+            <h3>Why this category exists at all</h3>
+            <p>Three real problems push organizations off "<code>FROM ubuntu</code>":</p>
+            <ul>
+                <li><strong>The "Ubuntu has 90 CVEs today" reality.</strong> Even a freshly-rebuilt mainstream base image typically has dozens of known vulnerabilities — almost always in packages your app never touches. The scanner sees them; the audit sees them; the auditor doesn't know <code>libxslt</code> is unreachable from your Go binary. You spend cycles either patching or arguing it doesn't matter.</li>
+                <li><strong>The shell-in-prod problem.</strong> When an attacker pops a web app shell, the next thing they run is <code>curl</code>, <code>wget</code>, <code>bash</code>, <code>id</code>, <code>find</code>. A minimal base with no shell and no curl is dramatically less useful to them — a "code execution" primitive without standard tooling is a much harder pivot than one in a full Linux userspace.</li>
+                <li><strong>Rebuild cadence.</strong> Your Ubuntu base from six months ago has six months of accumulated CVEs. The minimal-image vendors solve this by rebuilding <em>daily</em> from upstream sources, signing each build, and pushing the new digest. Your CI just re-pulls; the CVE count resets.</li>
+            </ul>
+
+            <h3>How minimal images help the ecosystem, not just one image</h3>
+            <p>The category's real impact is upstream of any one shop:</p>
+            <ul>
+                <li><strong>Shifts CVE work from every consumer to one producer.</strong> Instead of 10,000 organizations each patching their Ubuntu images, one vendor maintains the rebuild pipeline and ships the result. Aggregate vulnerability-management cost across the ecosystem drops by orders of magnitude.</li>
+                <li><strong>Normalizes signing &amp; provenance.</strong> Every serious minimal-image provider ships Sigstore signatures and SLSA provenance attestations. Adoption of those primitives in downstream pipelines (Binary Authorization, Kyverno verify-image rules) is partly being pulled by these vendors making them table stakes.</li>
+                <li><strong>Pressures distro maintainers.</strong> The rise of Wolfi, Distroless, and Chainguard has visibly accelerated Alpine, Ubuntu Minimal, and Debian's own rebuild and SBOM efforts. The "we always lagged on CVEs" defense doesn't hold when there's a CVE-free alternative on Docker Hub.</li>
+                <li><strong>Shrinks the average attack surface in production.</strong> An ecosystem where most production containers carry no shell and no package manager is one where post-exploitation tooling has to be staged in (and that staging is itself detectable). Even partial adoption pulls the median attacker's job harder.</li>
+                <li><strong>Better signal for runtime detection.</strong> Falco / Tetragon / CNAPP-runtime rules generate fewer false positives against a minimal image — there's no legitimate reason for <code>/bin/sh</code> to execute if the image doesn't contain it. The alerts become high-signal because the baseline is so quiet.</li>
+            </ul>
+
+            <h3>How to actually adopt one</h3>
+            <ul>
+                <li><strong>Start with new workloads.</strong> Retrofitting <code>FROM ubuntu</code> images often surfaces accidental dependencies on system binaries. Greenfield workloads adopt minimal bases with near-zero friction.</li>
+                <li><strong>Use multi-stage builds.</strong> Build with a full toolchain image; copy the artifact into the minimal final stage. The fat image never reaches production; the published image carries only the runtime.</li>
+                <li><strong>Pin to digests.</strong> Minimal-image vendors push new digests daily — that's the feature. Pin <code>image@sha256:...</code> in your manifests and let your dependency-update bot (Dependabot, Renovate) bump them in PR.</li>
+                <li><strong>Plan for the missing shell.</strong> Debugging a distroless container in prod requires <code>kubectl debug</code> with an ephemeral debug container, or sidecar tooling. Train the team on this before the incident.</li>
+                <li><strong>Verify signatures at admission.</strong> See the <a href="#supply-chain">supply-chain</a> section. Pulling Chainguard or Minimus is half the value; <em>enforcing</em> that only their signed digests can run in prod is the other half.</li>
+            </ul>
+            <p>None of this replaces the rest of the container hardening list — non-root user, dropped capabilities, read-only root filesystem, network policy, workload identity. It removes a whole category of base-image vulnerabilities <em>before</em> the rest of the hardening even applies.</p>
         </section>
 
         <section id="runtime">
