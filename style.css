@@ -3999,4 +3999,129 @@ footer {
     background: rgba(255,255,255,0.03);
     border-color: rgba(255,255,255,0.12);
 }
+
+/* =========================================================================
+   Comparison table — used for side-by-side multi-column comparisons
+   (e.g. AWS / Azure / GCP on landing-zones.html). Replaces the older
+   inline-styled tables which got cramped at narrow viewports.
+   ========================================================================= */
+.comparison-table {
+    margin: 1.5rem 0 2rem;
+    overflow-x: auto;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 12px;
+    background: var(--card-bg, #fff);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    -webkit-overflow-scrolling: touch;
+}
+.comparison-table table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 0.95rem;
+    table-layout: fixed;
+}
+.comparison-table thead th {
+    text-align: left;
+    padding: 1rem 1.1rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    border-bottom: 2px solid var(--border-color, #cbd5e1);
+    white-space: nowrap;
+    color: #0f172a;
+}
+.comparison-table thead th.ct-row-head {
+    width: 18%;
+    min-width: 160px;
+}
+.comparison-table thead th.ct-aws,
+.comparison-table thead th.ct-azure,
+.comparison-table thead th.ct-gcp {
+    width: 27.33%;
+}
+.comparison-table .ct-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 0.45rem;
+    vertical-align: middle;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.7);
+}
+.comparison-table .ct-dot-aws   { background: #ff9900; }
+.comparison-table .ct-dot-azure { background: #0078d4; }
+.comparison-table .ct-dot-gcp   { background: #34a853; }
+.comparison-table tbody th {
+    text-align: left;
+    padding: 0.95rem 1.1rem;
+    font-weight: 600;
+    color: #0f172a;
+    background: #f8fafc;
+    border-right: 1px solid var(--border-color, #e2e8f0);
+    border-bottom: 1px solid var(--border-color, #eef2f7);
+    vertical-align: top;
+    white-space: normal;
+}
+.comparison-table tbody td {
+    padding: 0.95rem 1.1rem;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border-color, #eef2f7);
+    line-height: 1.5;
+    color: #1e293b;
+}
+.comparison-table tbody tr:nth-child(even) td {
+    background: #fafbfc;
+}
+.comparison-table tbody tr:nth-child(even) th {
+    background: #f3f5f8;
+}
+.comparison-table tbody tr:last-child th,
+.comparison-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.comparison-table tbody tr:hover td,
+.comparison-table tbody tr:hover th {
+    background: #eff6ff;
+}
+
+[data-theme="dark"] .comparison-table {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.12);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+[data-theme="dark"] .comparison-table thead th {
+    background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    color: #e2e8f0;
+    border-bottom-color: rgba(255,255,255,0.18);
+}
+[data-theme="dark"] .comparison-table tbody th {
+    background: rgba(255,255,255,0.04);
+    color: #e2e8f0;
+    border-right-color: rgba(255,255,255,0.08);
+    border-bottom-color: rgba(255,255,255,0.06);
+}
+[data-theme="dark"] .comparison-table tbody td {
+    color: #cbd5e1;
+    border-bottom-color: rgba(255,255,255,0.06);
+}
+[data-theme="dark"] .comparison-table tbody tr:nth-child(even) td {
+    background: rgba(255,255,255,0.02);
+}
+[data-theme="dark"] .comparison-table tbody tr:nth-child(even) th {
+    background: rgba(255,255,255,0.05);
+}
+[data-theme="dark"] .comparison-table tbody tr:hover td,
+[data-theme="dark"] .comparison-table tbody tr:hover th {
+    background: rgba(56, 189, 248, 0.10);
+}
+
+@media (max-width: 720px) {
+    .comparison-table table { min-width: 760px; font-size: 0.9rem; }
+    .comparison-table thead th,
+    .comparison-table tbody th,
+    .comparison-table tbody td { padding: 0.7rem 0.8rem; }
+}
 [data-theme="dark"] .diagram-figure figcaption { color: #94a3b8; }

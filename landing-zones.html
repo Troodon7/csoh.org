@@ -34,10 +34,10 @@
     <link rel="preconnect" href="https://github.com" crossorigin>
     <link rel="dns-prefetch" href="https://github.com">
 
-    <link rel="preload" href="/style.css?v=ab65700f" as="style"
-        integrity="sha384-FoCFm5cXjBduxCr9YlnCgh4k6axjK3/8Nd8hX3MW5mFS0GxWcCWaG/nrgf+atRPY">
-    <link rel="stylesheet" href="/style.css?v=ab65700f"
-        integrity="sha384-FoCFm5cXjBduxCr9YlnCgh4k6axjK3/8Nd8hX3MW5mFS0GxWcCWaG/nrgf+atRPY">
+    <link rel="preload" href="/style.css?v=922775f4" as="style"
+        integrity="sha384-3GPc6BK87XgZYZpWAw9Zbx6QvWHENITuMHZw5lc2a0VX6i8eQBf6oZMCpjjJBHuZ">
+    <link rel="stylesheet" href="/style.css?v=922775f4"
+        integrity="sha384-3GPc6BK87XgZYZpWAw9Zbx6QvWHENITuMHZw5lc2a0VX6i8eQBf6oZMCpjjJBHuZ">
 
     <script type="application/ld+json">
     {
@@ -383,29 +383,76 @@
         <section id="comparison">
             <h2>AWS, Azure, and GCP side-by-side</h2>
             <p>Each cloud ships a reference landing-zone implementation. The names differ. The capabilities map nearly one-to-one:</p>
-            <div class="content-section" style="overflow-x:auto;">
-                <table style="width:100%; border-collapse:collapse; margin:1rem 0; min-width:760px;">
+
+            <div class="comparison-table">
+                <table>
                     <thead>
-                        <tr style="background:#f4f6f8; text-align:left;">
-                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Building block</th>
-                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">AWS</th>
-                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Azure</th>
-                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">GCP</th>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Building block</th>
+                            <th scope="col" class="ct-aws"><span class="ct-dot ct-dot-aws" aria-hidden="true"></span> AWS</th>
+                            <th scope="col" class="ct-azure"><span class="ct-dot ct-dot-azure" aria-hidden="true"></span> Azure</th>
+                            <th scope="col" class="ct-gcp"><span class="ct-dot ct-dot-gcp" aria-hidden="true"></span> GCP</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>Hierarchy</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">AWS Organizations, OUs, accounts</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Management groups, subscriptions</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Organization, folders, projects</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>Identity</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">IAM Identity Center (SSO) + permission sets</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Entra ID + role assignments</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Cloud Identity + IAM allow policies</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>Network</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Transit Gateway, network account</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Hub VNet, Azure Firewall, Virtual WAN</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Shared VPC, host project</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>Logging</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Org-wide CloudTrail to log archive account</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Activity log + diagnostic settings to LA workspace</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Aggregated log sinks to security project</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>Policy</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Service Control Policies (SCPs)</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Azure Policy + initiatives</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Organization Policy constraints</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>Encryption</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">KMS + Secrets Manager</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Key Vault</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Cloud KMS + Secret Manager</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>Account vending</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Control Tower Account Factory / AFT</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Subscription vending via Bicep/Terraform</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Project factory (Terraform)</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>Detection</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Security Hub, GuardDuty</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Defender for Cloud, Sentinel</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Security Command Center</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>Reference design</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Control Tower + Landing Zone Accelerator</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">CAF Enterprise-Scale landing zones (ALZ)</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Enterprise Foundations Blueprint</td></tr>
+                        <tr>
+                            <th scope="row">Hierarchy</th>
+                            <td>AWS Organizations, OUs, accounts</td>
+                            <td>Management groups, subscriptions</td>
+                            <td>Organization, folders, projects</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Identity</th>
+                            <td>IAM Identity Center (SSO) + permission sets</td>
+                            <td>Entra ID + role assignments</td>
+                            <td>Cloud Identity + IAM allow policies</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Network</th>
+                            <td>Transit Gateway, network account</td>
+                            <td>Hub VNet, Azure Firewall, Virtual WAN</td>
+                            <td>Shared VPC, host project</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Logging</th>
+                            <td>Org-wide CloudTrail to log archive account</td>
+                            <td>Activity log + diagnostic settings to Log Analytics workspace</td>
+                            <td>Aggregated log sinks to security project</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Policy</th>
+                            <td>Service Control Policies (SCPs)</td>
+                            <td>Azure Policy + initiatives</td>
+                            <td>Organization Policy constraints</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Encryption</th>
+                            <td>KMS + Secrets Manager</td>
+                            <td>Key Vault</td>
+                            <td>Cloud KMS + Secret Manager</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Account vending</th>
+                            <td>Control Tower Account Factory / AFT</td>
+                            <td>Subscription vending via Bicep / Terraform</td>
+                            <td>Project factory (Terraform)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Detection</th>
+                            <td>Security Hub, GuardDuty</td>
+                            <td>Defender for Cloud, Sentinel</td>
+                            <td>Security Command Center</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Reference design</th>
+                            <td>Control Tower + Landing Zone Accelerator</td>
+                            <td>CAF Enterprise-Scale landing zones (ALZ)</td>
+                            <td>Enterprise Foundations Blueprint</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
+
             <p>Anyone who's built a landing zone on one cloud has 80% of the conceptual model needed to build one on another. The remaining 20% is the cloud-specific quirks of each service — and that's where the multi-day reading lives.</p>
         </section>
 
