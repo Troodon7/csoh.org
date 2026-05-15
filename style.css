@@ -2498,8 +2498,8 @@ footer {
 
 /* Dark mode toggle button in header */
 .theme-toggle {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: transparent;
+    border: none;
     border-radius: 999px;
     color: var(--white);
     cursor: pointer;
@@ -2508,7 +2508,7 @@ footer {
     padding: 0;
     font-size: 1rem;
     line-height: 1;
-    transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+    transition: background-color 0.2s ease, transform 0.15s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -2518,8 +2518,7 @@ footer {
 }
 
 .theme-toggle:hover {
-    border-color: rgba(255, 255, 255, 0.55);
-    background-color: rgba(255, 255, 255, 0.14);
+    background-color: rgba(255, 255, 255, 0.12);
     transform: scale(1.06);
 }
 
