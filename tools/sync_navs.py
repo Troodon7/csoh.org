@@ -27,6 +27,7 @@ DROPDOWNS = [
         ('cloud-security-home-lab.html', 'Home Lab'),
         ('cloud-security-portfolio-projects.html', 'Portfolio Projects'),
         ('cloud-security-certifications.html', 'Certifications'),
+        ('resources.html', 'Resources'),
     ]),
     ('Topics', [
         ('cloud-security-best-practices.html', 'Best Practices'),
@@ -38,7 +39,7 @@ DROPDOWNS = [
         ('ci-cd.html', 'CI/CD'),
         ('cloud-security-reading-list.html', 'Reading List'),
     ]),
-    ('Threats &amp; Practice', [
+    ('Threat Research', [
         ('threat-research.html', 'Threat Research'),
         ('breach-timeline.html', 'Breach Kill Chains'),
         ('ctfs.html', 'CTFs'),
@@ -55,10 +56,11 @@ DROPDOWNS = [
         ('contribute.html', 'Contribute Overview'),
         ('contribute-resources.html', 'Add a Resource'),
     ]),
-    ('Lookup', [
+    ('About', [
         ('glossary.html', 'Glossary'),
-        ('resources.html', 'Resources'),
         ('faq.html', 'FAQ'),
+        ('github-actions.html', 'How We Use GitHub Actions'),
+        ('cloud-deployment.html', 'How We Deploy to GCP'),
     ]),
 ]
 
@@ -123,7 +125,6 @@ def build_nav(path: Path) -> str:
         out.append('                      </ul>')
         out.append('                    </li>')
 
-    out.append(f'                    <li><a href="{prefix}index.html#about">About</a></li>')
     out.append('                </ul>')
     out.append('            </nav>')
     return '\n'.join(out)
