@@ -282,7 +282,9 @@ Whether you're fixing a typo or rewriting a section, the process is the same.
 - [landing-zones.html](landing-zones.html) - Cloud foundations (AWS / Azure / GCP reference designs)
 - [containers.html](containers.html) - Container security: boundary, escapes, IMDS, supply chain
 - [kubernetes.html](kubernetes.html) - Kubernetes & managed K8s (EKS / AKS / GKE) security
+- [serverless.html](serverless.html) - Serverless functions (Lambda / Functions) security
 - [ci-cd.html](ci-cd.html) - CI/CD pipelines for cloud (OIDC federation, deploy strategies)
+- [cloud-soc.html](cloud-soc.html) - Cloud SOC, threat monitoring, SIEM, detection engineering
 - [cloud-security-certifications.html](cloud-security-certifications.html) - CCSK / CCSP / AWS / Azure / GCP / CKS comparison
 - [conferences.html](conferences.html) - Security and hacker conference directory
 - [ctfs.html](ctfs.html) - Cloud CTF directory

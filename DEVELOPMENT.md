@@ -86,10 +86,12 @@ csoh.org/
 ├── landing-zones.html                 # Cloud foundations (AWS Control Tower / Azure CAF / GCP blueprint)
 ├── containers.html                    # Container security: boundary, escapes, IMDS, supply chain
 ├── kubernetes.html                    # Kubernetes & managed K8s (EKS / AKS / GKE) security
+├── serverless.html                    # Serverless functions (Lambda / Functions) security
 ├── ci-cd.html                         # CI/CD pipelines for cloud (OIDC federation, deploy strategies)
+├── cloud-soc.html                     # Cloud SOC, threat monitoring, SIEM, detection engineering
 ├── github-actions.html              # Learn-by-example GitHub Actions explainer
 ├── breaches/                        # 10 per-breach kill chain pages (split from breach-timeline.html)
-├── meetings/                        # 91 per-meeting recap pages (split from meetings.html)
+├── meetings/                        # 94 per-meeting recap pages (split from meetings.html)
 ├── resources.html          # 200+ curated resources (largest page)
 ├── news.html               # Auto-generated news articles
 ├── chat-resources.html     # Community-shared URLs from Zoom chat
@@ -195,7 +197,9 @@ If you changed shared files (`style.css`, `main.js`), verify these pages:
 - `http://localhost:8091/landing-zones.html` -- Cloud foundations (AWS / Azure / GCP)
 - `http://localhost:8091/containers.html` -- Container security
 - `http://localhost:8091/kubernetes.html` -- Kubernetes & managed Kubernetes
+- `http://localhost:8091/serverless.html` -- Serverless functions (Lambda / Functions) security
 - `http://localhost:8091/ci-cd.html` -- CI/CD for cloud deployments
+- `http://localhost:8091/cloud-soc.html` -- Cloud SOC & threat monitoring
 - `http://localhost:8091/cloud-security-certifications.html` -- Certification comparison
 - `http://localhost:8091/conferences.html` -- Conference directory
 - `http://localhost:8091/ctfs.html` -- Cloud CTF directory

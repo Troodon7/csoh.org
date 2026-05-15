@@ -26,7 +26,9 @@ The vendor-neutral pillars of cloud security, written by practitioners:
 | 🛠️ [CSPM vs CNAPP vs CWPP vs CIEM vs DSPM](https://csoh.org/cspm-vs-cnapp.html) | The acronym soup decoded — when you need each tool |
 | 📦 [Containers & Cloud Security](https://csoh.org/containers.html) | The trust boundary, escape paths, identity chaining via IMDS, supply chain |
 | ☸️ [Kubernetes & Managed Kubernetes](https://csoh.org/kubernetes.html) | EKS / AKS / GKE — shared responsibility, workload identity, RBAC, admission |
+| ⚡ [Serverless Functions & Cloud Security](https://csoh.org/serverless.html) | Lambda / Azure Functions / Cloud Functions — event injection, IAM, denial of wallet |
 | 🔄 [CI/CD for Cloud Deployments](https://csoh.org/ci-cd.html) | Pipeline anatomy, OIDC federation, AWS/Azure/GCP toolchains |
+| 🛰️ [Cloud SOC & Threat Monitoring](https://csoh.org/cloud-soc.html) | Log-driven detection, native services, SIEM, detection engineering, IR |
 | 🎓 [Cloud Security Certifications](https://csoh.org/cloud-security-certifications.html) | CCSK, CCSP, AWS, Azure, GCP, CKS compared side by side |
 | ⚙️ [How We Use GitHub Actions](https://csoh.org/github-actions.html) | Learn CI/CD by reading our heavily-commented workflows |
 
@@ -40,7 +42,7 @@ The vendor-neutral pillars of cloud security, written by practitioners:
 | 🏟️ [Conferences](https://csoh.org/conferences.html) | 27 security & hacker conferences, with pros & cons |
 | 🔗 [Breach Kill Chains](https://csoh.org/breach-timeline.html) | 10 real cloud breaches mapped to MITRE ATT&CK |
 | 📰 [Cloud Security News](https://csoh.org/news.html) | 120+ articles, refreshed every 3 hours from 39 sources |
-| 📅 [Meeting Recaps](https://csoh.org/meetings.html) | 91 weekly session recaps, searchable |
+| 📅 [Meeting Recaps](https://csoh.org/meetings.html) | 94 weekly session recaps, searchable |
 
 ---
 
@@ -113,8 +115,14 @@ Vendor-neutral guide to containers in the cloud — what they actually are, why 
 ### ☸️ Kubernetes & Managed Kubernetes (`kubernetes.html`)
 Practitioner's guide to EKS / AKS / GKE — what's managed vs. what you still own, the pod-to-node-to-cloud threat arc, workload identity (IRSA / WIF / AKS Workload Identity), RBAC sprawl, Pod Security Standards, default-flat pod networking, admission control (Kyverno / OPA Gatekeeper), and a side-by-side comparison of the three managed offerings.
 
+### ⚡ Serverless Functions & Cloud Security (`serverless.html`)
+Practitioner's guide to AWS Lambda, Azure Functions, and Google Cloud Functions — what they are, when to use them, the good/bad tradeoffs, and the seven security risk categories: event injection from S3/SQS/HTTP triggers, identity sprawl across per-function roles, supply-chain risk, secrets handling, network egress, denial of wallet, and the observability gap.
+
 ### 🔄 CI/CD for Cloud Deployments (`ci-cd.html`)
 Vendor-neutral CI/CD reference focused on cloud — pipeline anatomy, OIDC federation (replacing long-lived cloud keys), AWS / Azure / GCP per-cloud deep dives, deployment strategies (blue/green, canary, rolling), securing the pipeline itself, IaC in the pipeline, and the DORA-aligned bootstrapping path.
+
+### 🛰️ Cloud SOC & Threat Monitoring (`cloud-soc.html`)
+Cloud-side detection and response — how cloud SOC differs from packet-driven traditional SOC, the log sources that matter (CloudTrail / Activity Log / Cloud Audit Logs, identity events, VPC flow, DNS, data plane), native cloud detection (GuardDuty / Defender for Cloud / SCC), the modern SIEM landscape (Splunk, Sentinel, Chronicle, Elastic, CrowdStrike, Datadog), detection engineering as a practice, MITRE-mapped detection categories, threat intel, IR specifics, and a 4-stage SOC maturity model.
 
 ### ⚙️ How We Use GitHub Actions (`github-actions.html`)
 Learn-by-example explainer for GitHub Actions, using CSOH's eight workflow files as the teaching material. Covers triggers, concurrency, secrets, the GITHUB_TOKEN vs PAT distinction, the `workflow` scope gotcha, and a recommended reading order through our heavily-commented YAML.
@@ -202,7 +210,7 @@ Archive of past Zoom session presentations:
 
 ### 📝 Meeting Recaps (`meetings.html`)
 Topic-by-topic recaps of every weekly session:
-- **91+ meeting recaps** with per-topic summaries and speaker notes
+- **94+ meeting recaps** with per-topic summaries and speaker notes
 - Searchable, filterable by tag (AWS, Azure, AI, supply chain, conferences, etc.)
 - **Speaker filter** — auto-detects recurring community members across recaps and surfaces a one-click filter row (Shawn, Neil, Jay, Matt, etc.) with appearance counts
 - Auto-ingested from Zoom AI Companion summaries or VTT transcripts via `tools/add_meeting.py`
@@ -334,7 +342,7 @@ csoh.org/
 ├── chat-resources.html         # Community-shared URLs from Zoom sessions (557+ URLs)
 ├── sessions.html               # Weekly Zoom session information
 ├── presentations.html          # Archive of recorded presentations
-├── meetings.html               # Weekly meeting recaps (91+ entries, topic-by-topic)
+├── meetings.html               # Weekly meeting recaps (94+ entries, topic-by-topic)
 ├── ctfs.html                   # Dedicated cloud CTF directory (39+ challenges)
 ├── conferences.html            # Security & hacker conferences directory with pros/cons
 ├── rss.html                    # Landing page explaining the RSS feed to subscribers
@@ -344,14 +352,16 @@ csoh.org/
 ├── privacy.html                # Privacy Policy (no cookies, no marketing)
 ├── breach-timeline.html        # Index of breach kill chains (per-breach pages live in /breaches/)
 ├── breaches/                   # 10 per-breach kill chain pages (Capital One, SolarWinds, etc.)
-├── meetings/                   # 91 per-meeting recap pages (split from meetings.html)
+├── meetings/                   # 94 per-meeting recap pages (split from meetings.html)
 ├── cloud-security-best-practices.html  # Practitioner's controls checklist
 ├── shared-responsibility-model.html    # Provider vs. customer security split
 ├── cspm-vs-cnapp.html                  # Tool-category comparison
 ├── landing-zones.html                  # Cloud foundations (AWS / Azure / GCP reference designs)
 ├── containers.html                     # Container security: boundary, escapes, IMDS, supply chain
 ├── kubernetes.html                     # Kubernetes & managed K8s (EKS / AKS / GKE) security
+├── serverless.html                     # Lambda / Functions security — event injection, IAM, denial of wallet
 ├── ci-cd.html                          # CI/CD pipelines for cloud, OIDC federation, deploy strategies
+├── cloud-soc.html                      # Cloud threat monitoring, SIEM, detection engineering, IR
 ├── threat-research.html        # Curated cloud threat research directory
 ├── contribute.html             # General contributions guide
 ├── contribute-resources.html   # Resource submission web form / guide
@@ -627,7 +637,7 @@ CSOH is engineered for organic discovery across traditional search (Google, Bing
 - ✅ **Article** / **NewsArticle** — pillar pages and the news index, with `datePublished`, `dateModified`, `author`, `publisher`
 - ✅ **HowTo** + **HowToStep** — step-by-step content (e.g. learning path, GitHub Actions guide)
 - ✅ **Course** + **CourseInstance** — learning-path roadmap and certifications comparison (Google Course rich result eligible)
-- ✅ **FAQPage** + **Question** / **Answer** — 6 pages with structured Q&A for featured snippets
+- ✅ **FAQPage** + **Question** / **Answer** — 15 pages with structured Q&A for featured snippets
 - ✅ **CollectionPage** — resource hub pages eligible for sitelinks rich results
 - ✅ **Event** + **VirtualLocation** + **Schedule** — weekly Friday Zoom session
 - ✅ **VideoObject** — each YouTube talk on `presentations.html` and meeting recaps
@@ -643,7 +653,7 @@ CSOH is engineered for organic discovery across traditional search (Google, Bing
 ### Author authority (E-E-A-T)
 
 - ✅ Dedicated bio page at `/about-shawn-nunley.html` with full Person schema
-- ✅ Visible "About the author" card at the bottom of all 7 pillar articles
+- ✅ Visible "About the author" card at the bottom of all pillar articles (21 pages and counting)
 - ✅ Visible byline + footer "Founded by" link site-wide
 - ✅ `rel="author"` on every author link
 - ✅ `sameAs` external profile links (LinkedIn, GitHub, csoh.org)
