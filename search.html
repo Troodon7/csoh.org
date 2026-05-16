@@ -57,10 +57,16 @@
 
         /* Pagefind UI theming. The widget reads these CSS custom
            properties to color its input, buttons, result text, and
-           borders. Light-mode values are the defaults we want. */
+           borders. Light-mode values are the defaults we want.
+           --pagefind-ui-scale defaults to 0.8 inside pagefind-ui.css,
+           which makes every dimension (font sizes, padding, border
+           radii) 20% smaller than the original designs. The result
+           looks cramped and the body text drops to ~13px. Setting it
+           back to 1 gives the layout its intended breathing room. */
         :root {
+            --pagefind-ui-scale: 1;
             --pagefind-ui-primary: #2c3e50;
-            --pagefind-ui-text: #2c3e50;
+            --pagefind-ui-text: #1a1f24;
             --pagefind-ui-background: #ffffff;
             --pagefind-ui-border: #d0d7de;
             --pagefind-ui-tag: #f1f3f5;
@@ -73,44 +79,72 @@
               <html data-theme="dark">
            (set by main.js's theme toggle), NOT body.dark-mode — make
            sure the selector matches or these variables never apply and
-           the Pagefind widget is unreadable on a dark page. */
+           the Pagefind widget is unreadable on a dark page.
+           #f0f6fc is the same near-white the rest of the site uses for
+           body text in dark mode; pure #fff is too high-contrast on the
+           #0d1117 page background and gives a "glow" effect. */
         [data-theme="dark"] {
-            --pagefind-ui-primary: #4da3ff;
-            --pagefind-ui-text: #e6edf3;
-            --pagefind-ui-background: #161b22;
-            --pagefind-ui-border: #30363d;
+            --pagefind-ui-primary: #58a6ff;
+            --pagefind-ui-text: #f0f6fc;
+            --pagefind-ui-background: #0d1117;
+            --pagefind-ui-border: #484f58;
             --pagefind-ui-tag: #21262d;
         }
 
-        /* Pagefind's <mark> highlight is hardcoded to a pale yellow
-           that disappears against a dark background. Override it so
-           hits stand out without changing light-mode behavior. */
-        [data-theme="dark"] .pagefind-ui__result mark,
-        [data-theme="dark"] .pagefind-ui__result-excerpt mark {
-            background-color: #5c4900;
-            color: #fff8b8;
-            padding: 0 2px;
-            border-radius: 2px;
+        /* Pagefind's title-link inherits color from --pagefind-ui-text;
+           we explicitly call it out with extra specificity so it always
+           wins over the Svelte-hash class Pagefind ships with. Bold +
+           full text color makes the result heading the clear focal
+           point of each card. */
+        #pagefind-search .pagefind-ui__result-title .pagefind-ui__result-link {
+            color: var(--pagefind-ui-text);
+            font-weight: 700;
+            font-size: 1.2rem;
+            line-height: 1.35;
         }
 
-        /* Tighten result spacing — the default 1.5rem feels airy when
-           you're scanning ten results at a glance. */
-        .pagefind-ui__result {
+        /* The excerpt is the second-most-important thing on a card.
+           Pagefind renders it at the same color as the title which
+           makes the two visually merge. Dimming it slightly (75%
+           opacity, not a new color so it still works in both themes)
+           gives a visual hierarchy without losing readability. */
+        #pagefind-search .pagefind-ui__result-excerpt {
+            color: var(--pagefind-ui-text);
+            opacity: 0.78;
+            line-height: 1.55;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Brighten <mark> hits so search terms pop in both themes.
+           Light mode keeps Pagefind's default yellow; dark mode needs
+           a darker amber with brighter text so the mark stays legible
+           against the page background. */
+        #pagefind-search mark {
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-weight: 700;
+        }
+        [data-theme="dark"] #pagefind-search mark {
+            background-color: #b58900;
+            color: #1a1f24;
+        }
+
+        /* Make the result count + "load more" message readable, and
+           give it a bit of breathing room from the first result. */
+        #pagefind-search .pagefind-ui__message {
+            color: var(--pagefind-ui-text);
+            opacity: 0.85;
+            font-size: 0.95rem;
             padding: 1rem 0;
         }
-        .pagefind-ui__result-title {
-            font-size: 1.1rem;
-            line-height: 1.3;
-            margin-bottom: 0.35rem;
-        }
-        .pagefind-ui__result-excerpt {
-            line-height: 1.5;
-        }
-        /* Surface the page URL under the title so users know where
-           the result lives without hovering. Pagefind doesn't render
-           one by default. */
-        .pagefind-ui__result-link {
-            font-weight: 600;
+
+        /* Pagefind's default 30px top + 40px bottom is a lot of
+           whitespace per result; tighten so users see more at once.
+           The border-top/bottom on every result is what visually
+           separates them — keep that styling, just compress padding. */
+        #pagefind-search .pagefind-ui__result {
+            padding: 1.25rem 0;
         }
     </style>
 
