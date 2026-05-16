@@ -1,0 +1,188 @@
+# =============================================================================
+# Update Resources
+# -----------------------------------------------------------------------------
+# Once a week, asks Claude Code to research and add 2-3 new resources to each
+# section of resources.html (CTF, Labs, Tools, Certifications, AI Security,
+# Job Search). Opens a PR for human review — does NOT auto-merge, because
+# AI-generated content deserves a human glance before going live.
+#
+# Requires repo secret: ANTHROPIC_API_KEY  (Anthropic Console > API Keys).
+# Reuses org secrets: CSOH_CI_CLIENT_ID, CSOH_CI_PRIVATE_KEY (GitHub App for
+# minting a write-scoped installation token, same pattern as update-news.yml).
+# =============================================================================
+
+name: Update Resources
+
+on:
+  # Mondays at 14:00 UTC (10:00 ET / 09:00 CT). cron timezone is always UTC.
+  schedule:
+    - cron: '0 14 * * 1'
+  # Manual trigger from the Actions tab.
+  workflow_dispatch:
+
+# Default token is read-only. Write access comes from the App installation
+# token minted below, matching the pattern in update-news.yml.
+permissions:
+  contents: read
+
+# Don't let two scheduled runs stomp each other. Queue serially.
+concurrency:
+  group: update-resources
+  cancel-in-progress: false
+
+jobs:
+  update-resources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      # Mint a short-lived installation token from the csoh-ci GitHub App so
+      # the create-PR step has push access AND the PR can trigger downstream
+      # CI (the default GITHUB_TOKEN cannot trigger workflows on PRs it opens).
+      - name: Mint installation token
+        id: app-token
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3  # v3.1.1
+        with:
+          client-id: ${{ secrets.CSOH_CI_CLIENT_ID }}
+          private-key: ${{ secrets.CSOH_CI_PRIVATE_KEY }}
+
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          fetch-depth: 0
+
+      # Hand Claude Code a prompt that mirrors the manual workflow we used
+      # to seed the catalog. The model researches new resources, checks for
+      # duplicates against existing cards, and edits resources.html in place.
+      - name: Run Claude Code to add new resources
+        uses: anthropics/claude-code-base-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          model: claude-opus-4-7
+          timeout_minutes: '15'
+          allowed_tools: "Read,Edit,Glob,Grep,Bash(grep:*),Bash(wc:*),Bash(python3:*),WebSearch,WebFetch"
+          prompt: |
+            You are updating the cloud security resources catalog at
+            resources.html. The file is large (~3,800 lines); read it in
+            chunks rather than all at once.
+
+            Goal: add 2-3 new resources to EACH of the six category sections.
+            Sections (and their HTML ids):
+              - CTF Challenges          → id="ctf-challenges"
+              - Labs & Training         → id="labs-training"
+              - Security Tools          → id="security-tools"
+              - Certifications          → id="certifications"
+              - AI Security             → id="ai-security"
+              - Job Search              → id="job-search"
+
+            Hard requirements:
+              1. NO DUPLICATES. Before adding a resource, grep resources.html
+                 for its URL and name. If either already appears, pick a
+                 different resource.
+              2. Use legitimate, well-known, vendor-neutral sources. No
+                 affiliate links. No obscure or sketchy sites. Prefer
+                 official URLs (vendor sites, GitHub orgs, .gov/.edu).
+              3. Match the existing resource-card HTML structure exactly.
+                 Look at a recent card in the same section to copy the
+                 format — `<a class="card-link">` wrapping a
+                 `<div class="resource-card" data-tooltip="...">` with an
+                 `<img class="resource-preview">`, an `<h3>`, a `<p>`, and
+                 a `<div class="resource-tags">` of `<span class="tag">`.
+              4. Insert each new card just before the closing `</div>` of
+                 that section's resource-grid (the last `</a>` followed by
+                 the grid's `</div>`).
+              5. Preview image filenames follow this convention:
+                 slashes in the URL path become underscores, dots are
+                 preserved. Example:
+                   https://github.com/foo/bar →
+                     img/previews/github.com_foo_bar.jpg
+                 You do NOT need to create the image — CI will generate it
+                 from the URL after the PR is opened.
+              6. Tooltip text (data-tooltip attribute) should be 2-3
+                 sentences explaining what makes the resource useful and
+                 distinct. Card description (<p>) is 1-2 short sentences.
+              7. After adding all cards, update the resource counter in
+                 the filter bar: find the `<span id="visibleCount">N</span>`
+                 line and bump N by the exact number of new cards you added.
+
+            Style guidance:
+              - Tags: pick 2-4 relevant tags per card. Look at neighbor cards
+                in the same section for the tag vocabulary already in use
+                (e.g., "AWS", "Azure", "GCP", "Kubernetes", "Free",
+                "Open Source", "CNAPP"). Include a category tag with the
+                matching class (e.g., `<span class="tag ctf">CTF</span>` in
+                CTF section, `<span class="tag tool">Tool</span>` in Tools).
+              - Description should focus on what the resource teaches or
+                does, not on marketing claims.
+
+            Process:
+              1. Skim resources.html to learn the structure and existing
+                 entries in each section.
+              2. For each category, brainstorm 4-6 candidate resources,
+                 verify they're not already present, then pick the best
+                 2-3 to add.
+              3. Make all edits to resources.html.
+              4. Update the visibleCount span.
+              5. Do a final pass: grep for the URLs you added to confirm
+                 they appear exactly once each.
+
+            Do not modify any file other than resources.html. Do not
+            commit or push — the workflow handles that.
+
+      # Bail out cleanly if Claude didn't change anything (e.g., it concluded
+      # there was nothing high-quality to add this week, or hit an error).
+      - name: Detect changed files
+        id: changes
+        run: |
+          set -euo pipefail
+          files="$(git diff --name-only)"
+          if [ -z "$files" ]; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            echo "No changes — Claude added nothing this run."
+            exit 0
+          fi
+          echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          echo "Changed files:"
+          echo "$files"
+
+          # Safety check: Claude was told to only edit resources.html. If it
+          # touched anything else, surface that in the PR so a human catches
+          # it. We don't fail the run — the PR review is the gate.
+          if echo "$files" | grep -v '^resources\.html$' >/dev/null; then
+            echo "unexpected_files=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "unexpected_files=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Open a PR for human review. Unlike update-news.yml, we do NOT enable
+      # auto-merge — AI-generated content needs a human to spot-check the
+      # new cards before they ship.
+      - name: Create Pull Request
+        id: cpr
+        if: steps.changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0  # v8.1.0
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          commit-message: 'chore: weekly resources catalog refresh'
+          title: 'chore: Weekly resources update'
+          body: |
+            Automated weekly refresh of `resources.html`.
+
+            Claude researched and proposed new entries for each of the six
+            category sections (CTF, Labs & Training, Security Tools,
+            Certifications, AI Security, Job Search).
+
+            **Please review before merging:**
+            - Each new card points to a legitimate, well-known source.
+            - No duplicates of existing entries.
+            - Descriptions and tooltips read accurately (not marketing fluff).
+            - Tags match the section's existing vocabulary.
+
+            Preview images will be auto-generated by `site-update-deploy`
+            after merge.
+
+            ${{ steps.changes.outputs.unexpected_files == 'true' && '⚠️  **Heads up:** Claude touched files other than `resources.html`. Inspect the diff carefully.' || '' }}
+          branch: update-resources-content
+          delete-branch: true
+          labels: automated, content
