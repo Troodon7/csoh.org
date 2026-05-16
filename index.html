@@ -20,7 +20,7 @@
   <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
     <link rel="author" type="text/plain" href="/humans.txt">
-  <meta name="theme-color" content="#2c3e50">
+  <meta name="theme-color" content="#0f172a">
 
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="Cloud Security Office Hours (CSOH)">
@@ -40,162 +40,77 @@
     <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
     <link rel="dns-prefetch" href="https://img.youtube.com">
 
-  <link rel="preload" href="/style.css?v=7072ffeb" as="style"
-    integrity="sha384-q4TnA2/wpa+fUTCb+5om9oKaapHUSiIuGu28ZrPmfBalEyXxpMX7Tn3xy5lLts3q">
+  <link rel="preload" href="/style.css?v=0b24f524" as="style"
+    integrity="sha384-lFVte/Letjg1OsEs/6Cy7ZpCptr+SZpX27tOXVVTIkjIpIGuCO4QppxPKKOOpG5s">
 
-  <link rel="stylesheet" href="/style.css?v=7072ffeb"
-    integrity="sha384-q4TnA2/wpa+fUTCb+5om9oKaapHUSiIuGu28ZrPmfBalEyXxpMX7Tn3xy5lLts3q">
+  <link rel="stylesheet" href="/style.css?v=0b24f524"
+    integrity="sha384-lFVte/Letjg1OsEs/6Cy7ZpCptr+SZpX27tOXVVTIkjIpIGuCO4QppxPKKOOpG5s">
 
-  <!-- Structured Data for SEO -->
+  <!-- Structured Data for SEO (single @graph keeps the head lean) -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Cloud Security Office Hours",
-      "alternateName": "CSOH",
-      "url": "https://csoh.org/",
-      "logo": "https://csoh.org/banner.png",
-      "description": "A community for cloud security professionals with curated resources, CTF challenges, training labs, and weekly Zoom sessions. Join 2000+ members solving real-world cloud security challenges.",
-      "foundingDate": "2023-02",
-      "sameAs": [],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "Community Support",
-        "availableLanguage": "English"
-      },
-      "knowsAbout": [
-        "AWS Security",
-        "Microsoft Azure Security",
-        "Google Cloud Security",
-        "Kubernetes Security",
-        "Cloud Posture Management (CSPM)",
-        "Cloud Native Application Protection (CNAPP)",
-        "Cloud Security Certifications",
-        "CTF Challenges",
-        "Cloud IAM",
-        "Cloud Compliance",
-        "Cloud Threat Detection",
-        "Zero Trust Architecture"
-      ],
-      "hasPart": [
+      "@graph": [
         {
-          "@type": "WebPage",
-          "name": "Cloud Security Resources",
-          "url": "https://csoh.org/resources.html",
-          "description": "200+ curated cloud security resources including labs, tools, and certifications"
+          "@type": "Organization",
+          "@id": "https://csoh.org/#org",
+          "name": "Cloud Security Office Hours",
+          "alternateName": "CSOH",
+          "url": "https://csoh.org/",
+          "logo": "https://csoh.org/banner.png",
+          "description": "A community for cloud security professionals with curated resources, CTF challenges, training labs, and weekly Zoom sessions. Join 2000+ members solving real-world cloud security challenges.",
+          "foundingDate": "2023-02",
+          "sameAs": [],
+          "contactPoint": { "@type": "ContactPoint", "contactType": "Community Support", "availableLanguage": "English" },
+          "knowsAbout": [
+            "AWS Security", "Microsoft Azure Security", "Google Cloud Security", "Kubernetes Security",
+            "Cloud Posture Management (CSPM)", "Cloud Native Application Protection (CNAPP)",
+            "Cloud Security Certifications", "CTF Challenges", "Cloud IAM", "Cloud Compliance",
+            "Cloud Threat Detection", "Zero Trust Architecture"
+          ],
+          "hasPart": [
+            { "@type": "WebPage", "name": "Cloud Security Resources", "url": "https://csoh.org/resources.html", "description": "200+ curated cloud security resources including labs, tools, and certifications" },
+            { "@type": "WebPage", "name": "Cloud Security News", "url": "https://csoh.org/news.html", "description": "120+ latest cloud security news articles from industry sources" },
+            { "@type": "WebPage", "name": "Sessions & Presentations", "url": "https://csoh.org/sessions.html", "description": "Recorded Zoom sessions and presentations from cloud security experts" }
+          ]
         },
         {
-          "@type": "WebPage",
-          "name": "Cloud Security News",
-          "url": "https://csoh.org/news.html",
-          "description": "120+ latest cloud security news articles from industry sources"
-        },
-        {
-          "@type": "WebPage",
-          "name": "Sessions & Presentations",
-          "url": "https://csoh.org/sessions.html",
-          "description": "Recorded Zoom sessions and presentations from cloud security experts"
-        }
-      ]
-    }
-    </script>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Cloud Security Office Hours",
-      "url": "https://csoh.org/",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://csoh.org/resources.html?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Event",
-      "name": "Cloud Security Office Hours - Weekly Zoom Session",
-      "description": "Weekly community gathering for cloud security professionals to discuss cloud security topics, share knowledge, and learn from each other.",
-      "eventSchedule": {
-        "@type": "Schedule",
-        "repeatFrequency": "P1W",
-        "byDay": "https://schema.org/Friday",
-        "startTime": "07:00:00",
-        "scheduleTimezone": "America/Los_Angeles"
-      },
-      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
-      "location": {
-        "@type": "VirtualLocation",
-        "url": "https://csoh.kit.com/39feb4f397"
-      },
-      "organizer": {
-        "@type": "Organization",
-        "name": "Cloud Security Office Hours",
-        "url": "https://csoh.org/"
-      },
-      "isAccessibleForFree": true
-    }
-    </script>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is Cloud Security Office Hours (CSOH)?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Cloud Security Office Hours (CSOH) is a weekly community gathering for cloud security professionals that started in February 2023. We have grown to over 2000 members. Every Friday at 7am PT, we meet on Zoom to discuss cloud security topics, share knowledge, and learn from each other. It's completely free and vendor-neutral."
+          "@type": "WebSite",
+          "@id": "https://csoh.org/#website",
+          "name": "Cloud Security Office Hours",
+          "url": "https://csoh.org/",
+          "publisher": { "@id": "https://csoh.org/#org" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://csoh.org/resources.html?q={search_term_string}",
+            "query-input": "required name=search_term_string"
           }
         },
         {
-          "@type": "Question",
-          "name": "How many cloud security resources does CSOH provide?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "CSOH provides 200+ curated cloud security resources including CTF challenges for AWS, Azure, GCP, and Kubernetes; hands-on training labs; CSPM and CNAPP security tools; professional certifications; and penetration testing platforms. All resources are free and updated weekly."
-          }
+          "@type": "Event",
+          "name": "Cloud Security Office Hours - Weekly Zoom Session",
+          "description": "Weekly community gathering for cloud security professionals to discuss cloud security topics, share knowledge, and learn from each other.",
+          "eventSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "P1W",
+            "byDay": "https://schema.org/Friday",
+            "startTime": "07:00:00",
+            "scheduleTimezone": "America/Los_Angeles"
+          },
+          "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+          "location": { "@type": "VirtualLocation", "url": "https://csoh.kit.com/39feb4f397" },
+          "organizer": { "@id": "https://csoh.org/#org" },
+          "isAccessibleForFree": true
         },
         {
-          "@type": "Question",
-          "name": "When are the CSOH Zoom sessions held?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "CSOH Zoom sessions are held every Friday at 7am PT. Sessions include presentations from industry experts, open discussions, and Q&A. All sessions are 100% free with no marketing."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is CSOH free to join?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, CSOH is completely free. All resources, Zoom sessions, and community access are provided at no cost. We are vendor-neutral and do not do any marketing. The community is run by volunteers."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What cloud platforms does CSOH cover?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "CSOH covers security for all major cloud platforms including Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP), and Kubernetes. Resources include multi-cloud security tools, CTF challenges, and training labs for each platform."
-          }
-        }
-      ]
-    }
-    </script>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://csoh.org/"
+          "@type": "FAQPage",
+          "mainEntity": [
+            { "@type": "Question", "name": "What is Cloud Security Office Hours (CSOH)?", "acceptedAnswer": { "@type": "Answer", "text": "Cloud Security Office Hours (CSOH) is a weekly community gathering for cloud security professionals that started in February 2023. We have grown to over 2000 members. Every Friday at 7am PT, we meet on Zoom to discuss cloud security topics, share knowledge, and learn from each other. It's completely free and vendor-neutral." } },
+            { "@type": "Question", "name": "How many cloud security resources does CSOH provide?", "acceptedAnswer": { "@type": "Answer", "text": "CSOH provides 200+ curated cloud security resources including CTF challenges for AWS, Azure, GCP, and Kubernetes; hands-on training labs; CSPM and CNAPP security tools; professional certifications; and penetration testing platforms. All resources are free and updated weekly." } },
+            { "@type": "Question", "name": "When are the CSOH Zoom sessions held?", "acceptedAnswer": { "@type": "Answer", "text": "CSOH Zoom sessions are held every Friday at 7am PT. Sessions include presentations from industry experts, open discussions, and Q&A. All sessions are 100% free with no marketing." } },
+            { "@type": "Question", "name": "Is CSOH free to join?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, CSOH is completely free. All resources, Zoom sessions, and community access are provided at no cost. We are vendor-neutral and do not do any marketing. The community is run by volunteers." } },
+            { "@type": "Question", "name": "What cloud platforms does CSOH cover?", "acceptedAnswer": { "@type": "Answer", "text": "CSOH covers security for all major cloud platforms including Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP), and Kubernetes. Resources include multi-cloud security tools, CTF challenges, and training labs for each platform." } }
+          ]
         }
       ]
     }
@@ -209,7 +124,8 @@
   <header>
     <div class="header-content">
       <a href="index.html" class="logo-link">
-        <div class="logo">
+          <svg class="logo-mark" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="CSOH logo"><defs><linearGradient id="lm-cloud" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7dd3fc"/><stop offset="100%" stop-color="#0284c7"/></linearGradient></defs><path d="M7 19 a4 4 0 0 1 4-4 a6 6 0 0 1 11 0 a3.5 3.5 0 0 1 3.5 3.5 a3.5 3.5 0 0 1 -3.5 3.5 H8 a3.5 3.5 0 0 1 -1-7 z" fill="url(#lm-cloud)"/><path d="M11 13 L21 13 L21 18 a5 5.5 0 0 1 -5 5 a5 5.5 0 0 1 -5 -5 z" fill="#f59e0b"/><path d="M13.5 16.7 L15.3 18.4 L18.6 15" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="logo">
           <div class="logo-title">CSOH</div>
           <p>Cloud Security Office Hours</p>
         </div>
@@ -303,12 +219,6 @@
     </div>
   </header>
 
-  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-    <ol>
-      <li><span aria-current="page">Home</span></li>
-    </ol>
-  </nav>
-
   <section class="hero hero--illustrated">
     <div class="hero-inner">
       <div class="hero-text">
@@ -320,7 +230,7 @@
         </div>
       </div>
       <div class="hero-illustration" aria-hidden="true">
-        <svg width="600" height="480" viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cloud security community illustration"><defs><linearGradient id="ix-cloud" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="60%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#2563eb"/></linearGradient><linearGradient id="ix-shield" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fde68a"/><stop offset="100%" stop-color="#f97316"/></linearGradient><linearGradient id="ix-tile" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#1e293b"/><stop offset="100%" stop-color="#0f172a"/></linearGradient><radialGradient id="ix-halo" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.5"/><stop offset="60%" stop-color="#7dd3fc" stop-opacity="0.05"/><stop offset="100%" stop-color="#7dd3fc" stop-opacity="0"/></radialGradient></defs><circle cx="300" cy="240" r="190" fill="url(#ix-halo)"/><g opacity="0.7"><circle cx="80" cy="50" r="2" fill="#7dd3fc"/><circle cx="540" cy="80" r="1.5" fill="#fbbf24"/><circle cx="40" cy="260" r="1.5" fill="#a78bfa"/><circle cx="565" cy="300" r="2" fill="#7dd3fc"/><circle cx="55" cy="430" r="1.5" fill="#34d399"/><circle cx="555" cy="450" r="1.5" fill="#fbbf24"/></g><g stroke="#7dd3fc" stroke-width="1.5" stroke-dasharray="3 5" opacity="0.4" fill="none"><line x1="300" y1="240" x2="100" y2="100"/><line x1="300" y1="240" x2="500" y2="100"/><line x1="300" y1="240" x2="500" y2="240"/><line x1="300" y1="240" x2="500" y2="380"/><line x1="300" y1="240" x2="100" y2="380"/><line x1="300" y1="240" x2="100" y2="240"/></g><path d="M 200,260 a 50,50 0 0,1 60,-60 a 70,70 0 0,1 130,0 a 50,50 0 0,1 50,30 a 45,45 0 0,1 -25,80 H 220 a 45,45 0 0,1 -20,-50 z" fill="url(#ix-cloud)" stroke="#fff" stroke-width="1.5" stroke-opacity="0.4"/><g transform="translate(300, 235)"><path d="M -32 -36 L 32 -36 L 32 8 a 32 38 0 0 1 -32 32 a 32 38 0 0 1 -32 -32 z" fill="url(#ix-shield)" stroke="#fff" stroke-width="2.5"/><path d="M -13 -3 L -3 9 L 16 -16" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(60, 60)"><rect width="80" height="80" rx="16" fill="url(#ix-tile)" stroke="rgba(255,255,255,0.18)"/><g transform="translate(40, 40)" stroke="#a78bfa" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="-13" y="-2" width="26" height="20" rx="3"/><path d="M -8 -2 v -10 a 8 10 0 0 1 16 0 v 10"/></g></g><g transform="translate(460, 60)"><rect width="80" height="80" rx="16" fill="url(#ix-tile)" stroke="rgba(255,255,255,0.18)"/><g transform="translate(40, 40)" stroke="#fbbf24" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="-7" cy="2" r="7"/><path d="M 0 2 L 16 2 M 11 2 v 6 M 16 2 v -5"/></g></g><g transform="translate(460, 200)"><rect width="80" height="80" rx="16" fill="url(#ix-tile)" stroke="rgba(255,255,255,0.18)"/><g transform="translate(40, 40)" stroke="#7dd3fc" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="-15" y="-13" width="30" height="11" rx="2"/><rect x="-15" y="2" width="30" height="11" rx="2"/></g></g><g transform="translate(460, 340)"><rect width="80" height="80" rx="16" fill="url(#ix-tile)" stroke="rgba(255,255,255,0.18)"/><g transform="translate(40, 40)" stroke="#34d399" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M -17 0 c 4 -9 12 -13 17 -13 c 5 0 13 4 17 13 c -4 9 -12 13 -17 13 c -5 0 -13 -4 -17 -13 z"/><circle cx="0" cy="0" r="4.5"/></g></g><g transform="translate(60, 340)"><rect width="80" height="80" rx="16" fill="url(#ix-tile)" stroke="rgba(255,255,255,0.18)"/><g transform="translate(40, 40)" stroke="#06b6d4" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="0" cy="-13" r="3.5"/><circle cx="-13" cy="11" r="3.5"/><circle cx="13" cy="11" r="3.5"/><line x1="-1.5" y1="-10" x2="-11" y2="9"/><line x1="1.5" y1="-10" x2="11" y2="9"/><line x1="-9" y1="11" x2="9" y2="11"/></g></g><g transform="translate(60, 200)"><rect width="80" height="80" rx="16" fill="url(#ix-tile)" stroke="rgba(255,255,255,0.18)"/><g transform="translate(40, 40)" stroke="#fb7185" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M -9 -10 L -17 0 L -9 10"/><path d="M 9 -10 L 17 0 L 9 10"/><line x1="-3" y1="13" x2="3" y2="-13"/></g></g></svg>
+        <svg width="600" height="480" viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cloud security community illustration"><defs><linearGradient id="ix-cloud" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="60%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#2563eb"/></linearGradient><linearGradient id="ix-shield" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fde68a"/><stop offset="100%" stop-color="#f97316"/></linearGradient><linearGradient id="ix-tile" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#1e293b"/><stop offset="100%" stop-color="#0f172a"/></linearGradient><radialGradient id="ix-halo" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.5"/><stop offset="60%" stop-color="#7dd3fc" stop-opacity="0.05"/><stop offset="100%" stop-color="#7dd3fc" stop-opacity="0"/></radialGradient></defs><circle cx="300" cy="240" r="190" fill="url(#ix-halo)"/><g opacity="0.7"><circle cx="80" cy="50" r="2" fill="#7dd3fc"/><circle cx="540" cy="80" r="1.5" fill="#fbbf24"/><circle cx="40" cy="260" r="1.5" fill="#a78bfa"/><circle cx="565" cy="300" r="2" fill="#7dd3fc"/><circle cx="55" cy="430" r="1.5" fill="#34d399"/><circle cx="555" cy="450" r="1.5" fill="#fbbf24"/></g><g stroke="#7dd3fc" stroke-width="1.5" stroke-dasharray="3 5" opacity="0.4" fill="none"><line x1="300" y1="240" x2="100" y2="100"/><line x1="300" y1="240" x2="500" y2="100"/><line x1="300" y1="240" x2="500" y2="240"/><line x1="300" y1="240" x2="500" y2="380"/><line x1="300" y1="240" x2="100" y2="380"/><line x1="300" y1="240" x2="100" y2="240"/></g><path d="M 200,260 a 50,50 0 0,1 60,-60 a 70,70 0 0,1 130,0 a 50,50 0 0,1 50,30 a 45,45 0 0,1 -25,80 H 220 a 45,45 0 0,1 -20,-50 z" fill="url(#ix-cloud)" stroke="#fff" stroke-width="1.5" stroke-opacity="0.4"/><g transform="translate(300, 235)"><path d="M -32 -36 L 32 -36 L 32 8 a 32 38 0 0 1 -32 32 a 32 38 0 0 1 -32 -32 z" fill="url(#ix-shield)" stroke="#fff" stroke-width="2.5"/><path d="M -13 -3 L -3 9 L 16 -16" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(60, 60)"><rect width="80" height="80" rx="16" class="hero-svg-tile"/><g transform="translate(40, 40)" stroke="#a78bfa" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="-13" y="-2" width="26" height="20" rx="3"/><path d="M -8 -2 v -10 a 8 10 0 0 1 16 0 v 10"/></g></g><g transform="translate(460, 60)"><rect width="80" height="80" rx="16" class="hero-svg-tile"/><g transform="translate(40, 40)" stroke="#fbbf24" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="-7" cy="2" r="7"/><path d="M 0 2 L 16 2 M 11 2 v 6 M 16 2 v -5"/></g></g><g transform="translate(460, 200)"><rect width="80" height="80" rx="16" class="hero-svg-tile"/><g transform="translate(40, 40)" stroke="#7dd3fc" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="-15" y="-13" width="30" height="11" rx="2"/><rect x="-15" y="2" width="30" height="11" rx="2"/></g></g><g transform="translate(460, 340)"><rect width="80" height="80" rx="16" class="hero-svg-tile"/><g transform="translate(40, 40)" stroke="#34d399" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M -17 0 c 4 -9 12 -13 17 -13 c 5 0 13 4 17 13 c -4 9 -12 13 -17 13 c -5 0 -13 -4 -17 -13 z"/><circle cx="0" cy="0" r="4.5"/></g></g><g transform="translate(60, 340)"><rect width="80" height="80" rx="16" class="hero-svg-tile"/><g transform="translate(40, 40)" stroke="#06b6d4" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="0" cy="-13" r="3.5"/><circle cx="-13" cy="11" r="3.5"/><circle cx="13" cy="11" r="3.5"/><line x1="-1.5" y1="-10" x2="-11" y2="9"/><line x1="1.5" y1="-10" x2="11" y2="9"/><line x1="-9" y1="11" x2="9" y2="11"/></g></g><g transform="translate(60, 200)"><rect width="80" height="80" rx="16" class="hero-svg-tile"/><g transform="translate(40, 40)" stroke="#fb7185" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M -9 -10 L -17 0 L -9 10"/><path d="M 9 -10 L 17 0 L 9 10"/><line x1="-3" y1="13" x2="3" y2="-13"/></g></g></svg>
       </div>
     </div>
   </section>
@@ -352,21 +262,11 @@
 
     <section class="section" id="community-driven">
       <h2>100% Community-Driven</h2>
-      <p>This website and all its resources are <strong>completely community-driven</strong>. Want to add a new feature,
-        improve the design, or build new capabilities? This is your opportunity to be creative and make an impact!</p>
-        
-      <p>Our <a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank"
-          rel="noopener noreferrer"><strong>GitHub repository</strong></a> is open for contributions. Whether you're
-        learning web development, want to practice your coding skills, or have ideas for new features, we welcome your
-        contributions. This is a safe place to learn, experiment, and grow your skills while helping the cloud security
-        community.</p>
-      <div class="cta-buttons">
-        <a href="https://github.com/CloudSecurityOfficeHours/csoh.org" class="btn btn-primary" target="_blank"
-          rel="noopener noreferrer">View on GitHub</a>
-        <a href="contribute.html" class="btn btn-secondary">Contribution Guide</a>
-      </div>
-      <p class="text-center mt-1"><em>💡 New to open source? This is a perfect place to start! Add resources, improve
-          documentation, or build new features. All skill levels welcome.</em></p>
+      <p>This site and every resource on it is built and maintained by volunteers. Whether you want to add a
+        resource, improve a page, or build something new, the <a
+          href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank"
+          rel="noopener noreferrer">GitHub repo</a> is open and the <a href="contribute.html">contribution guide</a>
+        walks you through it. New to open source? This is a safe place to start — all skill levels welcome.</p>
     </section>
 
         <blockquote class="pull-quote">
@@ -375,12 +275,21 @@
         </blockquote>
 
     <section class="section" id="featured">
-      <h2>Resource Categories</h2>
-
-      <div class="resource-grid">
+      <h2>Start here</h2>
+      <div class="resource-grid resource-grid--featured">
+        <a href="news.html" class="card-link">
+          <div class="resource-card" data-no-preview>
+            <h3>Cloud Security News</h3>
+            <p>Fresh headlines from 39 top security sources, auto-refreshed every 3 hours.</p>
+            <div class="resource-tags">
+              <span class="tag tag-live"><span class="tag-live-dot" aria-hidden="true"></span>Live &middot; updated every 3h</span>
+              <span class="tag">39 sources</span>
+            </div>
+          </div>
+        </a>
         <a href="ctfs.html" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>CTF Challenges & Vulnerable Environments</h3>
+            <h3>CTF Challenges &amp; Vulnerable Environments</h3>
             <p>Hands-on vulnerable environments and CTF labs for AWS, Azure, GCP, and Kubernetes.</p>
             <div class="resource-tags">
               <span class="tag ctf">CTF</span>
@@ -388,25 +297,13 @@
             </div>
           </div>
         </a>
-        <a href="news.html" class="card-link">
-          <div class="resource-card" data-no-preview>
-            <h3>Cloud Security News</h3>
-            <p>Fresh headlines from 39 top security sources, auto-refreshed every 3 hours.</p>
-            <div class="resource-tags">
-              <span class="tag">News</span>
-              <span class="tag">Updated Every 3 Hours</span>
-            </div>
-          </div>
-        </a>
         <a href="threat-research.html" class="card-link">
           <div class="resource-card" data-no-preview>
             <h3>Cloud Threat Research</h3>
-            <p>Vendor research teams, annual threat reports, notable incidents, IOC feeds, and MITRE ATT&amp;CK
-              Cloud frameworks.</p>
+            <p>Vendor research teams, annual threat reports, notable incidents, IOC feeds, and MITRE ATT&amp;CK Cloud frameworks.</p>
             <div class="resource-tags">
               <span class="tag">Threat Intel</span>
               <span class="tag">IOCs</span>
-              <span class="tag">Incidents</span>
             </div>
           </div>
         </a>
@@ -420,155 +317,100 @@
             </div>
           </div>
         </a>
+      </div>
+
+      <h3 class="featured-subhead">Browse by topic</h3>
+      <div class="resource-grid resource-grid--compact">
         <a href="resources.html?category=lab" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>Hands-On Labs & Training Platforms</h3>
-            <p>Interactive labs, challenge platforms, and training providers for practical cloud security skill
-              building.</p>
-            <div class="resource-tags">
-              <span class="tag lab">Labs</span>
-              <span class="tag lab">Training</span>
-            </div>
+            <h3>Hands-on labs &amp; training</h3>
+            <p>Interactive labs and training platforms for practical cloud security skills.</p>
+            <div class="resource-tags"><span class="tag lab">Labs</span></div>
           </div>
         </a>
         <a href="resources.html?category=tool" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>Security Tools & Platforms</h3>
-            <p>CNAPP, CSPM, KSPM, SIEM, and other cloud security tools and platform guides.</p>
-            <div class="resource-tags">
-              <span class="tag tool">Tools</span>
-              <span class="tag">Platforms</span>
-            </div>
+            <h3>Security tools &amp; platforms</h3>
+            <p>CNAPP, CSPM, KSPM, SIEM, and other cloud security tooling.</p>
+            <div class="resource-tags"><span class="tag tool">Tools</span></div>
           </div>
         </a>
         <a href="resources.html?category=certification" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>Certifications & Professional Development</h3>
-            <p>Certification paths, study guides, and professional development resources for cloud security careers.</p>
-            <div class="resource-tags">
-              <span class="tag certification">Certification</span>
-              <span class="tag job">Career</span>
-            </div>
+            <h3>Certifications</h3>
+            <p>Certification paths, study guides, and professional development.</p>
+            <div class="resource-tags"><span class="tag certification">Certification</span></div>
           </div>
         </a>
         <a href="resources.html?category=ai-security" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>AI Security & LLM Protection</h3>
-            <p>Guides and tools for securing AI/LLM deployments, prompt protection, and model safety.</p>
-            <div class="resource-tags">
-              <span class="tag ai-security">AI</span>
-              <span class="tag">Security</span>
-            </div>
+            <h3>AI security &amp; LLM protection</h3>
+            <p>Securing AI/LLM deployments, prompt protection, and model safety.</p>
+            <div class="resource-tags"><span class="tag ai-security">AI</span></div>
           </div>
         </a>
         <a href="resources.html?category=job" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>Job Search & Career Development</h3>
-            <p>Job boards, career advice, and resources to grow your cloud security career.</p>
-            <div class="resource-tags">
-              <span class="tag job">Jobs</span>
-              <span class="tag job">Career</span>
-            </div>
+            <h3>Jobs &amp; career development</h3>
+            <p>Job boards, interview prep, and career advice for cloud security.</p>
+            <div class="resource-tags"><span class="tag job">Jobs</span></div>
           </div>
         </a>
         <a href="cloud-security-degree-programs.html" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>Cloud Security Degree Programs</h3>
-            <p>Academic paths for cloud security: which degrees map to the work and which universities have strong reputations.</p>
-            <div class="resource-tags">
-              <span class="tag">Education</span>
-              <span class="tag">University</span>
-            </div>
+            <h3>Degree programs</h3>
+            <p>Academic paths and universities with strong cloud-security reputations.</p>
+            <div class="resource-tags"><span class="tag">Education</span></div>
           </div>
         </a>
         <a href="cloud-security-careers.html" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>Cloud Security Careers</h3>
-            <p>Roles, salary bands, interview formats, and portfolio projects for breaking into the field.</p>
-            <div class="resource-tags">
-              <span class="tag job">Careers</span>
-              <span class="tag">Hiring</span>
-            </div>
+            <h3>Careers</h3>
+            <p>Roles, salary bands, interview formats, and portfolio projects.</p>
+            <div class="resource-tags"><span class="tag job">Careers</span></div>
           </div>
         </a>
         <a href="cloud-security-home-lab.html" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>Build a Safe Home Lab</h3>
-            <p>Free-tier setups, budget guardrails, and kill-switches so you learn without a surprise bill.</p>
-            <div class="resource-tags">
-              <span class="tag lab">Lab</span>
-              <span class="tag">Free Tier</span>
-            </div>
+            <h3>Home lab</h3>
+            <p>Free-tier setups and kill-switches so you learn without a surprise bill.</p>
+            <div class="resource-tags"><span class="tag lab">Lab</span></div>
           </div>
         </a>
       </div>
     </section>
 
-        <figure class="page-photo">
-          <picture>
-            <source srcset="/img/photos/data-cables-800.webp 800w, /img/photos/data-cables-1200.webp 1200w, /img/photos/data-cables.webp 1880w" sizes="(max-width: 768px) 100vw, 1136px" type="image/webp">
-            <img src="/img/photos/data-cables.jpg" alt="From above contemporary server cable trays in a modern data center" width="1880" height="1253" loading="lazy" decoding="async">
-          </picture>
-          <figcaption>Photo by Brett Sayles on Pexels</figcaption>
-        </figure>
-
     <section class="section" id="community">
-      <h2>Join the Community</h2>
+      <h2>Join the community</h2>
       <div class="community-grid">
         <div class="community-card">
-          <h3 class="community-heading">Weekly Zoom Sessions</h3>
-          <p>Every Friday we meet on Zoom to discuss cloud security topics. Sessions include presentations from industry
-            experts, open discussions, and Q&A.</p>
-          <a href="https://csoh.kit.com/39feb4f397" class="btn btn-primary mt-1" target="_blank"
-            rel="noopener noreferrer">Register for Zoom Sessions</a>
+          <h3 class="community-heading">Get in touch</h3>
+          <p>Questions, ideas, or just want to say hi? Email <a href="mailto:admin@csoh.org">admin@csoh.org</a> or drop
+            into the Friday Zoom to meet the community in person.</p>
+          <a href="mailto:admin@csoh.org" class="card-action">Email us &rarr;</a>
         </div>
 
         <div class="community-card">
-          <h3 class="community-heading">Get in Touch</h3>
-          <p>Have questions or want to connect? Email us at admin@csoh.org or join our Friday Zoom session to meet the
-            community!</p>
-          <a href="mailto:admin@csoh.org" class="btn btn-primary mt-1">Email Us</a>
+          <h3 class="community-heading">Contribute</h3>
+          <p>Add a resource, fix a typo, suggest a feature, or build something new. No coding required &mdash; all skill
+            levels welcome.</p>
+          <a href="contribute.html" class="card-action">How to contribute &rarr;</a>
         </div>
 
         <div class="community-card">
           <h3 class="community-heading">Support CSOH</h3>
-          <p>CSOH is completely free and run by volunteers. If you find value in our community and resources, consider
-            supporting us.</p>
-          <a href="https://www.paypal.com/us/home" class="btn btn-primary mt-1" target="_blank"
-            rel="noopener noreferrer">Support via PayPal</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Contribute to CSOH</h2>
-      <p>Want to help improve our community? We welcome contributions from everyone—no coding experience needed!</p>
-
-      <div class="community-grid">
-        <div class="community-card">
-          <h3 class="community-heading">Add a Resource</h3>
-          <p>Share cloud security tools, labs, certifications, or training platforms with our community.</p>
-          <a href="contribute-resources.html" class="btn btn-primary mt-1">Learn How</a>
-        </div>
-
-        <div class="community-card">
-          <h3 class="community-heading">Suggest Improvements</h3>
-          <p>Improve descriptions, add news sources, report bugs, or share feature ideas.</p>
-          <a href="contribute.html" class="btn btn-primary mt-1">Contribute</a>
-        </div>
-
-        <div class="community-card">
-          <h3 class="community-heading">Join the Community</h3>
-          <p>Discuss improvements, brainstorm ideas, and connect with other contributors.</p>
-          <a href="sessions.html" class="btn btn-primary mt-1">Friday Zoom Sessions</a>
+          <p>CSOH is completely free and run by volunteers. If it&rsquo;s helped you, consider a small donation to keep
+            the lights on.</p>
+          <a href="https://www.paypal.com/us/home" class="card-action" target="_blank"
+            rel="noopener noreferrer">Donate via PayPal &rarr;</a>
         </div>
       </div>
     </section>
 
     <section class="section" id="testimonials">
-      <h2>In Our Members' Words</h2>
+      <h2>In our members' words</h2>
       <p>Hear from CSOH community members about what they get out of the Friday sessions and the resources here.</p>
-      <div class="community-grid">
+      <div class="testimonial-grid">
         <!-- QUOTES_START -->
         <!-- Auto-populated from Google Form submissions via Apps Script. Each quote is one .community-card block between these markers. Do not edit between the markers by hand — manual edits will be overwritten on the next submission. -->
                 <div class="community-card">
@@ -582,7 +424,7 @@
         <!-- QUOTES_END -->
       </div>
       <div class="text-center mt-2">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSenwrxB_n_YYhae6kKvhCsMdFetZjta-sUtRJskTCCn_9RuxA/viewform" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Share Your CSOH Story</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSenwrxB_n_YYhae6kKvhCsMdFetZjta-sUtRJskTCCn_9RuxA/viewform" class="card-action" target="_blank" rel="noopener noreferrer">Share your CSOH story &rarr;</a>
       </div>
     </section>
 
@@ -649,6 +491,7 @@
       <div class="footer-section">
         <h3>Explore</h3>
         <ul>
+          <li><a href="index.html#about">About CSOH</a></li>
           <li><a href="learning-path.html">Learning Path</a></li>
           <li><a href="resources.html">Resources</a></li>
           <li><a href="news.html">News</a></li>
