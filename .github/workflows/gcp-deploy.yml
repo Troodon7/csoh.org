@@ -25,6 +25,9 @@ on:
       - 'breach-timeline.js'
       - 'Dockerfile'
       - 'nginx.conf'
+      - 'nginx-security-headers.conf'
+      - 'pagefind-init.js'
+      - 'search.html'
       - '.github/workflows/gcp-deploy.yml'
   workflow_dispatch:
 
