@@ -3895,25 +3895,200 @@ footer {
     margin: 0.5rem 0 1rem;
 }
 
-/* Per-meeting page: tighter spacing for the article body */
+/* =========================================================================
+   Per-meeting recap page (e.g. /meetings/2026-05-08.html). 94 pages share
+   the same markup pattern, so all styling happens here — no per-page edits.
+   ========================================================================= */
+.meeting-page {
+    background: var(--white);
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    padding: 1.75rem 1.75rem 1.5rem;
+    margin-top: 1.25rem;
+}
 .meeting-page h2 {
     font-size: 1.5rem;
     line-height: 1.3;
-    margin: 1rem 0 0.5rem;
+    margin: 0 0 0.85rem;
+    color: var(--primary-color, #0f172a);
 }
-.meeting-page h3 {
-    font-size: 1.05rem;
-    color: var(--primary-color, #2c3e50);
-    margin: 1.25rem 0 0.4rem;
+.meeting-page h2 time {
+    color: var(--secondary-color, #0284c7);
+    font-weight: 600;
 }
+/* Quick-recap callout: the first <p> after the h2 is always the TL;DR */
+.meeting-page > h2 + p {
+    background: linear-gradient(180deg, #f8fafc 0%, #eef4fb 100%);
+    border-left: 4px solid var(--secondary-color, #0284c7);
+    border-radius: 0 8px 8px 0;
+    padding: 0.95rem 1.1rem;
+    margin: 0 0 1rem;
+    line-height: 1.6;
+    color: #1e293b;
+}
+.meeting-page > h2 + p > strong:first-child {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--secondary-color, #0284c7);
+    margin-right: 0.5rem;
+    vertical-align: 0.06em;
+}
+.meeting-page .meeting-tags { margin: 0 0 1rem; }
+
 .meeting-page details.meeting-topics {
-    margin-top: 1rem;
+    margin: 0.5rem 0 1.25rem;
+    border-top: 1px solid var(--border-color, #e2e8f0);
+    padding-top: 1rem;
 }
 .meeting-page details.meeting-topics > summary {
     cursor: pointer;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    background: var(--light-bg, #f8fafc);
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 999px;
     font-weight: 600;
-    color: var(--secondary-color, #3498db);
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--secondary-color, #0284c7);
+    transition: background 0.15s, border-color 0.15s;
+}
+.meeting-page details.meeting-topics > summary::-webkit-details-marker { display: none; }
+.meeting-page details.meeting-topics > summary::after {
+    content: "▸";
+    font-size: 0.75rem;
+    transition: transform 0.18s ease;
+    display: inline-block;
+}
+.meeting-page details.meeting-topics[open] > summary::after { transform: rotate(90deg); }
+.meeting-page details.meeting-topics > summary:hover {
+    background: rgba(2, 132, 199, 0.06);
+    border-color: var(--secondary-color, #0284c7);
+}
+.meeting-page details.meeting-topics[open] > summary { margin-bottom: 0.85rem; }
+
+.meeting-page details.meeting-topics h3 {
+    font-size: 1.05rem;
+    color: var(--primary-color, #0f172a);
+    margin: 1.1rem 0 0.4rem;
+    padding-left: 0.7rem;
+    border-left: 3px solid var(--accent-color, #f59e0b);
+    line-height: 1.35;
+}
+.meeting-page details.meeting-topics h3:first-of-type { margin-top: 0; }
+.meeting-page details.meeting-topics > p {
+    margin: 0 0 0.6rem;
+    line-height: 1.65;
+    max-width: 70ch;
+}
+
+.meeting-page > p.small {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color, #e2e8f0);
+}
+.meeting-page > p.small a {
+    display: inline-block;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 6px;
+    color: var(--secondary-color, #0284c7);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background 0.15s, border-color 0.15s;
+}
+.meeting-page > p.small a:hover {
+    background: rgba(2, 132, 199, 0.06);
+    border-color: var(--secondary-color, #0284c7);
+}
+
+/* Bottom prev/next/index pager. Styles live in breach-timeline.css for the
+   breach pages, but meeting pages only load style.css — so duplicate here. */
+.meeting-page + .incident-pager,
+main > .incident-pager {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem auto 1rem;
+    padding: 0;
+}
+main > .incident-pager .pager-link {
+    color: var(--secondary-color, #0284c7);
+    text-decoration: none;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 8px;
+    font-weight: 500;
+    background: var(--white);
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+main > .incident-pager .pager-link:hover {
+    background: rgba(2, 132, 199, 0.06);
+    border-color: var(--secondary-color, #0284c7);
+    transform: translateY(-1px);
+}
+main > .incident-pager .pager-index { font-weight: 600; }
+
+[data-theme="dark"] .meeting-page {
+    background: #0d1424;
+    border-color: #1e293b;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+[data-theme="dark"] .meeting-page h2 { color: #e2e8f0; }
+[data-theme="dark"] .meeting-page h2 time { color: #38bdf8; }
+[data-theme="dark"] .meeting-page > h2 + p {
+    background: rgba(56, 189, 248, 0.06);
+    border-left-color: #38bdf8;
+    color: #cbd5e1;
+}
+[data-theme="dark"] .meeting-page > h2 + p > strong:first-child { color: #38bdf8; }
+[data-theme="dark"] .meeting-page details.meeting-topics {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+[data-theme="dark"] .meeting-page details.meeting-topics > summary {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #38bdf8;
+}
+[data-theme="dark"] .meeting-page details.meeting-topics > summary:hover {
+    background: rgba(56, 189, 248, 0.08);
+    border-color: #38bdf8;
+}
+[data-theme="dark"] .meeting-page details.meeting-topics h3 { color: #e2e8f0; }
+[data-theme="dark"] .meeting-page details.meeting-topics > p { color: #cbd5e1; }
+[data-theme="dark"] .meeting-page > p.small { border-top-color: rgba(255, 255, 255, 0.08); }
+[data-theme="dark"] .meeting-page > p.small a {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #38bdf8;
+}
+[data-theme="dark"] .meeting-page > p.small a:hover {
+    background: rgba(56, 189, 248, 0.08);
+    border-color: #38bdf8;
+}
+[data-theme="dark"] main > .incident-pager .pager-link {
+    background: #0d1424;
+    color: #38bdf8;
+    border-color: #1e293b;
+}
+[data-theme="dark"] main > .incident-pager .pager-link:hover {
+    background: rgba(56, 189, 248, 0.08);
+    border-color: #38bdf8;
+}
+
+@media (max-width: 600px) {
+    .meeting-page { padding: 1.25rem 1.1rem 1.1rem; }
+    .meeting-page > h2 + p { padding: 0.8rem 0.9rem; }
+    main > .incident-pager { flex-direction: column; align-items: stretch; }
+    main > .incident-pager .pager-link { text-align: center; }
 }
 
 /* Dark mode */
