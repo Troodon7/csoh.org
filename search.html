@@ -75,11 +75,18 @@
             --pagefind-ui-font: inherit;
         }
 
-        /* Dark-mode override. The site uses
+        /* Dark-mode override. The site sets
               <html data-theme="dark">
-           (set by main.js's theme toggle), NOT body.dark-mode — make
-           sure the selector matches or these variables never apply and
-           the Pagefind widget is unreadable on a dark page.
+           from main.js once it runs, but the page background already
+           goes dark via the @media (prefers-color-scheme: dark) rules
+           in style.css the instant CSS is parsed. So there's a window
+           (or a state — JS disabled, SRI hash mismatch, etc.) where
+           the page is visually dark but data-theme is unset, and an
+           [data-theme="dark"]-only override leaves Pagefind's text
+           painted with the LIGHT-mode #1a1f24 against a dark backdrop.
+           Mirror the override under both selectors so dark text is
+           applied whenever the rendered page is dark, regardless of
+           whether JS got to set data-theme yet.
            #f0f6fc is the same near-white the rest of the site uses for
            body text in dark mode; pure #fff is too high-contrast on the
            #0d1117 page background and gives a "glow" effect. */
@@ -89,6 +96,15 @@
             --pagefind-ui-background: #0d1117;
             --pagefind-ui-border: #484f58;
             --pagefind-ui-tag: #21262d;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --pagefind-ui-primary: #58a6ff;
+                --pagefind-ui-text: #f0f6fc;
+                --pagefind-ui-background: #0d1117;
+                --pagefind-ui-border: #484f58;
+                --pagefind-ui-tag: #21262d;
+            }
         }
 
         /* Pagefind's title-link inherits color from --pagefind-ui-text;
@@ -128,6 +144,12 @@
         [data-theme="dark"] #pagefind-search mark {
             background-color: #b58900;
             color: #1a1f24;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) #pagefind-search mark {
+                background-color: #b58900;
+                color: #1a1f24;
+            }
         }
 
         /* Make the result count + "load more" message readable, and
