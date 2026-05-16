@@ -1,0 +1,132 @@
+/* Page-specific styling for /search.html. Lives in an external file
+   because the site's CSP includes `style-src 'self'` with no nonce or
+   'unsafe-inline' — an inline <style> block here gets silently dropped
+   by the browser, taking all of these rules with it. */
+
+/* Center the search widget and give it room to breathe. The Pagefind
+   UI sets its own internal widths; we just constrain the outer
+   container. */
+.search-page-wrap {
+    max-width: 720px;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
+}
+.search-page-wrap h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+.search-intro {
+    text-align: center;
+    color: var(--muted, #6c757d);
+    margin-bottom: 2rem;
+}
+
+/* Pagefind UI theming. The widget reads these CSS custom properties to
+   color its input, buttons, result text, and borders. Light-mode values
+   are the defaults we want. --pagefind-ui-scale defaults to 0.8 inside
+   pagefind-ui.css, which makes every dimension (font sizes, padding,
+   border radii) 20% smaller than the original designs. The result looks
+   cramped and the body text drops to ~13px. Setting it back to 1 gives
+   the layout its intended breathing room. */
+:root {
+    /* CSS-level color-scheme declaration. Belt-and-braces with the
+       <meta name="color-scheme"> in search.html's <head> — both should
+       opt this page out of browser-level "force dark" filters. */
+    color-scheme: dark light;
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: #2c3e50;
+    --pagefind-ui-text: #1a1f24;
+    --pagefind-ui-background: #ffffff;
+    --pagefind-ui-border: #d0d7de;
+    --pagefind-ui-tag: #f1f3f5;
+    --pagefind-ui-border-radius: 6px;
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-font: inherit;
+}
+
+/* Dark-mode override. The site sets <html data-theme="dark"> from
+   main.js once it runs, but the page background already goes dark via
+   the @media (prefers-color-scheme: dark) rules in style.css the
+   instant CSS is parsed. So there's a window (or a state — JS
+   disabled, SRI mismatch, etc.) where the page is visually dark but
+   data-theme is unset, and a [data-theme="dark"]-only override leaves
+   Pagefind's text painted with the LIGHT-mode #1a1f24 against a dark
+   backdrop. Mirror the override under both selectors so dark text is
+   applied whenever the rendered page is dark, regardless of when (or
+   whether) main.js gets to set data-theme. */
+[data-theme="dark"] {
+    --pagefind-ui-primary: #58a6ff;
+    --pagefind-ui-text: #f0f6fc;
+    --pagefind-ui-background: #0d1117;
+    --pagefind-ui-border: #484f58;
+    --pagefind-ui-tag: #21262d;
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --pagefind-ui-primary: #58a6ff;
+        --pagefind-ui-text: #f0f6fc;
+        --pagefind-ui-background: #0d1117;
+        --pagefind-ui-border: #484f58;
+        --pagefind-ui-tag: #21262d;
+    }
+}
+
+/* Title-link sits inside .pagefind-ui__result-title. The extra
+   specificity (#pagefind-search ancestor + the two classes) wins over
+   Pagefind's own .svelte-hashed rules, and !important guards against
+   any other override on the user's machine. Bold + full text color
+   makes the result heading the clear focal point of each card. */
+#pagefind-search .pagefind-ui__result-title .pagefind-ui__result-link {
+    color: var(--pagefind-ui-text) !important;
+    font-weight: 700 !important;
+    font-size: 1.2rem;
+    line-height: 1.35;
+}
+
+/* The excerpt is the second-most-important thing on a card. Pagefind
+   renders it at the same color as the title which makes the two
+   visually merge. Dimming it slightly (78% opacity, not a new color so
+   it still works in both themes) gives a visual hierarchy without
+   losing readability. */
+#pagefind-search .pagefind-ui__result-excerpt {
+    color: var(--pagefind-ui-text) !important;
+    opacity: 0.78;
+    line-height: 1.55;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* Brighten <mark> hits so search terms pop in both themes. Light mode
+   keeps Pagefind's default yellow; dark mode needs a darker amber with
+   bright text so the mark stays legible against the page background. */
+#pagefind-search mark {
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 700;
+}
+[data-theme="dark"] #pagefind-search mark {
+    background-color: #b58900;
+    color: #1a1f24;
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) #pagefind-search mark {
+        background-color: #b58900;
+        color: #1a1f24;
+    }
+}
+
+/* Make the result count + "load more" message readable. */
+#pagefind-search .pagefind-ui__message {
+    color: var(--pagefind-ui-text) !important;
+    opacity: 0.85;
+    font-size: 0.95rem;
+    padding: 1rem 0;
+}
+
+/* Pagefind's default 30px top + 40px bottom is a lot of whitespace
+   per result; tighten so users see more at once. The border-top/bottom
+   on every result is what visually separates them — keep that styling,
+   just compress padding. */
+#pagefind-search .pagefind-ui__result {
+    padding: 1.25rem 0;
+}
