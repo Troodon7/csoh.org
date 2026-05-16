@@ -259,25 +259,12 @@
          regenerated on every deploy by `npx pagefind`, so a checksum
          would have to be patched in afterward by the update-sri step
          and would just churn. The script is self-hosted on csoh.org
-         so the integrity story rests on TLS + our own origin. -->
-    <script src="/_pagefind/pagefind-ui.js"></script>
-    <script>
-        // Initialize the search UI once the DOM is ready. The element
-        // selector matches the <div id="pagefind-search"> in <main>.
-        window.addEventListener('DOMContentLoaded', function () {
-            if (typeof PagefindUI !== 'undefined') {
-                new PagefindUI({
-                    element: '#pagefind-search',
-                    showSubResults: true,
-                    showImages: false,
-                    resetStyles: false,
-                });
-                // Auto-focus the search box so the page is keyboard-ready.
-                var input = document.querySelector('#pagefind-search input');
-                if (input) input.focus();
-            }
-        });
-    </script>
+         so the integrity story rests on TLS + our own origin.
+         `defer` here matters: pagefind-init.js below relies on the
+         PagefindUI global being defined first, and defer preserves
+         in-document execution order. -->
+    <script src="/_pagefind/pagefind-ui.js" defer></script>
+    <script src="/pagefind-init.js" defer></script>
 
     <script src="/main.js?v=28d03270" integrity="sha384-rL3h8+9Zf3OnCebAlc/aSSGella8hnqqGbOKQv9QcZGh3P6vA0z6yQp8JLYgBTqc" defer></script>
 </body>
