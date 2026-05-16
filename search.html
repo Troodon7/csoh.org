@@ -54,21 +54,63 @@
             color: var(--muted, #6c757d);
             margin-bottom: 2rem;
         }
-        /* Match Pagefind's accent to the site theme. */
+
+        /* Pagefind UI theming. The widget reads these CSS custom
+           properties to color its input, buttons, result text, and
+           borders. Light-mode values are the defaults we want. */
         :root {
             --pagefind-ui-primary: #2c3e50;
             --pagefind-ui-text: #2c3e50;
             --pagefind-ui-background: #ffffff;
             --pagefind-ui-border: #d0d7de;
+            --pagefind-ui-tag: #f1f3f5;
             --pagefind-ui-border-radius: 6px;
             --pagefind-ui-border-width: 1px;
             --pagefind-ui-font: inherit;
         }
-        body.dark-mode {
-            --pagefind-ui-primary: #f8f9fa;
-            --pagefind-ui-text: #f8f9fa;
-            --pagefind-ui-background: #1f2933;
-            --pagefind-ui-border: #3a4654;
+
+        /* Dark-mode override. The site uses
+              <html data-theme="dark">
+           (set by main.js's theme toggle), NOT body.dark-mode — make
+           sure the selector matches or these variables never apply and
+           the Pagefind widget is unreadable on a dark page. */
+        [data-theme="dark"] {
+            --pagefind-ui-primary: #4da3ff;
+            --pagefind-ui-text: #e6edf3;
+            --pagefind-ui-background: #161b22;
+            --pagefind-ui-border: #30363d;
+            --pagefind-ui-tag: #21262d;
+        }
+
+        /* Pagefind's <mark> highlight is hardcoded to a pale yellow
+           that disappears against a dark background. Override it so
+           hits stand out without changing light-mode behavior. */
+        [data-theme="dark"] .pagefind-ui__result mark,
+        [data-theme="dark"] .pagefind-ui__result-excerpt mark {
+            background-color: #5c4900;
+            color: #fff8b8;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        /* Tighten result spacing — the default 1.5rem feels airy when
+           you're scanning ten results at a glance. */
+        .pagefind-ui__result {
+            padding: 1rem 0;
+        }
+        .pagefind-ui__result-title {
+            font-size: 1.1rem;
+            line-height: 1.3;
+            margin-bottom: 0.35rem;
+        }
+        .pagefind-ui__result-excerpt {
+            line-height: 1.5;
+        }
+        /* Surface the page URL under the title so users know where
+           the result lives without hovering. Pagefind doesn't render
+           one by default. */
+        .pagefind-ui__result-link {
+            font-weight: 600;
         }
     </style>
 

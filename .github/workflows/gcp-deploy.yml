@@ -98,11 +98,18 @@ jobs:
       - name: Build Pagefind search index
         run: |
           set -euo pipefail
+          # Why no --root-selector here: this site's <h1> usually lives
+          # inside <section class="hero">, which sits BEFORE the <main>
+          # element. Scoping the index to <main> would drop the page's
+          # title, leaving Pagefind to render every result as
+          # "undefined". Letting Pagefind index the whole <body> and
+          # then aggressively excluding chrome (nav, footer, breadcrumb,
+          # skip-link, dropdown menus) keeps the index focused on real
+          # content without losing titles.
           npx -y pagefind@1.4.0 \
             --site . \
             --output-path ./_pagefind \
-            --root-selector main \
-            --exclude-selectors "header, footer, nav.breadcrumb-nav, .skip-link, script, style"
+            --exclude-selectors "header, footer, nav.breadcrumb-nav, .skip-link, .dropdown-menu, .breadcrumb-nav, .footer-content, .footer-bottom, script, style, noscript"
           # Sanity-check that the index actually produced files. If
           # Pagefind silently no-op'd, we'd rather fail the deploy here
           # than ship a broken /search.html.
