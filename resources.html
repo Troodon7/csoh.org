@@ -326,7 +326,7 @@
                     aria-label="Search cloud security resources" autocomplete="off" spellcheck="false">
                 <div class="filter-buttons">
                     <button class="filter-btn active" data-category="all">All (<span
-                            id="visibleCount">198</span>)</button>
+                            id="visibleCount">229</span>)</button>
                     <button class="filter-btn" data-category="ctf">CTF Challenges</button>
                     <button class="filter-btn" data-category="tool">Security Tools</button>
                     <button class="filter-btn" data-category="certification">Certifications</button>
@@ -620,6 +620,78 @@
                                 <span class="tag">Blue Team</span>
                             </div>
                         </div>
+                    </a><a href="http://flaws.cloud/" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Created by Scott Piper, flaws.cloud is the original AWS CTF — six progressive levels walking you through S3 misconfigurations, metadata service abuse, and privilege escalation patterns commonly seen in real AWS breaches. Each level explains the underlying misconfiguration after you solve it, making it ideal for blue teamers learning what to look for. Hosted live with no AWS account required.">
+                            <img src="img/previews/flaws.cloud.jpg" alt="flaws.cloud preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>flaws.cloud</h3>
+                            <p>The classic AWS CTF by Scott Piper. Six progressive challenges covering S3, IAM, and
+                                metadata service misconfigurations — hosted live, no AWS account needed.</p>
+                            <div class="resource-tags">
+                                <span class="tag ctf">CTF</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">Free</span>
+                            </div>
+                        </div>
+                    </a><a href="http://flaws2.cloud/" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="The sequel to flaws.cloud with separate attacker and defender tracks. The attacker path focuses on compromising AWS infrastructure through Lambda and container misconfigurations, while the defender track teaches incident response using CloudTrail and GuardDuty logs. Hosted live with no AWS account required.">
+                            <img src="img/previews/flaws2.cloud.jpg" alt="flaws2.cloud preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>flaws2.cloud</h3>
+                            <p>Sequel to flaws.cloud with both attacker and defender tracks. Practice AWS incident
+                                response with CloudTrail and GuardDuty alongside offensive scenarios.</p>
+                            <div class="resource-tags">
+                                <span class="tag ctf">CTF</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">Blue Team</span>
+                                <span class="tag">Free</span>
+                            </div>
+                        </div>
+                    </a><a href="https://github.com/bridgecrewio/terragoat" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Bridgecrew's intentionally vulnerable Terraform repository covering AWS, Azure, and GCP misconfigurations. Each commit introduces specific IaC security issues, making it perfect for testing scanners like Checkov, tfsec, or Trivy. Excellent training environment for DevSecOps engineers learning to spot risky Terraform patterns before they reach production.">
+                            <img src="img/previews/github.com_bridgecrewio_terragoat.jpg" alt="TerraGoat preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>TerraGoat</h3>
+                            <p>Bridgecrew's vulnerable-by-design Terraform repo with multi-cloud misconfigurations.
+                                Ideal target for testing IaC scanners and DevSecOps pipelines.</p>
+                            <div class="resource-tags">
+                                <span class="tag ctf">CTF</span>
+                                <span class="tag">Multi-Cloud</span>
+                                <span class="tag">IaC</span>
+                                <span class="tag">DevSecOps</span>
+                            </div>
+                        </div>
+                    </a><a href="https://github.com/ine-labs/AWSGoat" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Modern AWS vulnerable application by INE Labs demonstrating real-world attack chains against serverless and containerized AWS services. Two modules cover OWASP Top 10 web vulnerabilities and AWS-specific misconfigurations across Lambda, ECS, S3, IAM, and RDS. Deploys via Terraform with full walkthroughs for each scenario.">
+                            <img src="img/previews/github.com_ine-labs_AWSGoat.jpg" alt="AWSGoat preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>AWSGoat</h3>
+                            <p>INE Labs' modern AWS vulnerable environment with serverless and container attack
+                                chains. Terraform-deployable with detailed walkthroughs.</p>
+                            <div class="resource-tags">
+                                <span class="tag ctf">CTF</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">Serverless</span>
+                            </div>
+                        </div>
+                    </a><a href="https://github.com/ine-labs/AzureGoat" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="INE Labs' Azure-focused vulnerable environment featuring intentional misconfigurations across Azure Functions, App Services, and Storage. Covers OWASP Top 10 attacks adapted to Azure plus privilege escalation paths unique to Microsoft's cloud. Comes with detailed exploitation guides and Terraform deployment.">
+                            <img src="img/previews/github.com_ine-labs_AzureGoat.jpg" alt="AzureGoat preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>AzureGoat</h3>
+                            <p>Vulnerable-by-design Azure environment covering Functions, App Services, and Storage
+                                misconfigurations with Azure-specific privilege escalation paths.</p>
+                            <div class="resource-tags">
+                                <span class="tag ctf">CTF</span>
+                                <span class="tag">Azure</span>
+                                <span class="tag">Privilege Escalation</span>
+                            </div>
+                        </div>
                     </a></div>
             </div>
         </div>
@@ -860,6 +932,81 @@
                                 <span class="tag lab">Labs & Training</span>
                                 <span class="tag">Cloud Security</span>
                                 <span class="tag">Hands-on</span>
+                            </div>
+                        </div>
+                    </a><a href="https://learn.microsoft.com/en-us/training/browse/?products=azure&roles=security-engineer"
+                        class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Microsoft's free official training platform with comprehensive learning paths for Azure security engineers. Includes hands-on sandboxes where you can practice with real Azure resources without your own subscription. Earn badges and prepare for certifications like AZ-500 and SC-100 through interactive modules.">
+                            <img src="img/previews/learn.microsoft.com_security-engineer.jpg" alt="Microsoft Learn Security preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Microsoft Learn — Azure Security</h3>
+                            <p>Free official Microsoft training with browser-based sandboxes for hands-on Azure
+                                security practice. Maps directly to AZ-500 and SC-100 certification paths.</p>
+                            <div class="resource-tags">
+                                <span class="tag lab">Labs & Training</span>
+                                <span class="tag">Azure</span>
+                                <span class="tag">Free</span>
+                            </div>
+                        </div>
+                    </a><a href="https://www.cloudskillsboost.google/paths/19" class="card-link" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Google's hands-on lab platform with dedicated security learning paths covering IAM, VPC Service Controls, and Security Command Center. Labs provide temporary GCP environments at no cost during the lab session. Skill badges and quests are recognized in Google's partner program and prepare you for the Professional Cloud Security Engineer certification.">
+                            <img src="img/previews/www.cloudskillsboost.google.jpg" alt="Google Cloud Skills Boost preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Google Cloud Skills Boost — Security</h3>
+                            <p>Hands-on GCP security learning path with temporary cloud environments provided.
+                                Covers IAM, VPC Service Controls, and Security Command Center.</p>
+                            <div class="resource-tags">
+                                <span class="tag lab">Labs & Training</span>
+                                <span class="tag">GCP</span>
+                                <span class="tag">Cloud Security</span>
+                            </div>
+                        </div>
+                    </a><a href="https://academy.attackiq.com/" class="card-link" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Free vendor-neutral training from AttackIQ covering threat-informed defense, MITRE ATT&CK, purple teaming, and adversary emulation. Courses are taught by industry practitioners and offer CPE credits. Especially valuable for detection engineers and SOC analysts learning to operationalize the MITRE framework.">
+                            <img src="img/previews/academy.attackiq.com.jpg" alt="AttackIQ Academy preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>AttackIQ Academy</h3>
+                            <p>Free training on threat-informed defense, MITRE ATT&CK, purple teaming, and adversary
+                                emulation. CPE credits awarded for completion.</p>
+                            <div class="resource-tags">
+                                <span class="tag lab">Labs & Training</span>
+                                <span class="tag">MITRE ATT&CK</span>
+                                <span class="tag">Free</span>
+                            </div>
+                        </div>
+                    </a><a href="https://www.antisyphontraining.com/" class="card-link" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="John Strand's pay-what-you-can security training covering cloud, offensive, and defensive topics. Many courses are completely free, and instructors include well-known practitioners from Black Hills Information Security. Live virtual classes combine lecture with hands-on lab work and active Discord support.">
+                            <img src="img/previews/www.antisyphontraining.com.jpg" alt="Antisyphon Training preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Antisyphon Training</h3>
+                            <p>Pay-what-you-can security training from John Strand and Black Hills InfoSec. Live
+                                virtual classes with practitioner instructors and active Discord support.</p>
+                            <div class="resource-tags">
+                                <span class="tag lab">Labs & Training</span>
+                                <span class="tag">Pay-What-You-Can</span>
+                                <span class="tag">Live Training</span>
+                            </div>
+                        </div>
+                    </a><a href="https://academy.hackthebox.com/" class="card-link" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Structured cybersecurity courses with integrated labs covering web exploitation, Active Directory, cloud, and DevSecOps. Job-role paths align to positions like Bug Bounty Hunter, SOC Analyst, and Penetration Tester. Earned certifications including CBBH and CPTS are increasingly recognized by hiring managers.">
+                            <img src="img/previews/academy.hackthebox.com.jpg" alt="Hack The Box Academy preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Hack The Box Academy</h3>
+                            <p>Structured courses with integrated labs and job-role paths. Earn industry-recognized
+                                certifications like CBBH and CPTS through hands-on practice.</p>
+                            <div class="resource-tags">
+                                <span class="tag lab">Labs & Training</span>
+                                <span class="tag">Pentesting</span>
+                                <span class="tag">Career Paths</span>
                             </div>
                         </div>
                     </a></div>
@@ -1245,6 +1392,81 @@
                                 <span class="tag tool">CNAPP</span>
                                 <span class="tag">CNAPP</span>
                                 <span class="tag">Enterprise</span>
+                            </div>
+                        </div>
+                    </a><a href="https://github.com/prowler-cloud/prowler" class="card-link" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Open-source multi-cloud security assessment tool covering AWS, Azure, GCP, and Kubernetes. Runs over 500 checks aligned to CIS benchmarks, GDPR, HIPAA, PCI-DSS, and other compliance frameworks. Outputs in multiple formats including HTML dashboards and JSON for SIEM integration, and supports custom checks for organization-specific policies.">
+                            <img src="img/previews/github.com_prowler-cloud_prowler.jpg" alt="Prowler preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Prowler</h3>
+                            <p>Leading open-source multi-cloud security assessment tool. 500+ checks across AWS,
+                                Azure, GCP, and Kubernetes mapped to CIS, PCI-DSS, and HIPAA.</p>
+                            <div class="resource-tags">
+                                <span class="tag tool">Tool</span>
+                                <span class="tag">Multi-Cloud</span>
+                                <span class="tag">Compliance</span>
+                                <span class="tag">Open Source</span>
+                            </div>
+                        </div>
+                    </a><a href="https://steampipe.io/" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Query your entire cloud estate using standard SQL. Steampipe maps APIs from over 140 services — AWS, Azure, GCP, Kubernetes, GitHub, and more — into queryable Postgres tables. Pre-built compliance mods cover CIS, NIST, and PCI benchmarks, making it ideal for asset inventory, drift detection, and ad-hoc security investigations.">
+                            <img src="img/previews/steampipe.io.jpg" alt="Steampipe preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Steampipe</h3>
+                            <p>Query cloud APIs with SQL. 140+ plugins for AWS, Azure, GCP, Kubernetes, and SaaS
+                                — ideal for asset inventory and ad-hoc security investigations.</p>
+                            <div class="resource-tags">
+                                <span class="tag tool">Tool</span>
+                                <span class="tag">Multi-Cloud</span>
+                                <span class="tag">Open Source</span>
+                            </div>
+                        </div>
+                    </a><a href="https://www.checkov.io/" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Open-source IaC scanner from Prisma Cloud covering Terraform, CloudFormation, Kubernetes, ARM, Helm, and Dockerfiles. Ships with over 1,000 built-in policies aligned to CIS benchmarks and supports custom Python or YAML policies. Integrates cleanly into CI pipelines and is widely used for shift-left security in DevSecOps workflows.">
+                            <img src="img/previews/www.checkov.io.jpg" alt="Checkov preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Checkov</h3>
+                            <p>Open-source IaC scanner for Terraform, CloudFormation, Kubernetes, Helm, and
+                                Dockerfiles. 1,000+ built-in policies and custom Python or YAML rules.</p>
+                            <div class="resource-tags">
+                                <span class="tag tool">Tool</span>
+                                <span class="tag">IaC</span>
+                                <span class="tag">DevSecOps</span>
+                                <span class="tag">Open Source</span>
+                            </div>
+                        </div>
+                    </a><a href="https://trivy.dev/" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Aqua Security's all-in-one open-source scanner for container images, file systems, IaC, and Kubernetes clusters. Detects vulnerabilities, misconfigurations, secrets, and SBOMs in a single tool with minimal setup. The industry standard for container CVE scanning and a default in many CI/CD security pipelines.">
+                            <img src="img/previews/trivy.dev.jpg" alt="Trivy preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Trivy</h3>
+                            <p>Aqua's all-in-one open-source scanner. CVEs, misconfigurations, secrets, and SBOMs
+                                across containers, IaC, and Kubernetes — the de facto standard for image scanning.</p>
+                            <div class="resource-tags">
+                                <span class="tag tool">Tool</span>
+                                <span class="tag">Container Security</span>
+                                <span class="tag">SBOM</span>
+                                <span class="tag">Open Source</span>
+                            </div>
+                        </div>
+                    </a><a href="https://kubescape.io/" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="CNCF-hosted Kubernetes security platform that scans clusters, IaC, and container images against NSA-CISA, MITRE ATT&CK, and CIS Kubernetes frameworks. Provides risk scores and remediation guidance and integrates with kubectl, ArgoCD, and GitHub Actions. A go-to free tool for Kubernetes posture management.">
+                            <img src="img/previews/kubescape.io.jpg" alt="Kubescape preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Kubescape</h3>
+                            <p>CNCF-hosted Kubernetes security platform. Scans clusters and IaC against NSA-CISA,
+                                MITRE ATT&CK, and CIS Kubernetes frameworks with remediation guidance.</p>
+                            <div class="resource-tags">
+                                <span class="tag tool">Tool</span>
+                                <span class="tag">Kubernetes</span>
+                                <span class="tag">CNCF</span>
+                                <span class="tag">Open Source</span>
                             </div>
                         </div>
                     </a>
@@ -1674,6 +1896,82 @@
                                 <span class="tag">Mentorship</span>
                                 <span class="tag">Career Development</span>
                                 <span class="tag">Networking</span>
+                            </div>
+                        </div>
+                    </a><a href="https://aws.amazon.com/certification/certified-security-specialty/" class="card-link"
+                        target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="AWS's most respected security-focused certification covering threat detection, infrastructure security, identity and access management, data protection, and incident response in AWS environments. Aimed at engineers with two or more years of AWS security experience. Strong signal for cloud security roles and a common requirement for senior AWS positions.">
+                            <img src="img/previews/aws.amazon.com_certified-security-specialty.jpg"
+                                alt="AWS Certified Security Specialty preview" class="resource-preview" loading="lazy" decoding="async">
+                            <h3>AWS Certified Security — Specialty (SCS-C02)</h3>
+                            <p>AWS's flagship security cert covering threat detection, IAM, infrastructure security,
+                                data protection, and incident response. Strong signal for senior AWS security roles.</p>
+                            <div class="resource-tags">
+                                <span class="tag certification">Certification</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">Specialty</span>
+                            </div>
+                        </div>
+                    </a><a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-security-engineer/"
+                        class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="The flagship Azure security certification covering identity management, platform protection, security operations, data security, and applications. Pairs naturally with AZ-104 and prepares you for senior roles or the SC-100 Cybersecurity Architect Expert path. Strongly recommended for engineers working in Microsoft-centric cloud environments.">
+                            <img src="img/previews/learn.microsoft.com_azure-security-engineer.jpg"
+                                alt="AZ-500 Azure Security Engineer preview" class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Microsoft AZ-500: Azure Security Engineer Associate</h3>
+                            <p>Microsoft's flagship Azure security cert covering identity, platform protection,
+                                security operations, and data security. A natural stepping stone to SC-100.</p>
+                            <div class="resource-tags">
+                                <span class="tag certification">Certification</span>
+                                <span class="tag">Azure</span>
+                                <span class="tag">Associate</span>
+                            </div>
+                        </div>
+                    </a><a href="https://cloud.google.com/learn/certification/cloud-security-engineer" class="card-link"
+                        target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Google's premier security certification covering IAM, network security, data protection, and compliance in GCP. Focuses heavily on practical implementation including VPC Service Controls, Cloud KMS, and Security Command Center. Recommended for engineers with three or more years of industry experience and one or more years working with GCP.">
+                            <img src="img/previews/cloud.google.com_cloud-security-engineer.jpg"
+                                alt="Google Professional Cloud Security Engineer preview" class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Google Professional Cloud Security Engineer</h3>
+                            <p>Google's premier security cert covering IAM, VPC Service Controls, Cloud KMS, and
+                                Security Command Center. Practical, implementation-focused exam content.</p>
+                            <div class="resource-tags">
+                                <span class="tag certification">Certification</span>
+                                <span class="tag">GCP</span>
+                                <span class="tag">Professional</span>
+                            </div>
+                        </div>
+                    </a><a href="https://learn.microsoft.com/en-us/credentials/certifications/cybersecurity-architect-expert/"
+                        class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Microsoft's expert-level security architecture certification covering Zero Trust strategy, GRC, and end-to-end security design across Microsoft 365 and Azure. Requires a prerequisite associate-level cert (AZ-500, SC-200, SC-300, or MS-500). Valuable for security architects and CISOs working in Microsoft-centric organizations.">
+                            <img src="img/previews/learn.microsoft.com_cybersecurity-architect-expert.jpg"
+                                alt="SC-100 Cybersecurity Architect Expert preview" class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Microsoft SC-100: Cybersecurity Architect Expert</h3>
+                            <p>Microsoft's expert-level certification for security architects. Covers Zero Trust,
+                                GRC, and end-to-end design across Microsoft 365 and Azure.</p>
+                            <div class="resource-tags">
+                                <span class="tag certification">Certification</span>
+                                <span class="tag">Azure</span>
+                                <span class="tag">Expert</span>
+                                <span class="tag">Zero Trust</span>
+                            </div>
+                        </div>
+                    </a><a href="https://www.comptia.org/certifications/security" class="card-link" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="The most widely-recognized entry-level security certification, vendor-neutral and approved for DoD 8570 baseline roles. Covers threats, attacks, architecture, identity, risk management, and cryptography. Often the first certification on a cloud security career path and a prerequisite for many federal and contractor positions.">
+                            <img src="img/previews/www.comptia.org_security.jpg" alt="CompTIA Security+ preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>CompTIA Security+ (SY0-701)</h3>
+                            <p>The most widely-recognized entry-level security cert. Vendor-neutral, DoD 8570
+                                approved, and often the first step on a cloud security career path.</p>
+                            <div class="resource-tags">
+                                <span class="tag certification">Certification</span>
+                                <span class="tag">Entry Level</span>
+                                <span class="tag">Vendor Neutral</span>
                             </div>
                         </div>
                     </a>
@@ -2536,6 +2834,80 @@
                                 <span class="tag">News</span>
                             </div>
                         </div>
+                    </a><a href="https://www.nist.gov/itl/ai-risk-management-framework" class="card-link"
+                        target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="NIST's voluntary framework for managing risks throughout the AI lifecycle, structured around Govern, Map, Measure, and Manage functions. The companion AI RMF Playbook provides concrete actions for each subcategory. Increasingly referenced in procurement contracts and regulatory guidance for organizations deploying AI systems.">
+                            <img src="img/previews/www.nist.gov_ai-rmf.jpg" alt="NIST AI Risk Management Framework preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>NIST AI Risk Management Framework (AI RMF)</h3>
+                            <p>NIST's voluntary AI risk framework built around Govern, Map, Measure, and Manage.
+                                The reference standard for AI governance programs.</p>
+                            <div class="resource-tags">
+                                <span class="tag ai-security">AI Security</span>
+                                <span class="tag">Framework</span>
+                                <span class="tag">Governance</span>
+                                <span class="tag">NIST</span>
+                            </div>
+                        </div>
+                    </a><a href="https://atlas.mitre.org/" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="MITRE's knowledge base of adversary tactics, techniques, and case studies against machine learning systems — modeled after ATT&CK. Catalogs real-world attacks like prompt injection, model evasion, and training data poisoning. Essential reference for AI red teams and defenders building threat models for ML pipelines.">
+                            <img src="img/previews/atlas.mitre.org.jpg" alt="MITRE ATLAS preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>MITRE ATLAS</h3>
+                            <p>MITRE's ATT&CK-style knowledge base of adversarial ML tactics and real-world case
+                                studies. Required reference for AI red teaming and threat modeling.</p>
+                            <div class="resource-tags">
+                                <span class="tag ai-security">AI Security</span>
+                                <span class="tag">Adversarial ML</span>
+                                <span class="tag">Threat Modeling</span>
+                            </div>
+                        </div>
+                    </a><a href="https://safety.google/cybersecurity-advancements/saif/" class="card-link"
+                        target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Google's conceptual framework for AI security built around six core elements including extending security foundations, contextualizing AI risks, and adapting controls. Includes a self-assessment tool, risk map, and concrete guidance derived from Google's own production AI experience. Useful for security teams establishing AI governance from scratch.">
+                            <img src="img/previews/safety.google_saif.jpg" alt="Google SAIF preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Google Secure AI Framework (SAIF)</h3>
+                            <p>Google's six-element AI security framework with a self-assessment tool and risk map.
+                                Practical guidance distilled from Google's production AI experience.</p>
+                            <div class="resource-tags">
+                                <span class="tag ai-security">AI Security</span>
+                                <span class="tag">Framework</span>
+                                <span class="tag">Google</span>
+                            </div>
+                        </div>
+                    </a><a href="https://avidml.org/" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Community-curated database of AI vulnerabilities, harms, and failure modes maintained by Robust Intelligence and partners. Catalogs issues across security, ethics, and performance with taxonomies that map to standards like NIST AI RMF and OWASP LLM Top 10. Searchable by model, vendor, and risk category — a go-to reference for AI red team research.">
+                            <img src="img/previews/avidml.org.jpg" alt="AVID AI Vulnerability Database preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>AVID — AI Vulnerability Database</h3>
+                            <p>Community-curated database of AI vulnerabilities and failure modes. Searchable by
+                                model, vendor, and risk category — mapped to NIST AI RMF and OWASP LLM Top 10.</p>
+                            <div class="resource-tags">
+                                <span class="tag ai-security">AI Security</span>
+                                <span class="tag">Vulnerability DB</span>
+                                <span class="tag">Reference</span>
+                            </div>
+                        </div>
+                    </a><a href="https://github.com/Azure/counterfit" class="card-link" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Microsoft's open-source generic automation tool for security testing AI systems. Wraps multiple attack frameworks (Adversarial Robustness Toolbox, TextAttack, Augly) behind a single CLI inspired by Metasploit. Designed for red teams that need to exercise the same attack across many different models without rewriting code.">
+                            <img src="img/previews/github.com_Azure_counterfit.jpg" alt="Microsoft Counterfit preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Microsoft Counterfit</h3>
+                            <p>Microsoft's open-source Metasploit-style framework for AI red teaming. Wraps ART,
+                                TextAttack, and Augly behind a unified CLI for cross-model testing.</p>
+                            <div class="resource-tags">
+                                <span class="tag ai-security">AI Security</span>
+                                <span class="tag">Red Team</span>
+                                <span class="tag">Open Source</span>
+                            </div>
+                        </div>
                     </a></div>
             </div>
         </div>
@@ -3267,6 +3639,82 @@
                                 <span class="tag">YouTube</span>
                                 <span class="tag">Career Advice</span>
                                 <span class="tag">Real-World</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Startup & Niche Job Boards -->
+                    <a href="https://wellfound.com/" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="The leading job board for startup roles, with strong representation across security-focused startups and Series A through Series D companies. Profile-driven matching means recruiters reach out to you directly with salary and equity ranges upfront. Particularly useful for cloud security engineers interested in early-stage CNAPP, AppSec, or AI security startups.">
+                            <img src="img/previews/wellfound.com.jpg" alt="Wellfound preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Wellfound (formerly AngelList Talent)</h3>
+                            <p>Leading startup job board with strong security startup representation. Recruiters
+                                reach out directly with salary and equity ranges upfront.</p>
+                            <div class="resource-tags">
+                                <span class="tag">Job Board</span>
+                                <span class="tag">Startups</span>
+                                <span class="tag">Equity</span>
+                            </div>
+                        </div>
+                    </a><a href="https://www.workatastartup.com/" class="card-link" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Direct access to job listings from current Y Combinator portfolio companies, including many fast-growing security startups. A single application can be sent to multiple companies, and founders frequently reply directly. Strong source for security engineers comfortable with early-stage risk and rapid growth environments.">
+                            <img src="img/previews/www.workatastartup.com.jpg" alt="Y Combinator Work at a Startup preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Y Combinator — Work at a Startup</h3>
+                            <p>Job listings from active YC portfolio companies including many security startups.
+                                Apply to multiple at once; founders often reply directly.</p>
+                            <div class="resource-tags">
+                                <span class="tag">Job Board</span>
+                                <span class="tag">Startups</span>
+                                <span class="tag">YC</span>
+                            </div>
+                        </div>
+                    </a><a href="https://builtin.com/" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Tech-focused job board organized by city hub (NYC, SF, LA, Chicago, etc.) with detailed company profiles covering culture, benefits, and tech stack. Excellent filtering for cybersecurity roles and remote positions. Companion editorial content highlights local tech employers, making it easier to research target companies before applying.">
+                            <img src="img/previews/builtin.com.jpg" alt="Built In preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>Built In</h3>
+                            <p>City-organized tech job board with detailed company profiles. Strong filtering for
+                                cybersecurity and remote roles plus editorial content on target employers.</p>
+                            <div class="resource-tags">
+                                <span class="tag">Job Board</span>
+                                <span class="tag">Tech Focus</span>
+                                <span class="tag">Remote</span>
+                            </div>
+                        </div>
+                    </a><a href="https://mentorcruise.com/categories/cybersecurity/" class="card-link" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Long-term paid mentorship platform connecting you with experienced security professionals for one-on-one career coaching. Mentors include CISOs, principal engineers, and bug bounty experts who provide structured guidance, resume reviews, and mock interviews. Particularly valuable for career switchers and junior engineers targeting senior roles.">
+                            <img src="img/previews/mentorcruise.com_cybersecurity.jpg" alt="MentorCruise preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>MentorCruise</h3>
+                            <p>Paid long-term mentorship with security pros — CISOs, principal engineers, and bug
+                                bounty experts. Structured coaching, resume reviews, and mock interviews.</p>
+                            <div class="resource-tags">
+                                <span class="tag">Mentorship</span>
+                                <span class="tag">Career Coaching</span>
+                                <span class="tag">Paid</span>
+                            </div>
+                        </div>
+                    </a><a href="https://infosec-conferences.com/" class="card-link" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="resource-card"
+                            data-tooltip="Comprehensive global directory of cybersecurity conferences, hackathons, and CFPs searchable by date, location, and topic. Tracks both major events like Black Hat and DEF CON and smaller regional BSides and ISC2 chapters. Essential for planning conference attendance, submitting talks, and finding networking opportunities throughout the year.">
+                            <img src="img/previews/infosec-conferences.com.jpg" alt="InfoSec-Conferences.com preview"
+                                class="resource-preview" loading="lazy" decoding="async">
+                            <h3>InfoSec-Conferences.com</h3>
+                            <p>Global directory of cybersecurity conferences, hackathons, and CFPs. Searchable by
+                                date, location, and topic — track major events and regional BSides alike.</p>
+                            <div class="resource-tags">
+                                <span class="tag">Conferences</span>
+                                <span class="tag">Networking</span>
+                                <span class="tag">CFP</span>
                             </div>
                         </div>
                     </a>
