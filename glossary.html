@@ -37,10 +37,10 @@
     <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
     <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=81490698" as="style"
-        integrity="sha384-ULrcmaXRxf+GLip0yWUoKHAupnS46Bb35vCTSIyZGvjgvwwGo7ffSVFSyItMSda8">
-    <link rel="stylesheet" href="/style.css?v=81490698"
-        integrity="sha384-ULrcmaXRxf+GLip0yWUoKHAupnS46Bb35vCTSIyZGvjgvwwGo7ffSVFSyItMSda8">
+    <link rel="preload" href="/style.css?v=7072ffeb" as="style"
+        integrity="sha384-q4TnA2/wpa+fUTCb+5om9oKaapHUSiIuGu28ZrPmfBalEyXxpMX7Tn3xy5lLts3q">
+    <link rel="stylesheet" href="/style.css?v=7072ffeb"
+        integrity="sha384-q4TnA2/wpa+fUTCb+5om9oKaapHUSiIuGu28ZrPmfBalEyXxpMX7Tn3xy5lLts3q">
 
     <script type="application/ld+json">
     {
@@ -142,7 +142,7 @@
                       </div>
                     </li>
                     <li class="has-dropdown">
-                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">About <span class="caret" aria-hidden="true">▾</span></button>
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
                       <ul class="dropdown-menu">
                         <li><a href="contribute.html">Contribute</a></li>
                         <li><a href="contribute-resources.html">Add a Resource</a></li>
@@ -177,7 +177,7 @@
         </figure>
         
         <section class="content-section">
-            <h2>📖 Cloud Security Glossary</h2>
+            <h2>Cloud Security Glossary</h2>
 
             <div class="info-box--blue">
                 <p>Cloud security has more three-letter acronyms than any reasonable field should. This page is the cheat sheet — short definitions, no marketing fluff. Missing something? <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/issues">Open an issue</a> or email <a href="mailto:admin@csoh.org">admin@csoh.org</a>.</p>
@@ -231,7 +231,7 @@
                 <button class="clear-search-btn" id="clearGlossarySearch">clear</button>.
             </p>
 
-            <h2 id="contents">📚 Contents</h2>
+            <h2 id="contents">Contents</h2>
             <ul>
                 <li><a href="#cloud-models">Cloud Service &amp; Deployment Models</a></li>
                 <li><a href="#compute">Compute, Containers &amp; Serverless</a></li>
@@ -248,7 +248,7 @@
                 <li><a href="#orgs">Standards Bodies &amp; Authorities</a></li>
             </ul>
 
-            <h2 id="cloud-models">☁️ Cloud Service &amp; Deployment Models</h2>
+            <h2 id="cloud-models">Cloud Service &amp; Deployment Models</h2>
             <dl class="glossary-list">
                 <dt id="term-iaas">IaaS — Infrastructure as a Service</dt>
                 <dd>Raw compute, storage, and network resources on demand. You manage the OS and everything above. Examples: <a class="glossary-link" href="#term-ec2">EC2</a>, Azure VM, GCE.</dd>
@@ -275,7 +275,7 @@
                 <dd>A logical boundary for one customer's data, identities, and configuration in a shared platform. Multi-tenant <a class="glossary-link" href="#term-saas">SaaS</a> keeps many tenants isolated on the same infrastructure; the cross-tenant boundary is the provider's most security-critical control.</dd>
             </dl>
 
-            <h2 id="compute">🐳 Compute, Containers &amp; Serverless</h2>
+            <h2 id="compute">Compute, Containers &amp; Serverless</h2>
             <dl class="glossary-list">
                 <dt id="term-container">Container</dt>
                 <dd>An OS-level isolated process bundle. Same kernel as the host, separate userland.</dd>
@@ -329,7 +329,7 @@
                 <dd>The practice of securing the full <a class="glossary-link" href="#term-container">container</a> lifecycle — base <a class="glossary-link" href="#term-image">image</a> hardening, registry scanning, signed builds, admission control, runtime detection, and <a class="glossary-link" href="#term-pod">pod</a>-level isolation in <a class="glossary-link" href="#term-kubernetes">Kubernetes</a>. Sits at the intersection of <a class="glossary-link" href="#term-cwpp">CWPP</a>, <a class="glossary-link" href="#term-kspm">KSPM</a>, and <a class="glossary-link" href="#term-supply-chain">supply-chain</a> tooling.</dd>
             </dl>
 
-            <h2 id="iam">🔑 Identity &amp; Access Management (IAM)</h2>
+            <h2 id="iam">Identity &amp; Access Management (IAM)</h2>
             <dl class="glossary-list">
                 <dt id="term-iam">IAM — Identity &amp; Access Management</dt>
                 <dd>Who you are and what you're allowed to do. The control plane for cloud security.</dd>
@@ -431,7 +431,7 @@
                 <dd>A list of rules attached to a resource specifying who can access it and how. Predates <a class="glossary-link" href="#term-rbac">RBAC</a>/<a class="glossary-link" href="#term-abac">ABAC</a>; still common on filesystems, <a class="glossary-link" href="#term-s3">S3</a> objects, and network devices.</dd>
             </dl>
 
-            <h2 id="network">🌐 Networking &amp; Zero Trust</h2>
+            <h2 id="network">Networking &amp; Zero Trust</h2>
             <dl class="glossary-list">
                 <dt id="term-vpc">VPC / VNet</dt>
                 <dd>Virtual Private Cloud / Virtual Network — your isolated network space inside a cloud account.</dd>
@@ -506,7 +506,7 @@
                 <dd>An AWS virtual NIC that can be detached and reattached between <a class="glossary-link" href="#term-ec2">EC2</a> instances. The unit a <a class="glossary-link" href="#term-security-group">Security Group</a> is bound to.</dd>
             </dl>
 
-            <h2 id="data">🔒 Data Protection, Secrets &amp; Cryptography</h2>
+            <h2 id="data">Data Protection, Secrets &amp; Cryptography</h2>
             <dl class="glossary-list">
                 <dt id="term-s3">S3 — Simple Storage Service</dt>
                 <dd>AWS's object storage service. The most common cloud-security failure surface: public buckets, overly broad bucket policies, world-readable objects, and <a class="glossary-link" href="#term-acl">ACL</a>/policy interactions that produce surprises. Capital One, LastPass, Snowflake-adjacent leaks, and many others all involved S3 as the exfil destination.</dd>
@@ -566,7 +566,7 @@
                 <dd>The property of a system that can swap cryptographic algorithms (and key sizes) without redesign. Critical for the <a class="glossary-link" href="#term-pqc">PQC</a> transition — and for surviving the next algorithm break after that.</dd>
             </dl>
 
-            <h2 id="detection">📡 Logging, Detection &amp; Response</h2>
+            <h2 id="detection">Logging, Detection &amp; Response</h2>
             <dl class="glossary-list">
                 <dt id="term-siem">SIEM — Security Information and Event Management</dt>
                 <dd>Central log aggregation + correlation + alerting. Splunk, <a class="glossary-link" href="#term-sentinel">Microsoft Sentinel</a>, Chronicle, Elastic, Sumo.</dd>
@@ -635,7 +635,7 @@
                 <dd>Collected, analyzed information about adversaries, their <a class="glossary-link" href="#term-ttp">TTPs</a>, infrastructure, and victims — used to prioritize defenses and inform <a class="glossary-link" href="#term-detection-engineering">detection engineering</a>. Tactical (<a class="glossary-link" href="#term-ioc">IOCs</a>), operational (campaigns), strategic (motives, geopolitics). Feeds: vendor reports, ISACs, OSINT, and internal incident telemetry.</dd>
             </dl>
 
-            <h2 id="posture">🧭 Posture, Policy &amp; the *PM Family</h2>
+            <h2 id="posture">Posture, Policy &amp; the *PM Family</h2>
             <dl class="glossary-list">
                 <dt id="term-cspm">CSPM — Cloud Security Posture Management</dt>
                 <dd>Continuous misconfiguration scanning of cloud accounts (public <a class="glossary-link" href="#term-s3">S3</a>, open SGs, missing <a class="glossary-link" href="#term-mfa">MFA</a>, etc.).</dd>
@@ -692,7 +692,7 @@
                 <dd>The sum of all points where an unauthenticated or low-privilege actor can interact with your systems — public IPs, exposed APIs, leaked credentials, third-party SaaS integrations, signed artifacts, employee inboxes. Attack Surface Management (ASM) is the discipline of continuously discovering and reducing it.</dd>
             </dl>
 
-            <h2 id="vuln">🐛 Vulnerability &amp; Supply-Chain Security</h2>
+            <h2 id="vuln">Vulnerability &amp; Supply-Chain Security</h2>
             <dl class="glossary-list">
                 <dt id="term-supply-chain">Supply-Chain Attack</dt>
                 <dd>Compromising the path that produces or delivers software so the malicious change rides through trusted channels — a poisoned dependency, a backdoored build step, a stolen signing key, a malicious GitHub Action. SolarWinds, the <a class="glossary-link" href="#term-pypi">PyPI</a>/<a class="glossary-link" href="#term-npm">npm</a> typosquats, Codecov, and the XZ backdoor are all examples. The <a class="glossary-link" href="#term-slsa">SLSA</a> framework, SBOMs, and <a class="glossary-link" href="#term-sigstore">Sigstore</a> exist to harden it.</dd>
@@ -752,7 +752,7 @@
                 <dd>The program of discovering, prioritizing, remediating, and verifying vulnerabilities across an environment. Modern cloud VM blends <a class="glossary-link" href="#term-cve">CVE</a> data with <a class="glossary-link" href="#term-epss">EPSS</a>, <a class="glossary-link" href="#term-kev">KEV</a>, reachability, runtime evidence, and ownership routing — moving toward <a class="glossary-link" href="#term-ctem">CTEM</a> rather than chasing every <a class="glossary-link" href="#term-cvss">CVSS</a> 7+.</dd>
             </dl>
 
-            <h2 id="compliance">📜 Compliance Frameworks</h2>
+            <h2 id="compliance">Compliance Frameworks</h2>
             <dl class="glossary-list">
                 <dt id="term-nis2">NIS2 Directive</dt>
                 <dd>EU directive (2022/2555) expanding cybersecurity obligations across "essential" and "important" entities — energy, transport, banking, health, cloud providers, MSPs, and more. Member states transposed it into national law in 2024–2025. Mandates risk management, supply-chain due diligence, 24-hour incident notification, and personal liability for management.</dd>
@@ -794,7 +794,7 @@
                 <dd>EU Digital Operational Resilience Act — financial-sector ICT risk and third-party oversight.</dd>
             </dl>
 
-            <h2 id="attack">⚔️ Threats, Attacker Techniques &amp; Frameworks</h2>
+            <h2 id="attack">Threats, Attacker Techniques &amp; Frameworks</h2>
             <dl class="glossary-list">
                 <dt id="term-mitre-att-ck">MITRE ATT&amp;CK</dt>
                 <dd>Knowledge base of adversary <a class="glossary-link" href="#term-ttp">tactics, techniques, and procedures</a>. Has Cloud, Containers, Mobile, ICS matrices.</dd>
@@ -888,7 +888,7 @@
                 <dd>Scott Piper's classic AWS-focused security CTFs. Each level teaches a real misconfiguration class — public S3 buckets, EC2 metadata, IAM trust policies, federated identity. Free, browser-driven, and still the most-recommended on-ramp into AWS attacker thinking.</dd>
             </dl>
 
-            <h2 id="ai">🤖 AI, LLM &amp; Agentic-System Security</h2>
+            <h2 id="ai">AI, LLM &amp; Agentic-System Security</h2>
             <dl class="glossary-list">
                 <dt id="term-ai">AI — Artificial Intelligence</dt>
                 <dd>In a cloud-security context, "AI" almost always means systems built around large language models — chat assistants, <a class="glossary-link" href="#term-rag">RAG</a> pipelines, autonomous agents, and the cloud services that host them. The security concerns are configuration of model endpoints, data flow into and out of models, <a class="glossary-link" href="#term-prompt-injection">prompt injection</a>, and the <a class="glossary-link" href="#term-blast-radius">blast radius</a> of agents with tool access.</dd>
@@ -948,7 +948,7 @@
                 <dd>Malicious payloads delivered via prompts to LLMs and agents — a cloud-relevant attack class as agents gain real-world tool access (see <a href="breach-timeline.html">Breach Kill Chains</a>).</dd>
             </dl>
 
-            <h2 id="ops">⚙️ DevOps, IaC &amp; Operating Concepts</h2>
+            <h2 id="ops">DevOps, IaC &amp; Operating Concepts</h2>
             <dl class="glossary-list">
                 <dt id="term-iac">IaC — Infrastructure as Code</dt>
                 <dd>Declaring infrastructure in versioned code. Terraform / OpenTofu, CloudFormation, Bicep, Pulumi, Crossplane.</dd>
@@ -996,7 +996,7 @@
                 <dd>Embedding security checks into the developer workflow — <a class="glossary-link" href="#term-sast">SAST</a>, <a class="glossary-link" href="#term-sca">SCA</a>, <a class="glossary-link" href="#term-iac">IaC</a> scanning, secret scanning, and policy gates running in <a class="glossary-link" href="#term-ci-cd">CI</a> rather than as a pre-prod review. The cultural goal is shared ownership; the practical goal is finding issues at the <a class="glossary-link" href="#term-shift-left">left</a> end of the pipeline where they're cheapest to fix.</dd>
             </dl>
 
-            <h2 id="orgs">🏛️ Standards Bodies &amp; Authorities</h2>
+            <h2 id="orgs">Standards Bodies &amp; Authorities</h2>
             <dl class="glossary-list">
                 <dt id="term-nist">NIST</dt>
                 <dd>US National Institute of Standards and Technology. Owns CSF, the <a class="glossary-link" href="#term-sp">SP</a> 800-series, <a class="glossary-link" href="#term-nvd">NVD</a>, and the <a class="glossary-link" href="#term-ai">AI</a> RMF.</dd>

@@ -40,15 +40,11 @@
     <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
     <link rel="dns-prefetch" href="https://img.youtube.com">
 
-  <link rel="preload" as="image" type="image/webp"
-    imagesrcset="/img/photos/homepage-team-800.webp 800w, /img/photos/homepage-team-1200.webp 1200w, /img/photos/homepage-team.webp 1880w"
-    imagesizes="(max-width: 768px) 100vw, (max-width: 1200px) 1136px, 1136px" fetchpriority="high">
+  <link rel="preload" href="/style.css?v=7072ffeb" as="style"
+    integrity="sha384-q4TnA2/wpa+fUTCb+5om9oKaapHUSiIuGu28ZrPmfBalEyXxpMX7Tn3xy5lLts3q">
 
-  <link rel="preload" href="/style.css?v=81490698" as="style"
-    integrity="sha384-ULrcmaXRxf+GLip0yWUoKHAupnS46Bb35vCTSIyZGvjgvwwGo7ffSVFSyItMSda8">
-
-  <link rel="stylesheet" href="/style.css?v=81490698"
-    integrity="sha384-ULrcmaXRxf+GLip0yWUoKHAupnS46Bb35vCTSIyZGvjgvwwGo7ffSVFSyItMSda8">
+  <link rel="stylesheet" href="/style.css?v=7072ffeb"
+    integrity="sha384-q4TnA2/wpa+fUTCb+5om9oKaapHUSiIuGu28ZrPmfBalEyXxpMX7Tn3xy5lLts3q">
 
   <!-- Structured Data for SEO -->
   <script type="application/ld+json">
@@ -295,7 +291,7 @@
                       </div>
                     </li>
                     <li class="has-dropdown">
-                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">About <span class="caret" aria-hidden="true">▾</span></button>
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
                       <ul class="dropdown-menu">
                         <li><a href="contribute.html">Contribute</a></li>
                         <li><a href="contribute-resources.html">Add a Resource</a></li>
@@ -330,13 +326,20 @@
   </section>
 
   <main class="container" id="main-content">
-        <figure class="page-photo">
-          <picture>
-            <source srcset="/img/photos/homepage-team-800.webp 800w, /img/photos/homepage-team-1200.webp 1200w, /img/photos/homepage-team.webp 1880w" sizes="(max-width: 768px) 100vw, 1136px" type="image/webp">
-            <img src="/img/photos/homepage-team.jpg" alt="Diverse team discussing ideas around a table in a modern office with laptops and tablets" width="1880" height="1253" fetchpriority="high" decoding="async">
-          </picture>
-          <figcaption>Photo by Ketut Subiyanto on Pexels</figcaption>
-        </figure>
+        <aside class="stat-strip" aria-label="CSOH at a glance">
+          <div class="stat-strip__item">
+            <span class="stat-strip__num">2,000+</span>
+            <span class="stat-strip__label">Cloud security pros in the community</span>
+          </div>
+          <div class="stat-strip__item">
+            <span class="stat-strip__num">200+</span>
+            <span class="stat-strip__label">Curated, vendor-neutral resources</span>
+          </div>
+          <div class="stat-strip__item">
+            <span class="stat-strip__num">Free, weekly</span>
+            <span class="stat-strip__label">Friday Zoom since February 2023</span>
+          </div>
+        </aside>
 
         
     <section class="section" id="home">
@@ -348,7 +351,7 @@
     </section>
 
     <section class="section" id="community-driven">
-      <h2>🚀 100% Community-Driven</h2>
+      <h2>100% Community-Driven</h2>
       <p>This website and all its resources are <strong>completely community-driven</strong>. Want to add a new feature,
         improve the design, or build new capabilities? This is your opportunity to be creative and make an impact!</p>
         
@@ -377,7 +380,7 @@
       <div class="resource-grid">
         <a href="ctfs.html" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>🎯 CTF Challenges & Vulnerable Environments</h3>
+            <h3>CTF Challenges & Vulnerable Environments</h3>
             <p>Hands-on vulnerable environments and CTF labs for AWS, Azure, GCP, and Kubernetes.</p>
             <div class="resource-tags">
               <span class="tag ctf">CTF</span>
@@ -387,7 +390,7 @@
         </a>
         <a href="news.html" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>📰 Cloud Security News</h3>
+            <h3>Cloud Security News</h3>
             <p>Fresh headlines from 39 top security sources, auto-refreshed every 3 hours.</p>
             <div class="resource-tags">
               <span class="tag">News</span>
@@ -397,7 +400,7 @@
         </a>
         <a href="threat-research.html" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>🔬 Cloud Threat Research</h3>
+            <h3>Cloud Threat Research</h3>
             <p>Vendor research teams, annual threat reports, notable incidents, IOC feeds, and MITRE ATT&amp;CK
               Cloud frameworks.</p>
             <div class="resource-tags">
@@ -409,7 +412,7 @@
         </a>
         <a href="meetings.html" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>📝 Meeting Recaps</h3>
+            <h3>Meeting Recaps</h3>
             <p>Topic-by-topic summaries of every Friday Zoom session going back to March 2024.</p>
             <div class="resource-tags">
               <span class="tag">Recaps</span>
@@ -419,7 +422,7 @@
         </a>
         <a href="resources.html?category=lab" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>🧪 Hands-On Labs & Training Platforms</h3>
+            <h3>Hands-On Labs & Training Platforms</h3>
             <p>Interactive labs, challenge platforms, and training providers for practical cloud security skill
               building.</p>
             <div class="resource-tags">
@@ -430,7 +433,7 @@
         </a>
         <a href="resources.html?category=tool" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>🛡️ Security Tools & Platforms</h3>
+            <h3>Security Tools & Platforms</h3>
             <p>CNAPP, CSPM, KSPM, SIEM, and other cloud security tools and platform guides.</p>
             <div class="resource-tags">
               <span class="tag tool">Tools</span>
@@ -440,7 +443,7 @@
         </a>
         <a href="resources.html?category=certification" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>🎓 Certifications & Professional Development</h3>
+            <h3>Certifications & Professional Development</h3>
             <p>Certification paths, study guides, and professional development resources for cloud security careers.</p>
             <div class="resource-tags">
               <span class="tag certification">Certification</span>
@@ -450,7 +453,7 @@
         </a>
         <a href="resources.html?category=ai-security" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>🤖 AI Security & LLM Protection</h3>
+            <h3>AI Security & LLM Protection</h3>
             <p>Guides and tools for securing AI/LLM deployments, prompt protection, and model safety.</p>
             <div class="resource-tags">
               <span class="tag ai-security">AI</span>
@@ -460,7 +463,7 @@
         </a>
         <a href="resources.html?category=job" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>💼 Job Search & Career Development</h3>
+            <h3>Job Search & Career Development</h3>
             <p>Job boards, career advice, and resources to grow your cloud security career.</p>
             <div class="resource-tags">
               <span class="tag job">Jobs</span>
@@ -470,7 +473,7 @@
         </a>
         <a href="cloud-security-degree-programs.html" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>🎓 Cloud Security Degree Programs</h3>
+            <h3>Cloud Security Degree Programs</h3>
             <p>Academic paths for cloud security: which degrees map to the work and which universities have strong reputations.</p>
             <div class="resource-tags">
               <span class="tag">Education</span>
@@ -480,7 +483,7 @@
         </a>
         <a href="cloud-security-careers.html" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>🧭 Cloud Security Careers</h3>
+            <h3>Cloud Security Careers</h3>
             <p>Roles, salary bands, interview formats, and portfolio projects for breaking into the field.</p>
             <div class="resource-tags">
               <span class="tag job">Careers</span>
@@ -490,7 +493,7 @@
         </a>
         <a href="cloud-security-home-lab.html" class="card-link">
           <div class="resource-card" data-no-preview>
-            <h3>🧰 Build a Safe Home Lab</h3>
+            <h3>Build a Safe Home Lab</h3>
             <p>Free-tier setups, budget guardrails, and kill-switches so you learn without a surprise bill.</p>
             <div class="resource-tags">
               <span class="tag lab">Lab</span>
@@ -513,7 +516,7 @@
       <h2>Join the Community</h2>
       <div class="community-grid">
         <div class="community-card">
-          <h3 class="community-heading">📅 Weekly Zoom Sessions</h3>
+          <h3 class="community-heading">Weekly Zoom Sessions</h3>
           <p>Every Friday we meet on Zoom to discuss cloud security topics. Sessions include presentations from industry
             experts, open discussions, and Q&A.</p>
           <a href="https://csoh.kit.com/39feb4f397" class="btn btn-primary mt-1" target="_blank"
@@ -521,14 +524,14 @@
         </div>
 
         <div class="community-card">
-          <h3 class="community-heading">✉️ Get in Touch</h3>
+          <h3 class="community-heading">Get in Touch</h3>
           <p>Have questions or want to connect? Email us at admin@csoh.org or join our Friday Zoom session to meet the
             community!</p>
           <a href="mailto:admin@csoh.org" class="btn btn-primary mt-1">Email Us</a>
         </div>
 
         <div class="community-card">
-          <h3 class="community-heading">❤️ Support CSOH</h3>
+          <h3 class="community-heading">Support CSOH</h3>
           <p>CSOH is completely free and run by volunteers. If you find value in our community and resources, consider
             supporting us.</p>
           <a href="https://www.paypal.com/us/home" class="btn btn-primary mt-1" target="_blank"
@@ -538,24 +541,24 @@
     </section>
 
     <section class="section">
-      <h2>🤝 Contribute to CSOH</h2>
+      <h2>Contribute to CSOH</h2>
       <p>Want to help improve our community? We welcome contributions from everyone—no coding experience needed!</p>
 
       <div class="community-grid">
         <div class="community-card">
-          <h3 class="community-heading">📚 Add a Resource</h3>
+          <h3 class="community-heading">Add a Resource</h3>
           <p>Share cloud security tools, labs, certifications, or training platforms with our community.</p>
           <a href="contribute-resources.html" class="btn btn-primary mt-1">Learn How</a>
         </div>
 
         <div class="community-card">
-          <h3 class="community-heading">💡 Suggest Improvements</h3>
+          <h3 class="community-heading">Suggest Improvements</h3>
           <p>Improve descriptions, add news sources, report bugs, or share feature ideas.</p>
           <a href="contribute.html" class="btn btn-primary mt-1">Contribute</a>
         </div>
 
         <div class="community-card">
-          <h3 class="community-heading">💬 Join the Community</h3>
+          <h3 class="community-heading">Join the Community</h3>
           <p>Discuss improvements, brainstorm ideas, and connect with other contributors.</p>
           <a href="sessions.html" class="btn btn-primary mt-1">Friday Zoom Sessions</a>
         </div>
@@ -563,7 +566,7 @@
     </section>
 
     <section class="section" id="testimonials">
-      <h2>💬 In Our Members' Words</h2>
+      <h2>In Our Members' Words</h2>
       <p>Hear from CSOH community members about what they get out of the Friday sessions and the resources here.</p>
       <div class="community-grid">
         <!-- QUOTES_START -->
