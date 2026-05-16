@@ -340,24 +340,60 @@
         <section id="comparison">
             <h2>Side-by-side comparison</h2>
             <p>The categories are easier to keep straight when you see them next to each other:</p>
-            <div class="content-section" style="overflow-x:auto;">
-                <table style="width:100%; border-collapse:collapse; margin:1rem 0; min-width:700px;">
+            <div class="comparison-table">
+                <table>
                     <thead>
-                        <tr style="background:#f4f6f8; text-align:left;">
-                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Category</th>
-                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">What it watches</th>
-                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Primary signal</th>
-                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">Catches things like</th>
-                            <th style="padding:0.75rem; border-bottom:2px solid #ddd;">When you need it</th>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Category</th>
+                            <th scope="col">What it watches</th>
+                            <th scope="col">Primary signal</th>
+                            <th scope="col">Catches things like</th>
+                            <th scope="col">When you need it</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>CSPM</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Cloud account configuration</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Cloud APIs, <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scans</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Public <a class="glossary-link" href="glossary.html#term-s3">S3</a>, open SGs, missing <a class="glossary-link" href="glossary.html#term-mfa">MFA</a>, no encryption</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">From day one</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>CWPP</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Running VMs, containers, <a class="glossary-link" href="glossary.html#term-serverless">serverless</a></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Agents, <a class="glossary-link" href="glossary.html#term-ebpf">eBPF</a>, syscalls</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Vulnerable images, unauthorized processes, malware</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">When you run <a class="glossary-link" href="glossary.html#term-kubernetes">K8s</a>/VMs at scale</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>CIEM</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">IAM permissions across accounts</td><td style="padding:0.6rem; border-bottom:1px solid #eee;"><a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a>, IAM policies</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Over-privileged roles, unused permissions, privilege paths</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">When IAM &gt; ~50 roles</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>DSPM</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Data stores (S3, RDS, Snowflake, etc.)</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Content scanning, classification</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">PII in dev environments, shadow data, exposed databases</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">When you have regulated data</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>SSPM</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">SaaS apps (M365, Salesforce, GitHub)</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">SaaS APIs, OAuth tokens</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Risky third-party app grants, weak SaaS configs</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">When SaaS sprawl matters</td></tr>
-                        <tr><td style="padding:0.6rem; border-bottom:1px solid #eee;"><strong>CNAPP</strong></td><td style="padding:0.6rem; border-bottom:1px solid #eee;">All of the above</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Multi-source unified</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">Toxic combinations across categories</td><td style="padding:0.6rem; border-bottom:1px solid #eee;">When tool sprawl hurts</td></tr>
+                        <tr>
+                            <th scope="row">CSPM</th>
+                            <td>Cloud account configuration</td>
+                            <td>Cloud APIs, <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scans</td>
+                            <td>Public <a class="glossary-link" href="glossary.html#term-s3">S3</a>, open SGs, missing <a class="glossary-link" href="glossary.html#term-mfa">MFA</a>, no encryption</td>
+                            <td>From day one</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">CWPP</th>
+                            <td>Running VMs, containers, <a class="glossary-link" href="glossary.html#term-serverless">serverless</a></td>
+                            <td>Agents, <a class="glossary-link" href="glossary.html#term-ebpf">eBPF</a>, syscalls</td>
+                            <td>Vulnerable images, unauthorized processes, malware</td>
+                            <td>When you run <a class="glossary-link" href="glossary.html#term-kubernetes">K8s</a>/VMs at scale</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">CIEM</th>
+                            <td>IAM permissions across accounts</td>
+                            <td><a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a>, IAM policies</td>
+                            <td>Over-privileged roles, unused permissions, privilege paths</td>
+                            <td>When IAM &gt; ~50 roles</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">DSPM</th>
+                            <td>Data stores (S3, RDS, Snowflake, etc.)</td>
+                            <td>Content scanning, classification</td>
+                            <td>PII in dev environments, shadow data, exposed databases</td>
+                            <td>When you have regulated data</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">SSPM</th>
+                            <td>SaaS apps (M365, Salesforce, GitHub)</td>
+                            <td>SaaS APIs, OAuth tokens</td>
+                            <td>Risky third-party app grants, weak SaaS configs</td>
+                            <td>When SaaS sprawl matters</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">CNAPP</th>
+                            <td>All of the above</td>
+                            <td>Multi-source unified</td>
+                            <td>Toxic combinations across categories</td>
+                            <td>When tool sprawl hurts</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
