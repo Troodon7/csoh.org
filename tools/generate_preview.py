@@ -95,6 +95,138 @@ def generate_filename_from_url(url):
 
     return f"{filename}.jpg"
 
+# Minimum byte size for an og:image to count as a real preview. Anything
+# smaller is almost always a 1x1 tracking pixel, a tiny favicon, or a SVG
+# icon — none of which look good at our 400x300 card size.
+MIN_OG_IMAGE_BYTES = 4_000
+
+# A modern desktop UA. Some sites (e.g. *.microsoft.com) return a stripped
+# response or block entirely when they see urllib's default UA.
+_BROWSER_UA = (
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+    'AppleWebKit/537.36 (KHTML, like Gecko) '
+    'Chrome/123.0.0.0 Safari/537.36'
+)
+
+
+def capture_from_og_image(url, output_path):
+    """Try to use the page's own <meta property="og:image"> as the preview.
+
+    This is the highest-ROI capture method for cloud-security resources:
+    most vendor docs, GitHub repos, and marketing pages set a curated OG
+    image specifically for social sharing. Fetching that image is
+    - faster than a headless browser screenshot,
+    - higher quality than a viewport-cropped page render,
+    - immune to cookie banners and Cloudflare bot challenges (we never
+      render the page, we just parse the HTML head).
+    Returns (True, message) on success — output_path will hold the raw
+    bytes of the OG image, ready for optimize_image() to resize/recompress.
+    """
+    try:
+        import re as _re
+        import urllib.request
+        import urllib.error
+        from urllib.parse import urljoin
+
+        print(f"  🔗 Trying og:image for {url}")
+
+        # Fetch the page HTML. We don't need the full page — head/meta tags
+        # are at the top, so a partial read of the first 256 KB is plenty
+        # and avoids waiting on slow asset loads.
+        req = urllib.request.Request(url, headers={
+            'User-Agent': _BROWSER_UA,
+            'Accept': 'text/html,application/xhtml+xml',
+            'Accept-Language': 'en-US,en;q=0.9',
+        })
+        try:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                final_url = resp.geturl()
+                html = resp.read(256 * 1024).decode('utf-8', errors='replace')
+        except urllib.error.HTTPError as e:
+            return False, f"og:image fetch HTTP {e.code}"
+        except Exception as e:
+            return False, f"og:image fetch error: {e}"
+
+        # Look for og:image first (Open Graph), then twitter:image as
+        # backup. We tolerate either property/name attribute ordering and
+        # either single or double quotes around values. Stop at the first
+        # match per tag to keep this cheap.
+        candidates = []
+        patterns = [
+            r'<meta[^>]+property=["\']og:image(?::secure_url)?["\'][^>]+content=["\']([^"\']+)["\']',
+            r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image(?::secure_url)?["\']',
+            r'<meta[^>]+name=["\']twitter:image(?::src)?["\'][^>]+content=["\']([^"\']+)["\']',
+            r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+name=["\']twitter:image(?::src)?["\']',
+        ]
+        for pat in patterns:
+            m = _re.search(pat, html, _re.IGNORECASE)
+            if m:
+                candidates.append(m.group(1))
+
+        if not candidates:
+            return False, "no og:image / twitter:image meta tag"
+
+        # Try each candidate in order — the first one that downloads as a
+        # real, non-trivial image wins.
+        for img_url in candidates:
+            # Resolve relative URLs (//cdn.example.com/foo.png, /foo.png)
+            # against the page's final URL (after redirects).
+            abs_url = urljoin(final_url, img_url.strip())
+            try:
+                img_req = urllib.request.Request(abs_url, headers={
+                    'User-Agent': _BROWSER_UA,
+                    'Accept': 'image/avif,image/webp,image/png,image/jpeg,image/*;q=0.8',
+                    'Referer': final_url,
+                })
+                with urllib.request.urlopen(img_req, timeout=15) as img_resp:
+                    ctype = (img_resp.headers.get('Content-Type') or '').lower()
+                    data = img_resp.read()
+            except Exception as e:
+                print(f"    ↳ candidate {abs_url} failed: {e}")
+                continue
+
+            if 'image/' not in ctype:
+                print(f"    ↳ candidate {abs_url} returned {ctype or 'unknown type'}")
+                continue
+            if len(data) < MIN_OG_IMAGE_BYTES:
+                print(f"    ↳ candidate {abs_url} too small ({len(data)} bytes)")
+                continue
+
+            # Pillow handles the format conversion — we write raw bytes
+            # here and let optimize_image() convert to JPEG + resize.
+            with open(output_path, 'wb') as f:
+                f.write(data)
+            return True, f"og:image captured from {abs_url} ({len(data) // 1024}KB)"
+
+        return False, "all og:image candidates were too small / wrong type"
+
+    except Exception as e:
+        return False, f"og:image error: {e}"
+
+
+# CSS that hides the cookie / consent banners that block the top half of
+# most vendor pages. We inject this before screenshot so the actual page
+# content shows through. Covers OneTrust, Cookiebot, Drupal cookie-notice,
+# Hubspot, and a catch-all for anything with "cookie"/"consent" in its id
+# or class. The `display: none !important` wins over the banner's own
+# fixed-position styling.
+_COOKIE_BANNER_HIDE_CSS = """
+#onetrust-banner-sdk, #onetrust-consent-sdk, #onetrust-pc-sdk,
+#CybotCookiebotDialog, #CybotCookiebotDialogBodyUnderlay,
+#cookie-notice, #cookie-banner, #cookie-law-info-bar,
+.cookie-banner, .cookie-notice, .cookie-consent, .cc-banner,
+.cc-window, .cookies-eu-banner, .gdpr-banner,
+[id*="cookie-banner" i], [id*="cookie-notice" i],
+[id*="cookie-consent" i], [id*="consent-banner" i],
+[class*="cookie-banner" i], [class*="cookie-notice" i],
+[class*="cookie-consent" i], [class*="consent-banner" i],
+[aria-label*="cookie" i], [aria-label*="consent" i] {
+    display: none !important;
+    visibility: hidden !important;
+}
+"""
+
+
 def capture_with_playwright(url, output_path):
     """Capture screenshot using Playwright (best quality)."""
     try:
@@ -106,18 +238,43 @@ def capture_with_playwright(url, output_path):
             browser = p.chromium.launch(headless=True)
             context = browser.new_context(
                 viewport={'width': 1280, 'height': 720},
-                user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+                user_agent=_BROWSER_UA,
             )
             page = context.new_page()
 
             # Set timeout
             page.set_default_timeout(SCREENSHOT_TIMEOUT * 1000)
 
-            # Navigate and wait for content
-            page.goto(url, wait_until='networkidle')
+            # Navigate. `domcontentloaded` returns as soon as the HTML is
+            # parsed — way more reliable than `networkidle`, which hangs
+            # on pages with WebSockets, analytics beacons, or other
+            # long-lived connections. We add an explicit settle delay
+            # below so JS still has time to render.
+            try:
+                page.goto(url, wait_until='domcontentloaded')
+            except Exception as e:
+                # If even DOMContentLoaded fails (e.g. ERR_TIMED_OUT on a
+                # really slow page), continue anyway — we may still have
+                # enough of the page to screenshot.
+                print(f"    ⚠️  navigation warning: {e}")
 
-            # Wait a bit for any JS to render
-            time.sleep(2)
+            # Let async JS render. Most cookie banners and hero sections
+            # finish first paint within ~3s.
+            time.sleep(3)
+
+            # Hide cookie / consent banners so they don't cover the
+            # screenshot. Best-effort — if injection fails, fall through.
+            try:
+                page.add_style_tag(content=_COOKIE_BANNER_HIDE_CSS)
+            except Exception:
+                pass
+
+            # Scroll to top in case any "back to top" rendering shifted
+            # the viewport, then take the screenshot.
+            try:
+                page.evaluate("window.scrollTo(0, 0)")
+            except Exception:
+                pass
 
             # Take screenshot
             page.screenshot(path=str(output_path), full_page=False)
@@ -343,8 +500,11 @@ def generate_preview(url, output_filename=None, force=False):
 
     print(f"  📁 Output: img/previews/{output_filename}")
 
-    # Try capture methods in order of preference
+    # Try capture methods in order of preference. og:image first because
+    # for resources that have one it's free, fast, and higher quality than
+    # a viewport screenshot. Playwright handles everything else.
     methods = [
+        capture_from_og_image,
         capture_with_playwright,
         capture_with_screenshot_api,
         # capture_with_screencapture,  # Skip manual method
