@@ -15,6 +15,16 @@
     <link rel="author" type="text/plain" href="/humans.txt">
     <meta name="theme-color" content="#2c3e50">
 
+    <!-- Opt out of browser-level "force dark mode" (Brave/Chrome's
+         force-dark flag, Edge's auto-dark, etc.). These features apply
+         an algorithmic color filter on top of our CSS, which turns
+         our intentional #f0f6fc title text into mid-grey and our
+         amber <mark> highlight into the unmodified Pagefind yellow.
+         Declaring `color-scheme: dark light` tells the browser this
+         page handles both themes natively, so it should leave the
+         rendered colors alone. -->
+    <meta name="color-scheme" content="dark light">
+
     <meta property="og:title" content="Search CSOH">
     <meta property="og:description" content="Full-text search across every page on Cloud Security Office Hours.">
     <meta property="og:type" content="website">
@@ -64,6 +74,10 @@
            looks cramped and the body text drops to ~13px. Setting it
            back to 1 gives the layout its intended breathing room. */
         :root {
+            /* CSS-level color-scheme declaration as belt-and-braces with
+               the <meta name="color-scheme"> in <head>. Both should opt
+               this page out of browser-level "force dark" filters. */
+            color-scheme: dark light;
             --pagefind-ui-scale: 1;
             --pagefind-ui-primary: #2c3e50;
             --pagefind-ui-text: #1a1f24;
@@ -113,8 +127,13 @@
            full text color makes the result heading the clear focal
            point of each card. */
         #pagefind-search .pagefind-ui__result-title .pagefind-ui__result-link {
-            color: var(--pagefind-ui-text);
-            font-weight: 700;
+            /* !important is heavy-handed but search results have been
+               rendering as mid-grey for at least one user even after
+               cache clears; pinning color here wins against any
+               in-page or browser-level color override we haven't
+               identified. */
+            color: var(--pagefind-ui-text) !important;
+            font-weight: 700 !important;
             font-size: 1.2rem;
             line-height: 1.35;
         }
@@ -125,11 +144,14 @@
            opacity, not a new color so it still works in both themes)
            gives a visual hierarchy without losing readability. */
         #pagefind-search .pagefind-ui__result-excerpt {
-            color: var(--pagefind-ui-text);
+            color: var(--pagefind-ui-text) !important;
             opacity: 0.78;
             line-height: 1.55;
             margin-top: 0.5rem;
             font-size: 0.95rem;
+        }
+        #pagefind-search .pagefind-ui__message {
+            color: var(--pagefind-ui-text) !important;
         }
 
         /* Brighten <mark> hits so search terms pop in both themes.
