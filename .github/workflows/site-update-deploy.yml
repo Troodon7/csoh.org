@@ -301,23 +301,34 @@ jobs:
           # -exec command (not `\+` because we want one-at-a-time output).
           find img/previews -name "*.jpg" -exec jpegoptim --strip-all --max=85 {} \;
 
+      # Always sync HTML <img src> paths to preview-mapping.json, even
+      # when no new previews were generated this run — past contributors
+      # (humans or the weekly Update Resources model) often type
+      # made-up filenames into the HTML that drift from what the
+      # screenshot generator actually writes to disk. This step is the
+      # safety net that keeps them aligned.
+      - name: Sync HTML preview paths to mapping
+        run: |
+          python3 tools/generate_preview.py --fix-html
+
       # Commit and push the new preview JPGs + the mapping file. We rely on
       # the credentials persisted by actions/checkout (which used the App
       # token) — same pattern as the SRI / sitemap / normalize steps above.
       # No need to embed the token in the remote URL.
       - name: Commit and push preview images
-        if: steps.check_previews.outputs.missing == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # `|| true` lets the step continue if there are no JPGs to add.
           git add img/previews/*.jpg || true
           git add preview-mapping.json || true
+          # Also pick up any HTML rewrites from the --fix-html step.
+          git add resources.html ctfs.html threat-research.html conferences.html cloud-security-reading-list.html || true
           # `git diff --cached --quiet` checks the staging area: nothing to
           # commit means we just exit cleanly.
           if git diff --cached --quiet; then
-            echo "No preview images to commit"
+            echo "No preview-related changes to commit"
           else
-            git commit -m "chore: auto-generate preview images for new resources [skip ci]"
+            git commit -m "chore: auto-generate preview images and sync HTML paths [skip ci]"
             git push || (git pull --rebase origin main && git push)
           fi

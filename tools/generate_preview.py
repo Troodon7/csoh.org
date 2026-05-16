@@ -544,6 +544,120 @@ def generate_preview(url, output_filename=None, force=False):
     relative_path = f"img/previews/{output_filename}"
     return True, relative_path, "Preview generated successfully"
 
+def fix_html_image_paths():
+    """Rewrite every card's <img src> in the catalog pages to match
+    preview-mapping.json.
+
+    Why this exists: contributors (including the weekly Update Resources
+    workflow's model) add new cards with `<img src="img/previews/foo.jpg">`
+    using whatever filename they happen to pick. The screenshot generator
+    derives its own filename from the URL via generate_filename_from_url()
+    and writes to that path — so the file on disk and the path the HTML
+    points to drift, leaving broken image references on the live site.
+
+    Using preview-mapping.json as the source of truth, this function walks
+    every resource card in the listed pages and rewrites its <img src>
+    to whatever the mapping says. Cards whose URL isn't in the mapping
+    yet are skipped (the screenshot step will populate them on a future
+    run, which then re-runs this).
+
+    Returns the count of cards rewritten.
+    """
+    import re
+
+    if not PREVIEW_MAPPING.exists():
+        print("⚠️  preview-mapping.json not found — nothing to rewrite.")
+        return 0
+
+    with open(PREVIEW_MAPPING, 'r', encoding='utf-8') as f:
+        mapping = json.load(f)
+
+    repo_root = Path(__file__).parent.parent
+    pages = [
+        repo_root / 'resources.html',
+        repo_root / 'ctfs.html',
+        repo_root / 'threat-research.html',
+        repo_root / 'conferences.html',
+        repo_root / 'cloud-security-reading-list.html',
+    ]
+
+    # Match a full resource-card block (anchor through the closing </a>)
+    # in either of the two layouts the site uses. The DOTALL flag lets `.`
+    # span newlines so the card body matches.
+    card_patterns = [
+        # Resources / CTFs / threat-research / conferences: card-link wraps
+        # the whole card and points to the external URL.
+        re.compile(
+            r'(<a\s+href="(?P<url>[^"]+)"[^>]*class="card-link"[^>]*>'
+            r'(?P<body>.*?)'
+            r'</a>)',
+            re.DOTALL,
+        ),
+        # Reading-list layout: <a> sits inside an <h3> inside .resource-card.
+        # The img is a sibling of the h3 within the same .resource-card.
+        re.compile(
+            r'(<div\s+class="resource-card"[^>]*>\s*'
+            r'<h3>\s*<a\s+href="(?P<url>[^"]+)"[^>]*>[^<]*</a>\s*</h3>'
+            r'(?P<body>.*?)'
+            r'</div>)',
+            re.DOTALL,
+        ),
+    ]
+
+    img_src_re = re.compile(r'(<img\b[^>]*\bsrc=")([^"]+)(")')
+
+    total_rewrites = 0
+    for page in pages:
+        if not page.exists():
+            continue
+        original = page.read_text(encoding='utf-8')
+        rewrites_this_page = 0
+
+        def rewrite_card(match, _mapping=mapping):
+            # `match` is the whole card block. We only want to touch the
+            # <img src> *inside* this card, not anywhere else on the page.
+            nonlocal rewrites_this_page
+            full = match.group(0)
+            url = match.group('url')
+            correct_path = _mapping.get(url)
+            if not correct_path:
+                # Not in the mapping yet — leave the card alone.
+                return full
+            # Some entries in the wild use a leading slash. Normalize to
+            # the same form the HTML uses (no leading slash, relative).
+            correct_path = correct_path.lstrip('/')
+
+            def swap_src(m):
+                nonlocal rewrites_this_page
+                old = m.group(2)
+                # Only rewrite if this is a preview image and the path is
+                # actually different — avoids gratuitous edits and skips
+                # things like the site logo if it ever appears in a card.
+                if 'img/previews/' not in old:
+                    return m.group(0)
+                if old.lstrip('/') == correct_path:
+                    return m.group(0)
+                rewrites_this_page += 1
+                return f'{m.group(1)}{correct_path}{m.group(3)}'
+
+            return img_src_re.sub(swap_src, full)
+
+        updated = original
+        for pat in card_patterns:
+            updated = pat.sub(rewrite_card, updated)
+
+        if updated != original:
+            page.write_text(updated, encoding='utf-8')
+            print(f"  ✏️  {page.name}: rewrote {rewrites_this_page} <img src> path(s)")
+            total_rewrites += rewrites_this_page
+
+    if total_rewrites == 0:
+        print("✅ All preview image paths already match preview-mapping.json")
+    else:
+        print(f"\n✅ Rewrote {total_rewrites} <img src> path(s) total")
+    return total_rewrites
+
+
 def extract_urls_from_resources_html():
     """Extract card-link URLs from pages that render preview images without good previews."""
     import re
@@ -591,7 +705,13 @@ def main():
         print("  python3 tools/generate_preview.py <url> [output_filename]")
         print("  python3 tools/generate_preview.py --check resources.html")
         print("  python3 tools/generate_preview.py --batch urls.txt")
+        print("  python3 tools/generate_preview.py --fix-html")
         return 1
+
+    if sys.argv[1] == '--fix-html':
+        print("🔧 Rewriting card <img src> paths to match preview-mapping.json")
+        fix_html_image_paths()
+        return 0
 
     if sys.argv[1] == '--check':
         print("🔍 Checking for resources without previews...")
