@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <meta name="description" content="Search across every page on Cloud Security Office Hours — guides, resources, news, CTFs, sessions, and more.">
+    <title>Search - Cloud Security Office Hours</title>
+
+    <link rel="canonical" href="https://csoh.org/search.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#2c3e50">
+
+    <meta property="og:title" content="Search CSOH">
+    <meta property="og:description" content="Full-text search across every page on Cloud Security Office Hours.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://csoh.org/search.html">
+    <meta property="og:image" content="https://csoh.org/img/og/index.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Search CSOH">
+    <meta name="twitter:description" content="Full-text search across every page on Cloud Security Office Hours.">
+    <meta name="twitter:image" content="https://csoh.org/img/og/index.jpg">
+
+    <link rel="preload" href="/style.css?v=81490698" as="style"
+        integrity="sha384-ULrcmaXRxf+GLip0yWUoKHAupnS46Bb35vCTSIyZGvjgvwwGo7ffSVFSyItMSda8">
+    <link rel="stylesheet" href="/style.css?v=81490698"
+        integrity="sha384-ULrcmaXRxf+GLip0yWUoKHAupnS46Bb35vCTSIyZGvjgvwwGo7ffSVFSyItMSda8">
+
+    <!-- Pagefind UI styles. Generated into /_pagefind/ by the build step
+         in .github/workflows/gcp-deploy.yml — `npx pagefind --site .`
+         runs against the static HTML right before the Docker image is
+         built. No SRI here because the file is rebuilt every deploy. -->
+    <link rel="stylesheet" href="/_pagefind/pagefind-ui.css">
+
+    <style>
+        /* Center the search widget and give it room to breathe. The
+           Pagefind UI sets its own internal widths; we just constrain
+           the outer container. */
+        .search-page-wrap {
+            max-width: 720px;
+            margin: 2rem auto 4rem;
+            padding: 0 1rem;
+        }
+        .search-page-wrap h1 {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .search-intro {
+            text-align: center;
+            color: var(--muted, #6c757d);
+            margin-bottom: 2rem;
+        }
+        /* Match Pagefind's accent to the site theme. */
+        :root {
+            --pagefind-ui-primary: #2c3e50;
+            --pagefind-ui-text: #2c3e50;
+            --pagefind-ui-background: #ffffff;
+            --pagefind-ui-border: #d0d7de;
+            --pagefind-ui-border-radius: 6px;
+            --pagefind-ui-border-width: 1px;
+            --pagefind-ui-font: inherit;
+        }
+        body.dark-mode {
+            --pagefind-ui-primary: #f8f9fa;
+            --pagefind-ui-text: #f8f9fa;
+            --pagefind-ui-background: #1f2933;
+            --pagefind-ui-border: #3a4654;
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Search CSOH",
+      "description": "Full-text search across every page on Cloud Security Office Hours.",
+      "url": "https://csoh.org/search.html",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Cloud Security Office Hours",
+        "url": "https://csoh.org/"
+      }
+    }
+    </script>
+    <noscript><style>.js-enabled header nav{display:block !important}</style></noscript>
+</head>
+
+<body class="js-enabled">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li class="has-dropdown has-mega">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                      <div class="dropdown-menu mega-menu mega-3col">
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Foundations</h4>
+                          <ul>
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Topics</h4>
+                          <ul>
+                            <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="containers.html">Containers</a></li>
+                            <li><a href="kubernetes.html">Kubernetes</a></li>
+                            <li><a href="serverless.html">Serverless</a></li>
+                            <li><a href="ci-cd.html">CI/CD</a></li>
+                            <li><a href="landing-zones.html">Landing Zones</a></li>
+                            <li><a href="grc.html">GRC</a></li>
+                            <li><a href="ai-learning.html">AI Learning</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Career &amp; Growth</h4>
+                          <ul>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+                            <li><a href="cloud-security-careers.html">Careers</a></li>
+                            <li><a href="cloud-security-reading-list.html">Reading List</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Threat Intel <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="threat-research.html">Threat Research</a></li>
+                        <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        <li><a href="cloud-soc.html">Cloud SOC</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown has-mega">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Community <span class="caret" aria-hidden="true">▾</span></button>
+                      <div class="dropdown-menu mega-menu mega-2col">
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Live</h4>
+                          <ul>
+                            <li><a href="sessions.html">Friday Zoom Sessions</a></li>
+                            <li><a href="community.html">Community &amp; Signal</a></li>
+                            <li><a href="conferences.html">Conferences</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Archive</h4>
+                          <ul>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">About <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="contribute.html">Contribute</a></li>
+                        <li><a href="contribute-resources.html">Add a Resource</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-cta-item"><a href="https://csoh.kit.com/39feb4f397" class="nav-cta" target="_blank" rel="noopener noreferrer">Join Friday Zoom →</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Search</span></li>
+        </ol>
+    </nav>
+
+    <main class="container" id="main-content">
+        <div class="search-page-wrap">
+            <h1>Search the site</h1>
+            <p class="search-intro">Full-text search across every page on csoh.org.</p>
+
+            <!-- Pagefind injects its search input, results list, and
+                 keyboard navigation into this container. -->
+            <div id="pagefind-search"></div>
+
+            <noscript>
+                <p style="text-align:center;margin-top:2rem;">Search requires JavaScript. With JS off, browse the site via the navigation at the top of the page.</p>
+            </noscript>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section footer-about">
+                <h3>CSOH</h3>
+                <p>A vendor-neutral community for cloud security professionals. Weekly Zoom sessions and curated resources.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="learning-path.html">Learning Path</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="sessions.html">Zoom Sessions</a></li>
+                    <li><a href="meetings.html">Meeting Recaps</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="mailto:admin@csoh.org">Contact</a></li>
+                    <li><a href="https://csoh.kit.com/39feb4f397" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+                    <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a href="rss.html">RSS Feed</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Developer Docs</h3>
+                <ul>
+                    <li><a href="github-actions.html">GitHub Actions</a></li>
+                    <li><a href="cloud-deployment.html">Deploy to GCP</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023-2026 Cloud Security Office Hours</p>
+            <ul class="footer-legal">
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="code-of-conduct.html">Code of Conduct</a></li>
+                <li><a href="security-policy.html">Security</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Pagefind UI loader. SRI deliberately omitted: the file is
+         regenerated on every deploy by `npx pagefind`, so a checksum
+         would have to be patched in afterward by the update-sri step
+         and would just churn. The script is self-hosted on csoh.org
+         so the integrity story rests on TLS + our own origin. -->
+    <script src="/_pagefind/pagefind-ui.js"></script>
+    <script>
+        // Initialize the search UI once the DOM is ready. The element
+        // selector matches the <div id="pagefind-search"> in <main>.
+        window.addEventListener('DOMContentLoaded', function () {
+            if (typeof PagefindUI !== 'undefined') {
+                new PagefindUI({
+                    element: '#pagefind-search',
+                    showSubResults: true,
+                    showImages: false,
+                    resetStyles: false,
+                });
+                // Auto-focus the search box so the page is keyboard-ready.
+                var input = document.querySelector('#pagefind-search input');
+                if (input) input.focus();
+            }
+        });
+    </script>
+
+    <script src="/main.js?v=b517f39d" integrity="sha384-8/1Y6zmSmGcKtdeoSJDd4JadBZUwI1F4M7uqeUVQt8uwrLkszhyRCqoPGfhKfKA7" defer></script>
+</body>
+
+</html>

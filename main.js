@@ -53,6 +53,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initDropdownNav();
 
+    // Site-wide search affordance. Adding a search link directly to every
+    // page's hardcoded <nav> would require touching ~30 HTML files; instead
+    // we inject one <li> into the top-level nav ul at runtime. The actual
+    // search UI lives at /search.html (Pagefind-backed).
+    injectSearchLink();
+
     // Add accessible label for search input
     if (domCache.searchInput && !document.querySelector('label[for="searchInput"]')) {
         const label = document.createElement('label');
@@ -885,6 +891,45 @@ function initTooltips() {
         tooltip.setAttribute('aria-hidden', 'true');
         card.removeAttribute('aria-describedby');
     });
+}
+
+// Add a site-wide "Search" link to the top-level header nav. Runs on every
+// page that loads main.js — saves us from editing the hardcoded <nav> in
+// ~30 HTML files. The link points at /search.html, where the Pagefind UI
+// renders. Idempotent: if a search link already exists in the markup (e.g.
+// search.html itself adds one statically in the future), the function does
+// nothing.
+function injectSearchLink() {
+    const navUl = document.querySelector('header nav > ul');
+    if (!navUl) return;
+    if (navUl.querySelector('.nav-search-item')) return;
+
+    const li = document.createElement('li');
+    li.className = 'nav-search-item';
+
+    const a = document.createElement('a');
+    a.href = '/search.html';
+    a.className = 'nav-search-link';
+    a.setAttribute('aria-label', 'Search the site');
+    // Magnifying glass + visible "Search" label so the affordance reads
+    // clearly on both desktop and the mobile hamburger menu. The wrapping
+    // span lets CSS shorten / hide the text on tight viewports later.
+    a.innerHTML = '<span aria-hidden="true">🔍</span> <span class="nav-search-text">Search</span>';
+
+    // If the current page IS /search.html, mark the link as the current page
+    // so it gets the same styling as other active nav items.
+    if (location.pathname.replace(/^\/+/, '').toLowerCase() === 'search.html') {
+        a.setAttribute('aria-current', 'page');
+    }
+
+    li.appendChild(a);
+
+    // Insert before the CTA item (Join Friday Zoom) so it lives in the
+    // primary nav region, not after the call-to-action. Fall back to
+    // appending if the CTA isn't on this page.
+    const cta = navUl.querySelector('.nav-cta-item');
+    if (cta) navUl.insertBefore(li, cta);
+    else navUl.appendChild(li);
 }
 
 function initDropdownNav() {
