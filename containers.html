@@ -303,10 +303,10 @@
             <g>
               <rect x="130" y="410" width="160" height="50" rx="8" fill="#0f172a" stroke="#fb7185" stroke-width="1.5"/>
               <text x="210" y="430" text-anchor="middle" fill="#fb7185" font-size="11" font-weight="700">169.254.169.254</text>
-              <text x="210" y="448" text-anchor="middle" fill="#e2e8f0" font-size="10">IMDS — host credentials</text>
+              <text x="210" y="448" text-anchor="middle" fill="#e2e8f0" font-size="10"><a class="glossary-link" href="glossary.html#term-imds">IMDS</a> — host credentials</text>
               <rect x="320" y="410" width="160" height="50" rx="8" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>
-              <text x="400" y="430" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="700">Workload identity</text>
-              <text x="400" y="448" text-anchor="middle" fill="#e2e8f0" font-size="10">per-pod credentials</text>
+              <text x="400" y="430" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="700"><a class="glossary-link" href="glossary.html#term-service-account">Workload identity</a></text>
+              <text x="400" y="448" text-anchor="middle" fill="#e2e8f0" font-size="10">per-<a class="glossary-link" href="glossary.html#term-pod">pod</a> credentials</text>
             </g>
             <path d="M 165,320 L 200,408" stroke="#fb7185" stroke-width="1.2" stroke-dasharray="3 3" fill="none" opacity="0.6"/>
           </svg>
@@ -327,7 +327,7 @@
         <p class="page-meta"><time datetime="2026-05-15">Last updated <strong>2026-05-15</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/containers.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
 
         <div class="info-box--blue">
-            <p><strong>The 30-second version:</strong> A <strong>container</strong> is a Linux process (or set of processes) isolated by <em>namespaces</em> and <em>cgroups</em>, packaged with its dependencies into an immutable image. Multiple containers share <em>one host kernel</em> — so the boundary is real but thin. In the cloud, containers run on a VM whose <a class="glossary-link" href="glossary.html#term-imds">instance metadata service</a> hands out the VM's IAM credentials. A compromised container that can reach IMDS gets the whole VM's cloud permissions.</p>
+            <p><strong>The 30-second version:</strong> A <strong>container</strong> is a Linux process (or set of processes) isolated by <em>namespaces</em> and <em>cgroups</em>, packaged with its dependencies into an immutable image. Multiple containers share <em>one host kernel</em> — so the boundary is real but thin. In the cloud, containers run on a VM whose instance metadata service hands out the VM's <a class="glossary-link" href="glossary.html#term-iam">IAM</a> credentials. A compromised container that can reach IMDS gets the whole VM's cloud permissions.</p>
             <p style="margin-top:0.75rem;">That's the dominant cloud-container risk: <strong>identity chaining</strong> — pivoting from "code execution in one container" to "the cloud role attached to the VM." Add container escapes via privileged flags or kernel CVEs, flat pod-to-pod networking, and pulled-from-public-internet base images, and you have the full container-security surface in the cloud.</p>
         </div>
 
@@ -360,7 +360,7 @@
                 <li><strong>Cgroups (control groups)</strong> — kernel mechanism for capping CPU, memory, I/O, and PID counts per group of processes. The container can't starve the host, can't fork-bomb the system, can't allocate more memory than its limit.</li>
                 <li><strong>An image</strong> — a tarball containing the filesystem the process sees, plus a manifest describing how to run it. Built once, shipped to a registry, pulled to any host, run identically.</li>
             </ol>
-            <p>That's the entire abstraction. There is no "container kernel" — the host's kernel runs every container's code. There is no hypervisor — containers are not VMs. They start in milliseconds because they're just processes; the only thing being created is the namespace and cgroup wiring around an exec.</p>
+            <p>That's the entire abstraction. There is no "container kernel" — the host's kernel runs every container's code. There is no <a class="glossary-link" href="glossary.html#term-hypervisor">hypervisor</a> — containers are not VMs. They start in milliseconds because they're just processes; the only thing being created is the namespace and cgroup wiring around an exec.</p>
             <p>Container runtimes (containerd, CRI-O, Docker Engine, runc underneath) automate the namespace setup and image management. The Open Container Initiative (<a href="https://opencontainers.org/" target="_blank" rel="noopener noreferrer">OCI</a>) standardizes the image format and runtime API so the same image runs on any conformant runtime.</p>
         </section>
 
@@ -371,24 +371,24 @@
                 <li><strong>Sub-second startup.</strong> A VM takes 30–90 seconds to boot. A container takes 50ms. When traffic spikes 10x, only containers scale in time.</li>
                 <li><strong>Density.</strong> Hundreds of containers fit on a VM that would host one or two VMs. Cloud compute is billed by the VM; density translates directly to cost.</li>
                 <li><strong>Immutable artifacts.</strong> The image is content-addressed. The same image hash that ran in staging runs in prod — no "works on my machine," no config drift.</li>
-                <li><strong>One artifact across clouds.</strong> An OCI image runs on EKS, AKS, GKE, ECS, Cloud Run, Container Apps, App Runner, Lambda (with caveats). The portability argument matters when you have to leave one cloud.</li>
+                <li><strong>One artifact across clouds.</strong> An OCI image runs on <a class="glossary-link" href="glossary.html#term-eks">EKS</a>, AKS, GKE, ECS, <a class="glossary-link" href="glossary.html#term-lambda">Cloud Run</a>, Container Apps, App Runner, Lambda (with caveats). The portability argument matters when you have to leave one cloud.</li>
                 <li><strong>Operability.</strong> Health checks, log shipping, metrics, auto-restart on crash — the container runtime gives you these for free, regardless of language.</li>
             </ul>
-            <p>The cost of that efficiency, from a security standpoint, is a shared kernel and a shared network namespace on the host. Both become attack surface when the threat model is "untrusted code in a container" instead of "trusted code on a VM."</p>
+            <p>The cost of that efficiency, from a security standpoint, is a shared kernel and a shared network namespace on the host. Both become <a class="glossary-link" href="glossary.html#term-attack-surface">attack surface</a> when the threat model is "untrusted code in a container" instead of "trusted code on a VM."</p>
         </section>
 
         <section id="boundary">
             <h2>The boundary — is a container a security boundary?</h2>
-            <p>It is not. Or more precisely: a container is a <em>process-isolation</em> boundary, not a <em>tenant-isolation</em> boundary. The difference matters.</p>
+            <p>It is not. Or more precisely: a container is a <em>process-isolation</em> boundary, not a <em><a class="glossary-link" href="glossary.html#term-tenant">tenant</a>-isolation</em> boundary. The difference matters.</p>
             <p>If you run two of <em>your own</em> microservices in two containers on the same VM, the isolation is fine for most purposes — the kernel keeps their namespaces separate, cgroups keep one from starving the other. That's process isolation. It works.</p>
-            <p>If you run two <em>different customers'</em> code in two containers on the same VM, the isolation is not fine. A kernel CVE affects both. A misconfigured capability on one container can let it inspect or modify the other. A noisy-neighbor exploit (Spectre, Foreshadow) can leak data across the shared CPU cache. That's a tenant boundary, and the container abstraction was not designed for it.</p>
+            <p>If you run two <em>different customers'</em> code in two containers on the same VM, the isolation is not fine. A kernel <a class="glossary-link" href="glossary.html#term-cve">CVE</a> affects both. A misconfigured capability on one container can let it inspect or modify the other. A noisy-neighbor exploit (Spectre, Foreshadow) can leak data across the shared CPU cache. That's a tenant boundary, and the container abstraction was not designed for it.</p>
             <p>The cloud providers know this. That's why <a href="https://aws.amazon.com/fargate/" target="_blank" rel="noopener noreferrer">AWS Fargate</a>, <a href="https://learn.microsoft.com/en-us/azure/container-apps/" target="_blank" rel="noopener noreferrer">Azure Container Apps</a>, <a href="https://cloud.google.com/run" target="_blank" rel="noopener noreferrer">Cloud Run</a>, and similar managed services run each workload in its own micro-VM (<a href="https://firecracker-microvm.github.io/" target="_blank" rel="noopener noreferrer">Firecracker</a> or equivalent). The container API is preserved; the actual isolation is at the VM level, where the hypervisor is the boundary.</p>
             <p>If you self-host on EKS / AKS / GKE / vanilla VMs, you control where containers land. If two workloads should not share a kernel — different trust levels, customer multi-tenancy, regulated data — use sandbox runtimes (<a href="https://gvisor.dev/" target="_blank" rel="noopener noreferrer">gVisor</a>, <a href="https://katacontainers.io/" target="_blank" rel="noopener noreferrer">Kata Containers</a>) or pin them to different node pools. The platform won't do this for you.</p>
         </section>
 
         <section id="risks">
             <h2>The six risk categories that matter</h2>
-            <p>Container security in the cloud collapses into six recurring categories. The names differ across vendors; the threats don't.</p>
+            <p><a class="glossary-link" href="glossary.html#term-container-security">Container security</a> in the cloud collapses into six recurring categories. The names differ across vendors; the threats don't.</p>
             <div class="pillar-grid">
                 <div class="pillar-card pillar-card-iam">
                     <h3>1. Container escape</h3>
@@ -421,7 +421,7 @@
             <h2>Container escapes — the real paths</h2>
             <p>"Container escape" sounds exotic. In practice it's a small number of well-known paths, almost always opened by configuration choices the user made.</p>
             <h3>The privileged container</h3>
-            <p>Running with <code>--privileged</code> (or <code>securityContext.privileged: true</code> in Kubernetes) disables almost every isolation feature the runtime adds. The container has all Linux capabilities, including <code>CAP_SYS_ADMIN</code>; sees all devices; can mount filesystems; can load kernel modules. From a privileged container, getting host root is a single <code>chroot</code> away. <a href="https://blog.trailofbits.com/2019/07/19/understanding-docker-container-escapes/" target="_blank" rel="noopener noreferrer">Trail of Bits has the canonical write-up</a>.</p>
+            <p>Running with <code>--privileged</code> (or <code>securityContext.privileged: true</code> in <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a>) disables almost every isolation feature the runtime adds. The container has all Linux capabilities, including <code>CAP_SYS_ADMIN</code>; sees all devices; can mount filesystems; can load kernel modules. From a privileged container, getting host root is a single <code>chroot</code> away. <a href="https://blog.trailofbits.com/2019/07/19/understanding-docker-container-escapes/" target="_blank" rel="noopener noreferrer">Trail of Bits has the canonical write-up</a>.</p>
             <h3>Sensitive capabilities without --privileged</h3>
             <p>Even without the privileged flag, specific capabilities are dangerous: <code>CAP_SYS_ADMIN</code>, <code>CAP_SYS_PTRACE</code>, <code>CAP_SYS_MODULE</code>, <code>CAP_NET_ADMIN</code>, <code>CAP_DAC_READ_SEARCH</code>. Drop all capabilities by default and add back only what the workload needs.</p>
             <h3>HostPath / hostPID / hostNetwork / hostIPC</h3>
@@ -429,7 +429,7 @@
             <h3>Kernel CVEs</h3>
             <p>Because the host kernel is shared, a kernel vulnerability is a container-escape vulnerability. Notable examples: <a href="https://nvd.nist.gov/vuln/detail/CVE-2022-0492" target="_blank" rel="noopener noreferrer">CVE-2022-0492</a> (cgroups v1 release_agent), <a href="https://nvd.nist.gov/vuln/detail/CVE-2022-0185" target="_blank" rel="noopener noreferrer">CVE-2022-0185</a> (filesystem context heap overflow), <a href="https://www.snyk.io/research/leaky-vessels-docker-runc-container-breakout-vulnerabilities" target="_blank" rel="noopener noreferrer">Leaky Vessels</a> (runc / Docker, 2024), Dirty Pipe. The defense is keeping host kernels patched — which on managed services is the cloud's job, on self-managed nodes is yours.</p>
             <h3>Misconfigured docker.sock</h3>
-            <p>A container that can talk to <code>/var/run/docker.sock</code> can ask the daemon to start a new container — privileged, with the host root mounted. Used in numerous public breaches (Tesla 2018, various crypto-jacking incidents). Never mount the docker socket into anything other than CI/admin tooling, and even then, isolate.</p>
+            <p>A container that can talk to <code>/var/run/docker.sock</code> can ask the daemon to start a new container — privileged, with the host root mounted. Used in numerous public breaches (Tesla 2018, various crypto-jacking incidents). Never mount the docker socket into anything other than <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a>/admin tooling, and even then, isolate.</p>
             <h3>Defense in layers</h3>
             <ul>
                 <li><strong>Run as non-root.</strong> <code>USER 1000</code> in the Dockerfile; <code>runAsNonRoot: true</code> in the pod spec. Root inside a container is one CVE away from root on the host.</li>
@@ -445,11 +445,11 @@
             <h2>Identity chaining — IMDS and stolen cloud roles</h2>
             <p>This is the cloud-specific container risk. Every cloud VM has an Instance Metadata Service at the link-local address 169.254.169.254 (or fd00:ec2::254 on AWS IPv6, similar paths on Azure and GCP). The metadata service hands out, among other things, the IAM credentials of the role attached to the VM.</p>
             <p>By default, containers running on the VM share its network namespace — they can reach 169.254.169.254. A compromised container with code execution can run <code>curl http://169.254.169.254/...</code> and walk away with the VM's full cloud permissions. That's identity chaining: <em>workload compromise → host compromise → cloud compromise</em>, in one hop.</p>
-            <p>This is exactly the Capital One breach pattern (see the <a href="breaches/capital-one.html">Capital One kill chain</a>) — except instead of an SSRF in a WAF, the entry point is whatever runs in your container.</p>
+            <p>This is exactly the Capital One breach pattern (see the <a href="breaches/capital-one.html">Capital One kill chain</a>) — except instead of an <a class="glossary-link" href="glossary.html#term-ssrf">SSRF</a> in a <a class="glossary-link" href="glossary.html#term-waf">WAF</a>, the entry point is whatever runs in your container.</p>
             <h3>The fix has two parts</h3>
             <p><strong>1. Per-workload identity, not per-host.</strong> Every cloud now offers a way to give an individual workload (pod, container, function) its own short-lived cloud credentials, scoped to that workload only:</p>
             <ul>
-                <li>AWS — <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html" target="_blank" rel="noopener noreferrer">IAM Roles for Service Accounts (IRSA)</a> on EKS, <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html" target="_blank" rel="noopener noreferrer">EKS Pod Identity</a>, task roles on ECS, function roles on Lambda.</li>
+                <li>AWS — <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html" target="_blank" rel="noopener noreferrer">IAM Roles for Service Accounts (IRSA)</a> on EKS, <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html" target="_blank" rel="noopener noreferrer">EKS Pod Identity</a>, task roles on <a class="glossary-link" href="glossary.html#term-ecs">ECS</a>, function roles on Lambda.</li>
                 <li>Azure — <a href="https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview" target="_blank" rel="noopener noreferrer">Workload Identity</a> on AKS (federated to Entra), managed identity per Container Apps revision.</li>
                 <li>GCP — <a href="https://docs.cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank" rel="noopener noreferrer">Workload Identity Federation</a> on GKE, per-revision service account on Cloud Run.</li>
             </ul>
@@ -457,7 +457,7 @@
             <p><strong>2. Block IMDS from containers entirely.</strong> Belt-and-suspenders: even with workload identity in place, the host's IMDS shouldn't be reachable from containers.</p>
             <ul>
                 <li>AWS — enforce IMDSv2 with hop-limit 1 (<code>HttpPutResponseHopLimit: 1</code>). Containers, which have at least one network hop, can't reach the metadata service through the host's interface.</li>
-                <li>Azure — block 169.254.169.254 at the iptables / network policy layer on the host.</li>
+                <li>Azure — block 169.254.169.254 at the iptables / <a class="glossary-link" href="glossary.html#term-network-policy">network policy</a> layer on the host.</li>
                 <li>GCP — workload identity already breaks this path; metadata server endpoints have additional <code>Metadata-Flavor: Google</code> header enforcement.</li>
             </ul>
             <p>If your container framework is "the VM has a god role and every container uses it" — that's the legacy pattern. Move every workload to per-pod / per-task / per-function identity. Block IMDS from containers as a hard rule.</p>
@@ -469,15 +469,15 @@
             <ul>
                 <li>Any container can open a TCP connection to any other container in the same network.</li>
                 <li>Any container can reach the host's IP and any port the host exposes.</li>
-                <li>Egress to the public internet is unrestricted.</li>
+                <li><a class="glossary-link" href="glossary.html#term-ingress">Egress</a> to the public internet is unrestricted.</li>
                 <li>DNS resolution can be used to enumerate internal services and other tenants.</li>
             </ul>
             <p>That means a single compromised container is a scanner. It probes for accessible internal services, vulnerable management endpoints (Redis with no auth, Elasticsearch open to <code>0.0.0.0</code>, a CI agent listening on the cluster network), and the cloud control plane (IMDS being the prime target).</p>
             <h3>What containment looks like</h3>
             <ul>
                 <li><strong>Network policies.</strong> On Kubernetes, <a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/" target="_blank" rel="noopener noreferrer">NetworkPolicy</a> resources define allowed ingress/egress per pod. Default-deny in production namespaces, then explicitly allow what's needed.</li>
-                <li><strong>Service mesh.</strong> Istio, Linkerd, Cilium, Consul — mTLS between services, identity-based authorization, traffic-flow telemetry. Brings the "every connection is authenticated" zero-trust model down to the pod level.</li>
-                <li><strong>Egress controls.</strong> Restrict outbound to a curated allow-list (your package registries, your dependencies, your APIs). Egress proxies (Cilium's L7 policies, NAT gateways with allow-list rules, service mesh egress gateways) make this practical.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-service-mesh">Service mesh</a>.</strong> Istio, Linkerd, Cilium, Consul — <a class="glossary-link" href="glossary.html#term-mtls">mTLS</a> between services, identity-based authorization, traffic-flow telemetry. Brings the "every connection is authenticated" zero-trust model down to the pod level.</li>
+                <li><strong>Egress controls.</strong> Restrict outbound to a curated allow-list (your package registries, your dependencies, your APIs). Egress proxies (Cilium's L7 policies, <a class="glossary-link" href="glossary.html#term-nat">NAT</a> gateways with allow-list rules, service mesh egress gateways) make this practical.</li>
                 <li><strong>No direct external exposure.</strong> Containers behind a load balancer, ingress, or API gateway — never with a public IP directly on the pod.</li>
                 <li><strong>Block link-local addresses.</strong> Drop traffic to 169.254.0.0/16 from containers unless explicitly required.</li>
             </ul>
@@ -488,19 +488,19 @@
             <h2>Supply chain — images, registries, signing</h2>
             <p>The container image is the artifact that ships to every environment. Compromising it compromises every deploy. The supply chain risks layer up:</p>
             <ul>
-                <li><strong>Public base images.</strong> Pulling <code>FROM ubuntu:latest</code> means inheriting whatever's in that image — including unpatched CVEs, packages you don't need, and a writable root. Pinning to a digest (<code>FROM ubuntu@sha256:...</code>) at least makes the input deterministic; switching to a <strong>distroless</strong> or minimal base (Distroless, Wolfi, Chainguard, Alpine when libc-compatible) shrinks attack surface dramatically.</li>
-                <li><strong>Public dependency repositories.</strong> npm, PyPI, RubyGems, Maven Central, NuGet, Go modules. All have been the source of typosquats, dependency confusion attacks, and account takeovers that injected malicious code. Lockfiles + vulnerability scanning + private mirrors are the standard mitigations.</li>
+                <li><strong>Public base images.</strong> Pulling <code>FROM ubuntu:latest</code> means inheriting whatever's in that image — including unpatched CVEs, packages you don't need, and a writable root. <a class="glossary-link" href="glossary.html#term-pinning">Pinning</a> to a digest (<code>FROM ubuntu@sha256:...</code>) at least makes the input deterministic; switching to a <strong>distroless</strong> or minimal base (Distroless, Wolfi, Chainguard, Alpine when libc-compatible) shrinks attack surface dramatically.</li>
+                <li><strong>Public dependency repositories.</strong> <a class="glossary-link" href="glossary.html#term-npm">npm</a>, <a class="glossary-link" href="glossary.html#term-pypi">PyPI</a>, RubyGems, Maven Central, NuGet, Go modules. All have been the source of typosquats, <a class="glossary-link" href="glossary.html#term-dependency-confusion">dependency confusion</a> attacks, and account takeovers that injected malicious code. Lockfiles + vulnerability scanning + private mirrors are the standard mitigations.</li>
                 <li><strong>Layer cache poisoning.</strong> Build caches in CI/CD shared across jobs can leak credentials and let one job's layer poison another's image.</li>
                 <li><strong>Registry compromise.</strong> If anyone can push to your image registry, anyone can replace prod images. Lock down registry write access to your CI pipeline; require signed images.</li>
                 <li><strong>Long-running images.</strong> The image you built six months ago still has six-month-old CVEs. Rebuild on a schedule even when the source hasn't changed, so base-image patches flow through.</li>
             </ul>
             <h3>What good looks like</h3>
             <ul>
-                <li><strong>Scan every image at build and push time</strong> — Trivy, Grype, Snyk, Wiz, the cloud's native scanner (ECR scanning, Defender for Cloud, Artifact Registry vulnerability scanning). Fail the build on HIGH/CRITICAL.</li>
-                <li><strong>Sign every image</strong> — Cosign / Sigstore. Push signature attestations to the registry.</li>
+                <li><strong>Scan every image at build and push time</strong> — Trivy, Grype, Snyk, Wiz, the cloud's native scanner (ECR scanning, <a class="glossary-link" href="glossary.html#term-guardduty">Defender for Cloud</a>, Artifact Registry vulnerability scanning). Fail the build on HIGH/CRITICAL.</li>
+                <li><strong>Sign every image</strong> — <a class="glossary-link" href="glossary.html#term-sigstore">Cosign</a> / Sigstore. Push signature attestations to the registry.</li>
                 <li><strong>Verify at deploy time</strong> — admission controllers reject unsigned images. AWS Signer + Kyverno on EKS; Binary Authorization on GKE; Defender admission control on AKS.</li>
-                <li><strong>Generate and store SBOMs</strong> — Syft, the cloud's SBOM tools. When the next big CVE drops, you query the SBOM database instead of running through your fleet image-by-image.</li>
-                <li><strong>SLSA provenance</strong> — emit attestations describing which builder built the image from which source. Reject images without provenance in prod.</li>
+                <li><strong>Generate and store SBOMs</strong> — Syft, the cloud's <a class="glossary-link" href="glossary.html#term-sbom">SBOM</a> tools. When the next big CVE drops, you query the SBOM database instead of running through your fleet image-by-image.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-slsa">SLSA</a> <a class="glossary-link" href="glossary.html#term-provenance">provenance</a></strong> — emit attestations describing which builder built the image from which source. Reject images without provenance in prod.</li>
             </ul>
             <p>The pipeline that builds the image is part of the supply chain. See the <a href="ci-cd.html">CI/CD page</a> for how to lock that down.</p>
         </section>
@@ -524,7 +524,7 @@
                 </div>
                 <div class="pillar-card pillar-card-detect">
                     <h3><a href="https://www.wiz.io/" target="_blank" rel="noopener noreferrer">Wiz</a> secured images</h3>
-                    <p>Wiz ships hardened base images bundled with their CNAPP — minimal, signed, scanned in the same plane as the runtime workloads they observe. Differentiator is the closed loop: the image, the registry scan, and the production-runtime detection are all in one product.</p>
+                    <p>Wiz ships hardened base images bundled with their <a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a> — minimal, signed, scanned in the same plane as the runtime workloads they observe. Differentiator is the closed loop: the image, the registry scan, and the production-runtime detection are all in one product.</p>
                 </div>
                 <div class="pillar-card pillar-card-posture">
                     <h3><a href="https://www.rapidfort.com/" target="_blank" rel="noopener noreferrer">RapidFort</a></h3>
@@ -551,7 +551,7 @@
                 <li><strong>Normalizes signing &amp; provenance.</strong> Every serious minimal-image provider ships Sigstore signatures and SLSA provenance attestations. Adoption of those primitives in downstream pipelines (Binary Authorization, Kyverno verify-image rules) is partly being pulled by these vendors making them table stakes.</li>
                 <li><strong>Pressures distro maintainers.</strong> The rise of Wolfi, Distroless, and Chainguard has visibly accelerated Alpine, Ubuntu Minimal, and Debian's own rebuild and SBOM efforts. The "we always lagged on CVEs" defense doesn't hold when there's a CVE-free alternative on Docker Hub.</li>
                 <li><strong>Shrinks the average attack surface in production.</strong> An ecosystem where most production containers carry no shell and no package manager is one where post-exploitation tooling has to be staged in (and that staging is itself detectable). Even partial adoption pulls the median attacker's job harder.</li>
-                <li><strong>Better signal for runtime detection.</strong> Falco / Tetragon / CNAPP-runtime rules generate fewer false positives against a minimal image — there's no legitimate reason for <code>/bin/sh</code> to execute if the image doesn't contain it. The alerts become high-signal because the baseline is so quiet.</li>
+                <li><strong>Better signal for runtime detection.</strong> <a class="glossary-link" href="glossary.html#term-falco">Falco</a> / <a class="glossary-link" href="glossary.html#term-tetragon">Tetragon</a> / CNAPP-runtime rules generate fewer false positives against a minimal image — there's no legitimate reason for <code>/bin/sh</code> to execute if the image doesn't contain it. The alerts become high-signal because the baseline is so quiet.</li>
             </ul>
 
             <h3>How to actually adopt one</h3>
@@ -559,22 +559,22 @@
                 <li><strong>Start with new workloads.</strong> Retrofitting <code>FROM ubuntu</code> images often surfaces accidental dependencies on system binaries. Greenfield workloads adopt minimal bases with near-zero friction.</li>
                 <li><strong>Use multi-stage builds.</strong> Build with a full toolchain image; copy the artifact into the minimal final stage. The fat image never reaches production; the published image carries only the runtime.</li>
                 <li><strong>Pin to digests.</strong> Minimal-image vendors push new digests daily — that's the feature. Pin <code>image@sha256:...</code> in your manifests and let your dependency-update bot (Dependabot, Renovate) bump them in PR.</li>
-                <li><strong>Plan for the missing shell.</strong> Debugging a distroless container in prod requires <code>kubectl debug</code> with an ephemeral debug container, or sidecar tooling. Train the team on this before the incident.</li>
+                <li><strong>Plan for the missing shell.</strong> Debugging a distroless container in prod requires <code>kubectl debug</code> with an ephemeral debug container, or <a class="glossary-link" href="glossary.html#term-sidecar">sidecar</a> tooling. Train the team on this before the incident.</li>
                 <li><strong>Verify signatures at admission.</strong> See the <a href="#supply-chain">supply-chain</a> section. Pulling Chainguard or Minimus is half the value; <em>enforcing</em> that only their signed digests can run in prod is the other half.</li>
             </ul>
-            <p>None of this replaces the rest of the container hardening list — non-root user, dropped capabilities, read-only root filesystem, network policy, workload identity. It removes a whole category of base-image vulnerabilities <em>before</em> the rest of the hardening even applies.</p>
+            <p>None of this replaces the rest of the container <a class="glossary-link" href="glossary.html#term-hardening">hardening</a> list — non-root user, dropped capabilities, read-only root filesystem, network policy, workload identity. It removes a whole category of base-image vulnerabilities <em>before</em> the rest of the hardening even applies.</p>
         </section>
 
         <section id="runtime">
             <h2>Runtime detection</h2>
-            <p>Scanning catches what's in the image. Network policy controls what can talk. Neither tells you when a process inside a running container does something unusual — a shell spawning from a web server, an unexpected outbound connection, a credential-file read, a privilege escalation attempt.</p>
-            <p>Runtime detection closes that gap. The dominant approach is <strong>eBPF</strong>-based syscall instrumentation:</p>
+            <p>Scanning catches what's in the image. Network policy controls what can talk. Neither tells you when a process inside a running container does something unusual — a shell spawning from a web server, an unexpected outbound connection, a credential-file read, a <a class="glossary-link" href="glossary.html#term-privilege-escalation">privilege escalation</a> attempt.</p>
+            <p>Runtime detection closes that gap. The dominant approach is <strong><a class="glossary-link" href="glossary.html#term-ebpf">eBPF</a></strong>-based syscall instrumentation:</p>
             <ul>
-                <li><a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a> — CNCF project, the de facto open-source runtime-security engine. Rule-based detection on syscalls, container metadata, and Kubernetes audit logs.</li>
+                <li><a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a> — <a class="glossary-link" href="glossary.html#term-cncf">CNCF</a> project, the de facto open-source runtime-security engine. Rule-based detection on syscalls, container metadata, and Kubernetes audit logs.</li>
                 <li><a href="https://tetragon.io/" target="_blank" rel="noopener noreferrer">Tetragon</a> — from Isovalent/Cilium, eBPF runtime enforcement (can <em>block</em>, not just alert).</li>
-                <li><strong>CNAPP runtime modules</strong> — Wiz, Aqua, Sysdig, CrowdStrike, Defender for Containers. Same idea, packaged as managed agents with SaaS analytics.</li>
+                <li><strong>CNAPP runtime modules</strong> — Wiz, Aqua, Sysdig, CrowdStrike, Defender for Containers. Same idea, packaged as managed agents with <a class="glossary-link" href="glossary.html#term-saas">SaaS</a> analytics.</li>
             </ul>
-            <p>What runtime detection catches: shell spawns inside production containers, processes writing to <code>/etc/shadow</code>, network connections to known C2 infrastructure, capability escalation, attempts to access <code>/proc/1/root</code>, anomalous outbound DNS. The signal is high; tuning the rules to fit your normal workload behavior is the work.</p>
+            <p>What runtime detection catches: shell spawns inside production containers, processes writing to <code>/etc/shadow</code>, network connections to known <a class="glossary-link" href="glossary.html#term-c2">C2</a> infrastructure, capability escalation, attempts to access <code>/proc/1/root</code>, anomalous outbound DNS. The signal is high; tuning the rules to fit your normal workload behavior is the work.</p>
             <p>If you don't have runtime visibility, the answer to "did anything weird run in our containers last month?" is "we don't know."</p>
         </section>
 
@@ -588,7 +588,7 @@
 
         <section id="comparison">
             <h2>AWS, Azure, and GCP container services</h2>
-            <p>Every cloud ships an orchestrator (managed Kubernetes), a serverless container runtime, and a registry. The capabilities map closely:</p>
+            <p>Every cloud ships an orchestrator (managed Kubernetes), a <a class="glossary-link" href="glossary.html#term-serverless">serverless</a> container runtime, and a registry. The capabilities map closely:</p>
             <div class="comparison-table">
                 <table>
                     <thead>
@@ -632,7 +632,7 @@
                         </tr>
                         <tr>
                             <th scope="row">Per-workload identity</th>
-                            <td>IRSA, EKS Pod Identity, ECS task roles</td>
+                            <td><a class="glossary-link" href="glossary.html#term-irsa">IRSA</a>, EKS Pod Identity, ECS task roles</td>
                             <td>AKS workload identity (federated to Entra)</td>
                             <td>GKE workload identity, Cloud Run service accounts</td>
                         </tr>
@@ -681,7 +681,7 @@
                     <p>Default-deny network policy. Explicit egress allow-list. mTLS for service-to-service. No direct public IPs on workload containers.</p>
                 </div>
             </div>
-            <p>Layer on top: admission controllers that enforce these defaults (Pod Security Standards, Kyverno, OPA Gatekeeper); runtime detection (Falco, Tetragon, or your CNAPP's runtime module); centralized logs from every container; and an SBOM database for fast CVE response.</p>
+            <p>Layer on top: admission controllers that enforce these defaults (<a class="glossary-link" href="glossary.html#term-pss">Pod Security Standards</a>, Kyverno, <a class="glossary-link" href="glossary.html#term-opa">OPA</a> Gatekeeper); runtime detection (Falco, Tetragon, or your CNAPP's runtime module); centralized logs from every container; and an SBOM database for fast CVE response.</p>
         </section>
 
         <section id="pitfalls">
@@ -711,7 +711,7 @@
             <h3>Tooling</h3>
             <ul>
                 <li><a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a> — runtime security</li>
-                <li><a href="https://trivy.dev/" target="_blank" rel="noopener noreferrer">Trivy</a> — vulnerability and IaC scanning</li>
+                <li><a href="https://trivy.dev/" target="_blank" rel="noopener noreferrer">Trivy</a> — vulnerability and <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scanning</li>
                 <li><a href="https://www.sigstore.dev/" target="_blank" rel="noopener noreferrer">Sigstore</a> &amp; Cosign — signing &amp; provenance</li>
                 <li><a href="https://gvisor.dev/" target="_blank" rel="noopener noreferrer">gVisor</a> — user-space kernel sandbox</li>
                 <li><a href="https://katacontainers.io/" target="_blank" rel="noopener noreferrer">Kata Containers</a> — VM-isolated containers</li>
@@ -749,8 +749,8 @@
             <h3>How is "containerless" / serverless different?</h3>
             <p>Cloud Run, Container Apps, Fargate, App Runner — these run your container image, but the platform manages the host, the kernel, the runtime sandboxing, and the scaling. You don't have a node to log into. The trade-off is reduced control (no DaemonSets, no privileged sidecars) for significantly less security surface to manage. For most application workloads, this is the right default in 2026.</p>
 
-            <h3>How does this relate to <a class="glossary-link" href="glossary.html#term-zero-trust">zero trust</a>?</h3>
-            <p>Containers operationalize zero trust at the workload layer when you do this right: per-workload identity (verify explicitly), default-deny networking (least privilege), mTLS between services (verify continuously), runtime detection (assume breach). The container is a unit of identity, not just a unit of deployment.</p>
+            <h3>How does this relate to zero trust?</h3>
+            <p>Containers operationalize <a class="glossary-link" href="glossary.html#term-zero-trust">zero trust</a> at the workload layer when you do this right: per-workload identity (verify explicitly), default-deny networking (<a class="glossary-link" href="glossary.html#term-least-privilege">least privilege</a>), mTLS between services (verify continuously), runtime detection (assume breach). The container is a unit of identity, not just a unit of deployment.</p>
         </section>
 
         <section class="cta-section">

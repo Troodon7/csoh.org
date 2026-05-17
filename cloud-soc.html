@@ -257,7 +257,7 @@
       <div class="hero-inner">
         <div class="hero-text">
           <h1>Cloud SOC &amp; Threat Monitoring</h1>
-          <p>Detection and response when the network is abstracted away and the perimeter is API-shaped. Vendor-neutral guide to the log sources that actually matter, the native cloud detectors, SIEM and SOAR choices, detection engineering as a discipline, incident response specifics, and the tools cloud SOC teams actually use.</p>
+          <p>Detection and response when the network is abstracted away and the perimeter is API-shaped. Vendor-neutral guide to the log sources that actually matter, the native cloud detectors, <a class="glossary-link" href="glossary.html#term-siem">SIEM</a> and <a class="glossary-link" href="glossary.html#term-soar">SOAR</a> choices, <a class="glossary-link" href="glossary.html#term-detection-engineering">detection engineering</a> as a discipline, <a class="glossary-link" href="glossary.html#term-incident-response">incident response</a> specifics, and the tools cloud <a class="glossary-link" href="glossary.html#term-soc">SOC</a> teams actually use.</p>
           <div class="cta-buttons">
             <a href="#detection-model" class="btn btn-primary">Detection model →</a>
             <a href="#comparison" class="btn btn-secondary">AWS / Azure / GCP comparison</a>
@@ -278,7 +278,7 @@
             <!-- Log sources -->
             <g>
               <rect x="60" y="125" width="115" height="26" rx="5" fill="#0d1424" stroke="#fbbf24" stroke-width="1.5"/>
-              <text x="118" y="143" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700">CloudTrail</text>
+              <text x="118" y="143" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700"><a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a></text>
               <rect x="60" y="160" width="115" height="26" rx="5" fill="#0d1424" stroke="#60a5fa" stroke-width="1.5"/>
               <text x="118" y="178" text-anchor="middle" fill="#60a5fa" font-size="10" font-weight="700">Activity Log</text>
               <rect x="60" y="195" width="115" height="26" rx="5" fill="#0d1424" stroke="#34d399" stroke-width="1.5"/>
@@ -286,7 +286,7 @@
               <rect x="60" y="230" width="115" height="26" rx="5" fill="#0d1424" stroke="#a78bfa" stroke-width="1.5"/>
               <text x="118" y="248" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="700">Identity logs</text>
               <rect x="60" y="265" width="115" height="26" rx="5" fill="#0d1424" stroke="#22d3ee" stroke-width="1.5"/>
-              <text x="118" y="283" text-anchor="middle" fill="#22d3ee" font-size="10" font-weight="700">VPC Flow</text>
+              <text x="118" y="283" text-anchor="middle" fill="#22d3ee" font-size="10" font-weight="700"><a class="glossary-link" href="glossary.html#term-vpc">VPC</a> Flow</text>
               <rect x="60" y="300" width="115" height="26" rx="5" fill="#0d1424" stroke="#f97316" stroke-width="1.5"/>
               <text x="118" y="318" text-anchor="middle" fill="#f97316" font-size="10" font-weight="700">DNS</text>
               <rect x="60" y="335" width="115" height="26" rx="5" fill="#0d1424" stroke="#84cc16" stroke-width="1.5"/>
@@ -299,11 +299,11 @@
             <text x="300" y="252" text-anchor="middle" fill="#e2e8f0" font-size="11">correlate</text>
             <text x="300" y="272" text-anchor="middle" fill="#e2e8f0" font-size="11">detection rules</text>
             <text x="300" y="292" text-anchor="middle" fill="#e2e8f0" font-size="11">retention</text>
-            <text x="300" y="319" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">Sigma · YARA-L</text>
+            <text x="300" y="319" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700"><a class="glossary-link" href="glossary.html#term-sigma">Sigma</a> · <a class="glossary-link" href="glossary.html#term-yara">YARA</a>-L</text>
             <!-- Native detection services to right -->
             <g>
               <rect x="425" y="135" width="130" height="36" rx="6" fill="#0d1424" stroke="#fbbf24" stroke-width="1.5"/>
-              <text x="490" y="152" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700">GuardDuty</text>
+              <text x="490" y="152" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700"><a class="glossary-link" href="glossary.html#term-guardduty">GuardDuty</a></text>
               <text x="490" y="166" text-anchor="middle" fill="#e2e8f0" font-size="9">AWS</text>
               <rect x="425" y="180" width="130" height="36" rx="6" fill="#0d1424" stroke="#60a5fa" stroke-width="1.5"/>
               <text x="490" y="197" text-anchor="middle" fill="#60a5fa" font-size="10" font-weight="700">Defender for Cloud</text>
@@ -394,7 +394,7 @@
                     <tbody>
                         <tr>
                             <th scope="row">Primary signal</th>
-                            <td>Packets, endpoint EDR telemetry, firewall logs</td>
+                            <td>Packets, endpoint <a class="glossary-link" href="glossary.html#term-edr">EDR</a> telemetry, firewall logs</td>
                             <td>Control-plane audit logs, identity events, app telemetry</td>
                         </tr>
                         <tr>
@@ -420,7 +420,7 @@
                         <tr>
                             <th scope="row">Contain action</th>
                             <td>Isolate host on the network</td>
-                            <td>Revoke session, rotate credential, detach IAM policy, quarantine resource</td>
+                            <td>Revoke session, rotate credential, detach <a class="glossary-link" href="glossary.html#term-iam">IAM</a> policy, quarantine resource</td>
                         </tr>
                         <tr>
                             <th scope="row">Dominant attack pattern</th>
@@ -443,10 +443,10 @@
             <p>Almost every credible cloud detection eventually reduces to the same shape: <em>this identity did this action on this resource from this context at this time, and that combination is suspicious.</em></p>
             <p>The fields that matter:</p>
             <ul>
-                <li><strong>Identity</strong> — user, role, service account, federated subject, automation key.</li>
+                <li><strong>Identity</strong> — user, role, <a class="glossary-link" href="glossary.html#term-service-account">service account</a>, federated subject, automation key.</li>
                 <li><strong>Action</strong> — the API call, with parameters. <code>iam:CreateAccessKey</code>, <code>s3:GetObject</code>, <code>compute.instances.delete</code>.</li>
                 <li><strong>Resource</strong> — the target. ARN, resource ID, bucket name, role name.</li>
-                <li><strong>Context</strong> — source IP, user agent, region, time, MFA used, source account, session origin.</li>
+                <li><strong>Context</strong> — source IP, user agent, region, time, <a class="glossary-link" href="glossary.html#term-mfa">MFA</a> used, source account, session origin.</li>
                 <li><strong>Result</strong> — succeeded, denied, rate-limited.</li>
             </ul>
             <p>Detections then ask combination questions:</p>
@@ -455,11 +455,11 @@
                 <li>Did an identity do an action from an <em>impossible location</em> relative to its recent baseline?</li>
                 <li>Did a sensitive action happen <em>without MFA</em>?</li>
                 <li>Did a service account do a <em>human-shaped</em> action (console login, IAM change)?</li>
-                <li>Did an identity do a <em>high-volume sequence</em> that looks like enumeration or exfiltration?</li>
+                <li>Did an identity do a <em>high-volume sequence</em> that looks like enumeration or <a class="glossary-link" href="glossary.html#term-exfiltration">exfiltration</a>?</li>
                 <li>Did a <em>just-created role</em> get used <em>immediately</em>?</li>
                 <li>Did the cloud's <em>logging be disabled</em>?</li>
             </ul>
-            <p>The vocabulary maps cleanly onto <a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK Cloud</a> — every detection should map to one or more techniques, both for shared language across the team and for coverage analysis ("we have no detections in the Persistence column").</p>
+            <p>The vocabulary maps cleanly onto <a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK Cloud</a> — every detection should map to one or more techniques, both for shared language across the team and for coverage analysis ("we have no detections in the <a class="glossary-link" href="glossary.html#term-persistence">Persistence</a> column").</p>
         </section>
 
         <section id="log-sources">
@@ -472,23 +472,23 @@
                 </div>
                 <div class="pillar-card pillar-card-posture">
                     <h3>2. Identity-provider logs</h3>
-                    <p>Entra ID sign-in &amp; audit, Okta system log, Cognito events, Cloud Identity. Captures auth events <em>before</em> they reach cloud APIs — phishing, MFA bypass, suspicious sessions live here.</p>
+                    <p><a class="glossary-link" href="glossary.html#term-entra-id">Entra ID</a> sign-in &amp; audit, Okta system log, Cognito events, Cloud Identity. Captures auth events <em>before</em> they reach cloud APIs — <a class="glossary-link" href="glossary.html#term-phishing">phishing</a>, MFA bypass, suspicious sessions live here.</p>
                 </div>
                 <div class="pillar-card pillar-card-network">
                     <h3>3. Network telemetry</h3>
-                    <p>VPC Flow Logs, NSG flow logs, GCP VPC Flow. Less interesting than CloudTrail for most cloud-native attacks, essential when a workload starts talking to known-bad IPs.</p>
+                    <p><a class="glossary-link" href="glossary.html#term-vpc-flow-logs">VPC Flow Logs</a>, <a class="glossary-link" href="glossary.html#term-nsg">NSG</a> flow logs, GCP VPC Flow. Less interesting than CloudTrail for most <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> attacks, essential when a workload starts talking to known-bad IPs.</p>
                 </div>
                 <div class="pillar-card pillar-card-detect">
                     <h3>4. DNS query logs</h3>
-                    <p>Route 53 Resolver logs, Azure DNS, Cloud DNS. C2 beacons, DGA traffic, data exfiltration via DNS — all visible here that aren't in flow logs.</p>
+                    <p>Route 53 Resolver logs, Azure DNS, Cloud DNS. <a class="glossary-link" href="glossary.html#term-c2">C2</a> beacons, DGA traffic, <a class="glossary-link" href="glossary.html#term-data-exfiltration">data exfiltration</a> via DNS — all visible here that aren't in flow logs.</p>
                 </div>
                 <div class="pillar-card pillar-card-data">
                     <h3>5. Data-plane logs</h3>
-                    <p>S3 access logs / data events, Azure Storage diagnostics, GCS data access logs. Required to investigate "what data was actually read?" — control plane only tells you <em>that</em> data was read, not which.</p>
+                    <p><a class="glossary-link" href="glossary.html#term-s3">S3</a> access logs / data events, Azure Storage diagnostics, GCS data access logs. Required to investigate "what data was actually read?" — control plane only tells you <em>that</em> data was read, not which.</p>
                 </div>
                 <div class="pillar-card pillar-card-supply">
                     <h3>6. Workload &amp; app logs</h3>
-                    <p>Lambda / Functions logs, container logs, app stdout / stderr. The application-layer evidence trail; required for app-vulnerability investigations.</p>
+                    <p><a class="glossary-link" href="glossary.html#term-lambda">Lambda</a> / Functions logs, container logs, app stdout / stderr. The application-layer evidence trail; required for app-vulnerability investigations.</p>
                 </div>
                 <div class="pillar-card pillar-card-compliance">
                     <h3>7. Configuration history</h3>
@@ -507,11 +507,11 @@
             <h2>Native cloud detection</h2>
             <p>Each cloud ships its own threat-detection service. They share more than they differ — managed, ML-driven, fed by the cloud's own internal telemetry, deliver findings to a central console with minimal setup. The pragmatic answer is: <strong>turn them on, all of them, on day one</strong>. They catch a meaningful percentage of real attacks for very little operational cost.</p>
             <h3><a href="https://aws.amazon.com/guardduty/" target="_blank" rel="noopener noreferrer">AWS GuardDuty</a></h3>
-            <p>Continuous threat detection across CloudTrail, VPC Flow Logs, DNS, S3, EKS audit, Lambda, Runtime Monitoring, and Malware Protection. The <code>UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration</code> finding catches the exact pattern that produced the Capital One breach (see the <a href="breaches/capital-one.html">kill chain</a>). Org-wide via delegated admin to your audit account.</p>
+            <p>Continuous threat detection across CloudTrail, VPC Flow Logs, DNS, S3, <a class="glossary-link" href="glossary.html#term-eks">EKS</a> audit, Lambda, Runtime Monitoring, and Malware Protection. The <code>UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration</code> finding catches the exact pattern that produced the Capital One breach (see the <a href="breaches/capital-one.html">kill chain</a>). Org-wide via delegated admin to your audit account.</p>
             <h3><a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Cloud</a></h3>
-            <p>CSPM + workload protection, with plans for servers, app services, databases, storage, key vault, DNS, containers, APIs. Recommendations + alerts; integrates with Sentinel. The "everything" plan is expensive at scale; most orgs enable the workload-protection plans on prod subs only.</p>
+            <p><a class="glossary-link" href="glossary.html#term-cspm">CSPM</a> + workload protection, with plans for servers, app services, databases, storage, <a class="glossary-link" href="glossary.html#term-key-vault">key vault</a>, DNS, containers, APIs. Recommendations + alerts; integrates with Sentinel. The "everything" plan is expensive at scale; most orgs enable the workload-protection plans on prod subs only.</p>
             <h3><a href="https://cloud.google.com/security/products/security-command-center" target="_blank" rel="noopener noreferrer">Google Security Command Center</a></h3>
-            <p>SCC Premium / Enterprise includes Event Threat Detection (CloudTrail-equivalent analysis), Container Threat Detection, Virtual Machine Threat Detection, and a CNAPP-style posture layer. Standard tier is free and covers basic findings; Premium / Enterprise are paid.</p>
+            <p>SCC Premium / Enterprise includes Event Threat Detection (CloudTrail-equivalent analysis), Container Threat Detection, Virtual Machine Threat Detection, and a <a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a>-style posture layer. Standard tier is free and covers basic findings; Premium / Enterprise are paid.</p>
             <h3>What native detection is good for</h3>
             <ul>
                 <li>Out-of-the-box coverage of the most common cloud-attack patterns.</li>
@@ -530,7 +530,7 @@
 
         <section id="siem">
             <h2>SIEM and the cloud</h2>
-            <p>SIEM = Security Information &amp; Event Management. The platform where logs land, get parsed, get queried, get correlated, and produce alerts. Once you have more than one cloud (or one cloud and SaaS, or one cloud and on-prem), the SIEM becomes the only place an analyst can ask cross-source questions.</p>
+            <p>SIEM = Security Information &amp; Event Management. The platform where logs land, get parsed, get queried, get correlated, and produce alerts. Once you have more than one cloud (or one cloud and <a class="glossary-link" href="glossary.html#term-saas">SaaS</a>, or one cloud and on-prem), the SIEM becomes the only place an analyst can ask cross-source questions.</p>
             <h3>The current landscape (vendor-neutral)</h3>
             <ul>
                 <li><strong><a href="https://www.splunk.com/en_us/products/enterprise-security.html" target="_blank" rel="noopener noreferrer">Splunk Enterprise Security</a></strong> — the heavyweight. Mature, expensive, SPL is its own language with a real learning curve. Strong in enterprise environments that have run Splunk for a decade.</li>
@@ -553,11 +553,11 @@
 
         <section id="detection-eng">
             <h2>Detection engineering as a practice</h2>
-            <p>Detection engineering is the discipline of writing, testing, deploying, and maintaining detection rules — treated as code, with the same review, versioning, and CI/CD as application code. Cloud SOC depends on it more than traditional SOC did, because so many cloud-specific detections are inherently custom (your IAM model, your service accounts, your business hours).</p>
+            <p>Detection engineering is the discipline of writing, testing, deploying, and maintaining detection rules — treated as code, with the same review, versioning, and <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a>/CD as application code. Cloud SOC depends on it more than traditional SOC did, because so many cloud-specific detections are inherently custom (your IAM model, your service accounts, your business hours).</p>
             <h3>The detection-engineering loop</h3>
             <ol>
-                <li><strong>Threat model</strong> the technique you want to catch. Where in MITRE ATT&amp;CK does it sit? What's the prerequisite for an attacker to do it?</li>
-                <li><strong>Find or generate evidence</strong> in your logs that the technique would leave. Atomic Red Team, <a href="https://github.com/DataDog/stratus-red-team" target="_blank" rel="noopener noreferrer">Stratus Red Team</a>, and similar tools simulate cloud attacks specifically so you can see what they look like in CloudTrail.</li>
+                <li><strong>Threat model</strong> the technique you want to catch. Where in <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK does it sit? What's the prerequisite for an attacker to do it?</li>
+                <li><strong>Find or generate evidence</strong> in your logs that the technique would leave. <a class="glossary-link" href="glossary.html#term-atomic-red-team">Atomic Red Team</a>, <a href="https://github.com/DataDog/stratus-red-team" target="_blank" rel="noopener noreferrer">Stratus Red Team</a>, and similar tools simulate cloud attacks specifically so you can see what they look like in CloudTrail.</li>
                 <li><strong>Write the detection</strong> — a query in your SIEM's language or a portable rule (Sigma).</li>
                 <li><strong>Tune for noise.</strong> The first iteration always over-fires. Whitelist legitimate sources, add context conditions, adjust thresholds.</li>
                 <li><strong>Test continuously.</strong> Re-run the atomic emulation periodically — when an upstream log schema changes, your rule may silently break.</li>
@@ -578,17 +578,17 @@
             <h2>Detection categories that matter</h2>
             <p>The classes of detection every cloud SOC should aim to cover, mapped roughly to <a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK Cloud</a>:</p>
             <ul>
-                <li><strong>Initial Access</strong> — impossible-travel sign-ins, sign-ins from anonymizing infrastructure (Tor, known VPN-as-a-service), brute-force / password-spray patterns, MFA fatigue prompts, OAuth consent grants to suspicious apps.</li>
-                <li><strong>Credential Access</strong> — <code>GetSessionToken</code> / <code>AssumeRole</code> from unusual contexts, IMDS credential use from outside the EC2 instance (this is the Capital One detection — see the <a href="breaches/capital-one.html">kill chain</a>), <code>ConsoleLogin</code> by a service account, password resets en masse.</li>
-                <li><strong>Privilege Escalation</strong> — IAM policy changes adding admin permissions, role-trust-policy changes opening cross-account trust, <code>AttachUserPolicy</code> bringing in AdministratorAccess, group-membership additions to privileged groups, <code>iam:PassRole</code> to a high-privilege role.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-initial-access">Initial Access</a></strong> — impossible-travel sign-ins, sign-ins from anonymizing infrastructure (Tor, known VPN-as-a-service), brute-force / password-spray patterns, <a class="glossary-link" href="glossary.html#term-mfa-fatigue">MFA fatigue</a> prompts, OAuth consent grants to suspicious apps.</li>
+                <li><strong>Credential Access</strong> — <code>GetSessionToken</code> / <code>AssumeRole</code> from unusual contexts, <a class="glossary-link" href="glossary.html#term-imds">IMDS</a> credential use from outside the <a class="glossary-link" href="glossary.html#term-ec2">EC2</a> instance (this is the Capital One detection — see the <a href="breaches/capital-one.html">kill chain</a>), <code>ConsoleLogin</code> by a service account, password resets en masse.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-privilege-escalation">Privilege Escalation</a></strong> — IAM policy changes adding admin permissions, role-trust-policy changes opening cross-account trust, <code>AttachUserPolicy</code> bringing in AdministratorAccess, group-membership additions to privileged groups, <code>iam:PassRole</code> to a high-privilege role.</li>
                 <li><strong>Persistence</strong> — new access keys created, new federated identity providers added, new IAM users in admin accounts, new SSH keys on instances, modified Lambda function execution roles, scheduled jobs created in unusual accounts.</li>
-                <li><strong>Defense Evasion</strong> — CloudTrail disabled or modified, log destinations changed, GuardDuty / Defender / SCC disabled, deletion of S3 access logs, KMS key policy changes that block your audit account.</li>
+                <li><strong>Defense Evasion</strong> — CloudTrail disabled or modified, log destinations changed, GuardDuty / Defender / SCC disabled, deletion of S3 access logs, <a class="glossary-link" href="glossary.html#term-kms">KMS</a> key policy changes that block your audit account.</li>
                 <li><strong>Discovery</strong> — high-volume <code>List*</code> / <code>Describe*</code> API call patterns, bucket enumeration via <code>HeadBucket</code>, IAM enumeration, secret listing.</li>
-                <li><strong>Lateral Movement</strong> — cross-account <code>AssumeRole</code>, new service-to-service connections, new pod-to-pod connections in K8s, new VPC peering or transit-gateway attachments.</li>
-                <li><strong>Collection &amp; Exfiltration</strong> — large-volume <code>GetObject</code> / <code>CopyObject</code>, bucket-replication to external accounts, snapshot sharing with unknown accounts, database export jobs to S3, egress spike from a workload.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-lateral-movement">Lateral Movement</a></strong> — cross-account <code>AssumeRole</code>, new service-to-service connections, new <a class="glossary-link" href="glossary.html#term-pod">pod</a>-to-pod connections in <a class="glossary-link" href="glossary.html#term-kubernetes">K8s</a>, new VPC <a class="glossary-link" href="glossary.html#term-peering">peering</a> or transit-gateway attachments.</li>
+                <li><strong>Collection &amp; Exfiltration</strong> — large-volume <code>GetObject</code> / <code>CopyObject</code>, bucket-replication to external accounts, snapshot sharing with unknown accounts, database export jobs to S3, <a class="glossary-link" href="glossary.html#term-ingress">egress</a> spike from a workload.</li>
                 <li><strong>Impact</strong> — mass-resource deletion, encryption-with-attacker-key (ransomware), public bucket creation, security-group modification opening 0.0.0.0/0, Route 53 hijacks.</li>
             </ul>
-            <p>For each category, the SOC should have at least one detection live, at least one quarterly emulation that exercises it, and at least one documented runbook. The first time a SOC enumerates "we have zero coverage in Defense Evasion" is usually the day after they needed it.</p>
+            <p>For each category, the SOC should have at least one detection live, at least one quarterly emulation that exercises it, and at least one documented <a class="glossary-link" href="glossary.html#term-runbook">runbook</a>. The first time a SOC enumerates "we have zero coverage in Defense Evasion" is usually the day after they needed it.</p>
         </section>
 
         <section id="threat-intel">
@@ -598,13 +598,13 @@
                 <li><strong>Indicators</strong> — known-bad IPs (often anonymizers, residential proxies, Tor exits), domains (C2 infrastructure, exfil destinations), CIDRs (cloud providers known to be abused).</li>
                 <li><strong>TTPs</strong> — attacker techniques specific to cloud. Permiso, Datadog Security Labs, Wiz Research, Mandiant, CrowdStrike all publish good cloud-specific TTPs regularly. MITRE ATT&amp;CK Cloud is the taxonomy.</li>
                 <li><strong>Attack tooling fingerprints</strong> — User-Agent strings from cloud-attack tools (Pacu, ScoutSuite, cloudtail, gcptokenrip), CloudTrail signatures of common attacker workflows.</li>
-                <li><strong>Industry sharing</strong> — FS-ISAC (financial), H-ISAC (health), the cloud-providers' own threat reports, AWS Security Hub findings, Microsoft DART / MSTIC public threat content.</li>
+                <li><strong>Industry sharing</strong> — FS-ISAC (financial), H-ISAC (health), the cloud-providers' own threat reports, <a class="glossary-link" href="glossary.html#term-security-hub">AWS Security Hub</a> findings, Microsoft DART / MSTIC public threat content.</li>
             </ul>
             <h3>Where to wire it in</h3>
             <ul>
                 <li><strong>Enrich alerts at the SIEM.</strong> Every alert that includes an IP should auto-enrich with reputation, ASN, geo, cloud-provider mapping, and known-attacker-tool fingerprints. Native to most modern SIEMs.</li>
-                <li><strong>Auto-block at the cloud-provider edge</strong> on the highest-confidence indicators. Network Firewall, WAF, security groups can ingest threat-intel feeds.</li>
-                <li><strong>Inform detection content.</strong> When a new cloud-attack TTP is published, the detection-engineering team's question is "do we cover this?" and the answer should be in days, not quarters.</li>
+                <li><strong>Auto-block at the cloud-provider edge</strong> on the highest-confidence indicators. Network Firewall, <a class="glossary-link" href="glossary.html#term-waf">WAF</a>, security groups can ingest threat-intel feeds.</li>
+                <li><strong>Inform detection content.</strong> When a new cloud-attack <a class="glossary-link" href="glossary.html#term-ttp">TTP</a> is published, the detection-engineering team's question is "do we cover this?" and the answer should be in days, not quarters.</li>
             </ul>
         </section>
 
@@ -615,7 +615,7 @@
             <ol>
                 <li><strong>Triage the alert.</strong> Identity, action, resource, context. Decide: noise, suspicious-not-yet-confirmed, confirmed-compromise.</li>
                 <li><strong>Pivot from one event to the full session.</strong> What else did this identity do? Same source IP? Same session token? CloudTrail with the identity's principal-ARN as a filter, plus the time window, plus the identity-provider session ID.</li>
-                <li><strong>Determine blast radius.</strong> What resources did the compromised identity have access to? What of those were actually accessed? IAM Access Analyzer / Permissions Analyzer + CloudTrail data events.</li>
+                <li><strong>Determine <a class="glossary-link" href="glossary.html#term-blast-radius">blast radius</a>.</strong> What resources did the compromised identity have access to? What of those were actually accessed? <a class="glossary-link" href="glossary.html#term-iam-access-analyzer">IAM Access Analyzer</a> / Permissions Analyzer + CloudTrail data events.</li>
                 <li><strong>Contain.</strong> Revoke session tokens (AWS <code>aws iam delete-access-key</code> + <code>aws sts revoke-session</code>; Azure conditional-access revoke; GCP <code>gcloud iam service-accounts disable</code>). Detach IAM policies. Quarantine compromised workloads (security-group-of-one). Disable user accounts.</li>
                 <li><strong>Eradicate.</strong> Remove persistence — newly created keys, new IAM users, new SSH keys, modified Lambda functions, new federated IdPs.</li>
                 <li><strong>Recover.</strong> Restore from known-clean snapshots if data integrity is in question. Rotate the secrets the attacker may have seen.</li>
@@ -641,15 +641,15 @@
 
         <section id="team">
             <h2>SOC team structure &amp; roles</h2>
-            <p>The classic "tier 1 / tier 2 / tier 3" structure persists but is shifting. AI-assisted triage is eating tier-1 work faster than other layers, which is pushing organizations toward flatter SOC structures with stronger detection-engineering and IR capabilities at the senior end.</p>
+            <p>The classic "tier 1 / tier 2 / tier 3" structure persists but is shifting. <a class="glossary-link" href="glossary.html#term-ai">AI</a>-assisted triage is eating tier-1 work faster than other layers, which is pushing organizations toward flatter SOC structures with stronger detection-engineering and IR capabilities at the senior end.</p>
             <h3>The roles that actually exist in 2026</h3>
             <ul>
-                <li><strong>SOC Analyst (junior / tier 1).</strong> Alert triage, basic enrichment, escalation. The role most affected by AI automation today. Career path is into detection engineering, IR, or threat hunting.</li>
+                <li><strong>SOC Analyst (junior / tier 1).</strong> Alert triage, basic enrichment, escalation. The role most affected by AI automation today. Career path is into detection engineering, IR, or <a class="glossary-link" href="glossary.html#term-threat-hunting">threat hunting</a>.</li>
                 <li><strong>SOC Analyst (senior / tier 2-3).</strong> Investigation lead. Reads complex CloudTrail / KQL / SPL queries, judges noise vs real, owns containment decisions for the alert. Knows the cloud APIs cold.</li>
                 <li><strong>Detection Engineer.</strong> Writes, tunes, and maintains detection content. Often a software-engineer profile who learned security; reads attacker writeups, writes the corresponding queries, ships them through CI to production.</li>
-                <li><strong>Threat Hunter.</strong> Looks for evidence of compromise that no detection caught yet. Hypothesis-driven querying — "if an attacker compromised an IRSA-bearing pod, what would I see?" — using SIEM, threat intel, and graph tooling.</li>
-                <li><strong>Incident Responder / DFIR.</strong> Runs incidents end-to-end. Owns the timeline, the contain/eradicate/recover steps, the post-incident review. Often the most senior SOC role; tightly partnered with Legal and Communications when things go big.</li>
-                <li><strong>SOC Manager / Director.</strong> Runs the team, owns metrics (MTTR, MTTC, false-positive rate, coverage), reports to security leadership, owns vendor relationships.</li>
+                <li><strong>Threat Hunter.</strong> Looks for evidence of compromise that no detection caught yet. Hypothesis-driven querying — "if an attacker compromised an <a class="glossary-link" href="glossary.html#term-irsa">IRSA</a>-bearing pod, what would I see?" — using SIEM, threat intel, and graph tooling.</li>
+                <li><strong>Incident Responder / <a class="glossary-link" href="glossary.html#term-dfir">DFIR</a>.</strong> Runs incidents end-to-end. Owns the timeline, the contain/eradicate/recover steps, the post-incident review. Often the most senior SOC role; tightly partnered with Legal and Communications when things go big.</li>
+                <li><strong>SOC Manager / Director.</strong> Runs the team, owns metrics (<a class="glossary-link" href="glossary.html#term-mttd">MTTR</a>, MTTC, false-positive rate, coverage), reports to security leadership, owns vendor relationships.</li>
                 <li><strong>Adjacent roles SOC depends on:</strong> Security Engineering (builds the platforms), GRC (defines the controls), Cloud Engineering (operates the cloud the SOC monitors).</li>
             </ul>
             <p>For more on these roles and how to break into them, see the <a href="cloud-security-careers.html">Cloud Security Careers page</a>.</p>
@@ -677,7 +677,7 @@
                         </tr>
                         <tr>
                             <th scope="row">Identity events</th>
-                            <td>IAM Identity Center, federated IdP</td>
+                            <td>IAM Identity Center, federated <a class="glossary-link" href="glossary.html#term-idp">IdP</a></td>
                             <td>Entra ID sign-in &amp; audit logs</td>
                             <td>Cloud Identity audit, Cloud Logging</td>
                         </tr>
@@ -702,7 +702,7 @@
                         <tr>
                             <th scope="row">Native SIEM</th>
                             <td>Security Lake + Athena, OpenSearch</td>
-                            <td>Microsoft Sentinel</td>
+                            <td><a class="glossary-link" href="glossary.html#term-sentinel">Microsoft Sentinel</a></td>
                             <td>Google Security Operations (Chronicle)</td>
                         </tr>
                         <tr>
@@ -739,15 +739,15 @@
                 </div>
                 <div class="pillar-card pillar-card-stage2">
                     <h3>Stage 2 — Triage</h3>
-                    <p>SIEM stood up, identity + network + DNS logs flowing. Defined alert taxonomy. Tier-1 analysts (or LLM-assisted automation) triaging within minutes. Documented runbooks for the top 20 alert types. MTTR measured.</p>
+                    <p>SIEM stood up, identity + network + DNS logs flowing. Defined alert taxonomy. Tier-1 analysts (or <a class="glossary-link" href="glossary.html#term-llm">LLM</a>-assisted automation) triaging within minutes. Documented runbooks for the top 20 alert types. MTTR measured.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage3">
                     <h3>Stage 3 — Engineering</h3>
-                    <p>Detection-as-code with CI/CD and tests. Adversary emulation (Stratus, Atomic Red Team) running monthly. SOAR automating the repetitive contain/enrich steps. Threat hunting on a regular cadence. Cross-cloud correlation working.</p>
+                    <p>Detection-as-code with CI/CD and tests. Adversary emulation (Stratus, Atomic <a class="glossary-link" href="glossary.html#term-red-team">Red Team</a>) running monthly. SOAR automating the repetitive contain/enrich steps. Threat hunting on a regular cadence. Cross-cloud correlation working.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage4">
                     <h3>Stage 4 — Resilience</h3>
-                    <p>Tabletop exercises quarterly, full red-team / purple-team annually. SLO-driven SOC metrics. Threat intel feeding both detection and proactive hardening. Post-incident reviews drive durable changes in the platform.</p>
+                    <p>Tabletop exercises quarterly, full red-team / purple-team annually. <a class="glossary-link" href="glossary.html#term-slo">SLO</a>-driven SOC metrics. Threat intel feeding both detection and proactive <a class="glossary-link" href="glossary.html#term-hardening">hardening</a>. Post-incident reviews drive durable changes in the platform.</p>
                 </div>
             </div>
             <p>Skipping stages is expensive in the same way it is for landing zones — a team trying to stand up SOAR before they have working alert triage just automates noise. The honest sequencing matters.</p>
@@ -822,8 +822,8 @@
             <h3>How do you measure if the SOC is working?</h3>
             <p>MTTD (detection), MTTA (acknowledge), MTTR (respond), MTTC (contain). Coverage against MITRE ATT&amp;CK Cloud. False-positive rate per detection. Number of true-positive incidents detected by the SOC vs reported externally. Post-incident-review follow-through rate. None of these alone tell the story; together they do.</p>
 
-            <h3>How does this relate to <a class="glossary-link" href="glossary.html#term-zero-trust">zero trust</a>?</h3>
-            <p>Zero trust says "assume breach and verify continuously." The SOC is the verification function — the team that closes the loop on the assumption. Without monitoring, zero-trust deployments are unverified claims; with monitoring, the principle becomes operationally measurable.</p>
+            <h3>How does this relate to zero trust?</h3>
+            <p><a class="glossary-link" href="glossary.html#term-zero-trust">Zero trust</a> says "assume breach and verify continuously." The SOC is the verification function — the team that closes the loop on the assumption. Without monitoring, zero-trust deployments are unverified claims; with monitoring, the principle becomes operationally measurable.</p>
         </section>
 
         <section class="cta-section">

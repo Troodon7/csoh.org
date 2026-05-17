@@ -500,19 +500,19 @@
             <h3>1. Run intentionally vulnerable environments</h3>
             <p>Pick three or four from our <a href="ctfs.html">cloud security CTF directory</a> and work through them. Recommended starting set:</p>
             <ul>
-                <li><strong>flAWS &amp; flAWS2</strong> — browser-based AWS challenges, no account required.</li>
-                <li><strong>CloudGoat</strong> — full vulnerable AWS environments you deploy yourself. Walk every scenario.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-flaws">flAWS</a> &amp; flAWS2</strong> — browser-based AWS challenges, no account required.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-cloudgoat">CloudGoat</a></strong> — full vulnerable AWS environments you deploy yourself. Walk every scenario.</li>
                 <li><strong>EntraGoat</strong> — Azure/Entra-focused identity attack scenarios.</li>
                 <li><strong>CNAPPGoat</strong> — <a class="glossary-link" href="glossary.html#term-public">multi-cloud</a> misconfigurations.</li>
                 <li><strong>PwnedLabs</strong> — guided cloud attack labs with both free and paid tiers.</li>
             </ul>
 
             <h3>2. Read real breach post-mortems</h3>
-            <p>Walk through the <a href="breach-timeline.html">CSOH breach kill chains</a>. Each one is mapped to <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud techniques. For each breach, identify: which IAM controls would have stopped it, which detection rule would have caught it, what the post-incident response looked like.</p>
+            <p>Walk through the <a href="breach-timeline.html">CSOH breach kill chains</a>. Each one is mapped to <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud techniques. For each breach, identify: which IAM controls would have stopped it, which detection rule would have caught it, what the post-<a class="glossary-link" href="glossary.html#term-incident-response">incident response</a> looked like.</p>
 
             <h3>3. Get familiar with the tooling</h3>
             <ul>
-                <li><strong>Open source:</strong> Prowler, ScoutSuite, Steampipe (multi-cloud posture). Pacu (AWS exploitation framework). ROADtools (Azure/Entra recon).</li>
+                <li><strong>Open source:</strong> <a class="glossary-link" href="glossary.html#term-prowler">Prowler</a>, ScoutSuite, Steampipe (multi-cloud posture). Pacu (AWS exploitation framework). ROADtools (Azure/Entra recon).</li>
                 <li><strong>Provider-native:</strong> AWS <a class="glossary-link" href="glossary.html#term-guardduty">GuardDuty</a>, <a class="glossary-link" href="glossary.html#term-iam-access-analyzer">IAM Access Analyzer</a>, Security Hub. Microsoft Defender for Cloud, Sentinel. GCP Security Command Center.</li>
                 <li><strong>Concept of <a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a>:</strong> read about how Wiz, Orca, Lacework, and similar platforms bundle <a class="glossary-link" href="glossary.html#term-cspm">CSPM</a>/<a class="glossary-link" href="glossary.html#term-cwpp">CWPP</a>/<a class="glossary-link" href="glossary.html#term-ciem">CIEM</a>. You don't need to use them — just understand the category.</li>
             </ul>
@@ -552,10 +552,10 @@
             <p>Master IAM policy evaluation, condition keys, and cross-account access patterns. Read every word of the <a href="https://aws.amazon.com/blogs/security/" target="_blank" rel="noopener noreferrer">AWS Security Blog</a> on identity. Use IAM Access Analyzer to find unused permissions in real environments. Study privilege-escalation paths via tools like Pacu.</p>
 
             <h3>4. Containers and Kubernetes security</h3>
-            <p>Most cloud-native workloads land in containers, and most non-trivial deployments land in Kubernetes. Start with the <a href="containers.html">Containers</a> page (the trust boundary, escape paths, IMDS-based identity chaining, supply chain). Then move to <a href="kubernetes.html">Kubernetes &amp; managed Kubernetes</a> for the cluster-specific risks — workload identity (IRSA / WIF), <a class="glossary-link" href="glossary.html#term-pss">pod security standards</a>, RBAC, network policies, and runtime tools (<a class="glossary-link" href="glossary.html#term-falco">Falco</a>, <a class="glossary-link" href="glossary.html#term-tetragon">Tetragon</a>). Pursue CKS as your hands-on credential.</p>
+            <p>Most <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> workloads land in containers, and most non-trivial deployments land in <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a>. Start with the <a href="containers.html">Containers</a> page (the trust boundary, escape paths, <a class="glossary-link" href="glossary.html#term-imds">IMDS</a>-based identity chaining, supply chain). Then move to <a href="kubernetes.html">Kubernetes &amp; managed Kubernetes</a> for the cluster-specific risks — <a class="glossary-link" href="glossary.html#term-service-account">workload identity</a> (<a class="glossary-link" href="glossary.html#term-irsa">IRSA</a> / <a class="glossary-link" href="glossary.html#term-wif">WIF</a>), <a class="glossary-link" href="glossary.html#term-pss">pod security standards</a>, <a class="glossary-link" href="glossary.html#term-rbac">RBAC</a>, network policies, and runtime tools (<a class="glossary-link" href="glossary.html#term-falco">Falco</a>, <a class="glossary-link" href="glossary.html#term-tetragon">Tetragon</a>). Pursue CKS as your hands-on credential.</p>
 
             <h3>5. CI/CD and supply-chain security</h3>
-            <p>The pipeline is now the soft underbelly of cloud security — its credentials are the keys to production. Read the <a href="ci-cd.html">CI/CD for cloud deployments</a> page for the OIDC-federation pattern that replaces long-lived cloud keys, plus pipeline hardening (signed artifacts, SLSA provenance, branch protection, ephemeral runners).</p>
+            <p>The pipeline is now the soft underbelly of cloud security — its credentials are the keys to production. Read the <a href="ci-cd.html">CI/CD for cloud deployments</a> page for the <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a>-<a class="glossary-link" href="glossary.html#term-federation">federation</a> pattern that replaces long-lived cloud keys, plus pipeline <a class="glossary-link" href="glossary.html#term-hardening">hardening</a> (signed artifacts, <a class="glossary-link" href="glossary.html#term-slsa">SLSA</a> <a class="glossary-link" href="glossary.html#term-provenance">provenance</a>, branch protection, ephemeral runners).</p>
 
             <h3>6. AI / LLM security</h3>
             <p>Increasingly relevant. Read the <a class="glossary-link" href="glossary.html#term-owasp">OWASP</a> Top 10 for LLMs. Practice on <a class="glossary-link" href="glossary.html#term-ai">AI</a>-focused CTFs in our <a href="ctfs.html">CTF directory</a>. Study agentic-system risks and <a class="glossary-link" href="glossary.html#term-prompt-injection">prompt injection</a> in production scenarios.</p>
@@ -574,7 +574,7 @@
                 <li><strong><a class="glossary-link" href="glossary.html#term-detection-engineering">Detection engineering</a></strong> — building the rules that catch the next breach.</li>
                 <li><strong>Identity and IAM architecture</strong> — increasingly the most important specialty in cloud security.</li>
                 <li><strong>Cloud penetration testing / <a class="glossary-link" href="glossary.html#term-red-team">red team</a></strong> — offensive cloud work, often as a consultant.</li>
-                <li><strong>Application security in <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> environments</strong> — <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scanning, supply-chain, <a href="containers.html">container hardening</a>, <a href="ci-cd.html">CI/CD pipeline security</a>.</li>
+                <li><strong>Application security in cloud-native environments</strong> — <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scanning, supply-chain, <a href="containers.html">container hardening</a>, <a href="ci-cd.html">CI/CD pipeline security</a>.</li>
                 <li><strong>Compliance and governance at scale</strong> — multi-account <a class="glossary-link" href="glossary.html#term-guardrails">guardrails</a>, control frameworks, audit automation.</li>
                 <li><strong>Cloud <a class="glossary-link" href="glossary.html#term-soc">SOC</a> / managed detection &amp; response</strong> — running a 24x7 monitoring practice.</li>
                 <li><strong>AI security</strong> — prompt injection, model security, agent risk.</li>

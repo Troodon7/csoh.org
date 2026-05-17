@@ -73,7 +73,7 @@ The vendor-neutral curriculum, written by practitioners. **Foundations**, **disc
 | Resource | Size |
 |---|---|
 | 🔍 [Site-wide Search](https://csoh.org/search.html) | Pagefind full-text index across every page |
-| 📖 [Glossary](https://csoh.org/glossary.html) | 230+ cloud-security terms, plain-English |
+| 📖 [Glossary](https://csoh.org/glossary.html) | 300+ cloud-security terms, plain-English |
 | 🗺️ [Vendor Landscape](https://csoh.org/vendor-landscape.html) | 350+ vendors, 30 categories, vendor-neutral one-liners |
 | 🛡️ [Resources Directory](https://csoh.org/resources.html) | 200+ tools, labs, CTFs, certifications (auto-refreshed weekly) |
 | 🚩 [CTF Challenges](https://csoh.org/ctfs.html) | 37+ hands-on cloud CTFs across AWS / Azure / GCP / Kubernetes / AI |
@@ -102,7 +102,7 @@ Our recommended learning sequence:
 1. **Get the Lay of the Land**: [What is Cloud Security?](https://csoh.org/what-is-cloud-security.html) — vendor-neutral pillar overview of the field
 2. **Follow the Roadmap**: [Cloud Security Learning Path](https://csoh.org/learning-path.html) — beginner → advanced with milestones, free labs, study targets
 3. **Master the Fundamentals**: [Best Practices](https://csoh.org/cloud-security-best-practices.html) and the [Shared Responsibility Model](https://csoh.org/shared-responsibility-model.html)
-4. **Decode the Acronyms**: [Glossary](https://csoh.org/glossary.html) — 230+ terms, every cross-reference hyperlinked
+4. **Decode the Acronyms**: [Glossary](https://csoh.org/glossary.html) — 300+ terms, every cross-reference hyperlinked
 5. **Get Hands-On**: [CTF Challenges](https://csoh.org/ctfs.html) and [Resources](https://csoh.org/resources.html) for practice
 6. **Choose a Certification**: [Cloud Security Certifications guide](https://csoh.org/cloud-security-certifications.html) — CCSK, CCSP, AWS, Azure, GCP, CKS
 7. **Read Real Breaches**: [Breach Kill Chains](https://csoh.org/breach-timeline.html) — see how attacks actually happen
@@ -337,7 +337,7 @@ Plain-English landing page for the `feed.xml` feed: explains what RSS is, recomm
 
 ### 📖 Glossary (`glossary.html`)
 A plain-English glossary of cloud-security acronyms and concepts:
-- **200+ terms** across 13 sections — cloud models, IAM, network, data, detection, the *PM family, supply-chain, ATT&CK, AI/LLM, DevOps, standards bodies
+- **300+ terms** across 13 sections — cloud models, IAM, network, data, detection, the *PM family, supply-chain, ATT&CK, AI/LLM, DevOps, standards bodies
 - **Live search** filters terms and definitions as you type, hiding sections with no matches
 - **Cross-linked**: every glossary term mentioned in any other definition is automatically hyperlinked to its entry — see `tools/crosslink_glossary.py`
 - Targeted terms (arrived via `#term-...` anchor) get a yellow highlight so the reader can immediately spot them
@@ -752,7 +752,7 @@ CSOH is engineered for organic discovery across traditional search (Google, Bing
 - ✅ **CollectionPage** — resource hub pages eligible for sitelinks rich results
 - ✅ **Event** + **VirtualLocation** + **Schedule** — weekly Friday Zoom session
 - ✅ **VideoObject** — each YouTube talk on `presentations.html` and meeting recaps
-- ✅ **DefinedTermSet** — the glossary, with 232 individual terms
+- ✅ **DefinedTermSet** — the glossary, with 300+ individual terms
 
 **Entity schema** — who/what is responsible for the content:
 - ✅ **Organization** — CSOH itself, with founding date, contact point, sameAs links, search action
@@ -777,7 +777,7 @@ CSOH is engineered for organic discovery across traditional search (Google, Bing
 - ✅ **`humans.txt`** for human-readable credits, linked via `<link rel="author">`
 - ✅ **`security.txt`** at the well-known location for vulnerability disclosure
 - ✅ Site-wide **canonical URLs** to consolidate ranking signals
-- ✅ **Glossary cross-linking** — first occurrence of each of 232 terms auto-linked to the glossary on every content page ([tools/crosslink_pages.py](tools/crosslink_pages.py))
+- ✅ **Glossary cross-linking** — first occurrence of each of 300+ terms auto-linked to the glossary on every content page ([tools/crosslink_pages.py](tools/crosslink_pages.py))
 
 ### Social previews
 

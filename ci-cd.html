@@ -267,7 +267,7 @@
       <div class="hero-inner">
         <div class="hero-text">
           <h1>CI/CD for Cloud Deployments</h1>
-          <p>The pipeline that ships code from a developer's laptop to a production cloud account. Vendor-neutral guide to what's in a modern pipeline, how OIDC federation replaced long-lived access keys, and how AWS, Azure, and GCP toolchains compare side-by-side.</p>
+          <p>The pipeline that ships code from a developer's laptop to a production cloud account. Vendor-neutral guide to what's in a modern pipeline, how <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a> <a class="glossary-link" href="glossary.html#term-federation">federation</a> replaced long-lived access keys, and how AWS, Azure, and GCP toolchains compare side-by-side.</p>
           <div class="cta-buttons">
             <a href="#anatomy" class="btn btn-primary">Pipeline anatomy →</a>
             <a href="#comparison" class="btn btn-secondary">AWS / Azure / GCP comparison</a>
@@ -302,8 +302,8 @@
 
               <rect x="360" y="195" width="80" height="90" rx="10" fill="url(#cicd-stage)" stroke="#fb7185" stroke-width="2"/>
               <text x="400" y="225" text-anchor="middle" fill="#fb7185" font-size="12" font-weight="700">Scan</text>
-              <text x="400" y="245" text-anchor="middle" fill="#e2e8f0" font-size="9">SAST/SCA</text>
-              <text x="400" y="260" text-anchor="middle" fill="#e2e8f0" font-size="9">IaC scan</text>
+              <text x="400" y="245" text-anchor="middle" fill="#e2e8f0" font-size="9"><a class="glossary-link" href="glossary.html#term-sast">SAST</a>/<a class="glossary-link" href="glossary.html#term-sca">SCA</a></text>
+              <text x="400" y="260" text-anchor="middle" fill="#e2e8f0" font-size="9"><a class="glossary-link" href="glossary.html#term-iac">IaC</a> scan</text>
             </g>
             <!-- Cloud target -->
             <path d="M 460,180 a 40,40 0 0,1 50,-40 a 55,55 0 0,1 80,0 a 35,35 0 0,1 -10,80 H 470 a 35,35 0 0,1 -10,-40 z" fill="url(#cicd-cloud)" stroke="#fff" stroke-width="1.5" stroke-opacity="0.4"/>
@@ -341,8 +341,8 @@
         <p class="page-meta"><time datetime="2026-05-15">Last updated <strong>2026-05-15</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/ci-cd.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
 
         <div class="info-box--blue">
-            <p><strong>The 30-second version:</strong> A <strong>CI/CD pipeline</strong> takes a developer's commit and turns it into running cloud infrastructure — automatically, repeatably, and with a security boundary at every step. <em>CI</em> (continuous integration) builds and tests the change; <em>CD</em> (continuous delivery / deployment) ships it to a cloud account.</p>
-            <p style="margin-top:0.75rem;">The modern shape: a <strong>git push</strong> triggers a <strong>pipeline runner</strong> (GitHub Actions, GitLab CI, Jenkins, CodePipeline, Cloud Build, Azure DevOps), which builds an artifact, runs tests and security scans, then assumes a <strong>short-lived cloud role</strong> via <strong>OIDC federation</strong> — no long-lived access keys anywhere — and applies the change. Every step is in version control. Every step is auditable. The pipeline is the only identity allowed to change production.</p>
+            <p><strong>The 30-second version:</strong> A <strong><a class="glossary-link" href="glossary.html#term-ci-cd">CI</a>/CD pipeline</strong> takes a developer's commit and turns it into running cloud infrastructure — automatically, repeatably, and with a security boundary at every step. <em>CI</em> (continuous integration) builds and tests the change; <em>CD</em> (continuous delivery / deployment) ships it to a cloud account.</p>
+            <p style="margin-top:0.75rem;">The modern shape: a <strong>git push</strong> triggers a <strong>pipeline runner</strong> (GitHub Actions, GitLab CI, Jenkins, CodePipeline, Cloud Build, Azure DevOps), which builds an artifact, runs tests and security scans, then assumes a <strong>short-lived cloud role</strong> via <strong><a class="glossary-link" href="glossary.html#term-oidc-federation">OIDC federation</a></strong> — no long-lived access keys anywhere — and applies the change. Every step is in version control. Every step is auditable. The pipeline is the only identity allowed to change production.</p>
         </div>
 
         <div class="toc">
@@ -372,17 +372,17 @@
             <p><strong>Continuous Integration (CI)</strong> is the practice of merging code changes into a shared branch frequently — many times per day per developer — and having an automated build and test run on every merge. The point is that problems surface in minutes, not at the end of a multi-week integration phase. CI is what makes "main is always green" a realistic goal.</p>
             <p><strong>Continuous Delivery (CD)</strong> extends the pipeline so every passing build is automatically packaged into a deployable artifact and shipped to a staging environment. A human still clicks "release to production." <strong>Continuous Deployment</strong> goes one step further: every passing build is automatically released to production, with the pipeline's automated checks and progressive rollout as the safety net.</p>
             <p>In practice, the acronym "CD" stretches over both. What matters is the pipeline shape: <em>commit → build → test → scan → deploy</em>, automated end-to-end, with the cloud-side credentials short-lived and tightly scoped.</p>
-            <p>None of this is cloud-specific in principle. It became <em>essential</em> for cloud because cloud infrastructure is itself code — every account, every network, every IAM role — and the pipeline is the only sustainable way to keep that code in sync with reality across dozens of environments.</p>
+            <p>None of this is cloud-specific in principle. It became <em>essential</em> for cloud because cloud infrastructure is itself code — every account, every network, every <a class="glossary-link" href="glossary.html#term-iam">IAM</a> role — and the pipeline is the only sustainable way to keep that code in sync with reality across dozens of environments.</p>
         </section>
 
         <section id="why">
             <h2>Why it matters for cloud deployments</h2>
             <p>Two teams running the same workload in the cloud. Both deploy to AWS, Azure, or GCP.</p>
-            <p><strong>Team A</strong> deploys from a developer laptop. The laptop has a long-lived access key with broad permissions. The Terraform state lives on someone's hard drive. When the original engineer goes on vacation, nobody knows what version is in prod or how to roll it back. When a credential leaks to GitHub, the blast radius is "everything that engineer had access to" — usually most of the account.</p>
+            <p><strong>Team A</strong> deploys from a developer laptop. The laptop has a long-lived access key with broad permissions. The <a class="glossary-link" href="glossary.html#term-terraform">Terraform</a> state lives on someone's hard drive. When the original engineer goes on vacation, nobody knows what version is in prod or how to roll it back. When a credential leaks to GitHub, the <a class="glossary-link" href="glossary.html#term-blast-radius">blast radius</a> is "everything that engineer had access to" — usually most of the account.</p>
             <p><strong>Team B</strong> deploys from a pipeline. The pipeline runs in CI, authenticates to the cloud via OIDC for a session that lasts 15 minutes, applies a Terraform plan reviewed in a pull request, and writes the state to a remote backend with locking. Every deploy is in git history. Rolling back is reverting a commit. When a developer's laptop is compromised, the attacker gets nothing useful for production — the developer cannot deploy directly.</p>
             <p>The CI/CD pipeline is the difference between those two paths. It's the operational expression of three security principles at once:</p>
             <ul>
-                <li><strong>Least privilege</strong> — the pipeline's role has exactly the permissions needed for one workload's deploy, and exists only for the seconds it runs.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-least-privilege">Least privilege</a></strong> — the pipeline's role has exactly the permissions needed for one workload's deploy, and exists only for the seconds it runs.</li>
                 <li><strong>Separation of duties</strong> — humans review code; the pipeline executes it. No human has standing write access to production.</li>
                 <li><strong>Auditability</strong> — every production change has a commit, a reviewer, and a pipeline run id. The audit answer is "look at git."</li>
             </ul>
@@ -411,7 +411,7 @@
                 </div>
                 <div class="pillar-card pillar-card-compliance">
                     <h3>5. Sign &amp; attest</h3>
-                    <p>Sign the artifact (Cosign / Sigstore). Attach provenance attestations (<a class="glossary-link" href="glossary.html#term-slsa">SLSA</a>) so the deploy target can verify what built it.</p>
+                    <p>Sign the artifact (<a class="glossary-link" href="glossary.html#term-sigstore">Cosign</a> / Sigstore). Attach provenance attestations (<a class="glossary-link" href="glossary.html#term-slsa">SLSA</a>) so the deploy target can verify what built it.</p>
                 </div>
                 <div class="pillar-card pillar-card-data">
                     <h3>6. Authenticate to cloud</h3>
@@ -419,7 +419,7 @@
                 </div>
                 <div class="pillar-card pillar-card-supply">
                     <h3>7. Deploy</h3>
-                    <p>Terraform apply, helm upgrade, gcloud run deploy, az deployment, kubectl apply, ECS / Lambda / Functions update. Progressive rollout where possible (canary, blue/green).</p>
+                    <p>Terraform apply, helm upgrade, gcloud run deploy, az deployment, kubectl apply, <a class="glossary-link" href="glossary.html#term-ecs">ECS</a> / <a class="glossary-link" href="glossary.html#term-lambda">Lambda</a> / Functions update. Progressive rollout where possible (canary, blue/green).</p>
                 </div>
                 <div class="pillar-card pillar-card-workload">
                     <h3>8. Verify &amp; observe</h3>
@@ -434,7 +434,7 @@
             <p>If there's one thing to take from this page, it's this: <strong>do not store long-lived cloud access keys in your CI system.</strong> Use OIDC federation instead.</p>
             <p>The pattern works the same way on every cloud:</p>
             <ol>
-                <li>Your CI runner (GitHub Actions, GitLab, CircleCI, Buildkite, Jenkins with a plugin) is configured as an <strong>OIDC identity provider</strong>. Every workflow run gets a unique, short-lived signed JWT describing <em>which repo, which branch, which workflow, which run, which actor</em>.</li>
+                <li>Your CI runner (GitHub Actions, GitLab, CircleCI, Buildkite, Jenkins with a plugin) is configured as an <strong>OIDC <a class="glossary-link" href="glossary.html#term-idp">identity provider</a></strong>. Every workflow run gets a unique, short-lived signed <a class="glossary-link" href="glossary.html#term-jwt">JWT</a> describing <em>which repo, which branch, which workflow, which run, which actor</em>.</li>
                 <li>The cloud side trusts that issuer for specific subject claims. AWS IAM, Azure Entra, and Google Cloud all support this out of the box.</li>
                 <li>When the pipeline needs to deploy, it presents its OIDC token. The cloud verifies the issuer's signature, checks the subject matches a configured trust, and returns short-lived credentials (15 minutes to 1 hour) scoped to a specific role.</li>
                 <li>The pipeline uses those credentials, then they expire.</li>
@@ -444,9 +444,9 @@
                 <li><strong>No secrets to rotate</strong> — there's nothing in CI to rotate. The trust is configured once, in the cloud.</li>
                 <li><strong>No secrets to leak</strong> — there are no long-lived keys to exfiltrate from a compromised workflow or repo. The OIDC token expires in minutes and is bound to one workflow run.</li>
                 <li><strong>Tight scoping</strong> — trust can be scoped to <code>repo:myorg/myrepo:ref:refs/heads/main</code>. A workflow from a fork or feature branch <em>cannot</em> assume the production role.</li>
-                <li><strong>Audit clarity</strong> — every cloud API call carries the OIDC subject in CloudTrail / Azure activity log / Cloud Audit Logs. You can trace every production change back to a specific workflow run.</li>
+                <li><strong>Audit clarity</strong> — every cloud API call carries the OIDC subject in <a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a> / Azure activity log / Cloud Audit Logs. You can trace every production change back to a specific workflow run.</li>
             </ul>
-            <p>Long-lived access keys in CI are now considered a legacy pattern — virtually every leak postmortem from the last several years (Travis CI 2022, CircleCI 2023, dependency confusion incidents) features one. OIDC removes the secret entirely.</p>
+            <p>Long-lived access keys in CI are now considered a legacy pattern — virtually every leak postmortem from the last several years (Travis CI 2022, CircleCI 2023, <a class="glossary-link" href="glossary.html#term-dependency-confusion">dependency confusion</a> incidents) features one. OIDC removes the secret entirely.</p>
             <div class="info-box--amber" style="margin-top:1.25rem;">
                 <p><strong>Trust scoping is the security boundary.</strong> When you configure OIDC on the cloud side, the subject claim is what stands between your production role and any random pull request. Scope to <code>ref:refs/heads/main</code> at minimum. Scope to specific <code>environment:</code> claims if your CI supports them. Never accept a wildcard subject — that's equivalent to leaving the role open to every workflow run in your repo, including untrusted fork PRs.</p>
             </div>
@@ -481,19 +481,19 @@
                         </tr>
                         <tr>
                             <th scope="row">Artifact registry</th>
-                            <td>ECR, CodeArtifact, S3</td>
+                            <td>ECR, CodeArtifact, <a class="glossary-link" href="glossary.html#term-s3">S3</a></td>
                             <td>Azure Container Registry, Artifacts</td>
                             <td>Artifact Registry</td>
                         </tr>
                         <tr>
                             <th scope="row">OIDC federation</th>
                             <td>IAM OIDC provider + role with trust on <code>token.actions.githubusercontent.com</code></td>
-                            <td>Workload identity federation in Entra ID app registration</td>
+                            <td><a class="glossary-link" href="glossary.html#term-wif">Workload identity federation</a> in <a class="glossary-link" href="glossary.html#term-entra-id">Entra ID</a> app registration</td>
                             <td>Workload Identity Federation pool + provider</td>
                         </tr>
                         <tr>
                             <th scope="row">Container deploy target</th>
-                            <td>ECS, EKS, App Runner, Lambda</td>
+                            <td>ECS, <a class="glossary-link" href="glossary.html#term-eks">EKS</a>, App Runner, Lambda</td>
                             <td>AKS, Container Apps, App Service, Functions</td>
                             <td>GKE, Cloud Run, Cloud Functions</td>
                         </tr>
@@ -517,12 +517,12 @@
                         </tr>
                         <tr>
                             <th scope="row">Secret store</th>
-                            <td>Secrets Manager, SSM Parameter Store</td>
-                            <td>Key Vault</td>
+                            <td><a class="glossary-link" href="glossary.html#term-secrets-manager">Secrets Manager</a>, SSM Parameter Store</td>
+                            <td><a class="glossary-link" href="glossary.html#term-key-vault">Key Vault</a></td>
                             <td>Secret Manager</td>
                         </tr>
                         <tr>
-                            <th scope="row">GitOps option</th>
+                            <th scope="row"><a class="glossary-link" href="glossary.html#term-gitops">GitOps</a> option</th>
                             <td>Argo CD / Flux on EKS, AWS Proton</td>
                             <td>Argo CD / Flux on AKS, GitOps for AKS (Flux extension)</td>
                             <td>Argo CD / Flux on GKE, Config Sync</td>
@@ -531,7 +531,7 @@
                 </table>
             </div>
 
-            <p>Anyone who's built a CI/CD pipeline on one cloud has 80% of the conceptual model needed to build one on another. The remaining 20% is the IAM/Entra/Workload Identity specifics and the deploy primitives of each platform.</p>
+            <p>Anyone who's built a CI/CD pipeline on one cloud has 80% of the conceptual model needed to build one on another. The remaining 20% is the IAM/Entra/<a class="glossary-link" href="glossary.html#term-service-account">Workload Identity</a> specifics and the deploy primitives of each platform.</p>
         </section>
 
         <section id="aws">
@@ -542,26 +542,26 @@
             <h3>The key AWS-specific decisions</h3>
             <ul>
                 <li><strong>One deploy role per environment, not one per pipeline.</strong> Production gets a role; staging gets a role; sandbox gets a role. The trust policy on the prod role only matches the main branch.</li>
-                <li><strong>Permission boundary on the deploy role.</strong> The role can deploy your workload but can't escalate — it cannot create new IAM users, cannot change its own trust policy, cannot disable CloudTrail.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-permission-boundary">Permission boundary</a> on the deploy role.</strong> The role can deploy your workload but can't escalate — it cannot create new IAM users, cannot change its own trust policy, cannot disable CloudTrail.</li>
                 <li><strong>CodeDeploy for canary/linear deployments</strong> on Lambda and ECS — pre-built rollout patterns with automated rollback on CloudWatch alarms.</li>
                 <li><strong>ECR + image scanning enhanced</strong> — Amazon Inspector continuous scanning on every push.</li>
                 <li><strong>State backend in S3 + DynamoDB</strong> for Terraform — versioned bucket, lock table, restricted to the deploy role.</li>
             </ul>
-            <p>For the in-AWS-only path: CodePipeline orchestrates, CodeBuild runs the build, CodeDeploy handles progressive rollout. It's heavier to set up than GitHub Actions + OIDC but keeps the entire pipeline inside the AWS account boundary — useful for FedRAMP / regulated workloads.</p>
+            <p>For the in-AWS-only path: CodePipeline orchestrates, CodeBuild runs the build, CodeDeploy handles progressive rollout. It's heavier to set up than GitHub Actions + OIDC but keeps the entire pipeline inside the AWS account boundary — useful for <a class="glossary-link" href="glossary.html#term-fedramp">FedRAMP</a> / regulated workloads.</p>
         </section>
 
         <section id="azure">
             <h2>Azure — Azure DevOps, GitHub Actions, Workload Identity</h2>
             <p>Azure customers split roughly between Azure DevOps Pipelines (Microsoft's hosted CI/CD, still widely used) and GitHub Actions (also Microsoft-owned, now the default for new projects). Both authenticate to Azure the same way: <a href="https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation" target="_blank" rel="noopener noreferrer">workload identity federation</a>.</p>
             <h3>The OIDC setup</h3>
-            <p>Create an app registration in Entra ID. Add a federated identity credential that trusts your CI's OIDC issuer — <code>https://token.actions.githubusercontent.com</code> for GitHub Actions, or the Azure DevOps issuer URL. Assign the app the minimum RBAC role on the target subscription or resource group. In the pipeline, use <a href="https://github.com/Azure/login" target="_blank" rel="noopener noreferrer">Azure/login</a> with <code>client-id</code>, <code>tenant-id</code>, <code>subscription-id</code> — no <code>client-secret</code>.</p>
+            <p>Create an app registration in Entra ID. Add a federated identity credential that trusts your CI's OIDC issuer — <code>https://token.actions.githubusercontent.com</code> for GitHub Actions, or the Azure DevOps issuer URL. Assign the app the minimum <a class="glossary-link" href="glossary.html#term-rbac">RBAC</a> role on the target subscription or resource group. In the pipeline, use <a href="https://github.com/Azure/login" target="_blank" rel="noopener noreferrer">Azure/login</a> with <code>client-id</code>, <code>tenant-id</code>, <code>subscription-id</code> — no <code>client-secret</code>.</p>
             <h3>The key Azure-specific decisions</h3>
             <ul>
-                <li><strong>Service principal vs managed identity.</strong> For CI running outside Azure, use a service principal (app registration) with federated credentials. For CI running inside Azure (a self-hosted runner on a VM), prefer a managed identity — no federation needed.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-service-principal">Service principal</a> vs managed identity.</strong> For CI running outside Azure, use a service principal (app registration) with federated credentials. For CI running inside Azure (a self-hosted runner on a VM), prefer a managed identity — no federation needed.</li>
                 <li><strong>Scope RBAC to the resource group, not the subscription.</strong> The deploy identity should be Contributor on the workload's resource group, not the whole sub.</li>
                 <li><strong>Azure Pipelines environments</strong> with approval gates — production deploys require a named approver, enforced by the pipeline.</li>
                 <li><strong>Container Apps revisions</strong> for blue/green-style cutovers — multiple revisions live simultaneously with traffic splits between them.</li>
-                <li><strong>Bicep is the modern path</strong>; ARM templates work but are verbose. Terraform with the AzureRM provider is the vendor-neutral option used by most multi-cloud orgs.</li>
+                <li><strong>Bicep is the modern path</strong>; ARM templates work but are verbose. Terraform with the AzureRM provider is the vendor-neutral option used by most <a class="glossary-link" href="glossary.html#term-public">multi-cloud</a> orgs.</li>
             </ul>
             <p>Workload identity federation on Azure is the same security shape as OIDC on AWS — short-lived tokens, no client secrets, scoped to a specific repo and branch. The configuration is in Entra rather than IAM, but the threat model is identical.</p>
         </section>
@@ -578,7 +578,7 @@
                 <li><strong>Binary Authorization on GKE and Cloud Run</strong> — only deploy images that have been signed by your pipeline. Attestor-based admission rejects unsigned images at deploy time.</li>
                 <li><strong>Cloud Run revisions with traffic splits</strong> — deploy a new revision, send 1% of traffic to it, ramp up. Rollback is one <code>gcloud run services update-traffic</code>.</li>
                 <li><strong>Cloud Deploy delivery pipelines</strong> for promotion through dev → staging → prod with approval gates between stages.</li>
-                <li><strong>Artifact Registry vulnerability scanning</strong> on every push, integrated with Security Command Center.</li>
+                <li><strong>Artifact Registry vulnerability scanning</strong> on every push, integrated with <a class="glossary-link" href="glossary.html#term-guardduty">Security Command Center</a>.</li>
             </ul>
             <p>The Cloud Build + Cloud Deploy + Artifact Registry trio is the most cohesive native CI/CD stack of the three big clouds — for a workload that lives entirely on GCP and uses containerized deploys, it's the path of least resistance.</p>
         </section>
@@ -601,7 +601,7 @@
                 </div>
                 <div class="pillar-card pillar-card-stage2">
                     <h3>Rolling</h3>
-                    <p>Replace instances one batch at a time (10% → 25% → 50% → 100%). No extra capacity, no outage during deploy, but rollback is slow because you're rolling backward through the same process. The default for Kubernetes deployments.</p>
+                    <p>Replace instances one batch at a time (10% → 25% → 50% → 100%). No extra capacity, no outage during deploy, but rollback is slow because you're rolling backward through the same process. The default for <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a> deployments.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage3">
                     <h3>Blue/green</h3>
@@ -631,10 +631,10 @@
                 <li><strong>Pin actions and runners by SHA, not tag.</strong> Tags are mutable. A third-party action pinned to <code>@v1</code> can be replaced under your feet; pinned to a commit SHA, it cannot. Dependabot updates the pin atomically.</li>
                 <li><strong>Restrict who can modify workflows.</strong> Workflow files are code that runs with deploy credentials. CODEOWNERS the <code>.github/workflows/</code> directory; require security-team review for changes.</li>
                 <li><strong>Ephemeral, isolated runners.</strong> Self-hosted runners should be ephemeral (one job per VM, destroyed after) and network-isolated from any environment they don't deploy to. The 2022 SolarWinds-style attacks rely on long-lived shared runners.</li>
-                <li><strong>Secrets scoped to environments.</strong> If you must store secrets in CI (API tokens for third-party SaaS, for example), scope them to environments that require approval to access. GitHub Actions environments, Azure Pipelines environments, and GitLab protected environments all do this.</li>
+                <li><strong>Secrets scoped to environments.</strong> If you must store secrets in CI (API tokens for third-party <a class="glossary-link" href="glossary.html#term-saas">SaaS</a>, for example), scope them to environments that require approval to access. GitHub Actions environments, Azure Pipelines environments, and GitLab protected environments all do this.</li>
                 <li><strong>Sign and verify artifacts.</strong> Build artifacts get signed (Cosign, Sigstore); deploy targets verify the signature before accepting (Binary Authorization on GCP, Kyverno / Cosign-policy-controller on Kubernetes).</li>
-                <li><strong>SBOM and provenance.</strong> Generate an <a class="glossary-link" href="glossary.html#term-sbom">SBOM</a> for every build; emit <a class="glossary-link" href="glossary.html#term-slsa">SLSA</a> provenance attestations. When a CVE drops, the answer to "which prod systems are affected" is a query, not a meeting.</li>
-                <li><strong>Audit pipeline runs the same as cloud activity.</strong> Pipeline logs flow to the same SIEM as CloudTrail / Azure activity / Cloud Audit Logs. The pipeline is part of the security perimeter.</li>
+                <li><strong>SBOM and <a class="glossary-link" href="glossary.html#term-provenance">provenance</a>.</strong> Generate an SBOM for every build; emit SLSA provenance attestations. When a <a class="glossary-link" href="glossary.html#term-cve">CVE</a> drops, the answer to "which prod systems are affected" is a query, not a meeting.</li>
+                <li><strong>Audit pipeline runs the same as cloud activity.</strong> Pipeline logs flow to the same <a class="glossary-link" href="glossary.html#term-siem">SIEM</a> as CloudTrail / Azure activity / Cloud Audit Logs. The pipeline is part of the security perimeter.</li>
             </ul>
         </section>
 
@@ -644,7 +644,7 @@
             <p>The typical IaC pipeline shape:</p>
             <ol>
                 <li><strong>Format &amp; validate</strong> — <code>terraform fmt -check</code>, <code>terraform validate</code>. Trivially cheap, catches typos before review.</li>
-                <li><strong>Policy scan</strong> — Checkov, tfsec, Trivy, Open Policy Agent / Conftest, or your CSPM/CNAPP's IaC scanner. Blocks merges that violate guardrails (public buckets, unencrypted disks, IAM wildcards).</li>
+                <li><strong>Policy scan</strong> — Checkov, tfsec, Trivy, <a class="glossary-link" href="glossary.html#term-opa">Open Policy Agent</a> / Conftest, or your <a class="glossary-link" href="glossary.html#term-cspm">CSPM</a>/<a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a>'s IaC scanner. Blocks merges that violate <a class="glossary-link" href="glossary.html#term-guardrails">guardrails</a> (public buckets, unencrypted disks, IAM wildcards).</li>
                 <li><strong>Plan on pull request</strong> — <code>terraform plan</code> output posted as a PR comment. Reviewers see exactly what will change.</li>
                 <li><strong>Apply on merge to main</strong> — pipeline assumes deploy role via OIDC, runs <code>terraform apply</code>, writes state to the remote backend. State backend access is restricted to the deploy role.</li>
                 <li><strong>Drift detection on a schedule</strong> — periodic plan-only runs alert when reality has drifted from code (someone clicked something in the console). Drift is the canary for broken IaC discipline.</li>
@@ -664,7 +664,7 @@
                 <li><strong>Add tests.</strong> Unit tests in the CI side; smoke tests in CD. End-to-end tests on the deployed environment.</li>
                 <li><strong>Split prod from non-prod environments.</strong> Different deploy roles. Different trust policies. Different state backends. Production trust scoped to the main branch only; non-prod can be looser.</li>
                 <li><strong>Add a deploy strategy beyond all-at-once.</strong> Rolling or canary, depending on the workload. Wire an automated rollback signal — error rate threshold, healthcheck failure, alarm trip.</li>
-                <li><strong>Wire pipeline observability.</strong> Slack/Teams notifications on failure. Pipeline run audit log into your SIEM. Metrics on deploy frequency, lead time, change failure rate, MTTR (the <a href="https://dora.dev" target="_blank" rel="noopener noreferrer">DORA metrics</a>).</li>
+                <li><strong>Wire pipeline observability.</strong> Slack/Teams notifications on failure. Pipeline run audit log into your SIEM. Metrics on deploy frequency, lead time, change failure rate, <a class="glossary-link" href="glossary.html#term-mttd">MTTR</a> (the <a href="https://dora.dev" target="_blank" rel="noopener noreferrer">DORA metrics</a>).</li>
             </ol>
             <p>Realistic time investment for a small team: a couple of weeks to a minimally-credible production pipeline; a quarter or two to one that you'd be comfortable scaling to ten more workloads on.</p>
         </section>
@@ -726,7 +726,7 @@
             <p>Continuous Integration (CI) is the build/test side — merging code changes frequently and verifying each merge automatically. Continuous Delivery (CD) is the deploy side — every passing build is automatically packaged and shippable, with a human gating the final release. Continuous Deployment automates the final step too: every passing build goes to production. "CI/CD" as a phrase covers all of it.</p>
 
             <h3>Should I use the cloud's native CI/CD or a third-party tool?</h3>
-            <p>For most teams, GitHub Actions (or your existing CI) for build/test and the cloud's native primitives for deploy targets is the right answer. The cloud-native CI services (CodePipeline, Azure DevOps, Cloud Build) are credible but rarely a reason to leave a tool your team already uses. The exception is regulated environments where keeping the entire pipeline inside the cloud account boundary simplifies compliance.</p>
+            <p>For most teams, GitHub Actions (or your existing CI) for build/test and the cloud's native primitives for deploy targets is the right answer. The <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> CI services (CodePipeline, Azure DevOps, Cloud Build) are credible but rarely a reason to leave a tool your team already uses. The exception is regulated environments where keeping the entire pipeline inside the cloud account boundary simplifies compliance.</p>
 
             <h3>Do I need progressive delivery for a small project?</h3>
             <p>Not on day one. A static site or a single-team prototype can do all-at-once deploys safely — the blast radius is small and the rollback is fast. Reach for canary or blue/green when the cost of a bad deploy (real users seeing errors, real money lost) is higher than the cost of running the extra capacity.</p>
@@ -743,8 +743,8 @@
             <h3>Can I do CI/CD without containers?</h3>
             <p>Yes. The pipeline pattern is independent of the artifact type. Lambda zips, VM images (Packer), unikernels, static site bundles, Terraform plans — all flow through the same eight stages. Containers happen to be the dominant artifact today because they unify build + runtime; the CI/CD shape is older than containers and survives them.</p>
 
-            <h3>How does this relate to <a class="glossary-link" href="glossary.html#term-zero-trust">zero trust</a>?</h3>
-            <p>The pipeline operationalizes zero trust at the deploy layer. "Verify explicitly" is OIDC federation — every deploy is a fresh authentication with a fresh subject claim. "Least privilege" is per-environment deploy roles with permission boundaries. "Assume breach" is auditability — every change traces to a commit, a reviewer, and a run id, so a compromise has a finite, observable blast radius.</p>
+            <h3>How does this relate to zero trust?</h3>
+            <p>The pipeline operationalizes <a class="glossary-link" href="glossary.html#term-zero-trust">zero trust</a> at the deploy layer. "Verify explicitly" is OIDC federation — every deploy is a fresh authentication with a fresh subject claim. "Least privilege" is per-environment deploy roles with permission boundaries. "Assume breach" is auditability — every change traces to a commit, a reviewer, and a run id, so a compromise has a finite, observable blast radius.</p>
         </section>
 
         <section class="cta-section">

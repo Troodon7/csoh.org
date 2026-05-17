@@ -64,6 +64,39 @@ TARGET_PAGES = [
     "privacy.html",
     "security-policy.html",
     "about-shawn-nunley.html",
+    # May 2026 build-out: discipline & topic reference pages
+    "iam.html",
+    "zero-trust.html",
+    "network-security.html",
+    "data-security.html",
+    "vulnerability-management.html",
+    "api-security.html",
+    "saas-security.html",
+    "backup-dr.html",
+    "threat-modeling.html",
+    "service-mesh-security.html",
+    "detection-engineering.html",
+    "incident-response.html",
+    "cloud-pentesting.html",
+    "grc.html",
+    "compliance-frameworks.html",
+    "ai-ml-security.html",
+    "ai-learning.html",
+    "landing-zones.html",
+    "containers.html",
+    "kubernetes.html",
+    "serverless.html",
+    "ci-cd.html",
+    "cloud-soc.html",
+    # Per-cloud SEO hubs
+    "aws-security.html",
+    "azure-security.html",
+    "gcp-security.html",
+    "cloud-security-comparison.html",
+    # Vendor directory
+    "vendor-landscape.html",
+    # Behind-the-scenes
+    "cloud-deployment.html",
 ]
 
 # Subdirectory pages (per-breach, per-meeting) are auto-discovered rather

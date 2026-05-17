@@ -267,7 +267,7 @@
       <div class="hero-inner">
         <div class="hero-text">
           <h1>Landing Zones &amp; Cloud Foundations</h1>
-          <p>The baseline of accounts, identities, networks, logging, and guardrails every workload lands into. Vendor-neutral guide to what a foundation is, the building blocks every one has, and how AWS, Azure, and GCP reference designs compare.</p>
+          <p>The baseline of accounts, identities, networks, logging, and <a class="glossary-link" href="glossary.html#term-guardrails">guardrails</a> every workload lands into. Vendor-neutral guide to what a foundation is, the building blocks every one has, and how AWS, Azure, and GCP reference designs compare.</p>
           <div class="cta-buttons">
             <a href="#building-blocks" class="btn btn-primary">Building blocks →</a>
             <a href="#comparison" class="btn btn-secondary">AWS / Azure / GCP comparison</a>
@@ -288,9 +288,9 @@
             <!-- Foundation layers as stacked rectangles -->
             <g stroke="rgba(255,255,255,0.2)" stroke-width="1">
               <rect x="100" y="200" width="400" height="40" rx="6" fill="url(#lz-tile)"/>
-              <text x="300" y="225" text-anchor="middle" fill="#a78bfa" font-size="13" font-weight="600">Identity &amp; SSO</text>
+              <text x="300" y="225" text-anchor="middle" fill="#a78bfa" font-size="13" font-weight="600">Identity &amp; <a class="glossary-link" href="glossary.html#term-sso">SSO</a></text>
               <rect x="100" y="245" width="400" height="40" rx="6" fill="url(#lz-tile)"/>
-              <text x="300" y="270" text-anchor="middle" fill="#7dd3fc" font-size="13" font-weight="600">Shared Network (VPC / VNet)</text>
+              <text x="300" y="270" text-anchor="middle" fill="#7dd3fc" font-size="13" font-weight="600">Shared Network (<a class="glossary-link" href="glossary.html#term-vpc">VPC</a> / VNet)</text>
               <rect x="100" y="290" width="400" height="40" rx="6" fill="url(#lz-tile)"/>
               <text x="300" y="315" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="600">Centralized Logging</text>
               <rect x="100" y="335" width="400" height="40" rx="6" fill="url(#lz-tile)"/>
@@ -298,7 +298,7 @@
             </g>
             <!-- Floor base -->
             <rect x="80" y="395" width="440" height="22" rx="4" fill="url(#lz-floor)" stroke="#b45309" stroke-width="1.5"/>
-            <text x="300" y="411" text-anchor="middle" fill="#451a03" font-size="13" font-weight="700">Foundation (Terraform / IaC)</text>
+            <text x="300" y="411" text-anchor="middle" fill="#451a03" font-size="13" font-weight="700">Foundation (<a class="glossary-link" href="glossary.html#term-terraform">Terraform</a> / <a class="glossary-link" href="glossary.html#term-iac">IaC</a>)</text>
             <!-- Workload tiles landing on top -->
             <g>
               <rect x="125" y="155" width="60" height="35" rx="6" fill="#1e293b" stroke="#fb7185" stroke-width="1.5"/>
@@ -338,7 +338,7 @@
         <p class="page-meta"><time datetime="2026-05-15">Last updated <strong>2026-05-15</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/landing-zones.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
 
         <div class="info-box--blue">
-            <p><strong>The 30-second version:</strong> A <strong>landing zone</strong> (a.k.a. <strong>cloud foundation</strong>) is the baseline of <em>accounts, identities, networks, logging sinks, and guardrails</em> that workloads land into when they're deployed. The point is that every workload — the second one, the fiftieth, the five-hundredth — starts from the same identity model, network segmentation, log aggregation, and <a class="glossary-link" href="glossary.html#term-policy-as-code">policy-as-code</a> guardrails, instead of whatever the team that built it decided in the moment.</p>
+            <p><strong>The 30-second version:</strong> A <strong><a class="glossary-link" href="glossary.html#term-landing-zone">landing zone</a></strong> (a.k.a. <strong>cloud foundation</strong>) is the baseline of <em>accounts, identities, networks, logging sinks, and guardrails</em> that workloads land into when they're deployed. The point is that every workload — the second one, the fiftieth, the five-hundredth — starts from the same identity model, network segmentation, log aggregation, and <a class="glossary-link" href="glossary.html#term-policy-as-code">policy-as-code</a> guardrails, instead of whatever the team that built it decided in the moment.</p>
             <p style="margin-top:0.75rem;">Every cloud has a reference design: AWS <strong>Control Tower / Landing Zone Accelerator</strong>, Azure <strong>Cloud Adoption Framework landing zones</strong>, GCP <strong>Enterprise Foundations Blueprint</strong>. The shapes look different; the building blocks underneath are the same.</p>
         </div>
 
@@ -366,8 +366,8 @@
             <p>Strip the marketing off and a landing zone is six concrete things, deployed once and reused by every workload that follows:</p>
             <ol>
                 <li>A <strong>resource hierarchy</strong> — folders or organizational units that group accounts/subscriptions/projects by environment and business unit.</li>
-                <li>An <strong>identity baseline</strong> — your <a class="glossary-link" href="glossary.html#term-sso">SSO</a> provider federated to the cloud, group-based access, no long-lived root credentials.</li>
-                <li>A <strong>shared network</strong> — central VPC/VNet topology (often hub-and-spoke), private connectivity to on-prem, no public egress by default.</li>
+                <li>An <strong>identity baseline</strong> — your SSO provider federated to the cloud, group-based access, no long-lived root credentials.</li>
+                <li>A <strong>shared network</strong> — central VPC/VNet topology (often hub-and-spoke), private connectivity to on-prem, no public <a class="glossary-link" href="glossary.html#term-ingress">egress</a> by default.</li>
                 <li>A <strong>logging spine</strong> — aggregated audit, flow, and resource logs flowing to a centralized security project for long-term retention.</li>
                 <li>A <strong>policy spine</strong> — organization-level guardrails that pre-block risky configurations everywhere (no public buckets, no internet-routable SGs in prod, no unencrypted databases).</li>
                 <li>A <strong>delivery pipeline</strong> — the IaC repository, review process, and deploy pipeline that's the only thing allowed to change foundation resources.</li>
@@ -378,7 +378,7 @@
         <section id="why">
             <h2>Why it exists — the problem it solves</h2>
             <p>Two organizations adopt cloud. Both end up with 200 workloads after three years.</p>
-            <p><strong>Org A</strong> built their first workload by hand. Team-by-team, every subsequent workload made similar decisions independently — its own log destination, its own VPC, its own IAM role naming, its own MFA enforcement. Audit asks "where are all your CloudTrail logs going?" and the answer is "uh, depends on the team." Their <a class="glossary-link" href="glossary.html#term-blast-radius">blast radius</a> is the whole org because a compromise in one workload's permissions can reach others' data.</p>
+            <p><strong>Org A</strong> built their first workload by hand. Team-by-team, every subsequent workload made similar decisions independently — its own log destination, its own VPC, its own IAM role naming, its own MFA enforcement. Audit asks "where are all your <a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a> logs going?" and the answer is "uh, depends on the team." Their <a class="glossary-link" href="glossary.html#term-blast-radius">blast radius</a> is the whole org because a compromise in one workload's permissions can reach others' data.</p>
             <p><strong>Org B</strong> stood up a landing zone first. Their second workload landed on it, then their fiftieth, then their two-hundredth. All 200 dump logs into the same security project, use the same SSO groups for access, sit in the same Shared VPC with the same egress controls, and are pre-blocked by the same org policies from creating public buckets in prod. Audit asks the same question; the answer is "one project, here's the dashboard."</p>
             <p>The landing zone is the difference between those two paths. It's not faster on day one — it's slower. It pays off on day 200, when the cost of fixing 199 different patterns is much higher than the cost of building one good pattern up front.</p>
             <p>The same logic applies at smaller scale: any time you have <em>more than one team</em> deploying to <em>more than one environment</em>, the foundation eliminates a whole class of "where does this go?" decisions.</p>
@@ -394,7 +394,7 @@
                 </div>
                 <div class="pillar-card pillar-card-posture">
                     <h3>2. Identity &amp; SSO</h3>
-                    <p>Your IdP (Okta, Entra, Google Workspace) federated to the cloud. Group-based access, no long-lived root keys, MFA enforced everywhere.</p>
+                    <p>Your <a class="glossary-link" href="glossary.html#term-idp">IdP</a> (Okta, Entra, Google Workspace) federated to the cloud. Group-based access, no long-lived root keys, <a class="glossary-link" href="glossary.html#term-mfa">MFA</a> enforced everywhere.</p>
                 </div>
                 <div class="pillar-card pillar-card-network">
                     <h3>3. Shared network</h3>
@@ -402,15 +402,15 @@
                 </div>
                 <div class="pillar-card pillar-card-detect">
                     <h3>4. Centralized logging</h3>
-                    <p>Aggregated audit, flow, and resource logs sunk to a dedicated security account for long-term retention, analysis, and SIEM export.</p>
+                    <p>Aggregated audit, flow, and resource logs sunk to a dedicated security account for long-term retention, analysis, and <a class="glossary-link" href="glossary.html#term-siem">SIEM</a> export.</p>
                 </div>
                 <div class="pillar-card pillar-card-compliance">
                     <h3>5. Policy guardrails</h3>
-                    <p>Org-level policy-as-code (SCPs, Azure Policy, Org Policy) pre-blocking risky configs — no public buckets in prod, no IMDSv1, no unencrypted disks.</p>
+                    <p>Org-level policy-as-code (SCPs, Azure Policy, Org Policy) pre-blocking risky configs — no public buckets in prod, no <a class="glossary-link" href="glossary.html#term-imds">IMDSv1</a>, no unencrypted disks.</p>
                 </div>
                 <div class="pillar-card pillar-card-data">
                     <h3>6. Encryption &amp; secrets</h3>
-                    <p>Centrally managed KMS keys and a secrets-management project (Secret Manager / Key Vault / Secrets Manager) with audited access.</p>
+                    <p>Centrally managed <a class="glossary-link" href="glossary.html#term-kms">KMS</a> keys and a secrets-management project (Secret Manager / <a class="glossary-link" href="glossary.html#term-key-vault">Key Vault</a> / <a class="glossary-link" href="glossary.html#term-secrets-manager">Secrets Manager</a>) with audited access.</p>
                 </div>
                 <div class="pillar-card pillar-card-supply">
                     <h3>7. Account vending</h3>
@@ -418,7 +418,7 @@
                 </div>
                 <div class="pillar-card pillar-card-workload">
                     <h3>8. Detective controls</h3>
-                    <p>Security Hub / Defender for Cloud / Security Command Center surfacing findings centrally, plus a feedback loop to remediation.</p>
+                    <p>Security Hub / <a class="glossary-link" href="glossary.html#term-guardduty">Defender for Cloud</a> / Security Command Center surfacing findings centrally, plus a feedback loop to remediation.</p>
                 </div>
             </div>
         </section>
@@ -454,13 +454,13 @@
                         </tr>
                         <tr>
                             <th scope="row">Identity</th>
-                            <td>IAM Identity Center (SSO) + permission sets</td>
-                            <td>Entra ID + role assignments</td>
+                            <td><a class="glossary-link" href="glossary.html#term-iam">IAM</a> Identity Center (SSO) + permission sets</td>
+                            <td><a class="glossary-link" href="glossary.html#term-entra-id">Entra ID</a> + role assignments</td>
                             <td>Cloud Identity + IAM allow policies</td>
                         </tr>
                         <tr>
                             <th scope="row">Network</th>
-                            <td>Transit Gateway, network account</td>
+                            <td><a class="glossary-link" href="glossary.html#term-peering">Transit Gateway</a>, network account</td>
                             <td>Hub VNet, Azure Firewall, Virtual WAN</td>
                             <td>Shared VPC, host project</td>
                         </tr>
@@ -480,7 +480,7 @@
                             <th scope="row">Encryption</th>
                             <td>KMS + Secrets Manager</td>
                             <td>Key Vault</td>
-                            <td>Cloud KMS + Secret Manager</td>
+                            <td><a class="glossary-link" href="glossary.html#term-cloud-kms">Cloud KMS</a> + Secret Manager</td>
                         </tr>
                         <tr>
                             <th scope="row">Account vending</th>
@@ -513,10 +513,10 @@
             <h3><a href="https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html" target="_blank" rel="noopener noreferrer">AWS Control Tower</a></h3>
             <p>An AWS-managed service that provisions and continuously governs a multi-account landing zone. Low-code, opinionated, with a console-driven experience and a built-in Account Factory for vending new accounts. Includes mandatory and elective guardrails (SCPs + AWS Config rules) and a managed Audit and Log Archive account out of the box. The right choice if you want AWS to own the wiring.</p>
             <h3><a href="https://docs.aws.amazon.com/solutions/landing-zone-accelerator-on-aws/" target="_blank" rel="noopener noreferrer">Landing Zone Accelerator (LZA)</a></h3>
-            <p>An open-source AWS Solution (CloudFormation + CDK) that deploys a more comprehensive baseline — more security services, more customizable network architectures, support for regulated workloads. Can run on top of Control Tower. The right choice if you need more control than Control Tower's opinionations allow (custom regions, specific compliance frameworks like FedRAMP, ITAR).</p>
+            <p>An open-source AWS Solution (CloudFormation + CDK) that deploys a more comprehensive baseline — more security services, more customizable network architectures, support for regulated workloads. Can run on top of Control Tower. The right choice if you need more control than Control Tower's opinionations allow (custom regions, specific compliance frameworks like <a class="glossary-link" href="glossary.html#term-fedramp">FedRAMP</a>, ITAR).</p>
             <h3>The key AWS-specific decisions</h3>
             <ul>
-                <li><strong>Account vending</strong> — Account Factory for Terraform (AFT) is the GitOps-flavor pattern; Control Tower's built-in factory is the console-flavor.</li>
+                <li><strong>Account vending</strong> — Account Factory for Terraform (AFT) is the <a class="glossary-link" href="glossary.html#term-gitops">GitOps</a>-flavor pattern; Control Tower's built-in factory is the console-flavor.</li>
                 <li><strong>SCPs at the OU level</strong> — your strongest preventive control. Deny <code>iam:DeleteRolePolicy</code> on detective-only roles, deny all actions outside approved regions, deny disabling CloudTrail.</li>
                 <li><strong>Centralized GuardDuty + Security Hub</strong> — both delegated to the audit account so you have one pane across all accounts.</li>
                 <li><strong>Transit Gateway in the network account</strong> — spoke accounts attach via shared TGW; egress through inspection VPC with firewalls.</li>
@@ -527,13 +527,13 @@
             <h2>Azure — Cloud Adoption Framework landing zones</h2>
             <p>Microsoft's reference is the <a href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/" target="_blank" rel="noopener noreferrer">CAF Enterprise-Scale landing zone</a> (often abbreviated "ALZ" — Azure Landing Zone). Unlike AWS, Azure's reference is a documented architecture plus reference IaC (Bicep, Terraform, ARM) — there's no single managed service that <em>is</em> the landing zone.</p>
             <h3>The CAF design</h3>
-            <p>A management-group tree (Tenant Root → Top-Level MG → Platform, Landing Zones, Decommissioned, Sandbox) with subscriptions hanging off the right MGs. Platform MG holds the Connectivity, Identity, and Management subscriptions; Landing Zones MG holds workload subscriptions for application teams.</p>
+            <p>A management-group tree (<a class="glossary-link" href="glossary.html#term-tenant">Tenant</a> Root → Top-Level MG → Platform, Landing Zones, Decommissioned, Sandbox) with subscriptions hanging off the right MGs. Platform MG holds the Connectivity, Identity, and Management subscriptions; Landing Zones MG holds workload subscriptions for application teams.</p>
             <h3>The key Azure-specific decisions</h3>
             <ul>
                 <li><strong>Azure Policy at the MG level</strong> — built-in initiatives like "Azure Security Benchmark" assigned at the top of the tree, with deny/audit effects on configurations everywhere below.</li>
                 <li><strong>Hub VNet in the Connectivity subscription</strong> — Azure Firewall (or NVA), ExpressRoute gateway, peered to spoke VNets in workload subscriptions.</li>
                 <li><strong>Log Analytics workspace in the Management subscription</strong> — diagnostic settings on every resource point to the central workspace; Sentinel reads from it.</li>
-                <li><strong>Entra ID PIM</strong> — Privileged Identity Management for just-in-time elevation; standing access only for break-glass.</li>
+                <li><strong>Entra ID <a class="glossary-link" href="glossary.html#term-pim">PIM</a></strong> — Privileged Identity Management for just-in-time elevation; standing access only for break-glass.</li>
                 <li><strong>Defender for Cloud at the MG level</strong> — coverage applied top-down; recommendations and secure-score visible across all subs.</li>
             </ul>
             <p>Implementation choice: <a href="https://github.com/Azure/Enterprise-Scale" target="_blank" rel="noopener noreferrer">Enterprise-Scale (ESLZ)</a> reference repo, <a href="https://github.com/Azure/ALZ-Bicep" target="_blank" rel="noopener noreferrer">ALZ-Bicep</a>, <a href="https://github.com/Azure/terraform-azurerm-caf-enterprise-scale" target="_blank" rel="noopener noreferrer">Terraform module</a>, or the portal-driven Azure landing zone accelerator. All deploy roughly the same architecture.</p>
@@ -548,7 +548,7 @@
             <ul>
                 <li><strong>Cloud Identity synced from your IdP</strong> — groups drive IAM allow-policy bindings; no individual user grants.</li>
                 <li><strong>Shared VPC with a host project</strong> — workload projects (service projects) attach to the central network; no workload owns its own VPC.</li>
-                <li><strong>Aggregated log sinks at the org level</strong> — every project's audit, data-access, and VPC flow logs route to a central <a class="glossary-link" href="glossary.html#term-bucket">bucket</a> or BigQuery dataset in a dedicated security project.</li>
+                <li><strong>Aggregated log sinks at the org level</strong> — every project's audit, data-access, and <a class="glossary-link" href="glossary.html#term-vpc-flow-logs">VPC flow logs</a> route to a central bucket or BigQuery dataset in a dedicated security project.</li>
                 <li><strong>Organization Policy constraints</strong> — pre-block configs like <code>storage.publicAccessPrevention</code>, <code>compute.requireOsLogin</code>, allowed regions, allowed external IPs.</li>
                 <li><strong>Cloud Build + Terraform pipeline</strong> — the only identity that can change foundation resources; humans get view-only.</li>
                 <li><strong>Security Command Center Premium</strong> — surfacing findings across the org with built-in detectors (Event Threat Detection, Container Threat Detection).</li>
@@ -594,7 +594,7 @@
             <ul>
                 <li><strong>Single workload, single team, single environment.</strong> A landing zone for one static site is over-engineering. (See our <a href="cloud-deployment.html">cloud deployment page</a> for what a sensible single-project setup looks like.)</li>
                 <li><strong>Greenfield prototype.</strong> If you're not sure the project will exist in six months, build it in a dedicated sandbox account with sensible defaults. Move it into a real landing zone once it's surviving.</li>
-                <li><strong>Pure-SaaS organization.</strong> If your "cloud" is Microsoft 365 + Salesforce + Workday and you have no IaaS workloads, the landing-zone concept doesn't fit. You want <a class="glossary-link" href="glossary.html#term-aspm">SSPM</a> instead — different posture problem.</li>
+                <li><strong>Pure-<a class="glossary-link" href="glossary.html#term-saas">SaaS</a> organization.</strong> If your "cloud" is Microsoft 365 + Salesforce + Workday and you have no <a class="glossary-link" href="glossary.html#term-iaas">IaaS</a> workloads, the landing-zone concept doesn't fit. You want <a class="glossary-link" href="glossary.html#term-sspm">SSPM</a> instead — different posture problem.</li>
                 <li><strong>Acquired or M&amp;A environment.</strong> Don't try to retrofit a brand-new landing zone onto an acquired company's 5-year-old cloud estate. Migrate workloads onto your foundation one at a time; the acquired estate stays as-is in a separate management boundary.</li>
             </ul>
             <p>The rule of thumb: if your second workload is six months away, you don't need a landing zone yet. If your second workload is six weeks away, you needed one yesterday.</p>
@@ -610,7 +610,7 @@
                 <li><strong>Stand up the hierarchy third.</strong> Three top-level folders/OUs/MGs — prod, non-prod, sandbox — even if you have one workload. The hierarchy is cheap; restructuring later is expensive.</li>
                 <li><strong>Layer in the network.</strong> Shared VPC / hub VNet / TGW once you have more than one workload that needs to talk privately. Skip if you don't.</li>
                 <li><strong>Layer in guardrails as needed.</strong> Don't deploy 100 SCPs/Policies on day one — pick the highest-leverage 10 (no public buckets, deny outside approved regions, require encryption, deny disabling logs) and grow the library as patterns emerge.</li>
-                <li><strong>Wire deploy through CI/CD.</strong> Foundation changes go through a pipeline with code review; no console writes in prod. Same model as application deploys — see our <a href="cloud-deployment.html">cloud deployment page</a> for the small-scale version of this idea.</li>
+                <li><strong>Wire deploy through <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a>/CD.</strong> Foundation changes go through a pipeline with code review; no console writes in prod. Same model as application deploys — see our <a href="cloud-deployment.html">cloud deployment page</a> for the small-scale version of this idea.</li>
                 <li><strong>Vending last.</strong> Once you have a working foundation, automate the "new account" path so app teams can self-serve. Don't write account-factory code before you have a working foundation to put accounts <em>into</em>.</li>
             </ol>
             <p>Realistic time investment for a small org doing this with a focused team: 2–3 months to a usable Stage 2; 6–12 months to a credible Stage 3. The reference designs are larger and assume larger teams; they're not deliverables-in-a-quarter.</p>
@@ -650,7 +650,7 @@
             <h3>Related CSOH pages</h3>
             <ul>
                 <li><a href="cloud-deployment.html">Cloud deployment</a> — the single-project, defense-in-depth version of these ideas, applied to csoh.org itself.</li>
-                <li><a href="cloud-security-best-practices.html">Cloud security best practices</a> — the strategic principles (least privilege, zero trust, defense-in-depth) that the foundation implements.</li>
+                <li><a href="cloud-security-best-practices.html">Cloud security best practices</a> — the strategic principles (<a class="glossary-link" href="glossary.html#term-least-privilege">least privilege</a>, <a class="glossary-link" href="glossary.html#term-zero-trust">zero trust</a>, defense-in-depth) that the foundation implements.</li>
                 <li><a href="shared-responsibility-model.html">Shared responsibility model</a> — which half of all this the cloud provider already handles.</li>
                 <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> — the tools that watch a landing zone once it's running.</li>
                 <li><a href="glossary.html#term-landing-zone">Glossary — landing zone</a>.</li>
@@ -676,10 +676,10 @@
             <p>Yes — all three clouds publish Terraform reference implementations (LZA has CDK first but Terraform support exists; ALZ has an official Terraform module; the GCP blueprint <em>is</em> Terraform). Vendor IaC (CloudFormation, Bicep, Deployment Manager) is also supported on each respective cloud. Pick what your team operates today.</p>
 
             <h3>What about Kubernetes — does the landing zone include cluster baselines?</h3>
-            <p>The classic landing-zone reference designs do not include opinionated Kubernetes baselines. The foundation provides the account / network / logging layer that K8s clusters land into; the cluster-level baseline (<a class="glossary-link" href="glossary.html#term-pss">Pod Security Standards</a>, network policies, admission controllers, RBAC) is a separate concern. Increasingly orgs deploy a "platform" layer on top of the foundation that includes cluster baselines — but that's an addition, not part of the standard landing-zone reference.</p>
+            <p>The classic landing-zone reference designs do not include opinionated <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a> baselines. The foundation provides the account / network / logging layer that K8s clusters land into; the cluster-level baseline (Pod Security Standards, network policies, admission controllers, <a class="glossary-link" href="glossary.html#term-rbac">RBAC</a>) is a separate concern. Increasingly orgs deploy a "platform" layer on top of the foundation that includes cluster baselines — but that's an addition, not part of the standard landing-zone reference.</p>
 
-            <h3>How does this relate to <a class="glossary-link" href="glossary.html#term-zero-trust">zero trust</a>?</h3>
-            <p>The landing zone is where zero-trust principles get <em>operationalized</em>. "Verify explicitly" means SSO + MFA at the foundation. "Least privilege" means SCP/Policy guardrails at the OU/MG/folder level. "Assume breach" means centralized logging + detective controls. Zero trust is the philosophy; the landing zone is the infrastructure that makes it actually work.</p>
+            <h3>How does this relate to zero trust?</h3>
+            <p>The landing zone is where zero-trust principles get <em>operationalized</em>. "Verify explicitly" means SSO + MFA at the foundation. "Least privilege" means <a class="glossary-link" href="glossary.html#term-scp">SCP</a>/Policy guardrails at the OU/MG/folder level. "Assume breach" means centralized logging + detective controls. Zero trust is the philosophy; the landing zone is the infrastructure that makes it actually work.</p>
         </section>
 
         <section class="cta-section">

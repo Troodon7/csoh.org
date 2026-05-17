@@ -281,7 +281,7 @@
       <div class="hero-inner">
         <div class="hero-text">
           <h1>Zero Trust Architecture</h1>
-          <p>The architectural shift from "trusted network" to "every request verified" — what Zero Trust actually means (and what it isn't), the NIST SP 800-207 tenets, the BeyondCorp origin story, ZTNA vs VPN, microsegmentation, workload identity with SPIFFE/SPIRE, the CISA Maturity Model, and concrete patterns for AWS, Azure, and GCP. Vendor-neutral.</p>
+          <p>The architectural shift from "trusted network" to "every request verified" — what <a class="glossary-link" href="glossary.html#term-zero-trust">Zero Trust</a> actually means (and what it isn't), the <a class="glossary-link" href="glossary.html#term-nist">NIST</a> <a class="glossary-link" href="glossary.html#term-sp">SP</a> 800-207 tenets, the <a class="glossary-link" href="glossary.html#term-beyondcorp">BeyondCorp</a> origin story, <a class="glossary-link" href="glossary.html#term-ztna">ZTNA</a> vs VPN, <a class="glossary-link" href="glossary.html#term-microsegmentation">microsegmentation</a>, <a class="glossary-link" href="glossary.html#term-service-account">workload identity</a> with <a class="glossary-link" href="glossary.html#term-spiffe">SPIFFE</a>/<a class="glossary-link" href="glossary.html#term-spire">SPIRE</a>, the <a class="glossary-link" href="glossary.html#term-cisa">CISA</a> Maturity Model, and concrete patterns for AWS, Azure, and GCP. Vendor-neutral.</p>
           <div class="cta-buttons">
             <a href="#tenets" class="btn btn-primary">The seven tenets →</a>
             <a href="#comparison" class="btn btn-secondary">AWS / Azure / GCP comparison</a>
@@ -303,7 +303,7 @@
 
             <!-- Middle ring -->
             <circle cx="300" cy="240" r="160" fill="none" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4 5" opacity="0.7"/>
-            <text x="300" y="92" text-anchor="middle" fill="#1d4ed8" font-size="11" font-weight="600">VPC / segment</text>
+            <text x="300" y="92" text-anchor="middle" fill="#1d4ed8" font-size="11" font-weight="600"><a class="glossary-link" href="glossary.html#term-vpc">VPC</a> / segment</text>
 
             <!-- Inner ring -->
             <circle cx="300" cy="240" r="105" fill="none" stroke="#38bdf8" stroke-width="2"/>
@@ -311,7 +311,7 @@
 
             <!-- Policy Decision Point at center -->
             <rect x="240" y="210" width="120" height="60" rx="8" fill="url(#zt-pdp)" stroke="#fbbf24" stroke-width="2"/>
-            <text x="300" y="232" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="800">PDP</text>
+            <text x="300" y="232" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="800"><a class="glossary-link" href="glossary.html#term-pdp">PDP</a></text>
             <text x="300" y="250" text-anchor="middle" fill="#fde68a" font-size="9">Policy Engine</text>
             <text x="300" y="262" text-anchor="middle" fill="#fde68a" font-size="9">Trust Algorithm</text>
 
@@ -320,17 +320,17 @@
               <!-- Identity -->
               <rect x="60" y="180" width="90" height="32" rx="16" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
               <text x="105" y="200" text-anchor="middle" fill="#dbeafe">Identity</text>
-              <text x="105" y="212" text-anchor="middle" fill="#bfdbfe" font-size="8">IdP · MFA · risk</text>
+              <text x="105" y="212" text-anchor="middle" fill="#bfdbfe" font-size="8"><a class="glossary-link" href="glossary.html#term-idp">IdP</a> · <a class="glossary-link" href="glossary.html#term-mfa">MFA</a> · risk</text>
 
               <!-- Device posture -->
               <rect x="60" y="222" width="90" height="32" rx="16" fill="#3b0764" stroke="#a78bfa" stroke-width="1.5"/>
               <text x="105" y="242" text-anchor="middle" fill="#ede9fe">Device</text>
-              <text x="105" y="254" text-anchor="middle" fill="#ddd6fe" font-size="8">MDM · EDR · cert</text>
+              <text x="105" y="254" text-anchor="middle" fill="#ddd6fe" font-size="8">MDM · <a class="glossary-link" href="glossary.html#term-edr">EDR</a> · cert</text>
 
               <!-- Workload identity -->
               <rect x="60" y="264" width="90" height="32" rx="16" fill="#064e3b" stroke="#34d399" stroke-width="1.5"/>
               <text x="105" y="284" text-anchor="middle" fill="#d1fae5">Workload</text>
-              <text x="105" y="296" text-anchor="middle" fill="#a7f3d0" font-size="8">SPIFFE · mTLS</text>
+              <text x="105" y="296" text-anchor="middle" fill="#a7f3d0" font-size="8">SPIFFE · <a class="glossary-link" href="glossary.html#term-mtls">mTLS</a></text>
 
               <!-- Context / risk -->
               <rect x="450" y="180" width="90" height="32" rx="16" fill="#7f1d1d" stroke="#fb7185" stroke-width="1.5"/>
@@ -365,7 +365,7 @@
               <text x="260" y="395" text-anchor="middle" fill="#bae6fd" font-size="8">+ device</text>
 
               <rect x="310" y="365" width="60" height="34" rx="6" fill="url(#zt-amber)" stroke="#fff" stroke-width="1"/>
-              <text x="340" y="385" text-anchor="middle" fill="#0f172a">PEP</text>
+              <text x="340" y="385" text-anchor="middle" fill="#0f172a"><a class="glossary-link" href="glossary.html#term-pep">PEP</a></text>
               <text x="340" y="395" text-anchor="middle" fill="#0f172a" font-size="8">enforce</text>
 
               <rect x="390" y="365" width="70" height="34" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
@@ -429,7 +429,7 @@
 
         <section id="what-is">
             <h2>What Zero Trust is (and isn't)</h2>
-            <p>Zero Trust is an <em>architectural strategy</em> built on a single assumption: the network is not a trust boundary. A request originating inside the corporate VPN, the production VPC, or the Kubernetes cluster is treated with the same skepticism as one from the public internet. Every request — human to application, application to API, service to service — is authenticated, authorized against a dynamic policy that considers identity, device posture, and context, and recorded.</p>
+            <p>Zero Trust is an <em>architectural strategy</em> built on a single assumption: the network is not a trust boundary. A request originating inside the corporate VPN, the production VPC, or the <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a> cluster is treated with the same skepticism as one from the public internet. Every request — human to application, application to API, service to service — is authenticated, authorized against a dynamic policy that considers identity, device posture, and context, and recorded.</p>
             <p>That definition has three load-bearing words. <em>Architectural</em>: it is a way of designing systems, not a SKU. <em>Strategy</em>: it is multi-year and touches identity, networks, applications, workloads, and data; you do not buy your way to it in a quarter. <em>Per-request</em>: trust is established at the moment of access, not at the moment of network connection, and it can be revoked between requests.</p>
             <p>Things Zero Trust is <strong>not</strong>:</p>
             <ul>
@@ -437,7 +437,7 @@
                 <li><strong>Not just VPN replacement.</strong> ZTNA replacing your VPN is a real, valuable project. Calling it Zero Trust is a category error — you've improved remote user access while leaving every workload-to-workload call inside the cluster on implicit trust.</li>
                 <li><strong>Not "trust no one" in a literal sense.</strong> The shorthand <em>never trust, always verify</em> is rhetorical. Of course you trust authenticated identities to do their job — the point is that trust is established per request from explicit signals, not granted implicitly because of network location.</li>
                 <li><strong>Not a one-time project.</strong> Zero Trust is closer to a posture you continuously improve than a milestone you hit. Maturity models (CISA, DoD) explicitly stage the work over years.</li>
-                <li><strong>Not the death of the firewall.</strong> Defense in depth still matters. Perimeter and egress controls remain useful as coarse-grained filters and for compliance — they're just no longer where trust decisions live.</li>
+                <li><strong>Not the death of the firewall.</strong> Defense in depth still matters. Perimeter and <a class="glossary-link" href="glossary.html#term-ingress">egress</a> controls remain useful as coarse-grained filters and for compliance — they're just no longer where trust decisions live.</li>
             </ul>
             <p>If you take one thing from this page, take this: a Zero Trust program is half engineering and half organizational change. The technology is largely ready; the hard part is sequencing the work and not letting any single vendor talk you into thinking their box is the whole story.</p>
         </section>
@@ -446,9 +446,9 @@
             <h2>The origin story</h2>
             <p>Three moments matter.</p>
             <h3>2010 — Forrester coins the term</h3>
-            <p>John Kindervag, then a Forrester analyst, published <em>No More Chewy Centers: Introducing the Zero Trust Model of Information Security</em>. The argument was that the prevailing castle-and-moat model — hard perimeter, soft interior — had failed; once an attacker was inside the network, lateral movement was trivial. Kindervag's prescription: trust nothing by default, verify everything, inspect and log all traffic. This is the conceptual seed. The implementation guidance was thin because the tooling didn't yet exist at scale.</p>
+            <p>John Kindervag, then a Forrester analyst, published <em>No More Chewy Centers: Introducing the Zero Trust Model of Information Security</em>. The argument was that the prevailing castle-and-moat model — hard perimeter, soft interior — had failed; once an attacker was inside the network, <a class="glossary-link" href="glossary.html#term-lateral-movement">lateral movement</a> was trivial. Kindervag's prescription: trust nothing by default, verify everything, inspect and log all traffic. This is the conceptual seed. The implementation guidance was thin because the tooling didn't yet exist at scale.</p>
             <h3>2014 — Google publishes BeyondCorp</h3>
-            <p>Google's <a href="https://research.google/pubs/beyondcorp-a-new-approach-to-enterprise-security/" target="_blank" rel="noopener noreferrer">BeyondCorp papers</a> (initial paper 2014, series running through 2018) described a working production implementation. The motivation: after the 2009 Operation Aurora intrusion, Google moved every employee application off the corporate VPN. Access was made conditional on user identity, device identity (managed device with valid certificate), and per-application policy enforced at an identity-aware proxy. The location of the user — corporate office, home, coffee shop — became irrelevant. BeyondCorp is the proof-of-existence reference every later vendor pitch implicitly invokes.</p>
+            <p>Google's <a href="https://research.google/pubs/beyondcorp-a-new-approach-to-enterprise-security/" target="_blank" rel="noopener noreferrer">BeyondCorp papers</a> (initial paper 2014, series running through 2018) described a working production implementation. The motivation: after the 2009 Operation Aurora intrusion, Google moved every employee application off the corporate VPN. Access was made conditional on user identity, device identity (managed device with valid certificate), and per-application policy enforced at an <a class="glossary-link" href="glossary.html#term-iap">identity-aware proxy</a>. The location of the user — corporate office, home, coffee shop — became irrelevant. BeyondCorp is the proof-of-existence reference every later vendor pitch implicitly invokes.</p>
             <h3>2020 — NIST SP 800-207 standardizes it</h3>
             <p><a href="https://csrc.nist.gov/pubs/sp/800/207/final" target="_blank" rel="noopener noreferrer">NIST Special Publication 800-207</a>, <em>Zero Trust Architecture</em>, published August 2020, is the canonical vendor-neutral definition. It establishes the seven tenets, the logical components (PDP / PEP / Policy Engine / Policy Administrator / Trust Algorithm), and three deployment approaches (enhanced identity governance, micro-segmentation, network infrastructure / SDP). Federal civilian agencies were directed to align with it under <a href="https://www.whitehouse.gov/wp-content/uploads/2022/01/M-22-09.pdf" target="_blank" rel="noopener noreferrer">OMB Memorandum M-22-09</a> in January 2022. The downstream consequence is that every U.S. federal cloud security program — and a large fraction of regulated private-sector programs — now maps to 800-207 terminology. When in doubt, that is the document to read.</p>
             <p>Other touchstones worth knowing: the <a href="https://dodcio.defense.gov/Portals/0/Documents/Library/(U)ZT_RA_v2.0(U)_Sep22.pdf" target="_blank" rel="noopener noreferrer">DoD Zero Trust Reference Architecture v2.0</a> (2022), the <a href="https://www.cisa.gov/zero-trust-maturity-model" target="_blank" rel="noopener noreferrer">CISA Zero Trust Maturity Model v2.0</a> (2023), and NSA's <a href="https://media.defense.gov/2021/Feb/25/2002588479/-1/-1/0/CSI_EMBRACING_ZT_SECURITY_MODEL_UOO115131-21.PDF" target="_blank" rel="noopener noreferrer">Embracing a Zero Trust Security Model</a> guidance.</p>
@@ -458,13 +458,13 @@
             <h2>The seven tenets (NIST SP 800-207)</h2>
             <p>800-207 enumerates seven tenets every Zero Trust Architecture is expected to satisfy. Paraphrased in operator language:</p>
             <ol>
-                <li><strong>All data sources and computing services are considered resources.</strong> A virtual machine, a SaaS API, a Kubernetes pod, a managed database, a customer-managed key — every one is a resource that must be protected by the same access-decision discipline. There is no "internal" stuff you don't have to wrap.</li>
+                <li><strong>All data sources and computing services are considered resources.</strong> A virtual machine, a <a class="glossary-link" href="glossary.html#term-saas">SaaS</a> API, a Kubernetes <a class="glossary-link" href="glossary.html#term-pod">pod</a>, a managed database, a customer-managed key — every one is a resource that must be protected by the same access-decision discipline. There is no "internal" stuff you don't have to wrap.</li>
                 <li><strong>All communication is secured regardless of network location.</strong> A request from a workload in the same VPC gets the same authentication, the same encryption (typically mTLS), and the same authorization check as one from the public internet. Same-subnet implicit trust is gone.</li>
                 <li><strong>Access to individual resources is granted per session.</strong> Authentication and authorization happen at the moment of access for that specific resource. A previously granted session does not implicitly grant access to other resources, and may not survive context changes (location, posture, time of day).</li>
-                <li><strong>Access is determined by dynamic policy.</strong> The policy decision considers the requesting identity, the device's posture, the data sensitivity, behavioral context, and risk signals. Policy is not a static ACL; it's an evaluation that can return different answers for the same identity at different moments.</li>
+                <li><strong>Access is determined by dynamic policy.</strong> The policy decision considers the requesting identity, the device's posture, the data sensitivity, behavioral context, and risk signals. Policy is not a static <a class="glossary-link" href="glossary.html#term-acl">ACL</a>; it's an evaluation that can return different answers for the same identity at different moments.</li>
                 <li><strong>The enterprise monitors and measures the integrity and security posture of all owned and associated assets.</strong> Devices, workloads, services — their state is observed continuously. A device whose posture has degraded loses access until remediated.</li>
-                <li><strong>All resource authentication and authorization are dynamic and strictly enforced before access is allowed.</strong> Re-authentication and re-authorization happen on a cadence appropriate to the resource sensitivity. Strong authentication, ideally phishing-resistant (FIDO2 / WebAuthn, hardware tokens), is the floor for human users; cryptographic identity for workloads.</li>
-                <li><strong>The enterprise collects as much information as possible about the current state of assets, network infrastructure, and communications, and uses it to improve its security posture.</strong> Telemetry is foundational. The policy engine and the SOC both depend on a richly instrumented environment — flow logs, audit logs, posture signals, identity events — to make better decisions over time.</li>
+                <li><strong>All resource authentication and authorization are dynamic and strictly enforced before access is allowed.</strong> Re-authentication and re-authorization happen on a cadence appropriate to the resource sensitivity. Strong authentication, ideally <a class="glossary-link" href="glossary.html#term-phishing">phishing</a>-resistant (<a class="glossary-link" href="glossary.html#term-fido2">FIDO2</a> / WebAuthn, hardware tokens), is the floor for human users; cryptographic identity for workloads.</li>
+                <li><strong>The enterprise collects as much information as possible about the current state of assets, network infrastructure, and communications, and uses it to improve its security posture.</strong> Telemetry is foundational. The policy engine and the <a class="glossary-link" href="glossary.html#term-soc">SOC</a> both depend on a richly instrumented environment — flow logs, audit logs, posture signals, identity events — to make better decisions over time.</li>
             </ol>
             <p>Pragmatic reading: tenets 1, 2, and 3 are the architectural shifts; tenets 4 and 6 require a real policy engine, not just static rules; tenets 5 and 7 are why a Zero Trust program is also necessarily a telemetry investment. You cannot have dynamic, posture-aware access decisions without the signals that feed them.</p>
         </section>
@@ -479,11 +479,11 @@
                 </div>
                 <div class="pillar-card pillar-card-network">
                     <h3>Policy Enforcement Point (PEP)</h3>
-                    <p>The muscle. The component sitting in the data path that actually allows or blocks the request based on the PDP's decision. Examples: an identity-aware proxy (Google IAP, Cloudflare Access), a service mesh sidecar (Envoy in Istio), a Kubernetes admission controller, an API gateway, a host-based agent enforcing microsegmentation.</p>
+                    <p>The muscle. The component sitting in the data path that actually allows or blocks the request based on the PDP's decision. Examples: an identity-aware proxy (Google IAP, Cloudflare Access), a <a class="glossary-link" href="glossary.html#term-service-mesh">service mesh</a> <a class="glossary-link" href="glossary.html#term-sidecar">sidecar</a> (<a class="glossary-link" href="glossary.html#term-envoy">Envoy</a> in Istio), a Kubernetes admission controller, an API gateway, a host-based agent enforcing microsegmentation.</p>
                 </div>
                 <div class="pillar-card pillar-card-detect">
                     <h3>Policy Engine</h3>
-                    <p>The logic inside the PDP — the rules and the Trust Algorithm. May be expressed as OPA / Rego, Cedar (AWS), conditional access policies (Azure), service-mesh authorization policies, or vendor-specific DSLs. The work of a Zero Trust program is keeping this engine's policy current, testable, and version-controlled.</p>
+                    <p>The logic inside the PDP — the rules and the Trust Algorithm. May be expressed as OPA / <a class="glossary-link" href="glossary.html#term-rego">Rego</a>, Cedar (AWS), <a class="glossary-link" href="glossary.html#term-conditional-access">conditional access</a> policies (Azure), service-mesh authorization policies, or vendor-specific DSLs. The work of a Zero Trust program is keeping this engine's policy current, testable, and version-controlled.</p>
                 </div>
                 <div class="pillar-card pillar-card-posture">
                     <h3>Trust Algorithm</h3>
@@ -491,7 +491,7 @@
                 </div>
                 <div class="pillar-card pillar-card-data">
                     <h3>Policy Administrator (PA)</h3>
-                    <p>The PDP's executor — actually issues the credential, establishes or revokes the session, and configures the PEP. In a SAML / OIDC flow the IdP plays this role; in a service mesh the control plane (Istiod) does. Often collapsed into the PDP in product literature.</p>
+                    <p>The PDP's executor — actually issues the credential, establishes or revokes the session, and configures the PEP. In a SAML / <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a> flow the IdP plays this role; in a service mesh the control plane (Istiod) does. Often collapsed into the PDP in product literature.</p>
                 </div>
                 <div class="pillar-card pillar-card-supply">
                     <h3>Data sources (Trust Signals)</h3>
@@ -530,7 +530,7 @@
                         <tr>
                             <th scope="row">Lateral movement</th>
                             <td>Easy once authenticated</td>
-                            <td>Effectively impossible — no network-level reachability</td>
+                            <td>Effectively impossible — no network-level <a class="glossary-link" href="glossary.html#term-reachability">reachability</a></td>
                         </tr>
                         <tr>
                             <th scope="row">Device posture</th>
@@ -562,8 +562,8 @@
                 <li><strong><a href="https://tailscale.com/" target="_blank" rel="noopener noreferrer">Tailscale</a></strong> — WireGuard-based mesh with an IdP-backed control plane. Engineer-favorite for its DX; ACLs as code; lighter on policy depth than Cloudflare / Zscaler but moving fast.</li>
                 <li><strong><a href="https://www.twingate.com/" target="_blank" rel="noopener noreferrer">Twingate</a></strong> — split-tunnel, agent-based, similar engineer-DX positioning to Tailscale.</li>
                 <li><strong><a href="https://cloud.google.com/security/products/iap" target="_blank" rel="noopener noreferrer">Google Cloud Identity-Aware Proxy (IAP)</a></strong> — the BeyondCorp pattern, productized. Works for HTTPS apps in GCP and on-prem (via the connector); integrates natively with Google identity.</li>
-                <li><strong><a href="https://learn.microsoft.com/en-us/entra/identity/app-proxy/" target="_blank" rel="noopener noreferrer">Microsoft Entra Application Proxy</a></strong> (formerly Azure AD App Proxy) — publishes on-prem apps via Entra ID; tight integration with Conditional Access for policy.</li>
-                <li><strong><a href="https://www.paloaltonetworks.com/sase/access" target="_blank" rel="noopener noreferrer">Palo Alto Prisma Access</a></strong>, <strong><a href="https://www.netskope.com/products/private-access" target="_blank" rel="noopener noreferrer">Netskope Private Access</a></strong>, <strong><a href="https://www.appgate.com/" target="_blank" rel="noopener noreferrer">Appgate SDP</a></strong> — broader SSE / SASE platforms with ZTNA as a component.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/entra/identity/app-proxy/" target="_blank" rel="noopener noreferrer">Microsoft Entra Application Proxy</a></strong> (formerly <a class="glossary-link" href="glossary.html#term-entra-id">Azure AD</a> App Proxy) — publishes on-prem apps via Entra ID; tight integration with Conditional Access for policy.</li>
+                <li><strong><a href="https://www.paloaltonetworks.com/sase/access" target="_blank" rel="noopener noreferrer">Palo Alto Prisma Access</a></strong>, <strong><a href="https://www.netskope.com/products/private-access" target="_blank" rel="noopener noreferrer">Netskope Private Access</a></strong>, <strong><a href="https://www.appgate.com/" target="_blank" rel="noopener noreferrer">Appgate SDP</a></strong> — broader <a class="glossary-link" href="glossary.html#term-sase">SSE</a> / SASE platforms with ZTNA as a component.</li>
                 <li><strong>Open-source</strong> — <a href="https://github.com/pomerium/pomerium" target="_blank" rel="noopener noreferrer">Pomerium</a>, <a href="https://github.com/ory/oathkeeper" target="_blank" rel="noopener noreferrer">Ory Oathkeeper</a>, <a href="https://www.boundary.dev/" target="_blank" rel="noopener noreferrer">HashiCorp Boundary</a>. Right when you have engineering capacity and want full control.</li>
             </ul>
             <p>Vendor-neutral take: ZTNA is the easiest entry point to a Zero Trust program because the user-visible win is real (no more VPN). Just remember: shipping ZTNA gets you one pillar — Identity + Networks for human-to-app traffic. The east-west, workload-to-workload, and data tiers remain untouched.</p>
@@ -580,7 +580,7 @@
                 </div>
                 <div class="pillar-card pillar-card-network">
                     <h3>Network / cloud-native</h3>
-                    <p>Cloud security groups, NSGs, firewall rules, eBPF data plane. Cheap and ubiquitous; granularity limited to the CIDR / tag model. Tools: AWS VPC Security Groups + Network Firewall, Azure NSGs + Azure Firewall, GCP Firewall Rules + VPC Service Controls, <a href="https://www.tigera.io/project-calico/" target="_blank" rel="noopener noreferrer">Calico</a>, <a href="https://cilium.io/" target="_blank" rel="noopener noreferrer">Cilium</a> (eBPF, identity-aware), <a href="https://docs.openshift.com/" target="_blank" rel="noopener noreferrer">OpenShift NetworkPolicy</a>.</p>
+                    <p>Cloud security groups, NSGs, firewall rules, <a class="glossary-link" href="glossary.html#term-ebpf">eBPF</a> data plane. Cheap and ubiquitous; granularity limited to the CIDR / tag model. Tools: AWS VPC Security Groups + Network Firewall, Azure NSGs + Azure Firewall, GCP Firewall Rules + <a class="glossary-link" href="glossary.html#term-vpc-sc">VPC Service Controls</a>, <a href="https://www.tigera.io/project-calico/" target="_blank" rel="noopener noreferrer">Calico</a>, <a href="https://cilium.io/" target="_blank" rel="noopener noreferrer">Cilium</a> (eBPF, identity-aware), <a href="https://docs.openshift.com/" target="_blank" rel="noopener noreferrer">OpenShift NetworkPolicy</a>.</p>
                 </div>
                 <div class="pillar-card pillar-card-detect">
                     <h3>Service mesh</h3>
@@ -588,7 +588,7 @@
                 </div>
             </div>
             <h3>How to choose</h3>
-            <p>The three flavors are complementary, not exclusive. A mature program runs cloud-native segmentation at the VPC/subnet level for blast-radius, Kubernetes NetworkPolicies (Calico / Cilium) for pod-to-pod, and a service mesh for L7 authorization on the most sensitive services. Layer them, with the same naming and identity scheme across layers.</p>
+            <p>The three flavors are complementary, not exclusive. A mature program runs <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> segmentation at the VPC/subnet level for blast-radius, Kubernetes NetworkPolicies (Calico / Cilium) for pod-to-pod, and a service mesh for L7 authorization on the most sensitive services. Layer them, with the same naming and identity scheme across layers.</p>
             <p>The hardest part of microsegmentation is not the enforcement — it is <em>discovery</em>. You cannot write a deny-by-default rule until you know what the legitimate east-west flows are. Most projects start with audit-mode policies for 60–90 days, build the dependency map, then ratchet to enforce. Tools like Illumio, Guardicore, and Cilium Hubble exist primarily to make this discovery tractable.</p>
         </section>
 
@@ -609,12 +609,12 @@
             <h2>Workload-to-workload Zero Trust</h2>
             <p>The piece most ZT writeups under-cover. Once you accept that the network is not a trust boundary, every service-to-service call needs an authenticated, authorized identity — and that identity cannot be an IP address.</p>
             <h3>SPIFFE / SPIRE</h3>
-            <p><a href="https://spiffe.io/" target="_blank" rel="noopener noreferrer">SPIFFE (Secure Production Identity Framework For Everyone)</a> defines a standard for workload identity: a SPIFFE ID (a URI like <code>spiffe://example.com/ns/payments/sa/api</code>) issued as an X.509 certificate (SVID) or JWT, attestable from runtime metadata (Kubernetes service account, AWS instance role, etc.). <a href="https://github.com/spiffe/spire" target="_blank" rel="noopener noreferrer">SPIRE</a> is the reference implementation: a server that issues identities and an agent on each node that attests workloads and delivers SVIDs. SPIFFE is the CNCF graduated standard; Istio, Linkerd, Consul, and several proprietary platforms either embed it or interoperate with it.</p>
+            <p><a href="https://spiffe.io/" target="_blank" rel="noopener noreferrer">SPIFFE (Secure Production Identity Framework For Everyone)</a> defines a standard for workload identity: a SPIFFE ID (a URI like <code>spiffe://example.com/ns/payments/sa/api</code>) issued as an X.509 certificate (SVID) or <a class="glossary-link" href="glossary.html#term-jwt">JWT</a>, attestable from runtime metadata (Kubernetes service account, AWS instance role, etc.). <a href="https://github.com/spiffe/spire" target="_blank" rel="noopener noreferrer">SPIRE</a> is the reference implementation: a server that issues identities and an agent on each node that attests workloads and delivers SVIDs. SPIFFE is the <a class="glossary-link" href="glossary.html#term-cncf">CNCF</a> graduated standard; Istio, Linkerd, Consul, and several proprietary platforms either embed it or interoperate with it.</p>
             <h3>mTLS as the default transport</h3>
-            <p>Mutual TLS — both parties present certificates, both verify the other — is the data-plane mechanic. In a service mesh, sidecars terminate plaintext from the application and re-emit it as mTLS to the next hop. The application code doesn't change; the mesh handles identity, encryption, and policy. Outside a mesh, mTLS is configurable at any modern HTTP client / server, just with more boilerplate.</p>
+            <p>Mutual <a class="glossary-link" href="glossary.html#term-tls">TLS</a> — both parties present certificates, both verify the other — is the data-plane mechanic. In a service mesh, sidecars terminate plaintext from the application and re-emit it as mTLS to the next hop. The application code doesn't change; the mesh handles identity, encryption, and policy. Outside a mesh, mTLS is configurable at any modern HTTP client / server, just with more boilerplate.</p>
             <h3>Cloud-provider workload identity</h3>
             <ul>
-                <li><strong>AWS</strong> — <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html" target="_blank" rel="noopener noreferrer">IAM Roles</a>, <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html" target="_blank" rel="noopener noreferrer">IAM Roles for Service Accounts (IRSA)</a> for EKS, <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html" target="_blank" rel="noopener noreferrer">EKS Pod Identity</a>. Every API call to AWS is already identity-authenticated via SigV4 — the AWS data plane has been zero-trust-aligned for service-to-AWS calls since the beginning.</li>
+                <li><strong>AWS</strong> — <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html" target="_blank" rel="noopener noreferrer">IAM Roles</a>, <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html" target="_blank" rel="noopener noreferrer">IAM Roles for Service Accounts (IRSA)</a> for <a class="glossary-link" href="glossary.html#term-eks">EKS</a>, <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html" target="_blank" rel="noopener noreferrer">EKS Pod Identity</a>. Every API call to AWS is already identity-authenticated via SigV4 — the AWS data plane has been zero-trust-aligned for service-to-AWS calls since the beginning.</li>
                 <li><strong>Azure</strong> — <a href="https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview" target="_blank" rel="noopener noreferrer">Managed Identities for Azure resources</a>, <a href="https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview" target="_blank" rel="noopener noreferrer">Azure AD Workload Identity</a> for AKS, federated with Entra ID.</li>
                 <li><strong>GCP</strong> — <a href="https://docs.cloud.google.com/iam/docs/workload-identity-federation" target="_blank" rel="noopener noreferrer">Workload Identity Federation</a>, <a href="https://docs.cloud.google.com/kubernetes-engine/docs/concepts/workload-identity" target="_blank" rel="noopener noreferrer">GKE Workload Identity</a>. Federate external workload identities (AWS, Azure, on-prem, OIDC) into Google service-account impersonation without long-lived keys.</li>
             </ul>
@@ -626,10 +626,10 @@
             <p>Concrete patterns that map the architecture to the three major clouds. None of these is "the Zero Trust button" — they are the pieces you assemble.</p>
             <h3>AWS</h3>
             <ul>
-                <li><strong><a href="https://docs.aws.amazon.com/singlesignon/" target="_blank" rel="noopener noreferrer">IAM Identity Center</a> + external IdP</strong> — federate workforce identity, enforce permission sets per account / role with session duration tied to risk. Pair with <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html" target="_blank" rel="noopener noreferrer">permissions boundaries</a> and <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html" target="_blank" rel="noopener noreferrer">SCPs</a> for guardrails.</li>
-                <li><strong><a href="https://aws.amazon.com/vpc/lattice/" target="_blank" rel="noopener noreferrer">VPC Lattice</a></strong> — application-layer networking with identity-aware policies; service-to-service authentication using IAM. The closest AWS-native analog to a managed service mesh for workload Zero Trust across accounts and VPCs.</li>
-                <li><strong><a href="https://aws.amazon.com/privatelink/" target="_blank" rel="noopener noreferrer">PrivateLink</a> + <a href="https://aws.amazon.com/verified-access/" target="_blank" rel="noopener noreferrer">Verified Access</a></strong> — Verified Access is AWS's ZTNA-style identity-aware proxy for corporate apps; PrivateLink eliminates network reachability between accounts / VPCs.</li>
-                <li><strong>IRSA / Pod Identity</strong> — short-lived workload credentials for EKS, OIDC-trust to IAM. Pair with <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html" target="_blank" rel="noopener noreferrer">IAM Access Analyzer</a> for least-privilege policy recommendation.</li>
+                <li><strong><a href="https://docs.aws.amazon.com/singlesignon/" target="_blank" rel="noopener noreferrer">IAM Identity Center</a> + external IdP</strong> — federate workforce identity, enforce permission sets per account / role with session duration tied to risk. Pair with <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html" target="_blank" rel="noopener noreferrer">permissions boundaries</a> and <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html" target="_blank" rel="noopener noreferrer">SCPs</a> for <a class="glossary-link" href="glossary.html#term-guardrails">guardrails</a>.</li>
+                <li><strong><a href="https://aws.amazon.com/vpc/lattice/" target="_blank" rel="noopener noreferrer">VPC Lattice</a></strong> — application-layer networking with identity-aware policies; service-to-service authentication using <a class="glossary-link" href="glossary.html#term-iam">IAM</a>. The closest AWS-native analog to a managed service mesh for workload Zero Trust across accounts and VPCs.</li>
+                <li><strong><a href="https://aws.amazon.com/privatelink/" target="_blank" rel="noopener noreferrer">PrivateLink</a> + <a href="https://aws.amazon.com/verified-access/" target="_blank" rel="noopener noreferrer">Verified Access</a></strong> — Verified Access is AWS's ZTNA-style identity-aware proxy for corporate apps; <a class="glossary-link" href="glossary.html#term-privatelink">PrivateLink</a> eliminates network reachability between accounts / VPCs.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-irsa">IRSA</a> / Pod Identity</strong> — short-lived workload credentials for EKS, OIDC-trust to IAM. Pair with <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html" target="_blank" rel="noopener noreferrer">IAM Access Analyzer</a> for least-privilege policy recommendation.</li>
                 <li><strong><a href="https://docs.aws.amazon.com/verifiedpermissions/" target="_blank" rel="noopener noreferrer">Verified Permissions (Cedar)</a></strong> — externalized fine-grained authorization for your own apps. Cedar is AWS's policy language; pairs well with a custom Zero Trust authorization layer.</li>
             </ul>
             <h3>Azure</h3>
@@ -644,7 +644,7 @@
             <ul>
                 <li><strong><a href="https://cloud.google.com/beyondcorp-enterprise" target="_blank" rel="noopener noreferrer">BeyondCorp Enterprise</a></strong> — productized BeyondCorp. Identity-aware proxy (IAP) + Chrome integration for posture + threat / data-loss protection. Closest thing to "BeyondCorp in a box" any cloud sells.</li>
                 <li><strong><a href="https://cloud.google.com/security/products/iap" target="_blank" rel="noopener noreferrer">Identity-Aware Proxy (IAP)</a></strong> — the building block. HTTPS apps and (via IAP TCP forwarding) SSH/RDP/arbitrary TCP, fronted by Google identity and Access Context Manager policy.</li>
-                <li><strong><a href="https://cloud.google.com/security/vpc-service-controls" target="_blank" rel="noopener noreferrer">VPC Service Controls</a></strong> — a perimeter around managed-service APIs (BigQuery, GCS, etc.) that prevents data exfiltration even by authenticated identities outside the perimeter. The most powerful and least-imitated control in any cloud for data-tier Zero Trust.</li>
+                <li><strong><a href="https://cloud.google.com/security/vpc-service-controls" target="_blank" rel="noopener noreferrer">VPC Service Controls</a></strong> — a perimeter around managed-service APIs (BigQuery, GCS, etc.) that prevents <a class="glossary-link" href="glossary.html#term-data-exfiltration">data exfiltration</a> even by authenticated identities outside the perimeter. The most powerful and least-imitated control in any cloud for data-tier Zero Trust.</li>
                 <li><strong><a href="https://docs.cloud.google.com/access-context-manager/docs/overview" target="_blank" rel="noopener noreferrer">Access Context Manager</a></strong> — defines access levels (device, location, identity attributes) consumed by IAP and VPC SC. The Policy Engine input layer.</li>
                 <li><strong><a href="https://docs.cloud.google.com/iam/docs/workload-identity-federation" target="_blank" rel="noopener noreferrer">Workload Identity Federation</a> + <a href="https://docs.cloud.google.com/kubernetes-engine/docs/concepts/workload-identity" target="_blank" rel="noopener noreferrer">GKE Workload Identity</a></strong> — short-lived credentials for workloads, federate AWS / Azure / OIDC identities into Google IAM.</li>
                 <li><strong><a href="https://docs.cloud.google.com/service-mesh/docs" target="_blank" rel="noopener noreferrer">Cloud Service Mesh</a></strong> (managed Istio) — east-west mTLS and L7 authorization.</li>
@@ -667,15 +667,15 @@
             <div class="pillar-grid">
                 <div class="pillar-card pillar-card-iam">
                     <h3>Identity</h3>
-                    <p>How users and entities prove who they are. Phishing-resistant MFA, risk-based authentication, identity-store consolidation, automated lifecycle, just-in-time access. The pillar most orgs start with.</p>
+                    <p>How users and entities prove who they are. <a class="glossary-link" href="glossary.html#term-phishing-resistant">Phishing-resistant MFA</a>, risk-based authentication, identity-store consolidation, automated lifecycle, <a class="glossary-link" href="glossary.html#term-jit">just-in-time access</a>. The pillar most orgs start with.</p>
                 </div>
                 <div class="pillar-card pillar-card-posture">
                     <h3>Devices</h3>
-                    <p>Inventory, posture, compliance enforcement. MDM, EDR, asset attestation, supply-chain integrity (firmware, software bill of materials). Device must be known and healthy to access anything.</p>
+                    <p>Inventory, posture, compliance enforcement. MDM, EDR, asset attestation, supply-chain integrity (firmware, <a class="glossary-link" href="glossary.html#term-sbom">software bill of materials</a>). Device must be known and healthy to access anything.</p>
                 </div>
                 <div class="pillar-card pillar-card-network">
                     <h3>Networks</h3>
-                    <p>Segmentation, encryption in transit (mTLS by default), application-aware traffic management, dynamic policy. The "no implicit trust based on network location" pillar.</p>
+                    <p>Segmentation, encryption <a class="glossary-link" href="glossary.html#term-encryption-at-rest">in transit</a> (mTLS by default), application-aware traffic management, dynamic policy. The "no implicit trust based on network location" pillar.</p>
                 </div>
                 <div class="pillar-card pillar-card-detect">
                     <h3>Applications &amp; Workloads</h3>
@@ -688,8 +688,8 @@
             </div>
             <h3>The three cross-cutting capabilities</h3>
             <ul>
-                <li><strong>Visibility &amp; Analytics</strong> — telemetry across all five pillars, fed to a SIEM / detection pipeline. The signal layer the Trust Algorithm needs.</li>
-                <li><strong>Automation &amp; Orchestration</strong> — automated response to policy violations and posture changes. Where SOAR and CAEP-driven session revocation live.</li>
+                <li><strong>Visibility &amp; Analytics</strong> — telemetry across all five pillars, fed to a <a class="glossary-link" href="glossary.html#term-siem">SIEM</a> / detection pipeline. The signal layer the Trust Algorithm needs.</li>
+                <li><strong>Automation &amp; Orchestration</strong> — automated response to policy violations and posture changes. Where <a class="glossary-link" href="glossary.html#term-soar">SOAR</a> and CAEP-driven session revocation live.</li>
                 <li><strong>Governance</strong> — policy, exception management, audit, compliance mapping. The <a href="grc.html">GRC</a> layer for the program.</li>
             </ul>
             <h3>The four maturity stages</h3>
@@ -717,7 +717,7 @@
                         </tr>
                         <tr>
                             <th scope="row">Optimal</th>
-                            <td>Fully dynamic policy across all pillars. Continuous, automated authorization. Data-tier enforcement (DLP, just-in-time decryption). AI-assisted Trust Algorithm. Self-healing posture. The aspirational target; few orgs are here in all pillars.</td>
+                            <td>Fully dynamic policy across all pillars. Continuous, automated authorization. Data-tier enforcement (<a class="glossary-link" href="glossary.html#term-dlp">DLP</a>, just-in-time decryption). <a class="glossary-link" href="glossary.html#term-ai">AI</a>-assisted Trust Algorithm. Self-healing posture. The aspirational target; few orgs are here in all pillars.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -776,7 +776,7 @@
                             <th scope="row">Workload identity</th>
                             <td>IAM Roles, IRSA, EKS Pod Identity</td>
                             <td>Managed Identities, AKS Workload Identity</td>
-                            <td>Workload Identity Federation, GKE Workload Identity</td>
+                            <td><a class="glossary-link" href="glossary.html#term-wif">Workload Identity Federation</a>, GKE Workload Identity</td>
                         </tr>
                         <tr>
                             <th scope="row">Service-to-service (east-west)</th>
@@ -810,20 +810,20 @@
                         </tr>
                         <tr>
                             <th scope="row">Continuous session revocation</th>
-                            <td>STS short-lived tokens; CAEP via partners</td>
+                            <td><a class="glossary-link" href="glossary.html#term-sts">STS</a> short-lived tokens; CAEP via partners</td>
                             <td>Continuous Access Evaluation (CAE) — native</td>
                             <td>Context-Aware Access re-eval; CAEP emerging</td>
                         </tr>
                         <tr>
                             <th scope="row">Posture &amp; telemetry</th>
-                            <td>Security Hub, GuardDuty, Detective</td>
+                            <td>Security Hub, <a class="glossary-link" href="glossary.html#term-guardduty">GuardDuty</a>, Detective</td>
                             <td>Defender for Cloud, Sentinel</td>
                             <td>Security Command Center, Chronicle</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p>Reading the table: Azure has the most mature out-of-the-box Trust Algorithm via Conditional Access + Intune + CAE; GCP has the strongest data-tier control via VPC Service Controls and the cleanest BeyondCorp lineage; AWS gives you the richest set of primitives with the most assembly required. Multi-cloud Zero Trust is most easily anchored on a common identity layer (Okta, Entra ID, or similar) and an SPIFFE / workload-identity-federation backbone for workloads.</p>
+            <p>Reading the table: Azure has the most mature out-of-the-box Trust Algorithm via Conditional Access + Intune + CAE; GCP has the strongest data-tier control via VPC Service Controls and the cleanest BeyondCorp lineage; AWS gives you the richest set of primitives with the most assembly required. <a class="glossary-link" href="glossary.html#term-public">Multi-cloud</a> Zero Trust is most easily anchored on a common identity layer (Okta, Entra ID, or similar) and an SPIFFE / workload-identity-<a class="glossary-link" href="glossary.html#term-federation">federation</a> backbone for workloads.</p>
         </section>
 
         <section id="maturity">
@@ -832,11 +832,11 @@
             <div class="pillar-grid">
                 <div class="pillar-card pillar-card-stage1">
                     <h3>Traditional → Initial</h3>
-                    <p>Phishing-resistant MFA enforced for all employees. Single workforce IdP. All cloud workloads using cloud-native workload identity (no long-lived static keys). Asset inventory complete. SSO for at least the top-20 applications. CSPM running. Most orgs reach this within 12–18 months.</p>
+                    <p>Phishing-resistant MFA enforced for all employees. Single workforce IdP. All cloud workloads using cloud-native workload identity (no long-lived static keys). Asset inventory complete. <a class="glossary-link" href="glossary.html#term-sso">SSO</a> for at least the top-20 applications. <a class="glossary-link" href="glossary.html#term-cspm">CSPM</a> running. Most orgs reach this within 12–18 months.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage2">
                     <h3>Initial → Advanced (Identity / Apps)</h3>
-                    <p>VPN replaced by ZTNA for all internal apps. Device posture (MDM + EDR) integrated into access decisions. Risk-based session policy live. Privileged access goes through PAM + JIT. Just-in-time elevation replaces standing admin. Externalized app authorization for in-house apps (Cedar, OPA, etc.).</p>
+                    <p>VPN replaced by ZTNA for all internal apps. Device posture (MDM + EDR) integrated into access decisions. Risk-based session policy live. Privileged access goes through <a class="glossary-link" href="glossary.html#term-pam">PAM</a> + JIT. Just-in-time elevation replaces standing admin. Externalized app authorization for in-house apps (Cedar, <a class="glossary-link" href="glossary.html#term-opa">OPA</a>, etc.).</p>
                 </div>
                 <div class="pillar-card pillar-card-stage3">
                     <h3>Initial → Advanced (Networks / Workloads)</h3>
@@ -844,7 +844,7 @@
                 </div>
                 <div class="pillar-card pillar-card-stage4">
                     <h3>Advanced → Optimal (Data)</h3>
-                    <p>Data classification automated. Customer-managed keys with HYOK / external KMS for the most sensitive tiers. DLP integrated into the policy engine. Just-in-time data decryption with audit. Sovereign-cloud or BYOK arrangements where required. CAEP-driven revocation across all pillars. AI-assisted anomaly detection feeding the Trust Algorithm.</p>
+                    <p>Data classification automated. Customer-managed keys with <a class="glossary-link" href="glossary.html#term-byok">HYOK</a> / external <a class="glossary-link" href="glossary.html#term-kms">KMS</a> for the most sensitive tiers. DLP integrated into the policy engine. Just-in-time data decryption with audit. Sovereign-cloud or BYOK arrangements where required. CAEP-driven revocation across all pillars. AI-assisted anomaly detection feeding the Trust Algorithm.</p>
                 </div>
             </div>
             <p>The skip-stage cost is real: a program that buys microsegmentation before fixing identity has built a fortress with the front door open. Sequence the pillars in order of risk reduction per dollar; Identity is almost always first because every other decision depends on it.</p>

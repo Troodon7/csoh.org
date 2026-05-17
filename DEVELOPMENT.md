@@ -80,7 +80,7 @@ csoh.org/
 ├── shared-responsibility-model.html # Provider vs. customer security split
 ├── cspm-vs-cnapp.html               # Tool-category comparison (CSPM/CNAPP/CWPP/CIEM/DSPM)
 ├── vendor-landscape.html            # 350+ cloud-security vendors across 30 categories
-├── glossary.html                    # 230+ cloud-security terms with live search + cross-links
+├── glossary.html                    # 300+ cloud-security terms with live search + cross-links
 ├── faq.html                         # Frequently asked questions
 │
 │  ── Platform topics ──
@@ -507,7 +507,7 @@ Codebase scorecard says 100, GSC says traffic dropped → something at the serve
 | `tools/update_presentations_schema.py` | Regenerates `VideoObject` JSON-LD on `presentations.html` | **Don't edit** -- runs in CI on every deploy |
 | `tools/crosslink_glossary.py` | Adds `id="term-..."` to glossary `<dt>`s and hyperlinks every term mention in `<dd>`s | Run after adding/editing glossary entries |
 | `tools/crosslink_pages.py` | Hyperlinks first occurrence of each glossary term across all content pages | Run after adding/editing glossary entries (or after adding a new content page) |
-| `glossary.html` | Cloud-security glossary (200+ terms) with live search and cross-linked definitions | Adding/editing terms; run `crosslink_glossary.py` *and* `crosslink_pages.py` after |
+| `glossary.html` | Cloud-security glossary (300+ terms) with live search and cross-linked definitions | Adding/editing terms; run `crosslink_glossary.py` *and* `crosslink_pages.py` after |
 | `glossary.js` | Live search/filter for `glossary.html` | Changing search behavior |
 | `meetings.js` | Filters + auto-detected speaker filter for `meetings.html` | Adding new recurring speakers (`SPEAKERS` list) |
 | `sitemap.xml` | XML sitemap for search engines | **Don't edit** -- lastmod refreshed automatically |

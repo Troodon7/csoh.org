@@ -281,7 +281,7 @@
       <div class="hero-inner">
         <div class="hero-text">
           <h1>Cloud Network Security</h1>
-          <p>The network mechanics of cloud security — VPC and VNet design, private endpoints, egress controls, DNS security, WAF, DDoS, SASE/SSE, ZTNA, microsegmentation, service mesh mTLS, and the eBPF data plane underneath it all. Vendor-neutral practitioner guide to the controls between your workloads, your users, and the rest of the internet, with the AWS, Azure, and GCP primitives that implement them.</p>
+          <p>The network mechanics of cloud security — <a class="glossary-link" href="glossary.html#term-vpc">VPC</a> and VNet design, private endpoints, egress controls, DNS security, <a class="glossary-link" href="glossary.html#term-waf">WAF</a>, <a class="glossary-link" href="glossary.html#term-ddos">DDoS</a>, <a class="glossary-link" href="glossary.html#term-sase">SASE</a>/SSE, ZTNA, <a class="glossary-link" href="glossary.html#term-microsegmentation">microsegmentation</a>, <a class="glossary-link" href="glossary.html#term-service-mesh">service mesh</a> <a class="glossary-link" href="glossary.html#term-mtls">mTLS</a>, and the <a class="glossary-link" href="glossary.html#term-ebpf">eBPF</a> data plane underneath it all. Vendor-neutral practitioner guide to the controls between your workloads, your users, and the rest of the internet, with the AWS, Azure, and GCP primitives that implement them.</p>
           <div class="cta-buttons">
             <a href="#egress" class="btn btn-primary">Egress is the new ingress →</a>
             <a href="#comparison" class="btn btn-secondary">AWS / Azure / GCP comparison</a>
@@ -308,7 +308,7 @@
             <!-- WAF -->
             <rect x="220" y="35" width="160" height="50" rx="6" fill="#0d1424" stroke="#fbbf24" stroke-width="1.5"/>
             <text x="300" y="58" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="700">WAF</text>
-            <text x="300" y="74" text-anchor="middle" fill="#e5e7eb" font-size="9">OWASP · bot · rate-limit</text>
+            <text x="300" y="74" text-anchor="middle" fill="#e5e7eb" font-size="9"><a class="glossary-link" href="glossary.html#term-owasp">OWASP</a> · bot · rate-limit</text>
             <!-- Bot mgmt -->
             <rect x="430" y="40" width="80" height="40" rx="6" fill="#0d1424" stroke="#f472b6" stroke-width="1.5"/>
             <text x="470" y="58" text-anchor="middle" fill="#f472b6" font-size="10" font-weight="700">Bot mgmt</text>
@@ -321,7 +321,7 @@
             <!-- Public subnet -->
             <rect x="60" y="160" width="200" height="80" rx="6" fill="url(#ns-public)" stroke="#b45309" stroke-width="1.5" opacity="0.92"/>
             <text x="160" y="180" text-anchor="middle" fill="#1f2937" font-size="11" font-weight="700">Public subnet</text>
-            <text x="160" y="196" text-anchor="middle" fill="#1f2937" font-size="9">ALB · NAT GW · bastion</text>
+            <text x="160" y="196" text-anchor="middle" fill="#1f2937" font-size="9">ALB · <a class="glossary-link" href="glossary.html#term-nat">NAT</a> GW · bastion</text>
             <circle cx="100" cy="220" r="10" fill="#fff" stroke="#1f2937" stroke-width="1.2"/>
             <text x="100" y="224" text-anchor="middle" fill="#1f2937" font-size="9" font-weight="700">LB</text>
             <circle cx="160" cy="220" r="10" fill="#fff" stroke="#1f2937" stroke-width="1.2"/>
@@ -332,9 +332,9 @@
             <!-- Private subnet -->
             <rect x="60" y="255" width="200" height="80" rx="6" fill="url(#ns-private)" stroke="#047857" stroke-width="1.5" opacity="0.92"/>
             <text x="160" y="275" text-anchor="middle" fill="#064e3b" font-size="11" font-weight="700">Private subnet (app)</text>
-            <text x="160" y="291" text-anchor="middle" fill="#064e3b" font-size="9">EKS · ECS · EC2 · Lambda</text>
+            <text x="160" y="291" text-anchor="middle" fill="#064e3b" font-size="9"><a class="glossary-link" href="glossary.html#term-eks">EKS</a> · <a class="glossary-link" href="glossary.html#term-ecs">ECS</a> · <a class="glossary-link" href="glossary.html#term-ec2">EC2</a> · <a class="glossary-link" href="glossary.html#term-lambda">Lambda</a></text>
             <rect x="85" y="305" width="40" height="20" rx="3" fill="#fff" stroke="#064e3b"/>
-            <text x="105" y="319" text-anchor="middle" fill="#064e3b" font-size="9" font-weight="700">pod</text>
+            <text x="105" y="319" text-anchor="middle" fill="#064e3b" font-size="9" font-weight="700"><a class="glossary-link" href="glossary.html#term-pod">pod</a></text>
             <rect x="135" y="305" width="40" height="20" rx="3" fill="#fff" stroke="#064e3b"/>
             <text x="155" y="319" text-anchor="middle" fill="#064e3b" font-size="9" font-weight="700">pod</text>
             <rect x="185" y="305" width="60" height="20" rx="3" fill="#fff" stroke="#064e3b"/>
@@ -349,23 +349,23 @@
             <rect x="290" y="195" width="120" height="60" rx="6" fill="#1f2937" stroke="#f59e0b" stroke-width="2"/>
             <text x="350" y="218" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">Network</text>
             <text x="350" y="232" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">Firewall</text>
-            <text x="350" y="248" text-anchor="middle" fill="#fde68a" font-size="8">FQDN · IDS · TLS</text>
+            <text x="350" y="248" text-anchor="middle" fill="#fde68a" font-size="8">FQDN · IDS · <a class="glossary-link" href="glossary.html#term-tls">TLS</a></text>
 
             <!-- Private endpoint -->
             <rect x="290" y="280" width="120" height="55" rx="6" fill="#0d1424" stroke="#22d3ee" stroke-width="1.5"/>
-            <text x="350" y="302" text-anchor="middle" fill="#22d3ee" font-size="11" font-weight="700">PrivateLink</text>
-            <text x="350" y="316" text-anchor="middle" fill="#cffafe" font-size="9">S3 · KMS · STS</text>
+            <text x="350" y="302" text-anchor="middle" fill="#22d3ee" font-size="11" font-weight="700"><a class="glossary-link" href="glossary.html#term-privatelink">PrivateLink</a></text>
+            <text x="350" y="316" text-anchor="middle" fill="#cffafe" font-size="9"><a class="glossary-link" href="glossary.html#term-s3">S3</a> · <a class="glossary-link" href="glossary.html#term-kms">KMS</a> · <a class="glossary-link" href="glossary.html#term-sts">STS</a></text>
             <text x="350" y="328" text-anchor="middle" fill="#cffafe" font-size="8">endpoint policy</text>
 
             <!-- Flow logs sink -->
             <rect x="430" y="280" width="120" height="55" rx="6" fill="#0d1424" stroke="#a78bfa" stroke-width="1.5"/>
             <text x="490" y="302" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="700">Flow logs</text>
-            <text x="490" y="316" text-anchor="middle" fill="#ddd6fe" font-size="9">VPC FL · NSG FL</text>
-            <text x="490" y="328" text-anchor="middle" fill="#ddd6fe" font-size="8">→ SIEM</text>
+            <text x="490" y="316" text-anchor="middle" fill="#ddd6fe" font-size="9">VPC FL · <a class="glossary-link" href="glossary.html#term-nsg">NSG</a> FL</text>
+            <text x="490" y="328" text-anchor="middle" fill="#ddd6fe" font-size="8">→ <a class="glossary-link" href="glossary.html#term-siem">SIEM</a></text>
 
             <!-- ZTNA / SASE cloud -->
             <rect x="430" y="195" width="120" height="60" rx="6" fill="#0d1424" stroke="#34d399" stroke-width="1.5"/>
-            <text x="490" y="218" text-anchor="middle" fill="#34d399" font-size="11" font-weight="700">ZTNA / SASE</text>
+            <text x="490" y="218" text-anchor="middle" fill="#34d399" font-size="11" font-weight="700"><a class="glossary-link" href="glossary.html#term-ztna">ZTNA</a> / SASE</text>
             <text x="490" y="232" text-anchor="middle" fill="#a7f3d0" font-size="9">user → app</text>
             <text x="490" y="248" text-anchor="middle" fill="#a7f3d0" font-size="8">identity-aware</text>
 
@@ -395,8 +395,8 @@
         <p class="page-meta"><time datetime="2026-05-17">Last updated <strong>2026-05-17</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/network-security.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
 
         <div class="info-box--blue">
-            <p><strong>The 30-second version:</strong> Cloud network security is what's left after you accept that there's no perimeter. The network is software-defined, every workload has a public-by-default API edge, and the most common modern attack path runs <em>outbound</em> — a compromised workload calling an attacker-owned domain — not inbound. The discipline is four things stacked: <strong>good VPC/VNet design</strong> (tiered subnets, hub-and-spoke, no default VPC in prod), <strong>private connectivity</strong> to cloud APIs (PrivateLink / Private Link / PSC, with endpoint policies), <strong>controlled egress</strong> (Network Firewall, FQDN allow-lists, DNS firewall), and <strong>identity-aware overlay</strong> (ZTNA, service mesh mTLS, microsegmentation).</p>
-            <p style="margin-top:0.75rem;">This page is the network mechanics. The architectural pattern that sits on top — <a href="zero-trust.html">zero trust</a> — is its own page; this one is the wires, rules, and primitives that make zero trust enforceable in AWS, Azure, and GCP.</p>
+            <p><strong>The 30-second version:</strong> Cloud network security is what's left after you accept that there's no perimeter. The network is software-defined, every workload has a public-by-default API edge, and the most common modern attack path runs <em>outbound</em> — a compromised workload calling an attacker-owned domain — not inbound. The discipline is four things stacked: <strong>good VPC/VNet design</strong> (tiered subnets, hub-and-spoke, no default VPC in prod), <strong>private connectivity</strong> to cloud APIs (PrivateLink / Private Link / <a class="glossary-link" href="glossary.html#term-psc">PSC</a>, with endpoint policies), <strong>controlled <a class="glossary-link" href="glossary.html#term-ingress">egress</a></strong> (Network Firewall, FQDN allow-lists, DNS firewall), and <strong>identity-aware overlay</strong> (ZTNA, service mesh mTLS, microsegmentation).</p>
+            <p style="margin-top:0.75rem;">This page is the network mechanics. The architectural pattern that sits on top — <a href="zero-trust.html">zero trust</a> — is its own page; this one is the wires, rules, and primitives that make <a class="glossary-link" href="glossary.html#term-zero-trust">zero trust</a> enforceable in AWS, Azure, and GCP.</p>
         </div>
 
         <div class="toc">
@@ -433,9 +433,9 @@
         <section id="why-different">
             <h2>Why cloud networking is different</h2>
             <p>On-prem networking is built around a perimeter and a small number of choke points — a firewall at the edge, a DMZ behind it, an internal LAN behind that. The perimeter is the policy plane: in front of it, untrusted; behind it, trusted (more or less). Cloud breaks the model in three ways.</p>
-            <p><strong>The perimeter is gone.</strong> Every VPC has an internet-routable edge unless you actively block it; every managed service (S3, Cosmos DB, Cloud Storage) has a public endpoint by default; every IAM principal can be assumed from anywhere on earth if its credentials leak. The "firewall at the edge" stops being a thing because there is no single edge — there are thousands, one per resource. Identity, not network position, becomes the trust anchor.</p>
-            <p><strong>The network is software-defined.</strong> A CIDR block, a route table, a security group, an NSG, a transit gateway attachment — all of these are API calls. Which means they change in seconds, they leave a CloudTrail / Activity Log / Cloud Audit Log record, and they can be expressed as code (Terraform, Pulumi, CDK, Bicep, Deployment Manager). The bad news: a single misconfigured security group rule can expose a database to the internet in one API call. The good news: you can detect that misconfig the moment it happens, and you can write policy-as-code that prevents it in CI.</p>
-            <p><strong>Egress is the new ingress.</strong> The classic on-prem attack went <em>in</em> through a firewall, found a foothold, moved laterally. The modern cloud attack often starts with an SSRF or a leaked credential and works <em>out</em> — the compromised workload calls an attacker-controlled domain to exfiltrate data or pull down a second-stage payload. The network control that stops it is outbound filtering: FQDN allow-lists, DNS sinkholing, VPC endpoint policies. Most cloud network security programs are inbound-heavy and egress-blind, which is exactly backwards from where the attacks happen.</p>
+            <p><strong>The perimeter is gone.</strong> Every VPC has an internet-routable edge unless you actively block it; every managed service (S3, Cosmos DB, Cloud Storage) has a public endpoint by default; every <a class="glossary-link" href="glossary.html#term-iam">IAM</a> principal can be assumed from anywhere on earth if its credentials leak. The "firewall at the edge" stops being a thing because there is no single edge — there are thousands, one per resource. Identity, not network position, becomes the trust anchor.</p>
+            <p><strong>The network is software-defined.</strong> A CIDR block, a route table, a <a class="glossary-link" href="glossary.html#term-security-group">security group</a>, an NSG, a <a class="glossary-link" href="glossary.html#term-peering">transit gateway</a> attachment — all of these are API calls. Which means they change in seconds, they leave a <a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a> / Activity Log / Cloud Audit Log record, and they can be expressed as code (Terraform, Pulumi, CDK, Bicep, Deployment Manager). The bad news: a single misconfigured security group rule can expose a database to the internet in one API call. The good news: you can detect that misconfig the moment it happens, and you can write policy-as-code that prevents it in <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a>.</p>
+            <p><strong>Egress is the new ingress.</strong> The classic on-prem attack went <em>in</em> through a firewall, found a foothold, moved laterally. The modern cloud attack often starts with an <a class="glossary-link" href="glossary.html#term-ssrf">SSRF</a> or a leaked credential and works <em>out</em> — the compromised workload calls an attacker-controlled domain to exfiltrate data or pull down a second-stage payload. The network control that stops it is outbound filtering: FQDN allow-lists, DNS sinkholing, VPC endpoint policies. Most cloud network security programs are inbound-heavy and egress-blind, which is exactly backwards from where the attacks happen.</p>
             <p>The rest of this page is what you do about all three.</p>
         </section>
 
@@ -447,7 +447,7 @@
             <ul>
                 <li>Use RFC1918 space. <code>10.0.0.0/8</code> is the standard choice for a multi-region multi-account program; reserve <code>172.16.0.0/12</code> and <code>192.168.0.0/16</code> for special cases (lab, on-prem overlap, partner peering).</li>
                 <li>Never overlap. The single largest source of "we can't peer these VPCs" pain is overlapping CIDRs across accounts. Maintain an IP address management (IPAM) source of truth — AWS VPC IPAM, Azure IPAM solutions, Infoblox, BlueCat, NetBox, phpIPAM — and allocate from it.</li>
-                <li>Size for growth. A <code>/16</code> per VPC gives you 65k addresses; a <code>/24</code> per subnet gives you 256. Cloud-native workloads (Kubernetes, especially) burn through IPs quickly because every pod takes one. Plan large.</li>
+                <li>Size for growth. A <code>/16</code> per VPC gives you 65k addresses; a <code>/24</code> per subnet gives you 256. <a class="glossary-link" href="glossary.html#term-cloud-native">Cloud-native</a> workloads (<a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a>, especially) burn through IPs quickly because every pod takes one. Plan large.</li>
                 <li>Reserve space for transit. The transit/inspection VPC needs its own range that doesn't overlap with anything it will route between.</li>
             </ul>
             <h3>Subnetting strategy: tiered subnets</h3>
@@ -457,13 +457,13 @@
                 <li><strong>Private subnet</strong> — no direct internet route; egress goes through a NAT Gateway (or, better, a Network Firewall in front of NAT). Holds the application tier: EKS / AKS / GKE nodes, EC2/VM instances, Lambda functions with VPC config, container services.</li>
                 <li><strong>Data subnet</strong> — strictest. No internet route at all (egress and ingress). Holds RDS, Aurora, Cosmos DB, Cloud SQL, ElastiCache, Memorystore. Security groups restrict access to the application tier's security group only.</li>
             </ul>
-            <p>The tiers serve two purposes: they make blast radius small (a compromised public-tier load balancer can't directly reach the database), and they make the routing/firewall policy legible (the route table for "private" tier always sends egress through Network Firewall; the data tier never has an egress route).</p>
+            <p>The tiers serve two purposes: they make <a class="glossary-link" href="glossary.html#term-blast-radius">blast radius</a> small (a compromised public-tier load balancer can't directly reach the database), and they make the routing/firewall policy legible (the route table for "private" tier always sends egress through Network Firewall; the data tier never has an egress route).</p>
             <h3>AZ / region resilience</h3>
             <p>Minimum two AZs per region for any production workload; three is the standard when the service supports it. Same subnet tiering replicated in each AZ. For multi-region: separate VPCs per region, connected via Transit Gateway (AWS), vWAN (Azure), or Network Connectivity Center (GCP), with CIDR planning that allows region-to-region traffic without overlap.</p>
             <h3>Transit hub-and-spoke</h3>
             <p>Past three or four VPCs/VNets, full-mesh peering becomes unmanageable (O(n²) connections, no central inspection point). The standard pattern is hub-and-spoke: every workload VPC peers only to a central transit/inspection VPC, which runs the Network Firewall, the egress to internet, the on-prem connectivity, and the cross-region links. AWS implements it with Transit Gateway; Azure with Virtual WAN; GCP with Network Connectivity Center. The hub becomes the policy choke-point: one Network Firewall instance inspects everything that crosses VPC boundaries.</p>
             <h3>The default VPC is not your friend</h3>
-            <p>Every cloud account ships with a default VPC, in every region, with default subnets that are routable to the internet, with permissive default security groups. Disable creation of default VPCs in your landing zone — AWS Control Tower has a guardrail for this, Azure does it via Policy, GCP via Organization Policy (<code>compute.skipDefaultNetworkCreation</code>). The number of accidental "public Redis on the default VPC because someone forgot to specify a VPC" incidents is non-trivial.</p>
+            <p>Every cloud account ships with a default VPC, in every region, with default subnets that are routable to the internet, with permissive default security groups. Disable creation of default VPCs in your <a class="glossary-link" href="glossary.html#term-landing-zone">landing zone</a> — AWS Control Tower has a guardrail for this, Azure does it via Policy, GCP via Organization Policy (<code>compute.skipDefaultNetworkCreation</code>). The number of accidental "public Redis on the default VPC because someone forgot to specify a VPC" incidents is non-trivial.</p>
         </section>
 
         <section id="aws-primitives">
@@ -478,7 +478,7 @@
                 <li><strong>Transit Gateway (TGW)</strong> — the hub for multi-VPC, multi-account, on-prem connectivity. Holds route tables that decide which VPCs can talk to which. The standard hub-and-spoke implementation.</li>
                 <li><strong>VPC Peering</strong> — direct 1:1 connection between two VPCs. Non-transitive, doesn't scale. Use only for two-VPC cases; everything else should be TGW.</li>
                 <li><strong>VPC Endpoints (interface, gateway)</strong> — private connectivity to AWS services without traversing the internet. Gateway endpoints (S3, DynamoDB) are free; Interface endpoints (PrivateLink) cost per-hour per-AZ + data.</li>
-                <li><strong><a href="https://aws.amazon.com/privatelink/" target="_blank" rel="noopener noreferrer">AWS PrivateLink</a> (VPC Endpoint Services)</strong> — you can publish your own service over PrivateLink for consumers to reach without internet. The right pattern for SaaS sold to AWS customers.</li>
+                <li><strong><a href="https://aws.amazon.com/privatelink/" target="_blank" rel="noopener noreferrer">AWS PrivateLink</a> (VPC Endpoint Services)</strong> — you can publish your own service over PrivateLink for consumers to reach without internet. The right pattern for <a class="glossary-link" href="glossary.html#term-saas">SaaS</a> sold to AWS customers.</li>
                 <li><strong>VPC Lattice</strong> — service-to-service connectivity across VPCs and accounts with identity-aware policy. Newer; takes some of the service-mesh problem space.</li>
                 <li><strong>Cloud WAN</strong> — global network manager that abstracts TGW + Direct Connect + on-prem into a policy-driven topology.</li>
                 <li><strong>Network Firewall</strong> — managed firewall (Suricata under the hood) for inline FQDN filtering, IDS/IPS, TLS inspection. Sits in front of NAT typically.</li>
@@ -493,14 +493,14 @@
             <ul>
                 <li><strong>VNet</strong> — the network boundary. Regional. Contains subnets.</li>
                 <li><strong>Subnet</strong> — per-VNet. No AZ scoping at the subnet level (Azure puts AZ-awareness in resources, not subnets).</li>
-                <li><strong>NSG (Network Security Group)</strong> — stateful 5-tuple ACL. Applied at NIC or subnet. AWS's "security group" equivalent.</li>
+                <li><strong>NSG (Network Security Group)</strong> — stateful 5-tuple <a class="glossary-link" href="glossary.html#term-acl">ACL</a>. Applied at NIC or subnet. AWS's "security group" equivalent.</li>
                 <li><strong>ASG (Application Security Group)</strong> — name-based grouping of NICs to simplify NSG rule writing.</li>
                 <li><strong>UDR (User-Defined Routes)</strong> — route tables. Required to force-tunnel egress through a firewall instead of out the default internet route.</li>
                 <li><strong>Azure Firewall</strong> — managed L3-L7 firewall with FQDN filtering, threat intel, TLS inspection (Premium). The standard hub inspection device.</li>
                 <li><strong>Azure DDoS Protection</strong> — Standard tier protects all public IPs in subscriptions with the plan enabled.</li>
                 <li><strong>Application Gateway + WAF</strong> — L7 load balancer with optional WAF (OWASP CRS managed rules). Regional, with Application Gateway for Containers as the AKS-aware variant.</li>
                 <li><strong>Azure Front Door</strong> — global L7 load balancer with WAF, similar to CloudFront + AWS WAF.</li>
-                <li><strong>Private Link / Private Endpoint</strong> — private connectivity to Azure PaaS services (Storage, SQL DB, Cosmos DB, Key Vault, etc.) over a VNet-internal IP.</li>
+                <li><strong>Private Link / Private Endpoint</strong> — private connectivity to Azure <a class="glossary-link" href="glossary.html#term-paas">PaaS</a> services (Storage, SQL DB, Cosmos DB, <a class="glossary-link" href="glossary.html#term-key-vault">Key Vault</a>, etc.) over a VNet-internal IP.</li>
                 <li><strong>Service Endpoints</strong> — older mechanism (just routes traffic over the Azure backbone with source-IP signaling, not a true private endpoint). Mostly superseded by Private Link.</li>
                 <li><strong>Virtual WAN (vWAN)</strong> — Azure's transit-hub equivalent. SD-WAN + branch + ExpressRoute aggregation.</li>
                 <li><strong>VNet Peering</strong> — 1:1 connection between VNets in the same or different regions/subscriptions.</li>
@@ -522,12 +522,12 @@
                 <li><strong>Cloud NAT</strong> — managed source-NAT. Regional, with options to disable internet egress entirely.</li>
                 <li><strong>Cloud Router</strong> — dynamic routing for VPN, Interconnect, and Cloud NAT.</li>
                 <li><strong>Private Service Connect (PSC)</strong> — GCP's PrivateLink equivalent. Connects consumers to producers (Google APIs, your own services, third-party SaaS) via private endpoints.</li>
-                <li><strong>VPC Service Controls (VPC-SC)</strong> — unique to GCP. Creates a "service perimeter" around a set of GCP projects + services so that even with valid IAM credentials, data can't be moved outside the perimeter without an access policy allowing it. The strongest data-exfiltration control any cloud ships natively.</li>
-                <li><strong>Cloud Armor</strong> — DDoS + WAF + bot management. The Google Front End is the first line of defense; Cloud Armor adds rules on top.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-vpc-sc">VPC Service Controls</a> (VPC-SC)</strong> — unique to GCP. Creates a "service perimeter" around a set of GCP projects + services so that even with valid IAM credentials, data can't be moved outside the perimeter without an access policy allowing it. The strongest data-<a class="glossary-link" href="glossary.html#term-exfiltration">exfiltration</a> control any cloud ships natively.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-cloud-armor">Cloud Armor</a></strong> — DDoS + WAF + bot management. The Google Front End is the first line of defense; Cloud Armor adds rules on top.</li>
                 <li><strong>Network Connectivity Center (NCC)</strong> — transit-hub abstraction for multi-VPC and hybrid.</li>
                 <li><strong>Cloud Interconnect</strong> — dedicated or partner physical connectivity.</li>
                 <li><strong>Shared VPC (XPN)</strong> — host one VPC across many service projects. The standard multi-project landing-zone pattern.</li>
-                <li><strong>Identity-Aware Proxy (IAP)</strong> — Google's ZTNA. Identity-aware tunneling to SSH/RDP and to web apps.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-iap">Identity-Aware Proxy</a> (IAP)</strong> — Google's ZTNA. Identity-aware tunneling to SSH/RDP and to web apps.</li>
             </ul>
             <p>The combination most worth knowing: <strong>VPC Service Controls + Private Service Connect + Cloud NAT with disabled egress</strong> is the strongest "data can't leave" posture available in any cloud out of the box.</p>
         </section>
@@ -541,7 +541,7 @@
                         <tr>
                             <th scope="col" class="ct-row-head">Dimension</th>
                             <th scope="col">Security Group / NSG</th>
-                            <th scope="col">NACL (AWS) / Subnet NSG</th>
+                            <th scope="col"><a class="glossary-link" href="glossary.html#term-nacl">NACL</a> (AWS) / Subnet NSG</th>
                             <th scope="col">Network Firewall</th>
                         </tr>
                     </thead>
@@ -554,7 +554,7 @@
                         </tr>
                         <tr>
                             <th scope="row">Scope</th>
-                            <td>Per ENI / NIC</td>
+                            <td>Per <a class="glossary-link" href="glossary.html#term-eni">ENI</a> / NIC</td>
                             <td>Per subnet boundary</td>
                             <td>Inline traffic flow (VPC route target)</td>
                         </tr>
@@ -596,24 +596,24 @@
 
         <section id="private-endpoints">
             <h2>Private connectivity &amp; service endpoints</h2>
-            <p>One of the highest-leverage moves in cloud network security: stop reaching cloud-provider APIs (S3, Cosmos DB, Cloud Storage, KMS, Secrets Manager, etc.) over the public internet. Every major cloud has the primitive; what they cost and what they actually buy you differs.</p>
+            <p>One of the highest-leverage moves in cloud network security: stop reaching cloud-provider APIs (S3, Cosmos DB, Cloud Storage, KMS, <a class="glossary-link" href="glossary.html#term-secrets-manager">Secrets Manager</a>, etc.) over the public internet. Every major cloud has the primitive; what they cost and what they actually buy you differs.</p>
             <h3>AWS: VPC Endpoints &amp; PrivateLink</h3>
             <ul>
                 <li><strong>Gateway endpoints</strong> — free; available only for S3 and DynamoDB. Use these unconditionally if you have a VPC that talks to either service.</li>
                 <li><strong>Interface endpoints (PrivateLink)</strong> — ENIs in your VPC for any of ~150 AWS services. ~$0.01/hr/AZ + data. Use for KMS, STS, Secrets Manager, ECR, SSM, CloudWatch Logs, Lambda, SQS, SNS, and any other service you call from private subnets without internet egress.</li>
-                <li><strong>VPC endpoint policies</strong> — IAM policy documents attached to the endpoint that scope <em>which</em> S3 buckets, KMS keys, or STS roles can be reached <em>through</em> that endpoint. This is the security feature, not the connectivity feature. A common control: VPC endpoint policy restricts STS to your own org's accounts, blocking confused-deputy exfil to attacker AWS accounts.</li>
+                <li><strong>VPC endpoint policies</strong> — IAM policy documents attached to the endpoint that scope <em>which</em> S3 buckets, KMS keys, or STS roles can be reached <em>through</em> that endpoint. This is the security feature, not the connectivity feature. A common control: VPC endpoint policy restricts STS to your own org's accounts, blocking <a class="glossary-link" href="glossary.html#term-confused-deputy">confused-deputy</a> exfil to attacker AWS accounts.</li>
                 <li><strong>PrivateLink for third-party</strong> — Datadog, Snowflake, Confluent, MongoDB Atlas, dozens more SaaS publish PrivateLink endpoints. Use them; they cost the same as AWS-service PrivateLink and eliminate the third-party from your egress allow-list.</li>
             </ul>
             <h3>Azure: Private Link &amp; Private Endpoint</h3>
             <ul>
                 <li><strong>Private Endpoint</strong> — a NIC in your VNet with a private IP, mapping to the PaaS service (Storage Account, SQL DB, Cosmos DB, Key Vault, etc.). DNS resolution is overridden so the service's public hostname resolves to the private IP.</li>
-                <li><strong>Private Link Service</strong> — publish your own service over Private Link for tenant consumers.</li>
+                <li><strong>Private Link Service</strong> — publish your own service over Private Link for <a class="glossary-link" href="glossary.html#term-tenant">tenant</a> consumers.</li>
                 <li><strong>Service Endpoints</strong> — the older, simpler primitive. Doesn't give a private IP — just routes traffic over the Azure backbone with source-IP signaling so the PaaS service can scope by source-VNet. Cheaper but less defense-in-depth; Private Endpoint is usually the right answer.</li>
                 <li><strong>Private DNS zones</strong> — required for Private Endpoint to work correctly with the auto-rewritten hostnames. The most common Private Link misconfiguration is DNS not resolving inside the VNet.</li>
             </ul>
             <h3>GCP: Private Service Connect (PSC)</h3>
             <ul>
-                <li><strong>PSC for Google APIs</strong> — reach Google services (Cloud Storage, BigQuery, Cloud KMS, etc.) via a consumer VPC's private IP. Combine with VPC Service Controls and you have an exfiltration-resistant data plane.</li>
+                <li><strong>PSC for Google APIs</strong> — reach Google services (Cloud Storage, BigQuery, <a class="glossary-link" href="glossary.html#term-cloud-kms">Cloud KMS</a>, etc.) via a consumer VPC's private IP. Combine with VPC Service Controls and you have an exfiltration-resistant data plane.</li>
                 <li><strong>PSC for published services</strong> — your own service exposed to consumers via PSC endpoints.</li>
                 <li><strong>Private Google Access</strong> — older option; routes Google API traffic over the Google backbone via the subnet's existing internet route, without a public IP on the VM. Still requires the egress route; PSC is stricter.</li>
             </ul>
@@ -623,7 +623,7 @@
 
         <section id="egress">
             <h2>Egress controls</h2>
-            <p>This is the most-overlooked area in cloud network security. The cloud's defaults give you wide-open outbound: any private subnet with a NAT Gateway can reach any IP on the internet on any port. That's the path attackers use after they get in — SSRF to metadata service, credential theft, then beaconing out to a C2 server, then bulk data egress to an attacker-controlled S3 bucket. The controls, in order of increasing strictness and cost:</p>
+            <p>This is the most-overlooked area in cloud network security. The cloud's defaults give you wide-open outbound: any private subnet with a NAT Gateway can reach any IP on the internet on any port. That's the path attackers use after they get in — SSRF to metadata service, credential theft, then beaconing out to a <a class="glossary-link" href="glossary.html#term-c2">C2</a> server, then bulk data egress to an attacker-controlled S3 bucket. The controls, in order of increasing strictness and cost:</p>
             <h3>Level 0 — NAT-only (don't)</h3>
             <p>Private subnet → NAT Gateway → internet. No filtering on what destinations are allowed. The default for most cloud accounts. <strong>This is not a control; it's the absence of one.</strong> If a workload is compromised, the attacker has full outbound connectivity.</p>
             <h3>Level 1 — VPC endpoint policies</h3>
@@ -631,11 +631,11 @@
             <h3>Level 2 — Network Firewall with FQDN allow-list</h3>
             <p>AWS Network Firewall, Azure Firewall, GCP Cloud NGFW (Palo Alto), or a third-party NGFW (Palo Alto VM-Series, Fortinet FortiGate-VM, Check Point CloudGuard, Cisco Secure Firewall Threat Defense). Place inline on egress, configure FQDN allow-listing: workloads can only egress to a curated list of domains (your own SaaS dependencies, package mirrors, OS update servers). Everything else is dropped. This is the single largest egress posture improvement available and is achievable in a few weeks for most environments.</p>
             <h3>Level 3 — TLS inspection</h3>
-            <p>Network Firewall in TLS-terminating mode (with a per-workload root CA installed). Lets the firewall see inside the encrypted traffic for IDS/IPS, data-loss prevention, and DNS-over-HTTPS detection. Privacy and certificate-pinning workloads break under it; pick which traffic to inspect carefully.</p>
+            <p>Network Firewall in TLS-terminating mode (with a per-workload root CA installed). Lets the firewall see inside the encrypted traffic for IDS/IPS, data-loss prevention, and DNS-over-HTTPS detection. Privacy and certificate-<a class="glossary-link" href="glossary.html#term-pinning">pinning</a> workloads break under it; pick which traffic to inspect carefully.</p>
             <h3>Level 4 — Egress proxy with auth</h3>
             <p>Workloads must authenticate to an HTTP proxy (Squid with auth, smokescreen, sysdig egress, Cloudflare Gateway, Zscaler Internet Access) to reach the internet. Adds identity to the egress flow: a stolen credential without proxy access can't egress at all. The strongest pattern, but the most operational tax.</p>
             <h3>Level 5 — VPC Service Controls (GCP only)</h3>
-            <p>The strongest data-egress control any cloud offers. Defines a service perimeter around a set of projects and Google services; data inside cannot flow to projects outside, even with valid IAM credentials. The right answer for any regulated workload (FedRAMP, HIPAA, PCI) running on GCP. AWS doesn't have a native equivalent (Resource Control Policies + VPC endpoint policies approximate it); Azure doesn't either (Private Link + storage firewall + Defender for Cloud's exfil-detection approximate it).</p>
+            <p>The strongest data-egress control any cloud offers. Defines a service perimeter around a set of projects and Google services; data inside cannot flow to projects outside, even with valid IAM credentials. The right answer for any regulated workload (<a class="glossary-link" href="glossary.html#term-fedramp">FedRAMP</a>, <a class="glossary-link" href="glossary.html#term-hipaa">HIPAA</a>, PCI) running on GCP. AWS doesn't have a native equivalent (Resource Control Policies + VPC endpoint policies approximate it); Azure doesn't either (Private Link + storage firewall + <a class="glossary-link" href="glossary.html#term-guardduty">Defender for Cloud</a>'s exfil-detection approximate it).</p>
             <h3>Egress filtering for Kubernetes</h3>
             <p>The above describes network-level egress. Inside the cluster, <strong>Cilium NetworkPolicy</strong> (with L7 visibility), <strong>Calico</strong>, or <strong>Kubernetes NetworkPolicy</strong> can scope egress per pod. Pair with cluster-level egress (cluster traffic egresses via a single NAT or Network Firewall) and the result is per-pod FQDN allow-listing. See the <a href="kubernetes.html">Kubernetes page</a> for the details.</p>
         </section>
@@ -659,7 +659,7 @@
             <h3>Cloud-native</h3>
             <ul>
                 <li><strong><a href="https://aws.amazon.com/waf/" target="_blank" rel="noopener noreferrer">AWS WAF</a></strong> — attaches to CloudFront, ALB, API Gateway, AppSync, App Runner. Managed rule groups from AWS and Marketplace (Fortinet, F5, Imperva, Cyber Security Cloud). The <code>AWSManagedRulesCommonRuleSet</code> + <code>AWSManagedRulesKnownBadInputsRuleSet</code> + <code>AWSManagedRulesBotControlRuleSet</code> is the starting baseline.</li>
-                <li><strong><a href="https://learn.microsoft.com/en-us/azure/web-application-firewall/" target="_blank" rel="noopener noreferrer">Azure WAF</a></strong> on Application Gateway or Azure Front Door, with the OWASP CRS managed rule set and Microsoft Threat Intelligence rule set.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/azure/web-application-firewall/" target="_blank" rel="noopener noreferrer">Azure WAF</a></strong> on Application Gateway or Azure Front Door, with the OWASP CRS managed rule set and Microsoft <a class="glossary-link" href="glossary.html#term-threat-intelligence">Threat Intelligence</a> rule set.</li>
                 <li><strong><a href="https://cloud.google.com/security/products/armor" target="_blank" rel="noopener noreferrer">Cloud Armor</a></strong> — GCP's WAF, attached to global external HTTPS load balancers. Includes preconfigured OWASP CRS rules and reCAPTCHA Enterprise integration for bot defense.</li>
             </ul>
             <h3>CDN-native (likely already in front of your app)</h3>
@@ -670,14 +670,14 @@
                 <li><strong><a href="https://www.imperva.com/products/web-application-firewall-waf/" target="_blank" rel="noopener noreferrer">Imperva WAF</a></strong>, <strong>F5 BIG-IP Advanced WAF</strong>, <strong>Barracuda WAF</strong> — long-established players.</li>
             </ul>
             <h3>Picking one</h3>
-            <p>If you already have a CDN, use its WAF. Stacking three WAFs (Cloudflare → AWS WAF → app-level ModSecurity) means three teams tuning rules and triple the false-positive surface for one ruleset's worth of protection. The right pattern: <em>one</em> WAF as the policy plane, ideally co-located with the CDN, with the cloud-native WAF as a thin fall-back for direct origin protection (block all non-CDN-origin traffic).</p>
+            <p>If you already have a <a class="glossary-link" href="glossary.html#term-cdn">CDN</a>, use its WAF. Stacking three WAFs (Cloudflare → AWS WAF → app-level ModSecurity) means three teams tuning rules and triple the false-positive surface for one ruleset's worth of protection. The right pattern: <em>one</em> WAF as the policy plane, ideally co-located with the CDN, with the cloud-native WAF as a thin fall-back for direct origin protection (block all non-CDN-origin traffic).</p>
             <h3>Rate limiting and CAPTCHA</h3>
             <p>The most effective WAF rule is usually a rate limit, not a signature. Per-IP, per-session, per-API-key, with a CAPTCHA challenge above a threshold. AWS WAF, Cloud Armor, Cloudflare, Fastly, and Akamai all support this; tune it before tuning the signature rules.</p>
         </section>
 
         <section id="ddos">
             <h2>DDoS protection</h2>
-            <p>The volumetric attack surface — L3/L4 floods, HTTP floods, slowloris, amplification — sits in front of the WAF. Modern attacks regularly cross 1 Tbps; the largest in 2025 hit 5+ Tbps. The options:</p>
+            <p>The volumetric <a class="glossary-link" href="glossary.html#term-attack-surface">attack surface</a> — L3/L4 floods, HTTP floods, slowloris, amplification — sits in front of the WAF. Modern attacks regularly cross 1 Tbps; the largest in 2025 hit 5+ Tbps. The options:</p>
             <ul>
                 <li><strong><a href="https://aws.amazon.com/shield/" target="_blank" rel="noopener noreferrer">AWS Shield</a></strong> — <em>Standard</em> protects every AWS resource at no extra cost (basic infrastructure-layer mitigation). <em>Advanced</em> ($3000/month + data) adds dedicated DDoS response team, cost-protection (you don't pay for the surge in CloudFront/Route 53/ALB data charges from an attack), and Health-based detection. Worth the price only for revenue-critical public surfaces.</li>
                 <li><strong><a href="https://learn.microsoft.com/en-us/azure/ddos-protection/" target="_blank" rel="noopener noreferrer">Azure DDoS Protection</a></strong> — basic protection is free at the platform level; <em>Network</em> and <em>IP</em> protection plans add tuning and rapid-response team access.</li>
@@ -694,7 +694,7 @@
             <h3>Bot management</h3>
             <p>Distinguishing automated traffic from human is its own discipline. The signal is hundreds of behavioral, fingerprinting, and reputational features — not a simple ruleset. The players:</p>
             <ul>
-                <li><strong><a href="https://www.humansecurity.com/" target="_blank" rel="noopener noreferrer">HUMAN</a></strong> (formerly PerimeterX BotDefender) — strong on ad fraud, account takeover, credential stuffing.</li>
+                <li><strong><a href="https://www.humansecurity.com/" target="_blank" rel="noopener noreferrer">HUMAN</a></strong> (formerly PerimeterX BotDefender) — strong on ad fraud, account takeover, <a class="glossary-link" href="glossary.html#term-credential-stuffing">credential stuffing</a>.</li>
                 <li><strong><a href="https://www.cloudflare.com/products/bot-mitigation/" target="_blank" rel="noopener noreferrer">Cloudflare Bot Management</a></strong> — large data corpus from Cloudflare's edge; tight integration with their WAF and rate-limit.</li>
                 <li><strong><a href="https://datadome.co/" target="_blank" rel="noopener noreferrer">DataDome</a></strong> — invisible-CAPTCHA approach, strong API and mobile-app bot defense.</li>
                 <li><strong><a href="https://www.akamai.com/products/bot-manager" target="_blank" rel="noopener noreferrer">Akamai Bot Manager</a></strong> — enterprise scale, deep edge integration.</li>
@@ -702,11 +702,11 @@
             </ul>
             <p>For most workloads, the WAF's bot-control rule group plus per-route rate limits is enough. Dedicated bot-management makes sense when account takeover, scraping, or ad fraud is a measurable line item.</p>
             <h3>API security</h3>
-            <p>APIs have a different threat model from web apps: BOLA (broken object-level authorization), excessive data exposure, mass assignment, missing rate limits per consumer. The OWASP API Security Top 10 is the reference. The dedicated tools:</p>
+            <p>APIs have a different threat model from web apps: <a class="glossary-link" href="glossary.html#term-bola">BOLA</a> (broken object-level authorization), excessive data exposure, mass assignment, missing rate limits per consumer. The <a class="glossary-link" href="glossary.html#term-owasp-api">OWASP API Security Top 10</a> is the reference. The dedicated tools:</p>
             <ul>
                 <li><strong><a href="https://salt.security/" target="_blank" rel="noopener noreferrer">Salt Security</a></strong>, <strong><a href="https://www.traceable.ai/" target="_blank" rel="noopener noreferrer">Traceable</a></strong>, <strong><a href="https://nonamesecurity.com/" target="_blank" rel="noopener noreferrer">Noname Security</a></strong> (now part of Akamai), <strong><a href="https://www.cequence.ai/" target="_blank" rel="noopener noreferrer">Cequence</a></strong>, <strong><a href="https://apiiro.com/" target="_blank" rel="noopener noreferrer">Apiiro</a></strong> — runtime API observability + ML-based abuse detection.</li>
                 <li><strong>WAF + API gateway</strong> — for many environments, AWS API Gateway / Azure APIM / Apigee / Kong / Tyk with WAF integration covers 80% of the API-security need at a fraction of the cost of a dedicated tool.</li>
-                <li><strong>Shift-left</strong> — Stack Hawk, 42Crunch, Apiiro, Escape: scan OpenAPI specs and API endpoints in CI for BOLA/BFLA and authn/authz gaps. The most cost-effective intervention is usually here, not at runtime.</li>
+                <li><strong>Shift-left</strong> — Stack Hawk, 42Crunch, Apiiro, Escape: scan OpenAPI specs and API endpoints in CI for BOLA/<a class="glossary-link" href="glossary.html#term-bfla">BFLA</a> and authn/authz gaps. The most cost-effective intervention is usually here, not at runtime.</li>
             </ul>
         </section>
 
@@ -714,8 +714,8 @@
             <h2>Service mesh &amp; east-west mTLS</h2>
             <p>Inside a Kubernetes cluster (and increasingly across clusters), service-to-service traffic needs the same protections as user-to-service: encryption, identity, authorization, observability. Service meshes provide these as platform features without each app re-implementing them.</p>
             <ul>
-                <li><strong><a href="https://istio.io/" target="_blank" rel="noopener noreferrer">Istio</a></strong> — the most-deployed open-source mesh. Envoy sidecars (or ambient mode without sidecars), mTLS by default, AuthorizationPolicy for service-to-service ACLs, integrates with SPIFFE/SPIRE for workload identity.</li>
-                <li><strong><a href="https://linkerd.io/" target="_blank" rel="noopener noreferrer">Linkerd</a></strong> — CNCF graduated mesh. Rust-based proxy (linkerd2-proxy), lower resource overhead than Istio, simpler config. mTLS by default. The right choice when "I want mesh but not Istio."</li>
+                <li><strong><a href="https://istio.io/" target="_blank" rel="noopener noreferrer">Istio</a></strong> — the most-deployed open-source mesh. <a class="glossary-link" href="glossary.html#term-envoy">Envoy</a> sidecars (or <a class="glossary-link" href="glossary.html#term-ambient-mode">ambient mode</a> without sidecars), mTLS by default, AuthorizationPolicy for service-to-service ACLs, integrates with <a class="glossary-link" href="glossary.html#term-spiffe">SPIFFE</a>/<a class="glossary-link" href="glossary.html#term-spire">SPIRE</a> for <a class="glossary-link" href="glossary.html#term-service-account">workload identity</a>.</li>
+                <li><strong><a href="https://linkerd.io/" target="_blank" rel="noopener noreferrer">Linkerd</a></strong> — <a class="glossary-link" href="glossary.html#term-cncf">CNCF</a> graduated mesh. Rust-based proxy (linkerd2-proxy), lower resource overhead than Istio, simpler config. mTLS by default. The right choice when "I want mesh but not Istio."</li>
                 <li><strong><a href="https://cilium.io/use-cases/service-mesh/" target="_blank" rel="noopener noreferrer">Cilium Service Mesh</a></strong> — sidecarless, eBPF-based. mTLS, L7 policy, identity-aware. The technically-strongest option for new deployments; pairs naturally with Cilium NetworkPolicy.</li>
                 <li><strong><a href="https://aws.amazon.com/app-mesh/" target="_blank" rel="noopener noreferrer">AWS App Mesh</a></strong> — Envoy-based, managed control plane. Note AWS announced deprecation in 2024 in favor of VPC Lattice for cross-VPC service mesh.</li>
                 <li><strong><a href="https://cloud.google.com/products/service-mesh" target="_blank" rel="noopener noreferrer">GCP Anthos Service Mesh</a></strong> — managed Istio with Google's policy and observability layers.</li>
@@ -725,12 +725,12 @@
             <h3>The mTLS-everywhere claim</h3>
             <p>"Mesh gives us mTLS everywhere" is the most common pitch and the most common over-claim. It does — within the mesh. Traffic that leaves the mesh (to a managed database, to a third-party API, from an unmeshed VM) is unencrypted unless you wire it through a mesh egress gateway. Plan for the boundary, not just the interior.</p>
             <h3>When you don't need a mesh</h3>
-            <p>For a single cluster, single team, modest service count, and a language with good native TLS/JWT libraries — you may not need a mesh at all. The operational tax (sidecar resource overhead, debug complexity, mesh upgrades) is real. Cilium's sidecarless mode and Istio ambient mode both make this lighter; ambient + L4 policy is plausibly enough for many teams.</p>
+            <p>For a single cluster, single team, modest service count, and a language with good native TLS/JWT libraries — you may not need a mesh at all. The operational tax (<a class="glossary-link" href="glossary.html#term-sidecar">sidecar</a> resource overhead, debug complexity, mesh upgrades) is real. Cilium's sidecarless mode and Istio ambient mode both make this lighter; ambient + L4 policy is plausibly enough for many teams.</p>
         </section>
 
         <section id="sase">
             <h2>SASE / SSE</h2>
-            <p>SASE (Secure Access Service Edge) is a 2019-Gartner-coined bundle of: SD-WAN + SWG (Secure Web Gateway) + CASB (Cloud Access Security Broker) + ZTNA + FWaaS (Firewall-as-a-Service), all delivered from a cloud-provider's globally-distributed PoPs. SSE (Security Service Edge) is the same minus SD-WAN — security-only, no networking layer. The players in 2026:</p>
+            <p>SASE (Secure Access Service Edge) is a 2019-Gartner-coined bundle of: SD-WAN + SWG (Secure Web Gateway) + CASB (<a class="glossary-link" href="glossary.html#term-casb">Cloud Access Security Broker</a>) + ZTNA + FWaaS (Firewall-as-a-Service), all delivered from a cloud-provider's globally-distributed PoPs. SSE (<a class="glossary-link" href="glossary.html#term-sse">Security Service Edge</a>) is the same minus SD-WAN — security-only, no networking layer. The players in 2026:</p>
             <ul>
                 <li><strong><a href="https://www.zscaler.com/" target="_blank" rel="noopener noreferrer">Zscaler</a></strong> — ZIA (web gateway), ZPA (ZTNA), ZDX (digital experience). The category-defining vendor; deep enterprise mindshare.</li>
                 <li><strong><a href="https://www.netskope.com/" target="_blank" rel="noopener noreferrer">Netskope</a></strong> — strong CASB heritage, modern SSE platform.</li>
@@ -749,7 +749,7 @@
             <h2>ZTNA</h2>
             <p>Zero Trust Network Access — the modern replacement for client VPN. Instead of "VPN in, you're on the corporate network," ZTNA brokers per-application access based on user identity, device posture, and contextual signals. The app doesn't get a public IP; the user doesn't get a network. Both connect to the broker. The market:</p>
             <ul>
-                <li><strong><a href="https://www.cloudflare.com/sase/products/access/" target="_blank" rel="noopener noreferrer">Cloudflare Access</a></strong> — identity-aware reverse proxy in front of any HTTP app or SSH/RDP target. Tight integration with Cloudflare's edge, easy IdP setup, generous free tier.</li>
+                <li><strong><a href="https://www.cloudflare.com/sase/products/access/" target="_blank" rel="noopener noreferrer">Cloudflare Access</a></strong> — identity-aware reverse proxy in front of any HTTP app or SSH/RDP target. Tight integration with Cloudflare's edge, easy <a class="glossary-link" href="glossary.html#term-idp">IdP</a> setup, generous free tier.</li>
                 <li><strong><a href="https://www.zscaler.com/products-and-solutions/zscaler-private-access" target="_blank" rel="noopener noreferrer">Zscaler Private Access (ZPA)</a></strong> — the enterprise standard. App connectors initiate outbound to ZPA cloud; no inbound exposure.</li>
                 <li><strong><a href="https://www.paloaltonetworks.com/sase/access" target="_blank" rel="noopener noreferrer">Palo Alto Prisma Access</a></strong> — ZTNA inside Palo Alto's SASE platform.</li>
                 <li><strong><a href="https://www.twingate.com/" target="_blank" rel="noopener noreferrer">Twingate</a></strong> — developer-friendly, simple deployment, agentless options for SaaS.</li>
@@ -758,7 +758,7 @@
                 <li><strong><a href="https://www.sonicwall.com/blog/sonicwall-acquires-banyan-security" target="_blank" rel="noopener noreferrer">Banyan Security</a></strong> (SonicWall) — device-trust-strong ZTNA.</li>
                 <li><strong>Cloud-native</strong>:
                   <ul>
-                    <li><strong>Azure App Proxy / Entra ID Application Proxy</strong> — reverse-proxy internal apps through Entra ID with conditional access. Free with Entra ID P1/P2.</li>
+                    <li><strong>Azure App Proxy / <a class="glossary-link" href="glossary.html#term-entra-id">Entra ID</a> Application Proxy</strong> — reverse-proxy internal apps through Entra ID with <a class="glossary-link" href="glossary.html#term-conditional-access">conditional access</a>. Free with Entra ID P1/P2.</li>
                     <li><strong><a href="https://cloud.google.com/security/products/iap" target="_blank" rel="noopener noreferrer">GCP Identity-Aware Proxy (IAP)</a></strong> — front any GCP web app or SSH endpoint with Google identity; trivial setup if you're GCP-native.</li>
                     <li><strong>AWS Verified Access</strong> — newer AWS service for VPN-less app access with identity and device-trust signals.</li>
                   </ul>
@@ -780,7 +780,7 @@
             <h3>Network-based (policy in the cloud / cluster fabric)</h3>
             <ul>
                 <li><strong>Cloud-native</strong> — security groups (AWS), NSGs (Azure), VPC firewall rules (GCP). Adequate for most environments if used disciplined; default-deny + reference-by-SG-ID.</li>
-                <li><strong><a href="https://www.tigera.io/project-calico/" target="_blank" rel="noopener noreferrer">Calico</a></strong> — Kubernetes NetworkPolicy, with Calico Enterprise adding global network policy, threat-feed integration, and observability.</li>
+                <li><strong><a href="https://www.tigera.io/project-calico/" target="_blank" rel="noopener noreferrer">Calico</a></strong> — Kubernetes NetworkPolicy, with Calico Enterprise adding global <a class="glossary-link" href="glossary.html#term-network-policy">network policy</a>, threat-feed integration, and observability.</li>
                 <li><strong><a href="https://cilium.io/" target="_blank" rel="noopener noreferrer">Cilium</a></strong> — eBPF-based CNI with L3/L4/L7 NetworkPolicy, identity-aware policy, no kube-proxy required. The technical state-of-art for Kubernetes microsegmentation.</li>
                 <li><strong><a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/" target="_blank" rel="noopener noreferrer">Kubernetes NetworkPolicy</a></strong> — the standard. Default deny-all egress + allow-list per pod is the minimum bar; most managed Kubernetes services support it via their CNI.</li>
             </ul>
@@ -794,16 +794,16 @@
             <ul>
                 <li><strong><a href="https://cilium.io/" target="_blank" rel="noopener noreferrer">Cilium</a></strong> — eBPF CNI for Kubernetes. Replaces kube-proxy, gives identity-aware L3-L7 NetworkPolicy, native service mesh (with or without sidecars), Hubble for observability. The default CNI on GKE Dataplane V2, EKS Auto Mode, and Azure CNI Powered by Cilium.</li>
                 <li><strong><a href="https://tetragon.io/" target="_blank" rel="noopener noreferrer">Tetragon</a></strong> — Cilium's sibling for runtime security: process, file, and network observability at kernel level. Sees what eBPF-enabled networking sees, plus the host actions.</li>
-                <li><strong><a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a></strong> — CNCF runtime-detection tool with eBPF data sources. Network-relevant rules detect lateral movement, unusual connections, port scanning from inside the cluster.</li>
-                <li><strong><a href="https://px.dev/" target="_blank" rel="noopener noreferrer">Pixie</a></strong> (now part of New Relic / open source) — eBPF-based observability for Kubernetes. Auto-instruments HTTP, gRPC, DNS, MySQL, PostgreSQL traffic without sidecars or code changes.</li>
-                <li><strong>Inspektor Gadget</strong>, <strong>bpftrace</strong>, <strong>kubectl-trace</strong> — the diagnostic tools you reach for in incident response when you need packet-level visibility without deploying anything new.</li>
+                <li><strong><a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a></strong> — CNCF runtime-detection tool with eBPF data sources. Network-relevant rules detect <a class="glossary-link" href="glossary.html#term-lateral-movement">lateral movement</a>, unusual connections, port scanning from inside the cluster.</li>
+                <li><strong><a href="https://px.dev/" target="_blank" rel="noopener noreferrer">Pixie</a></strong> (now part of New Relic / open source) — eBPF-based observability for Kubernetes. Auto-instruments HTTP, <a class="glossary-link" href="glossary.html#term-grpc">gRPC</a>, DNS, MySQL, PostgreSQL traffic without sidecars or code changes.</li>
+                <li><strong>Inspektor Gadget</strong>, <strong>bpftrace</strong>, <strong>kubectl-trace</strong> — the diagnostic tools you reach for in <a class="glossary-link" href="glossary.html#term-incident-response">incident response</a> when you need packet-level visibility without deploying anything new.</li>
             </ul>
-            <p>The strategic point: eBPF is the data plane for cloud-native networking and security for the next decade. Programs that have invested in Cilium + Hubble + Tetragon end up with a coherent stack covering CNI, NetworkPolicy, service mesh, and runtime detection on the same engine — instead of four point products with overlapping agents.</p>
+            <p>The strategic point: eBPF is the data plane for cloud-native networking and security for the next decade. Programs that have invested in Cilium + Hubble + <a class="glossary-link" href="glossary.html#term-tetragon">Tetragon</a> end up with a coherent stack covering CNI, NetworkPolicy, service mesh, and runtime detection on the same engine — instead of four point products with overlapping agents.</p>
         </section>
 
         <section id="cross-cloud">
             <h2>Cross-cloud connectivity</h2>
-            <p>For multi-cloud and hybrid programs, how the clouds (and on-prem) reach each other is its own discipline. Options:</p>
+            <p>For <a class="glossary-link" href="glossary.html#term-public">multi-cloud</a> and hybrid programs, how the clouds (and on-prem) reach each other is its own discipline. Options:</p>
             <ul>
                 <li><strong>Internet + VPN</strong> — IPsec tunnels over public internet. Cheapest, lowest performance, often the right answer for non-critical paths.</li>
                 <li><strong>Cloud-native private links to provider backbones</strong> — AWS Direct Connect, Azure ExpressRoute, GCP Cloud Interconnect. Direct circuits to the cloud provider's edge. Best performance, highest cost.</li>
@@ -824,11 +824,11 @@
             <h2>Flow logs &amp; network observability</h2>
             <p>The audit trail of every connection in your cloud is the single highest-value piece of data you control. Get it on, get it stored, get it queryable.</p>
             <ul>
-                <li><strong>VPC Flow Logs (AWS)</strong> — per-ENI, per-subnet, or per-VPC. Fields include source/dest IP, port, protocol, packets, bytes, action (ACCEPT/REJECT). Custom format adds VPC-ID, instance-ID, TCP flags, more. Send to S3 (cheap, queried via Athena) or CloudWatch Logs (more expensive, real-time).</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-vpc-flow-logs">VPC Flow Logs</a> (AWS)</strong> — per-ENI, per-subnet, or per-VPC. Fields include source/dest IP, port, protocol, packets, bytes, action (ACCEPT/REJECT). Custom format adds VPC-ID, instance-ID, TCP flags, more. Send to S3 (cheap, queried via Athena) or CloudWatch Logs (more expensive, real-time).</li>
                 <li><strong>NSG Flow Logs (Azure)</strong> — per-NSG. Version 2 adds bytes/packets per flow. Stored in Storage Accounts; Traffic Analytics builds a dashboard.</li>
                 <li><strong>VPC Flow Logs (GCP)</strong> — per-subnet, configurable sampling rate. Streams to Cloud Logging; export to BigQuery for analysis.</li>
                 <li><strong>VPC Traffic Mirroring (AWS), Azure Virtual Network TAP, GCP Packet Mirroring</strong> — full packet capture for selected workloads. Use sparingly (expensive at scale); reach for it when you need DPI for IR or compliance.</li>
-                <li><strong>Third-party packet/flow tools</strong> — <a href="https://arkime.com/" target="_blank" rel="noopener noreferrer">Arkime</a> (formerly Moloch), <a href="https://www.ntop.org/" target="_blank" rel="noopener noreferrer">ntopng</a>, <a href="https://corelight.com/" target="_blank" rel="noopener noreferrer">Corelight</a> (Zeek), <a href="https://www.extrahop.com/" target="_blank" rel="noopener noreferrer">ExtraHop Reveal(x)</a>, <a href="https://www.vectra.ai/" target="_blank" rel="noopener noreferrer">Vectra</a>. NDR (network detection and response) products that consume mirrored or captured traffic for behavioral analytics.</li>
+                <li><strong>Third-party packet/flow tools</strong> — <a href="https://arkime.com/" target="_blank" rel="noopener noreferrer">Arkime</a> (formerly Moloch), <a href="https://www.ntop.org/" target="_blank" rel="noopener noreferrer">ntopng</a>, <a href="https://corelight.com/" target="_blank" rel="noopener noreferrer">Corelight</a> (Zeek), <a href="https://www.extrahop.com/" target="_blank" rel="noopener noreferrer">ExtraHop Reveal(x)</a>, <a href="https://www.vectra.ai/" target="_blank" rel="noopener noreferrer">Vectra</a>. <a class="glossary-link" href="glossary.html#term-edr">NDR</a> (network detection and response) products that consume mirrored or captured traffic for behavioral analytics.</li>
                 <li><strong>Hubble (Cilium)</strong>, <strong>Pixie</strong> — Kubernetes-specific flow observability with eBPF.</li>
             </ul>
             <p>Practical defaults: enable VPC Flow Logs on every production VPC at full fidelity, store in cheap object storage with 1–2 year retention, query via Athena/Log Analytics/BigQuery for IR, and stream a sampled subset (or filtered "rejected" flows + high-value source/destination flows) to your SIEM. Cost is meaningful but not prohibitive; the IR value is enormous.</p>
@@ -958,7 +958,7 @@
                 </div>
                 <div class="pillar-card pillar-card-stage3">
                     <h3>Stage 3 — Egress-controlled</h3>
-                    <p>Hub-and-spoke topology via Transit Gateway / vWAN / NCC. Network Firewall inline on egress with FQDN allow-list. DNS firewall enabled with managed threat-intel rule groups. Most cloud-API traffic on PrivateLink with endpoint policies. CSPM continuously alerts on policy drift.</p>
+                    <p>Hub-and-spoke topology via Transit Gateway / vWAN / NCC. Network Firewall inline on egress with FQDN allow-list. DNS firewall enabled with managed threat-intel rule groups. Most cloud-API traffic on PrivateLink with endpoint policies. <a class="glossary-link" href="glossary.html#term-cspm">CSPM</a> continuously alerts on policy drift.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage4">
                     <h3>Stage 4 — Microsegmented</h3>
@@ -966,7 +966,7 @@
                 </div>
                 <div class="pillar-card pillar-card-stage5">
                     <h3>Stage 5 — Continuous-verified</h3>
-                    <p>Identity-aware policy at every hop. VPC Service Controls (GCP) or equivalent network-level exfil boundary. Policy-as-code in CI prevents the misconfigurations from ever shipping. Network behavior baselines and anomaly detection auto-isolate compromised workloads. Egress policy is per-workload, not per-VPC.</p>
+                    <p>Identity-aware policy at every hop. VPC Service Controls (GCP) or equivalent network-level exfil boundary. <a class="glossary-link" href="glossary.html#term-policy-as-code">Policy-as-code</a> in CI prevents the misconfigurations from ever shipping. Network behavior baselines and anomaly detection auto-isolate compromised workloads. Egress policy is per-workload, not per-VPC.</p>
                 </div>
             </div>
             <p>Most production cloud environments live at Stage 2 with aspirations toward Stage 3. Stage 4 takes intentional investment; Stage 5 is rare and usually limited to regulated workloads where it earns its keep.</p>
@@ -980,7 +980,7 @@
                 <li><strong>Security groups with <code>0.0.0.0/0</code> on anything but a public load balancer.</strong> The bread-and-butter finding of every CSPM. Default-deny, allow only what's needed, prefer SG-ID references over CIDRs.</li>
                 <li><strong>VPC peering everything to everything.</strong> Becomes O(n²) connections, no transit policy, no central inspection. Hub-and-spoke via TGW / vWAN / NCC by the third VPC.</li>
                 <li><strong>No flow logs.</strong> When IR happens you can't answer "did this host ever talk to this IP?" Turn them on in every prod VPC; cost is small relative to value.</li>
-                <li><strong>Public RDS / Cosmos DB / Cloud SQL.</strong> Managed databases default-public on some configurations. Always: private-subnet, security-group-scoped to the app tier, no public IP, encryption in transit and at rest.</li>
+                <li><strong>Public RDS / Cosmos DB / Cloud SQL.</strong> Managed databases default-public on some configurations. Always: private-subnet, security-group-scoped to the app tier, no public IP, encryption <a class="glossary-link" href="glossary.html#term-encryption-at-rest">in transit</a> and at rest.</li>
                 <li><strong>Bastion on a public IP.</strong> "We need SSH access to the VPC" → bastion on public subnet with port 22 open → bastion-credential theft → full VPC pivot. ZTNA (IAP, Cloudflare Access, Tailscale, AWS Verified Access) is the modern answer.</li>
                 <li><strong>One WAF in front of another.</strong> Cloudflare → AWS WAF → ModSecurity in three teams' rule libraries with three sets of false positives. Pick one policy plane.</li>
                 <li><strong>TLS inspection turned on for everything.</strong> Breaks certificate-pinning apps, mobile SDKs, and anything that does its own validation. Inspect by exception, not by default.</li>
@@ -1003,7 +1003,7 @@
                 <li><a href="https://csrc.nist.gov/pubs/sp/800/207/final" target="_blank" rel="noopener noreferrer">NIST SP 800-207 — Zero Trust Architecture</a></li>
                 <li><a href="https://www.cisecurity.org/cis-benchmarks" target="_blank" rel="noopener noreferrer">CIS Benchmarks for AWS / Azure / GCP / Kubernetes</a> — the network sections especially.</li>
                 <li><a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a> and <a href="https://owasp.org/API-Security/" target="_blank" rel="noopener noreferrer">OWASP API Security Top 10</a> — what your WAF rules should aim at.</li>
-                <li><a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK Cloud</a> — Initial Access, Lateral Movement, Exfiltration techniques map to the network controls on this page.</li>
+                <li><a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK Cloud</a> — <a class="glossary-link" href="glossary.html#term-initial-access">Initial Access</a>, Lateral Movement, Exfiltration techniques map to the network controls on this page.</li>
             </ul>
             <h3>Tooling</h3>
             <ul>
@@ -1044,7 +1044,7 @@
             <p>Security groups give you network-level segmentation between workloads in a VPC, scoped by IP, port, and (in AWS) other security-group IDs. That is a form of microsegmentation, and for many environments it is enough. True microsegmentation tools (Illumio, Guardicore/Akamai, ColorTokens, vArmour, Cisco Secure Workload) add three things: identity-aware policy (the workload's label, role, or process — not its IP), east-west visibility across hybrid environments (on-prem + multi-cloud + Kubernetes in one map), and policy at the host level (so a host-based agent enforces even if the cloud security group is misconfigured). For a single-cloud, Kubernetes-heavy environment, Cilium NetworkPolicy + cloud security groups often replaces the commercial microsegmentation tool. For a hybrid bank or hospital, the commercial tool earns its keep.</p>
 
             <h3>How important are flow logs?</h3>
-            <p>More important than they look. VPC Flow Logs (AWS, GCP), NSG Flow Logs (Azure), and the equivalents are the audit trail of every connection — source, destination, port, bytes, action. They answer "did this workload ever talk to this CIDR?" which is the question you need answered in every incident, and they are the input to behavioral analytics (GuardDuty, Defender for Cloud, Chronicle, Wiz, Vectra, ExtraHop) that detect lateral movement, C2 traffic, and data exfiltration patterns. Costs scale with volume; the practical pattern is enable flow logs at full fidelity in all production VPCs, store in cheap storage (S3 / Blob / GCS) with a 1–2 year retention, and stream a sample (or all of it) to your detection platform. Skip flow logs and your detection coverage collapses to whatever the agents on the hosts can see.</p>
+            <p>More important than they look. VPC Flow Logs (AWS, GCP), NSG Flow Logs (Azure), and the equivalents are the audit trail of every connection — source, destination, port, bytes, action. They answer "did this workload ever talk to this CIDR?" which is the question you need answered in every incident, and they are the input to behavioral analytics (GuardDuty, Defender for Cloud, Chronicle, Wiz, Vectra, ExtraHop) that detect lateral movement, C2 traffic, and <a class="glossary-link" href="glossary.html#term-data-exfiltration">data exfiltration</a> patterns. Costs scale with volume; the practical pattern is enable flow logs at full fidelity in all production VPCs, store in cheap storage (S3 / Blob / GCS) with a 1–2 year retention, and stream a sample (or all of it) to your detection platform. Skip flow logs and your detection coverage collapses to whatever the agents on the hosts can see.</p>
 
             <h3>Should I use a cloud-native WAF or a third-party (Cloudflare, Akamai, Imperva)?</h3>
             <p>Depends on what sits in front of your app. If everything is already behind Cloudflare or Akamai (because you needed their CDN, DDoS, and bot management), use their WAF — it is the cheapest, most-mature option and you avoid double-decrypting TLS. If you are AWS-native and your apps front directly via ALB or CloudFront, AWS WAF with managed rule groups (AWSManagedRulesCommonRuleSet, AWSManagedRulesKnownBadInputsRuleSet, plus a bot-control rule group) is good enough for most workloads and cheaper than a third-party. The pattern to avoid: stacking three WAFs (Cloudflare → AWS WAF → app-level ModSecurity) and paying three rule-tuning teams. Pick one as the policy plane; let the others pass through.</p>

@@ -421,7 +421,7 @@
         <section id="definition">
             <h2>What cloud security actually is</h2>
             <p><strong>Cloud security</strong> is the practice of protecting data, applications, identities, and infrastructure that run on cloud platforms — primarily Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP), but also second-tier providers like Oracle Cloud, IBM Cloud, and Alibaba Cloud, plus the <a class="glossary-link" href="glossary.html#term-saas">SaaS</a> layer (Microsoft 365, Salesforce, Snowflake, GitHub, and so on).</p>
-            <p>It is not a single product or a single team. In a mature organization, cloud security spans configuration management, identity and access, network controls, data protection, application security, threat detection, incident response, and compliance — all running across hundreds or thousands of accounts, subscriptions, and projects.</p>
+            <p>It is not a single product or a single team. In a mature organization, cloud security spans configuration management, identity and access, network controls, data protection, application security, threat detection, <a class="glossary-link" href="glossary.html#term-incident-response">incident response</a>, and compliance — all running across hundreds or thousands of accounts, subscriptions, and projects.</p>
             <p>If you're new to the field, see the <a href="glossary.html">cloud security glossary</a> for plain-English definitions of the acronyms in this article.</p>
         </section>
 
@@ -529,7 +529,7 @@
                 </div>
                 <div class="threat-tile">
                     <span class="threat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/><path d="m9 12 2 2 4-4"/></svg></span>
-                    <div><h4>Insecure APIs &amp; <a class="glossary-link" href="glossary.html#term-ssrf">SSRF</a></h4><p>Apps coerced into calling internal endpoints, including the metadata service. <a class="glossary-link" href="glossary.html#term-imds">IMDSv2</a>.</p></div>
+                    <div><h4>Insecure APIs &amp; SSRF</h4><p>Apps coerced into calling internal endpoints, including the metadata service. <a class="glossary-link" href="glossary.html#term-imds">IMDSv2</a>.</p></div>
                 </div>
                 <div class="threat-tile">
                     <span class="threat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h18"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="17" cy="17" r="1.5" fill="currentColor"/></svg></span>
@@ -545,7 +545,7 @@
                 </div>
                 <div class="threat-tile">
                     <span class="threat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><path d="M2 12h2M20 12h2M12 2v2M12 20v2"/></svg></span>
-                    <div><h4>AI/<a class="glossary-link" href="glossary.html#term-llm">LLM</a>-specific risks</h4><p><a class="glossary-link" href="glossary.html#term-prompt-injection">Prompt injection</a>, data leakage via outputs, agents with too much authority.</p></div>
+                    <div><h4>AI/LLM-specific risks</h4><p><a class="glossary-link" href="glossary.html#term-prompt-injection">Prompt injection</a>, data leakage via outputs, agents with too much authority.</p></div>
                 </div>
             </div>
             <p>Real attacks chain several of these together. To see exactly how, walk through the <a href="breach-timeline.html">cloud breach kill chains</a>, all mapped to MITRE ATT&amp;CK Cloud techniques.</p>
@@ -563,15 +563,15 @@
             <circle cx="300" cy="245" r="65" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
             <circle cx="300" cy="245" r="32" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
             <text x="300" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e" letter-spacing="0.5">PERIMETER</text>
-            <text x="300" y="76" text-anchor="middle" font-size="9" fill="#92400e">DDoS · WAF · CDN</text>
+            <text x="300" y="76" text-anchor="middle" font-size="9" fill="#92400e"><a class="glossary-link" href="glossary.html#term-ddos">DDoS</a> · <a class="glossary-link" href="glossary.html#term-waf">WAF</a> · <a class="glossary-link" href="glossary.html#term-cdn">CDN</a></text>
             <text x="300" y="98" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a" letter-spacing="0.5">NETWORK</text>
-            <text x="300" y="112" text-anchor="middle" font-size="9" fill="#1e3a8a">VPC · SGs · segmentation</text>
+            <text x="300" y="112" text-anchor="middle" font-size="9" fill="#1e3a8a"><a class="glossary-link" href="glossary.html#term-vpc">VPC</a> · SGs · segmentation</text>
             <text x="300" y="133" text-anchor="middle" font-size="11" font-weight="700" fill="#5b21b6" letter-spacing="0.5">IDENTITY</text>
-            <text x="300" y="147" text-anchor="middle" font-size="9" fill="#5b21b6">IAM · MFA · SSO</text>
+            <text x="300" y="147" text-anchor="middle" font-size="9" fill="#5b21b6">IAM · MFA · <a class="glossary-link" href="glossary.html#term-sso">SSO</a></text>
             <text x="300" y="167" text-anchor="middle" font-size="11" font-weight="700" fill="#831843" letter-spacing="0.5">WORKLOAD</text>
-            <text x="300" y="181" text-anchor="middle" font-size="9" fill="#831843">VMs · containers · K8s</text>
+            <text x="300" y="181" text-anchor="middle" font-size="9" fill="#831843">VMs · containers · <a class="glossary-link" href="glossary.html#term-kubernetes">K8s</a></text>
             <text x="300" y="201" text-anchor="middle" font-size="11" font-weight="700" fill="#065f46" letter-spacing="0.5">APP</text>
-            <text x="300" y="215" text-anchor="middle" font-size="9" fill="#065f46">SAST · deps · runtime</text>
+            <text x="300" y="215" text-anchor="middle" font-size="9" fill="#065f46"><a class="glossary-link" href="glossary.html#term-sast">SAST</a> · deps · runtime</text>
             <text x="300" y="248" text-anchor="middle" font-size="12" font-weight="700" fill="#991b1b" letter-spacing="0.5">DATA</text>
             <text x="300" y="261" text-anchor="middle" font-size="9" font-style="italic" fill="#991b1b">crown jewels</text>
           </svg>
@@ -584,7 +584,7 @@
             <figure class="cnapp-figure" id="cnapp-umbrella">
               <svg viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cnapp-fig-title cnapp-fig-desc">
                 <title id="cnapp-fig-title">The CNAPP umbrella</title>
-                <desc id="cnapp-fig-desc">CNAPP is the umbrella category that bundles CSPM, CWPP, CIEM, DSPM, and IaC scanning into a single platform.</desc>
+                <desc id="cnapp-fig-desc">CNAPP is the umbrella category that bundles CSPM, CWPP, CIEM, DSPM, and <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scanning into a single platform.</desc>
                 <defs>
                   <linearGradient id="cnapp-pill" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" stop-color="#1e3a8a"/>
@@ -596,7 +596,7 @@
                 <line x1="360" y1="20" x2="360" y2="55" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
                 <rect x="270" y="55" width="180" height="62" rx="31" fill="url(#cnapp-pill)" stroke="#3b82f6" stroke-width="1.5"/>
                 <text x="360" y="83" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">CNAPP</text>
-                <text x="360" y="103" text-anchor="middle" font-size="10.5" fill="#cbd5e1" letter-spacing="0.3">Cloud-Native App Protection</text>
+                <text x="360" y="103" text-anchor="middle" font-size="10.5" fill="#cbd5e1" letter-spacing="0.3"><a class="glossary-link" href="glossary.html#term-cloud-native">Cloud-Native</a> App Protection</text>
                 <g stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.6" fill="none">
                   <path d="M 110 132 V 188"/>
                   <path d="M 235 132 V 188"/>
@@ -638,7 +638,7 @@
                   <rect width="100" height="118" rx="12" fill="#fff" stroke="#06b6d4" stroke-width="2"/>
                   <rect width="100" height="34" rx="12" fill="#06b6d4"/>
                   <rect y="22" width="100" height="12" fill="#06b6d4"/>
-                  <text x="50" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">DSPM</text>
+                  <text x="50" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#fff"><a class="glossary-link" href="glossary.html#term-dspm">DSPM</a></text>
                   <text x="50" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Data</text>
                   <text x="50" y="80" text-anchor="middle" font-size="9" fill="#475569">Find, classify,</text>
                   <text x="50" y="92" text-anchor="middle" font-size="9" fill="#475569">track sensitive</text>
@@ -650,7 +650,7 @@
                   <rect y="22" width="100" height="12" fill="#f43f5e"/>
                   <text x="50" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">IaC scan</text>
                   <text x="50" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Pre-deploy</text>
-                  <text x="50" y="80" text-anchor="middle" font-size="9" fill="#475569">Terraform,</text>
+                  <text x="50" y="80" text-anchor="middle" font-size="9" fill="#475569"><a class="glossary-link" href="glossary.html#term-terraform">Terraform</a>,</text>
                   <text x="50" y="92" text-anchor="middle" font-size="9" fill="#475569">CFN, K8s</text>
                   <text x="50" y="104" text-anchor="middle" font-size="9" fill="#475569">manifests</text>
                 </g>
@@ -658,12 +658,12 @@
               <figcaption>CNAPP bundles the previously separate categories into one platform. The market is consolidating fast.</figcaption>
             </figure>
             <ul>
-                <li><strong>CSPM — Cloud Security Posture Management.</strong> Continuously scans your cloud accounts for misconfigurations against a benchmark like CIS or your own policies. Examples: Prowler, ScoutSuite, Steampipe, plus commercial platforms.</li>
+                <li><strong>CSPM — Cloud Security Posture Management.</strong> Continuously scans your cloud accounts for misconfigurations against a benchmark like CIS or your own policies. Examples: <a class="glossary-link" href="glossary.html#term-prowler">Prowler</a>, ScoutSuite, Steampipe, plus commercial platforms.</li>
                 <li><strong>CWPP — Cloud Workload Protection Platform.</strong> Protects the running workload — VMs, containers, serverless. Includes vulnerability scanning, runtime detection, file integrity monitoring.</li>
                 <li><strong>CIEM — Cloud Infrastructure Entitlement Management.</strong> Analyzes IAM at scale. Who can assume what role? Which permissions are unused? Where are the privilege-escalation paths?</li>
-                <li><strong>CNAPP — Cloud-Native Application Protection Platform.</strong> The umbrella category. A single platform that bundles CSPM + CWPP + CIEM and often vulnerability management, container security, and <a class="glossary-link" href="glossary.html#term-iac">IaC</a> scanning. The market trend is consolidation into CNAPP.</li>
-                <li><strong><a class="glossary-link" href="glossary.html#term-dspm">DSPM</a> — Data Security Posture Management.</strong> Finds and classifies sensitive data across cloud stores, then tracks who can access it.</li>
-                <li><strong>SIEM/<a class="glossary-link" href="glossary.html#term-soar">SOAR</a>.</strong> Centralizes logs and automates response. The <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> variants are increasingly important as log volume explodes.</li>
+                <li><strong>CNAPP — Cloud-Native Application Protection Platform.</strong> The umbrella category. A single platform that bundles CSPM + CWPP + CIEM and often <a class="glossary-link" href="glossary.html#term-vulnerability-management">vulnerability management</a>, <a class="glossary-link" href="glossary.html#term-container-security">container security</a>, and IaC scanning. The market trend is consolidation into CNAPP.</li>
+                <li><strong>DSPM — Data Security Posture Management.</strong> Finds and classifies sensitive data across cloud stores, then tracks who can access it.</li>
+                <li><strong>SIEM/<a class="glossary-link" href="glossary.html#term-soar">SOAR</a>.</strong> Centralizes logs and automates response. The cloud-native variants are increasingly important as log volume explodes.</li>
                 <li><strong>Provider-native services.</strong> AWS GuardDuty/Security Hub/<a class="glossary-link" href="glossary.html#term-iam-access-analyzer">IAM Access Analyzer</a>; Microsoft Defender for Cloud + Entra; GCP Security Command Center. Often the cheapest credible starting point.</li>
             </ul>
             <p>For specific tools, hands-on labs, and certifications, see the <a href="resources.html">cloud security resources catalog</a>.</p>
@@ -683,7 +683,7 @@
             <ol>
                 <li><strong>Pick one cloud.</strong> AWS, Azure, or GCP. Don't try to learn three at once. AWS has the deepest community and the most learning material.</li>
                 <li><strong>Learn IAM and networking first.</strong> Almost every breach involves one or both. The provider's free training (AWS Skill Builder, Microsoft Learn, Google Cloud Skills Boost) is fine for fundamentals.</li>
-                <li><strong>Practice on intentionally vulnerable environments.</strong> CloudGoat, flAWS, EntraGoat, CNAPPGoat, and PwnedLabs let you exploit and defend without getting fired. See our <a href="ctfs.html">cloud security CTF directory</a>.</li>
+                <li><strong>Practice on intentionally vulnerable environments.</strong> <a class="glossary-link" href="glossary.html#term-cloudgoat">CloudGoat</a>, <a class="glossary-link" href="glossary.html#term-flaws">flAWS</a>, EntraGoat, CNAPPGoat, and PwnedLabs let you exploit and defend without getting fired. See our <a href="ctfs.html">cloud security CTF directory</a>.</li>
                 <li><strong>Read real breach post-mortems.</strong> Understanding how Capital One, SolarWinds, Snowflake, MGM, and LastPass actually happened teaches more than any textbook. Walk through the <a href="breach-timeline.html">breach kill chains</a>.</li>
                 <li><strong>Pick up one foundational certification.</strong> CCSK (<a class="glossary-link" href="glossary.html#term-csa">Cloud Security Alliance</a>) is vendor-neutral and a great anchor. AWS Security Specialty, Microsoft SC-100/AZ-500, and Google's Cloud Security Engineer are the provider-specific options. See our <a href="cloud-security-certifications.html">cloud security certifications guide</a>.</li>
                 <li><strong>Join a community.</strong> Talking to practitioners is how you learn what's actually current. <a href="sessions.html">CSOH meets every Friday on Zoom</a>, free, no marketing.</li>
@@ -695,7 +695,7 @@
             <h2>Frequently asked questions</h2>
 
             <h3>Is cloud security different from regular cybersecurity?</h3>
-            <p>The principles are the same. The implementation is wildly different. In on-prem environments you control the network and physical access; in the cloud you don't. Identity becomes the perimeter. Configuration becomes the attack surface. Everything is API-driven, which means everything is automatable — both for defense and for attackers.</p>
+            <p>The principles are the same. The implementation is wildly different. In on-prem environments you control the network and physical access; in the cloud you don't. Identity becomes the perimeter. Configuration becomes the <a class="glossary-link" href="glossary.html#term-attack-surface">attack surface</a>. Everything is API-driven, which means everything is automatable — both for defense and for attackers.</p>
 
             <h3>Do I need to know how to code?</h3>
             <p>Not to start. You will pick up Python and shell over time, plus enough Terraform or CloudFormation to read what your team is deploying. Reading code matters more than writing it for most cloud security roles.</p>

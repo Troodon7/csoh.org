@@ -309,7 +309,7 @@ Whether you're fixing a typo or rewriting a section, the process is the same.
 - [cloud-security-certifications.html](cloud-security-certifications.html) - CCSK / CCSP / AWS / Azure / GCP / CKS comparison
 - [conferences.html](conferences.html) - Security and hacker conference directory
 - [ctfs.html](ctfs.html) - Cloud CTF directory
-- [glossary.html](glossary.html) - 230+ terms with cross-links
+- [glossary.html](glossary.html) - 300+ terms with cross-links
 - [faq.html](faq.html) - Frequently asked questions
 - [github-actions.html](github-actions.html) - GitHub Actions explainer
 - [cloud-deployment.html](cloud-deployment.html) - How csoh.org itself deploys to GCP
