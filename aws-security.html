@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="AWS security — the complete guide. The Well-Architected Security Pillar, the AWS security service catalog (GuardDuty, Security Hub, IAM, KMS, WAF, Macie, Inspector), a multi-account landing zone reference architecture, the top 10 AWS misconfigurations, AWS-specific attack paths, service comparisons against Azure and GCP, certification track, and deep cross-references to every cloud-security discipline as it runs on AWS.">
+    <meta name="keywords"
+        content="AWS security, AWS Well-Architected, AWS security services, GuardDuty, Security Hub, IAM, KMS, AWS WAF, Macie, Inspector, AWS landing zone, Control Tower, IAM Identity Center, AWS misconfigurations, AWS attack paths, IMDS abuse, AWS pentesting, AWS Security Specialty">
+    <title>AWS Security — The Complete Guide - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/aws-security.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#0f172a">
+
+    <meta property="og:title" content="AWS Security — The Complete Guide - CSOH">
+    <meta property="og:description"
+        content="A practitioner's guide to AWS security — the Well-Architected Security Pillar, the AWS service catalog, multi-account landing zones, the top misconfigurations, AWS-specific attack paths, and the certification track.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/aws-security.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AWS Security — The Complete Guide">
+    <meta name="twitter:description"
+        content="The Well-Architected Security Pillar, the AWS service catalog, multi-account landing zones, top misconfigurations, AWS attack paths, and the certification track.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://csoh.kit.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+
+    <link rel="preload" href="/style.css?v=0e1857bd" as="style"
+        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+    <link rel="stylesheet" href="/style.css?v=0e1857bd"
+        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AWS Security — The Complete Guide",
+      "description": "A practitioner's guide to AWS security — the Well-Architected Security Pillar, the AWS service catalog, multi-account landing zones, the top misconfigurations, AWS-specific attack paths, service comparisons, and the certification track.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-05-17",
+      "dateModified": "2026-05-17",
+      "mainEntityOfPage": "https://csoh.org/aws-security.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csoh.org/"},
+        {"@type": "ListItem", "position": 2, "name": "AWS Security", "item": "https://csoh.org/aws-security.html"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is AWS more secure than Azure or GCP?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No cloud is categorically more secure than another at the platform level — all three meet the major frameworks (FedRAMP High, ISO 27001, PCI DSS, HIPAA) and run mature security programs. The differences are in defaults, service granularity, and ecosystem. AWS has the largest service surface (which is both more capability and more sharp edges), the most mature partner ecosystem, and IAM that is uniquely powerful and uniquely easy to misuse. Azure leads on enterprise identity (Entra ID). GCP leads on safe defaults and the simplicity of its resource hierarchy. Security outcomes are determined by the operator, not the provider — pick the cloud your team can run safely."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a CSPM if I already have Security Hub?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Security Hub is a credible CSPM for single-cloud AWS shops that have time to tune it. It aggregates findings from GuardDuty, Inspector, Macie, IAM Access Analyzer, and Config; runs CIS / PCI / NIST / AWS Foundational Security Best Practices conformance packs; and pushes to EventBridge for routing. Where a third-party CNAPP (Wiz, Orca, Prisma, Lacework, etc.) earns its license cost: multi-cloud coverage, agentless workload scanning, attack-path graph (which Security Hub does not produce), Kubernetes / container depth, identity-graph correlation across clouds, and a more polished operator UX. If you are single-cloud AWS and disciplined, Security Hub is fine. Multi-cloud or graph-driven prioritization, you want the third-party tool."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between IAM and IAM Identity Center?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "IAM is the per-account identity service that defines users, roles, and policies inside a single AWS account. IAM Identity Center (formerly AWS SSO) is the org-wide workforce-identity service that federates a human identity provider (Okta, Entra ID, Google Workspace, or its own directory) into AWS and lets that human assume IAM roles across many accounts via short-lived sessions. The right pattern in 2026: zero IAM users for humans, Identity Center for all human access, IAM roles for workload access (with IAM Roles Anywhere for non-AWS workloads), and IAM users only for the rare cases short-lived credentials can't satisfy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should new AWS accounts start from Control Tower or build the landing zone from scratch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start with Control Tower unless you have a specific reason not to. It deploys an opinionated multi-account baseline — Organizations with an OU structure, Identity Center, a log archive account, an audit account, CloudTrail org trail, Config aggregator, and a starter set of guardrails — in an afternoon. The escape hatches are real: you can layer your own custom SCPs, customize controls, and migrate off later via the Customizations for Control Tower (CfCT) framework. The accounts where teams skip Control Tower are usually heavily regulated environments with bespoke control sets that conflict with Control Tower's defaults; even then, the AWS Landing Zone Accelerator (LZA) gives you a CloudFormation/CDK baseline that's closer to a from-scratch build but still maintained."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the root account ever safe to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Almost never. The root user is required for ~10 tasks (closing the account, changing the support plan, restoring an IAM policy that locks everyone out, registering as a seller in the Reserved Instance Marketplace, and a few others — AWS publishes the list). For everything else, root should be locked away. The hardening pattern: hardware MFA on root, no access keys, password in a corporate secrets manager with a break-glass procedure, account email tied to a distribution list (never an individual), and CloudTrail + EventBridge alerting on any root login. If your team uses root weekly, your IAM model is broken."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the AWS shared responsibility model affect what I have to audit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AWS owns security 'of' the cloud — hardware, hypervisor, physical data center, the parts of managed services you can't see. You own security 'in' the cloud — IAM, network configuration, OS / app patching where applicable, data encryption, the configuration of every service. Auditors will ask you for AWS's SOC 2 and ISO 27001 reports (downloadable from AWS Artifact) to cover the provider side, and they will ask you to produce evidence — CloudTrail logs, Config snapshots, IAM policy exports, Security Hub findings — for everything on your side of the line. The line moves by service: with EC2 you own a lot; with Lambda you own less; with S3 you own only the configuration and the data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which AWS certification path should a cloud security engineer take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The pragmatic ladder: Cloud Practitioner (foundational vocabulary, can skip if you're already working in AWS), then Solutions Architect Associate (architecture intuition that the security exam assumes), then Security Specialty (the deep-end exam — IAM, KMS, detective controls, infrastructure security, IR). Optional layers: Solutions Architect Professional (multi-account, hybrid, enterprise patterns) for staff / principal roles, and Advanced Networking Specialty for engineers who own connectivity. Pair the certs with a home lab — see our home-lab guide — because the exam tests recognition but the job tests execution."
+          }
+        }
+      ]
+    }
+    </script>
+  <noscript><style>.js-enabled header nav{display:block !important}</style></noscript>
+</head>
+
+<body class="js-enabled">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+          <svg class="logo-mark" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="CSOH logo"><defs><linearGradient id="lm-cloud" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7dd3fc"/><stop offset="100%" stop-color="#0284c7"/></linearGradient></defs><path d="M7 19 a4 4 0 0 1 4-4 a6 6 0 0 1 11 0 a3.5 3.5 0 0 1 3.5 3.5 a3.5 3.5 0 0 1 -3.5 3.5 H8 a3.5 3.5 0 0 1 -1-7 z" fill="url(#lm-cloud)"/><path d="M11 13 L21 13 L21 18 a5 5.5 0 0 1 -5 5 a5 5.5 0 0 1 -5 -5 z" fill="#f59e0b"/><path d="M13.5 16.7 L15.3 18.4 L18.6 15" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li class="has-dropdown has-mega">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                      <div class="dropdown-menu mega-menu mega-3col">
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Foundations</h4>
+                          <ul>
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="vendor-landscape.html">Vendor Landscape</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Topics</h4>
+                          <ul>
+                            <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="containers.html">Containers</a></li>
+                            <li><a href="kubernetes.html">Kubernetes</a></li>
+                            <li><a href="serverless.html">Serverless</a></li>
+                            <li><a href="service-mesh-security.html">Service Mesh</a></li>
+                            <li><a href="ci-cd.html">CI/CD</a></li>
+                            <li><a href="landing-zones.html">Landing Zones</a></li>
+                            <li><a href="iam.html">IAM &amp; Identity</a></li>
+                            <li><a href="zero-trust.html">Zero Trust</a></li>
+                            <li><a href="network-security.html">Network Security</a></li>
+                            <li><a href="data-security.html">Data Security &amp; KMS</a></li>
+                            <li><a href="vulnerability-management.html">Vulnerability Management</a></li>
+                            <li><a href="api-security.html">API Security</a></li>
+                            <li><a href="saas-security.html">SaaS Security (SSPM)</a></li>
+                            <li><a href="backup-dr.html">Backup, DR &amp; Ransomware</a></li>
+                            <li><a href="threat-modeling.html">Threat Modeling</a></li>
+                            <li><a href="grc.html">GRC</a></li>
+                            <li><a href="compliance-frameworks.html">Compliance Frameworks</a></li>
+                            <li><a href="ai-learning.html">AI Learning</a></li>
+                            <li><a href="ai-ml-security.html">AI/ML Security</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Career &amp; Growth</h4>
+                          <ul>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+                            <li><a href="cloud-security-careers.html">Careers</a></li>
+                            <li><a href="cloud-security-reading-list.html">Reading List</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li><a href="resources.html">Resources</a></li>
+                    
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle active" aria-expanded="true" aria-haspopup="true">By Cloud <span class="caret" aria-hidden="true">&#9662;</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="aws-security.html" aria-current="page">AWS Security</a></li>
+                        <li><a href="azure-security.html">Azure Security</a></li>
+                        <li><a href="gcp-security.html">GCP Security</a></li>
+                        <li><a href="cloud-security-comparison.html">AWS vs Azure vs GCP</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Threat Intel <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="threat-research.html">Threat Research</a></li>
+                        <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        <li><a href="cloud-soc.html">Cloud SOC</a></li>
+                        <li><a href="detection-engineering.html">Detection Engineering</a></li>
+                        <li><a href="incident-response.html">Incident Response</a></li>
+                        <li><a href="cloud-pentesting.html">Cloud Pentesting</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown has-mega">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Community <span class="caret" aria-hidden="true">▾</span></button>
+                      <div class="dropdown-menu mega-menu mega-2col">
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Live</h4>
+                          <ul>
+                            <li><a href="sessions.html">Friday Zoom Sessions</a></li>
+                            <li><a href="community.html">Community &amp; Signal</a></li>
+                            <li><a href="conferences.html">Conferences</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Archive</h4>
+                          <ul>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="contribute.html">Contribute</a></li>
+                        <li><a href="contribute-resources.html">Add a Resource</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-cta-item"><a href="https://csoh.kit.com/39feb4f397" class="nav-cta" target="_blank" rel="noopener noreferrer">Join Friday Zoom →</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">AWS Security</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--illustrated">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1>AWS Security — The Complete Guide</h1>
+          <p>The Well-Architected Security Pillar, the AWS service catalog (GuardDuty, Security Hub, IAM, KMS, WAF, Macie, Inspector and the rest), a secure multi-account landing zone reference architecture, the top 10 AWS misconfigurations, AWS-specific attack paths, side-by-side comparisons against Azure and GCP, and deep cross-references to every cloud-security discipline as it runs on AWS. Vendor-neutral analysis from someone who works the platform every day.</p>
+          <div class="cta-buttons">
+            <a href="#services" class="btn btn-primary">AWS service catalog →</a>
+            <a href="#misconfigurations" class="btn btn-secondary">Top 10 misconfigurations</a>
+          </div>
+        </div>
+        <div class="hero-illustration" aria-hidden="true">
+          <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of AWS security services arranged around a central account perimeter">
+            <defs>
+              <linearGradient id="aws-cloud" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="60%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
+              <linearGradient id="aws-orange" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FF9900"/><stop offset="100%" stop-color="#c2410c"/></linearGradient>
+              <radialGradient id="aws-halo" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fcd34d" stop-opacity="0.35"/><stop offset="100%" stop-color="#fcd34d" stop-opacity="0"/></radialGradient>
+            </defs>
+            <circle cx="300" cy="240" r="210" fill="url(#aws-halo)"/>
+            <!-- Central account perimeter -->
+            <rect x="220" y="190" width="160" height="100" rx="14" fill="url(#aws-cloud)" stroke="#FF9900" stroke-width="3"/>
+            <text x="300" y="225" text-anchor="middle" fill="#0c4a6e" font-size="14" font-weight="800">AWS Account</text>
+            <text x="300" y="245" text-anchor="middle" fill="#0c4a6e" font-size="11">Organization · OU · Account</text>
+            <text x="300" y="265" text-anchor="middle" fill="#0c4a6e" font-size="10">CloudTrail · Config · IAM</text>
+            <!-- Service badges arranged in orbit -->
+            <g font-family="system-ui, sans-serif" font-weight="700">
+              <!-- Detection (top-left) -->
+              <rect x="40" y="70" width="120" height="28" rx="6" fill="#0d1424" stroke="#FF9900" stroke-width="1.5"/>
+              <text x="100" y="89" text-anchor="middle" fill="#FF9900" font-size="11">GuardDuty</text>
+              <rect x="40" y="108" width="120" height="28" rx="6" fill="#0d1424" stroke="#FF9900" stroke-width="1.5"/>
+              <text x="100" y="127" text-anchor="middle" fill="#FF9900" font-size="11">Security Hub</text>
+              <rect x="40" y="146" width="120" height="28" rx="6" fill="#0d1424" stroke="#FF9900" stroke-width="1.5"/>
+              <text x="100" y="165" text-anchor="middle" fill="#FF9900" font-size="11">Inspector</text>
+              <rect x="40" y="184" width="120" height="28" rx="6" fill="#0d1424" stroke="#FF9900" stroke-width="1.5"/>
+              <text x="100" y="203" text-anchor="middle" fill="#FF9900" font-size="11">Detective</text>
+              <text x="100" y="55" text-anchor="middle" fill="#0c4a6e" font-size="11" font-weight="800">Detection</text>
+
+              <!-- Identity (top-right) -->
+              <rect x="440" y="70" width="120" height="28" rx="6" fill="#0d1424" stroke="#60a5fa" stroke-width="1.5"/>
+              <text x="500" y="89" text-anchor="middle" fill="#60a5fa" font-size="11">IAM</text>
+              <rect x="440" y="108" width="120" height="28" rx="6" fill="#0d1424" stroke="#60a5fa" stroke-width="1.5"/>
+              <text x="500" y="127" text-anchor="middle" fill="#60a5fa" font-size="11">Identity Center</text>
+              <rect x="440" y="146" width="120" height="28" rx="6" fill="#0d1424" stroke="#60a5fa" stroke-width="1.5"/>
+              <text x="500" y="165" text-anchor="middle" fill="#60a5fa" font-size="11">Access Analyzer</text>
+              <rect x="440" y="184" width="120" height="28" rx="6" fill="#0d1424" stroke="#60a5fa" stroke-width="1.5"/>
+              <text x="500" y="203" text-anchor="middle" fill="#60a5fa" font-size="11">Roles Anywhere</text>
+              <text x="500" y="55" text-anchor="middle" fill="#0c4a6e" font-size="11" font-weight="800">Identity</text>
+
+              <!-- Data (bottom-left) -->
+              <rect x="40" y="280" width="120" height="28" rx="6" fill="#0d1424" stroke="#34d399" stroke-width="1.5"/>
+              <text x="100" y="299" text-anchor="middle" fill="#34d399" font-size="11">KMS</text>
+              <rect x="40" y="318" width="120" height="28" rx="6" fill="#0d1424" stroke="#34d399" stroke-width="1.5"/>
+              <text x="100" y="337" text-anchor="middle" fill="#34d399" font-size="11">Secrets Manager</text>
+              <rect x="40" y="356" width="120" height="28" rx="6" fill="#0d1424" stroke="#34d399" stroke-width="1.5"/>
+              <text x="100" y="375" text-anchor="middle" fill="#34d399" font-size="11">Macie</text>
+              <rect x="40" y="394" width="120" height="28" rx="6" fill="#0d1424" stroke="#34d399" stroke-width="1.5"/>
+              <text x="100" y="413" text-anchor="middle" fill="#34d399" font-size="11">ACM / CloudHSM</text>
+              <text x="100" y="441" text-anchor="middle" fill="#0c4a6e" font-size="11" font-weight="800">Data</text>
+
+              <!-- Network (bottom-right) -->
+              <rect x="440" y="280" width="120" height="28" rx="6" fill="#0d1424" stroke="#a78bfa" stroke-width="1.5"/>
+              <text x="500" y="299" text-anchor="middle" fill="#a78bfa" font-size="11">WAF</text>
+              <rect x="440" y="318" width="120" height="28" rx="6" fill="#0d1424" stroke="#a78bfa" stroke-width="1.5"/>
+              <text x="500" y="337" text-anchor="middle" fill="#a78bfa" font-size="11">Shield</text>
+              <rect x="440" y="356" width="120" height="28" rx="6" fill="#0d1424" stroke="#a78bfa" stroke-width="1.5"/>
+              <text x="500" y="375" text-anchor="middle" fill="#a78bfa" font-size="11">VPC / PrivateLink</text>
+              <rect x="440" y="394" width="120" height="28" rx="6" fill="#0d1424" stroke="#a78bfa" stroke-width="1.5"/>
+              <text x="500" y="413" text-anchor="middle" fill="#a78bfa" font-size="11">Network Firewall</text>
+              <text x="500" y="441" text-anchor="middle" fill="#0c4a6e" font-size="11" font-weight="800">Network</text>
+            </g>
+            <!-- Connecting lines -->
+            <g stroke="#FF9900" stroke-width="1" stroke-dasharray="3 4" fill="none" opacity="0.4">
+              <line x1="160" y1="140" x2="220" y2="220"/>
+              <line x1="440" y1="140" x2="380" y2="220"/>
+              <line x1="160" y1="340" x2="220" y2="270"/>
+              <line x1="440" y1="340" x2="380" y2="270"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <main class="container contribute-article" id="main-content">
+
+        <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/server-room.webp" type="image/webp">
+            <img src="/img/photos/server-room.jpg" alt="Rows of illuminated server racks inside a data center" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Photo from Pexels</figcaption>
+        </figure>
+
+        <p class="page-meta"><time datetime="2026-05-17">Last updated <strong>2026-05-17</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/aws-security.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>The 30-second version:</strong> AWS is the largest cloud by usage, the largest by service surface, and the largest by attacker interest. Most people who type "cloud security" into a search bar actually mean "AWS security," because AWS is the cloud they run. The platform is mature, the primitives are well-documented, and the failure modes are well-known — IAM that's too broad, S3 buckets that are too public, IMDS that's too easy to abuse, CloudTrail that's missing in some region. This page is the index: the <a href="#well-architected">Well-Architected Security Pillar</a>, the <a href="#services">service catalog</a> with opinionated commentary on each one, a <a href="#landing-zone">reference landing-zone architecture</a>, the <a href="#misconfigurations">top 10 misconfigurations</a>, the <a href="#attack-paths">attack paths</a> AWS specifically enables, and deep cross-references into every <a href="#discipline-links">discipline page</a> with AWS-specific anchors.</p>
+            <p style="margin-top:0.75rem;">If you want one number: the <a href="shared-responsibility-model.html">shared responsibility model</a> moves the line — AWS owns the physical and the hypervisor; you own the configuration, the identity, the data, and almost every misconfiguration the attacker exploits. Build the muscle, then let the certifications and the CSPM follow.</p>
+        </div>
+
+        <div class="toc">
+            <h2>On this page</h2>
+            <ol>
+                <li><a href="#why-aws">Why AWS-specific guidance matters</a></li>
+                <li><a href="#shared-responsibility">The shared responsibility model on AWS</a></li>
+                <li><a href="#well-architected">The Well-Architected Security Pillar</a></li>
+                <li><a href="#services">AWS security service catalog</a></li>
+                <li><a href="#landing-zone">Reference architecture — multi-account landing zone</a></li>
+                <li><a href="#misconfigurations">Top 10 AWS misconfigurations</a></li>
+                <li><a href="#attack-paths">AWS-specific attack paths</a></li>
+                <li><a href="#comparisons">Service comparisons (AWS vs Azure vs GCP)</a></li>
+                <li><a href="#discipline-links">Discipline cross-references</a></li>
+                <li><a href="#certifications">AWS certifications track</a></li>
+                <li><a href="#native-vs-third-party">AWS-native vs third-party tooling</a></li>
+                <li><a href="#further">Further reading</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#where-next">Where next</a></li>
+            </ol>
+        </div>
+
+        <section id="why-aws">
+            <h2>Why AWS-specific guidance matters</h2>
+            <p>"Cloud security" as a category exists because the disciplines — identity, network, data, detection, response — rhyme across providers. But the controls don't translate one-to-one. An IAM policy in AWS is a different shape from an Azure RBAC role assignment, which is a different shape from a GCP IAM binding. A GuardDuty finding triggers a different response runbook than a Defender for Cloud alert. The misconfigurations that breach AWS environments (public S3, IMDSv1 abuse, wildcard <code>Resource: *</code>) are not the same as the ones that breach Azure environments (over-privileged service principals, public storage accounts, exposed managed identities).</p>
+            <p>This page is the AWS-specific entry point. If you're a practitioner who runs workloads on AWS, this is where to start; the deeper discipline pages (<a href="iam.html">IAM</a>, <a href="network-security.html">network</a>, <a href="data-security.html">data</a>, <a href="detection-engineering.html">detection</a>, <a href="incident-response.html">IR</a>) each have an AWS anchor that drills in. If you run multi-cloud, pair this page with <a href="azure-security.html">Azure Security</a> and <a href="gcp-security.html">GCP Security</a>, and consult <a href="cloud-security-comparison.html">the side-by-side comparison</a> when you need to translate.</p>
+            <p>The opinions on this page are vendor-neutral but not provider-neutral. AWS gets credit for what it does well (IAM expressiveness, service breadth, partner ecosystem, deep documentation) and gets criticized for what it does badly (defaults that favor functionality over safety, naming that drifts over time, IAM that is uniquely capable of producing surprising privilege-escalation paths).</p>
+        </section>
+
+        <section id="shared-responsibility">
+            <h2>The shared responsibility model on AWS</h2>
+            <p>AWS owns security <em>of</em> the cloud — the hardware, the hypervisor, the physical data center, the network backbone, and the parts of managed services you cannot see. You own security <em>in</em> the cloud — your identities, your network configuration, your OS and application patching (where applicable), your data and its encryption, and the configuration of every service you turn on. The line shifts by service: on EC2 you own a lot (OS, patches, agent posture, security groups); on RDS you own less (no OS, but still network, IAM, and encryption); on Lambda you own only the code, the IAM role, and a few runtime knobs; on S3 you own only the configuration and the data, but those two account for most S3 breaches. See <a href="shared-responsibility-model.html">the full shared responsibility model page</a> for the table-form breakdown across AWS, Azure, and GCP.</p>
+            <p>Two practical implications. First, every audit conversation begins with you handing the auditor AWS's downloaded SOC 2 / ISO 27001 / PCI DSS reports (from AWS Artifact) to cover AWS's half, and then producing your own evidence — CloudTrail, Config, Security Hub findings, IAM exports — for your half. Second, almost every cloud breach you've read about happened on the customer's side of the line. AWS having FedRAMP High doesn't make your S3 bucket private.</p>
+        </section>
+
+        <section id="well-architected">
+            <h2>The Well-Architected Security Pillar</h2>
+            <p>The AWS Well-Architected Framework codifies what AWS thinks "good" looks like, and the Security Pillar lays out seven design principles. They are unglamorous, mostly common sense, and consistently the right answer when teams disagree about how to build something.</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-iam">
+                    <h3>1. Implement a strong identity foundation</h3>
+                    <p>Centralize identity through IAM Identity Center (or your IdP federated through it). Eliminate long-lived IAM users for humans. Enforce least privilege via IAM policies, permission boundaries, and Service Control Policies. Use IAM Access Analyzer to surface unintended external access. The identity foundation is the only one that touches every other pillar.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>2. Maintain traceability</h3>
+                    <p>Turn on CloudTrail in all regions, with an organization trail centralized to a log-archive account. Enable VPC Flow Logs, ALB / CloudFront access logs, and CloudTrail data events for sensitive S3 buckets. Aggregate to Security Hub and ship to a SIEM. The first 24 hours of an incident is forensic-quality logs, or it's nothing.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3>3. Apply security at all layers</h3>
+                    <p>Defense in depth: SCPs at the org perimeter, network controls at the VPC edge, host controls inside the VPC, application controls in the workload, data controls under the workload. Each layer assumes the one above will fail. Single-layer security is single-point-of-failure security.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage1">
+                    <h3>4. Automate security best practices</h3>
+                    <p>Detective controls — Security Hub, Config rules, GuardDuty findings — should auto-route to EventBridge, into either ticketing or auto-remediation Lambdas. Preventive controls — SCPs, permission boundaries, Config conformance packs — should ship as code. Manual security at scale is no security.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage2">
+                    <h3>5. Protect data in transit and at rest</h3>
+                    <p>Encrypt-by-default through KMS-managed keys; reach for customer-managed KMS keys (CMKs) where compliance, key-rotation, or cross-account access policy demands it. TLS 1.2+ at every public edge via ACM-issued certificates. S3 Block Public Access on at the account level. Macie for sensitive-data discovery. The encryption is easy; the key-management story is the work.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage3">
+                    <h3>6. Keep people away from data</h3>
+                    <p>Humans should not have direct production-data access. Build query interfaces, redacted exports, and break-glass workflows that produce audit logs. Use Session Manager (not SSH bastions) for any necessary host access. The fewer hands that touch raw data, the smaller the blast radius of any compromised credential.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage4">
+                    <h3>7. Prepare for security events</h3>
+                    <p>Have an <a href="incident-response.html">IR runbook</a>. Run game-days against it. Pre-stage IR tooling in a forensics account with EBS-snapshot copy permissions. Practice the chain — detection in GuardDuty / Security Hub, triage in Detective, evidence collection via API, containment via SCPs / quarantine VPCs. The runbook you've never executed will not work the first time.</p>
+                </div>
+            </div>
+            <p>The pillar's value isn't novelty — none of these are surprising. The value is that they're documented, prioritized, and reviewed annually by AWS, so when an engineering team and a security team disagree on direction, "what does the Well-Architected Security Pillar say?" is a productive question.</p>
+        </section>
+
+        <section id="services">
+            <h2>AWS security service catalog</h2>
+            <p>AWS ships dozens of security services across overlapping problem domains. Below is the opinionated tour — what each service does, when it earns its keep, and where it falls short. Grouped by function, not by AWS console category.</p>
+
+            <h3>Detection</h3>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-detect">
+                    <h3>GuardDuty</h3>
+                    <p>Managed threat detection across CloudTrail, VPC Flow Logs, DNS logs, EKS audit logs, S3 events, RDS login activity, EC2 runtime (with the agent), and Lambda runtime. The first detective control to turn on in every account. Findings are high signal; the noise is manageable. Turn it on org-wide via the delegated-admin pattern.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>Security Hub</h3>
+                    <p>Findings aggregator and CSPM. Pulls from GuardDuty, Inspector, Macie, IAM Access Analyzer, Config, and dozens of partners. Runs CIS / PCI / NIST / AWS Foundational Security Best Practices conformance packs. Push to EventBridge for routing. Single pane of glass for AWS-native findings; not a substitute for a third-party CNAPP if you're multi-cloud.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>Detective</h3>
+                    <p>Investigation graph that ingests CloudTrail and VPC Flow Logs and lets you pivot between IPs, IAM principals, and resources to chase down the timeline of an incident. Pairs with GuardDuty findings as the "what happened next" view. Earns its keep during an IR; spend less time in it day-to-day.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>Inspector</h3>
+                    <p>Vulnerability scanner for EC2, ECR container images, and Lambda functions. Agentless for EC2 via SSM, image-pull-time for ECR, on-deploy for Lambda. CVE-based; results show in Security Hub. Good baseline; a third-party scanner (Wiz, Snyk, Trivy in CI, etc.) tends to outperform on container depth.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>Macie</h3>
+                    <p>Sensitive-data discovery for S3. Scans for PII, financial data, credentials, and custom data identifiers. Per-GB pricing makes "scan everything" expensive; the right pattern is targeted scans on data classifications you care about. Findings flow to Security Hub.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>Audit Manager</h3>
+                    <p>Pulls evidence (CloudTrail logs, Config snapshots, API outputs) on a schedule and maps it against prebuilt frameworks (SOC 2, PCI DSS, NIST 800-53, HIPAA, etc.). Useful inside an AWS-centric <a href="grc.html">GRC</a> program; less useful if your evidence story spans multiple clouds (use a dedicated GRC platform instead).</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>AWS Config</h3>
+                    <p>Resource-configuration history and rule evaluation. The substrate every other AWS detection service depends on — turn it on org-wide and aggregate to a central account. Managed and custom rules; conformance packs for frameworks. Cost grows with resource count and rule count; review periodically.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>CloudTrail</h3>
+                    <p>The audit log of the AWS control plane. Management events (free); data events for S3 / Lambda / DynamoDB (paid, on-by-default-off). Org trail to a log-archive account is the only correct configuration. Most cloud breach investigations begin and end in CloudTrail.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>Network Firewall</h3>
+                    <p>Managed stateful firewall with Suricata-compatible rules, deployed at VPC egress. Earns its keep for egress filtering, IDS/IPS on north-south traffic, and TLS-SNI-based blocklisting. Per-GB pricing means you'll think hard about scope.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>Route 53 Resolver DNS Firewall</h3>
+                    <p>Block DNS resolution to known-bad domains (or any domain list you maintain). Cheap, high-signal preventive control. Catches malware C2, accidental data exfil to file-share domains, and the long tail of "we should not be talking to that." Use AWS-managed domain lists or your own.</p>
+                </div>
+            </div>
+
+            <h3>Identity</h3>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-iam">
+                    <h3>IAM</h3>
+                    <p>The per-account identity service. Users, groups, roles, policies, permission boundaries, condition keys. Uniquely expressive — and uniquely capable of producing surprising privilege-escalation paths. Almost every AWS breach involves an IAM misuse. Read the <a href="iam.html#aws">IAM page</a> for the deep dive.</p>
+                </div>
+                <div class="pillar-card pillar-card-iam">
+                    <h3>IAM Identity Center</h3>
+                    <p>The workforce identity service (formerly AWS SSO). Federates your IdP (Okta / Entra ID / Google Workspace / its own directory) into AWS Organizations and brokers short-lived role sessions across accounts. The right answer for all human access in 2026. Eliminate IAM users for humans entirely.</p>
+                </div>
+                <div class="pillar-card pillar-card-iam">
+                    <h3>IAM Access Analyzer</h3>
+                    <p>Free service that surfaces resources (S3 buckets, KMS keys, IAM roles, Lambda functions, SQS queues, Secrets Manager secrets) shared with external accounts or the public, plus unused access findings and policy validation. Turn it on org-wide; review the public/external findings weekly.</p>
+                </div>
+                <div class="pillar-card pillar-card-iam">
+                    <h3>IAM Roles Anywhere</h3>
+                    <p>Lets workloads outside AWS (on-prem, other clouds, SaaS) authenticate via X.509 certificates and assume IAM roles for short-lived credentials. The replacement pattern for hard-coded AWS access keys on non-AWS hosts. Use it.</p>
+                </div>
+                <div class="pillar-card pillar-card-iam">
+                    <h3>Cognito</h3>
+                    <p>Customer identity service — user pools for the directory, identity pools for federated identity to AWS resources. Fine for B2C apps; not the right place for workforce identity (use Identity Center) or fine-grained authorization (build that yourself or use a dedicated authZ service).</p>
+                </div>
+                <div class="pillar-card pillar-card-iam">
+                    <h3>Resource Access Manager (RAM)</h3>
+                    <p>Shares resources (VPC subnets, Transit Gateway attachments, License Manager configurations, etc.) across accounts within an Organization. Underused — many teams stand up VPC-per-account when a shared-services pattern via RAM is cleaner. Audit who has shared what; over-sharing is a real risk.</p>
+                </div>
+            </div>
+
+            <h3>Data</h3>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-compliance">
+                    <h3>KMS</h3>
+                    <p>The crypto API for AWS. AWS-managed keys (free, per-service), customer-managed keys (CMKs, $1/month + API calls), and external / XKS keys. The key policy is the access-control surface most teams under-invest in. Rotate yearly; restrict <code>kms:Decrypt</code> via condition keys; alarm on key deletion.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3>CloudHSM</h3>
+                    <p>Dedicated FIPS 140-2 Level 3 hardware. Needed for very specific regulatory requirements (some payment-card flows, regulated industries that require single-tenant HSM). For almost all customers, KMS is the right answer. Don't over-engineer here.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3>Secrets Manager</h3>
+                    <p>Centralized secrets storage with automatic rotation, KMS-backed encryption, and IAM-controlled access. Pairs with Parameter Store for non-secret config. Use it instead of environment-variable secrets in Lambda or container task definitions.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3>ACM</h3>
+                    <p>Free public TLS certificates for ALB, NLB, CloudFront, API Gateway, and other AWS endpoints. ACM Private CA for internal PKI. Auto-renews public certs; treat the private-CA hierarchy with the same gravity you'd treat any root-of-trust.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3>S3 Block Public Access</h3>
+                    <p>Account-level and bucket-level setting that overrides any public ACL or bucket policy. Turn on at the account level on day one, then carve out the (vanishingly rare) buckets that legitimately need public access via OAC / CloudFront. The most impactful single click in AWS security.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3>S3 Object Lock</h3>
+                    <p>WORM (write-once-read-many) protection for S3 objects in Compliance or Governance mode. The control of choice for ransomware-resistant backups; pairs with versioning and replication to a separate account. See <a href="backup-dr.html">backup &amp; DR</a> for the pattern.</p>
+                </div>
+            </div>
+
+            <h3>Network</h3>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-network">
+                    <h3>AWS WAF</h3>
+                    <p>Web application firewall for ALB, CloudFront, API Gateway, App Runner, and Cognito user pools. Managed rule groups (AWS-managed and Marketplace). Good baseline; for high-volume apps or sophisticated bot management, Cloudflare and Akamai are typically deeper. Pair with rate-based rules and the AWS Managed Bot Control rule group.</p>
+                </div>
+                <div class="pillar-card pillar-card-network">
+                    <h3>Shield (Standard &amp; Advanced)</h3>
+                    <p>Standard is free and automatic against L3/L4 DDoS for all AWS customers. Advanced ($3K/month) adds L7 protection, the DDoS Response Team, and cost-protection credits if you get attacked. Worth the spend only for high-profile or revenue-critical public surfaces.</p>
+                </div>
+                <div class="pillar-card pillar-card-network">
+                    <h3>VPC</h3>
+                    <p>The network primitive. Subnets, route tables, NAT gateways, internet gateways, VPC endpoints. Design once, change reluctantly — every workload depends on it. See <a href="network-security.html#aws">network security on AWS</a> for the patterns.</p>
+                </div>
+                <div class="pillar-card pillar-card-network">
+                    <h3>Security Groups &amp; NACLs</h3>
+                    <p>Security Groups are stateful, instance-level, allow-only. NACLs are stateless, subnet-level, allow-and-deny. Use Security Groups as the primary control; reach for NACLs only when you need an explicit deny rule at the subnet boundary. <code>0.0.0.0/0</code> on SSH or RDP is a finding, not a configuration.</p>
+                </div>
+                <div class="pillar-card pillar-card-network">
+                    <h3>PrivateLink</h3>
+                    <p>Private connectivity to AWS services and partner / customer services without traversing the internet. Use VPC endpoints (interface and gateway flavors) to keep S3, KMS, Secrets Manager, and the rest of the control plane off the internet. Cheap, high-impact.</p>
+                </div>
+                <div class="pillar-card pillar-card-network">
+                    <h3>VPC Lattice</h3>
+                    <p>Application-layer service-to-service networking across VPCs and accounts, with IAM-authenticated calls and observability. The newer answer for what used to be Transit Gateway + complex SG plumbing. Worth piloting for service-mesh use cases that don't need a full <a href="service-mesh-security.html">service mesh</a>.</p>
+                </div>
+                <div class="pillar-card pillar-card-network">
+                    <h3>Network Firewall &amp; Cloud WAN</h3>
+                    <p>Network Firewall sits at VPC egress with Suricata rules; Cloud WAN is the managed global backbone for connecting many VPCs and on-prem sites. Enterprise patterns; small shops over-buy these.</p>
+                </div>
+            </div>
+
+            <h3>Compliance &amp; governance</h3>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-stage1">
+                    <h3>Audit Manager</h3>
+                    <p>Continuous evidence collection mapped to frameworks. Useful inside the AWS perimeter; pairs poorly with multi-cloud GRC where you'd want a dedicated platform. See <a href="grc.html">the GRC page</a> for the broader landscape.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage2">
+                    <h3>AWS Artifact</h3>
+                    <p>Self-serve portal for AWS's compliance reports (SOC 1/2/3, ISO 27001/27017/27018, PCI DSS, FedRAMP, HIPAA BAA, and more). The first stop in every auditor conversation — download AWS's reports to cover the provider half of <a href="shared-responsibility-model.html">shared responsibility</a>.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage3">
+                    <h3>Control Tower</h3>
+                    <p>Opinionated multi-account landing-zone framework. Deploys Organizations, OUs, Identity Center, log-archive and audit accounts, an org-wide CloudTrail, a Config aggregator, and a starter set of preventive (SCPs) and detective (Config rules) guardrails. The default starting point for new AWS deployments in 2026.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage4">
+                    <h3>Organizations + SCPs</h3>
+                    <p>Organizations is the account-grouping layer. SCPs (Service Control Policies) are the org-perimeter preventive control — they constrain what IAM principals in member accounts <em>can</em> do, no matter what their IAM policies say. The strongest preventive control in AWS; use them sparingly and explicitly.</p>
+                </div>
+            </div>
+
+            <h3>Incident response</h3>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-incident">
+                    <h3>Detective</h3>
+                    <p>The investigation graph (see above). The "next page" in an IR after a GuardDuty finding triggers a ticket.</p>
+                </div>
+                <div class="pillar-card pillar-card-incident">
+                    <h3>Security Hub</h3>
+                    <p>The findings aggregator and triage console during an event. Pre-build your insights and saved searches before you need them.</p>
+                </div>
+                <div class="pillar-card pillar-card-incident">
+                    <h3>Systems Manager Incident Manager</h3>
+                    <p>Incident-orchestration service — escalation chains, response plans, runbook automation, post-incident review templates. Genuinely useful even outside AWS-only environments. Pairs with EventBridge to trigger incidents from GuardDuty severity thresholds.</p>
+                </div>
+                <div class="pillar-card pillar-card-incident">
+                    <h3>AWS IR runbook library</h3>
+                    <p>AWS publishes a <a href="https://github.com/aws-samples/aws-customer-playbook-framework" target="_blank" rel="noopener noreferrer">customer IR playbook framework on GitHub</a> with prebuilt runbooks for credential exposure, IAM compromise, S3 exposure, and others. Fork, customize, run game-days against. See <a href="incident-response.html#aws">IR on AWS</a> for the operational pattern.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="landing-zone">
+            <h2>Reference architecture — multi-account landing zone</h2>
+            <p>The right starting shape for any AWS deployment past three accounts is a <strong>multi-account landing zone</strong> built on Organizations, Control Tower, and Identity Center. The pattern below is the one that almost every well-run AWS estate converges on, regardless of whether they started there.</p>
+            <ul>
+                <li><strong>Management account</strong> — root of the AWS Organization. Hosts Organizations itself, SCPs, billing consolidation. Nothing else runs here. Hardened root account; humans don't log in to it day-to-day.</li>
+                <li><strong>Log archive account</strong> — central destination for the org-wide CloudTrail, Config aggregator, ALB/CloudFront/VPC Flow logs, S3 access logs. Object-locked and versioned. Limited IAM principals can read; almost none can write.</li>
+                <li><strong>Audit / security tooling account</strong> — Security Hub delegated admin, GuardDuty delegated admin, Macie delegated admin, IAM Access Analyzer delegated admin, third-party CNAPP read-only roles, SIEM ingestion role. The security team operates from here.</li>
+                <li><strong>Identity Center account</strong> — Identity Center as the federation point to the corporate IdP. Permission sets defined here; assignments roll out across all accounts.</li>
+                <li><strong>Network / shared services account</strong> — Transit Gateway, Network Firewall, Route 53 private hosted zones, AD Connector or Managed Microsoft AD, shared S3 buckets. RAM-shares network resources to workload accounts.</li>
+                <li><strong>Workload accounts</strong> — one per (team × environment), or per application × environment, depending on team scale. Connected to shared networking via RAM-shared subnets or their own VPC peered through Transit Gateway. SCPs prevent destructive actions; CloudTrail and Config send to log-archive.</li>
+                <li><strong>Sandbox accounts</strong> — disposable. Generous SCPs (deny only the truly destructive); time-boxed lifetime; auto-cleaned. The pressure-release valve that keeps engineers out of production accounts.</li>
+            </ul>
+            <p>Control Tower deploys most of this in an afternoon. The AWS Landing Zone Accelerator (LZA) is the CDK/CloudFormation alternative for environments that need bespoke control sets Control Tower can't express. Read the <a href="landing-zones.html">landing zones page</a> for the full architectural treatment, including diagrams.</p>
+        </section>
+
+        <section id="misconfigurations">
+            <h2>Top 10 AWS misconfigurations</h2>
+            <p>Synthesized from the CIS AWS Foundations Benchmark, AWS Foundational Security Best Practices, and the post-mortems of the public AWS breaches of the last several years. Roughly in order of how often each shows up in actual incidents.</p>
+            <ol>
+                <li><strong>Public S3 buckets.</strong> Still the canonical AWS breach. Mitigation: S3 Block Public Access at the account level, IAM Access Analyzer alerts on public buckets, SCPs that deny <code>s3:PutBucketPolicy</code> with public statements. The fix is a single click; the audit ritual is to verify it's clicked.</li>
+                <li><strong>IMDSv1 still enabled.</strong> The Instance Metadata Service v1 is fetchable via blind SSRF — and SSRFs in cloud workloads are a top finding. IMDSv2 requires a PUT to get a session token before the GET. Mitigation: enforce IMDSv2 via account-level setting, EC2 launch templates, and a Config rule that flags exceptions.</li>
+                <li><strong>No MFA on the root account.</strong> Root has unrestricted access; MFA is the only credential-theft protection. Hardware MFA, password in a corp secrets vault with break-glass procedure, alerting on root login. CIS check 1.4, and it should never fail.</li>
+                <li><strong>Wildcard IAM policies (<code>Action: *</code> or <code>Resource: *</code>).</strong> Especially in custom policies — managed policies are at least scoped. <code>Action: *</code> on a role used by Lambda is a privilege escalation away from total account compromise. Mitigation: permission boundaries, Access Analyzer's policy validation, periodic least-privilege reviews via CloudTrail-derived access reports.</li>
+                <li><strong>Public RDS snapshots.</strong> An RDS snapshot shared publicly exposes the entire database. Mitigation: SCP denying <code>rds:ModifyDBSnapshotAttribute</code> with public, Config rule, weekly scan via IAM Access Analyzer's RDS coverage.</li>
+                <li><strong>Exposed AWS access keys in public repositories.</strong> Long-lived IAM user keys committed to GitHub get scraped within minutes — AWS's own scanners catch many, but not all. Mitigation: eliminate long-lived keys (Identity Center for humans, IAM roles for workloads, Roles Anywhere for non-AWS workloads), GitHub secret scanning, GitGuardian / TruffleHog in CI.</li>
+                <li><strong>Security Groups open to <code>0.0.0.0/0</code> on SSH / RDP.</strong> Endless scanning. Use Session Manager for host access; if you must SSH from a fixed range, lock the SG down to that range. Better: don't SSH at all.</li>
+                <li><strong>Default VPC used in production.</strong> The default VPC has overly permissive defaults (Internet Gateway, default SG allowing internal traffic). Delete it in every region in every account, and force teams to think about networking when they create one.</li>
+                <li><strong>CloudTrail not enabled in all regions, or not enabled with management events.</strong> Attackers pivot to disabled regions. Mitigation: an org-wide trail covering all regions, including future ones, delivering to the log-archive account, with log-file validation.</li>
+                <li><strong>Root account used for daily operations.</strong> Root should be locked away. Daily use means there's no IAM model. Mitigation: Identity Center for humans, alarm on every root sign-in, audit log review.</li>
+            </ol>
+            <p>Every one of these is a single line in a Security Hub or CSPM dashboard. The point isn't that they're undetectable — they're trivially detectable. The point is that they keep showing up because the defaults favor functionality, the org-level controls are opt-in, and turnover means new accounts get spun up without the central guardrails until somebody notices.</p>
+        </section>
+
+        <section id="attack-paths">
+            <h2>AWS-specific attack paths</h2>
+            <p>The attack patterns below are the ones AWS specifically enables. They're not novel — many derive from generic SSRF, supply-chain, or credential-theft chains — but the AWS-specific mechanic is the part worth knowing. See <a href="cloud-pentesting.html#aws">cloud pentesting on AWS</a> for the offensive-side treatment.</p>
+            <ul>
+                <li><strong>IMDS abuse via SSRF.</strong> A server-side request forgery in a workload running on EC2, ECS, or EKS pivots to the Instance Metadata Service and reads the instance role's temporary credentials. IMDSv2 mitigates by requiring a session token via PUT, which most SSRF primitives can't make. Enforce IMDSv2 everywhere.</li>
+                <li><strong>IAM privilege escalation chains.</strong> Permissions like <code>iam:CreateAccessKey</code> on another user, <code>iam:AttachRolePolicy</code> on a role you can assume, <code>iam:PassRole</code> + <code>lambda:CreateFunction</code>, and a long list of others, allow an attacker with limited initial access to escalate. Tools like Pacu and PMapper enumerate these. Mitigation: permission boundaries, IAM Access Analyzer's unused-access findings, periodic privilege reviews.</li>
+                <li><strong>AssumeRole pivoting across accounts.</strong> A trust policy that allows a too-broad source (<code>arn:aws:iam::*:root</code>) or that doesn't constrain <code>sts:ExternalId</code> for vendor cross-account roles can be assumed by accounts you don't control. IAM Access Analyzer surfaces external-trust policies; review them.</li>
+                <li><strong><code>iam:PassRole</code> abuse.</strong> An attacker who can <code>PassRole</code> to a more-privileged service (Lambda, EC2, ECS, Glue, SageMaker) escalates by creating a resource that runs as the higher-privileged role. Constrain <code>iam:PassRole</code> with <code>iam:PassedToService</code> conditions and resource ARNs in the policy.</li>
+                <li><strong>Lambda environment-variable secrets.</strong> Secrets in environment variables are readable by anyone with <code>lambda:GetFunctionConfiguration</code> — a much broader permission than expected. Use Secrets Manager / Parameter Store with KMS, fetched at runtime; restrict the function's KMS key policy.</li>
+                <li><strong>EBS direct API exfil.</strong> The EBS direct APIs (<code>ListSnapshotBlocks</code>, <code>GetSnapshotBlock</code>) let a sufficiently-privileged principal read snapshot data without ever attaching a volume — and the calls don't trigger common detections. Restrict via SCP, alert on the API calls, and review snapshot-sharing policies.</li>
+                <li><strong>SSM RunCommand / Session Manager abuse.</strong> An attacker with <code>ssm:SendCommand</code> on EC2 instances executes commands as root without ever opening an SSH port. The forensic trail is in SSM rather than syslog. Constrain SSM permissions tightly, alert on use, and feed SSM logs into the SIEM.</li>
+                <li><strong>CloudTrail tampering.</strong> A compromised admin can <code>StopLogging</code>, delete trails, or modify retention. Mitigation: org trail in a separate log-archive account, log-file validation, S3 Object Lock on the trail bucket, alerting on trail-modification API calls.</li>
+            </ul>
+        </section>
+
+        <section id="comparisons">
+            <h2>Service comparisons (AWS vs Azure vs GCP)</h2>
+            <p>The right tool is rarely AWS-only or third-party-only — it's the one that fits your shape. The tables below are deliberately opinionated; calibrate against your own environment.</p>
+
+            <h3>Threat detection: GuardDuty vs Defender for Cloud vs Security Command Center</h3>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Dimension</th>
+                            <th scope="col">AWS GuardDuty</th>
+                            <th scope="col">Azure Defender for Cloud</th>
+                            <th scope="col">GCP Security Command Center</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row">Pricing model</th><td>Per GB of analyzed logs + per million events</td><td>Per resource per month (plan tiers)</td><td>Premium tier per asset</td></tr>
+                        <tr><th scope="row">Coverage breadth</th><td>CloudTrail, VPC Flow, DNS, EKS, S3, RDS, Lambda, EC2 runtime</td><td>VMs, containers, storage, databases, App Service, key vault, DNS, APIs, AI</td><td>VMs, containers, IAM, storage; weaker network</td></tr>
+                        <tr><th scope="row">Posture management</th><td>Separate — Security Hub</td><td>Bundled — CSPM in Defender CSPM tier</td><td>Bundled — SCC Premium</td></tr>
+                        <tr><th scope="row">Attack-path graph</th><td>No (need third-party CNAPP)</td><td>Yes (in Defender CSPM)</td><td>Yes (in SCC Enterprise)</td></tr>
+                        <tr><th scope="row">Multi-cloud</th><td>AWS only</td><td>Multi-cloud (AWS &amp; GCP supported)</td><td>Multi-cloud in Enterprise tier</td></tr>
+                        <tr><th scope="row">When it wins</th><td>Single-cloud AWS shops disciplined about tuning</td><td>Microsoft-heavy enterprises; integrated with Sentinel</td><td>GCP-first shops, especially with BigQuery analytics</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>WAF: AWS WAF vs Cloudflare vs Akamai</h3>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Dimension</th>
+                            <th scope="col">AWS WAF</th>
+                            <th scope="col">Cloudflare</th>
+                            <th scope="col">Akamai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row">Deployment</th><td>ALB / CloudFront / API Gateway / App Runner / Cognito</td><td>Cloudflare proxy in front of any origin</td><td>Akamai edge in front of any origin</td></tr>
+                        <tr><th scope="row">Bot management</th><td>Managed Bot Control rule group (good baseline)</td><td>Strong; bot-management product is mature</td><td>Strong; long-standing product</td></tr>
+                        <tr><th scope="row">DDoS</th><td>Shield Standard free; Advanced $3K/mo</td><td>Included; unmetered on enterprise</td><td>Included; unmetered on enterprise</td></tr>
+                        <tr><th scope="row">Latency</th><td>Adds little if origin is AWS</td><td>Reduces — global edge usually closer to user</td><td>Reduces — largest CDN footprint</td></tr>
+                        <tr><th scope="row">Pricing model</th><td>Per request + per rule</td><td>Plans, with enterprise commit pricing</td><td>Enterprise commit, generally higher</td></tr>
+                        <tr><th scope="row">When it wins</th><td>AWS-only public surfaces; cost-sensitive</td><td>Multi-origin; deep bot needs; integrated CDN</td><td>Enterprise with strict perf SLAs and global footprint</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Vulnerability scanning: Inspector vs Wiz vs Orca</h3>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Dimension</th>
+                            <th scope="col">AWS Inspector</th>
+                            <th scope="col">Wiz</th>
+                            <th scope="col">Orca</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row">Cloud coverage</th><td>AWS only</td><td>Multi-cloud (AWS, Azure, GCP, OCI, Alibaba)</td><td>Multi-cloud (AWS, Azure, GCP)</td></tr>
+                        <tr><th scope="row">Workload scan model</th><td>SSM agent for EC2; image scan for ECR; on-deploy for Lambda</td><td>Agentless via snapshot</td><td>Agentless via snapshot (SideScanning)</td></tr>
+                        <tr><th scope="row">Container depth</th><td>ECR; basic K8s</td><td>Deep K8s, including admission control</td><td>Deep K8s</td></tr>
+                        <tr><th scope="row">Attack-path graph</th><td>No</td><td>Yes — flagship</td><td>Yes</td></tr>
+                        <tr><th scope="row">Identity correlation</th><td>Via Security Hub aggregation</td><td>First-class identity graph</td><td>First-class identity</td></tr>
+                        <tr><th scope="row">When it wins</th><td>Cost-sensitive AWS-only shops</td><td>Multi-cloud enterprise; graph-driven prioritization</td><td>Multi-cloud; agentless preference</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Disclosure: the site author works at Wiz. Everything above is a fair characterization rather than a marketing pitch; calibrate against your own evaluation.</p>
+        </section>
+
+        <section id="discipline-links">
+            <h2>Discipline cross-references</h2>
+            <p>Each cloud-security discipline on CSOH has an AWS-specific section. The links below jump directly to the AWS anchor (or to the page where AWS is the dominant cloud discussed).</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-iam">
+                    <h3><a href="iam.html#aws">IAM &amp; Identity on AWS</a></h3>
+                    <p>IAM users, roles, policies, permission boundaries, SCPs, Identity Center, the privilege-escalation surface, the right pattern for human and workload identity in 2026.</p>
+                </div>
+                <div class="pillar-card pillar-card-iam">
+                    <h3><a href="zero-trust.html#aws">Zero Trust on AWS</a></h3>
+                    <p>How NIST 800-207 maps to AWS primitives: Verified Access, PrivateLink, Identity Center, VPC Lattice, and the right service-to-service authentication pattern.</p>
+                </div>
+                <div class="pillar-card pillar-card-network">
+                    <h3><a href="network-security.html#aws">Network Security on AWS</a></h3>
+                    <p>VPC design, Security Groups vs NACLs, Transit Gateway, Network Firewall, DNS Firewall, PrivateLink, the egress-control patterns that actually work.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3><a href="data-security.html#aws">Data Security on AWS</a></h3>
+                    <p>KMS deeply, customer-managed vs AWS-managed keys, key policies, S3 Block Public Access, Object Lock, Macie, the encryption-everywhere baseline.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3><a href="vulnerability-management.html#aws">Vulnerability Management on AWS</a></h3>
+                    <p>Inspector for EC2 / ECR / Lambda, the patching story for Amazon Linux and managed services, third-party scanner integration, container-image lifecycle.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3><a href="detection-engineering.html#aws">Detection Engineering on AWS</a></h3>
+                    <p>Detection development against CloudTrail, GuardDuty's finding taxonomy, custom EventBridge rules, Athena for ad-hoc analysis, Sigma rules adapted to AWS.</p>
+                </div>
+                <div class="pillar-card pillar-card-incident">
+                    <h3><a href="incident-response.html#aws">Incident Response on AWS</a></h3>
+                    <p>The forensics account pattern, evidence collection via API, EBS snapshot copies, IAM credential revocation, the post-incident review template.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage1">
+                    <h3><a href="compliance-frameworks.html">AWS Compliance Frameworks</a></h3>
+                    <p>How AWS supports SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP, NIST 800-53. Artifact for AWS's reports; Audit Manager for your evidence.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3><a href="threat-research.html">AWS Threat Research</a></h3>
+                    <p>Curated AWS-specific threat-research reports and campaign breakdowns. The intelligence layer on top of detection.</p>
+                </div>
+                <div class="pillar-card pillar-card-incident">
+                    <h3><a href="cloud-pentesting.html#aws">AWS Pentesting</a></h3>
+                    <p>The offensive-side counterpart — Pacu, CloudGoat, the IAM enumeration techniques, the realistic engagement model with AWS pentest authorization.</p>
+                </div>
+                <div class="pillar-card pillar-card-iam">
+                    <h3><a href="landing-zones.html">Landing Zones</a></h3>
+                    <p>Multi-account architectures in depth — Control Tower, LZA, the OU structures that work for 5 vs 50 vs 500 accounts.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3><a href="grc.html">GRC for Cloud</a></h3>
+                    <p>The audit-readiness discipline. Audit Manager, Artifact, Config conformance packs, and how AWS evidence fits into a multi-framework GRC program.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2>AWS certifications track</h2>
+            <p>AWS certifications won't get you a job by themselves, but they organize your study and demonstrate baseline literacy. The pragmatic security-engineer ladder:</p>
+            <ul>
+                <li><strong>AWS Certified Cloud Practitioner (CLF-C02).</strong> Foundational vocabulary. Skip if you've worked in AWS for a year already. Useful for non-engineering stakeholders who need to talk to the security team.</li>
+                <li><strong>AWS Certified Solutions Architect — Associate (SAA-C03).</strong> Architecture intuition that the Security Specialty assumes. Networking, storage, compute, IAM at the associate level. Worth doing even if you're focused on security; the security exam will frustrate you without it.</li>
+                <li><strong>AWS Certified Security — Specialty (SCS-C02).</strong> The deep-end security exam. IAM, KMS, detective controls, infrastructure security, identity / data / IR. The certification most cloud-security-engineer job descriptions list, and the one that actually moves the dial on hiring conversations.</li>
+                <li><strong>AWS Certified Solutions Architect — Professional (SAP-C02).</strong> Multi-account, hybrid, enterprise patterns. Optional but valuable for staff / principal roles where you're designing landing zones, migration strategies, and cross-account network architectures.</li>
+                <li><strong>AWS Certified Advanced Networking — Specialty (ANS-C01).</strong> Connectivity-deep. Worth pursuing if you own the network plane — Transit Gateway, Direct Connect, Cloud WAN, IPAM, hybrid DNS.</li>
+            </ul>
+            <p>Pair the exams with a <a href="cloud-security-home-lab.html">home lab</a> — labs in CloudGoat, flAWS, AWS Skill Builder, and a personal sandbox account where you can break things. The exam tests recognition; the job tests execution. See <a href="cloud-security-certifications.html">the certifications hub</a> for the broader landscape including Azure, GCP, and vendor-neutral options.</p>
+        </section>
+
+        <section id="native-vs-third-party">
+            <h2>AWS-native vs third-party tooling</h2>
+            <p>The recurring question for every AWS security program: do you use the AWS-native service or buy a third-party tool? Some heuristics that hold up over time:</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Capability</th>
+                            <th scope="col">Native usually wins</th>
+                            <th scope="col">Third-party usually wins</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row">Single-cloud AWS, small team</th><td>Security Hub + GuardDuty + Inspector + Macie</td><td>—</td></tr>
+                        <tr><th scope="row">Multi-cloud</th><td>—</td><td>Wiz / Orca / Prisma / Lacework</td></tr>
+                        <tr><th scope="row">Attack-path graph</th><td>—</td><td>CNAPP graph</td></tr>
+                        <tr><th scope="row">Kubernetes / container depth</th><td>—</td><td>CNAPP or dedicated K8s tool</td></tr>
+                        <tr><th scope="row">SIEM</th><td>—</td><td>Splunk / Sentinel / Elastic / Sumo / Panther</td></tr>
+                        <tr><th scope="row">CSPM with broad framework mappings</th><td>Security Hub conformance packs</td><td>CNAPP with deeper mappings</td></tr>
+                        <tr><th scope="row">GRC platform</th><td>Audit Manager (AWS-only programs)</td><td>Vanta / Drata / OneTrust (multi-cloud GRC)</td></tr>
+                        <tr><th scope="row">Secrets management</th><td>Secrets Manager (AWS workloads)</td><td>Vault / Doppler / 1Password (hybrid)</td></tr>
+                        <tr><th scope="row">WAF</th><td>AWS WAF (AWS-only public surfaces)</td><td>Cloudflare / Akamai (perf-critical, bot-heavy)</td></tr>
+                        <tr><th scope="row">DDoS</th><td>Shield Standard (free, all surfaces)</td><td>Shield Advanced or third-party for high-risk</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>The bias should be: start native, especially for detective controls in a single-cloud AWS environment, and earn the right to add a third-party tool when you've outgrown what native provides or you've gone multi-cloud. The cost of operating an over-stack of tools — license, integration, maintenance, operator fatigue — is real, and the security outcome of "we have everything but use none of it well" is consistently worse than "we have less but use it well."</p>
+        </section>
+
+        <section id="further">
+            <h2>Further reading</h2>
+            <h3>AWS official</h3>
+            <ul>
+                <li><a href="https://aws.amazon.com/security/" target="_blank" rel="noopener noreferrer">AWS Security home</a></li>
+                <li><a href="https://aws.amazon.com/blogs/security/" target="_blank" rel="noopener noreferrer">AWS Security Blog</a> — the primary signal channel for new features and patterns</li>
+                <li><a href="https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html" target="_blank" rel="noopener noreferrer">AWS Well-Architected — Security Pillar</a></li>
+                <li><a href="https://reinforce.awsevents.com/" target="_blank" rel="noopener noreferrer">AWS re:Inforce</a> — AWS's annual security conference; session recordings are gold</li>
+                <li><a href="https://aws.amazon.com/compliance/" target="_blank" rel="noopener noreferrer">AWS Compliance Center</a></li>
+                <li><a href="https://aws.amazon.com/security/security-bulletins/" target="_blank" rel="noopener noreferrer">AWS Security Bulletins</a></li>
+                <li><a href="https://github.com/aws-samples/aws-customer-playbook-framework" target="_blank" rel="noopener noreferrer">AWS Customer IR Playbook Framework (GitHub)</a></li>
+            </ul>
+            <h3>Community resources</h3>
+            <ul>
+                <li><a href="https://hackingthe.cloud/aws/" target="_blank" rel="noopener noreferrer">hackingthe.cloud — AWS section</a></li>
+                <li><a href="https://github.com/RhinoSecurityLabs/pacu" target="_blank" rel="noopener noreferrer">Pacu — AWS exploitation framework</a></li>
+                <li><a href="https://github.com/RhinoSecurityLabs/cloudgoat" target="_blank" rel="noopener noreferrer">CloudGoat — vulnerable-by-design AWS scenarios</a></li>
+                <li><a href="https://flaws.cloud/" target="_blank" rel="noopener noreferrer">flAWS.cloud &amp; flAWS2.cloud</a> — interactive AWS misconfiguration walkthroughs</li>
+                <li><a href="https://github.com/toniblyx/prowler" target="_blank" rel="noopener noreferrer">Prowler — open-source AWS auditing</a></li>
+                <li><a href="https://github.com/duo-labs/cloudmapper" target="_blank" rel="noopener noreferrer">CloudMapper — AWS network visualization</a></li>
+                <li><a href="https://www.cisecurity.org/benchmark/amazon_web_services" target="_blank" rel="noopener noreferrer">CIS AWS Foundations Benchmark</a></li>
+            </ul>
+            <h3>Related CSOH pages</h3>
+            <ul>
+                <li><a href="shared-responsibility-model.html">Shared responsibility</a> — what AWS owns, what you own.</li>
+                <li><a href="landing-zones.html">Landing zones</a> — multi-account architecture in depth.</li>
+                <li><a href="iam.html">IAM &amp; Identity</a> — the most consequential AWS service.</li>
+                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> — where Security Hub fits and where it doesn't.</li>
+                <li><a href="cloud-security-comparison.html">AWS vs Azure vs GCP</a> — the side-by-side translation guide.</li>
+                <li><a href="glossary.html">Glossary</a> — every term on this page, defined.</li>
+            </ul>
+        </section>
+
+        <section id="faq">
+            <h2>FAQ</h2>
+
+            <h3>Is AWS more secure than Azure or GCP?</h3>
+            <p>No cloud is categorically more secure than another at the platform level — all three meet the major frameworks (FedRAMP High, ISO 27001, PCI DSS, HIPAA) and run mature security programs. The differences are in defaults, service granularity, and ecosystem. AWS has the largest service surface (which is both more capability and more sharp edges), the most mature partner ecosystem, and IAM that is uniquely powerful and uniquely easy to misuse. Azure leads on enterprise identity (Entra ID). GCP leads on safe defaults and the simplicity of its resource hierarchy. Security outcomes are determined by the operator, not the provider — pick the cloud your team can run safely.</p>
+
+            <h3>Do I need a CSPM if I already have Security Hub?</h3>
+            <p>Security Hub is a credible CSPM for single-cloud AWS shops that have time to tune it. It aggregates findings from GuardDuty, Inspector, Macie, IAM Access Analyzer, and Config; runs CIS / PCI / NIST / AWS Foundational Security Best Practices conformance packs; and pushes to EventBridge for routing. Where a third-party CNAPP (Wiz, Orca, Prisma, Lacework, etc.) earns its license cost: multi-cloud coverage, agentless workload scanning, attack-path graph (which Security Hub does not produce), Kubernetes / container depth, identity-graph correlation across clouds, and a more polished operator UX. If you are single-cloud AWS and disciplined, Security Hub is fine. Multi-cloud or graph-driven prioritization, you want the third-party tool.</p>
+
+            <h3>What's the difference between IAM and IAM Identity Center?</h3>
+            <p>IAM is the per-account identity service that defines users, roles, and policies inside a single AWS account. IAM Identity Center (formerly AWS SSO) is the org-wide workforce-identity service that federates a human identity provider (Okta, Entra ID, Google Workspace, or its own directory) into AWS and lets that human assume IAM roles across many accounts via short-lived sessions. The right pattern in 2026: zero IAM users for humans, Identity Center for all human access, IAM roles for workload access (with IAM Roles Anywhere for non-AWS workloads), and IAM users only for the rare cases short-lived credentials can't satisfy.</p>
+
+            <h3>Should new AWS accounts start from Control Tower or build the landing zone from scratch?</h3>
+            <p>Start with Control Tower unless you have a specific reason not to. It deploys an opinionated multi-account baseline — Organizations with an OU structure, Identity Center, a log archive account, an audit account, CloudTrail org trail, Config aggregator, and a starter set of guardrails — in an afternoon. The escape hatches are real: you can layer your own custom SCPs, customize controls, and migrate off later via the Customizations for Control Tower (CfCT) framework. The accounts where teams skip Control Tower are usually heavily regulated environments with bespoke control sets that conflict with Control Tower's defaults; even then, the AWS Landing Zone Accelerator (LZA) gives you a CloudFormation/CDK baseline that's closer to a from-scratch build but still maintained.</p>
+
+            <h3>Is the root account ever safe to use?</h3>
+            <p>Almost never. The root user is required for ~10 tasks (closing the account, changing the support plan, restoring an IAM policy that locks everyone out, registering as a seller in the Reserved Instance Marketplace, and a few others — AWS publishes the list). For everything else, root should be locked away. The hardening pattern: hardware MFA on root, no access keys, password in a corporate secrets manager with a break-glass procedure, account email tied to a distribution list (never an individual), and CloudTrail + EventBridge alerting on any root login. If your team uses root weekly, your IAM model is broken.</p>
+
+            <h3>How does the AWS shared responsibility model affect what I have to audit?</h3>
+            <p>AWS owns security <em>of</em> the cloud — hardware, hypervisor, physical data center, the parts of managed services you can't see. You own security <em>in</em> the cloud — IAM, network configuration, OS / app patching where applicable, data encryption, the configuration of every service. Auditors will ask you for AWS's SOC 2 and ISO 27001 reports (downloadable from AWS Artifact) to cover the provider side, and they will ask you to produce evidence — CloudTrail logs, Config snapshots, IAM policy exports, Security Hub findings — for everything on your side of the line. The line moves by service: with EC2 you own a lot; with Lambda you own less; with S3 you own only the configuration and the data.</p>
+
+            <h3>Which AWS certification path should a cloud security engineer take?</h3>
+            <p>The pragmatic ladder: Cloud Practitioner (foundational vocabulary, can skip if you're already working in AWS), then Solutions Architect Associate (architecture intuition that the security exam assumes), then Security Specialty (the deep-end exam — IAM, KMS, detective controls, infrastructure security, IR). Optional layers: Solutions Architect Professional (multi-account, hybrid, enterprise patterns) for staff / principal roles, and Advanced Networking Specialty for engineers who own connectivity. Pair the certs with a <a href="cloud-security-home-lab.html">home lab</a> — because the exam tests recognition but the job tests execution.</p>
+        </section>
+
+        <section class="cta-section" id="where-next">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="azure-security.html">Azure Security</a> — the side-by-side discipline tour for the Microsoft cloud.</li>
+                <li><a href="gcp-security.html">GCP Security</a> — the equivalent for Google Cloud.</li>
+                <li><a href="cloud-security-comparison.html">AWS vs Azure vs GCP</a> — the comparison page when you need to translate.</li>
+                <li><a href="landing-zones.html">Landing zones</a> — the architectural foundation under everything on this page.</li>
+                <li><a href="iam.html">IAM &amp; Identity</a> — the discipline that determines whether the rest works.</li>
+                <li><a href="sessions.html">Friday Zoom</a> — AWS deep-dives are a recurring agenda item. Drop in.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section footer-about">
+        <h3>CSOH</h3>
+        <p>A vendor-neutral community for cloud security professionals. Weekly Zoom sessions and curated resources.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="index.html#about">About CSOH</a></li>
+          <li><a href="learning-path.html">Learning Path</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="sessions.html">Zoom Sessions</a></li>
+          <li><a href="meetings.html">Meeting Recaps</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="mailto:admin@csoh.org">Contact</a></li>
+          <li><a href="https://csoh.kit.com/39feb4f397" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+          <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="rss.html">RSS Feed</a></li>
+          <li><a href="contribute.html">Contribute</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Developer Docs</h3>
+        <ul>
+          <li><a href="github-actions.html">GitHub Actions</a></li>
+          <li><a href="cloud-deployment.html">Deploy to GCP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023-2026 Cloud Security Office Hours</p>
+      <ul class="footer-legal">
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="code-of-conduct.html">Code of Conduct</a></li>
+        <li><a href="security-policy.html">Security</a></li>
+      </ul>
+    </div>
+  </footer>
+
+    <script src="/main.js?v=28d03270" integrity="sha384-rL3h8+9Zf3OnCebAlc/aSSGella8hnqqGbOKQv9QcZGh3P6vA0z6yQp8JLYgBTqc"
+        defer></script>
+</body>
+</html>

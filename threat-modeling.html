@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="Cloud threat modeling — a vendor-neutral practitioner's guide to STRIDE, PASTA, LINDDUN, attack trees, and kill-chain models applied to cloud architectures. Worked examples for a 3-tier AWS app, an LLM RAG app, and a multi-account AWS landing zone, plus tooling (OWASP Threat Dragon, MS TMT, IriusRisk, Pytm), MITRE ATT&CK Cloud, and threat modeling as code.">
+    <meta name="keywords"
+        content="threat modeling, cloud threat modeling, STRIDE, PASTA, LINDDUN, attack trees, MITRE ATT&CK Cloud, OWASP Threat Dragon, Microsoft Threat Modeling Tool, IriusRisk, Pytm, Threatspec, Shostack, four questions, kill chain, DREAD, FAIR, threat library, CAPEC, D3FEND, threat modeling as code, secure design">
+    <title>Cloud Threat Modeling (STRIDE, PASTA, LINDDUN, Attack Trees) - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/threat-modeling.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#0f172a">
+
+    <meta property="og:title" content="Cloud Threat Modeling (STRIDE, PASTA, LINDDUN, Attack Trees) - CSOH">
+    <meta property="og:description"
+        content="A practitioner's guide to threat modeling cloud architectures — STRIDE, PASTA, LINDDUN, attack trees, and ATT&CK Cloud, with worked examples for AWS 3-tier apps, LLM RAG, and multi-account landing zones.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/threat-modeling.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cloud Threat Modeling (STRIDE, PASTA, LINDDUN, Attack Trees)">
+    <meta name="twitter:description"
+        content="Vendor-neutral guide to STRIDE, PASTA, LINDDUN, attack trees, and ATT&CK Cloud, with worked examples for real cloud architectures.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://csoh.kit.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+
+    <link rel="preload" href="/style.css?v=0e1857bd" as="style"
+        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+    <link rel="stylesheet" href="/style.css?v=0e1857bd"
+        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Cloud Threat Modeling (STRIDE, PASTA, LINDDUN, Attack Trees)",
+      "description": "A vendor-neutral practitioner's guide to threat modeling for cloud — STRIDE, PASTA, LINDDUN, attack trees, MITRE ATT&CK Cloud, tooling, worked examples, and how to integrate threat modeling into the SDLC.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-05-17",
+      "dateModified": "2026-05-17",
+      "mainEntityOfPage": "https://csoh.org/threat-modeling.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csoh.org/"},
+        {"@type": "ListItem", "position": 2, "name": "Threat Modeling", "item": "https://csoh.org/threat-modeling.html"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "When should I threat model?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "As early as possible — ideally during design review, before architectural decisions are baked into code. The marginal cost of changing an architectural choice on a whiteboard is near zero; the same change after six months of implementation can be a quarter of engineering effort. Re-threat-model whenever the trust boundary changes — new third-party integration, new identity type, new data classification, new region, new tenancy model. For mature programs the rhythm is: a 30-minute lightweight session per significant design change, plus a deeper review on a quarterly cadence for high-criticality systems."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "STRIDE vs PASTA — which should I use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "STRIDE is a categorization checklist — six threat classes (Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege) applied to each element or interaction in your model. It's fast, teachable, and produces a usable list in a 30-minute session. PASTA is a seven-stage risk-centric methodology that runs from business objectives through attack simulation to risk scoring. It produces a more rigorous artifact for high-stakes systems (think regulated financial workloads or critical infrastructure) but costs days, not minutes. Most practitioners use STRIDE as the day-to-day tool and reach for PASTA when an executive sponsor wants quantified risk."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who should be in the room for a threat model?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The smallest group that can answer the four questions. At minimum: the engineer or architect who knows the system best, a security practitioner familiar with the relevant cloud, and a product or operations partner who knows the data sensitivity and SLAs. For larger or higher-risk systems add an IAM specialist, a privacy or compliance reviewer (especially for LINDDUN), and a representative of any downstream team your trust boundary touches. Avoid making it a 12-person ceremony — past 6 attendees the signal-to-noise drops sharply."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long should a threat modeling session take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For a typical microservice or feature: 30–60 minutes for a STRIDE-per-element pass on a whiteboard, plus another hour or two to write up the findings and mitigations. For a complete new system: a half-day workshop, then a follow-up review of the documented model. PASTA-style modeling on a regulated workload can run multiple days across stages. The discipline isn't the duration — it's that the session ends with a written list of threats, ranked, with owners and target dates for mitigations. A 30-minute model that ships a list beats a 30-page document nobody reads."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is DREAD still recommended for risk scoring?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "DREAD (Damage, Reproducibility, Exploitability, Affected users, Discoverability) was Microsoft's original threat-scoring rubric and has been informally deprecated for over a decade — the scores are subjective, the dimensions overlap, and different reviewers produce wildly different numbers on the same threat. Modern programs use a simple Likelihood × Impact heuristic for triage, CVSS only for known CVEs (it's a vulnerability metric, not a design metric), and FAIR (Factor Analysis of Information Risk) when the business needs dollar-denominated risk for investment decisions. DREAD can still work in a small team as a shared rubric, but verify before adopting — many security shops have moved on."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does threat modeling differ for an LLM-based application?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The classic STRIDE categories still apply — but the trust boundaries shift. Retrieved content becomes a new attack surface (prompt injection via documents in a vector store), the model itself is a supply-chain dependency (model card, training-data provenance, weights integrity), and tools the agent can call are now part of your attack surface (any agent that can call a payment API can be coerced into doing so). Frameworks like OWASP LLM Top 10 and MITRE ATLAS extend ATT&CK-style categorization to ML and agentic systems. See our AI/ML security page for the full treatment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can AI tools write threat models for me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Increasingly they can produce a credible first draft — generate STRIDE elements from a diagram, suggest mitigations from a threat library, validate completeness against known patterns. But they don't yet replace the human judgment that decides which threats your organization will accept, which to mitigate, and how much engineering budget to spend on each. The pragmatic 2026 pattern is LLM-assisted generation with a human reviewer who edits the output, prunes false positives, and signs the result. Treat AI threat modeling like AI code generation — productivity multiplier, not autonomy substitute."
+          }
+        }
+      ]
+    }
+    </script>
+  <noscript><style>.js-enabled header nav{display:block !important}</style></noscript>
+</head>
+
+<body class="js-enabled">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+          <svg class="logo-mark" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="CSOH logo"><defs><linearGradient id="lm-cloud" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7dd3fc"/><stop offset="100%" stop-color="#0284c7"/></linearGradient></defs><path d="M7 19 a4 4 0 0 1 4-4 a6 6 0 0 1 11 0 a3.5 3.5 0 0 1 3.5 3.5 a3.5 3.5 0 0 1 -3.5 3.5 H8 a3.5 3.5 0 0 1 -1-7 z" fill="url(#lm-cloud)"/><path d="M11 13 L21 13 L21 18 a5 5.5 0 0 1 -5 5 a5 5.5 0 0 1 -5 -5 z" fill="#f59e0b"/><path d="M13.5 16.7 L15.3 18.4 L18.6 15" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li class="has-dropdown has-mega">
+                      <button class="dropdown-toggle active" aria-expanded="true" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                      <div class="dropdown-menu mega-menu mega-3col">
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Foundations</h4>
+                          <ul>
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="vendor-landscape.html">Vendor Landscape</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Topics</h4>
+                          <ul>
+                            <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="containers.html">Containers</a></li>
+                            <li><a href="kubernetes.html">Kubernetes</a></li>
+                            <li><a href="serverless.html">Serverless</a></li>
+                            <li><a href="service-mesh-security.html">Service Mesh</a></li>
+                            <li><a href="ci-cd.html">CI/CD</a></li>
+                            <li><a href="landing-zones.html">Landing Zones</a></li>
+                            <li><a href="iam.html">IAM &amp; Identity</a></li>
+                            <li><a href="zero-trust.html">Zero Trust</a></li>
+                            <li><a href="network-security.html">Network Security</a></li>
+                            <li><a href="data-security.html">Data Security &amp; KMS</a></li>
+                            <li><a href="vulnerability-management.html">Vulnerability Management</a></li>
+                            <li><a href="api-security.html">API Security</a></li>
+                            <li><a href="saas-security.html">SaaS Security (SSPM)</a></li>
+                            <li><a href="backup-dr.html">Backup, DR &amp; Ransomware</a></li>
+                            <li><a href="threat-modeling.html" aria-current="page">Threat Modeling</a></li>
+                            <li><a href="grc.html">GRC</a></li>
+                            <li><a href="compliance-frameworks.html">Compliance Frameworks</a></li>
+                            <li><a href="ai-learning.html">AI Learning</a></li>
+                            <li><a href="ai-ml-security.html">AI/ML Security</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Career &amp; Growth</h4>
+                          <ul>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+                            <li><a href="cloud-security-careers.html">Careers</a></li>
+                            <li><a href="cloud-security-reading-list.html">Reading List</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li><a href="resources.html">Resources</a></li>
+                    
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">By Cloud <span class="caret" aria-hidden="true">&#9662;</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="aws-security.html">AWS Security</a></li>
+                        <li><a href="azure-security.html">Azure Security</a></li>
+                        <li><a href="gcp-security.html">GCP Security</a></li>
+                        <li><a href="cloud-security-comparison.html">AWS vs Azure vs GCP</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Threat Intel <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="threat-research.html">Threat Research</a></li>
+                        <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        <li><a href="cloud-soc.html">Cloud SOC</a></li>
+                        <li><a href="detection-engineering.html">Detection Engineering</a></li>
+                        <li><a href="incident-response.html">Incident Response</a></li>
+                        <li><a href="cloud-pentesting.html">Cloud Pentesting</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown has-mega">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Community <span class="caret" aria-hidden="true">▾</span></button>
+                      <div class="dropdown-menu mega-menu mega-2col">
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Live</h4>
+                          <ul>
+                            <li><a href="sessions.html">Friday Zoom Sessions</a></li>
+                            <li><a href="community.html">Community &amp; Signal</a></li>
+                            <li><a href="conferences.html">Conferences</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Archive</h4>
+                          <ul>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="contribute.html">Contribute</a></li>
+                        <li><a href="contribute-resources.html">Add a Resource</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-cta-item"><a href="https://csoh.kit.com/39feb4f397" class="nav-cta" target="_blank" rel="noopener noreferrer">Join Friday Zoom →</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Threat Modeling</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--illustrated">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1>Cloud Threat Modeling</h1>
+          <p>STRIDE, PASTA, LINDDUN, and attack trees applied to cloud architectures. A vendor-neutral practitioner's guide to reasoning about what can go wrong — Adam Shostack's four questions, the major methodologies, the tooling, and worked examples for a 3-tier AWS app, an LLM RAG application, and a multi-account landing zone.</p>
+          <div class="cta-buttons">
+            <a href="#stride" class="btn btn-primary">Jump to STRIDE →</a>
+            <a href="#worked-3tier" class="btn btn-secondary">Worked example: 3-tier AWS app</a>
+          </div>
+        </div>
+        <div class="hero-illustration" aria-hidden="true">
+          <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of an attack tree with a root goal at the top and branching attack paths, alongside a data-flow diagram with dashed trust boundaries">
+            <defs>
+              <linearGradient id="tm-sky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
+              <linearGradient id="tm-root" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#b45309"/></linearGradient>
+              <linearGradient id="tm-branch" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#7dd3fc"/><stop offset="100%" stop-color="#0369a1"/></linearGradient>
+              <radialGradient id="tm-halo" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.30"/><stop offset="100%" stop-color="#7dd3fc" stop-opacity="0"/></radialGradient>
+            </defs>
+            <rect width="600" height="480" fill="url(#tm-sky)" opacity="0.08"/>
+            <circle cx="300" cy="200" r="220" fill="url(#tm-halo)"/>
+
+            <!-- Root goal at top -->
+            <g>
+              <rect x="230" y="30" width="140" height="46" rx="8" fill="url(#tm-root)" stroke="#fff" stroke-width="1.5"/>
+              <text x="300" y="52" text-anchor="middle" fill="#1f2937" font-size="12" font-weight="800">ATTACKER GOAL</text>
+              <text x="300" y="68" text-anchor="middle" fill="#1f2937" font-size="10">Exfiltrate customer data</text>
+            </g>
+
+            <!-- Edges to second level -->
+            <g stroke="#fbbf24" stroke-width="1.5" fill="none" opacity="0.75">
+              <line x1="300" y1="76" x2="130" y2="125"/>
+              <line x1="300" y1="76" x2="300" y2="125"/>
+              <line x1="300" y1="76" x2="470" y2="125"/>
+            </g>
+
+            <!-- Second level: three branches -->
+            <g>
+              <rect x="70"  y="125" width="120" height="40" rx="6" fill="url(#tm-branch)" stroke="#fff" stroke-width="1"/>
+              <text x="130" y="145" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="700">Steal credentials</text>
+              <text x="130" y="158" text-anchor="middle" fill="#0f172a" font-size="9">OR</text>
+
+              <rect x="240" y="125" width="120" height="40" rx="6" fill="url(#tm-branch)" stroke="#fff" stroke-width="1"/>
+              <text x="300" y="145" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="700">Abuse cloud API</text>
+              <text x="300" y="158" text-anchor="middle" fill="#0f172a" font-size="9">OR</text>
+
+              <rect x="410" y="125" width="120" height="40" rx="6" fill="url(#tm-branch)" stroke="#fff" stroke-width="1"/>
+              <text x="470" y="145" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="700">Compromise host</text>
+              <text x="470" y="158" text-anchor="middle" fill="#0f172a" font-size="9">OR</text>
+            </g>
+
+            <!-- Edges to third level -->
+            <g stroke="#7dd3fc" stroke-width="1" fill="none" opacity="0.6">
+              <line x1="130" y1="165" x2="70"  y2="210"/>
+              <line x1="130" y1="165" x2="190" y2="210"/>
+              <line x1="300" y1="165" x2="240" y2="210"/>
+              <line x1="300" y1="165" x2="360" y2="210"/>
+              <line x1="470" y1="165" x2="410" y2="210"/>
+              <line x1="470" y1="165" x2="530" y2="210"/>
+            </g>
+
+            <!-- Third level: leaves -->
+            <g font-size="8" font-weight="600" fill="#0f172a">
+              <rect x="20"  y="210" width="100" height="28" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+              <text x="70"  y="228" text-anchor="middle">Phish admin</text>
+              <rect x="140" y="210" width="100" height="28" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+              <text x="190" y="228" text-anchor="middle">Leak secret in repo</text>
+              <rect x="190" y="210" width="100" height="28" rx="4" fill="#fef3c7" stroke="#f59e0b" opacity="0"/>
+              <rect x="200" y="210" width="80"  height="28" rx="4" fill="#fef3c7" stroke="#f59e0b" opacity="0"/>
+
+              <rect x="200" y="210" width="80"  height="28" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+              <text x="240" y="228" text-anchor="middle">SSRF → IMDS</text>
+              <rect x="320" y="210" width="80"  height="28" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+              <text x="360" y="228" text-anchor="middle">Confused deputy</text>
+
+              <rect x="360" y="210" width="100" height="28" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+              <text x="410" y="228" text-anchor="middle">Container escape</text>
+              <rect x="480" y="210" width="100" height="28" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+              <text x="530" y="228" text-anchor="middle">Vuln workload</text>
+            </g>
+
+            <!-- Data-flow diagram below with trust boundaries -->
+            <g>
+              <text x="300" y="275" text-anchor="middle" fill="#0c4a6e" font-size="11" font-weight="700">DATA-FLOW · trust boundaries dashed</text>
+
+              <!-- User -->
+              <circle cx="70" cy="345" r="22" fill="#fde68a" stroke="#b45309" stroke-width="2"/>
+              <text x="70" y="349" text-anchor="middle" fill="#1f2937" font-size="9" font-weight="700">User</text>
+
+              <!-- ALB -->
+              <rect x="135" y="320" width="80" height="50" rx="6" fill="#bae6fd" stroke="#0284c7" stroke-width="1.5"/>
+              <text x="175" y="342" text-anchor="middle" fill="#0c4a6e" font-size="9" font-weight="700">ALB</text>
+              <text x="175" y="356" text-anchor="middle" fill="#0c4a6e" font-size="8">edge</text>
+
+              <!-- App -->
+              <rect x="265" y="320" width="80" height="50" rx="6" fill="#a7f3d0" stroke="#047857" stroke-width="1.5"/>
+              <text x="305" y="342" text-anchor="middle" fill="#064e3b" font-size="9" font-weight="700">App tier</text>
+              <text x="305" y="356" text-anchor="middle" fill="#064e3b" font-size="8">EC2 ASG</text>
+
+              <!-- DB -->
+              <ellipse cx="435" cy="345" rx="40" ry="26" fill="#fca5a5" stroke="#b91c1c" stroke-width="1.5"/>
+              <text x="435" y="342" text-anchor="middle" fill="#450a0a" font-size="9" font-weight="700">RDS</text>
+              <text x="435" y="356" text-anchor="middle" fill="#450a0a" font-size="8">data</text>
+
+              <!-- KMS -->
+              <rect x="510" y="320" width="70" height="50" rx="6" fill="#ddd6fe" stroke="#5b21b6" stroke-width="1.5"/>
+              <text x="545" y="342" text-anchor="middle" fill="#1e1b4b" font-size="9" font-weight="700">KMS</text>
+              <text x="545" y="356" text-anchor="middle" fill="#1e1b4b" font-size="8">keys</text>
+
+              <!-- Arrows -->
+              <g stroke="#0f172a" stroke-width="1.3" fill="none" marker-end="url(#tm-arrow)">
+                <line x1="92"  y1="345" x2="133" y2="345"/>
+                <line x1="215" y1="345" x2="263" y2="345"/>
+                <line x1="345" y1="345" x2="395" y2="345"/>
+                <line x1="345" y1="335" x2="508" y2="335"/>
+              </g>
+              <defs>
+                <marker id="tm-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f172a"/></marker>
+              </defs>
+
+              <!-- Trust boundaries (dashed) -->
+              <g stroke="#dc2626" stroke-width="1.5" stroke-dasharray="6 4" fill="none">
+                <line x1="115" y1="295" x2="115" y2="400"/>
+                <line x1="245" y1="295" x2="245" y2="400"/>
+                <line x1="395" y1="295" x2="395" y2="400"/>
+                <line x1="495" y1="295" x2="495" y2="400"/>
+              </g>
+              <text x="115" y="418" text-anchor="middle" fill="#b91c1c" font-size="8" font-weight="700">internet</text>
+              <text x="245" y="418" text-anchor="middle" fill="#b91c1c" font-size="8" font-weight="700">edge</text>
+              <text x="395" y="418" text-anchor="middle" fill="#b91c1c" font-size="8" font-weight="700">data plane</text>
+              <text x="495" y="418" text-anchor="middle" fill="#b91c1c" font-size="8" font-weight="700">control plane</text>
+            </g>
+
+            <text x="300" y="455" text-anchor="middle" fill="#0c4a6e" font-size="9" opacity="0.7">attack tree above · data-flow with trust boundaries below</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <main class="container contribute-article" id="main-content">
+
+        <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/brainstorm.webp" type="image/webp">
+            <img src="/img/photos/brainstorm.jpg" alt="A small team in front of a whiteboard sketching arrows between boxes during a design discussion" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Threat modeling at its best: a small group, a whiteboard, and enough discipline to write the threats down.</figcaption>
+        </figure>
+
+        <p class="page-meta"><time datetime="2026-05-17">Last updated <strong>2026-05-17</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/threat-modeling.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>The 30-second version:</strong> Threat modeling is the practice of <em>reasoning out loud</em>, in writing, about what can go wrong with a system before an attacker does it for you. It is not a checklist, not a tool, and not a compliance artifact — though all three exist around it. The classic framing is <strong>Adam Shostack's four questions</strong>: <em>What are we building? What can go wrong? What are we going to do about it? Did we do a good job?</em></p>
+            <p style="margin-top:0.75rem;">The practitioner's stack: <strong>STRIDE</strong> as the day-to-day categorization, <strong>PASTA</strong> for high-stakes risk-quantified modeling, <strong>LINDDUN</strong> for privacy, <strong>attack trees</strong> for goal-oriented analysis, and <strong>MITRE ATT&amp;CK Cloud</strong> as the threat library. Cloud changes the model in five ways: identities everywhere, the control plane <em>is</em> the attack surface, shared responsibility shrinks scope, multi-tenancy is an assumption, and default stances differ per cloud.</p>
+        </div>
+
+        <div class="toc">
+            <h2>On this page</h2>
+            <ol>
+                <li><a href="#what-it-is">What threat modeling is (and isn't)</a></li>
+                <li><a href="#four-questions">Shostack's four questions</a></li>
+                <li><a href="#stride">STRIDE</a></li>
+                <li><a href="#stride-variants">STRIDE-per-element vs per-interaction</a></li>
+                <li><a href="#pasta">PASTA</a></li>
+                <li><a href="#linddun">LINDDUN (privacy)</a></li>
+                <li><a href="#attack-trees">Attack trees</a></li>
+                <li><a href="#kill-chains">Kill chains &amp; ATT&amp;CK</a></li>
+                <li><a href="#tools-os">OWASP Threat Dragon &amp; Microsoft TMT</a></li>
+                <li><a href="#tools-commercial">Commercial platforms</a></li>
+                <li><a href="#sdlc">Where it fits in the SDLC</a></li>
+                <li><a href="#agile">The agile threat model</a></li>
+                <li><a href="#cloud-different">What's different for cloud</a></li>
+                <li><a href="#worked-3tier">Worked example: 3-tier AWS app</a></li>
+                <li><a href="#worked-llm">Worked example: LLM RAG app</a></li>
+                <li><a href="#worked-landing">Worked example: multi-account landing zone</a></li>
+                <li><a href="#libraries">Threat libraries vs custom</a></li>
+                <li><a href="#scoring">Risk scoring threats</a></li>
+                <li><a href="#as-code">Threat modeling as code</a></li>
+                <li><a href="#ai">AI in threat modeling</a></li>
+                <li><a href="#pitfalls">Common pitfalls</a></li>
+                <li><a href="#maturity">Maturity stages</a></li>
+                <li><a href="#further">Further reading</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ol>
+        </div>
+
+        <section id="what-it-is">
+            <h2>What threat modeling is (and isn't)</h2>
+            <p>Threat modeling is a structured way to <em>reason</em> about what can go wrong with a system. It produces a written artifact — a list of threats, ranked, with mitigations and owners — that future versions of you, your team, and the auditor can read. It is most valuable when applied during design, when the cost of changing an architectural decision is still close to zero.</p>
+            <p>It is <strong>not</strong> a checklist. Checklists answer "did you do X?" Threat modeling asks "given what we are building, what is the set of Xs we should worry about?" — which is a different and earlier question. A checklist that came out of a threat model is a useful artifact; a checklist that <em>replaces</em> the modeling is dangerous, because it bakes in someone else's threat assumptions.</p>
+            <p>It is not a tool. Threat Dragon, Microsoft TMT, IriusRisk, and a dozen others can support the work, but the work itself is human reasoning over a system diagram. A team without tooling that runs a 30-minute STRIDE session every two weeks will out-deliver a team with a $50,000 platform that never books the meeting.</p>
+            <p>It is not a compliance artifact, though SOC 2, ISO 27001, PCI DSS, FedRAMP, and most modern frameworks now reference threat modeling explicitly. Doing it <em>only</em> for the auditor produces compliance theater — a 200-page document everyone signs once, nobody updates, and which fails its first contact with a real attacker. Do it because it makes your system safer; the audit evidence follows.</p>
+            <p>It is not a one-time event. Systems evolve; trust boundaries shift; new third-party integrations introduce new edges. A model from two years ago describes a system that no longer exists. The discipline is in re-running it at every meaningful design change.</p>
+        </section>
+
+        <section id="four-questions">
+            <h2>Shostack's four questions</h2>
+            <p>Adam Shostack — author of <em>Threat Modeling: Designing for Security</em>, the field's defining textbook — reduced the practice to four questions. Almost every methodology since maps to one of them.</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-iam">
+                    <h3>1. What are we building?</h3>
+                    <p>Draw the system. A data-flow diagram with components, data stores, external entities, and the edges (interactions) between them. Mark the trust boundaries — the dashed lines where data crosses from one zone of trust to another. The diagram is the foundation; vague diagrams produce vague models.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>2. What can go wrong?</h3>
+                    <p>Apply a categorization — STRIDE, PASTA, LINDDUN, attack trees, or a custom library — to enumerate threats. Walk the diagram element-by-element or interaction-by-interaction. Don't filter for plausibility yet; the goal is breadth, then ranking.</p>
+                </div>
+                <div class="pillar-card pillar-card-network">
+                    <h3>3. What are we going to do about it?</h3>
+                    <p>For each threat, decide: <em>mitigate</em> (add a control), <em>transfer</em> (insurance, contract, third-party), <em>accept</em> (risk decision with an owner), or <em>avoid</em> (don't build the thing). The output is mitigations with owners and target dates.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage1">
+                    <h3>4. Did we do a good job?</h3>
+                    <p>Validation. Did the mitigations ship? Did peer reviewers find threats you missed? Did pentests or red-team exercises confirm the threats you ranked were the right ones? The fourth question is the one most teams skip; it's also the one that turns threat modeling into an evolving discipline rather than a one-shot ritual.</p>
+                </div>
+            </div>
+            <p>Skip any one of the four and the work degrades. Skip question one and you'll find threats in the imaginary architecture, not the real one. Skip question three and you've cataloged risks rather than reduced them. Skip question four and you'll never know whether you got better.</p>
+        </section>
+
+        <section id="stride">
+            <h2>STRIDE</h2>
+            <p>STRIDE is Microsoft's six-category mnemonic for the kinds of threats that systems face. Each letter maps to a security property that the threat <em>violates</em>. It is the most-taught, most-used, and most-tractable categorization scheme — a 30-minute team can produce a useful threat list with nothing more than STRIDE and a diagram.</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Letter</th>
+                            <th scope="col">Threat category</th>
+                            <th scope="col">Violates</th>
+                            <th scope="col">Cloud-specific example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>Spoofing</td>
+                            <td>Authentication</td>
+                            <td>Forged JWT, stolen IAM role credentials, IMDSv1 SSRF impersonating the workload identity, OIDC trust-policy misconfiguration trusting any GitHub repo.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">T</th>
+                            <td>Tampering</td>
+                            <td>Integrity</td>
+                            <td>S3 object overwrite without versioning, container image swap before pull, IaC plan tampering between plan and apply, RDS audit log mutation.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">R</th>
+                            <td>Repudiation</td>
+                            <td>Non-repudiation</td>
+                            <td>CloudTrail disabled in one region, KMS key used without logging, shared IAM user accessed by multiple humans, log-bucket retention disabled by the attacker.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">I</th>
+                            <td>Information disclosure</td>
+                            <td>Confidentiality</td>
+                            <td>Public S3 bucket, error message returning stack trace + secrets, secrets in env vars exposed via SSRF, blob storage SAS URL leaking customer data.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">D</th>
+                            <td>Denial of service</td>
+                            <td>Availability</td>
+                            <td>Cloud-bill DoS via misconfigured auto-scaling, billing-account suspension after fraud signals, exhaustion of API quotas, KMS key rotation breaking dependent services.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">E</th>
+                            <td>Elevation of privilege</td>
+                            <td>Authorization</td>
+                            <td>iam:PassRole abuse, AssumeRoleWithWebIdentity to a more-privileged role, lateral movement via shared KMS keys, GuardDuty bypass via cross-account trust.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>The mnemonic is a generative tool, not a comprehensive ontology. STRIDE doesn't explicitly cover privacy (that's LINDDUN), supply chain (that's a category in its own right), or business-logic abuse (which often lives at the application layer below the threat-model abstraction). Use STRIDE as the starting categorization and add domain-specific lenses where the system warrants it.</p>
+        </section>
+
+        <section id="stride-variants">
+            <h2>STRIDE-per-element vs STRIDE-per-interaction</h2>
+            <p>There are two ways to apply STRIDE against a data-flow diagram. They produce different threat lists and different costs.</p>
+            <h3>STRIDE-per-element</h3>
+            <p>For each element on the diagram — external entity, process, data store, data flow — apply the STRIDE categories that <em>can</em> affect that element type. The Microsoft Threat Modeling Tool encodes which categories apply to which element types out of the box: external entities can be Spoofed and can Repudiate; processes can suffer every STRIDE class; data stores can be Tampered with, leak Information, suffer DoS, but not generally Spoofed; data flows can be Tampered with, leak Information, and suffer DoS. The mechanical traversal makes per-element fast and predictable; it tends to <em>under</em>-find at boundaries.</p>
+            <h3>STRIDE-per-interaction</h3>
+            <p>For each <em>edge</em> (interaction) on the diagram — every arrow that crosses a trust boundary — apply the full STRIDE set. Per-interaction produces more threats and surfaces the cross-boundary problems STRIDE was originally designed to catch (the trust-boundary crossing is where most cloud threats actually live). It costs more time and demands more practitioner skill to keep the list useful.</p>
+            <p>The pragmatic default: STRIDE-per-element for fast, repeatable team sessions; STRIDE-per-interaction for new architectures, regulated workloads, or anything where the cost of a missed threat is high. Many mature teams run per-element on a quarterly cadence and per-interaction once at design and after any major architectural change.</p>
+        </section>
+
+        <section id="pasta">
+            <h2>PASTA — Process for Attack Simulation and Threat Analysis</h2>
+            <p>PASTA is a seven-stage risk-centric methodology developed by Tony UcedaVélez and Marco Morana. Where STRIDE answers "what kinds of threats apply here," PASTA answers "given the business objectives, the actual technology stack, and credible attacker capabilities, what is the prioritized risk picture, and how should we treat it?" It produces a heavier artifact for higher-stakes systems.</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Stage</th>
+                            <th scope="col">Activity</th>
+                            <th scope="col">Output</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row">1</th><td>Define business objectives</td><td>What the system exists to do; regulatory and contractual constraints; risk tolerance.</td></tr>
+                        <tr><th scope="row">2</th><td>Define technical scope</td><td>Application boundaries, dependencies, third-party integrations, cloud services in scope.</td></tr>
+                        <tr><th scope="row">3</th><td>Decompose the application</td><td>Data-flow diagrams, trust boundaries, identity model, data classification per element.</td></tr>
+                        <tr><th scope="row">4</th><td>Threat analysis</td><td>Enumeration of credible threats — often using STRIDE, CAPEC, or ATT&amp;CK as input libraries.</td></tr>
+                        <tr><th scope="row">5</th><td>Vulnerability analysis</td><td>Map threats to existing weaknesses — known CVEs, misconfigurations, design flaws, control gaps.</td></tr>
+                        <tr><th scope="row">6</th><td>Attack modeling</td><td>Attack trees, attack libraries, simulated kill chains. The "could an attacker actually do this?" stage.</td></tr>
+                        <tr><th scope="row">7</th><td>Risk and impact analysis</td><td>Scored risks (likelihood × impact, or quantified via FAIR), treatment plan, residual risk register.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>PASTA's reputation as "heavyweight" is partly fair. The seven stages are days of work, not minutes. The payoff is a defensible risk artifact — one that a CISO can take to a board, a regulator can read, and an internal audit team can re-perform against. For most workloads, STRIDE is enough; PASTA earns its keep on regulated, mission-critical, or revenue-bearing systems where the stakes justify the cost.</p>
+        </section>
+
+        <section id="linddun">
+            <h2>LINDDUN — privacy threat modeling</h2>
+            <p>LINDDUN is the privacy counterpart to STRIDE. Developed at KU Leuven, it categorizes <em>privacy</em> threats — the harms that arise from how a system handles personal data — that security-focused methodologies tend to miss. With GDPR (EU), CCPA / CPRA (California), LGPD (Brazil), PIPL (China), and a growing list of jurisdictional regimes, LINDDUN's relevance has expanded sharply.</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Letter</th>
+                            <th scope="col">Threat category</th>
+                            <th scope="col">Cloud example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row">L</th><td>Linkability</td><td>Two anonymized analytics events that, together, identify a user (cookie + IP + UA).</td></tr>
+                        <tr><th scope="row">I</th><td>Identifiability</td><td>A "pseudonymous" identifier (hashed email) that's reversible via rainbow tables or a join.</td></tr>
+                        <tr><th scope="row">N</th><td>Non-repudiation</td><td>Whistleblower or activist data linked to a real identity by audit log retention that exceeds the privacy promise.</td></tr>
+                        <tr><th scope="row">D</th><td>Detectability</td><td>The presence of a user record being inferable even without reading it (e.g., conditional access patterns).</td></tr>
+                        <tr><th scope="row">D</th><td>Disclosure of information</td><td>Confidential personal data leaking to unauthorized parties (overlaps STRIDE's I).</td></tr>
+                        <tr><th scope="row">U</th><td>Unawareness</td><td>Users not informed how their data is processed; missing consent records or transparent notices.</td></tr>
+                        <tr><th scope="row">N</th><td>Non-compliance</td><td>Processing that violates a specific regulatory obligation — retention beyond stated limits, cross-border transfer without lawful basis.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Run LINDDUN alongside STRIDE on any system that processes personal data at scale. The categorizations partially overlap (Disclosure of information appears in both) but address different audiences — STRIDE for the security team, LINDDUN for the privacy office and the data-protection officer. A combined STRIDE + LINDDUN session is a strong default for any consumer-facing or healthcare workload.</p>
+        </section>
+
+        <section id="attack-trees">
+            <h2>Attack trees</h2>
+            <p>Attack trees are Bruce Schneier's contribution — a goal-oriented enumeration of how an attacker could achieve an objective. The root of the tree is the attacker's goal; the branches are sub-goals; the leaves are concrete actions an attacker would take. AND-nodes require all children; OR-nodes require any one.</p>
+            <p>Where STRIDE walks the defender's view of the system asking "what can go wrong at each element?", attack trees walk the attacker's view asking "given a goal, what paths lead to it?" The two are complementary; many practitioners use STRIDE to generate threat candidates and then build attack trees for the highest-priority ones to enumerate the actual paths.</p>
+            <p>Worked sketch — goal "exfiltrate customer PII from the database":</p>
+            <ul>
+                <li><strong>OR</strong> Obtain valid database credentials
+                    <ul>
+                        <li>Steal application-tier IAM role credentials (SSRF, vulnerable workload)</li>
+                        <li>Leaked secret in source repo</li>
+                        <li>Phish a database administrator</li>
+                    </ul>
+                </li>
+                <li><strong>OR</strong> Abuse the cloud API to read the database directly
+                    <ul>
+                        <li>Compromise a privileged IAM principal with rds:* permissions</li>
+                        <li>Confused-deputy via a backup-restore role that targets attacker-controlled storage</li>
+                        <li>Cross-account assume-role chain ending at a snapshot-export role</li>
+                    </ul>
+                </li>
+                <li><strong>OR</strong> Compromise the application tier and exfiltrate via legitimate data flows
+                    <ul>
+                        <li>Vuln in an unpatched dependency</li>
+                        <li>Container escape from a co-tenant workload</li>
+                        <li>Supply-chain compromise of an application dependency</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>The value of writing this down: each leaf maps to a specific mitigation (or absence thereof), and an attacker only needs <em>one</em> leaf to succeed. The defender needs all the leaves' parent OR-branches cut. Attack trees make that asymmetry concrete in a way STRIDE alone doesn't.</p>
+        </section>
+
+        <section id="kill-chains">
+            <h2>Kill chains, ATT&amp;CK, and threat libraries</h2>
+            <p>Categorization frameworks (STRIDE, LINDDUN) answer "what kinds of bad things can happen?" Kill-chain models answer "what is the typical sequence an attacker follows to do them?" — useful for connecting design threats to detection and response controls (see <a href="cloud-soc.html">Cloud SOC</a> and <a href="detection-engineering.html">Detection Engineering</a>).</p>
+            <h3>Lockheed Martin Cyber Kill Chain</h3>
+            <p>The original seven-stage model: Reconnaissance → Weaponization → Delivery → Exploitation → Installation → Command &amp; Control → Actions on Objectives. Useful as a teaching scaffold; criticized in cloud contexts because cloud breaches frequently skip stages (a leaked access key collapses several stages into one API call).</p>
+            <h3>MITRE ATT&amp;CK and ATT&amp;CK Cloud Matrix</h3>
+            <p><a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK</a> is a comprehensive threat library — tactics (the why), techniques (the how), and sub-techniques (the specifics) — built from real-world adversary behavior. The <a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">Cloud Matrix</a> is the cloud-specific lens, with sub-matrices for AWS, Azure, GCP, Microsoft 365, Google Workspace, and SaaS. Most modern threat modeling references ATT&amp;CK techniques by ID (T1078, T1098, T1136, etc.) so that designers, detection engineers, and red teams share vocabulary.</p>
+            <h3>Other libraries</h3>
+            <ul>
+                <li><strong><a href="https://capec.mitre.org/" target="_blank" rel="noopener noreferrer">CAPEC</a></strong> — MITRE's catalog of attack patterns. More design-oriented than ATT&amp;CK (which is operations-oriented).</li>
+                <li><strong><a href="https://d3fend.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE D3FEND</a></strong> — the defender-side counterpart, mapping countermeasures to ATT&amp;CK techniques. Use it to validate that you have at least one detective or preventive control per high-priority technique.</li>
+                <li><strong><a href="https://attack.mitre.org/resources/working-with-attack/" target="_blank" rel="noopener noreferrer">ATT&amp;CK for Containers</a></strong>, <strong>ATT&amp;CK for ICS</strong>, <strong><a href="https://atlas.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATLAS</a></strong> (ML-specific) — domain-specific extensions.</li>
+                <li><strong>OWASP Top 10</strong> (web), <strong>OWASP API Top 10</strong>, <strong><a href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noopener noreferrer">OWASP LLM Top 10</a></strong> — focused, well-known starting points for app, API, and AI workloads.</li>
+            </ul>
+        </section>
+
+        <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/flipchart-discussion.webp" type="image/webp">
+            <img src="/img/photos/flipchart-discussion.jpg" alt="A group at a flipchart working through diagrams and notes during a design discussion" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>A flipchart, a marker, and the four questions outperform most tooling.</figcaption>
+        </figure>
+
+        <section id="tools-os">
+            <h2>OWASP Threat Dragon &amp; Microsoft Threat Modeling Tool</h2>
+            <h3>OWASP Threat Dragon</h3>
+            <p><a href="https://owasp.org/www-project-threat-dragon/" target="_blank" rel="noopener noreferrer">OWASP Threat Dragon</a> is the open-source, cross-platform threat modeling tool. Web or desktop; diagrams as JSON; STRIDE-per-element built in; git-friendly storage so threat models can live next to the code. Strengths: free, vendor-neutral, scriptable, good enough for the 80% case. Limitations for cloud: it's element-and-flow generic — there's no cloud-service-aware threat library, so you bring the cloud knowledge yourself.</p>
+            <h3>Microsoft Threat Modeling Tool (TMT)</h3>
+            <p><a href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool" target="_blank" rel="noopener noreferrer">Microsoft TMT</a> is the canonical STRIDE tool, free and Windows-only. Strengths: an excellent stencil library, automatic threat generation per STRIDE-per-element rules, and good reporting. Limitations: Windows-only, Azure-flavored stencils (you can use it for AWS or GCP, but you'll fight it), and the threat library is generic.</p>
+            <p>Both tools share a common gap for cloud: the generated threat lists are categorically correct (STRIDE) but lack the cloud-specific specificity that makes a threat model actionable. A cloud-aware practitioner has to enrich the output with the IMDS, IAM, OIDC, KMS, and shared-responsibility-edge threats the generic library doesn't surface.</p>
+        </section>
+
+        <section id="tools-commercial">
+            <h2>Commercial threat modeling platforms</h2>
+            <p>The commercial layer adds cloud-aware threat libraries, integration with CI/CD and ticketing, and team-collaboration features that the open-source tools lack.</p>
+            <ul>
+                <li><strong><a href="https://www.iriusrisk.com/" target="_blank" rel="noopener noreferrer">IriusRisk</a></strong> — questionnaire-driven model building, large built-in threat library mapped to CAPEC and ATT&amp;CK, integrations with Jira, GitHub, GitLab. Strong for organizations that want repeatable models across many teams without each team needing deep threat-library knowledge.</li>
+                <li><strong><a href="https://threatmodeler.com/" target="_blank" rel="noopener noreferrer">ThreatModeler</a></strong> — visual modeling with cloud-aware stencils (AWS, Azure, GCP) and threat generation tied to the components used. Good for teams already comfortable with diagram-first workflows.</li>
+                <li><strong><a href="https://www.foreseeti.com/" target="_blank" rel="noopener noreferrer">SecuriCAD</a></strong> (foreseeti, now part of Google) — attack-graph-based modeling that simulates probabilistic attacker paths against a model. Different paradigm: closer to attack-graph analysis than STRIDE enumeration.</li>
+                <li><strong>Cyversity</strong>, <strong><a href="https://devici.com/" target="_blank" rel="noopener noreferrer">Devici</a></strong>, <strong>Tutamantic</strong> — newer entrants with AI-assisted threat generation, diagram-from-IaC import, and tighter dev-loop integration.</li>
+                <li><strong>Cloud-provider threat-modeling helpers</strong> — AWS published <a href="https://github.com/awslabs/threat-composer" target="_blank" rel="noopener noreferrer">Threat Composer</a> (open-source); the AWS Security Workshops include threat-modeling tracks. Azure offers built-in TMT templates; GCP has guidance but no first-party tool.</li>
+            </ul>
+            <p>The selection criterion that matters: which tool produces threat lists your team will actually act on. A platform with a deep threat library nobody trusts produces dust-collecting models. A simpler tool that's been adopted by the team produces shipped mitigations.</p>
+        </section>
+
+        <section id="sdlc">
+            <h2>Where threat modeling fits in the SDLC</h2>
+            <p>The most expensive moment to find an architectural threat is after the architecture is implemented. The cheapest is at the whiteboard. The SDLC placements that earn their cost:</p>
+            <ul>
+                <li><strong>Design review.</strong> The original target. Threat model before the architecture decision record (ADR) is approved. Most threats found here cost minutes to fix — change a trust boundary, choose a different service, scope a role differently.</li>
+                <li><strong>Pre-implementation security review.</strong> When the team has detailed design but no code yet. Re-confirm the model matches what's actually being built.</li>
+                <li><strong>Pre-production / pre-launch.</strong> Final review before the system goes live. Validates the implementation against the design-time model; catches the gap between "what we said we'd build" and "what we built."</li>
+                <li><strong>Post-incident.</strong> After any meaningful security event, re-threat-model the affected component with the new attacker behavior as input. The post-incident model becomes durable institutional knowledge.</li>
+                <li><strong>Periodic refresh.</strong> Quarterly for high-criticality systems, annually for the rest. Confirms the diagram still reflects reality and the threats still rank the same way.</li>
+            </ul>
+            <p>Threat modeling at any single stage helps; threat modeling across all five is how mature programs operate. The opportunity cost of one missed iteration is generally small; the opportunity cost of <em>never</em> threat modeling a critical system is what shows up in the post-incident report.</p>
+        </section>
+
+        <section id="agile">
+            <h2>The agile threat model</h2>
+            <p>The classic threat-modeling failure mode is the 200-page artifact: produced once, reviewed once, never updated, and quietly irrelevant by the time the system has shipped. The agile threat model is the antidote.</p>
+            <p>The mechanics: 30 minutes on a whiteboard with the engineer who knows the system, a security partner, and a product / ops person who knows the data sensitivity. Draw the data-flow diagram. Walk STRIDE per element. Write threats on sticky notes. End the session with a list of mitigations, each with an owner and a target date. Commit the diagram and the threat list to the repo. That is the artifact.</p>
+            <p>Re-run the session whenever the trust boundary changes — new identity type, new third-party integration, new data classification, new region. Re-run for new features whose blast radius the team isn't sure about. Skip the formality when the change is genuinely cosmetic. The discipline is in <em>doing it often</em>, not in <em>doing it exhaustively</em>.</p>
+            <p>The <a href="https://www.threatmodelingmanifesto.org/" target="_blank" rel="noopener noreferrer">Threat Modeling Manifesto</a> codifies the spirit: people and collaboration over processes, methodologies, and tools; a journey of understanding over a security or privacy snapshot; a tool to expose dangers over a means to compliance.</p>
+        </section>
+
+        <section id="cloud-different">
+            <h2>What's different for cloud</h2>
+            <p>The methodology survives the move to cloud unchanged. The threats it surfaces shift in five practical ways.</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-iam">
+                    <h3>Identities everywhere</h3>
+                    <p>Every workload has an identity (instance profile, managed identity, service account); every human has multiple (corporate SSO, cloud console, federated roles); every service-to-service call carries one. Identity is the new perimeter and most cloud threats involve an identity primitive somewhere. STRIDE Spoofing and Elevation of Privilege dominate the cloud threat list. See <a href="iam.html">IAM &amp; Identity</a>.</p>
+                </div>
+                <div class="pillar-card pillar-card-network">
+                    <h3>Control plane = attack surface</h3>
+                    <p>The cloud API is itself an attack surface. A traditional threat model worried about network-layer threats to a service; a cloud threat model worries about API-layer threats to the service <em>and</em> to the cloud control plane that manages it. CreateAccessKey, AssumeRole, PutBucketPolicy, and similar API actions are first-class threat surfaces.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3>Shared responsibility</h3>
+                    <p>Some threats are already mitigated by the provider — physical access, hypervisor escape (mostly), DDoS scrubbing for managed front-doors. The model should explicitly mark which threats are out-of-scope because the provider owns them, and which are still yours. See <a href="shared-responsibility-model.html">Shared Responsibility</a>.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>Multi-tenancy assumptions</h3>
+                    <p>Every managed service is multi-tenant under the hood. The model must state explicitly what tenancy guarantees you rely on (per-account isolation, per-VPC isolation, KMS key-policy enforcement) and what would break if the provider's isolation model surprised you (extremely rare in practice, but the threat is non-zero — see breach reviews like LastPass and the GCP DataStudio class of disclosure).</p>
+                </div>
+                <div class="pillar-card pillar-card-stage2">
+                    <h3>Default stances differ</h3>
+                    <p>AWS defaults to deny on IAM, permit on networking-within-VPC; Azure defaults to a more permissive RBAC inheritance model; GCP defaults to organization-inherited deny. Threats that are obvious on one cloud are surprises on another. A cloud-portable threat model must call out which defaults the design depends on.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage3">
+                    <h3>Change rate &amp; ephemerality</h3>
+                    <p>Cloud workloads are ephemeral; networks are software-defined; identities can be created and destroyed in API calls. A threat model that's correct at design time but stale at runtime is a hazard. Pair the model with runtime sensing (<a href="cspm-vs-cnapp.html">CSPM/CNAPP</a>) so the design intent and the operational state stay aligned.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="worked-3tier">
+            <h2>Worked example: 3-tier app on AWS</h2>
+            <p>The architecture: Route 53 → ALB → EC2 Auto Scaling Group running a Java application → RDS PostgreSQL. KMS for encryption keys. CloudTrail and VPC Flow Logs enabled. A typical SaaS pattern that looks deceptively simple on the diagram. A STRIDE-per-interaction pass produces roughly 20 threats; here's a representative subset.</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">#</th>
+                            <th scope="col">Element / interaction</th>
+                            <th scope="col">STRIDE</th>
+                            <th scope="col">Threat</th>
+                            <th scope="col">Mitigation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row">1</th><td>User → Route 53</td><td>S</td><td>DNS hijack via registrar account takeover</td><td>Registrar MFA, DNSSEC, monitoring NS-record changes</td></tr>
+                        <tr><th scope="row">2</th><td>User → ALB</td><td>I</td><td>TLS downgrade, weak cipher</td><td>TLS 1.3 only policy, HSTS, ACM-managed cert</td></tr>
+                        <tr><th scope="row">3</th><td>Internet → ALB</td><td>D</td><td>L7 DDoS exhausting backend</td><td>AWS WAF, Shield Advanced, ALB rate-based rules</td></tr>
+                        <tr><th scope="row">4</th><td>ALB → App tier</td><td>S</td><td>Bypass of ALB by reaching EC2 directly</td><td>Security group on EC2 allows only ALB SG; private subnets</td></tr>
+                        <tr><th scope="row">5</th><td>App tier (EC2)</td><td>I</td><td>SSRF retrieves IMDS credentials</td><td>IMDSv2 required, hop-limit 1, minimal instance-profile permissions</td></tr>
+                        <tr><th scope="row">6</th><td>App tier (EC2)</td><td>E</td><td>Instance profile has overly broad RDS or S3 access</td><td>Scope role to specific resources; periodic IAM Access Analyzer review</td></tr>
+                        <tr><th scope="row">7</th><td>App tier → RDS</td><td>S</td><td>SQL connection from compromised host using shared DB password</td><td>IAM database authentication; per-app database user; rotation</td></tr>
+                        <tr><th scope="row">8</th><td>App tier → RDS</td><td>I</td><td>Unencrypted in-transit between app and DB</td><td>Force SSL on RDS parameter group; verify cert chain in app</td></tr>
+                        <tr><th scope="row">9</th><td>RDS</td><td>I</td><td>Snapshot copied cross-account to attacker account</td><td>Resource policy on snapshot sharing; SCP denying snapshot share</td></tr>
+                        <tr><th scope="row">10</th><td>RDS</td><td>T</td><td>Backup integrity not verified</td><td>Restore drill cadence; AWS Backup with vault lock</td></tr>
+                        <tr><th scope="row">11</th><td>App tier → KMS</td><td>E</td><td>Key policy allows broad principals</td><td>Tight key policy; grant model; aws:SourceVpc condition</td></tr>
+                        <tr><th scope="row">12</th><td>KMS</td><td>D</td><td>Key disabled or scheduled for deletion</td><td>Multi-region keys; CloudWatch alarms on disable/schedule actions</td></tr>
+                        <tr><th scope="row">13</th><td>CloudTrail</td><td>R</td><td>Trail disabled by compromised principal</td><td>Org trail with S3 + KMS lock; SCP denying trail disable</td></tr>
+                        <tr><th scope="row">14</th><td>CloudTrail S3 bucket</td><td>T</td><td>Log mutation</td><td>S3 Object Lock (compliance mode); bucket policy restricting writes to CT</td></tr>
+                        <tr><th scope="row">15</th><td>App tier dependencies</td><td>T</td><td>Supply-chain compromise of a library</td><td>SBOM, pinned versions, dependency scanning in <a href="ci-cd.html">CI/CD</a></td></tr>
+                        <tr><th scope="row">16</th><td>Deployment pipeline → EC2</td><td>S</td><td>Forged deploy as a release</td><td>OIDC federation from CI to AWS; sigstore-signed artifacts; required reviewers</td></tr>
+                        <tr><th scope="row">17</th><td>Operator → cloud console</td><td>E</td><td>Console-only break-glass without time-bound elevation</td><td>IAM Identity Center with permission sets; PIM-style time-bound roles</td></tr>
+                        <tr><th scope="row">18</th><td>Operator → cloud console</td><td>R</td><td>Shared root credentials</td><td>Disable root key; MFA on root; per-human SSO identities</td></tr>
+                        <tr><th scope="row">19</th><td>App → S3 (objects in upload bucket)</td><td>I</td><td>Public bucket access</td><td>Block Public Access at account level; SCP denying its disable</td></tr>
+                        <tr><th scope="row">20</th><td>Whole architecture</td><td>D</td><td>Region-wide outage (single-region design)</td><td>Multi-AZ baseline; documented RPO/RTO; multi-region for tier-1 systems</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>The exercise is fast — an experienced practitioner produces this list in under two hours. The output is a concrete remediation backlog and a documented design that future reviewers (and auditors) can read.</p>
+        </section>
+
+        <section id="worked-llm">
+            <h2>Worked example: LLM RAG application</h2>
+            <p>The architecture: a customer-support chatbot using an LLM (call it Claude or GPT, your choice) with a RAG layer pulling from a vector database populated by ingesting product documentation and customer-uploaded knowledge bases. The agent has tool-use access to a few internal APIs (lookup ticket, escalate, write summary back to CRM). Cross-reference <a href="ai-ml-security.html">AI/ML Security</a> for the full treatment.</p>
+            <p>The architecture introduces three trust boundaries STRIDE-against-a-classic-3-tier-app doesn't see:</p>
+            <ul>
+                <li><strong>Retrieved content as input.</strong> Any document the RAG layer retrieves becomes part of the prompt. A poisoned document — a customer-uploaded knowledge base with embedded prompt-injection content — is an input the system trusts because it came from "your" vector store.</li>
+                <li><strong>The model itself.</strong> The model is a supply-chain dependency. Provider compromise, model-update behavior change, jailbreak technique discovery, training-data inversion attacks — all are categorically novel threats.</li>
+                <li><strong>Tool-use as authorization.</strong> Any tool the agent can call is a privilege the agent has. An agent that can call <code>refund_customer</code> can be coerced into doing so via crafted input. Tool-use authorization is a design problem most systems aren't built to handle.</li>
+            </ul>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr><th scope="col" class="ct-row-head">Threat</th><th scope="col">STRIDE</th><th scope="col">Specifics</th><th scope="col">Mitigation</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Direct prompt injection</td><td>S/E</td><td>User crafts input that overrides system prompt; agent executes attacker intent</td><td>Input filtering, output filtering, system-prompt isolation, untrusted-input markers</td></tr>
+                        <tr><td>Indirect prompt injection via retrieved content</td><td>T/E</td><td>Poisoned document in vector DB redirects agent behavior</td><td>Provenance metadata on retrieved docs; treat all retrieved content as untrusted</td></tr>
+                        <tr><td>Vector DB poisoning</td><td>T</td><td>Attacker uploads document that biases retrieval for any future query</td><td>Per-tenant isolation in the vector DB; ingestion review; signed ingestion sources</td></tr>
+                        <tr><td>Embedding inversion</td><td>I</td><td>Embeddings reverse-engineered to reveal source text</td><td>Don't treat embeddings as safe to expose; access-control embeddings as PII</td></tr>
+                        <tr><td>Model supply chain</td><td>T</td><td>Compromised model weights, training-data poisoning</td><td>Use vetted providers; model card review; pinned model versions; integrity checks</td></tr>
+                        <tr><td>Agentic tool abuse</td><td>E</td><td>Agent coerced to call a privileged tool (refund, send email, modify ticket)</td><td>Per-tool authorization separate from agent identity; human-in-the-loop on high-impact tools</td></tr>
+                        <tr><td>Cross-tenant data leakage</td><td>I</td><td>Agent retrieves another tenant's vector entries via shared index</td><td>Tenant ID enforced in retrieval queries; per-tenant index where threat model demands</td></tr>
+                        <tr><td>Sensitive data in prompts</td><td>I</td><td>PII leaked into model provider's logs / training pipeline</td><td>PII redaction at the boundary; provider zero-retention agreement; on-tenant models for sensitive workloads</td></tr>
+                        <tr><td>Cost / DoS</td><td>D</td><td>Adversarial prompts maximizing tokens; recursion in tool use</td><td>Per-user rate limits; max-token caps; recursion-depth caps on tool calls</td></tr>
+                        <tr><td>Output exfiltration via markdown</td><td>I</td><td>Model output renders an attacker-controlled image URL with PII in the path</td><td>Strip image and link rendering from untrusted output; content security policy on chat UI</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>The lesson generalizes: the same STRIDE walk surfaces these threats, but a practitioner who hasn't seen agentic systems before will miss the tool-abuse category entirely. The threat library matters — extending ATT&amp;CK / MITRE ATLAS / OWASP LLM Top 10 into your team's working vocabulary takes minutes and produces better models for years.</p>
+        </section>
+
+        <section id="worked-landing">
+            <h2>Worked example: multi-account AWS landing zone</h2>
+            <p>The architecture: AWS Organizations with a hub-and-spoke account model — management account, log-archive account, security tooling account, network account, and per-environment accounts (dev, staging, prod) plus per-team product accounts. IAM Identity Center for human access; OIDC federation for CI/CD; central transit gateway; org-wide CloudTrail; SCPs and RCPs in place. See <a href="landing-zones.html">Landing Zones</a> for the architecture itself.</p>
+            <p>The threats that emerge are <em>organization-level</em> — and they're frequently invisible to single-account threat models.</p>
+            <ul>
+                <li><strong>Management account compromise.</strong> The blast radius is the entire organization. Threats: phished root, compromised admin in management account, malicious OU change, billing-account capture. Mitigations: minimal occupants of the management account, SCPs that even the management account respects (yes, you can write them that way), IAM Access Analyzer at the org level, billing console isolated.</li>
+                <li><strong>Cross-account trust attacks.</strong> Roles in account A that trust principals in account B. Threats: confused-deputy via external-id absence, role-trust policies trusting <code>*</code> or "any AWS principal," AssumeRole chaining that accumulates privilege. Mitigations: required external-id on cross-account roles; audit of trust policies via Access Analyzer; SCPs constraining who can be assumed.</li>
+                <li><strong>Organization-level privilege escalation.</strong> Threats: assumption of OrganizationAccountAccessRole from management; AWS Control Tower role abuse; iam:PassRole into a service that has org-level privileges. Mitigations: SCPs that deny dangerous actions at the OU level; deny-list policies for the highest-risk APIs; PIM-style time-bound elevation.</li>
+                <li><strong>Log-archive integrity.</strong> Threats: log archive in a separate account, but with a role from another account that can mutate it. Mitigations: S3 Object Lock in compliance mode; KMS key policy that the archive account alone controls; resource policy denying all but-CloudTrail writes.</li>
+                <li><strong>Network plumbing.</strong> Threats: transit-gateway route leakage exposing dev to prod; VPC peering misconfiguration; PrivateLink endpoint that exposes a managed service across account boundaries. Mitigations: route-table reviews; SCPs denying VPC peer creation outside-org; network account ownership of all centralized network resources.</li>
+                <li><strong>Identity provider drift.</strong> Threats: SAML / OIDC trust relationships that survive employee departure; IAM Identity Center permission sets that aren't reviewed; service-control changes by SCP that exempt specific roles. Mitigations: identity-lifecycle automation tied to HRIS; quarterly permission-set review; alerting on SCP changes.</li>
+                <li><strong>New-account provisioning.</strong> Threats: a newly-created account briefly without all SCPs / Config rules / CloudTrail; a Control Tower customization gap producing a less-secure account. Mitigations: account-vending pipeline that bakes in all controls before the account is ready for use; account-ready-check before handoff.</li>
+                <li><strong>Backup / restore boundary.</strong> Threats: a snapshot that's restorable cross-account; AWS Backup vaults in workload accounts the workload's compromised principal can wipe. Mitigations: AWS Backup vault in the log-archive account; vault lock; SCP denying snapshot share outside-org.</li>
+            </ul>
+            <p>The threat model at the landing-zone layer is what determines whether the per-workload threat models can rely on the boundaries they assume. If the landing-zone threats aren't worked through, every per-workload model is sitting on assumptions that may not hold.</p>
+        </section>
+
+        <section id="libraries">
+            <h2>Threat libraries vs custom</h2>
+            <p>A threat library is a curated list of known threat patterns you start from instead of inventing every threat from first principles. The build-vs-buy decision tracks the maturity of the program.</p>
+            <ul>
+                <li><strong>Start with libraries.</strong> ATT&amp;CK Cloud, CAPEC, OWASP Top 10 / API Top 10 / LLM Top 10, CIS Threat Catalog, NIST SP 800-30 generic threat list. They cover 80% of what a small program needs and they speak the same vocabulary your detection engineers, red team, and auditors do.</li>
+                <li><strong>Add domain libraries where relevant.</strong> ATT&amp;CK for Containers if you run Kubernetes (see <a href="kubernetes.html">Kubernetes</a>). MITRE ATLAS if you ship ML systems. NIST SP 800-82 if you have OT. STRIDE-LM (the LinkedIn STRIDE machine-learning fork) for ML-specific STRIDE.</li>
+                <li><strong>Build a custom library when patterns repeat.</strong> The fifth time a team rediscovers the same SSRF-to-IMDS threat, write it into your internal library. Annotate with your default mitigations, your detection coverage, and the team that owns the response. Custom libraries shorten the time-to-first-threat in every subsequent session.</li>
+                <li><strong>Keep custom libraries small.</strong> A 200-entry custom library is a library nobody can hold in their head. Prefer 30 high-value patterns specific to your stack, plus the public libraries for breadth. Crosswalk to ATT&amp;CK so the custom entries stay readable by outsiders.</li>
+            </ul>
+        </section>
+
+        <section id="scoring">
+            <h2>Risk scoring threats</h2>
+            <p>The scoring conversation is where threat modeling meets risk management. Several rubrics exist; none are universally good.</p>
+            <h3>DREAD (deprecated)</h3>
+            <p>Damage, Reproducibility, Exploitability, Affected users, Discoverability — Microsoft's original 1–10 rubric per dimension. Informally deprecated; the scores are too subjective, the dimensions overlap, and different reviewers produce wildly different numbers. A small team with strong shared calibration can still use it; most programs have moved on.</p>
+            <h3>CVSS</h3>
+            <p>The Common Vulnerability Scoring System. Excellent for <em>known vulnerabilities</em> with specific exploit characteristics. Poor for <em>design threats</em>, which don't have a defined exploit yet. Use CVSS for CVE prioritization in <a href="vulnerability-management.html">vulnerability management</a>; don't try to bend it into a design-review rubric.</p>
+            <h3>FAIR (Factor Analysis of Information Risk)</h3>
+            <p><a href="https://www.fairinstitute.org/" target="_blank" rel="noopener noreferrer">FAIR</a> is a quantitative model: loss-event frequency × loss magnitude, decomposed into estimable factors with calibrated ranges. Outputs dollar-denominated risk that executives can rank against other investments. The setup cost is meaningful (training, calibration, tooling) and the rigor pays off on high-stakes decisions; overkill for day-to-day STRIDE-session triage.</p>
+            <h3>Simple Likelihood × Impact</h3>
+            <p>Three or five buckets for each dimension (Low / Medium / High, or 1–5). Produces a 9- or 25-cell heat map. Imperfect, but fast, repeatable, and good enough to drive ranking inside a session. Most agile threat models live here.</p>
+            <h3>OWASP Risk Rating</h3>
+            <p>A documented Likelihood × Impact methodology with sub-factors (skill required, opportunity, awareness, etc.). Good middle ground between simple heuristic and FAIR; widely used for application-security risk ranking.</p>
+            <p>Pick one and stay consistent. Mixing rubrics within a program makes risk-register entries incomparable. The choice matters less than the consistency.</p>
+        </section>
+
+        <section id="as-code">
+            <h2>Threat modeling as code</h2>
+            <p>The same instinct that produced infrastructure-as-code and policy-as-code produces threat-modeling-as-code: keep the model in the repo, version it, diff it on changes, and run continuous checks against it.</p>
+            <ul>
+                <li><strong><a href="https://github.com/izar/pytm" target="_blank" rel="noopener noreferrer">Pytm</a></strong> — define the threat model in Python: actors, processes, data stores, dataflows, and trust boundaries as code; the library generates DFDs and a STRIDE-aligned threat list. Excellent for repos where the architecture changes faster than the documentation.</li>
+                <li><strong><a href="https://threatspec.org/" target="_blank" rel="noopener noreferrer">Threatspec</a></strong> — embed threat and mitigation annotations directly in source code as comments; the tool aggregates them into a model. Useful for keeping the model glued to the code it describes.</li>
+                <li><strong>OWASP Threat Dragon CLI</strong> — runs Threat Dragon models from the command line; integrates into CI to validate that the threat model file exists, parses, and is up to date relative to a defined cadence.</li>
+                <li><strong><a href="https://github.com/awslabs/threat-composer" target="_blank" rel="noopener noreferrer">Threat Composer</a></strong> — AWS-published, browser-based, file-on-disk; produces a structured threat-statement format ("a [threat source] can [prerequisites] [threat action] resulting in [impact] to [asset], leading to [outcome]") that's notably good for clarity.</li>
+                <li><strong>IaC → diagram → threats</strong> — newer commercial tools generate first-pass DFDs directly from Terraform or CloudFormation, and produce threat lists from the resulting diagrams. Cuts the "I'll update the diagram next sprint" failure mode.</li>
+            </ul>
+            <p>The GitOps pattern: threat model lives at <code>/threat-model/</code> in the repo; PRs that change architecture must update the model; CI fails the build if the model parses-but-is-older-than-N-days against a control file; periodic review issues open automatically. Same hygiene as policy-as-code; same payoff.</p>
+        </section>
+
+        <section id="ai">
+            <h2>AI in threat modeling</h2>
+            <p>LLM-assisted threat modeling has moved from research to mainstream practice between 2023 and 2026. The pragmatic 2026 pattern uses AI as a first-draft generator and a completeness validator, with a human reviewer making the keep/discard/edit calls.</p>
+            <h3>Where AI helps</h3>
+            <ul>
+                <li><strong>STRIDE generation from a diagram.</strong> Upload a DFD; the LLM produces a STRIDE-per-element threat list within seconds. Quality is roughly junior-analyst level — useful as a draft, requires review.</li>
+                <li><strong>Completeness checking.</strong> "Given this model, what STRIDE categories are missing across elements?" LLMs are good at spotting the obvious gaps a tired reviewer drops.</li>
+                <li><strong>Mitigation suggestions.</strong> For a given threat, the LLM produces the canonical mitigation list. Excellent for surfacing the standard playbook quickly; weaker on context-specific trade-offs.</li>
+                <li><strong>Cross-walks.</strong> "Map this threat to ATT&amp;CK techniques, CAPEC patterns, and OWASP top 10 entries." Tedious for humans, fast and accurate for LLMs.</li>
+                <li><strong>Diagram generation from text.</strong> Describe the architecture in prose; get a first-pass DFD. Still rough, but improving.</li>
+            </ul>
+            <h3>Where humans still own the work</h3>
+            <ul>
+                <li><strong>Trust-boundary judgment.</strong> The LLM doesn't know your tenancy model, your customer trust assumptions, or which integrations are contractually constrained. Humans set the boundaries.</li>
+                <li><strong>Risk acceptance.</strong> The decision to accept a risk is an organizational one with budgetary and political dimensions. AI can recommend; only an authorized human can decide.</li>
+                <li><strong>Novel threats.</strong> Anything that isn't in the LLM's training distribution gets a hallucinated answer or no answer at all. The cutting edge of threat modeling — new attack classes, new architectures — remains human work.</li>
+                <li><strong>Auditor sign-off.</strong> The auditor needs a human signatory. Tooling outputs become evidence; humans remain accountable.</li>
+            </ul>
+            <p>Vendors are racing to integrate LLM features — IriusRisk, ThreatModeler, Devici, and others have shipped agent-style flows that generate first-pass models from architectural prose. Treat them like AI-assisted coding: productivity multipliers when used well, automation traps when used uncritically.</p>
+        </section>
+
+        <section id="pitfalls">
+            <h2>Common pitfalls</h2>
+            <ul>
+                <li><strong>Threat modeling once and never updating.</strong> The model becomes archaeology. Re-run at every meaningful design change; commit the model to the repo so updates are visible in code review.</li>
+                <li><strong>Modeling components instead of trust boundaries.</strong> The threats live at the boundaries. A model that lists components but doesn't mark the dashed lines is missing the highest-signal part of the analysis.</li>
+                <li><strong>No asset valuation.</strong> Without knowing what's valuable, every threat looks equally important. Tag every data store and process with a sensitivity / criticality so the threat list can be ranked.</li>
+                <li><strong>No mitigation discipline.</strong> The output of a session is a threat list with mitigations, owners, and dates. A list of threats without owners is a list of complaints.</li>
+                <li><strong>Treating the model as the goal.</strong> The model is a means to a safer system. A team that produced ten high-quality models last year but shipped two mitigations from them had a bad year, regardless of how thorough the modeling looked.</li>
+                <li><strong>Single methodology fundamentalism.</strong> STRIDE-only programs miss privacy threats. PASTA-only programs become a check-the-stages ritual. Combine methodologies — STRIDE for breadth, attack trees for the highest-priority threats, LINDDUN for privacy-sensitive systems.</li>
+                <li><strong>Excluding engineering.</strong> A threat model produced by security and dropped on engineering is a culture failure. Engineers in the room produce better models and ship more mitigations.</li>
+                <li><strong>Ignoring out-of-scope assumptions.</strong> "The provider handles that" is a valid statement only when it's documented. Make the shared-responsibility line explicit on the diagram so the assumption is auditable.</li>
+                <li><strong>Tool fetishism.</strong> Buying a $50,000 platform doesn't produce threat models; it produces a $50,000 expense. Tools support the work; they don't perform it.</li>
+                <li><strong>No second-question discipline.</strong> Teams that stop at "what can go wrong?" without rigorously answering "what are we doing about it?" produce risk registers that grow forever. The third question is non-optional.</li>
+            </ul>
+        </section>
+
+        <section id="maturity">
+            <h2>Maturity stages</h2>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-stage1">
+                    <h3>Stage 1 — Ad-hoc</h3>
+                    <p>Threat modeling happens occasionally, driven by individual practitioners. No common methodology. No shared template. Output lives in scattered Confluence pages or design docs that age out.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage2">
+                    <h3>Stage 2 — Documented</h3>
+                    <p>A methodology is documented (typically STRIDE-per-element). A template exists. High-priority projects run a model at design review. Output is captured in a known location; mitigations are tracked.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage3">
+                    <h3>Stage 3 — Repeatable</h3>
+                    <p>Threat modeling is a defined SDLC step. Trained internal facilitators are available across teams. A custom threat library has emerged. Mitigations are tracked through to closure in the engineering tracker.</p>
+                </div>
+                <div class="pillar-card pillar-card-iam">
+                    <h3>Stage 4 — Integrated</h3>
+                    <p>Threat models live next to code in the repo. CI surfaces stale models. Cross-functional reviews include privacy (LINDDUN), reliability, and compliance. ATT&amp;CK coverage is tracked end-to-end from design through detection.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>Stage 5 — Continuous</h3>
+                    <p>Threat modeling is a continuous practice, not a project gate. Quantitative risk scoring (FAIR or equivalent) feeds the program's investment decisions. AI assistance is in the workflow with human review. Models, detections, mitigations, and tests share a common vocabulary.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3>The skip-stage cost</h3>
+                    <p>Jumping from Stage 1 to "AI-assisted continuous threat modeling" without the intermediate discipline produces lists nobody owns. Sequence matters; tooling is a force multiplier on a working program, not a substitute for it.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="further">
+            <h2>Further reading</h2>
+            <h3>Books</h3>
+            <ul>
+                <li><a href="https://shostack.org/books/threat-modeling-book" target="_blank" rel="noopener noreferrer">Adam Shostack — <em>Threat Modeling: Designing for Security</em></a> — the defining textbook of the field.</li>
+                <li><a href="https://shostack.org/books/threats-book" target="_blank" rel="noopener noreferrer">Adam Shostack — <em>Threats: What Every Engineer Should Learn from Star Wars</em></a> — engineer-friendly introduction.</li>
+                <li><a href="https://www.wiley.com/en-us/Risk+Centric+Threat+Modeling%3A+Process+for+Attack+Simulation+and+Threat+Analysis-p-9780470500965" target="_blank" rel="noopener noreferrer">UcedaVélez &amp; Morana — <em>Risk Centric Threat Modeling</em></a> — the PASTA reference.</li>
+                <li><a href="https://shostack.org/resources/threat-modeling-gameplay" target="_blank" rel="noopener noreferrer"><em>Threat Modeling Gameplay with EOP</em></a> — using the Elevation of Privilege card game in practice.</li>
+            </ul>
+            <h3>Manifestos and standards</h3>
+            <ul>
+                <li><a href="https://www.threatmodelingmanifesto.org/" target="_blank" rel="noopener noreferrer">Threat Modeling Manifesto</a> — the field's "agile manifesto" equivalent.</li>
+                <li><a href="https://owasp.org/www-community/Threat_Modeling" target="_blank" rel="noopener noreferrer">OWASP Threat Modeling</a> — community-curated reference.</li>
+                <li><a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK Cloud Matrix</a></li>
+                <li><a href="https://atlas.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATLAS</a> — ML-specific threat library.</li>
+                <li><a href="https://capec.mitre.org/" target="_blank" rel="noopener noreferrer">CAPEC</a> — attack pattern catalog.</li>
+                <li><a href="https://d3fend.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE D3FEND</a> — defender-side counterpart to ATT&amp;CK.</li>
+                <li><a href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noopener noreferrer">OWASP LLM Top 10</a></li>
+            </ul>
+            <h3>Tools</h3>
+            <ul>
+                <li><a href="https://owasp.org/www-project-threat-dragon/" target="_blank" rel="noopener noreferrer">OWASP Threat Dragon</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool" target="_blank" rel="noopener noreferrer">Microsoft Threat Modeling Tool</a></li>
+                <li><a href="https://github.com/awslabs/threat-composer" target="_blank" rel="noopener noreferrer">AWS Threat Composer</a></li>
+                <li><a href="https://github.com/izar/pytm" target="_blank" rel="noopener noreferrer">Pytm</a></li>
+                <li><a href="https://threatspec.org/" target="_blank" rel="noopener noreferrer">Threatspec</a></li>
+                <li><a href="https://www.iriusrisk.com/" target="_blank" rel="noopener noreferrer">IriusRisk</a></li>
+                <li><a href="https://threatmodeler.com/" target="_blank" rel="noopener noreferrer">ThreatModeler</a></li>
+                <li><a href="https://devici.com/" target="_blank" rel="noopener noreferrer">Devici</a></li>
+            </ul>
+            <h3>Related CSOH pages</h3>
+            <ul>
+                <li><a href="api-security.html">API Security</a> — the layer where the application-side STRIDE work concentrates.</li>
+                <li><a href="ai-ml-security.html">AI/ML Security</a> — threat modeling for LLM and agentic systems in depth.</li>
+                <li><a href="grc.html">GRC</a> — how threat-model outputs feed control evidence and risk registers.</li>
+                <li><a href="iam.html">IAM &amp; Identity</a> — the primitive most cloud threats turn on.</li>
+                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> — the runtime sensors that validate the design-time model.</li>
+                <li><a href="cloud-soc.html">Cloud SOC</a> — translating threats into detections.</li>
+                <li><a href="detection-engineering.html">Detection Engineering</a> — coverage analysis against ATT&amp;CK.</li>
+                <li><a href="landing-zones.html">Landing Zones</a> — the org-level architecture worked-example sits on.</li>
+                <li><a href="glossary.html">Glossary</a> — every term on this page, defined.</li>
+            </ul>
+        </section>
+
+        <section id="faq">
+            <h2>FAQ</h2>
+
+            <h3>When should I threat model?</h3>
+            <p>As early as possible — ideally during design review, before architectural decisions are baked into code. The marginal cost of changing an architectural choice on a whiteboard is near zero; the same change after six months of implementation can be a quarter of engineering effort. Re-threat-model whenever the trust boundary changes — new third-party integration, new identity type, new data classification, new region, new tenancy model. For mature programs the rhythm is: a 30-minute lightweight session per significant design change, plus a deeper review on a quarterly cadence for high-criticality systems.</p>
+
+            <h3>STRIDE vs PASTA — which should I use?</h3>
+            <p>STRIDE is a categorization checklist — six threat classes applied to each element or interaction in your model. It's fast, teachable, and produces a usable list in a 30-minute session. PASTA is a seven-stage risk-centric methodology that runs from business objectives through attack simulation to risk scoring. It produces a more rigorous artifact for high-stakes systems but costs days, not minutes. Most practitioners use STRIDE as the day-to-day tool and reach for PASTA when an executive sponsor wants quantified risk on a regulated or revenue-critical workload.</p>
+
+            <h3>Who should be in the room?</h3>
+            <p>The smallest group that can answer the four questions. At minimum: the engineer or architect who knows the system best, a security practitioner familiar with the relevant cloud, and a product or operations partner who knows the data sensitivity and SLAs. For larger or higher-risk systems add an IAM specialist, a privacy or compliance reviewer (especially for LINDDUN), and a representative of any downstream team your trust boundary touches. Avoid making it a 12-person ceremony — past 6 attendees the signal-to-noise drops sharply.</p>
+
+            <h3>How long should it take?</h3>
+            <p>For a typical microservice or feature: 30–60 minutes for a STRIDE-per-element pass on a whiteboard, plus another hour or two to write up the findings and mitigations. For a complete new system: a half-day workshop, then a follow-up review of the documented model. PASTA-style modeling on a regulated workload can run multiple days across stages. The discipline isn't the duration — it's that the session ends with a written list of threats, ranked, with owners and target dates for mitigations.</p>
+
+            <h3>Is DREAD still recommended for risk scoring?</h3>
+            <p>DREAD has been informally deprecated for over a decade — the scores are subjective, the dimensions overlap, and different reviewers produce different numbers on the same threat. Modern programs use a simple Likelihood × Impact heuristic for triage, CVSS only for known CVEs (it's a vulnerability metric, not a design metric), and FAIR when the business needs dollar-denominated risk for investment decisions.</p>
+
+            <h3>How does threat modeling differ for an LLM-based application?</h3>
+            <p>The classic STRIDE categories still apply — but the trust boundaries shift. Retrieved content becomes a new attack surface (prompt injection via documents in a vector store), the model itself is a supply-chain dependency, and tools the agent can call are part of your attack surface (any agent that can call a payment API can be coerced into doing so). See <a href="ai-ml-security.html">AI/ML Security</a> for the full treatment, including OWASP LLM Top 10 and MITRE ATLAS.</p>
+
+            <h3>Can AI tools write threat models for me?</h3>
+            <p>Increasingly they can produce a credible first draft — generate STRIDE elements from a diagram, suggest mitigations from a threat library, validate completeness against known patterns. But they don't yet replace the human judgment that decides which threats your organization will accept, which to mitigate, and how much engineering budget to spend on each. The pragmatic 2026 pattern is LLM-assisted generation with a human reviewer who edits the output, prunes false positives, and signs the result.</p>
+        </section>
+
+        <section class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="api-security.html">API Security</a> — the application-layer threats that show up first in most cloud workloads.</li>
+                <li><a href="ai-ml-security.html">AI/ML Security</a> — extend the methodology to LLMs and agents.</li>
+                <li><a href="grc.html">GRC</a> — where the threat-model output meets the audit evidence chain.</li>
+                <li><a href="iam.html">IAM &amp; Identity</a> — most cloud threats turn on this primitive.</li>
+                <li><a href="detection-engineering.html">Detection Engineering</a> — translate the modeled threats into runtime detections.</li>
+                <li><a href="sessions.html">Friday Zoom</a> — threat modeling sessions are a recurring topic. Drop in.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section footer-about">
+        <h3>CSOH</h3>
+        <p>A vendor-neutral community for cloud security professionals. Weekly Zoom sessions and curated resources.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="index.html#about">About CSOH</a></li>
+          <li><a href="learning-path.html">Learning Path</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="sessions.html">Zoom Sessions</a></li>
+          <li><a href="meetings.html">Meeting Recaps</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="mailto:admin@csoh.org">Contact</a></li>
+          <li><a href="https://csoh.kit.com/39feb4f397" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+          <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="rss.html">RSS Feed</a></li>
+          <li><a href="contribute.html">Contribute</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Developer Docs</h3>
+        <ul>
+          <li><a href="github-actions.html">GitHub Actions</a></li>
+          <li><a href="cloud-deployment.html">Deploy to GCP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023-2026 Cloud Security Office Hours</p>
+      <ul class="footer-legal">
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="code-of-conduct.html">Code of Conduct</a></li>
+        <li><a href="security-policy.html">Security</a></li>
+      </ul>
+    </div>
+  </footer>
+
+    <script src="/main.js?v=28d03270" integrity="sha384-rL3h8+9Zf3OnCebAlc/aSSGella8hnqqGbOKQv9QcZGh3P6vA0z6yQp8JLYgBTqc"
+        defer></script>
+</body>
+</html>
