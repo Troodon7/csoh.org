@@ -274,6 +274,46 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- AI/ML & LLM Security - reference page -->
+  <url>
+    <loc>https://csoh.org/ai-ml-security.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- SaaS Security & SSPM - reference page -->
+  <url>
+    <loc>https://csoh.org/saas-security.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cloud Network Security - reference page -->
+  <url>
+    <loc>https://csoh.org/network-security.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cloud Vulnerability Management - reference page -->
+  <url>
+    <loc>https://csoh.org/vulnerability-management.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cloud Pentesting & Red Teaming - reference page -->
+  <url>
+    <loc>https://csoh.org/cloud-pentesting.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- GitHub Actions - Educational page on CI/CD via our workflows -->
   <url>
     <loc>https://csoh.org/github-actions.html</loc>
