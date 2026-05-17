@@ -582,7 +582,7 @@
             </ul>
             <p>Azure Backup Recovery Services Vaults also support <strong>soft delete</strong> (default 14 days, can be extended to 180 days and made non-bypassable) and <strong>multi-user authorization (MUA)</strong> — a Resource Guard pattern that requires approval from a second tenant for destructive operations on the vault. MUA is the Azure-native answer to "we need two-person rule on backup deletion."</p>
 
-            <h3><a href="https://cloud.google.com/storage/docs/bucket-lock" target="_blank" rel="noopener noreferrer">GCP — Cloud Storage Bucket Lock</a></h3>
+            <h3><a href="https://docs.cloud.google.com/storage/docs/bucket-lock" target="_blank" rel="noopener noreferrer">GCP — Cloud Storage Bucket Lock</a></h3>
             <p>GCS Bucket Lock applies a retention policy to a bucket; objects within cannot be deleted or overwritten until they exceed the retention period. The retention policy itself can be <strong>locked</strong> — once locked, neither the project owner nor org admin can shorten or remove it. The lock is permanent for the lifetime of the bucket; the only way out is bucket deletion, which requires the bucket to be empty (impossible while objects are within retention).</p>
             <p>Pair with <strong>object versioning</strong> for protection against malicious overwrites, and use <strong>VPC Service Controls</strong> to draw a perimeter around the backup project preventing data exfiltration even by privileged identities.</p>
 
@@ -760,12 +760,12 @@ Out-of-cloud / cross-cloud / on-prem destination
             <h3>The native services</h3>
             <ul>
                 <li><strong><a href="https://cloud.google.com/backup-disaster-recovery" target="_blank" rel="noopener noreferrer">Backup and DR Service</a></strong> — GCP's enterprise backup orchestration. Application-consistent backups for Compute Engine, VMware Engine, databases (Oracle, SQL Server, SAP HANA, PostgreSQL), and file systems. Centralized policy, retention, restore. The Actifio engine under Google branding.</li>
-                <li><strong><a href="https://cloud.google.com/storage/docs/bucket-lock" target="_blank" rel="noopener noreferrer">GCS Bucket Lock</a></strong> — retention policies that, once locked, cannot be removed or shortened. Pair with <strong>object versioning</strong> and <strong>turbo replication</strong> across regions.</li>
+                <li><strong><a href="https://docs.cloud.google.com/storage/docs/bucket-lock" target="_blank" rel="noopener noreferrer">GCS Bucket Lock</a></strong> — retention policies that, once locked, cannot be removed or shortened. Pair with <strong>object versioning</strong> and <strong>turbo replication</strong> across regions.</li>
                 <li><strong>Persistent Disk snapshots + scheduled snapshot policies.</strong> Per-disk or per-resource-policy. Cross-region by default for multi-regional locations. Snapshot retention policies enforce minimum and maximum retention.</li>
                 <li><strong>Cloud SQL automated backups + PITR.</strong> Automated backups for 7-365 days; point-in-time recovery via write-ahead-log retention. Cross-region replicas for DR.</li>
                 <li><strong>Spanner / Bigtable / Firestore</strong> — managed databases with their own backup and restore primitives. Spanner offers multi-region instances with synchronous replication; database backups can be retained up to 1 year.</li>
                 <li><strong>BigQuery snapshots and time-travel.</strong> 7-day time-travel by default; table snapshots persist beyond that. Cross-region copy supported for DR.</li>
-                <li><strong><a href="https://cloud.google.com/vpc-service-controls" target="_blank" rel="noopener noreferrer">VPC Service Controls</a></strong> — perimeter around the backup project preventing data exfiltration to outside-perimeter destinations, even by identities with broad IAM.</li>
+                <li><strong><a href="https://cloud.google.com/security/vpc-service-controls" target="_blank" rel="noopener noreferrer">VPC Service Controls</a></strong> — perimeter around the backup project preventing data exfiltration to outside-perimeter destinations, even by identities with broad IAM.</li>
             </ul>
             <h3>Reference architecture</h3>
             <p>GCP pattern for a regulated org:</p>
@@ -890,10 +890,10 @@ Out-of-cloud / cross-cloud / on-prem destination
             <h3>Cloud-native / SaaS backup platforms</h3>
             <ul>
                 <li><strong><a href="https://www.druva.com/" target="_blank" rel="noopener noreferrer">Druva</a></strong> — SaaS-delivered backup for cloud workloads, SaaS apps, endpoints. No backup infrastructure to manage.</li>
-                <li><strong><a href="https://clumio.com/" target="_blank" rel="noopener noreferrer">Clumio</a></strong> — purpose-built for AWS workloads (acquired by Commvault in 2024). Air-gapped, immutable backup as a service.</li>
+                <li><strong><a href="https://www.commvault.com/clumio" target="_blank" rel="noopener noreferrer">Clumio</a></strong> — purpose-built for AWS workloads (acquired by Commvault in 2024). Air-gapped, immutable backup as a service.</li>
                 <li><strong><a href="https://www.hycu.com/" target="_blank" rel="noopener noreferrer">HYCU</a></strong> — SaaS-app and cloud-workload focused, broad app coverage.</li>
                 <li><strong><a href="https://www.n-able.com/" target="_blank" rel="noopener noreferrer">N-able</a></strong> — MSP-focused backup for Microsoft 365 and other SaaS.</li>
-                <li><strong><a href="https://www.acronis.com/" target="_blank" rel="noopener noreferrer">Acronis</a></strong> — endpoint and workload backup with integrated cyber-protection features.</li>
+                <li><strong><a href="https://www.acronis.com/en/" target="_blank" rel="noopener noreferrer">Acronis</a></strong> — endpoint and workload backup with integrated cyber-protection features.</li>
             </ul>
             <h3>When to add a third party on top of native</h3>
             <ul>
@@ -1074,7 +1074,7 @@ Out-of-cloud / cross-cloud / on-prem destination
                 <li><a href="https://learn.microsoft.com/en-us/azure/storage/blobs/immutable-storage-overview" target="_blank" rel="noopener noreferrer">Azure Blob immutable storage</a></li>
                 <li><a href="https://learn.microsoft.com/en-us/azure/site-recovery/" target="_blank" rel="noopener noreferrer">Azure Site Recovery</a></li>
                 <li><a href="https://cloud.google.com/backup-disaster-recovery" target="_blank" rel="noopener noreferrer">GCP Backup and DR Service</a></li>
-                <li><a href="https://cloud.google.com/storage/docs/bucket-lock" target="_blank" rel="noopener noreferrer">GCS Bucket Lock</a></li>
+                <li><a href="https://docs.cloud.google.com/storage/docs/bucket-lock" target="_blank" rel="noopener noreferrer">GCS Bucket Lock</a></li>
             </ul>
             <h3>Standards &amp; guidance</h3>
             <ul>
@@ -1092,9 +1092,9 @@ Out-of-cloud / cross-cloud / on-prem destination
                 <li><a href="https://www.cohesity.com/" target="_blank" rel="noopener noreferrer">Cohesity</a></li>
                 <li><a href="https://www.commvault.com/" target="_blank" rel="noopener noreferrer">Commvault</a></li>
                 <li><a href="https://www.druva.com/" target="_blank" rel="noopener noreferrer">Druva</a></li>
-                <li><a href="https://clumio.com/" target="_blank" rel="noopener noreferrer">Clumio</a></li>
+                <li><a href="https://www.commvault.com/clumio" target="_blank" rel="noopener noreferrer">Clumio</a></li>
                 <li><a href="https://www.hycu.com/" target="_blank" rel="noopener noreferrer">HYCU</a></li>
-                <li><a href="https://www.acronis.com/" target="_blank" rel="noopener noreferrer">Acronis</a></li>
+                <li><a href="https://www.acronis.com/en/" target="_blank" rel="noopener noreferrer">Acronis</a></li>
             </ul>
             <h3>Related CSOH pages</h3>
             <ul>

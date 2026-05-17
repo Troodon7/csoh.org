@@ -481,8 +481,8 @@
                 <li><strong><a href="https://learn.microsoft.com/en-us/defender-xdr/" target="_blank" rel="noopener noreferrer">Microsoft Defender XDR</a></strong> — the unified XDR portal pulling Defender for Endpoint, Defender for Identity, Defender for Office 365, Defender for Cloud Apps, and Entra ID Protection together. The investigation experience that correlates an endpoint detection with the user's mailbox activity and the Entra sign-in that preceded it. Increasingly the SOC's primary console for Microsoft-shop incidents.</li>
                 <li><strong><a href="https://www.microsoft.com/en-us/security/business/ai-machine-learning/microsoft-security-copilot" target="_blank" rel="noopener noreferrer">Microsoft Security Copilot</a></strong> — LLM-assisted analyst tooling. Incident summarization, KQL generation, threat-intel synthesis, malware reverse-engineering hints. Billed as Security Compute Units (SCUs). Force-multiplier for experienced analysts; not a tier-1 replacement.</li>
                 <li><strong><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/" target="_blank" rel="noopener noreferrer">Azure Monitor</a></strong> — the metric, log, and alert platform underneath everything. Log Analytics workspace is the storage; Application Insights is the APM slice. Sentinel runs on top of Log Analytics. The plumbing every detection eventually depends on.</li>
-                <li><strong><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log" target="_blank" rel="noopener noreferrer">Activity Log</a></strong> — the Azure control-plane audit log. Every ARM API call against your subscriptions. The single most-requested evidence class in any Azure audit. Stream it to Log Analytics and Sentinel; retain per your compliance obligation.</li>
-                <li><strong><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings" target="_blank" rel="noopener noreferrer">Diagnostic Settings</a></strong> — per-resource configuration that ships resource-level logs and metrics to Log Analytics, Event Hubs, or Storage. The thing that makes "Sentinel sees the Key Vault audit log" actually true. Enforce via Azure Policy; default-on is your friend.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/platform/activity-log" target="_blank" rel="noopener noreferrer">Activity Log</a></strong> — the Azure control-plane audit log. Every ARM API call against your subscriptions. The single most-requested evidence class in any Azure audit. Stream it to Log Analytics and Sentinel; retain per your compliance obligation.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings" target="_blank" rel="noopener noreferrer">Diagnostic Settings</a></strong> — per-resource configuration that ships resource-level logs and metrics to Log Analytics, Event Hubs, or Storage. The thing that makes "Sentinel sees the Key Vault audit log" actually true. Enforce via Azure Policy; default-on is your friend.</li>
             </ul>
 
             <h3>Identity</h3>
@@ -809,7 +809,7 @@
             <ul>
                 <li><a href="https://www.microsoft.com/en-us/security/blog/" target="_blank" rel="noopener noreferrer">Microsoft Security Blog</a></li>
                 <li><a href="https://techcommunity.microsoft.com/category/azure/blog" target="_blank" rel="noopener noreferrer">Microsoft Tech Community — Azure</a></li>
-                <li><a href="https://ignite.microsoft.com/" target="_blank" rel="noopener noreferrer">Microsoft Ignite</a> — annual flagship; security sessions and product announcements.</li>
+                <li><a href="https://ignite.microsoft.com/en-US/home" target="_blank" rel="noopener noreferrer">Microsoft Ignite</a> — annual flagship; security sessions and product announcements.</li>
                 <li><a href="https://www.microsoft.com/en-us/security/business/microsoft-secure" target="_blank" rel="noopener noreferrer">Microsoft Secure</a> — security-focused annual event.</li>
             </ul>
             <h3>Microsoft Learn paths</h3>
@@ -825,7 +825,7 @@
                 <li><a href="https://www.kqlsearch.com/" target="_blank" rel="noopener noreferrer">KQL Search</a> — community KQL query repository.</li>
                 <li><a href="https://github.com/swiftsolves-msft/MITREAttack-Sentinel-Workbook" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK coverage workbooks for Sentinel</a></li>
                 <li><a href="https://dirkjanm.io/" target="_blank" rel="noopener noreferrer">Dirk-jan Mollema — Entra security research</a></li>
-                <li><a href="https://posts.specterops.io/" target="_blank" rel="noopener noreferrer">SpecterOps blog — Azure / Entra offensive research</a></li>
+                <li><a href="https://specterops.io/blog/" target="_blank" rel="noopener noreferrer">SpecterOps blog — Azure / Entra offensive research</a></li>
             </ul>
             <h3>Related CSOH pages</h3>
             <ul>

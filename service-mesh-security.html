@@ -501,14 +501,14 @@
             </ul>
             <h3>Vendor-led, open-source</h3>
             <ul>
-                <li><strong><a href="https://www.consul.io/use-cases/multi-platform-service-mesh" target="_blank" rel="noopener noreferrer">Consul Connect</a></strong> — HashiCorp. Service mesh capability built into Consul; strong story for mixed Kubernetes + VM + multi-cloud workloads where Consul is already the service catalog and KV store. Envoy-based.</li>
-                <li><strong><a href="https://www.nginx.com/products/nginx-service-mesh/" target="_blank" rel="noopener noreferrer">NGINX Service Mesh</a></strong> — F5/NGINX. NGINX-based data plane; integrates with NGINX Plus Ingress Controller.</li>
-                <li><strong><a href="https://traefik.io/traefik-mesh/" target="_blank" rel="noopener noreferrer">Traefik Mesh</a></strong> (formerly Maesh) — Traefik Labs. Different model: per-node mesh proxy, not per-pod sidecar. Simple to operate.</li>
+                <li><strong><a href="https://developer.hashicorp.com/consul" target="_blank" rel="noopener noreferrer">Consul Connect</a></strong> — HashiCorp. Service mesh capability built into Consul; strong story for mixed Kubernetes + VM + multi-cloud workloads where Consul is already the service catalog and KV store. Envoy-based.</li>
+                <li><strong><a href="https://www.f5.com/products/nginx" target="_blank" rel="noopener noreferrer">NGINX Service Mesh</a></strong> — F5/NGINX. NGINX-based data plane; integrates with NGINX Plus Ingress Controller.</li>
+                <li><strong><a href="https://traefik.io/traefik-mesh" target="_blank" rel="noopener noreferrer">Traefik Mesh</a></strong> (formerly Maesh) — Traefik Labs. Different model: per-node mesh proxy, not per-pod sidecar. Simple to operate.</li>
             </ul>
             <h3>Managed and provider-integrated</h3>
             <ul>
                 <li><strong><a href="https://aws.amazon.com/app-mesh/" target="_blank" rel="noopener noreferrer">AWS App Mesh</a></strong> — Envoy-based managed mesh; works across EKS, ECS, EC2, and Fargate. Less feature-rich than vanilla Istio; tightly integrated with AWS networking and IAM.</li>
-                <li><strong><a href="https://cloud.google.com/service-mesh" target="_blank" rel="noopener noreferrer">Cloud Service Mesh</a></strong> (the consolidated successor to Anthos Service Mesh) — Google's managed Istio. Both sidecar and ambient modes; cross-cluster federation across GKE, on-prem, and other clouds.</li>
+                <li><strong><a href="https://cloud.google.com/products/service-mesh" target="_blank" rel="noopener noreferrer">Cloud Service Mesh</a></strong> (the consolidated successor to Anthos Service Mesh) — Google's managed Istio. Both sidecar and ambient modes; cross-cluster federation across GKE, on-prem, and other clouds.</li>
                 <li><strong>Azure Service Mesh add-on for AKS</strong> — Microsoft retired Open Service Mesh (OSM) in 2024 and now ships managed Istio as the AKS add-on (Istio-based service mesh). Linkerd is also commonly run on AKS unmanaged.</li>
                 <li><strong>Red Hat OpenShift Service Mesh</strong> — productized Istio for OpenShift, with Maistra components on top.</li>
                 <li><strong>Solo.io Gloo Mesh</strong> — commercial Istio distribution and federation control plane; widely used in regulated enterprises.</li>
@@ -1002,7 +1002,7 @@
                             <th scope="row">Documentation</th>
                             <td><a href="https://docs.aws.amazon.com/app-mesh/" target="_blank" rel="noopener noreferrer">App Mesh docs</a></td>
                             <td><a href="https://learn.microsoft.com/en-us/azure/aks/istio-about" target="_blank" rel="noopener noreferrer">AKS Istio add-on</a></td>
-                            <td><a href="https://cloud.google.com/service-mesh/docs" target="_blank" rel="noopener noreferrer">Cloud Service Mesh docs</a></td>
+                            <td><a href="https://cloud.google.com/products/service-mesh/docs" target="_blank" rel="noopener noreferrer">Cloud Service Mesh docs</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1055,10 +1055,10 @@
             <h3>Projects &amp; specs</h3>
             <ul>
                 <li><a href="https://istio.io/latest/docs/" target="_blank" rel="noopener noreferrer">Istio documentation</a></li>
-                <li><a href="https://linkerd.io/2/overview/" target="_blank" rel="noopener noreferrer">Linkerd documentation</a></li>
-                <li><a href="https://docs.cilium.io/" target="_blank" rel="noopener noreferrer">Cilium documentation</a></li>
+                <li><a href="https://linkerd.io/docs/overview/" target="_blank" rel="noopener noreferrer">Linkerd documentation</a></li>
+                <li><a href="https://docs.cilium.io/en/stable/" target="_blank" rel="noopener noreferrer">Cilium documentation</a></li>
                 <li><a href="https://developer.hashicorp.com/consul/docs/connect" target="_blank" rel="noopener noreferrer">Consul Connect documentation</a></li>
-                <li><a href="https://kuma.io/docs/" target="_blank" rel="noopener noreferrer">Kuma documentation</a></li>
+                <li><a href="https://kuma.io/docs/2.13.x/" target="_blank" rel="noopener noreferrer">Kuma documentation</a></li>
                 <li><a href="https://spiffe.io/docs/latest/spiffe-about/overview/" target="_blank" rel="noopener noreferrer">SPIFFE / SPIRE documentation</a></li>
                 <li><a href="https://www.envoyproxy.io/docs" target="_blank" rel="noopener noreferrer">Envoy proxy documentation</a></li>
                 <li><a href="https://gateway-api.sigs.k8s.io/" target="_blank" rel="noopener noreferrer">Kubernetes Gateway API</a></li>
@@ -1067,7 +1067,7 @@
             <ul>
                 <li><a href="https://docs.aws.amazon.com/app-mesh/" target="_blank" rel="noopener noreferrer">AWS App Mesh</a></li>
                 <li><a href="https://learn.microsoft.com/en-us/azure/aks/istio-about" target="_blank" rel="noopener noreferrer">AKS managed Istio add-on</a></li>
-                <li><a href="https://cloud.google.com/service-mesh/docs" target="_blank" rel="noopener noreferrer">Google Cloud Service Mesh</a></li>
+                <li><a href="https://cloud.google.com/products/service-mesh/docs" target="_blank" rel="noopener noreferrer">Google Cloud Service Mesh</a></li>
                 <li><a href="https://docs.openshift.com/container-platform/latest/service_mesh/v2x/ossm-about.html" target="_blank" rel="noopener noreferrer">OpenShift Service Mesh</a></li>
             </ul>
             <h3>Practitioner background</h3>

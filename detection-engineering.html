@@ -449,7 +449,7 @@
 
             <h3>Azure</h3>
             <ul>
-                <li><strong><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log" target="_blank" rel="noopener noreferrer">Activity Log</a></strong>. The Azure control-plane audit log at the subscription / management-group level. Equivalent of CloudTrail management events. Configure Diagnostic Settings to ship to Log Analytics / Event Hub / storage.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/platform/activity-log" target="_blank" rel="noopener noreferrer">Activity Log</a></strong>. The Azure control-plane audit log at the subscription / management-group level. Equivalent of CloudTrail management events. Configure Diagnostic Settings to ship to Log Analytics / Event Hub / storage.</li>
                 <li><strong>Entra ID Sign-in Logs</strong>. Every authentication against an Entra-protected resource: user, app, location, conditional-access result. The single most-queried log in any Microsoft environment.</li>
                 <li><strong>Entra ID Audit Logs</strong>. Directory-change events — user creation, group membership, role assignment, conditional-access policy edits. Pair with Sign-in for identity-side detection.</li>
                 <li><strong>Diagnostic Settings (per-resource)</strong>. The mechanism by which resource-specific logs leave the resource and go somewhere queryable. Many high-value logs (Key Vault audit, Storage data-plane, SQL audit) are <strong>off by default</strong> until a Diagnostic Setting is configured.</li>
