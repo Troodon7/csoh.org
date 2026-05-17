@@ -7,6 +7,16 @@ Welcome! This guide will walk you through **adding a new resource** to our commu
 - Copy and paste some text
 - Follow a few simple steps
 
+> 🤖 **Heads up: there's a weekly bot too.** Every Monday at 14:00 UTC, an
+> automated workflow (`.github/workflows/update-resources.yml`) uses Claude
+> Code to research and propose 2-3 new resources for each of the six
+> `resources.html` sections. The bot opens a PR for review — if the diff is
+> purely `resources.html`, the PR auto-merges; otherwise it waits for a
+> human. **Your human-submitted PRs are still very welcome** — they
+> complement the bot, never conflict with it. The bot intentionally errs on
+> the side of well-known, well-documented sources; humans tend to surface
+> the more obscure, higher-signal finds. Both are valuable.
+
 ---
 
 ## 🎯 What This Guide Covers

@@ -12,35 +12,74 @@
 
 ## ⭐ Featured Guides
 
-The vendor-neutral pillars of cloud security, written by practitioners:
+The vendor-neutral curriculum, written by practitioners. **Foundations**, **disciplines**, and **per-cloud hubs** below.
 
+### Foundations
 | Guide | What it covers |
 |---|---|
-| 📚 [What is Cloud Security?](https://csoh.org/what-is-cloud-security.html) | The plain-English foundation — shared responsibility, threats, tool landscape |
+| 📚 [What is Cloud Security?](https://csoh.org/what-is-cloud-security.html) | Plain-English foundation — shared responsibility, threats, tool landscape |
 | 🛣️ [Cloud Security Learning Path](https://csoh.org/learning-path.html) | Beginner → working practitioner roadmap with milestones |
-| 🎓 [Cloud Security Degree Programs](https://csoh.org/cloud-security-degree-programs.html) | Academic paths, what to look for in a program, and US/international universities with strong cybersecurity reputations |
-| 🧭 [Cloud Security Careers](https://csoh.org/cloud-security-careers.html) | Roles, salary bands, interview formats, portfolio projects, and how to translate from adjacent jobs |
-| 🧰 [Cloud Security Home Lab](https://csoh.org/cloud-security-home-lab.html) | Free-tier setups, budget guardrails, and kill-switches so you learn without a surprise bill |
-| ✅ [Cloud Security Best Practices](https://csoh.org/cloud-security-best-practices.html) | The controls that actually prevent breaches, ranked by what shows up in real incidents |
 | ⚖️ [Shared Responsibility Model](https://csoh.org/shared-responsibility-model.html) | What the cloud provider secures vs. what you secure (AWS / Azure / GCP) |
 | 🛠️ [CSPM vs CNAPP vs CWPP vs CIEM vs DSPM](https://csoh.org/cspm-vs-cnapp.html) | The acronym soup decoded — when you need each tool |
-| 📦 [Containers & Cloud Security](https://csoh.org/containers.html) | The trust boundary, escape paths, identity chaining via IMDS, supply chain |
+| 🗺️ [Vendor Landscape](https://csoh.org/vendor-landscape.html) | 350+ cloud-security vendors across 30 categories. No rankings, just orientation |
+
+### Disciplines
+| Guide | What it covers |
+|---|---|
+| 🔐 [IAM & Cloud Identity](https://csoh.org/iam.html) | Federation, RBAC/ABAC, JIT, workload identity, privilege-escalation paths |
+| 🛡️ [Zero Trust Architecture](https://csoh.org/zero-trust.html) | NIST SP 800-207, BeyondCorp, CISA Maturity Model, ZTNA, microsegmentation |
+| 🌐 [Cloud Network Security](https://csoh.org/network-security.html) | VPC design, private endpoints, egress controls, WAF, DDoS, SASE/ZTNA |
+| 🗝️ [Data Security, KMS & Secrets](https://csoh.org/data-security.html) | Envelope encryption, BYOK/HSM, secrets management, key rotation |
+| 🐛 [Vulnerability Management](https://csoh.org/vulnerability-management.html) | CVSS/EPSS/KEV prioritization, reachability, SAST/SCA/DAST, SBOM/VEX, ASPM |
+| 🔌 [API Security](https://csoh.org/api-security.html) | OWASP API Top 10, BOLA, JWT pitfalls, GraphQL/gRPC, runtime defense |
+| 📡 [SaaS Security (SSPM)](https://csoh.org/saas-security.html) | M365 / Workspace / Salesforce / GitHub / Slack, OAuth app risk, ITDR |
+| 💾 [Backup, DR & Ransomware](https://csoh.org/backup-dr.html) | 3-2-1-1-0, immutability per cloud, ransomware kill chain, key custody |
+| 🧠 [Threat Modeling](https://csoh.org/threat-modeling.html) | STRIDE/PASTA/LINDDUN, attack trees, ATT&CK Cloud, three worked examples |
+| 🕵️ [Detection Engineering](https://csoh.org/detection-engineering.html) | Sigma, ATT&CK Cloud Matrix, detection-as-code, SIEM/lake/XDR |
+| 🚨 [Incident Response & Forensics](https://csoh.org/incident-response.html) | IR lifecycle, EC2/EKS/Lambda evidence, memory forensics, runbooks |
+| 🎯 [Cloud Pentesting & Red Teaming](https://csoh.org/cloud-pentesting.html) | AWS/Azure/GCP attack paths, Pacu/ROADtools/BloodHound, MITRE ATT&CK Cloud |
+| 🤖 [AI/ML & LLM Security](https://csoh.org/ai-ml-security.html) | OWASP LLM Top 10, prompt injection, agentic AI, model supply chain, ATLAS |
+| 🕸️ [Service Mesh Security](https://csoh.org/service-mesh-security.html) | Istio / Linkerd / Cilium / Consul, mTLS, SPIFFE/SPIRE, ambient mode |
+| 📐 [Landing Zones](https://csoh.org/landing-zones.html) | Cloud foundations — Control Tower / Azure CAF / GCP blueprint |
+| 📦 [Containers & Cloud Security](https://csoh.org/containers.html) | Trust boundary, escape paths, identity chaining via IMDS, supply chain |
 | ☸️ [Kubernetes & Managed Kubernetes](https://csoh.org/kubernetes.html) | EKS / AKS / GKE — shared responsibility, workload identity, RBAC, admission |
-| ⚡ [Serverless Functions & Cloud Security](https://csoh.org/serverless.html) | Lambda / Azure Functions / Cloud Functions — event injection, IAM, denial of wallet |
+| ⚡ [Serverless Functions](https://csoh.org/serverless.html) | Lambda / Azure Functions / Cloud Functions — event injection, IAM, denial of wallet |
 | 🔄 [CI/CD for Cloud Deployments](https://csoh.org/ci-cd.html) | Pipeline anatomy, OIDC federation, AWS/Azure/GCP toolchains |
 | 🛰️ [Cloud SOC & Threat Monitoring](https://csoh.org/cloud-soc.html) | Log-driven detection, native services, SIEM, detection engineering, IR |
+| 📜 [GRC for Cloud](https://csoh.org/grc.html) | Governance, Risk, Compliance — frameworks, policy-as-code, audit evidence |
+| 📋 [Compliance Frameworks](https://csoh.org/compliance-frameworks.html) | SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP, CMMC, NIST CSF, GDPR |
+
+### By Cloud
+| Hub | Focus |
+|---|---|
+| 🟧 [AWS Security](https://csoh.org/aws-security.html) | Well-Architected, service catalog, top-10 misconfigs, AWS attack paths |
+| 🟦 [Azure Security](https://csoh.org/azure-security.html) | CAF Secure, Entra/Defender/Sentinel, Entra-vs-AD, Azure attack paths |
+| 🟩 [GCP Security](https://csoh.org/gcp-security.html) | Encryption-by-default, SCC Enterprise, VPC Service Controls deep-dive |
+| ⚖️ [AWS vs Azure vs GCP](https://csoh.org/cloud-security-comparison.html) | Definitive side-by-side — 10 comparison tables and a 20-row scorecard |
+
+### Career & community
+| Guide | What it covers |
+|---|---|
 | 🎓 [Cloud Security Certifications](https://csoh.org/cloud-security-certifications.html) | CCSK, CCSP, AWS, Azure, GCP, CKS compared side by side |
+| 🎓 [Cloud Security Degree Programs](https://csoh.org/cloud-security-degree-programs.html) | Academic paths, what to look for, named US/international universities |
+| 🧭 [Cloud Security Careers](https://csoh.org/cloud-security-careers.html) | Roles, salary bands, interview formats, portfolio projects |
+| 🧰 [Cloud Security Home Lab](https://csoh.org/cloud-security-home-lab.html) | Free-tier setups, budget guardrails, kill-switches |
+| ✅ [Cloud Security Best Practices](https://csoh.org/cloud-security-best-practices.html) | The controls that actually prevent breaches, ranked by real incidents |
 | ⚙️ [How We Use GitHub Actions](https://csoh.org/github-actions.html) | Learn CI/CD by reading our heavily-commented workflows |
+| ☁️ [How We Deploy to GCP](https://csoh.org/cloud-deployment.html) | Cloud Run + WIF + Cloud CDN + Cloud Armor — the full dogfooded stack |
 
 ## 📚 Reference & Practice
 
 | Resource | Size |
 |---|---|
+| 🔍 [Site-wide Search](https://csoh.org/search.html) | Pagefind full-text index across every page |
 | 📖 [Glossary](https://csoh.org/glossary.html) | 230+ cloud-security terms, plain-English |
-| 🛡️ [Resources Directory](https://csoh.org/resources.html) | 200+ tools, labs, CTFs, certifications |
+| 🗺️ [Vendor Landscape](https://csoh.org/vendor-landscape.html) | 350+ vendors, 30 categories, vendor-neutral one-liners |
+| 🛡️ [Resources Directory](https://csoh.org/resources.html) | 200+ tools, labs, CTFs, certifications (auto-refreshed weekly) |
 | 🚩 [CTF Challenges](https://csoh.org/ctfs.html) | 37+ hands-on cloud CTFs across AWS / Azure / GCP / Kubernetes / AI |
 | 🏟️ [Conferences](https://csoh.org/conferences.html) | 27 security & hacker conferences, with pros & cons |
 | 🔗 [Breach Kill Chains](https://csoh.org/breach-timeline.html) | 10 real cloud breaches mapped to MITRE ATT&CK |
+| 🔬 [Threat Research Sources](https://csoh.org/threat-research.html) | Curated directory of vendor research, IOC feeds, advisories — includes a Supply Chain Attacks section |
 | 📰 [Cloud Security News](https://csoh.org/news.html) | 120+ articles, refreshed every 3 hours from 39 sources |
 | 📅 [Meeting Recaps](https://csoh.org/meetings.html) | 94 weekly session recaps, searchable |
 
@@ -124,8 +163,80 @@ Vendor-neutral CI/CD reference focused on cloud — pipeline anatomy, OIDC feder
 ### 🛰️ Cloud SOC & Threat Monitoring (`cloud-soc.html`)
 Cloud-side detection and response — how cloud SOC differs from packet-driven traditional SOC, the log sources that matter (CloudTrail / Activity Log / Cloud Audit Logs, identity events, VPC flow, DNS, data plane), native cloud detection (GuardDuty / Defender for Cloud / SCC), the modern SIEM landscape (Splunk, Sentinel, Chronicle, Elastic, CrowdStrike, Datadog), detection engineering as a practice, MITRE-mapped detection categories, threat intel, IR specifics, and a 4-stage SOC maturity model.
 
+### 🔐 IAM & Cloud Identity (`iam.html`)
+Cloud identity is the #1 root-cause category in breach reports. This page covers federation (SAML/OIDC/SCIM), RBAC vs ABAC vs ReBAC, JIT access and PAM, workload identity (IRSA / Workload Identity Federation / Managed Identities), and the per-cloud privilege-escalation paths (`iam:PassRole`, AssumeRole chains, GCP service-account impersonation, Azure managed-identity abuse). FAQ schema.
+
+### 🛡️ Zero Trust Architecture (`zero-trust.html`)
+NIST SP 800-207 explained, the BeyondCorp origin story, the seven tenets, PDP/PEP/Policy Engine, ZTNA vs VPN, microsegmentation (host-based vs network-based vs service-mesh), continuous verification, CISA Zero Trust Maturity Model, and per-cloud patterns for AWS / Azure / GCP. Explicitly debunks "Zero Trust as a product."
+
+### 🌐 Cloud Network Security (`network-security.html`)
+VPC/VNet design, private endpoints (PrivateLink / Private Link / Private Service Connect), egress controls, DNS security, WAF / DDoS / bot management, service mesh east-west, SASE/SSE landscape, ZTNA, microsegmentation, eBPF (Cilium/Tetragon), and a flow-logs + observability section. "Egress is the new ingress" through-line.
+
+### 🗝️ Data Security, KMS & Secrets (`data-security.html`)
+Data classification, encryption at rest / in transit, envelope encryption with DEK/KEK, BYOK vs HYOK vs CMK, HSMs (FIPS 140-2/140-3), secrets managers (AWS Secrets Manager / Azure Key Vault / GCP Secret Manager / HashiCorp Vault), Kubernetes secrets patterns (sealed-secrets, ESO, SOPS), tokenization vs encryption, DLP, confidential computing, and database encryption nuances.
+
+### 🐛 Cloud Vulnerability Management (`vulnerability-management.html`)
+CVSS is not a priority score. The prioritization stack: CVSS → EPSS → KEV → reachability → asset criticality. SCA, SAST, DAST, container image scanning, IaC scanning, agentless vs agent-based cloud scanners, SBOM (CycloneDX/SPDX), VEX, runtime detection (eBPF), patch management in cloud, ASPM, and SLAs by severity.
+
+### 🔌 API Security (`api-security.html`)
+OWASP API Security Top 10 (2023) walked end to end — BOLA, broken auth, BOPLA, unrestricted resource consumption, BFLA, business-flow abuse, SSRF, misconfig, inventory drift, unsafe consumption. Plus auth patterns (OAuth/OIDC/JWT pitfalls/mTLS), rate limiting, gateway landscape, schema validation, GraphQL/gRPC specifics, runtime API platforms, and testing.
+
+### 📡 SaaS Security & SSPM (`saas-security.html`)
+The third leg of the *PM stool. Four pillars (identity / config / data / detection), the OAuth-app problem, shadow IT discovery, SSPM vs CASB, ITDR, and per-app guides for Microsoft 365, Google Workspace, Salesforce, GitHub, Slack/Teams. SSPM and CASB landscape, plus a SaaS security program model.
+
+### 💾 Backup, DR & Ransomware Resilience (`backup-dr.html`)
+Why backup became a security control. 3-2-1-1-0, RTO/RPO, immutability (S3 Object Lock Compliance, Azure Immutable Storage, GCS Bucket Lock), virtual air gap, KMS key custody (the killer detail), the cloud-ransomware kill chain (encrypt backups FIRST), per-cloud landscape, restoration drills, cyber insurance reality, and tabletop scenarios.
+
+### 🧠 Cloud Threat Modeling (`threat-modeling.html`)
+Shostack's four questions, STRIDE / PASTA / LINDDUN compared, attack trees, MITRE ATT&CK Cloud as a threat library, OWASP Threat Dragon and Microsoft TMT, commercial platforms (IriusRisk, ThreatModeler), and three worked examples — a 3-tier AWS app, an LLM RAG app, and a multi-account landing zone.
+
+### 🕵️ Detection Engineering & Cloud Logging (`detection-engineering.html`)
+The build side of cloud SOC. Detection-engineering lifecycle (research → develop → tune → deploy → validate), cloud logging fundamentals per cloud, Sigma + vendor detection languages, MITRE ATT&CK Cloud Matrix, detection-as-code workflow, SIEM vs Data Lake vs XDR, log retention economics, and validation tooling (Atomic / Stratus Red Team / CALDERA).
+
+### 🚨 Incident Response & Cloud Forensics (`incident-response.html`)
+The IR lifecycle adapted for cloud. Forensic readiness before the incident (immutable log archive, dedicated forensics account, snapshot pipelines, SCPs to block evidence destruction). Evidence collection by workload type (EC2 / EKS / Lambda / S3 / IAM), memory forensics, container forensics, isolation patterns, credential rotation under incident, six standard cloud IR runbooks, retainers, and breach-notification timing.
+
+### 🎯 Cloud Pentesting & Red Teaming (`cloud-pentesting.html`)
+The offensive complement to detection-engineering. Provider testing policies, RoE, methodology (PTES / ATT&CK / Hacking the Cloud), per-cloud attack paths (AWS / Azure / GCP / Kubernetes), the open-source toolkit catalog (Pacu, ROADtools, BloodHound, Cloudfox, MicroBurst, Stratus Red Team, CloudGoat, AzureHound). Explicit authorized-testing-only banner.
+
+### 📜 GRC for Cloud (`grc.html`)
+Governance, Risk, Compliance — the discipline that makes cloud security legible to auditors and regulators. Three pillars, framework landscape (SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP, NIST CSF, CIS, GDPR), policy-as-code, compliance-as-code, continuous compliance with CSPM/CNAPP, audit evidence in cloud, AWS Audit Manager vs Azure Policy vs GCP Assured Workloads.
+
+### 📋 Compliance Frameworks in Cloud (`compliance-frameworks.html`)
+The deep-dive companion to GRC: framework-by-framework breakdowns (SOC 2 Type I/II, ISO 27001/27017/27018, PCI DSS v4, HIPAA, FedRAMP Low/Mod/High + 20x, CMMC 2.0, NIST CSF 2.0, NIST SP 800-53/171, CIS Benchmarks, GDPR, SOX, NIS2, DORA, plus industry-specific). Control crosswalks, GRC platform landscape, and AWS / Azure / GCP compliance program comparison.
+
+### 🤖 AI/ML & LLM Security (`ai-ml-security.html`)
+Securing AI workloads (distinct from `ai-learning.html`, which is about using AI to learn cloud security). OWASP LLM Top 10 walked item by item, OWASP ML Top 10, prompt-injection defenses, agentic AI risks, model supply chain, training-data security, vector DB and RAG security, AI governance frameworks (NIST AI RMF, EU AI Act, ISO/IEC 42001, MITRE ATLAS), and per-cloud AI service controls.
+
+### 🕸️ Service Mesh Security (`service-mesh-security.html`)
+Securing east-west traffic. Istio / Linkerd / Cilium / Consul Connect, mTLS, authentication (SPIFFE/SPIRE workload identity), authorization policy, observability (Hubble, Kiali), sidecar vs sidecarless (ambient mode, eBPF), multi-cluster meshes, mesh attack surface, AWS App Mesh / Anthos Service Mesh / AKS Istio add-on.
+
+### 📐 Landing Zones & Cloud Foundations (`landing-zones.html`)
+The foundation layer — AWS Control Tower + Organizations + SCPs, Azure CAF Enterprise-scale + Management Groups + Azure Policy, GCP Org → Folders → Projects + Org Policies + VPC Service Controls. Account-vault patterns, identity layer placement, tagging strategy.
+
+### 🟧 AWS Security Hub (`aws-security.html`)
+SEO-targeted hub page for the "AWS security" search intent (~10× the volume of "cloud security"). Well-Architected Security pillar, the full AWS service catalog (detection / identity / data / network / compliance / IR), reference landing-zone architecture, top-10 AWS misconfigurations, AWS attack paths, and discipline cross-links with `#aws` anchors.
+
+### 🟦 Azure Security Hub (`azure-security.html`)
+Same SEO play for Azure. CAF Secure methodology, the Microsoft service catalog (Defender for Cloud / Sentinel / Entra ID / Purview / Key Vault / Front Door / NSGs), Entra-ID-vs-traditional-AD, Azure attack paths (managed identity abuse, illicit consent grants, Conditional Access bypass), and the Microsoft Defender licensing maze.
+
+### 🟩 GCP Security Hub (`gcp-security.html`)
+Same SEO play for Google Cloud. Encryption-by-default story, Security Command Center Standard/Premium/Enterprise, BeyondCorp Enterprise, VPC Service Controls deep-dive, GCP attack paths (service-account impersonation, deployment-manager privesc, metadata SSH-key injection), and Assured Workloads.
+
+### ⚖️ AWS vs Azure vs GCP Security Services (`cloud-security-comparison.html`)
+The definitive vendor-neutral comparison. Ten side-by-side `.comparison-table` blocks (identity, detection, data, network, compliance, pricing, customer identity, compute, container, serverless), conceptual differences that bite you (IAM-policy languages, org-boundary models, log pricing, VPC SC), a "which cloud for which job" guidance section, and a 20-row score-card summary.
+
+### 🗺️ Vendor Landscape (`vendor-landscape.html`)
+A directory of **350+ cloud-security vendors** across 30 categories — CNAPP, CSPM, KSPM, CIEM, SSPM, DSPM, SIEM, EDR/XDR, MDR, SOAR, ASPM, SAST/SCA, IaC scanning, secrets, PAM, IdP, WAF/DDoS, API security, CASB, SASE, ZTNA, DevSecOps, image hardening, supply chain, AI security, vuln mgmt, forensics, MSSPs, GRC platforms. Vendor-neutral one-liners, no rankings. Wiz affiliation disclosed.
+
+### 🔍 Site Search (`search.html`)
+Pagefind-powered full-text search across every page. Static index generated at deploy time and served from `/pagefind/`. CSS lives in `/search.css` (extracted from inline so CSP doesn't drop it); init lives in `/pagefind-init.js`.
+
 ### ⚙️ How We Use GitHub Actions (`github-actions.html`)
-Learn-by-example explainer for GitHub Actions, using CSOH's eight workflow files as the teaching material. Covers triggers, concurrency, secrets, the GITHUB_TOKEN vs PAT distinction, the `workflow` scope gotcha, and a recommended reading order through our heavily-commented YAML.
+Learn-by-example explainer for GitHub Actions, using CSOH's workflow files as the teaching material. Covers triggers, concurrency, secrets, the GITHUB_TOKEN vs PAT distinction, the `workflow` scope gotcha, OIDC trust to GCP, and a recommended reading order through our heavily-commented YAML.
+
+### ☁️ How We Deploy to GCP (`cloud-deployment.html`)
+The dogfooded GCP architecture: Cloud Run + Workload Identity Federation + Cloud CDN + Cloud Armor + Artifact Registry + Cloud Monitoring, with the security controls called out at every layer. Pairs with the GitHub Actions explainer to give a complete CI/CD-to-cloud reference.
 
 ### 📚 Resources (`resources.html`)
 Comprehensive catalog of **200+ cloud security resources** organized by 6 categories:

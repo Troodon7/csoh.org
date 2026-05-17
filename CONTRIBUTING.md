@@ -279,21 +279,42 @@ Whether you're fixing a typo or rewriting a section, the process is the same.
 - [cloud-security-best-practices.html](cloud-security-best-practices.html) - Practitioner controls checklist
 - [shared-responsibility-model.html](shared-responsibility-model.html) - Provider vs. customer split
 - [cspm-vs-cnapp.html](cspm-vs-cnapp.html) - Tool category comparison
+- [vendor-landscape.html](vendor-landscape.html) - 350+ vendors across 30 categories
 - [landing-zones.html](landing-zones.html) - Cloud foundations (AWS / Azure / GCP reference designs)
 - [containers.html](containers.html) - Container security: boundary, escapes, IMDS, supply chain
 - [kubernetes.html](kubernetes.html) - Kubernetes & managed K8s (EKS / AKS / GKE) security
 - [serverless.html](serverless.html) - Serverless functions (Lambda / Functions) security
+- [service-mesh-security.html](service-mesh-security.html) - Service mesh security (Istio / Linkerd / Cilium / Consul)
 - [ci-cd.html](ci-cd.html) - CI/CD pipelines for cloud (OIDC federation, deploy strategies)
-- [cloud-soc.html](cloud-soc.html) - Cloud SOC, threat monitoring, SIEM, detection engineering
+- [iam.html](iam.html) - IAM & cloud identity, RBAC/ABAC, workload identity
+- [zero-trust.html](zero-trust.html) - Zero Trust Architecture (NIST SP 800-207, BeyondCorp)
+- [network-security.html](network-security.html) - Cloud network security (VPC, private endpoints, WAF/DDoS, ZTNA)
+- [data-security.html](data-security.html) - Data security, KMS, secrets management
+- [vulnerability-management.html](vulnerability-management.html) - Cloud VM (CVSS / EPSS / KEV, SAST/SCA/DAST, SBOM)
+- [api-security.html](api-security.html) - API security (OWASP API Top 10, GraphQL/gRPC)
+- [saas-security.html](saas-security.html) - SaaS Security & SSPM
+- [backup-dr.html](backup-dr.html) - Backup, DR & ransomware resilience
+- [threat-modeling.html](threat-modeling.html) - Cloud threat modeling (STRIDE / PASTA / LINDDUN)
+- [cloud-soc.html](cloud-soc.html) - Cloud SOC, threat monitoring, SIEM
+- [detection-engineering.html](detection-engineering.html) - Detection engineering & cloud logging
+- [incident-response.html](incident-response.html) - IR & cloud forensics
+- [cloud-pentesting.html](cloud-pentesting.html) - Cloud pentesting & red teaming
+- [grc.html](grc.html) - GRC for cloud (governance, risk, compliance)
+- [compliance-frameworks.html](compliance-frameworks.html) - Per-framework deep dives (SOC2/ISO/PCI/HIPAA/FedRAMP/CMMC/GDPR)
+- [ai-ml-security.html](ai-ml-security.html) - AI/ML security (OWASP LLM Top 10, ATLAS)
+- [aws-security.html](aws-security.html) - AWS security hub
+- [azure-security.html](azure-security.html) - Azure security hub
+- [gcp-security.html](gcp-security.html) - GCP security hub
+- [cloud-security-comparison.html](cloud-security-comparison.html) - AWS vs Azure vs GCP comparison
 - [cloud-security-certifications.html](cloud-security-certifications.html) - CCSK / CCSP / AWS / Azure / GCP / CKS comparison
 - [conferences.html](conferences.html) - Security and hacker conference directory
 - [ctfs.html](ctfs.html) - Cloud CTF directory
-- [glossary.html](glossary.html) - 200+ terms with cross-links
+- [glossary.html](glossary.html) - 230+ terms with cross-links
 - [faq.html](faq.html) - Frequently asked questions
 - [github-actions.html](github-actions.html) - GitHub Actions explainer
 - [cloud-deployment.html](cloud-deployment.html) - How csoh.org itself deploys to GCP
 - [breach-timeline.html](breach-timeline.html) - Breach kill chain index (per-breach pages live in `breaches/`)
-- [threat-research.html](threat-research.html) - Cloud threat research source directory
+- [threat-research.html](threat-research.html) - Cloud threat research source directory (incl. Supply Chain Attacks)
 - [code-of-conduct.html](code-of-conduct.html) - Community standards
 - [privacy.html](privacy.html) - Privacy policy
 - [security-policy.html](security-policy.html) - Vulnerability disclosure policy
