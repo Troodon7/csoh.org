@@ -644,11 +644,11 @@
             <ul>
                 <li><strong><a href="https://aws.amazon.com/waf/" target="_blank" rel="noopener noreferrer">AWS WAF</a></strong> — attaches to CloudFront, ALB, API Gateway, AppSync, App Runner. Managed rule groups from AWS and Marketplace (Fortinet, F5, Imperva, Cyber Security Cloud). The <code>AWSManagedRulesCommonRuleSet</code> + <code>AWSManagedRulesKnownBadInputsRuleSet</code> + <code>AWSManagedRulesBotControlRuleSet</code> is the starting baseline.</li>
                 <li><strong><a href="https://learn.microsoft.com/en-us/azure/web-application-firewall/" target="_blank" rel="noopener noreferrer">Azure WAF</a></strong> on Application Gateway or Azure Front Door, with the OWASP CRS managed rule set and Microsoft Threat Intelligence rule set.</li>
-                <li><strong><a href="https://cloud.google.com/armor" target="_blank" rel="noopener noreferrer">Cloud Armor</a></strong> — GCP's WAF, attached to global external HTTPS load balancers. Includes preconfigured OWASP CRS rules and reCAPTCHA Enterprise integration for bot defense.</li>
+                <li><strong><a href="https://cloud.google.com/security/products/armor" target="_blank" rel="noopener noreferrer">Cloud Armor</a></strong> — GCP's WAF, attached to global external HTTPS load balancers. Includes preconfigured OWASP CRS rules and reCAPTCHA Enterprise integration for bot defense.</li>
             </ul>
             <h3>CDN-native (likely already in front of your app)</h3>
             <ul>
-                <li><strong><a href="https://www.cloudflare.com/application-services/products/waf/" target="_blank" rel="noopener noreferrer">Cloudflare WAF</a></strong> — strong managed rulesets, the largest threat-intel feed in the WAF market, custom rules in a wirefilter-like DSL. Pairs with Cloudflare Bot Management and Rate Limiting.</li>
+                <li><strong><a href="https://www.cloudflare.com/products/waf/" target="_blank" rel="noopener noreferrer">Cloudflare WAF</a></strong> — strong managed rulesets, the largest threat-intel feed in the WAF market, custom rules in a wirefilter-like DSL. Pairs with Cloudflare Bot Management and Rate Limiting.</li>
                 <li><strong><a href="https://www.akamai.com/products/app-and-api-protector" target="_blank" rel="noopener noreferrer">Akamai App &amp; API Protector</a></strong> (formerly Kona Site Defender) — enterprise-grade, deep Akamai-edge integration.</li>
                 <li><strong><a href="https://www.fastly.com/products/web-application-api-protection" target="_blank" rel="noopener noreferrer">Fastly Next-Gen WAF</a></strong> — Signal Sciences-derived; strong on API-shaped traffic and developer ergonomics.</li>
                 <li><strong><a href="https://www.imperva.com/products/web-application-firewall-waf/" target="_blank" rel="noopener noreferrer">Imperva WAF</a></strong>, <strong>F5 BIG-IP Advanced WAF</strong>, <strong>Barracuda WAF</strong> — long-established players.</li>
@@ -666,7 +666,7 @@
                 <li><strong><a href="https://aws.amazon.com/shield/" target="_blank" rel="noopener noreferrer">AWS Shield</a></strong> — <em>Standard</em> protects every AWS resource at no extra cost (basic infrastructure-layer mitigation). <em>Advanced</em> ($3000/month + data) adds dedicated DDoS response team, cost-protection (you don't pay for the surge in CloudFront/Route 53/ALB data charges from an attack), and Health-based detection. Worth the price only for revenue-critical public surfaces.</li>
                 <li><strong><a href="https://learn.microsoft.com/en-us/azure/ddos-protection/" target="_blank" rel="noopener noreferrer">Azure DDoS Protection</a></strong> — basic protection is free at the platform level; <em>Network</em> and <em>IP</em> protection plans add tuning and rapid-response team access.</li>
                 <li><strong>Cloud Armor</strong> — GCP's L7 DDoS protection. Always-on Adaptive Protection uses ML to detect anomalous patterns; Cloud Armor Edge Security Policies block at the Google network edge before reaching your origin.</li>
-                <li><strong><a href="https://www.cloudflare.com/ddos/" target="_blank" rel="noopener noreferrer">Cloudflare DDoS Protection</a></strong> — unmetered DDoS mitigation across all plans; one of the largest mitigation networks in operation.</li>
+                <li><strong><a href="https://www.cloudflare.com/products/ddos/" target="_blank" rel="noopener noreferrer">Cloudflare DDoS Protection</a></strong> — unmetered DDoS mitigation across all plans; one of the largest mitigation networks in operation.</li>
                 <li><strong><a href="https://www.akamai.com/solutions/security/ddos-protection" target="_blank" rel="noopener noreferrer">Akamai Prolexic</a></strong> — enterprise-grade BGP-routed DDoS scrubbing service. Right for organizations with non-HTTP critical services (gaming, financial trading, large enterprises with dedicated peering).</li>
                 <li><strong>Imperva, F5 (Silverline), Radware, NETSCOUT (Arbor)</strong> — additional enterprise scrubbing providers.</li>
             </ul>
@@ -679,8 +679,8 @@
             <p>Distinguishing automated traffic from human is its own discipline. The signal is hundreds of behavioral, fingerprinting, and reputational features — not a simple ruleset. The players:</p>
             <ul>
                 <li><strong><a href="https://www.humansecurity.com/" target="_blank" rel="noopener noreferrer">HUMAN</a></strong> (formerly PerimeterX BotDefender) — strong on ad fraud, account takeover, credential stuffing.</li>
-                <li><strong><a href="https://www.cloudflare.com/application-services/products/bot-management/" target="_blank" rel="noopener noreferrer">Cloudflare Bot Management</a></strong> — large data corpus from Cloudflare's edge; tight integration with their WAF and rate-limit.</li>
-                <li><strong><a href="https://www.datadome.co/" target="_blank" rel="noopener noreferrer">DataDome</a></strong> — invisible-CAPTCHA approach, strong API and mobile-app bot defense.</li>
+                <li><strong><a href="https://www.cloudflare.com/products/bot-mitigation/" target="_blank" rel="noopener noreferrer">Cloudflare Bot Management</a></strong> — large data corpus from Cloudflare's edge; tight integration with their WAF and rate-limit.</li>
+                <li><strong><a href="https://datadome.co/" target="_blank" rel="noopener noreferrer">DataDome</a></strong> — invisible-CAPTCHA approach, strong API and mobile-app bot defense.</li>
                 <li><strong><a href="https://www.akamai.com/products/bot-manager" target="_blank" rel="noopener noreferrer">Akamai Bot Manager</a></strong> — enterprise scale, deep edge integration.</li>
                 <li><strong>Imperva Advanced Bot Protection</strong>, <strong>F5 Distributed Cloud Bot Defense</strong> — additional enterprise options.</li>
             </ul>
@@ -702,9 +702,9 @@
                 <li><strong><a href="https://linkerd.io/" target="_blank" rel="noopener noreferrer">Linkerd</a></strong> — CNCF graduated mesh. Rust-based proxy (linkerd2-proxy), lower resource overhead than Istio, simpler config. mTLS by default. The right choice when "I want mesh but not Istio."</li>
                 <li><strong><a href="https://cilium.io/use-cases/service-mesh/" target="_blank" rel="noopener noreferrer">Cilium Service Mesh</a></strong> — sidecarless, eBPF-based. mTLS, L7 policy, identity-aware. The technically-strongest option for new deployments; pairs naturally with Cilium NetworkPolicy.</li>
                 <li><strong><a href="https://aws.amazon.com/app-mesh/" target="_blank" rel="noopener noreferrer">AWS App Mesh</a></strong> — Envoy-based, managed control plane. Note AWS announced deprecation in 2024 in favor of VPC Lattice for cross-VPC service mesh.</li>
-                <li><strong><a href="https://cloud.google.com/anthos/service-mesh" target="_blank" rel="noopener noreferrer">GCP Anthos Service Mesh</a></strong> — managed Istio with Google's policy and observability layers.</li>
+                <li><strong><a href="https://cloud.google.com/products/service-mesh" target="_blank" rel="noopener noreferrer">GCP Anthos Service Mesh</a></strong> — managed Istio with Google's policy and observability layers.</li>
                 <li><strong>AKS Istio add-on</strong> — Microsoft's supported Istio integration for AKS.</li>
-                <li><strong><a href="https://www.consul.io/" target="_blank" rel="noopener noreferrer">HashiCorp Consul Connect</a></strong> — mesh that spans Kubernetes and VMs, with the Consul service catalog underneath.</li>
+                <li><strong><a href="https://developer.hashicorp.com/consul" target="_blank" rel="noopener noreferrer">HashiCorp Consul Connect</a></strong> — mesh that spans Kubernetes and VMs, with the Consul service catalog underneath.</li>
             </ul>
             <h3>The mTLS-everywhere claim</h3>
             <p>"Mesh gives us mTLS everywhere" is the most common pitch and the most common over-claim. It does — within the mesh. Traffic that leaves the mesh (to a managed database, to a third-party API, from an unmeshed VM) is unencrypted unless you wire it through a mesh egress gateway. Plan for the boundary, not just the interior.</p>
@@ -719,7 +719,7 @@
                 <li><strong><a href="https://www.zscaler.com/" target="_blank" rel="noopener noreferrer">Zscaler</a></strong> — ZIA (web gateway), ZPA (ZTNA), ZDX (digital experience). The category-defining vendor; deep enterprise mindshare.</li>
                 <li><strong><a href="https://www.netskope.com/" target="_blank" rel="noopener noreferrer">Netskope</a></strong> — strong CASB heritage, modern SSE platform.</li>
                 <li><strong><a href="https://www.paloaltonetworks.com/sase/access" target="_blank" rel="noopener noreferrer">Palo Alto Prisma Access</a></strong> — Palo Alto's cloud-delivered NGFW + ZTNA.</li>
-                <li><strong><a href="https://www.cloudflare.com/cloudflare-one/" target="_blank" rel="noopener noreferrer">Cloudflare One</a></strong> — Cloudflare's SASE: Access (ZTNA), Gateway (SWG / DNS / Egress), CASB, Browser Isolation. Strong developer ergonomics; cheap for SMB / mid-market.</li>
+                <li><strong><a href="https://www.cloudflare.com/sase/" target="_blank" rel="noopener noreferrer">Cloudflare One</a></strong> — Cloudflare's SASE: Access (ZTNA), Gateway (SWG / DNS / Egress), CASB, Browser Isolation. Strong developer ergonomics; cheap for SMB / mid-market.</li>
                 <li><strong><a href="https://umbrella.cisco.com/" target="_blank" rel="noopener noreferrer">Cisco Umbrella</a></strong> + Cisco+ Secure Connect — DNS-led origin, broadening into full SASE.</li>
                 <li><strong><a href="https://www.catonetworks.com/" target="_blank" rel="noopener noreferrer">Cato Networks</a></strong> — built SASE from scratch as a single platform; strong on SD-WAN integration.</li>
                 <li><strong><a href="https://www.fortinet.com/products/sase" target="_blank" rel="noopener noreferrer">Fortinet FortiSASE</a></strong> — extends FortiGate / FortiClient into the SASE shape.</li>
@@ -733,17 +733,17 @@
             <h2>ZTNA</h2>
             <p>Zero Trust Network Access — the modern replacement for client VPN. Instead of "VPN in, you're on the corporate network," ZTNA brokers per-application access based on user identity, device posture, and contextual signals. The app doesn't get a public IP; the user doesn't get a network. Both connect to the broker. The market:</p>
             <ul>
-                <li><strong><a href="https://www.cloudflare.com/zero-trust/products/access/" target="_blank" rel="noopener noreferrer">Cloudflare Access</a></strong> — identity-aware reverse proxy in front of any HTTP app or SSH/RDP target. Tight integration with Cloudflare's edge, easy IdP setup, generous free tier.</li>
+                <li><strong><a href="https://www.cloudflare.com/sase/products/access/" target="_blank" rel="noopener noreferrer">Cloudflare Access</a></strong> — identity-aware reverse proxy in front of any HTTP app or SSH/RDP target. Tight integration with Cloudflare's edge, easy IdP setup, generous free tier.</li>
                 <li><strong><a href="https://www.zscaler.com/products-and-solutions/zscaler-private-access" target="_blank" rel="noopener noreferrer">Zscaler Private Access (ZPA)</a></strong> — the enterprise standard. App connectors initiate outbound to ZPA cloud; no inbound exposure.</li>
                 <li><strong><a href="https://www.paloaltonetworks.com/sase/access" target="_blank" rel="noopener noreferrer">Palo Alto Prisma Access</a></strong> — ZTNA inside Palo Alto's SASE platform.</li>
                 <li><strong><a href="https://www.twingate.com/" target="_blank" rel="noopener noreferrer">Twingate</a></strong> — developer-friendly, simple deployment, agentless options for SaaS.</li>
                 <li><strong><a href="https://tailscale.com/" target="_blank" rel="noopener noreferrer">Tailscale</a></strong> — WireGuard-based mesh VPN with ACLs and identity integration. Often the lowest-friction option for engineering teams; production-grade with proper ACLs and tag-based policy.</li>
                 <li><strong><a href="https://netfoundry.io/" target="_blank" rel="noopener noreferrer">NetFoundry</a></strong> — Ziti-based programmable ZTNA, strong for app-embedded use cases.</li>
-                <li><strong><a href="https://www.banyansecurity.io/" target="_blank" rel="noopener noreferrer">Banyan Security</a></strong> (SonicWall) — device-trust-strong ZTNA.</li>
+                <li><strong><a href="https://www.sonicwall.com/blog/sonicwall-acquires-banyan-security" target="_blank" rel="noopener noreferrer">Banyan Security</a></strong> (SonicWall) — device-trust-strong ZTNA.</li>
                 <li><strong>Cloud-native</strong>:
                   <ul>
                     <li><strong>Azure App Proxy / Entra ID Application Proxy</strong> — reverse-proxy internal apps through Entra ID with conditional access. Free with Entra ID P1/P2.</li>
-                    <li><strong><a href="https://cloud.google.com/iap/" target="_blank" rel="noopener noreferrer">GCP Identity-Aware Proxy (IAP)</a></strong> — front any GCP web app or SSH endpoint with Google identity; trivial setup if you're GCP-native.</li>
+                    <li><strong><a href="https://cloud.google.com/security/products/iap" target="_blank" rel="noopener noreferrer">GCP Identity-Aware Proxy (IAP)</a></strong> — front any GCP web app or SSH endpoint with Google identity; trivial setup if you're GCP-native.</li>
                     <li><strong>AWS Verified Access</strong> — newer AWS service for VPN-less app access with identity and device-trust signals.</li>
                   </ul>
                 </li>
@@ -979,8 +979,8 @@
                 <li><a href="https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/welcome.html" target="_blank" rel="noopener noreferrer">AWS — VPC Connectivity Options</a></li>
                 <li><a href="https://aws.amazon.com/architecture/security-identity-compliance/" target="_blank" rel="noopener noreferrer">AWS — Network Security reference architectures</a></li>
                 <li><a href="https://learn.microsoft.com/en-us/azure/architecture/networking/" target="_blank" rel="noopener noreferrer">Azure — Networking architecture</a></li>
-                <li><a href="https://cloud.google.com/architecture/best-practices-vpc-design" target="_blank" rel="noopener noreferrer">GCP — Best practices for VPC design</a></li>
-                <li><a href="https://cloud.google.com/vpc-service-controls/docs/overview" target="_blank" rel="noopener noreferrer">GCP — VPC Service Controls</a></li>
+                <li><a href="https://docs.cloud.google.com/architecture/best-practices-vpc-design" target="_blank" rel="noopener noreferrer">GCP — Best practices for VPC design</a></li>
+                <li><a href="https://docs.cloud.google.com/vpc-service-controls/docs/overview" target="_blank" rel="noopener noreferrer">GCP — VPC Service Controls</a></li>
             </ul>
             <h3>Standards &amp; frameworks</h3>
             <ul>
