@@ -236,6 +236,7 @@
                     <li><a href="#research-teams">Vendor Research Teams</a></li>
                     <li><a href="#threat-reports">Annual Threat Reports</a></li>
                     <li><a href="#incidents">Notable Cloud Incidents &amp; Post-Mortems</a></li>
+                    <li><a href="#supply-chain">Supply Chain Attacks</a></li>
                     <li><a href="#ioc-feeds">IOC Feeds &amp; Threat Intel Platforms</a></li>
                     <li><a href="#frameworks">Attack Frameworks &amp; Matrices</a></li>
                     <li><a href="#government-advisories">Government &amp; Regulatory Advisories</a></li>
@@ -857,6 +858,251 @@
                         <div class="resource-tags">
                             <span class="tag">CISA</span>
                             <span class="tag">Advisories</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Supply Chain Attacks -->
+        <section class="section" id="supply-chain">
+            <h2>Supply Chain Attacks</h2>
+            <p><a class="glossary-link" href="glossary.html#term-supply-chain">Supply-chain compromise</a> has moved from a niche concern to one of the dominant cloud threat patterns: a single tampered build artifact, signing key, or upstream dependency now propagates to thousands of downstream tenants before anyone notices. SolarWinds, Codecov, 3CX, the XZ Utils backdoor, and the tj-actions/changed-files GitHub Action compromise all share the same shape — trusted code gets modified upstream of where defenders look. The resources below cover both sides: the frameworks (<a class="glossary-link" href="glossary.html#term-sbom">SBOM</a>, SLSA, sigstore, in-toto, NIST SSDF) that defenders use to harden their build and dependency chains, the research feeds that catalog malicious packages in npm, PyPI, and container registries in near-real time, and the post-mortems of incidents that defined how we think about <a class="glossary-link" href="glossary.html#term-ci-cd">CI/CD</a> trust today. If you already pin dependencies and sign artifacts, weight the malicious-package feeds and incident write-ups; if you're just starting, begin with SLSA and the OpenSSF Scorecard to baseline where you stand.</p>
+            <div class="resource-grid">
+                <a href="https://slsa.dev/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>SLSA Framework</h3>
+                        <p>Supply-chain Levels for Software Artifacts — a graduated framework (levels 1–4) for build
+                            integrity, provenance, and tamper-resistance. Maintained under OpenSSF.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Framework</span>
+                            <span class="tag">Provenance</span>
+                            <span class="tag">Build Integrity</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://openssf.org/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>OpenSSF</h3>
+                        <p>Open Source Security Foundation — home for Scorecard, Sigstore, SLSA, and the malicious
+                            packages working group. The closest thing OSS has to a coordinating defender body.</p>
+                        <div class="resource-tags">
+                            <span class="tag">OSS</span>
+                            <span class="tag">Foundation</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.sigstore.dev/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Sigstore</h3>
+                        <p>Keyless artifact signing (cosign, Fulcio, Rekor) — short-lived OIDC-issued certs plus a
+                            public transparency log. The default signing layer for npm, PyPI, Kubernetes, and most
+                            modern OSS releases.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Signing</span>
+                            <span class="tag">Transparency Log</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://in-toto.io/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>in-toto</h3>
+                        <p>End-to-end framework for cryptographically attesting each step of a software supply chain.
+                            Underpins SLSA provenance generation and CNCF graduated.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Attestation</span>
+                            <span class="tag">CNCF</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://csrc.nist.gov/Projects/ssdf" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>NIST SSDF (SP 800-218)</h3>
+                        <p>Secure Software Development Framework — the practices US federal software producers must
+                            attest to under EO 14028. The de facto compliance floor for selling software to the
+                            government.</p>
+                        <div class="resource-tags">
+                            <span class="tag">NIST</span>
+                            <span class="tag">Compliance</span>
+                            <span class="tag">EO 14028</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://csrc.nist.gov/Projects/cyber-supply-chain-risk-management" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>NIST C-SCRM (SP 800-161)</h3>
+                        <p>Cybersecurity Supply Chain Risk Management practices — vendor risk, third-party assessment,
+                            and the controls that map to FedRAMP and CMMC supply-chain requirements.</p>
+                        <div class="resource-tags">
+                            <span class="tag">NIST</span>
+                            <span class="tag">Vendor Risk</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://github.com/advisories" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>GitHub Advisory Database</h3>
+                        <p>Curated CVE + GHSA database for npm, PyPI, RubyGems, Maven, NuGet, Go, Composer, Rust, and
+                            more. Backs Dependabot and is queryable via the GraphQL API.</p>
+                        <div class="resource-tags">
+                            <span class="tag">CVE</span>
+                            <span class="tag">Dependencies</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://osv.dev/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>OSV.dev</h3>
+                        <p>Google's open-source vulnerability database — aggregates GHSA, PyPA, RustSec, and OS distro
+                            advisories into a single schema. Free API, used by osv-scanner.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Vulnerabilities</span>
+                            <span class="tag">Free API</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://socket.dev/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Socket</h3>
+                        <p>Real-time detection of malicious npm and PyPI packages — install-script analysis, typosquat
+                            scoring, and dependency drift alerts. Publishes ongoing campaign write-ups.</p>
+                        <div class="resource-tags">
+                            <span class="tag">npm</span>
+                            <span class="tag">PyPI</span>
+                            <span class="tag">Malicious Packages</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://blog.phylum.io/" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Phylum / Veracode Threat Research</h3>
+                        <p>Continuous monitoring of open-source registries for malicious package campaigns — primary
+                            source for North Korea (Lazarus / Contagious Interview) npm and PyPI activity.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Malicious Packages</span>
+                            <span class="tag">Threat Intel</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cisa.gov/topics/cyber-threats-and-advisories/supply-chain-compromise" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>CISA ICT Supply Chain Risk Management</h3>
+                        <p>US government guidance, attestation forms, and advisories on ICT supply-chain compromise
+                            — including the secure software development attestation common form.</p>
+                        <div class="resource-tags">
+                            <span class="tag">CISA</span>
+                            <span class="tag">Guidance</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.enisa.europa.eu/publications/threat-landscape-for-supply-chain-attacks" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>ENISA Threat Landscape for Supply Chain Attacks</h3>
+                        <p>EU Agency for Cybersecurity's report taxonomizing supply-chain attack patterns by attack
+                            technique on the supplier vs. the customer asset targeted.</p>
+                        <div class="resource-tags">
+                            <span class="tag">ENISA</span>
+                            <span class="tag">Taxonomy</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.sonatype.com/state-of-the-software-supply-chain/introduction" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Sonatype State of the Software Supply Chain</h3>
+                        <p>Annual report on open-source consumption, malicious package volumes, and remediation
+                            timelines — sourced from Maven Central and Sonatype's registry telemetry.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Annual Report</span>
+                            <span class="tag">OSS</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-074a" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>XZ Utils Backdoor — CVE-2024-3094</h3>
+                        <p>Multi-year social engineering of an OSS maintainer to plant an sshd backdoor in liblzma.
+                            Caught by a Microsoft engineer noticing a 500ms login delay. CISA + Red Hat advisories.</p>
+                        <div class="resource-tags">
+                            <span class="tag">OSS</span>
+                            <span class="tag">Maintainer Compromise</span>
+                            <span class="tag">2024</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.mandiant.com/resources/blog/3cx-software-supply-chain-compromise" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>3CX Cascading Supply Chain (2023)</h3>
+                        <p>First publicly documented cascading supply-chain attack — DPRK actor compromised X_TRADER,
+                            pivoted to 3CX desktop app, which then shipped malware to 600,000+ customers. Mandiant
+                            investigation.</p>
+                        <div class="resource-tags">
+                            <span class="tag">DPRK</span>
+                            <span class="tag">Cascading</span>
+                            <span class="tag">2023</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-158a" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>MOVEit / Cl0p (2023)</h3>
+                        <p>Zero-day SQLi in Progress MOVEit Transfer exploited by Cl0p ransomware affiliate against
+                            2,700+ organizations and 95M+ individuals — the largest mass-exploitation supply-chain
+                            event of 2023.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Zero-Day</span>
+                            <span class="tag">Mass Exploit</span>
+                            <span class="tag">2023</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-209a" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Kaseya VSA / REvil (2021)</h3>
+                        <p>REvil exploited an authentication-bypass zero-day in Kaseya VSA to push ransomware to
+                            ~1,500 downstream MSP customers in a single weekend. CISA joint advisory.</p>
+                        <div class="resource-tags">
+                            <span class="tag">MSP</span>
+                            <span class="tag">Ransomware</span>
+                            <span class="tag">2021</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.wiz.io/blog/new-github-action-supply-chain-attack-reviewdog-action-setup" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>tj-actions / reviewdog (2025)</h3>
+                        <p>Compromised GitHub Actions (tj-actions/changed-files and reviewdog/action-setup) leaked
+                            CI/CD secrets from thousands of repositories via injected workflow steps. The case for
+                            SHA-pinning third-party actions.</p>
+                        <div class="resource-tags">
+                            <span class="tag">GitHub Actions</span>
+                            <span class="tag">CI/CD</span>
+                            <span class="tag">2025</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-356a" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>Log4Shell — CVE-2021-44228</h3>
+                        <p>Transitive-dependency nightmare: a JNDI lookup bug in log4j showed up in every Java app on
+                            earth, including AWS, Azure, and GCP control-plane services. CISA's emergency directive
+                            is the canonical reference.</p>
+                        <div class="resource-tags">
+                            <span class="tag">Transitive Deps</span>
+                            <span class="tag">Java</span>
+                            <span class="tag">2021</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.cisa.gov/sbom" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-card" data-no-preview>
+                        <h3>CISA SBOM Resources</h3>
+                        <p>Software Bill of Materials guidance, formats (SPDX, CycloneDX), and the minimum-element
+                            spec from NTIA. The inventory layer that makes "are we affected by X?" answerable in
+                            minutes instead of weeks.</p>
+                        <div class="resource-tags">
+                            <span class="tag">SBOM</span>
+                            <span class="tag">SPDX</span>
+                            <span class="tag">CycloneDX</span>
                         </div>
                     </div>
                 </a>
