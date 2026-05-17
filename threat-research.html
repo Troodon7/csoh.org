@@ -870,7 +870,8 @@
             <p><a class="glossary-link" href="glossary.html#term-supply-chain">Supply-chain compromise</a> has moved from a niche concern to one of the dominant cloud threat patterns: a single tampered build artifact, signing key, or upstream dependency now propagates to thousands of downstream tenants before anyone notices. SolarWinds, Codecov, 3CX, the XZ Utils backdoor, and the tj-actions/changed-files GitHub Action compromise all share the same shape — trusted code gets modified upstream of where defenders look. The resources below cover both sides: the frameworks (<a class="glossary-link" href="glossary.html#term-sbom">SBOM</a>, SLSA, sigstore, in-toto, NIST SSDF) that defenders use to harden their build and dependency chains, the research feeds that catalog malicious packages in npm, PyPI, and container registries in near-real time, and the post-mortems of incidents that defined how we think about <a class="glossary-link" href="glossary.html#term-ci-cd">CI/CD</a> trust today. If you already pin dependencies and sign artifacts, weight the malicious-package feeds and incident write-ups; if you're just starting, begin with SLSA and the OpenSSF Scorecard to baseline where you stand.</p>
             <div class="resource-grid">
                 <a href="https://slsa.dev/" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/slsa-dev.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>SLSA Framework</h3>
                         <p>Supply-chain Levels for Software Artifacts — a graduated framework (levels 1–4) for build
                             integrity, provenance, and tamper-resistance. Maintained under OpenSSF.</p>
@@ -882,7 +883,8 @@
                     </div>
                 </a>
                 <a href="https://openssf.org/" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/openssf-org.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>OpenSSF</h3>
                         <p>Open Source Security Foundation — home for Scorecard, Sigstore, SLSA, and the malicious
                             packages working group. The closest thing OSS has to a coordinating defender body.</p>
@@ -893,7 +895,8 @@
                     </div>
                 </a>
                 <a href="https://www.sigstore.dev/" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/sigstore-dev.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>Sigstore</h3>
                         <p>Keyless artifact signing (cosign, Fulcio, Rekor) — short-lived OIDC-issued certs plus a
                             public transparency log. The default signing layer for npm, PyPI, Kubernetes, and most
@@ -905,7 +908,8 @@
                     </div>
                 </a>
                 <a href="https://in-toto.io/" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/in-toto-io.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>in-toto</h3>
                         <p>End-to-end framework for cryptographically attesting each step of a software supply chain.
                             Underpins SLSA provenance generation and CNCF graduated.</p>
@@ -916,7 +920,8 @@
                     </div>
                 </a>
                 <a href="https://csrc.nist.gov/Projects/ssdf" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/csrc-nist-gov-projects-ssdf.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>NIST SSDF (SP 800-218)</h3>
                         <p>Secure Software Development Framework — the practices US federal software producers must
                             attest to under EO 14028. The de facto compliance floor for selling software to the
@@ -929,7 +934,8 @@
                     </div>
                 </a>
                 <a href="https://csrc.nist.gov/Projects/cyber-supply-chain-risk-management" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/csrc-nist-gov-projects-cyber-supply-chain-risk-management.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>NIST C-SCRM (SP 800-161)</h3>
                         <p>Cybersecurity Supply Chain Risk Management practices — vendor risk, third-party assessment,
                             and the controls that map to FedRAMP and CMMC supply-chain requirements.</p>
@@ -940,7 +946,8 @@
                     </div>
                 </a>
                 <a href="https://github.com/advisories" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/github-com-advisories.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>GitHub Advisory Database</h3>
                         <p>Curated CVE + GHSA database for npm, PyPI, RubyGems, Maven, NuGet, Go, Composer, Rust, and
                             more. Backs Dependabot and is queryable via the GraphQL API.</p>
@@ -951,7 +958,8 @@
                     </div>
                 </a>
                 <a href="https://osv.dev/" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/osv-dev.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>OSV.dev</h3>
                         <p>Google's open-source vulnerability database — aggregates GHSA, PyPA, RustSec, and OS distro
                             advisories into a single schema. Free API, used by osv-scanner.</p>
@@ -962,7 +970,8 @@
                     </div>
                 </a>
                 <a href="https://socket.dev/" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/socket-dev.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>Socket</h3>
                         <p>Real-time detection of malicious npm and PyPI packages — install-script analysis, typosquat
                             scoring, and dependency drift alerts. Publishes ongoing campaign write-ups.</p>
@@ -974,7 +983,8 @@
                     </div>
                 </a>
                 <a href="https://blog.phylum.io/" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/blog-phylum-io.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>Phylum / Veracode Threat Research</h3>
                         <p>Continuous monitoring of open-source registries for malicious package campaigns — primary
                             source for North Korea (Lazarus / Contagious Interview) npm and PyPI activity.</p>
@@ -985,7 +995,8 @@
                     </div>
                 </a>
                 <a href="https://www.cisa.gov/topics/cyber-threats-and-advisories/supply-chain-compromise" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/cisa-gov-topics-cyber-threats-and-advisories-supply-chain-compromise.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>CISA ICT Supply Chain Risk Management</h3>
                         <p>US government guidance, attestation forms, and advisories on ICT supply-chain compromise
                             — including the secure software development attestation common form.</p>
@@ -996,7 +1007,8 @@
                     </div>
                 </a>
                 <a href="https://www.enisa.europa.eu/publications/threat-landscape-for-supply-chain-attacks" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/enisa-europa-eu-publications-threat-landscape-for-supply-chain-attacks.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>ENISA Threat Landscape for Supply Chain Attacks</h3>
                         <p>EU Agency for Cybersecurity's report taxonomizing supply-chain attack patterns by attack
                             technique on the supplier vs. the customer asset targeted.</p>
@@ -1007,7 +1019,8 @@
                     </div>
                 </a>
                 <a href="https://www.sonatype.com/state-of-the-software-supply-chain/introduction" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/sonatype-com-state-of-the-software-supply-chain-introduction.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>Sonatype State of the Software Supply Chain</h3>
                         <p>Annual report on open-source consumption, malicious package volumes, and remediation
                             timelines — sourced from Maven Central and Sonatype's registry telemetry.</p>
@@ -1018,7 +1031,8 @@
                     </div>
                 </a>
                 <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-074a" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/cisa-gov-news-events-cybersecurity-advisories-aa24-074a.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>XZ Utils Backdoor — CVE-2024-3094</h3>
                         <p>Multi-year social engineering of an OSS maintainer to plant an sshd backdoor in liblzma.
                             Caught by a Microsoft engineer noticing a 500ms login delay. CISA + Red Hat advisories.</p>
@@ -1030,7 +1044,8 @@
                     </div>
                 </a>
                 <a href="https://cloud.google.com/blog/topics/threat-intelligence/3cx-software-supply-chain-compromise/" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/cloud-google-com-blog-topics-threat-intelligence-3cx-software-supply-chain-compromise.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>3CX Cascading Supply Chain (2023)</h3>
                         <p>First publicly documented cascading supply-chain attack — DPRK actor compromised X_TRADER,
                             pivoted to 3CX desktop app, which then shipped malware to 600,000+ customers. Mandiant
@@ -1043,7 +1058,8 @@
                     </div>
                 </a>
                 <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-158a" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/cisa-gov-news-events-cybersecurity-advisories-aa23-158a.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>MOVEit / Cl0p (2023)</h3>
                         <p>Zero-day SQLi in Progress MOVEit Transfer exploited by Cl0p ransomware affiliate against
                             2,700+ organizations and 95M+ individuals — the largest mass-exploitation supply-chain
@@ -1056,7 +1072,8 @@
                     </div>
                 </a>
                 <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-209a" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/cisa-gov-news-events-cybersecurity-advisories-aa21-209a.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>Kaseya VSA / REvil (2021)</h3>
                         <p>REvil exploited an authentication-bypass zero-day in Kaseya VSA to push ransomware to
                             ~1,500 downstream MSP customers in a single weekend. CISA joint advisory.</p>
@@ -1068,7 +1085,8 @@
                     </div>
                 </a>
                 <a href="https://www.wiz.io/blog/new-github-action-supply-chain-attack-reviewdog-action-setup" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/wiz-io-blog-new-github-action-supply-chain-attack-reviewdog-action-setup.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>tj-actions / reviewdog (2025)</h3>
                         <p>Compromised GitHub Actions (tj-actions/changed-files and reviewdog/action-setup) leaked
                             CI/CD secrets from thousands of repositories via injected workflow steps. The case for
@@ -1081,7 +1099,8 @@
                     </div>
                 </a>
                 <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-356a" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/cisa-gov-news-events-cybersecurity-advisories-aa21-356a.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>Log4Shell — CVE-2021-44228</h3>
                         <p>Transitive-dependency nightmare: a JNDI lookup bug in log4j showed up in every Java app on
                             earth, including AWS, Azure, and GCP control-plane services. CISA's emergency directive
@@ -1094,7 +1113,8 @@
                     </div>
                 </a>
                 <a href="https://www.cisa.gov/topics/information-communications-technology-supply-chain-security/sbom" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <div class="resource-card" data-no-preview>
+                    <div class="resource-card">
+                        <img src="img/previews/cisa-gov-topics-information-communications-technology-supply-chain-security-sbom.jpg" alt="Preview" class="resource-preview" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         <h3>CISA SBOM Resources</h3>
                         <p>Software Bill of Materials guidance, formats (SPDX, CycloneDX), and the minimum-element
                             spec from NTIA. The inventory layer that makes "are we affected by X?" answerable in
