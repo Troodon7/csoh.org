@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="IAM &amp; Cloud Identity — the #1 root cause of cloud breaches. Vendor-neutral practitioner guide to identity types, federation &amp; SSO (SAML, OIDC, SCIM), RBAC vs ABAC vs ReBAC, least privilege, JIT &amp; PAM, workload identity (IRSA, GKE Workload Identity, Azure Workload Identity), common privilege escalation paths, phishing-resistant MFA, detection signals, and AWS / Azure / GCP side-by-side.">
+    <meta name="keywords"
+        content="cloud IAM, cloud identity, SAML, OIDC, SCIM, RBAC, ABAC, ReBAC, least privilege, IAM Access Analyzer, Azure PIM, GCP Policy Analyzer, just in time access, PAM, workload identity, IRSA, EKS Pod Identity, GKE Workload Identity, Azure Workload Identity, OIDC trust, iam:PassRole, AssumeRole, service account impersonation, managed identity, confused deputy, FIDO2, passkeys, WebAuthn, conditional access, Okta, Entra ID, Auth0, AWS, Azure, GCP">
+    <title>IAM &amp; Cloud Identity - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/iam.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#0f172a">
+
+    <meta property="og:title" content="IAM &amp; Cloud Identity - CSOH">
+    <meta property="og:description"
+        content="A practitioner's guide to IAM in cloud — identity types, federation, RBAC/ABAC, JIT, workload identity, privilege escalation paths, and how AWS, Azure, and GCP each implement the discipline.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/iam.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IAM &amp; Cloud Identity">
+    <meta name="twitter:description"
+        content="Vendor-neutral guide to cloud IAM — federation, RBAC vs ABAC, JIT, workload identity, privilege escalation, and the native tools.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://csoh.kit.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+
+    <link rel="preload" href="/style.css?v=0e1857bd" as="style"
+        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+    <link rel="stylesheet" href="/style.css?v=0e1857bd"
+        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IAM & Cloud Identity",
+      "description": "A vendor-neutral practitioner's guide to IAM in cloud — identity types, federation and SSO, RBAC vs ABAC vs ReBAC, least privilege, just-in-time access, workload identity, common privilege escalation paths, phishing-resistant MFA, detection signals, and AWS / Azure / GCP side-by-side.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-05-17",
+      "dateModified": "2026-05-17",
+      "mainEntityOfPage": "https://csoh.org/iam.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csoh.org/"},
+        {"@type": "ListItem", "position": 2, "name": "IAM & Identity", "item": "https://csoh.org/iam.html"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why is IAM the #1 root cause of cloud breaches?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every cloud action is an authenticated API call, so identity is the perimeter. When an attacker compromises a credential — a leaked access key, a phished session cookie, a misconfigured OIDC trust — they inherit whatever permissions that identity holds, and most identities hold far more than they need. The Verizon DBIR, Mandiant M-Trends, and IBM Cost of a Data Breach reports all converge on the same finding: stolen or abused credentials are the top initial-access vector in cloud, ahead of vulnerability exploitation and phishing-of-endpoints. The fix is not a single product; it's a program — strong authentication for humans, short-lived tokens for workloads, least privilege enforced continuously, and detections that fire on identity anomalies."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between RBAC, ABAC, and ReBAC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RBAC (role-based) grants permissions to named roles, and assigns subjects to roles — simple, auditable, but combinatorially expensive at scale. ABAC (attribute-based) grants permissions through policies that evaluate attributes of the subject, resource, action, and context (e.g., 'engineers can read S3 buckets tagged team=their-team in us-east-1 during business hours') — flexible, scales without role explosion, but harder to reason about. ReBAC (relationship-based, popularized by Google Zanzibar / OpenFGA / SpiceDB) models access as graph relationships ('user is editor of document, document is in folder, folder is owned by team') — fits SaaS sharing models and hierarchical resources. Most cloud platforms are RBAC at the surface (roles, policies) with ABAC primitives (tag / condition keys / IAM conditions) layered in. Use RBAC for cloud-control-plane access; ABAC for scale-out tenant data-plane decisions; ReBAC inside applications that model sharing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I get rid of long-lived cloud access keys?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For humans: federate through your IdP (Okta, Entra ID, Google Workspace) into IAM Identity Center / Entra-based federation / Workforce Identity Federation. Humans get short-lived credentials via SSO; static keys go away. For workloads in cloud: use the native workload-identity primitives — IAM Roles for EC2 / Lambda, IRSA / EKS Pod Identity for Kubernetes on AWS, Managed Identities / Azure Workload Identity for Azure, GCE / GKE Workload Identity for GCP. For workloads outside cloud (CI/CD, on-prem agents, third-party SaaS): use OIDC trust — GitHub Actions, GitLab, CircleCI all publish OIDC tokens that AWS / Azure / GCP can trust without any pre-shared secret. Rotate the remaining long-lived keys aggressively, alert on creation, and track them to zero. The metric to chase is 'count of access keys older than N days' trending toward zero."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is MFA enough for cloud admin accounts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MFA is necessary but not sufficient, and the type of MFA matters more than the presence of it. SMS-based codes are phishable and SIM-swappable. TOTP (authenticator apps) is phishable through real-time relay attacks (Evilginx-class kits). The bar for cloud admins in 2026 is phishing-resistant authentication — FIDO2 security keys, platform passkeys, or device-bound credentials via WebAuthn. Pair that with conditional access (only from managed devices, only from expected geographies, step-up auth for sensitive actions) and session-binding (tokens tied to the device that minted them). Treat 'MFA enabled' as a compliance floor; treat 'phishing-resistant for everyone with prod cloud access' as the actual security target."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is iam:PassRole and why does it matter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "iam:PassRole is the AWS permission that lets a principal hand a role to a service to assume on its behalf. If you can pass a powerful role to a service you control (Lambda, EC2, SageMaker, Glue, CloudFormation, dozens more), you can effectively assume that role's permissions through the service. It's the single most-abused privilege escalation primitive in AWS — the equivalent of 'I can't read this S3 bucket, but I can launch an EC2 instance with a role that can.' The defense: scope iam:PassRole tightly using the iam:PassedToService condition, restrict which roles can be passed by ARN, and audit it with IAM Access Analyzer's unused-permission and external-access analyzers. Azure's analog is the ability to assign a managed identity with elevated rights; GCP's is the iam.serviceAccounts.actAs permission. The pattern repeats across all three clouds; the names differ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does just-in-time (JIT) access look like in cloud?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JIT access means standing permissions are minimal, and elevated permissions are requested per-need with an expiration. The mechanics vary by cloud and platform: AWS via IAM Identity Center permission sets + approval workflows or via tools like ConductorOne / Tenable Cloud Security / Sym; Azure via Entra PIM (Privileged Identity Management) with eligibility, activation, MFA-on-activation, and time bounds; GCP via temporary IAM grants with conditions or Privileged Access Manager. The audit trail captures who requested, who approved, why, and when access expired. The operational benefit is that the breach blast-radius from a compromised user is small most of the time — they only have elevated privileges during the window they actively requested. The maturity step beyond JIT is just-enough-access: even during the window, only the specific actions needed, not a generic admin role."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I detect identity abuse in cloud?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The high-signal detections to build first: (1) console login or AssumeRole from a new ASN / country / device for a privileged identity; (2) GetCallerIdentity called by a long-lived access key from an unusual source — the 'who am I, where are my permissions' reconnaissance step is reliable post-compromise behavior; (3) impossible-travel between sessions; (4) MFA-disable, password-reset, or new-access-key events on privileged accounts; (5) AssumeRole chain length anomalies (one role assumed via another via another); (6) new OAuth app consent grants in your IdP; (7) iam:PassRole / iam:CreateAccessKey / iam:CreateLoginProfile / iam:AttachUserPolicy / sts:GetFederationToken from non-admin paths; (8) service-account-key creation in GCP, federated-credential addition in Azure, IAM-user creation in AWS — all rarer than zero in a mature org, all high-value to alert on. Feed CloudTrail / Activity Log / Cloud Audit Logs into a SIEM or detection-engineering platform (Panther, Anvilogic, SnapAttack, native Sentinel) and tune from there."
+          }
+        }
+      ]
+    }
+    </script>
+  <noscript><style>.js-enabled header nav{display:block !important}</style></noscript>
+</head>
+
+<body class="js-enabled">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+          <svg class="logo-mark" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="CSOH logo"><defs><linearGradient id="lm-cloud" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7dd3fc"/><stop offset="100%" stop-color="#0284c7"/></linearGradient></defs><path d="M7 19 a4 4 0 0 1 4-4 a6 6 0 0 1 11 0 a3.5 3.5 0 0 1 3.5 3.5 a3.5 3.5 0 0 1 -3.5 3.5 H8 a3.5 3.5 0 0 1 -1-7 z" fill="url(#lm-cloud)"/><path d="M11 13 L21 13 L21 18 a5 5.5 0 0 1 -5 5 a5 5.5 0 0 1 -5 -5 z" fill="#f59e0b"/><path d="M13.5 16.7 L15.3 18.4 L18.6 15" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li class="has-dropdown has-mega">
+                      <button class="dropdown-toggle active" aria-expanded="true" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                      <div class="dropdown-menu mega-menu mega-3col">
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Foundations</h4>
+                          <ul>
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Topics</h4>
+                          <ul>
+                            <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="containers.html">Containers</a></li>
+                            <li><a href="kubernetes.html">Kubernetes</a></li>
+                            <li><a href="serverless.html">Serverless</a></li>
+                            <li><a href="ci-cd.html">CI/CD</a></li>
+                            <li><a href="landing-zones.html">Landing Zones</a></li>
+                            <li><a href="iam.html" aria-current="page">IAM &amp; Identity</a></li>
+                            <li><a href="zero-trust.html">Zero Trust</a></li>
+                            <li><a href="data-security.html">Data Security &amp; KMS</a></li>
+                            <li><a href="grc.html">GRC</a></li>
+                            <li><a href="compliance-frameworks.html">Compliance Frameworks</a></li>
+                            <li><a href="ai-learning.html">AI Learning</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Career &amp; Growth</h4>
+                          <ul>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+                            <li><a href="cloud-security-careers.html">Careers</a></li>
+                            <li><a href="cloud-security-reading-list.html">Reading List</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Threat Intel <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="threat-research.html">Threat Research</a></li>
+                        <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        <li><a href="cloud-soc.html">Cloud SOC</a></li>
+                        <li><a href="detection-engineering.html">Detection Engineering</a></li>
+                        <li><a href="incident-response.html">Incident Response</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown has-mega">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Community <span class="caret" aria-hidden="true">▾</span></button>
+                      <div class="dropdown-menu mega-menu mega-2col">
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Live</h4>
+                          <ul>
+                            <li><a href="sessions.html">Friday Zoom Sessions</a></li>
+                            <li><a href="community.html">Community &amp; Signal</a></li>
+                            <li><a href="conferences.html">Conferences</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Archive</h4>
+                          <ul>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="contribute.html">Contribute</a></li>
+                        <li><a href="contribute-resources.html">Add a Resource</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-cta-item"><a href="https://csoh.kit.com/39feb4f397" class="nav-cta" target="_blank" rel="noopener noreferrer">Join Friday Zoom →</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">IAM &amp; Identity</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--illustrated">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1>IAM &amp; Cloud Identity</h1>
+          <p>Identity is the perimeter. The #1 root cause of cloud breaches isn't an unpatched server or a zero-day — it's a stolen credential, a misconfigured trust, or a role that holds more permissions than anyone remembers granting. Vendor-neutral guide to cloud IAM: identity types (human, workload, service), federation and SSO, RBAC vs ABAC vs ReBAC, least privilege at scale, JIT access, workload identity without long-lived keys, the privilege escalation paths attackers actually use, phishing-resistant MFA, and the detections that fire when identity is abused.</p>
+          <div class="cta-buttons">
+            <a href="#escalation" class="btn btn-primary">Privilege escalation paths →</a>
+            <a href="#comparison" class="btn btn-secondary">AWS / Azure / GCP comparison</a>
+          </div>
+        </div>
+        <div class="hero-illustration" aria-hidden="true">
+          <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of three identity-provider columns with a key motif feeding into a cloud, surrounded by identity-protocol badges">
+            <defs>
+              <linearGradient id="iam-cloud" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="60%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
+              <linearGradient id="iam-col-human" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#075985"/></linearGradient>
+              <linearGradient id="iam-col-workload" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#92400e"/></linearGradient>
+              <linearGradient id="iam-col-service" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#065f46"/></linearGradient>
+              <linearGradient id="iam-key" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fde68a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient>
+              <radialGradient id="iam-halo" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.35"/><stop offset="100%" stop-color="#7dd3fc" stop-opacity="0"/></radialGradient>
+            </defs>
+            <circle cx="300" cy="240" r="200" fill="url(#iam-halo)"/>
+            <!-- Cloud at top -->
+            <path d="M 200,80 a 50,50 0 0,1 60,-30 a 70,70 0 0,1 130,0 a 50,50 0 0,1 50,30 a 45,45 0 0,1 -25,80 H 220 a 45,45 0 0,1 -20,-80 z" fill="url(#iam-cloud)" stroke="#fff" stroke-width="1.5" stroke-opacity="0.4"/>
+            <text x="300" y="105" text-anchor="middle" fill="#0c4a6e" font-size="14" font-weight="700">Cloud control plane</text>
+            <text x="300" y="125" text-anchor="middle" fill="#0c4a6e" font-size="11">APIs · resources · data</text>
+            <!-- Lock body in the center under cloud -->
+            <g transform="translate(270,165)">
+              <rect x="0" y="20" width="60" height="50" rx="6" fill="#1f2937" stroke="#fbbf24" stroke-width="1.5"/>
+              <path d="M 10,20 V 12 a 20,20 0 0,1 40,0 V 20" stroke="#fbbf24" stroke-width="4" fill="none"/>
+              <circle cx="30" cy="40" r="6" fill="#fbbf24"/>
+              <rect x="28" y="44" width="4" height="14" fill="#fbbf24"/>
+            </g>
+            <!-- Three identity columns -->
+            <g>
+              <rect x="80" y="250" width="120" height="150" rx="4" fill="url(#iam-col-human)" stroke="#7dd3fc" stroke-width="2"/>
+              <text x="140" y="278" text-anchor="middle" fill="#fff" font-size="13" font-weight="800">Human</text>
+              <circle cx="140" cy="305" r="9" fill="#e0f2fe"/>
+              <path d="M 124,335 q 16,-18 32,0 v 12 h -32 z" fill="#e0f2fe"/>
+              <text x="140" y="370" text-anchor="middle" fill="#e0f2fe" font-size="10">SSO · MFA</text>
+              <text x="140" y="386" text-anchor="middle" fill="#bae6fd" font-size="9">workforce · CIAM</text>
+
+              <rect x="240" y="250" width="120" height="150" rx="4" fill="url(#iam-col-workload)" stroke="#fcd34d" stroke-width="2"/>
+              <text x="300" y="278" text-anchor="middle" fill="#fff" font-size="13" font-weight="800">Workload</text>
+              <rect x="282" y="295" width="36" height="24" rx="2" fill="#fef3c7"/>
+              <rect x="286" y="299" width="6" height="4" fill="#f59e0b"/>
+              <rect x="296" y="299" width="6" height="4" fill="#f59e0b"/>
+              <rect x="306" y="299" width="6" height="4" fill="#f59e0b"/>
+              <rect x="286" y="307" width="28" height="4" fill="#fcd34d"/>
+              <text x="300" y="345" text-anchor="middle" fill="#fef3c7" font-size="10">IRSA · OIDC</text>
+              <text x="300" y="361" text-anchor="middle" fill="#fde68a" font-size="9">pods · services</text>
+              <text x="300" y="377" text-anchor="middle" fill="#fde68a" font-size="9">CI/CD runners</text>
+
+              <rect x="400" y="250" width="120" height="150" rx="4" fill="url(#iam-col-service)" stroke="#6ee7b7" stroke-width="2"/>
+              <text x="460" y="278" text-anchor="middle" fill="#fff" font-size="13" font-weight="800">Service</text>
+              <circle cx="460" cy="307" r="14" fill="none" stroke="#a7f3d0" stroke-width="2"/>
+              <circle cx="460" cy="307" r="4" fill="#a7f3d0"/>
+              <text x="460" y="345" text-anchor="middle" fill="#a7f3d0" font-size="10">IAM principals</text>
+              <text x="460" y="361" text-anchor="middle" fill="#6ee7b7" font-size="9">roles · SAs</text>
+              <text x="460" y="377" text-anchor="middle" fill="#6ee7b7" font-size="9">managed identity</text>
+            </g>
+            <!-- Base plate -->
+            <rect x="60" y="404" width="480" height="14" rx="2" fill="#1f2937" stroke="#fbbf24" stroke-width="1"/>
+            <!-- Protocol badges left -->
+            <g>
+              <rect x="10" y="195" width="60" height="20" rx="10" fill="#0d1424" stroke="#fbbf24" stroke-width="1"/>
+              <text x="40" y="209" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700">SAML</text>
+              <rect x="10" y="225" width="60" height="20" rx="10" fill="#0d1424" stroke="#60a5fa" stroke-width="1"/>
+              <text x="40" y="239" text-anchor="middle" fill="#60a5fa" font-size="10" font-weight="700">OIDC</text>
+              <rect x="10" y="255" width="60" height="20" rx="10" fill="#0d1424" stroke="#f97316" stroke-width="1"/>
+              <text x="40" y="269" text-anchor="middle" fill="#f97316" font-size="10" font-weight="700">SCIM</text>
+              <rect x="10" y="285" width="60" height="20" rx="10" fill="#0d1424" stroke="#84cc16" stroke-width="1"/>
+              <text x="40" y="299" text-anchor="middle" fill="#84cc16" font-size="10" font-weight="700">FIDO2</text>
+            </g>
+            <!-- Protocol badges right -->
+            <g>
+              <rect x="530" y="195" width="60" height="20" rx="10" fill="#0d1424" stroke="#a78bfa" stroke-width="1"/>
+              <text x="560" y="209" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="700">RBAC</text>
+              <rect x="530" y="225" width="60" height="20" rx="10" fill="#0d1424" stroke="#22d3ee" stroke-width="1"/>
+              <text x="560" y="239" text-anchor="middle" fill="#22d3ee" font-size="10" font-weight="700">ABAC</text>
+              <rect x="530" y="255" width="60" height="20" rx="10" fill="#0d1424" stroke="#34d399" stroke-width="1"/>
+              <text x="560" y="269" text-anchor="middle" fill="#34d399" font-size="10" font-weight="700">JIT</text>
+              <rect x="530" y="285" width="60" height="20" rx="10" fill="#0d1424" stroke="#f472b6" stroke-width="1"/>
+              <text x="560" y="299" text-anchor="middle" fill="#f472b6" font-size="10" font-weight="700">PIM</text>
+            </g>
+            <!-- Connection lines from columns to cloud -->
+            <g stroke="#a78bfa" stroke-width="1" stroke-dasharray="3 4" fill="none" opacity="0.5">
+              <line x1="140" y1="250" x2="240" y2="180"/>
+              <line x1="300" y1="250" x2="300" y2="240"/>
+              <line x1="460" y1="250" x2="360" y2="180"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <main class="container contribute-article" id="main-content">
+
+        <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/keys-lock.webp" type="image/webp">
+            <img src="/img/photos/keys-lock.jpg" alt="Close-up of a brass key inserted in an old lock" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Photo by PhotoMIX Company on Pexels</figcaption>
+        </figure>
+
+        <p class="page-meta"><time datetime="2026-05-17">Last updated <strong>2026-05-17</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/iam.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>The 30-second version:</strong> In cloud, <strong>identity is the perimeter</strong>. Every action is an authenticated API call, every misconfigured trust is a foothold, every overprivileged role is a blast radius. The work of cloud IAM is to (1) <strong>federate humans</strong> through one identity provider so credentials are short-lived and revocable, (2) <strong>eliminate long-lived workload secrets</strong> by adopting platform workload identity (IRSA, GKE Workload Identity, Azure Workload Identity, OIDC trust for CI/CD), (3) <strong>continuously narrow permissions</strong> using the cloud's own analyzers plus a third-party tool when the volume demands it, and (4) <strong>detect identity abuse</strong> with high-signal alerts that fire on the post-compromise behaviors attackers exhibit.</p>
+            <p style="margin-top:0.75rem;">The trap is treating IAM as a one-time configuration. It's a discipline — drift, role proliferation, exception accumulation, and shadow identities (service accounts created in side projects, OAuth apps consented to, federated trusts added to integrate a new SaaS) all bend the curve away from least privilege every week. The mature program treats identity like a code base: reviewed, versioned, tested, and monitored.</p>
+        </div>
+
+        <div class="toc">
+            <h2>On this page</h2>
+            <ol>
+                <li><a href="#what-is">What IAM is in cloud</a></li>
+                <li><a href="#identity-types">Identity types</a></li>
+                <li><a href="#federation">Federation &amp; SSO</a></li>
+                <li><a href="#rbac-abac">RBAC vs ABAC vs ReBAC</a></li>
+                <li><a href="#least-privilege">Least privilege &amp; permissions analyzers</a></li>
+                <li><a href="#jit-pam">JIT access &amp; PAM</a></li>
+                <li><a href="#workload-identity">Workload identity (no more keys)</a></li>
+                <li><a href="#escalation">Privilege escalation paths</a></li>
+                <li><a href="#mfa">MFA &amp; phishing-resistant auth</a></li>
+                <li><a href="#detection">Detection signals for identity abuse</a></li>
+                <li><a href="#comparison">AWS, Azure, and GCP side-by-side</a></li>
+                <li><a href="#maturity">Maturity stages</a></li>
+                <li><a href="#pitfalls">Common pitfalls</a></li>
+                <li><a href="#further">Further reading</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#where-next">Where next</a></li>
+            </ol>
+        </div>
+
+        <section id="what-is">
+            <h2>What IAM is in cloud</h2>
+            <p>IAM — Identity and Access Management — is the set of systems that answer two questions on every cloud API call: <em>who is this</em>, and <em>are they allowed to do this</em>. The first is authentication (AuthN); the second is authorization (AuthZ). In cloud, both happen at the control plane on every action, not once at the front door, which is the central difference from the on-prem AD-centric model many practitioners came up in.</p>
+            <p>The on-prem model is roughly: a user logs into a workstation, the workstation gets a Kerberos ticket from a domain controller, the ticket grants implicit trust to most internal resources behind the same firewall. Network position is most of the access decision; identity is a constant inside the perimeter. The cloud model has no perimeter — every call to the AWS, Azure, or GCP API is a fresh authorization decision evaluated against an explicit policy. There is no "behind the firewall"; an IMDS-exposed role abused from a compromised pod talks to the same control plane as the security team's own console session.</p>
+            <p>The practical implications: every workload needs an identity (no shared service accounts), every policy is auditable (every Allow / Deny is a log line), every change is an event (a new role assumption is detectable in real time), and every credential is interesting to an attacker (long-lived keys leak; short-lived tokens are the only safe pattern). The IAM team's job is to make that surface area legible, narrow, and observable.</p>
+        </section>
+
+        <section id="identity-types">
+            <h2>Identity types</h2>
+            <p>The first taxonomy to internalize: cloud IAM serves three distinct populations, with different lifecycles, threat models, and tooling.</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-iam">
+                    <h3>Human identities</h3>
+                    <p><strong>Workforce</strong> — employees, contractors, vendor partners. Lives in your corporate IdP (Okta, Entra ID, Google Workspace). Federated into every cloud, SaaS, and internal app. <strong>Customer (CIAM)</strong> — end users of your product. Auth0, Cognito, Entra External ID, Firebase Auth, Stytch, WorkOS. Different scale (millions of users, social login, account-recovery flows) and different threat model (credential stuffing, ATO). <strong>B2B</strong> — your customer's IT admins integrating with your product via SSO. SAML / OIDC inbound, SCIM provisioning, the messy world of "every customer wants a different IdP."</p>
+                </div>
+                <div class="pillar-card pillar-card-supply">
+                    <h3>Workload identities</h3>
+                    <p>Anything that isn't a human but needs to call an API: a pod in Kubernetes, a serverless function, a CI/CD job, an on-prem agent, a third-party SaaS connector, a script running in someone's automation. Historically these used long-lived access keys; the modern pattern is short-lived tokens minted from a platform identity (IRSA, GKE Workload Identity, Azure Workload Identity) or from a federated OIDC trust. The volume here typically exceeds the human population 10–100×; most orgs have an order-of-magnitude underestimate of how many workload identities they have.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>Service / principal identities</h3>
+                    <p>The cloud-native IAM constructs — AWS IAM users / roles / federated principals, Azure service principals / managed identities, GCP service accounts / workload-identity pools. These are the <em>shape</em> identity takes inside the cloud, regardless of whether the entity behind them is human, workload, or another service. The principal is what policies attach to and what logs reference. Most identity work in cloud is really principal hygiene: who owns this role, what touches it, when was it last used, is it still needed.</p>
+                </div>
+            </div>
+            <p>The three populations overlap in unintuitive ways. A workforce engineer logs into AWS via SSO (human → principal), pushes code via a CI/CD job that assumes a deploy role (workload → principal), and the deployed service runs as a pod-bound role that calls S3 (workload → principal). Three different identity types, one continuous chain of accountability if the logs and trust relationships are wired correctly. The most common audit gap is that the chain isn't continuous — a CI job runs as a generic shared role, so "who deployed this" can't be answered. Fix the federation, fix the audit.</p>
+        </section>
+
+        <section id="federation">
+            <h2>Federation &amp; SSO</h2>
+            <p>Federation is the pattern that lets a single identity provider authoritatively assert "this is user X" to multiple downstream systems. SSO is the user-visible benefit: one login, many apps. The protocols and the IdP landscape:</p>
+            <h3>SAML 2.0</h3>
+            <p>The grandfather of enterprise federation. XML-based, browser-redirect flow, signed assertions. Still dominant for SaaS-to-SaaS federation in B2B contexts because every IdP and every enterprise app speaks it. Verbose, awkward to debug, vulnerable to subtle bugs in signature validation if you ever roll your own — which you shouldn't.</p>
+            <h3>OIDC (OpenID Connect)</h3>
+            <p>The modern, JSON / JWT-based federation protocol built on OAuth 2.0. Cleaner, mobile-friendly, easier to debug, and — critically for cloud — the protocol cloud providers trust for federating workloads from CI/CD systems, Kubernetes clusters, and on-prem agents. If you're integrating a new system in 2026, prefer OIDC; reserve SAML for legacy partners that don't speak OIDC.</p>
+            <h3>SCIM (System for Cross-domain Identity Management)</h3>
+            <p>The provisioning protocol that complements SAML / OIDC. SAML / OIDC authenticate sessions; SCIM keeps user lifecycles (create / update / deprovision) in sync between the IdP and downstream apps. Without SCIM, you authenticate a user successfully — and the destination app has no idea they exist, or worse, doesn't know they were terminated last quarter. The off-boarding gap is the most expensive consequence of skipping SCIM.</p>
+            <h3>The IdP landscape</h3>
+            <ul>
+                <li><strong><a href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">Okta</a></strong> — the SaaS IdP market leader, especially for B2B SaaS and mid-market. Strong app catalog, mature SCIM connectors. Okta Workforce Identity Cloud for employees; Auth0 (Okta-owned) for CIAM.</li>
+                <li><strong><a href="https://www.microsoft.com/en-us/security/business/microsoft-entra" target="_blank" rel="noopener noreferrer">Microsoft Entra ID</a></strong> (formerly Azure AD) — dominant in Microsoft-centric enterprises and basically default in any org running Microsoft 365. Entra ID Governance, PIM, Conditional Access. Entra External ID is the Microsoft CIAM offering.</li>
+                <li><strong><a href="https://workspace.google.com/" target="_blank" rel="noopener noreferrer">Google Workspace</a></strong> — IdP for orgs that run on Google Workspace. Cloud Identity is the stand-alone IAM-only SKU. Strong integration with GCP Workload Identity Federation.</li>
+                <li><strong><a href="https://www.pingidentity.com/" target="_blank" rel="noopener noreferrer">Ping Identity</a></strong> — enterprise-grade, strong in financial services and regulated industries. PingOne, PingFederate, PingAccess.</li>
+                <li><strong><a href="https://jumpcloud.com/" target="_blank" rel="noopener noreferrer">JumpCloud</a></strong> — directory + IdP + device management, popular with SMBs and growth-stage companies that want one tool for everything.</li>
+                <li><strong><a href="https://auth0.com/" target="_blank" rel="noopener noreferrer">Auth0</a></strong> — developer-friendly CIAM, owned by Okta. The default choice for many product engineers building customer authentication.</li>
+                <li><strong>Open source</strong> — <a href="https://www.keycloak.org/" target="_blank" rel="noopener noreferrer">Keycloak</a>, <a href="https://www.ory.sh/" target="_blank" rel="noopener noreferrer">Ory</a>, <a href="https://authentik.io/" target="_blank" rel="noopener noreferrer">authentik</a>, <a href="https://www.zitadel.com/" target="_blank" rel="noopener noreferrer">Zitadel</a>. Worth considering when you want to own the identity layer or when CIAM cost-per-MAU at scale becomes painful.</li>
+            </ul>
+            <h3>One IdP, one source of truth</h3>
+            <p>The architectural decision that pays the most dividends: pick one workforce IdP, federate every cloud and every SaaS through it, and treat that IdP's user lifecycle (joiner / mover / leaver via HRIS-driven SCIM) as the authoritative event stream for access. Multi-IdP environments — usually the result of acquisitions or org-chart politics — produce orphan accounts, missed deprovisions, and security exposure. Consolidate, even if it takes 18 months.</p>
+        </section>
+
+        <section id="rbac-abac">
+            <h2>RBAC vs ABAC vs ReBAC</h2>
+            <p>The three authorization models you'll encounter, and where each fits in a cloud environment.</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Model</th>
+                            <th scope="col">How it grants access</th>
+                            <th scope="col">Best for</th>
+                            <th scope="col">Watch out for</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">RBAC</th>
+                            <td>Permissions attach to named roles; subjects are assigned roles.</td>
+                            <td>Cloud control-plane access, small-to-medium app permissions, anything an auditor needs to read at a glance.</td>
+                            <td>Role explosion at scale (1 role per team × per env × per privilege level = thousands of roles).</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">ABAC</th>
+                            <td>Policies evaluate attributes of subject, resource, action, and context — tags, claims, time, IP, MFA state.</td>
+                            <td>Scale-out tenant data planes, multi-team cloud accounts using tags to scope access, per-environment guardrails.</td>
+                            <td>Harder to reason about; one wrong tag flips the access decision. Strong tagging discipline is a prerequisite.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">ReBAC</th>
+                            <td>Access is a graph relationship — user is editor of doc, doc is in folder, folder is owned by team.</td>
+                            <td>SaaS sharing models (Google Docs / Notion / Figma-style), hierarchical resources, fine-grained app permissions.</td>
+                            <td>Newer pattern; tooling (OpenFGA, SpiceDB, Permify, Cerbos) is maturing but less embedded in cloud-native IAM than RBAC / ABAC.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>In practice, cloud-native IAM is <strong>RBAC at the surface with ABAC primitives layered in</strong>. You define roles (RBAC), and within the role's policy you use condition keys / aws:ResourceTag / aud / claims / scope to add attribute-based constraints (ABAC). The pure-RBAC org with thousands of roles is at one failure mode; the pure-ABAC org with one role and 200 condition keys is at the other. Most mature programs land in the middle: a small set of roles per persona, ABAC conditions inside each role to scope to the right resources.</p>
+            <p>ReBAC belongs <em>inside the application</em>, not in the cloud control plane. If you're building product authorization (who can see which document, which org's data, which row in this multi-tenant table), reach for <a href="https://openfga.dev/" target="_blank" rel="noopener noreferrer">OpenFGA</a>, <a href="https://authzed.com/" target="_blank" rel="noopener noreferrer">SpiceDB</a>, <a href="https://www.cerbos.dev/" target="_blank" rel="noopener noreferrer">Cerbos</a>, or <a href="https://permify.co/" target="_blank" rel="noopener noreferrer">Permify</a>. AWS Verified Permissions (Cedar) is the AWS-native answer in the same category. Don't try to encode product authorization in IAM policies; that's a path to permission sprawl and customer-visible bugs.</p>
+        </section>
+
+        <section id="least-privilege">
+            <h2>Least privilege &amp; permissions analyzers</h2>
+            <p>"Grant the minimum permissions required" is the most-repeated and least-implemented principle in cloud security. The reasons it's hard at scale: the cloud has thousands of distinct actions, your application uses an unknown subset, that subset changes as code evolves, and "what was used" requires log analysis nobody has time to do manually. The 2026 toolchain finally makes this tractable.</p>
+            <h3>Native permissions analyzers</h3>
+            <ul>
+                <li><strong><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html" target="_blank" rel="noopener noreferrer">AWS IAM Access Analyzer</a></strong> — multiple analyzers in one product: external-access (resources reachable from outside the account), unused-access (roles, users, keys, permissions not exercised in N days), policy validation (warns about over-broad policies during authoring), and policy generation (generates a right-sized policy from CloudTrail history). The unused-access analyzer is the single highest-leverage tool for shrinking permissions on roles that already exist.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure" target="_blank" rel="noopener noreferrer">Azure Entra PIM</a></strong> — Privileged Identity Management. Makes admin roles eligible-but-not-active by default; activation requires justification, approval, MFA, and bounds the access window. The audit trail on activations is auditor-gold.</li>
+                <li><strong><a href="https://cloud.google.com/iam/docs/policy-analyzer" target="_blank" rel="noopener noreferrer">GCP Policy Analyzer</a></strong> + <strong><a href="https://cloud.google.com/iam/docs/recommender-overview" target="_blank" rel="noopener noreferrer">IAM Recommender</a></strong> — answers "what permissions does principal X actually have on resource Y" (Policy Analyzer) and "which permissions hasn't this service account used recently, downsize to this smaller role" (Recommender).</li>
+            </ul>
+            <h3>Third-party permissions / CIEM tools</h3>
+            <ul>
+                <li><strong><a href="https://www.wiz.io/" target="_blank" rel="noopener noreferrer">Wiz</a></strong> — CNAPP with strong CIEM (Cloud Infrastructure Entitlement Management) — visualizes attack paths through identity, finds toxic combinations (over-permissioned identity + public exposure + sensitive data + vulnerable workload).</li>
+                <li><strong><a href="https://sonraisecurity.com/" target="_blank" rel="noopener noreferrer">Sonrai</a></strong> — identity-graph focused; built around the "effective permissions" calculation across complex AWS / Azure / GCP IAM models.</li>
+                <li><strong><a href="https://www.permiso.io/" target="_blank" rel="noopener noreferrer">Permiso</a></strong> — identity threat detection &amp; response — what identities did, not just what they could do.</li>
+                <li><strong><a href="https://www.conductorone.com/" target="_blank" rel="noopener noreferrer">ConductorOne</a></strong>, <strong><a href="https://www.veza.com/" target="_blank" rel="noopener noreferrer">Veza</a></strong>, <strong><a href="https://opal.dev/" target="_blank" rel="noopener noreferrer">Opal</a></strong> — access governance / lifecycle / JIT request platforms that sit above the cloud-native IAM primitives.</li>
+                <li><strong><a href="https://www.paloaltonetworks.com/prisma/cloud" target="_blank" rel="noopener noreferrer">Prisma Cloud</a></strong>, <strong><a href="https://www.crowdstrike.com/platform/cloud-security/" target="_blank" rel="noopener noreferrer">CrowdStrike</a></strong>, <strong><a href="https://orca.security/" target="_blank" rel="noopener noreferrer">Orca</a></strong> — CNAPPs with embedded CIEM modules.</li>
+                <li><strong>Open source</strong> — <a href="https://github.com/Netflix/repokid" target="_blank" rel="noopener noreferrer">RepoKID</a> (Netflix), <a href="https://github.com/duo-labs/cloudmapper" target="_blank" rel="noopener noreferrer">CloudMapper</a>, <a href="https://github.com/nccgroup/PMapper" target="_blank" rel="noopener noreferrer">PMapper</a>, <a href="https://github.com/iann0036/iamlive" target="_blank" rel="noopener noreferrer">iamlive</a>. Useful starting points; less hands-off than the commercial tools.</li>
+            </ul>
+            <h3>The right-sizing loop</h3>
+            <p>The operational practice that makes least-privilege real: (1) start a new workload with a deny-by-default role; (2) run it in staging with broad audit logging; (3) use a policy generator or iamlive to derive the minimum permissions actually used; (4) ship that minimum; (5) re-run the analyzer monthly and trim what falls into disuse. The pattern shrinks blast radius continuously without slowing engineers down — the analyzer does the work, the engineer reviews and approves the trim.</p>
+        </section>
+
+        <section id="jit-pam">
+            <h2>JIT access &amp; PAM in cloud</h2>
+            <p>Standing admin access is the highest-impact risk in any cloud environment. The fewer humans who hold standing admin rights, the smaller the blast radius when one gets phished. JIT — just-in-time — access is the pattern that collapses standing privilege to near-zero by making elevated access requestable, approvable, and time-bounded.</p>
+            <h3>What JIT looks like by cloud</h3>
+            <ul>
+                <li><strong>AWS</strong> — IAM Identity Center permission sets configured with shorter session durations (1–4 hours) and approval gates. Third-party platforms (<a href="https://www.conductorone.com/" target="_blank" rel="noopener noreferrer">ConductorOne</a>, <a href="https://opal.dev/" target="_blank" rel="noopener noreferrer">Opal</a>, <a href="https://symops.com/" target="_blank" rel="noopener noreferrer">Sym</a>, <a href="https://teleport.dev/" target="_blank" rel="noopener noreferrer">Teleport</a>) sit in front of permission set activation, capturing the request / approve / audit trail. Some shops build it from primitives — Slack request, Lambda activator, time-bound role assignment.</li>
+                <li><strong>Azure</strong> — Entra PIM is the native answer and is mature. Eligible vs active assignments, activation requires justification + MFA + optional approval, time bounds enforced. Pair with Conditional Access (require compliant device, location, etc.) on activation.</li>
+                <li><strong>GCP</strong> — temporary IAM grants with IAM conditions (expiry timestamp). <a href="https://cloud.google.com/iam/docs/pam-overview" target="_blank" rel="noopener noreferrer">Privileged Access Manager</a> (PAM) is the newer native flow with request / approve / time-bound semantics.</li>
+            </ul>
+            <h3>PAM (Privileged Access Management) in cloud</h3>
+            <p>Traditional PAM (CyberArk, BeyondTrust, Delinea) is built for credential vaulting in an on-prem world — store the admin password, broker the session, record everything. The cloud-native version is different: there are fewer secrets to vault (because federated SSO replaces passwords), but the brokering / recording / approval workflow still matters for sensitive operations. The 2026 PAM shape:</p>
+            <ul>
+                <li><strong>Vault the few remaining long-lived secrets</strong> — root credentials, break-glass accounts, third-party API keys that can't be replaced with OIDC. Use AWS Secrets Manager / Azure Key Vault / GCP Secret Manager, or a cross-cloud vault (HashiCorp Vault, 1Password Secrets Automation, Doppler).</li>
+                <li><strong>Broker access to sensitive resources</strong> — production databases, cluster admin access, customer data systems. Teleport, StrongDM, Cyberark Conjur, Tailscale SSH, plus identity-aware proxies (BeyondCorp Enterprise, AWS Verified Access, Cloudflare Zero Trust). The broker enforces JIT, records the session, and emits the audit log.</li>
+                <li><strong>Break-glass procedures</strong> — every cloud needs a documented, tested path for "the IdP is down and we need to access AWS / Azure / GCP root." Sealed root credentials, multi-person approval to unseal, audit of every use. Test this every six months; the time you need it is not the time to discover the runbook is stale.</li>
+            </ul>
+        </section>
+
+        <section id="workload-identity">
+            <h2>Workload identity (no more long-lived keys)</h2>
+            <p>Long-lived access keys are the most common source of cloud breaches. Every leaked GitHub commit with an AKIA-prefixed key, every Stack Overflow paste with a service-account JSON, every disgruntled-employee export — long-lived credentials get exfiltrated and reused. The fix is to eliminate them, not to rotate them harder.</p>
+            <h3>Inside the cloud — platform workload identity</h3>
+            <ul>
+                <li><strong>AWS EC2 / ECS / Lambda</strong> — IAM roles attached to the compute. The SDK retrieves short-lived credentials from the instance metadata service (IMDSv2 — never IMDSv1) or the task / function metadata endpoint. No keys on disk, ever.</li>
+                <li><strong>AWS EKS — IRSA (IAM Roles for Service Accounts)</strong> — Kubernetes service accounts mapped to IAM roles via OIDC. Pods retrieve credentials via the SDK using a projected service-account token. The successor pattern is <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html" target="_blank" rel="noopener noreferrer">EKS Pod Identity</a>, simpler to configure for net-new clusters.</li>
+                <li><strong>Azure</strong> — <a href="https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview" target="_blank" rel="noopener noreferrer">Managed Identities</a> for VMs / App Service / Functions / Container Apps. For AKS, <a href="https://azure.github.io/azure-workload-identity/docs/" target="_blank" rel="noopener noreferrer">Azure Workload Identity</a> (the successor to AAD Pod Identity) federates Kubernetes service accounts to Entra identities via OIDC.</li>
+                <li><strong>GCP</strong> — service accounts attached to Compute Engine / Cloud Run / Cloud Functions. <a href="https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity" target="_blank" rel="noopener noreferrer">GKE Workload Identity</a> federates Kubernetes service accounts to GCP service accounts. <a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank" rel="noopener noreferrer">Workload Identity Federation</a> extends the same pattern to workloads running outside GCP.</li>
+            </ul>
+            <h3>Outside the cloud — OIDC trust for CI/CD and on-prem</h3>
+            <p>The pattern that eliminated the last common need for long-lived cloud credentials: every major CI/CD platform now publishes OIDC tokens that AWS / Azure / GCP can trust as federated identities. No secret to leak; the trust is a verifiable JWT signed by the CI provider for that specific job.</p>
+            <ul>
+                <li><strong>GitHub Actions</strong> — <code>id-token: write</code> in the workflow permissions, configure an OIDC provider in AWS (or federated credential in Entra / Workload Identity Pool in GCP) that trusts <code>token.actions.githubusercontent.com</code>, scope the trust to specific repos / branches / environments. <a href="https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect" target="_blank" rel="noopener noreferrer">GitHub OIDC docs</a>.</li>
+                <li><strong>GitLab CI</strong> — analogous with <code>id_tokens</code> in the job. <a href="https://docs.gitlab.com/ci/secrets/id_token_authentication/" target="_blank" rel="noopener noreferrer">GitLab OIDC docs</a>.</li>
+                <li><strong>CircleCI</strong> — OIDC tokens via the OIDC contexts feature.</li>
+                <li><strong>Buildkite, Jenkins, Argo, Tekton</strong> — all support OIDC patterns; configuration varies. Vault and SPIFFE / SPIRE bridge the gap for workloads that don't have native OIDC.</li>
+                <li><strong>On-prem agents and third-party SaaS</strong> — Workload Identity Federation (GCP) and similar AWS / Azure mechanisms federate an external OIDC issuer (Okta, Auth0, Vault, SPIRE) so the on-prem workload presents an OIDC token and gets short-lived cloud creds.</li>
+            </ul>
+            <h3>The metrics to chase</h3>
+            <p>Two numbers that should both trend to zero: <strong>count of IAM users with access keys</strong> (every key is potential exposure) and <strong>median age of access keys</strong> (older keys are likelier to have been exposed). A mature program ends with a handful of break-glass IAM users, every other principal a role / service account / federated identity, and no key older than 30–90 days.</p>
+        </section>
+
+        <section id="escalation">
+            <h2>Common cloud privilege escalation paths</h2>
+            <p>The defender's view of how attackers move from a low-privilege foothold to admin in cloud. The pattern names change by provider; the shape repeats.</p>
+            <h3>AWS</h3>
+            <ul>
+                <li><strong>iam:PassRole abuse.</strong> The single most-abused permission. If the compromised principal can iam:PassRole a powerful role to a service it controls (Lambda, EC2, Glue, CloudFormation, SageMaker, dozens more), it effectively assumes that role. Defense: scope iam:PassRole with iam:PassedToService and explicit role-ARN allowlists. Audit with Access Analyzer's unused-permission view.</li>
+                <li><strong>AssumeRole chains.</strong> Role A trusts role B which trusts role C. The compromised B can chain to A or C if the trust policies are permissive. Defense: scope sts:AssumeRole trust policies tightly — specific principals, not Account: 123456789012; specific external IDs for cross-account; aws:SourceAccount / aws:SourceArn conditions to prevent confused-deputy attacks.</li>
+                <li><strong>Confused deputy via cross-account trust.</strong> An AWS service (a backup service, a monitoring SaaS) assumes a role in your account. If the trust policy doesn't pin the source account / external ID, a malicious tenant of that service can trick the service into acting against your account. Defense: aws:SourceAccount + aws:SourceArn + sts:ExternalId on every cross-account trust policy.</li>
+                <li><strong>iam:CreateAccessKey, iam:CreateLoginProfile, iam:AttachUserPolicy, iam:PutUserPolicy.</strong> The "let me make myself more powerful" permissions. Any of them on a principal that can target a more-privileged user is escalation. Defense: deny these as a service control policy unless explicitly scoped to a narrow admin role.</li>
+                <li><strong>IMDSv1 + SSRF.</strong> An app vulnerable to SSRF reads the EC2 instance metadata endpoint and exfiltrates the instance role credentials. Defense: enforce IMDSv2 (the token-based session protocol) account-wide; SCP-block IMDSv1 instances. Run <code>aws ec2 modify-instance-metadata-options</code> on every existing instance.</li>
+            </ul>
+            <h3>GCP</h3>
+            <ul>
+                <li><strong>Service account impersonation (iam.serviceAccounts.actAs, getAccessToken, generateAccessToken).</strong> If the compromised principal can impersonate a more privileged service account, it inherits that service account's permissions for the duration of the impersonation. Defense: narrow which principals have actAs on which service accounts; alert on impersonation events of high-value SAs.</li>
+                <li><strong>Service account key creation.</strong> iam.serviceAccountKeys.create on a privileged SA mints a long-lived key the attacker can exfiltrate. Defense: organization policy <em>iam.disableServiceAccountKeyCreation</em> at the org level; require a documented exception path.</li>
+                <li><strong>Workload Identity binding abuse.</strong> A compromised Kubernetes service account bound to a powerful GCP service account is, effectively, that GCP service account. Defense: principle of least privilege on Workload Identity bindings; one GSA per workload, narrowly scoped.</li>
+                <li><strong>Hierarchical inheritance.</strong> A role granted at the organization level inherits down. A misplaced "Owner" at org level is everywhere. Defense: grant at the lowest level that works (project or folder), audit org-level bindings monthly.</li>
+            </ul>
+            <h3>Azure</h3>
+            <ul>
+                <li><strong>Managed identity abuse.</strong> A VM with a User-Assigned Managed Identity that holds Contributor on the subscription — compromise the VM, get the subscription. The VM's IMDS endpoint mints tokens for the managed identity. Defense: scope managed identities to the minimum role on the minimum scope; never Contributor on a subscription for a workload.</li>
+                <li><strong>Service principal credential addition.</strong> Adding a new password or certificate to an existing service principal — and the resulting identity inherits the SP's app roles. Defense: alert on credential additions to privileged service principals; review SP credential lifetimes.</li>
+                <li><strong>Federated credential abuse.</strong> An Entra app's federated credentials allow OIDC tokens to authenticate as the app. A misconfigured federated credential — e.g., trusting <code>repo:*</code> across all branches without environment scoping — lets a PR from a fork mint cloud creds. Defense: scope federated credentials to specific repos, environments, branches.</li>
+                <li><strong>Owner / Global Admin separation.</strong> Azure RBAC (subscription Owner) and Entra ID admin roles (Global Admin) are independent in some configurations, conflated in others. A compromised Global Admin can grant itself Owner via the "Access management for Azure resources" toggle. Defense: PIM-protect both, separate the populations, monitor escalation paths.</li>
+            </ul>
+            <h3>Cross-cloud and federation</h3>
+            <ul>
+                <li><strong>OIDC trust misconfigurations.</strong> The most common 2026 pattern: a GitHub Actions OIDC trust configured with <code>repo:*</code> instead of <code>repo:org/repo:ref:refs/heads/main</code>. Any PR — including from a fork — can mint cloud creds for the trusted role. Defense: always scope the OIDC subject claim to specific repo + branch / environment; prefer environment-scoped trust over branch.</li>
+                <li><strong>SAML response tampering.</strong> Historic (CVE-2017-11427 and friends) — bugs in signature validation let attackers modify the assertion's user claim. Mostly patched, occasionally rediscovered in roll-your-own SAML libraries. Defense: use the IdP-provided SDK, not a homegrown parser.</li>
+                <li><strong>SCIM token leakage.</strong> SCIM provisioning tokens can typically create / modify users in the downstream app. A leaked SCIM token is account takeover for the entire tenant. Defense: rotate SCIM tokens; alert on user-creation outside expected HRIS sync windows.</li>
+            </ul>
+            <p>For attack-path tooling beyond manual review, <a href="https://github.com/BloodHoundAD/BloodHound" target="_blank" rel="noopener noreferrer">BloodHound</a> (Cloud), <a href="https://github.com/nccgroup/PMapper" target="_blank" rel="noopener noreferrer">PMapper</a>, <a href="https://github.com/RhinoSecurityLabs/pacu" target="_blank" rel="noopener noreferrer">Pacu</a>, and the CIEM tools listed earlier all visualize these paths automatically. Run them in offense mode against your own environment quarterly.</p>
+        </section>
+
+        <section id="mfa">
+            <h2>MFA &amp; phishing-resistant authentication</h2>
+            <p>"MFA enabled" is no longer a meaningful security control by itself. The factor type matters more than the presence of a second factor.</p>
+            <h3>The factor ladder</h3>
+            <ul>
+                <li><strong>SMS / voice OTP</strong> — phishable, SIM-swappable, intercept-able via SS7. Use only as a fallback for accounts with no other risk exposure; never for cloud admins.</li>
+                <li><strong>TOTP (Google Authenticator, Authy, 1Password)</strong> — better than SMS, still phishable via real-time relay (the attacker proxies your TOTP through Evilginx / Modlishka). Acceptable for low-risk users; insufficient for admins.</li>
+                <li><strong>Push notifications</strong> — Duo Push, Microsoft Authenticator, Okta Verify. Vulnerable to MFA fatigue (spam the user until they tap). Number-matching mitigates most of that. Acceptable middle tier.</li>
+                <li><strong>FIDO2 / WebAuthn / passkeys</strong> — phishing-resistant. The credential is bound to the origin (the IdP domain), so a phishing site can't relay it. YubiKeys, Titan Keys, Touch ID, Windows Hello, platform passkeys all qualify. <strong>This is the 2026 minimum for any account with prod cloud access.</strong></li>
+                <li><strong>Hardware-backed device certificates</strong> — for high-value access, the credential is sealed to a TPM / Secure Enclave, gated by user presence. The session is bound to the device; stolen tokens don't replay.</li>
+            </ul>
+            <h3>Conditional access</h3>
+            <p>The factor is one input to the access decision; context is the other. Conditional access policies (Entra Conditional Access, Okta Adaptive MFA, Google BeyondCorp, Cloudflare Zero Trust) evaluate device posture, location, network, time, sign-in risk score, and recent behavior — and either allow, step-up (require an additional factor), or block. The shape of a mature policy: only managed compliant devices, only from expected geographies, step-up for admin scopes, block from anonymizing networks (Tor, known VPN exit nodes that match attacker telemetry).</p>
+            <h3>Session binding</h3>
+            <p>The 2026 attack pattern that bypasses MFA is session-cookie theft via infostealer (Lumma, RedLine, etc.). The user does FIDO2 successfully; the malware exfiltrates the resulting session cookie; the attacker reuses it from anywhere. Defenses: <a href="https://developer.chrome.com/docs/web-platform/device-bound-session-credentials" target="_blank" rel="noopener noreferrer">device-bound session credentials</a> (DBSC), token-binding, continuous-access evaluation that revokes sessions on risk-score changes, and short session lifetimes for sensitive scopes. Expect session-theft to dominate the next round of cloud incidents until DBSC and equivalents are universally deployed.</p>
+        </section>
+
+        <section id="detection">
+            <h2>Detection signals for identity abuse</h2>
+            <p>The detections every cloud SOC should have running. None of these are exotic; the failure mode is rarely "we couldn't see it" — it's "we never wrote the rule." (See also: <a href="cloud-soc.html">Cloud SOC</a>.)</p>
+            <h3>High-signal detections</h3>
+            <ul>
+                <li><strong>Impossible travel.</strong> Same user, two sessions in geographically incompatible locations within a window shorter than physical travel allows. Native in Entra ID Protection, Okta ThreatInsight, and most CASB / SIEM platforms.</li>
+                <li><strong>Console login from a new ASN / country / device.</strong> For privileged identities, "first-seen" is the alert. Suppress with a baseline of expected sources.</li>
+                <li><strong>GetCallerIdentity from an unusual context.</strong> The "who am I" reconnaissance call is one of the most reliable post-compromise indicators. A long-lived access key calling GetCallerIdentity from a new ASN is high-fidelity. (AWS-specific; analogs exist for Azure / GCP.)</li>
+                <li><strong>New AssumeRole / impersonation event for a high-value role.</strong> If only three principals should ever assume the org-admin role, the fourth is the alert.</li>
+                <li><strong>AssumeRole chain length anomaly.</strong> Role A assumed via B via C is normal in some workflows, unusual in most. Baseline and alert on chain length growth.</li>
+                <li><strong>MFA disabled / password reset / new access key / new federated credential.</strong> On any privileged principal, these are critical-severity. On standard principals, watch for clustering (the attacker hits ten in a row).</li>
+                <li><strong>OAuth app consent / new federated trust.</strong> New OAuth app consents in the IdP and new federated credentials on Entra apps / AWS OIDC providers / GCP workload-identity pools are the modern persistence mechanism. Alert and review.</li>
+                <li><strong>Privilege-escalation primitive use.</strong> iam:AttachUserPolicy, iam:PutUserPolicy, iam:CreateLoginProfile, iam:CreateAccessKey targeting another user; sts:GetFederationToken; resource-policy-write actions on critical resources. Catalog the actions; alert on any use outside well-known admin workflows.</li>
+                <li><strong>Service-account-key creation (GCP), federated credential addition (Azure), IAM user creation (AWS).</strong> Rare in mature orgs; high-value to alert on.</li>
+                <li><strong>Unused-then-used.</strong> A role that hasn't been used in 90 days, suddenly used. Dormant identity activation is a strong attacker signal.</li>
+            </ul>
+            <h3>Where the detections live</h3>
+            <p>Feed CloudTrail (AWS), Activity Log + Sign-in Logs (Azure), and Cloud Audit Logs (GCP) plus the IdP audit log (Okta System Log, Entra Sign-in / Audit logs, Google Workspace Reports) into one of: a SIEM (Splunk, Elastic, Sumo Logic, Sentinel, Chronicle), a detection-engineering platform (<a href="https://panther.com/" target="_blank" rel="noopener noreferrer">Panther</a>, <a href="https://anvilogic.com/" target="_blank" rel="noopener noreferrer">Anvilogic</a>, <a href="https://hunters.security/" target="_blank" rel="noopener noreferrer">Hunters</a>), or the cloud-native detection stack (GuardDuty + Detective, Defender for Cloud, Security Command Center + Chronicle). The detections above translate to all of them; the rule libraries (Sigma, Splunk SPL, KQL, YARA-L) are widely shared.</p>
+        </section>
+
+        <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/server-room-cables.webp" type="image/webp">
+            <img src="/img/photos/server-room-cables.jpg" alt="Backlit server-room cabling, dense and organized" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Photo by Brett Sayles on Pexels</figcaption>
+        </figure>
+
+        <section id="comparison">
+            <h2>AWS, Azure, and GCP side-by-side</h2>
+            <p>The native IAM constructs each cloud ships, reduced to a one-screen reference:</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Capability</th>
+                            <th scope="col" class="ct-aws"><span class="ct-dot ct-dot-aws" aria-hidden="true"></span> AWS</th>
+                            <th scope="col" class="ct-azure"><span class="ct-dot ct-dot-azure" aria-hidden="true"></span> Azure</th>
+                            <th scope="col" class="ct-gcp"><span class="ct-dot ct-dot-gcp" aria-hidden="true"></span> GCP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Workforce SSO</th>
+                            <td>IAM Identity Center (federated to Okta / Entra / Google)</td>
+                            <td>Entra ID (native), federate external IdPs</td>
+                            <td>Cloud Identity / Workforce Identity Federation</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Authorization model</th>
+                            <td>Identity-based + resource-based policies, JSON</td>
+                            <td>Azure RBAC + Azure Policy, role definitions in JSON</td>
+                            <td>IAM bindings (role-based) + IAM Conditions</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Workload identity (VMs / functions)</th>
+                            <td>IAM roles + IMDSv2</td>
+                            <td>Managed Identities (system / user-assigned)</td>
+                            <td>Service accounts attached to compute</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Kubernetes workload identity</th>
+                            <td>IRSA / EKS Pod Identity</td>
+                            <td>Azure Workload Identity (AKS)</td>
+                            <td>GKE Workload Identity</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">External workload federation</th>
+                            <td>IAM OIDC identity providers + AssumeRoleWithWebIdentity</td>
+                            <td>Entra federated credentials on app registrations</td>
+                            <td>Workload Identity Federation pools &amp; providers</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">JIT / privileged access</th>
+                            <td>IAM Identity Center session limits + third-party (ConductorOne, Opal, Sym, Teleport)</td>
+                            <td>Entra Privileged Identity Management (PIM)</td>
+                            <td>Privileged Access Manager + conditional IAM</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Permissions / unused-access analysis</th>
+                            <td>IAM Access Analyzer (external + unused + policy gen)</td>
+                            <td>Entra Permissions Management (formerly CloudKnox), Access Reviews</td>
+                            <td>IAM Recommender, Policy Analyzer, Policy Troubleshooter</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Org-level guardrails</th>
+                            <td>Service Control Policies, Resource Control Policies, Declarative policies</td>
+                            <td>Azure Policy + Initiatives at mgmt-group scope</td>
+                            <td>Organization Policy constraints</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Activity audit log</th>
+                            <td>CloudTrail (org trail)</td>
+                            <td>Activity Log + Entra Audit / Sign-in Logs</td>
+                            <td>Cloud Audit Logs (Admin / Data Access)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Identity threat detection</th>
+                            <td>GuardDuty (IAM &amp; S3 protection), Detective</td>
+                            <td>Entra ID Protection, Defender for Identity, Defender for Cloud</td>
+                            <td>Security Command Center, Event Threat Detection, Chronicle</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Phishing-resistant MFA</th>
+                            <td>FIDO2 security keys + passkeys via IAM Identity Center / IdP</td>
+                            <td>FIDO2 + passkeys + Windows Hello via Conditional Access</td>
+                            <td>FIDO2 + Titan keys + passkeys via Google Workspace</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Break-glass &amp; root</th>
+                            <td>Root user — store credentials sealed; CloudTrail-alert on use</td>
+                            <td>Global Admin emergency accounts (2+), excluded from MFA Conditional Access carefully</td>
+                            <td>Super Admin emergency accounts, gcloud-restricted access</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>The native tools are necessary but rarely sufficient at scale. Most orgs running multi-cloud reach for a CIEM (Wiz, Sonrai, Permiso, ConductorOne, Veza) to get a cross-cloud effective-permissions view; the native tools are best-in-class for their own cloud and weakest at "show me everything one principal can do across our entire estate."</p>
+        </section>
+
+        <section id="maturity">
+            <h2>Maturity stages</h2>
+            <p>A useful staging model for a cloud IAM program:</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-stage1">
+                    <h3>Crawl — Federated &amp; inventoried</h3>
+                    <p>One IdP for all humans, federated into every cloud. SCIM-driven joiner / mover / leaver. Long-lived access keys inventoried and aged out. MFA enforced (any factor) on all admins. CloudTrail / Activity Log / Cloud Audit Logs centralized. A first inventory of roles and service accounts exists.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage2">
+                    <h3>Walk — Least privilege at rest</h3>
+                    <p>Permissions analyzers running monthly; unused permissions trimmed. CIEM or equivalent visualizes effective permissions across accounts. Workload identity adopted for most net-new workloads; access keys trending toward zero. Phishing-resistant MFA mandatory for admins. Basic identity-abuse detections firing into the SOC.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage3">
+                    <h3>Run — JIT &amp; engineered</h3>
+                    <p>Standing admin reduced to near-zero via JIT. SCPs / Organization Policies / Azure Policy guardrails block known-bad patterns at the API. OIDC trust for all CI/CD; no long-lived secrets in pipelines. Identity-threat detections (impossible travel, unused-then-used, escalation primitives) all running. Quarterly attack-path review with BloodHound / PMapper / CIEM.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage4">
+                    <h3>Fly — Identity is a product</h3>
+                    <p>Identity team treats internal IAM as a paved-road service: self-service role requests, automated right-sizing, drift detection blocking PRs in IaC. Customer-facing identity (CIAM / B2B SSO) is differentiated as a competitive feature. Continuous-access evaluation, device-bound sessions, and just-enough-access reduce blast radius to single API operations.</p>
+                </div>
+            </div>
+            <p>The skip-stage cost is real here — JIT without federated SSO produces a Frankenstein of half-controls; CIEM without an IdP inventory produces noise without action. Sequence matters.</p>
+        </section>
+
+        <section id="pitfalls">
+            <h2>Common pitfalls</h2>
+            <ul>
+                <li><strong>Treating IAM as one-time configuration.</strong> Roles, trusts, and policies drift weekly as teams ship features. Without continuous review, your "least privilege" diagram is fiction by month three. Schedule the review; tool it.</li>
+                <li><strong>Wildcarding the OIDC subject claim.</strong> Trusting <code>repo:*</code> or <code>repo:org/*</code> in a GitHub-Actions OIDC trust lets any PR — including a fork from outside your org — mint cloud creds. Always pin <code>repo:org/repo:environment:prod</code> or <code>repo:org/repo:ref:refs/heads/main</code>.</li>
+                <li><strong>Long-lived access keys on humans.</strong> No human in 2026 needs a static AWS access key. Federate through IAM Identity Center; if engineers need CLI access, use <code>aws sso login</code>. Same logic for service-account JSON keys in GCP; use <code>gcloud auth application-default login</code> or impersonation.</li>
+                <li><strong>Over-broad iam:PassRole.</strong> Granting iam:PassRole "*" is a blank check for privilege escalation. Always pair with iam:PassedToService and explicit role-ARN allowlists. Audit existing grants quarterly.</li>
+                <li><strong>Confusing roles and groups.</strong> AWS IAM groups don't show up in CloudTrail; group-attached policies are invisible at audit time without an extra lookup. Use roles + permission sets for human access; reserve groups for bulk policy attachment, not as the identity primitive.</li>
+                <li><strong>Skipping the off-boarding test.</strong> "We have SCIM" doesn't mean deprovisioning works. Pick a terminated employee from six months ago; verify they can't sign into anything anywhere. The first run almost always finds at least one orphan.</li>
+                <li><strong>Shared service accounts.</strong> One "ci-deploy" service account used by every team is one compromise away from total compromise. One identity per workload. The "but that's a lot of identities" objection is solved by automation, not by sharing.</li>
+                <li><strong>Trusting MFA without considering session theft.</strong> Phishing-resistant MFA stops credential phishing; it doesn't stop session-cookie theft via infostealer. Add device-bound session credentials, continuous-access evaluation, and short admin session lifetimes.</li>
+                <li><strong>Letting the root / Global Admin / Super Admin sprawl.</strong> The break-glass accounts should be a tiny, named, sealed-credentials set. Every additional Global Admin is an attacker's path. Audit monthly.</li>
+                <li><strong>Outsourcing identity to a SaaS without an audit log integration.</strong> If your IdP, your CIAM, or your B2B-SSO provider doesn't stream audit logs into your SOC, the detections aren't running. The biggest IdP breaches of the past few years were discovered by the SaaS provider, not by the customer; assume that's your data path too unless you've wired it differently.</li>
+            </ul>
+        </section>
+
+        <section id="further">
+            <h2>Further reading</h2>
+            <h3>Specifications &amp; standards</h3>
+            <ul>
+                <li><a href="https://datatracker.ietf.org/doc/html/rfc6749" target="_blank" rel="noopener noreferrer">RFC 6749 — OAuth 2.0</a></li>
+                <li><a href="https://openid.net/specs/openid-connect-core-1_0.html" target="_blank" rel="noopener noreferrer">OpenID Connect Core 1.0</a></li>
+                <li><a href="https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf" target="_blank" rel="noopener noreferrer">SAML 2.0 Core (OASIS)</a></li>
+                <li><a href="https://datatracker.ietf.org/doc/html/rfc7644" target="_blank" rel="noopener noreferrer">RFC 7644 — SCIM Protocol</a></li>
+                <li><a href="https://www.w3.org/TR/webauthn-2/" target="_blank" rel="noopener noreferrer">W3C WebAuthn Level 2</a></li>
+                <li><a href="https://fidoalliance.org/specifications/" target="_blank" rel="noopener noreferrer">FIDO Alliance specifications</a></li>
+                <li><a href="https://csrc.nist.gov/pubs/sp/800/63/4/final" target="_blank" rel="noopener noreferrer">NIST SP 800-63 — Digital Identity Guidelines</a></li>
+                <li><a href="https://csrc.nist.gov/pubs/sp/800/207/final" target="_blank" rel="noopener noreferrer">NIST SP 800-207 — Zero Trust Architecture</a></li>
+            </ul>
+            <h3>Provider docs</h3>
+            <ul>
+                <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/" target="_blank" rel="noopener noreferrer">AWS IAM User Guide</a></li>
+                <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html" target="_blank" rel="noopener noreferrer">AWS IAM Access Analyzer</a></li>
+                <li><a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html" target="_blank" rel="noopener noreferrer">AWS IAM Identity Center</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/entra/identity/" target="_blank" rel="noopener noreferrer">Microsoft Entra ID documentation</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure" target="_blank" rel="noopener noreferrer">Entra Privileged Identity Management</a></li>
+                <li><a href="https://cloud.google.com/iam/docs" target="_blank" rel="noopener noreferrer">Google Cloud IAM documentation</a></li>
+                <li><a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank" rel="noopener noreferrer">GCP Workload Identity Federation</a></li>
+            </ul>
+            <h3>Attack &amp; offense research</h3>
+            <ul>
+                <li><a href="https://github.com/BloodHoundAD/BloodHound" target="_blank" rel="noopener noreferrer">BloodHound (cloud attack-path graph)</a></li>
+                <li><a href="https://github.com/nccgroup/PMapper" target="_blank" rel="noopener noreferrer">PMapper — AWS principal mapper</a></li>
+                <li><a href="https://github.com/RhinoSecurityLabs/pacu" target="_blank" rel="noopener noreferrer">Pacu — AWS exploitation framework</a></li>
+                <li><a href="https://hackingthe.cloud/" target="_blank" rel="noopener noreferrer">Hacking the Cloud</a></li>
+                <li><a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK Cloud matrices</a></li>
+            </ul>
+            <h3>Related CSOH pages</h3>
+            <ul>
+                <li><a href="zero-trust.html">Zero Trust</a> — the architectural pattern identity-driven security implements.</li>
+                <li><a href="landing-zones.html">Landing zones</a> — where IAM gets baked in at organization birth.</li>
+                <li><a href="kubernetes.html">Kubernetes</a> — workload identity, RBAC, admission control.</li>
+                <li><a href="ci-cd.html">CI/CD</a> — OIDC trust and pipeline identity.</li>
+                <li><a href="cloud-soc.html">Cloud SOC</a> — where identity-abuse detections live.</li>
+                <li><a href="grc.html">GRC</a> — how IAM controls satisfy SOC 2 / ISO 27001 / PCI DSS.</li>
+                <li><a href="glossary.html">Glossary</a> — every IAM term on this page, defined.</li>
+            </ul>
+        </section>
+
+        <section id="faq">
+            <h2>FAQ</h2>
+
+            <h3>Why is IAM the #1 root cause of cloud breaches?</h3>
+            <p>Every cloud action is an authenticated API call, so identity is the perimeter. When an attacker compromises a credential — a leaked access key, a phished session cookie, a misconfigured OIDC trust — they inherit whatever permissions that identity holds, and most identities hold far more than they need. The Verizon DBIR, Mandiant M-Trends, and IBM Cost of a Data Breach reports all converge on the same finding: stolen or abused credentials are the top initial-access vector in cloud, ahead of vulnerability exploitation and phishing-of-endpoints. The fix is not a single product; it's a program — strong authentication for humans, short-lived tokens for workloads, least privilege enforced continuously, and detections that fire on identity anomalies.</p>
+
+            <h3>What's the difference between RBAC, ABAC, and ReBAC?</h3>
+            <p>RBAC (role-based) grants permissions to named roles, and assigns subjects to roles — simple, auditable, but combinatorially expensive at scale. ABAC (attribute-based) grants permissions through policies that evaluate attributes of the subject, resource, action, and context (e.g., "engineers can read S3 buckets tagged team=their-team in us-east-1 during business hours") — flexible, scales without role explosion, but harder to reason about. ReBAC (relationship-based, popularized by Google Zanzibar / OpenFGA / SpiceDB) models access as graph relationships ("user is editor of document, document is in folder, folder is owned by team") — fits SaaS sharing models and hierarchical resources. Most cloud platforms are RBAC at the surface (roles, policies) with ABAC primitives (tag / condition keys / IAM conditions) layered in. Use RBAC for cloud-control-plane access; ABAC for scale-out tenant data-plane decisions; ReBAC inside applications that model sharing.</p>
+
+            <h3>How do I get rid of long-lived cloud access keys?</h3>
+            <p>For humans: federate through your IdP (Okta, Entra ID, Google Workspace) into IAM Identity Center / Entra-based federation / Workforce Identity Federation. Humans get short-lived credentials via SSO; static keys go away. For workloads in cloud: use the native workload-identity primitives — IAM Roles for EC2 / Lambda, IRSA / EKS Pod Identity for Kubernetes on AWS, Managed Identities / Azure Workload Identity for Azure, GCE / GKE Workload Identity for GCP. For workloads outside cloud (CI/CD, on-prem agents, third-party SaaS): use OIDC trust — GitHub Actions, GitLab, CircleCI all publish OIDC tokens that AWS / Azure / GCP can trust without any pre-shared secret. Rotate the remaining long-lived keys aggressively, alert on creation, and track them to zero. The metric to chase is "count of access keys older than N days" trending toward zero.</p>
+
+            <h3>Is MFA enough for cloud admin accounts?</h3>
+            <p>MFA is necessary but not sufficient, and the type of MFA matters more than the presence of it. SMS-based codes are phishable and SIM-swappable. TOTP (authenticator apps) is phishable through real-time relay attacks (Evilginx-class kits). The bar for cloud admins in 2026 is phishing-resistant authentication — FIDO2 security keys, platform passkeys, or device-bound credentials via WebAuthn. Pair that with conditional access (only from managed devices, only from expected geographies, step-up auth for sensitive actions) and session-binding (tokens tied to the device that minted them). Treat "MFA enabled" as a compliance floor; treat "phishing-resistant for everyone with prod cloud access" as the actual security target.</p>
+
+            <h3>What is iam:PassRole and why does it matter?</h3>
+            <p>iam:PassRole is the AWS permission that lets a principal hand a role to a service to assume on its behalf. If you can pass a powerful role to a service you control (Lambda, EC2, SageMaker, Glue, CloudFormation, dozens more), you can effectively assume that role's permissions through the service. It's the single most-abused privilege escalation primitive in AWS — the equivalent of "I can't read this S3 bucket, but I can launch an EC2 instance with a role that can." The defense: scope iam:PassRole tightly using the iam:PassedToService condition, restrict which roles can be passed by ARN, and audit it with IAM Access Analyzer's unused-permission and external-access analyzers. Azure's analog is the ability to assign a managed identity with elevated rights; GCP's is the iam.serviceAccounts.actAs permission. The pattern repeats across all three clouds; the names differ.</p>
+
+            <h3>What does just-in-time (JIT) access look like in cloud?</h3>
+            <p>JIT access means standing permissions are minimal, and elevated permissions are requested per-need with an expiration. The mechanics vary by cloud and platform: AWS via IAM Identity Center permission sets + approval workflows or via tools like ConductorOne / Tenable Cloud Security / Sym; Azure via Entra PIM (Privileged Identity Management) with eligibility, activation, MFA-on-activation, and time bounds; GCP via temporary IAM grants with conditions or Privileged Access Manager. The audit trail captures who requested, who approved, why, and when access expired. The operational benefit is that the breach blast-radius from a compromised user is small most of the time — they only have elevated privileges during the window they actively requested. The maturity step beyond JIT is just-enough-access: even during the window, only the specific actions needed, not a generic admin role.</p>
+
+            <h3>How do I detect identity abuse in cloud?</h3>
+            <p>The high-signal detections to build first: (1) console login or AssumeRole from a new ASN / country / device for a privileged identity; (2) GetCallerIdentity called by a long-lived access key from an unusual source — the "who am I, where are my permissions" reconnaissance step is reliable post-compromise behavior; (3) impossible-travel between sessions; (4) MFA-disable, password-reset, or new-access-key events on privileged accounts; (5) AssumeRole chain length anomalies (one role assumed via another via another); (6) new OAuth app consent grants in your IdP; (7) iam:PassRole / iam:CreateAccessKey / iam:CreateLoginProfile / iam:AttachUserPolicy / sts:GetFederationToken from non-admin paths; (8) service-account-key creation in GCP, federated-credential addition in Azure, IAM-user creation in AWS — all rarer than zero in a mature org, all high-value to alert on. Feed CloudTrail / Activity Log / Cloud Audit Logs into a SIEM or detection-engineering platform (Panther, Anvilogic, SnapAttack, native Sentinel) and tune from there.</p>
+        </section>
+
+        <section id="where-next" class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="zero-trust.html">Zero Trust</a> — identity is the foundation; this is how the rest of the architecture builds on it.</li>
+                <li><a href="landing-zones.html">Landing zones</a> — bake the IAM model in at organization birth, not retrofit it later.</li>
+                <li><a href="kubernetes.html">Kubernetes</a> — workload identity, RBAC, admission control, the cluster-side mechanics.</li>
+                <li><a href="ci-cd.html">CI/CD</a> — where OIDC trust eliminates the last static secrets.</li>
+                <li><a href="cloud-soc.html">Cloud SOC</a> — the detections that fire when identity is abused.</li>
+                <li><a href="grc.html">GRC</a> — how IAM controls map to SOC 2 / ISO 27001 / PCI DSS evidence.</li>
+                <li><a href="sessions.html">Friday Zoom</a> — IAM, federation, and identity-abuse incidents come up almost every week. Drop in.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section footer-about">
+        <h3>CSOH</h3>
+        <p>A vendor-neutral community for cloud security professionals. Weekly Zoom sessions and curated resources.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="index.html#about">About CSOH</a></li>
+          <li><a href="learning-path.html">Learning Path</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="sessions.html">Zoom Sessions</a></li>
+          <li><a href="meetings.html">Meeting Recaps</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="mailto:admin@csoh.org">Contact</a></li>
+          <li><a href="https://csoh.kit.com/39feb4f397" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+          <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="rss.html">RSS Feed</a></li>
+          <li><a href="contribute.html">Contribute</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Developer Docs</h3>
+        <ul>
+          <li><a href="github-actions.html">GitHub Actions</a></li>
+          <li><a href="cloud-deployment.html">Deploy to GCP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023-2026 Cloud Security Office Hours</p>
+      <ul class="footer-legal">
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="code-of-conduct.html">Code of Conduct</a></li>
+        <li><a href="security-policy.html">Security</a></li>
+      </ul>
+    </div>
+  </footer>
+
+    <script src="/main.js?v=28d03270" integrity="sha384-rL3h8+9Zf3OnCebAlc/aSSGella8hnqqGbOKQv9QcZGh3P6vA0z6yQp8JLYgBTqc"
+        defer></script>
+</body>
+</html>

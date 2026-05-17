@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="Incident response and cloud forensics — a vendor-neutral practitioner's guide. The IR lifecycle (NIST SP 800-61r2 / SANS PICERL) adapted to cloud, what cloud changes about IR, forensic readiness, evidence collection for EC2 / EKS / Lambda / S3, memory and container forensics, isolating compromised workloads, credential rotation, runbooks, tabletops, and the AWS / Azure / GCP native tooling.">
+    <meta name="keywords"
+        content="incident response, cloud forensics, DFIR, NIST SP 800-61, SANS PICERL, EC2 forensics, EKS forensics, Lambda forensics, memory forensics, container forensics, CloudTrail, GuardDuty, Defender for Cloud, Security Command Center, Cado, Mitiga, Mandiant, IR runbook, tabletop exercise, breach notification, AWS, Azure, GCP">
+    <title>Incident Response &amp; Cloud Forensics - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/incident-response.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#0f172a">
+
+    <meta property="og:title" content="Incident Response &amp; Cloud Forensics - CSOH">
+    <meta property="og:description"
+        content="A practitioner's guide to incident response and forensics in cloud — adapting the IR lifecycle, forensic readiness, evidence collection by workload type, memory and container forensics, and how AWS, Azure, and GCP each support the work.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/incident-response.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Incident Response &amp; Cloud Forensics">
+    <meta name="twitter:description"
+        content="Vendor-neutral guide to cloud IR and forensics — lifecycle, evidence, EC2 / EKS / Lambda, memory forensics, runbooks, and native tooling.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://csoh.kit.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+
+    <link rel="preload" href="/style.css?v=0e1857bd" as="style"
+        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+    <link rel="stylesheet" href="/style.css?v=0e1857bd"
+        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Incident Response & Cloud Forensics",
+      "description": "A vendor-neutral practitioner's guide to incident response and forensics in cloud — the IR lifecycle adapted, forensic readiness, evidence collection by workload type, memory and container forensics, runbooks, tabletops, and how AWS, Azure, and GCP each support the work.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-05-17",
+      "dateModified": "2026-05-17",
+      "mainEntityOfPage": "https://csoh.org/incident-response.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csoh.org/"},
+        {"@type": "ListItem", "position": 2, "name": "Incident Response", "item": "https://csoh.org/incident-response.html"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is cloud incident response different from on-prem IR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Three big shifts. First, ephemerality — the instance, container, or function that you want to image may not exist by the time you reach for it; if you didn't snapshot disk and capture logs proactively, that evidence is gone. Second, the API is the attack surface — most cloud breaches are not 'shell on a box' but 'stolen credential calling APIs', so CloudTrail / Activity Log / Cloud Audit Logs are the primary evidence source, not memory dumps. Third, shared responsibility — the hypervisor, the physical network, the underlying storage hardware are not yours to investigate; you work with what the provider exposes, and you escalate to the provider's IR team when an incident crosses that line."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the single highest-leverage thing to do before an incident happens?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Build an immutable, cross-account log archive that an attacker who compromises your production environment cannot tamper with. In AWS, that's CloudTrail (org trail, all regions, management + data events) writing to an S3 bucket in a dedicated Log Archive account, with bucket policies and SCPs that prevent deletion or alteration. In Azure, it's Activity Log + Diagnostic Settings exported to a Log Analytics workspace and a locked storage account in a separate subscription. In GCP, it's organization-aggregated Cloud Audit Logs sinking to a retention-locked bucket in a dedicated logging project. Without this, the attacker rotates credentials, disables CloudTrail, deletes logs, and you investigate blind."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I really need a separate forensics account?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and you need it provisioned before the incident, not during. A forensics account / subscription / project is a clean environment with pre-staged tooling (a forensics AMI or VM image, scripting, disk-imaging utilities, packet-capture tools, Velociraptor / GRR collectors), an isolated VPC with no route to production, IAM trust policies that allow the IR team to assume roles into compromised accounts in read-only or evidence-collection modes, and a budget. Doing forensics in the prod account contaminates evidence, exposes the IR team to whatever the attacker is still doing, and gives auditors and lawyers heartburn."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I rotate credentials immediately when I detect a compromise?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not before you've captured what you need from the credential's audit trail and decided on a containment strategy. The instinct to 'kill the access key' is right eventually, but rotating credentials prematurely (a) tips off the attacker, (b) destroys live session state that may be the best evidence of what's happening right now, and (c) can lock out legitimate workloads if the credential is shared. The order is: identify the compromised principal, query CloudTrail / Activity / Audit Logs for the credential's full activity history, snapshot any associated workloads, then rotate — and use AssumeRole session revocation (the AWSRevokeOlderSessions inline policy) to kill active sessions, not just the long-term credential."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long do we have to disclose a breach?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on jurisdiction and data type. GDPR requires notification to the supervisory authority within 72 hours of becoming aware of a personal-data breach, and to affected individuals 'without undue delay' if there's high risk. U.S. state breach-notification laws vary (most 30–60 days, some shorter for specific data types). SEC Item 1.05 requires public companies to disclose material cybersecurity incidents within four business days of materiality determination. HIPAA breach notification is 60 days. Sector-specific rules (NYDFS Part 500, FFIEC, NERC CIP, NIS2, DORA) add their own clocks. Your IR runbook should include a decision tree that maps incident type to the regulatory clocks that apply — and your General Counsel should be in the war room from the first hour."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is memory forensics still relevant on cloud VMs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes for workloads that meaningfully run anything in memory beyond what's on disk — long-running services with in-memory state, JIT-compiled malware, fileless attacks that hide in process memory. The mechanics on cloud VMs work: LiME or AVML can capture RAM from a running Linux instance, MAGNET RAM Capture or similar from Windows. The constraint is that ephemeral cloud VMs may be gone by the time you reach for them, and capturing memory requires the instance to still be running (or for the hypervisor to support live snapshots — AWS / Azure / GCP don't generally expose this to tenants). For containers and serverless, memory forensics is largely impractical; you fall back on runtime-security telemetry (Falco, Tracee, eBPF-based sensors) captured before the workload terminates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When does a DFIR retainer pay off?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When you have meaningful cloud presence, sensitive data, and an internal IR team that's small enough to be overwhelmed by a serious incident. A retainer (Mandiant, CrowdStrike, Kroll, Unit 42, Arctic Wolf, and similar) buys you a contracted response SLA — typically 1–4 hours to first responder — and pre-negotiated rates instead of emergency premium pricing. It also forces you to do a tabletop with the firm in advance so they know your environment when the call comes in. The math works above roughly 100 employees, or earlier if you're in a regulated industry. Below that, a 'best-efforts' relationship with one or two firms you've talked to in calm times is often enough."
+          }
+        }
+      ]
+    }
+    </script>
+  <noscript><style>.js-enabled header nav{display:block !important}</style></noscript>
+</head>
+
+<body class="js-enabled">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+          <svg class="logo-mark" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="CSOH logo"><defs><linearGradient id="lm-cloud" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7dd3fc"/><stop offset="100%" stop-color="#0284c7"/></linearGradient></defs><path d="M7 19 a4 4 0 0 1 4-4 a6 6 0 0 1 11 0 a3.5 3.5 0 0 1 3.5 3.5 a3.5 3.5 0 0 1 -3.5 3.5 H8 a3.5 3.5 0 0 1 -1-7 z" fill="url(#lm-cloud)"/><path d="M11 13 L21 13 L21 18 a5 5.5 0 0 1 -5 5 a5 5.5 0 0 1 -5 -5 z" fill="#f59e0b"/><path d="M13.5 16.7 L15.3 18.4 L18.6 15" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li class="has-dropdown has-mega">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                      <div class="dropdown-menu mega-menu mega-3col">
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Foundations</h4>
+                          <ul>
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Topics</h4>
+                          <ul>
+                            <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="containers.html">Containers</a></li>
+                            <li><a href="kubernetes.html">Kubernetes</a></li>
+                            <li><a href="serverless.html">Serverless</a></li>
+                            <li><a href="ci-cd.html">CI/CD</a></li>
+                            <li><a href="landing-zones.html">Landing Zones</a></li>
+                            <li><a href="iam.html">IAM &amp; Identity</a></li>
+                            <li><a href="zero-trust.html">Zero Trust</a></li>
+                            <li><a href="data-security.html">Data Security &amp; KMS</a></li>
+                            <li><a href="grc.html">GRC</a></li>
+                            <li><a href="compliance-frameworks.html">Compliance Frameworks</a></li>
+                            <li><a href="ai-learning.html">AI Learning</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Career &amp; Growth</h4>
+                          <ul>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+                            <li><a href="cloud-security-careers.html">Careers</a></li>
+                            <li><a href="cloud-security-reading-list.html">Reading List</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle active" aria-expanded="true" aria-haspopup="true">Threat Intel <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="threat-research.html">Threat Research</a></li>
+                        <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        <li><a href="cloud-soc.html">Cloud SOC</a></li>
+                        <li><a href="detection-engineering.html">Detection Engineering</a></li>
+                        <li><a href="incident-response.html" aria-current="page">Incident Response</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown has-mega">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Community <span class="caret" aria-hidden="true">▾</span></button>
+                      <div class="dropdown-menu mega-menu mega-2col">
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Live</h4>
+                          <ul>
+                            <li><a href="sessions.html">Friday Zoom Sessions</a></li>
+                            <li><a href="community.html">Community &amp; Signal</a></li>
+                            <li><a href="conferences.html">Conferences</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Archive</h4>
+                          <ul>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="contribute.html">Contribute</a></li>
+                        <li><a href="contribute-resources.html">Add a Resource</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-cta-item"><a href="https://csoh.kit.com/39feb4f397" class="nav-cta" target="_blank" rel="noopener noreferrer">Join Friday Zoom →</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Incident Response</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--illustrated">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1>Incident Response &amp; Cloud Forensics</h1>
+          <p>The discipline that turns "we think something is wrong" into "we know what happened, we stopped it, we proved it to regulators, and it can't happen the same way again." A vendor-neutral practitioner's guide to the IR lifecycle in cloud, forensic readiness, evidence collection by workload type, memory and container forensics, runbooks, tabletops, retainers, and the native tooling on AWS, Azure, and GCP.</p>
+          <div class="cta-buttons">
+            <a href="#readiness" class="btn btn-primary">Forensic readiness →</a>
+            <a href="#comparison" class="btn btn-secondary">AWS / Azure / GCP comparison</a>
+          </div>
+        </div>
+        <div class="hero-illustration" aria-hidden="true">
+          <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a circular incident response workflow with phases Detect, Triage, Contain, Eradicate, Recover, Learn — surrounded by a magnifying glass over cloud evidence">
+            <defs>
+              <linearGradient id="ir-cloud" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="60%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
+              <linearGradient id="ir-glass" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#d97706"/></linearGradient>
+              <linearGradient id="ir-ring" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0ea5e9"/><stop offset="50%" stop-color="#6366f1"/><stop offset="100%" stop-color="#ec4899"/></linearGradient>
+              <radialGradient id="ir-halo" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.35"/><stop offset="100%" stop-color="#7dd3fc" stop-opacity="0"/></radialGradient>
+            </defs>
+            <circle cx="300" cy="240" r="220" fill="url(#ir-halo)"/>
+            <!-- Outer ring -->
+            <circle cx="300" cy="240" r="160" fill="none" stroke="url(#ir-ring)" stroke-width="6" stroke-dasharray="4 8" opacity="0.6"/>
+            <!-- Phase nodes around the ring -->
+            <g font-family="system-ui, sans-serif">
+              <!-- Detect (top) -->
+              <circle cx="300" cy="80" r="32" fill="#0d1424" stroke="#22d3ee" stroke-width="2"/>
+              <text x="300" y="78" text-anchor="middle" fill="#22d3ee" font-size="11" font-weight="700">DETECT</text>
+              <text x="300" y="93" text-anchor="middle" fill="#a5f3fc" font-size="9">alert · triage</text>
+              <!-- Contain (top right) -->
+              <circle cx="450" cy="160" r="32" fill="#0d1424" stroke="#f97316" stroke-width="2"/>
+              <text x="450" y="158" text-anchor="middle" fill="#f97316" font-size="10" font-weight="700">CONTAIN</text>
+              <text x="450" y="173" text-anchor="middle" fill="#fed7aa" font-size="9">isolate · revoke</text>
+              <!-- Eradicate (bottom right) -->
+              <circle cx="450" cy="320" r="32" fill="#0d1424" stroke="#dc2626" stroke-width="2"/>
+              <text x="450" y="318" text-anchor="middle" fill="#fb7185" font-size="10" font-weight="700">ERADICATE</text>
+              <text x="450" y="333" text-anchor="middle" fill="#fecaca" font-size="9">remove · rebuild</text>
+              <!-- Recover (bottom) -->
+              <circle cx="300" cy="400" r="32" fill="#0d1424" stroke="#34d399" stroke-width="2"/>
+              <text x="300" y="398" text-anchor="middle" fill="#34d399" font-size="11" font-weight="700">RECOVER</text>
+              <text x="300" y="413" text-anchor="middle" fill="#a7f3d0" font-size="9">restore · verify</text>
+              <!-- Learn (bottom left) -->
+              <circle cx="150" cy="320" r="32" fill="#0d1424" stroke="#a78bfa" stroke-width="2"/>
+              <text x="150" y="318" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="700">LEARN</text>
+              <text x="150" y="333" text-anchor="middle" fill="#c4b5fd" font-size="9">retro · improve</text>
+              <!-- Prepare (top left) -->
+              <circle cx="150" cy="160" r="32" fill="#0d1424" stroke="#fbbf24" stroke-width="2"/>
+              <text x="150" y="158" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">PREPARE</text>
+              <text x="150" y="173" text-anchor="middle" fill="#fde68a" font-size="9">runbook · drill</text>
+            </g>
+            <!-- Center: cloud being inspected -->
+            <path d="M 230,210 a 25,25 0 0,1 30,-15 a 35,35 0 0,1 65,0 a 25,25 0 0,1 25,15 a 22,22 0 0,1 -12,40 H 245 a 22,22 0 0,1 -15,-40 z" fill="url(#ir-cloud)" stroke="#fff" stroke-width="1.5" stroke-opacity="0.4"/>
+            <text x="290" y="235" text-anchor="middle" fill="#0c4a6e" font-size="11" font-weight="700">Cloud workload</text>
+            <text x="290" y="250" text-anchor="middle" fill="#0c4a6e" font-size="9">logs · snapshots · evidence</text>
+            <!-- Magnifying glass overlay -->
+            <g transform="translate(0,0)">
+              <circle cx="330" cy="245" r="48" fill="none" stroke="url(#ir-glass)" stroke-width="5" opacity="0.9"/>
+              <circle cx="330" cy="245" r="48" fill="#fbbf24" fill-opacity="0.08"/>
+              <line x1="365" y1="280" x2="395" y2="310" stroke="url(#ir-glass)" stroke-width="8" stroke-linecap="round"/>
+              <line x1="365" y1="280" x2="395" y2="310" stroke="#7c2d12" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+            </g>
+            <!-- Tiny evidence markers inside the lens -->
+            <g fill="#0c4a6e" font-size="8" font-family="ui-monospace, monospace">
+              <text x="305" y="240">CT</text>
+              <text x="345" y="240">FL</text>
+              <text x="320" y="265">EBS</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <main class="container contribute-article" id="main-content">
+
+        <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/contract-signing.webp" type="image/webp">
+            <img src="/img/photos/contract-signing.jpg" alt="Detailed view of a hand writing a signature on an official document with a ballpoint pen" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Photo by Tima Miroshnichenko on Pexels</figcaption>
+        </figure>
+
+        <p class="page-meta"><time datetime="2026-05-17">Last updated <strong>2026-05-17</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/incident-response.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>The 30-second version:</strong> Cloud incident response is the same six-phase loop you already know — <strong>Prepare → Identify → Contain → Eradicate → Recover → Lessons Learned</strong> — but every phase changes when the workload lives behind an API in someone else's data center. The instance you want to image may already be gone. The credential the attacker is using leaves a perfect log if you're capturing it, and zero log if you're not. The blast radius is whatever scope an over-privileged role has, which is usually larger than anyone thinks.</p>
+            <p style="margin-top:0.75rem;">The work that makes IR survivable in cloud is done <em>before</em> any incident: an immutable cross-account log archive, a dedicated forensics account with pre-staged tooling, snapshot pipelines, SCPs that block evidence destruction, and runbooks practiced in tabletop. Without those, you investigate blind. With them, the playbook is largely automatable.</p>
+        </div>
+
+        <div class="toc">
+            <h2>On this page</h2>
+            <ol>
+                <li><a href="#lifecycle">The IR lifecycle in cloud</a></li>
+                <li><a href="#cloud-changes">What cloud changes about IR</a></li>
+                <li><a href="#readiness">Forensic readiness</a></li>
+                <li><a href="#logging">The "log everything that matters" baseline</a></li>
+                <li><a href="#evidence">Evidence collection by workload type</a></li>
+                <li><a href="#memory">Memory forensics on cloud VMs</a></li>
+                <li><a href="#container">Container forensics</a></li>
+                <li><a href="#isolation">Isolating compromised workloads</a></li>
+                <li><a href="#credentials">Credential rotation under incident</a></li>
+                <li><a href="#runbooks">IR runbooks</a></li>
+                <li><a href="#tabletops">Tabletop exercises</a></li>
+                <li><a href="#retainers">DFIR retainers</a></li>
+                <li><a href="#communication">Communication during incident</a></li>
+                <li><a href="#post-incident">Post-incident</a></li>
+                <li><a href="#comparison">AWS, Azure, and GCP side-by-side</a></li>
+                <li><a href="#tooling">Specialized cloud-IR tooling</a></li>
+                <li><a href="#maturity">Maturity stages</a></li>
+                <li><a href="#pitfalls">Common pitfalls</a></li>
+                <li><a href="#further">Further reading</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ol>
+        </div>
+
+        <section id="lifecycle">
+            <h2>The IR lifecycle in cloud</h2>
+            <p>Two reference lifecycles dominate: <a href="https://csrc.nist.gov/pubs/sp/800/61/r2/final" target="_blank" rel="noopener noreferrer">NIST SP 800-61r2</a> (Preparation, Detection &amp; Analysis, Containment / Eradication / Recovery, Post-Incident Activity) and the SANS <strong>PICERL</strong> model (Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned). They're functionally the same loop with slightly different boundaries. Either works; pick one, use its vocabulary consistently across your runbooks and your retros, and don't get religious about the seams.</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-stage1">
+                    <h3>Preparation</h3>
+                    <p>The 80% of the work. Immutable log archive, forensics account, snapshot pipelines, IR runbooks, on-call rotation, retainer contract, tabletop calendar, communications plan. If preparation is weak, every other phase is harder; if it's strong, the rest is mostly procedure.</p>
+                </div>
+                <div class="pillar-card pillar-card-detect">
+                    <h3>Identification</h3>
+                    <p>Triage the alert. Is it real? What's the scope? What's the blast radius if the worst-case is true? In cloud this is largely a question of which principal, which resources, what API activity, what data — answerable from logs if you collected them.</p>
+                </div>
+                <div class="pillar-card pillar-card-network">
+                    <h3>Containment</h3>
+                    <p>Stop the bleeding without destroying evidence. Quarantine the workload (not stop it), revoke active sessions, narrow IAM, isolate the network. Two flavors: short-term ("buy us an hour") and long-term ("safe to operate while we eradicate").</p>
+                </div>
+                <div class="pillar-card pillar-card-iam">
+                    <h3>Eradication</h3>
+                    <p>Remove the attacker's persistence — implanted IAM principals, modified Lambda code, malicious container images, backdoored AMIs, scheduled tasks, rogue OAuth grants. Cloud-specific: an attacker who got into your IdP has persistence options well beyond a single host.</p>
+                </div>
+                <div class="pillar-card pillar-card-compliance">
+                    <h3>Recovery</h3>
+                    <p>Restore service safely. Redeploy from known-good IaC, rotate keys and secrets, validate the environment matches the pre-incident known-good baseline, monitor for re-emergence. Cloud helps here — rebuild-from-Terraform is faster and cleaner than reimaging an on-prem box.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage4">
+                    <h3>Lessons Learned</h3>
+                    <p>Blameless retro. What broke? What missed? Which detections fired late? Which runbooks were wrong? Outputs: detection backfill, runbook updates, control improvements, tabletop scenarios. The phase most often skipped; the one with the highest long-term return.</p>
+                </div>
+            </div>
+            <p>The phases are not strictly sequential. You'll loop between identification and containment as scope expands; you'll re-eradicate when you discover new persistence; you'll start lessons-learned work the moment the incident commander declares the active phase over. The lifecycle is a frame, not a Gantt chart.</p>
+        </section>
+
+        <section id="cloud-changes">
+            <h2>What cloud changes about IR</h2>
+            <p>The lifecycle survives the move to cloud. The execution looks meaningfully different in four ways that show up in every cloud incident.</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Dimension</th>
+                            <th scope="col">Traditional IR</th>
+                            <th scope="col">Cloud IR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Workload persistence</th>
+                            <td>A physical host is still there next week</td>
+                            <td>Instances scale-in, containers restart, functions are gone in milliseconds — capture evidence at the moment of detection or lose it</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Primary attack surface</th>
+                            <td>OS-level: shell, malware, lateral movement</td>
+                            <td>API-level: stolen credential calling AWS / Azure / GCP APIs from somewhere it shouldn't be</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Primary evidence</th>
+                            <td>Disk image, memory dump, endpoint telemetry</td>
+                            <td>CloudTrail / Activity Log / Cloud Audit Logs, plus disk and memory when the workload is the target</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Containment unit</th>
+                            <td>Pull the cable, block at firewall, isolate the host</td>
+                            <td>Detach IAM, swap to quarantine security group, revoke OAuth grants, kill role sessions</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Blast radius</th>
+                            <td>Whatever's on the network segment</td>
+                            <td>Whatever the compromised role can call — often cross-account, cross-region, cross-service</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Shared responsibility</th>
+                            <td>You own everything below the rack</td>
+                            <td><a href="shared-responsibility-model.html">Provider owns hypervisor / network / storage layer</a>; you escalate when an incident crosses it</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Speed</th>
+                            <td>Hours to days to spread</td>
+                            <td>Minutes to seconds — automated exploitation can run thousands of API calls before a human is even paged</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>The single biggest practical shift is that <strong>most cloud breaches are control-plane incidents, not data-plane incidents</strong>. Someone stole a credential — from a developer laptop, a leaked git commit, a compromised CI runner, a phished session — and is now making API calls. The shell on the box, if there's one at all, is incidental. Your IR program has to be biased toward identity, log analysis, and API-call correlation; the host-forensics muscle that on-prem IR teams grew over twenty years is necessary but no longer sufficient.</p>
+        </section>
+
+        <section id="readiness">
+            <h2>Forensic readiness</h2>
+            <p>The hardest lesson of cloud IR is that almost everything that matters has to be set up <em>before</em> the incident. The attacker who has compromised your environment is not going to wait while you deploy a logging pipeline. Treat the items below as preconditions to running a viable IR program, not as nice-to-haves.</p>
+
+            <h3>1. Immutable, cross-account log archive</h3>
+            <p>The foundational control. The attacker who lands in your production account will try to disable logging and delete logs; the log archive has to be somewhere they cannot reach.</p>
+            <ul>
+                <li><strong>AWS.</strong> <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html" target="_blank" rel="noopener noreferrer">Organization CloudTrail</a> (all regions, management + S3 data events at minimum) writing to an S3 bucket in a dedicated Log Archive account. <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html" target="_blank" rel="noopener noreferrer">S3 Object Lock</a> in compliance mode, MFA delete, a bucket policy denying delete from any principal except a break-glass role, and a Service Control Policy at the org root that prevents anyone in production from disabling the trail. Pair with a separate Security tooling account that has read-only access for the SOC.</li>
+                <li><strong>Azure.</strong> <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log" target="_blank" rel="noopener noreferrer">Activity Log</a> + <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings" target="_blank" rel="noopener noreferrer">Diagnostic Settings</a> exported to a <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview" target="_blank" rel="noopener noreferrer">Log Analytics workspace</a> in a separate subscription, with <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/immutable-storage-overview" target="_blank" rel="noopener noreferrer">immutable blob storage</a> as the long-term archive. <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources" target="_blank" rel="noopener noreferrer">Management locks</a> at the subscription level prevent deletion.</li>
+                <li><strong>GCP.</strong> Organization-aggregated <a href="https://cloud.google.com/logging/docs/audit" target="_blank" rel="noopener noreferrer">Cloud Audit Logs</a> sinking to a dedicated logging project, with <a href="https://cloud.google.com/storage/docs/bucket-lock" target="_blank" rel="noopener noreferrer">retention-locked Cloud Storage</a> as the immutable archive. <a href="https://cloud.google.com/resource-manager/docs/organization-policy/overview" target="_blank" rel="noopener noreferrer">Organization policies</a> prevent disabling of audit logs on production projects.</li>
+            </ul>
+            <p>The "what's the retention?" answer is "long enough for the longest regulatory clock that applies to you" — for most orgs, that's 365 days minimum, often 7 years for financial-services contexts.</p>
+
+            <h3>2. Dedicated forensics account / subscription / project</h3>
+            <p>A clean environment, on the same cloud as production, but in a separate account boundary. The contents:</p>
+            <ul>
+                <li>Pre-built forensics AMI / VM image / instance template with disk-imaging utilities (<code>dc3dd</code>, <code>guymager</code>), packet capture (<code>tcpdump</code>, <code>zeek</code>), memory tooling (LiME, AVML), and a Velociraptor / GRR / OSQuery collector pre-installed.</li>
+                <li>Isolated VPC / VNet with no route to production. Public egress only via a logged, monitored gateway.</li>
+                <li>IAM trust policies that let the IR team assume a read-only or evidence-capture role into compromised accounts — but no trust the other direction.</li>
+                <li>A logging archive of its own, separate from production's, so the IR team's actions are themselves auditable.</li>
+                <li>A small budget pool that won't trip cost alerts during a real incident.</li>
+            </ul>
+
+            <h3>3. Snapshot / AMI / image pipelines for evidence preservation</h3>
+            <p>Scripts or runbooks that, given a workload ID, will: snapshot the disk, copy the snapshot to the forensics account, capture metadata (instance config, IAM role, network state, tags) and write it to immutable storage, all in under a few minutes. Idempotent — running twice doesn't double the work. Tested — runbooks that have never run for real don't run for real on the worst day.</p>
+
+            <h3>4. Service control / organization policies that block evidence destruction</h3>
+            <p>The attacker with admin in your production account should still be unable to: disable CloudTrail / Activity Log / Audit Logs, delete the log archive bucket, modify forensics IAM trust policies, change the immutable storage configuration. SCPs (AWS), management group policies (Azure), and organization policies (GCP) enforce this <em>above</em> the production account, so production admin doesn't grant the necessary scope to undo the controls. This is the second-most-important control after the immutable log archive itself.</p>
+
+            <h3>5. The break-glass account, ready to use</h3>
+            <p>A separately credentialed identity, used only in emergencies, with permissions broad enough to investigate any account but narrow enough that abuse is detectable. MFA-required, monitored, with use that pages the security team automatically. If you can't get into the compromised account because the attacker rotated the credentials of every other admin, you need this; if you never set it up, your IR program stalls during the incident.</p>
+        </section>
+
+        <section id="logging">
+            <h2>The "log everything that matters" baseline</h2>
+            <p>Logs are not retroactive. If they weren't being captured when the incident began, no clever query recovers them. The minimum baseline that pays for itself the first time you have an actual incident:</p>
+
+            <h3>AWS</h3>
+            <ul>
+                <li><strong>CloudTrail</strong> — org trail, all regions, management events + S3 data events at a minimum. Add Lambda invocation events for sensitive functions. Validate file integrity is on.</li>
+                <li><strong>VPC Flow Logs</strong> — every production VPC, accept + reject, custom format that includes <code>pkt-srcaddr</code> / <code>pkt-dstaddr</code> for NAT-traversed flows.</li>
+                <li><strong>Route 53 query logs</strong> — for resolver, public hosted zones, and Resolver query logging in critical VPCs. DNS is where exfil and C2 frequently show up.</li>
+                <li><strong>S3 access logs</strong> or <strong>S3 server access logging</strong> for sensitive buckets; CloudTrail data events as the structured alternative.</li>
+                <li><strong>GuardDuty</strong> findings — enabled in every account, every region. Runtime monitoring for EKS / ECS / EC2 where worth the spend.</li>
+                <li><strong>IAM Access Analyzer</strong> — surfaces unused access and external sharing; useful as a baseline that an incident's findings can be diffed against.</li>
+                <li><strong>WAF logs, ALB / NLB access logs, CloudFront logs</strong> for internet-facing services.</li>
+            </ul>
+
+            <h3>Azure</h3>
+            <ul>
+                <li><strong>Activity Log</strong> — every subscription, exported via Diagnostic Settings to Log Analytics and immutable storage.</li>
+                <li><strong>Diagnostic logs</strong> — for every relevant resource type (Key Vault, Storage, SQL, App Service, AKS, Function Apps). Defaults are not enough; enable explicitly per service.</li>
+                <li><strong>Entra ID sign-in logs and audit logs</strong> — the cloud-identity equivalent of CloudTrail's identity events. Retention longer than the 30-day free tier.</li>
+                <li><strong>NSG flow logs</strong> — to Storage and Traffic Analytics.</li>
+                <li><strong>Microsoft Sentinel</strong> as the SIEM ingestion layer when you have the spend; the connectors do most of the work.</li>
+                <li><strong>Defender for Cloud</strong> recommendations and alerts — surface compliance posture and active findings.</li>
+            </ul>
+
+            <h3>GCP</h3>
+            <ul>
+                <li><strong>Cloud Audit Logs</strong> — Admin Activity (always on) and Data Access (must be enabled, costs more, and worth it for sensitive services like BigQuery, Cloud Storage, Cloud KMS, IAM).</li>
+                <li><strong>VPC Flow Logs</strong> — every subnet in scope.</li>
+                <li><strong>Cloud DNS query logging</strong>.</li>
+                <li><strong>Cloud Logging sinks</strong> — aggregated at the organization level into the dedicated logging project, with retention-locked Cloud Storage as the long-term archive.</li>
+                <li><strong>Security Command Center Premium / Enterprise</strong> for threat detection findings; Chronicle for SIEM-grade ingestion if you've adopted it.</li>
+                <li><strong>Access Transparency / Access Approval</strong> — provider-personnel access logs, for the regulated workloads where that matters.</li>
+            </ul>
+            <p>The unifying principle: log what changes, log who did it, log from where, log against what data. The volume looks alarming on the bill the first month. The single time an incident requires you to reconstruct three months of activity for a specific compromised credential, the cost has paid itself off many times over.</p>
+        </section>
+
+        <section id="evidence">
+            <h2>Evidence collection by workload type</h2>
+            <p>Different workloads need different evidence captures. Cloud IR runbooks split by workload class because the mechanics genuinely differ.</p>
+
+            <h3>EC2 / Azure VM / GCE instance</h3>
+            <p>Closest to traditional host forensics, with the cloud adding capabilities you didn't have on-prem.</p>
+            <ul>
+                <li><strong>Snapshot first, stop second.</strong> The disk snapshot of a running instance captures state including some pagefile and journal contents; stopping the instance first risks losing in-memory state and may trigger anti-forensics in malware that watches for shutdown.</li>
+                <li><strong>Share the snapshot to the forensics account</strong> (cross-account EBS snapshot sharing on AWS; Azure managed disk export to the forensics subscription; GCE disk snapshot in the forensics project).</li>
+                <li><strong>Create a fresh forensics volume from the snapshot, attach to the analysis instance in an isolated VPC, mount read-only.</strong> Never attach the forensics volume to anything that has internet egress until you've confirmed what you have.</li>
+                <li><strong>Capture metadata</strong> alongside the disk: IAM role and its policies, security groups, IMDS history if available, instance tags, launch template, AMI ID, user data. Cloud-side metadata is often more useful than anything on the disk itself.</li>
+                <li><strong>If memory matters,</strong> capture it before snapshot — see the memory forensics section.</li>
+            </ul>
+
+            <h3>EKS / AKS / GKE pods</h3>
+            <p>Containers are designed to be ephemeral and identical. Treat the container as evidence about the deployment, not as the state itself.</p>
+            <ul>
+                <li><strong><code>kubectl debug</code> ephemeral container</strong> — attach a debug container to a running pod in the same namespace and PID space; capture <code>/proc</code>, environment, network state, running processes. Pre-build a debug image with your forensics tools.</li>
+                <li><strong>Pin the image SHA</strong> before anything else. A pod compromised via image vulnerability is meaningless to investigate without knowing precisely which image layer was running.</li>
+                <li><strong>Node-level disk snapshot</strong> for the underlying VM if the pod is suspected of having escaped or written to host paths.</li>
+                <li><strong>Container runtime telemetry</strong> — <a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a>, <a href="https://github.com/aquasecurity/tracee" target="_blank" rel="noopener noreferrer">Tracee</a>, eBPF-based sensors. These have to have been running before the incident; standing them up after is too late.</li>
+                <li><strong>Kubernetes audit logs</strong> for the API-server events that produced and changed the pod. These should be flowing to the same log archive as the rest of your audit logs.</li>
+                <li><strong>kubectl <code>cp</code> for any specific files of interest,</strong> then capture stdout / stderr logs before pod termination.</li>
+            </ul>
+            <p>See also the <a href="kubernetes.html">Kubernetes page</a> for the deeper detection and runtime-security context.</p>
+
+            <h3>Lambda / Cloud Functions / Azure Functions</h3>
+            <p>Serverless evidence is mostly side-channel. The function instance is gone; you investigate what it did, not the function itself.</p>
+            <ul>
+                <li><strong>Function code + configuration at the time of the incident.</strong> CloudTrail / Activity Log / Audit Logs record the deployment events; capture the version that was running, including environment variables (they often contain secrets that need rotating).</li>
+                <li><strong>Invocation logs</strong> — CloudWatch Logs (AWS), Application Insights / Log Analytics (Azure), Cloud Logging (GCP). Export anything covering the suspected incident window to immutable storage before retention windows expire.</li>
+                <li><strong>Distributed tracing</strong> — X-Ray, Application Insights, Cloud Trace. Reconstructs the call graph of a request that triggered the function; useful for showing whether the function was the attacker's pivot or just a downstream caller.</li>
+                <li><strong>IAM role activity from the function's execution role</strong> — what API calls did it actually make, when, against what.</li>
+            </ul>
+
+            <h3>S3 / Azure Blob / GCS objects</h3>
+            <ul>
+                <li><strong>Object versioning</strong> and <strong>MFA delete</strong> (AWS) / <strong>soft delete + versioning</strong> (Azure) / <strong>object versioning + retention policies</strong> (GCS) — turn these on by default for sensitive buckets so that an attacker can't simply delete objects to cover tracks or to ransom them.</li>
+                <li><strong>Server access logs / data events</strong> for the bucket — every GET, PUT, DELETE with the principal, source IP, user agent. Without this, the answer to "what did they exfiltrate?" is a guess.</li>
+                <li><strong>Object hash verification</strong> — for any objects suspected of modification, compare the current MD5 / SHA256 with whatever last-known-good baseline you have. <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html" target="_blank" rel="noopener noreferrer">S3 supports SHA-256 checksums natively</a> if you opt in.</li>
+            </ul>
+
+            <h3>IAM credentials</h3>
+            <p>Often the primary evidence. For any credential — IAM user access key, IAM role session, service principal secret, GCP service account key — the questions are the same:</p>
+            <ul>
+                <li><strong>Who used it?</strong> CloudTrail's <code>userIdentity</code>, Activity Log's caller, Cloud Audit Logs' <code>protoPayload.authenticationInfo</code>.</li>
+                <li><strong>From where?</strong> Source IP, user agent. Anomalous geos and unexpected user agents (cli tools when the workload uses the SDK; Python when the workload is Go) are classic indicators.</li>
+                <li><strong>When?</strong> First-use timestamp, last-use, full activity timeline.</li>
+                <li><strong>What API calls?</strong> The full list, with read / write / sensitive breakdown.</li>
+            </ul>
+            <p>Tools like <a href="https://github.com/Netflix/dispatch" target="_blank" rel="noopener noreferrer">Netflix Dispatch</a>, <a href="https://github.com/cado-security/cloudgrep" target="_blank" rel="noopener noreferrer">cloudgrep</a>, and <a href="https://github.com/jordanpotti/AWSBucketDump" target="_blank" rel="noopener noreferrer">AWS-native tools</a> help here, but a well-indexed CloudTrail / Activity / Audit Log corpus in your SIEM is the foundation.</p>
+        </section>
+
+        <section id="memory">
+            <h2>Memory forensics on cloud VMs</h2>
+            <p>Memory forensics on cloud VMs is technically possible, useful for a narrow class of incidents, and constrained by cloud realities most on-prem tooling didn't anticipate.</p>
+            <ul>
+                <li><strong>Linux:</strong> <a href="https://github.com/504ensicsLabs/LiME" target="_blank" rel="noopener noreferrer">LiME</a> — Loadable Kernel Module that dumps physical RAM to a file (or over the network); requires kernel-version-matched build. <a href="https://github.com/microsoft/avml" target="_blank" rel="noopener noreferrer">AVML</a> (Microsoft) — userspace, no kernel module; works on most cloud Linux distros without recompilation. Both can be pre-staged on a forensics user-data script ready to run if needed.</li>
+                <li><strong>Windows:</strong> MAGNET RAM Capture, FTK Imager, WinPmem. Run via Systems Manager Session Manager / Azure Run Command / GCP OS Login to avoid the need for inbound SSH/RDP.</li>
+                <li><strong>Analysis:</strong> <a href="https://volatilityfoundation.org/" target="_blank" rel="noopener noreferrer">Volatility 3</a> is the de-facto open-source analysis framework, plus commercial tooling (Magnet Axiom Cyber, Cellebrite Inseyets, MAGNET IEF) for richer workflows.</li>
+            </ul>
+            <p>The cloud-specific constraints to know:</p>
+            <ul>
+                <li><strong>You cannot ask the hypervisor for memory.</strong> AWS / Azure / GCP do not expose hypervisor-level memory acquisition to tenants. You're capturing from inside the guest, which means the malware can see you doing it.</li>
+                <li><strong>Ephemeral instances may be gone</strong> by the time you decide to capture. Autoscaling, spot reclamation, container scheduling, and even just <code>StopInstances</code> calls by the attacker erase live state.</li>
+                <li><strong>Encrypted memory features</strong> (AWS Nitro Enclaves, Azure Confidential Compute, GCP Confidential VMs) may prevent memory capture even from inside the VM. Plan around them rather than against them.</li>
+                <li><strong>Network egress to ship the memory image</strong> may not be available if the host is being contained. Capture to local storage, then move the storage.</li>
+            </ul>
+            <p>For most cloud incidents, memory forensics is not the highest-leverage activity. Save the muscle for the cases that genuinely warrant it (fileless attacks, in-memory implants, suspected rootkits); for the rest, CloudTrail and a disk image will tell you more, faster.</p>
+        </section>
+
+        <section id="container">
+            <h2>Container forensics</h2>
+            <p>Container forensics is its own discipline. The container is short-lived, the filesystem is layered, the logs scroll past quickly, and most of the interesting state is somewhere the container layer doesn't preserve.</p>
+            <ul>
+                <li><strong>Image SHA capture.</strong> First action. Without the precise image digest, you cannot say what code was running, and the registry tag may move under you.</li>
+                <li><strong>Runtime layer snapshot.</strong> The container's writable layer (the diff from the read-only image) holds whatever the malware wrote at runtime. <code>docker commit</code> on the container creates an image of the current state; <code>crictl</code> / <code>nerdctl</code> equivalents for containerd / CRI-O. Save the image to your forensics registry.</li>
+                <li><strong>Ephemeral debug container</strong> (<code>kubectl debug</code>) for live state — process list, network sockets, mounted filesystems, environment.</li>
+                <li><strong>Runtime telemetry from before the incident.</strong> The most valuable evidence for container investigations is what was being captured continuously: <a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a> rules firing on syscalls, <a href="https://github.com/aquasecurity/tracee" target="_blank" rel="noopener noreferrer">Tracee</a> traces, eBPF-based sensors (Cilium Tetragon, Sysdig, Datadog runtime security, Wiz Runtime Sensor). Without these, the container's history is largely unrecoverable after the fact.</li>
+                <li><strong>Kubernetes audit log</strong> — every <code>exec</code>, every <code>port-forward</code>, every <code>cp</code>, every secret read. Often the attacker's clearest trail.</li>
+                <li><strong>Node-level filesystem and process state</strong> for suspected container escape; capture the underlying node disk snapshot as if it were a VM compromise.</li>
+            </ul>
+        </section>
+
+        <section id="isolation">
+            <h2>Isolating compromised workloads</h2>
+            <p>Containment without evidence loss is the hardest single skill in cloud IR. The instinct to "shut it down" is wrong; the right move is to isolate the workload from anything it can damage or call, while keeping it intact enough to interrogate.</p>
+
+            <h3>The quarantine security group pattern (AWS)</h3>
+            <p>A pre-built security group with no ingress rules and egress restricted to (a) your forensics VPC peering, (b) your logging endpoints, (c) Systems Manager / SSM endpoints for remote command execution. Replacing the instance's existing SGs with this one isolates the workload in seconds while leaving it running for evidence capture.</p>
+
+            <h3>NSG / firewall isolation (Azure / GCP)</h3>
+            <p>Same pattern, different primitives. Azure: a "quarantine" NSG associated with the NIC, replacing existing NSGs. GCP: tag the instance with a <code>quarantine</code> network tag that matches a firewall rule denying all ingress and egress except to logged forensic endpoints.</p>
+
+            <h3>IAM containment</h3>
+            <p>Often more important than network containment in cloud breaches. If a credential is compromised, you want to:</p>
+            <ul>
+                <li><strong>Detach all policies</strong> from the user / role, replacing with an explicit deny on everything except the calls your IR team will use to investigate.</li>
+                <li><strong>Revoke active sessions</strong> for IAM roles using the <code>AWSRevokeOlderSessions</code> inline policy — the credential continues to exist (so the audit trail of attempted reuse is preserved) but no API call succeeds.</li>
+                <li><strong>For SSO / federated identities,</strong> disable the user at the IdP (Entra ID, Okta, Google Workspace) and revoke all refresh tokens.</li>
+            </ul>
+
+            <h3>The "running but cannot reach anything" state</h3>
+            <p>The goal is a workload that is alive enough to capture from, dead enough not to cause further harm. For most cloud incidents this is achievable in under 5 minutes if the runbooks and IAM are pre-built; if they aren't, you'll spend 30 minutes deciding what to do while the attacker continues.</p>
+        </section>
+
+        <section id="credentials">
+            <h2>Credential rotation under incident</h2>
+            <p>Credential rotation is necessary but rarely the first thing to do. The discipline is to capture evidence and contain first, then rotate — and to rotate correctly so you don't leave windows open.</p>
+
+            <h3>AWS</h3>
+            <ul>
+                <li><strong>IAM user access keys:</strong> <code>aws iam update-access-key --status Inactive</code> first (preserves the key for audit lookup); then <code>aws iam delete-access-key</code> after the active phase. Create a new key only after confirming the workload that uses it has a containment plan.</li>
+                <li><strong>IAM role sessions:</strong> deny based on session-issue-time. The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_revoke-sessions.html" target="_blank" rel="noopener noreferrer">AWSRevokeOlderSessions inline policy</a> applies a condition denying all actions where <code>aws:TokenIssueTime</code> is before a chosen timestamp; this kills active sessions without affecting the long-term credential.</li>
+                <li><strong>STS federation:</strong> rotate the IdP-side credential (SAML signing key, OIDC trust) if the trust relationship itself is suspected.</li>
+                <li><strong>Root credentials:</strong> rotate, re-MFA, audit the root API key usage history. The root key should never be in regular use; any use is an event in itself.</li>
+            </ul>
+
+            <h3>Azure</h3>
+            <ul>
+                <li><strong>Service principal secrets and certificates:</strong> rotate via Entra ID. Old credentials remain in audit logs for the retention window.</li>
+                <li><strong>Managed identities:</strong> cannot be "rotated" in the user-managed sense; instead, remove the role assignment and re-grant if you suspect the identity itself is compromised.</li>
+                <li><strong>User sessions:</strong> <code>Revoke-AzureADUserAllRefreshToken</code> (or the Entra ID portal equivalent) forces reauth on every device.</li>
+            </ul>
+
+            <h3>GCP</h3>
+            <ul>
+                <li><strong>Service account keys:</strong> disable first (preserves audit trail) via <code>gcloud iam service-accounts keys disable</code>; delete after the active phase. The presence of long-lived service account keys at all is increasingly a finding — prefer Workload Identity Federation.</li>
+                <li><strong>OAuth tokens:</strong> revoke refresh tokens via Admin SDK or the IdP integration. Active access tokens expire on their own clock but cannot be retroactively killed in all cases.</li>
+                <li><strong>User sessions:</strong> Workspace admin console offers session reset on a per-user basis.</li>
+            </ul>
+            <p>The cross-cloud principle: <strong>disable, don't delete, until evidence is captured.</strong> A deleted credential's last-used and policy-version history is harder to recover than a disabled one.</p>
+        </section>
+
+        <section id="runbooks">
+            <h2>IR runbooks</h2>
+            <p>Runbooks are the predefined sequences your team executes for the common cloud incident classes. The right set covers the 80% of incidents that look the same time after time. Each runbook should answer: who's on call, what to capture, how to contain, how to verify, who to notify.</p>
+
+            <h3>Compromised IAM credential</h3>
+            <p>The single most common cloud incident. Trigger: GuardDuty / Defender / SCC finding of unusual API activity, or a credential surfacing in a public leak (GitHub, paste sites). Sequence: identify the principal, query the credential's full CloudTrail / Activity Log history, capture and store the activity trail in immutable storage, disable the credential, revoke active sessions, scope the blast radius from the API calls made, then notify the workload owner, rotate, and audit downstream resources for attacker persistence (new IAM users, new roles, modified policies).</p>
+
+            <h3>Exposed S3 / Storage bucket</h3>
+            <p>Trigger: external researcher report, internal CSPM alert, or a finding from data-exposure scanners (GrayNoise, BinaryEdge, internal). Sequence: confirm exposure (don't trust the alert alone), enumerate accessed objects from server access logs, identify the sensitive data classes involved, fix the bucket ACL / policy / public-access-block, capture an immutable snapshot of the access logs, then escalate to the data-owner team and Legal for breach-notification analysis.</p>
+
+            <h3>Crypto-mining EC2 / VM</h3>
+            <p>Trigger: GuardDuty CryptoCurrency finding, billing spike alert, unusual outbound network volume to mining-pool IP ranges. Usually downstream of a compromised IAM credential that launched the workload. Sequence: snapshot the workload, capture network traffic, identify the launching principal (often a forgotten access key in a code repo), shutdown the workload, then move to the credential-compromise runbook to find the root cause.</p>
+
+            <h3>Ransomware in storage</h3>
+            <p>Trigger: customer reports of inaccessible files, S3 object versioning chain showing mass-deletion, ransom note found in a bucket. Sequence: pause all auto-replication so the attacker's deletions don't propagate to backups, verify object versioning is intact, restore from versioning history or backups, identify the credential used for the deletions, follow the credential-compromise runbook for the source, and engage Legal for ransom-decision and law-enforcement notification.</p>
+
+            <h3>Exfiltration via egress</h3>
+            <p>Trigger: VPC Flow Logs / NSG Flow Logs anomaly, GuardDuty <code>UnusualNetworkActivity</code> or <code>OutboundDataTransferAnomaly</code>, DNS-tunneling indicators in Route 53 / Cloud DNS query logs. Sequence: contain the workload via the quarantine SG / NSG pattern, capture the workload, identify the data being transferred (via S3 access logs, database query logs, application logs), determine the principal and the credential, then run the credential-compromise + ransomware-style data-loss runbooks in parallel.</p>
+
+            <h3>Insider / privileged-user misuse</h3>
+            <p>Trigger: HR notification of an investigation, anomalous behavior from a privileged principal, or a finding that an admin's account is doing something the role permits but the human shouldn't. Sequence: do NOT alert the subject; preserve evidence; engage HR and Legal before any technical action; capture the full activity trail; coordinate any rotation / disablement with HR's timing.</p>
+
+            <h3>Reference playbooks worth reading</h3>
+            <ul>
+                <li><a href="https://github.com/aws-samples/aws-incident-response-playbooks" target="_blank" rel="noopener noreferrer">AWS Incident Response Playbooks</a> — the AWS-published reference set; technical, opinionated, useful even if you adapt them.</li>
+                <li><a href="https://www.cisa.gov/sites/default/files/publications/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf" target="_blank" rel="noopener noreferrer">CISA Federal Cybersecurity Incident &amp; Vulnerability Response Playbooks</a> — federal but broadly applicable.</li>
+                <li><a href="https://github.com/aws-samples/aws-customer-playbook-framework" target="_blank" rel="noopener noreferrer">AWS Customer Playbook Framework</a> — the structure for writing your own.</li>
+                <li><a href="https://learn.microsoft.com/en-us/security/operations/incident-response-playbooks" target="_blank" rel="noopener noreferrer">Microsoft Incident Response Playbooks</a> — phishing, password spray, app consent grants.</li>
+            </ul>
+        </section>
+
+        <section id="tabletops">
+            <h2>Tabletop exercises</h2>
+            <p>An IR program that has never practiced will not perform under stress. Tabletops are the cheapest way to discover that your runbooks reference an account that no longer exists, that the on-call rotation hasn't been updated since the last reorg, or that nobody has paged Legal in 18 months and the contact is stale.</p>
+
+            <h3>Cadence</h3>
+            <ul>
+                <li><strong>Quarterly</strong> — small, scenario-specific. 90 minutes. Run the runbook on paper, identify what breaks.</li>
+                <li><strong>Annually</strong> — major, multi-team. A full day. Multiple scenarios, including ones that overlap (a credential compromise that becomes a ransomware event).</li>
+                <li><strong>Ad-hoc</strong> — after a major architectural change, a leadership change, or a near-miss incident.</li>
+            </ul>
+
+            <h3>Who attends</h3>
+            <p>Incident commander (rotating), security engineering, on-call SRE / platform team, cloud-account owners for the affected workloads, communications / PR, Legal / privacy counsel, executive sponsor (often CTO or CISO), and a designated observer who takes notes and runs the retro. For tabletops with a DFIR retainer, the firm's account team should join — they should know your environment before the real call.</p>
+
+            <h3>Scenarios worth running</h3>
+            <ul>
+                <li>Leaked AWS access key in a public GitHub commit, with crypto-mining activity within 4 minutes.</li>
+                <li>Compromised Entra ID admin account during a session-hijack attack against the CFO.</li>
+                <li>Public S3 / GCS bucket discovered by an external researcher with media interest.</li>
+                <li>Ransomware on a sub-set of S3 buckets via a compromised CI/CD pipeline.</li>
+                <li>Insider exfiltration: a departing engineer with broad access to customer-data tables.</li>
+                <li>Supply-chain compromise: a malicious update to a widely-used base image discovered by your runtime sensor.</li>
+                <li>Cross-tenant cloud-provider incident: the provider notifies you of a vulnerability that affected your data.</li>
+            </ul>
+        </section>
+
+        <section id="retainers">
+            <h2>DFIR retainers</h2>
+            <p>A retainer is a contracted relationship with a DFIR firm that buys you a response SLA, pre-negotiated rates, and (most importantly) a team that knows your environment before the call. The major firms in 2026:</p>
+            <ul>
+                <li><strong><a href="https://cloud.google.com/security/products/mandiant" target="_blank" rel="noopener noreferrer">Mandiant</a></strong> (Google Cloud) — long history, deep nation-state experience, Mandiant Managed Defense for ongoing detection.</li>
+                <li><strong><a href="https://www.crowdstrike.com/en-us/services/respond/" target="_blank" rel="noopener noreferrer">CrowdStrike Services</a></strong> — strong on endpoint-led investigations, paired with their EDR.</li>
+                <li><strong><a href="https://www.kroll.com/en/services/cyber-risk" target="_blank" rel="noopener noreferrer">Kroll</a></strong> — broad coverage including breach-coach legal coordination; common in privacy-driven incidents.</li>
+                <li><strong><a href="https://www.paloaltonetworks.com/unit42" target="_blank" rel="noopener noreferrer">Unit 42</a></strong> (Palo Alto Networks) — strong on cloud and ransomware engagements.</li>
+                <li><strong><a href="https://arcticwolf.com/solutions/incident-response/" target="_blank" rel="noopener noreferrer">Arctic Wolf</a></strong> — mid-market focus, broad retainer base.</li>
+                <li><strong><a href="https://www.secureworks.com/services/incident-response" target="_blank" rel="noopener noreferrer">Secureworks (now Sophos)</a></strong>, <strong><a href="https://www.optiv.com/services/incident-response" target="_blank" rel="noopener noreferrer">Optiv</a></strong>, <strong><a href="https://www.coalfire.com/services/cybersecurity/cybersecurity-services/incident-response" target="_blank" rel="noopener noreferrer">Coalfire</a></strong>, regional specialists.</li>
+                <li><strong><a href="https://www.mitiga.io/" target="_blank" rel="noopener noreferrer">Mitiga</a></strong>, <strong><a href="https://www.cadosecurity.com/" target="_blank" rel="noopener noreferrer">Cado</a></strong> — cloud-native IR specialists, particularly useful for orgs whose incident surface is heavily AWS / Azure / GCP rather than endpoint.</li>
+            </ul>
+
+            <h3>When the math works</h3>
+            <p>Retainers pay off when:</p>
+            <ul>
+                <li>You have meaningful cloud presence and sensitive data, and an internal IR team too small to cover a serious incident without help.</li>
+                <li>You're in a regulated industry where regulatory notification timelines (GDPR 72h, NYDFS 72h, etc.) leave no slack for shopping for a firm during the incident.</li>
+                <li>You have cyber insurance — most policies require a panel-approved DFIR firm and offer rate concessions for retainer customers.</li>
+                <li>You want the firm to do an annual tabletop or environment-familiarization engagement to be useful when the real call comes.</li>
+            </ul>
+            <p>Below those thresholds, an established phone-and-email relationship with one or two firms — without a paid retainer — is often enough. The worst case is having no one to call and shopping during the incident; the second-worst is having a retainer with a firm that has never looked at your environment.</p>
+        </section>
+
+        <section id="communication">
+            <h2>Communication during incident</h2>
+            <p>The communications layer of IR is where most programs reveal their immaturity. The technical containment can go well and the public reception can still be terrible, or vice versa.</p>
+
+            <h3>Internal</h3>
+            <ul>
+                <li><strong>The war room.</strong> A dedicated Slack / Teams channel (e.g. <code>#inc-2026-05-17-credential-compromise</code>) for the active incident. The IC, technical leads, comms, Legal, and executive sponsor live in it during the active phase. No side-channel discussion; everything in the channel is evidence.</li>
+                <li><strong>RACI for the incident.</strong> Incident Commander (one, rotating), Technical Lead, Communications Lead, Legal Lead, Executive Sponsor. Each role has a named human; if that human is unavailable, the runbook says who replaces them.</li>
+                <li><strong>Status updates on a cadence.</strong> Every 30 minutes during active response — even "no change" is a status. Drift to 60 minutes once containment is solid.</li>
+                <li><strong>Decision log.</strong> Major decisions (containment scope, who to notify, when to rotate keys, when to declare the active phase over) written down with the reasoning at the time. Saves the retro from "why did we do that?" amnesia.</li>
+            </ul>
+
+            <h3>External</h3>
+            <ul>
+                <li><strong>Customers.</strong> If their data is affected — even potentially — they get notified per the contract you signed with them and the law that applies to where they are. Vague language about "an investigation is ongoing" is acceptable initially; silence is not.</li>
+                <li><strong>Regulators.</strong> <a href="https://gdpr.eu/article-33-notification-personal-data-breach/" target="_blank" rel="noopener noreferrer">GDPR Article 33 requires notification to the supervisory authority within 72 hours of becoming aware</a> of a personal-data breach. U.S. state laws vary (most 30–60 days, some require law-enforcement consultation first). HIPAA breach-notification: 60 days. SEC 8-K Item 1.05: four business days from materiality determination for public companies. <a href="https://digital-strategy.ec.europa.eu/en/policies/nis2-directive" target="_blank" rel="noopener noreferrer">NIS2</a>, <a href="https://www.eiopa.europa.eu/digital-operational-resilience-act-dora_en" target="_blank" rel="noopener noreferrer">DORA</a>, and sector regulators add their own clocks.</li>
+                <li><strong>Cyber insurance carrier.</strong> Notify per policy — often within 24-72 hours of awareness, sometimes before engaging counsel or a DFIR firm not on their panel.</li>
+                <li><strong>Law enforcement.</strong> FBI / Secret Service / NCSC / local cybercrime unit. Usually optional, sometimes valuable for nation-state attribution or extortion cases.</li>
+                <li><strong>Public.</strong> Press statement, status page update, blog post. The principle: tell the truth, tell it clearly, tell it before someone else does. Late or evasive comms are the durable reputational damage.</li>
+            </ul>
+            <p>Your IR runbook should include a one-page summary of the regulatory clocks that apply to you — by data type, by jurisdiction, by sector. Your General Counsel should own it; your security team should know where to find it at 2am.</p>
+        </section>
+
+        <section id="post-incident">
+            <h2>Post-incident</h2>
+            <p>The phase most programs underinvest in, and the one with the highest long-term return.</p>
+
+            <h3>Blameless retro</h3>
+            <p>The principle, borrowed from SRE: people made the best decisions they could with the information they had. Retros that hunt for fault produce defensive participants who hide details; blameless retros produce honest accounts that surface the systemic causes. Have a designated facilitator (not the IC, not the executive sponsor), follow a written agenda, and produce a written document with the timeline, the decisions, the lessons, and the action items.</p>
+
+            <h3>Action item categories</h3>
+            <ul>
+                <li><strong>Control improvements.</strong> The actual prevention or limit that would have stopped or reduced this incident. Specific, owned, dated.</li>
+                <li><strong>Detection backfill.</strong> The alert that should have fired earlier. New SIEM rules, new GuardDuty / Defender / SCC enablements, new <a href="detection-engineering.html">detection-engineering</a> work. Track from "we noticed" to "we noticed within an SLA."</li>
+                <li><strong>Runbook updates.</strong> Every place the runbook was wrong, missing, or required improvisation. Updated, reviewed, tested in the next tabletop.</li>
+                <li><strong>Tooling gaps.</strong> The capabilities you wished you had. Often: better evidence capture, better cross-account access for the IR team, better network isolation, better identity-side controls.</li>
+                <li><strong>Process gaps.</strong> The places the org-chart let you down. New on-call agreements, new RACI, new escalation paths.</li>
+            </ul>
+            <p>The owner of action items is not Security alone. Detection backfill is Security; control improvements often live with platform / engineering teams; comms updates live with Legal and Marketing. The retro that produces action items only for Security is a retro that has misdiagnosed the incident.</p>
+        </section>
+
+        <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/checklist.webp" type="image/webp">
+            <img src="/img/photos/checklist.jpg" alt="Close-up of a checklist with green checkmarks" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Photo by Towfiqu barbhuiya on Pexels</figcaption>
+        </figure>
+
+        <section id="comparison">
+            <h2>AWS, Azure, and GCP side-by-side</h2>
+            <p>The native IR-supporting capabilities each cloud ships, reduced to a one-screen reference:</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Capability</th>
+                            <th scope="col" class="ct-aws"><span class="ct-dot ct-dot-aws" aria-hidden="true"></span> AWS</th>
+                            <th scope="col" class="ct-azure"><span class="ct-dot ct-dot-azure" aria-hidden="true"></span> Azure</th>
+                            <th scope="col" class="ct-gcp"><span class="ct-dot ct-dot-gcp" aria-hidden="true"></span> GCP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Activity audit log</th>
+                            <td>CloudTrail (org trail, mgmt + data events)</td>
+                            <td>Activity Log + Diagnostic Settings</td>
+                            <td>Cloud Audit Logs (Admin + Data Access)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Network flow logs</th>
+                            <td>VPC Flow Logs</td>
+                            <td>NSG Flow Logs / VNet Flow Logs</td>
+                            <td>VPC Flow Logs</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Threat detection</th>
+                            <td>GuardDuty (incl. EKS, S3, RDS, runtime)</td>
+                            <td>Defender for Cloud (CSPM + CWPP)</td>
+                            <td>Security Command Center (Premium / Enterprise)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Investigation / graph</th>
+                            <td>Detective</td>
+                            <td>Sentinel investigation graph</td>
+                            <td>SCC Investigation, Chronicle</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">SIEM / SOAR</th>
+                            <td>Security Lake + partner SIEM, Security Hub</td>
+                            <td>Microsoft Sentinel (SIEM + SOAR)</td>
+                            <td>Chronicle SIEM + SOAR</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Disk evidence</th>
+                            <td>EBS snapshot, cross-account share</td>
+                            <td>Managed disk export, snapshot copy</td>
+                            <td>Persistent disk snapshot, cross-project share</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Memory acquisition</th>
+                            <td>SSM Session Manager + LiME/AVML; no hypervisor-level</td>
+                            <td>Azure Run Command + AVML/WinPmem; no hypervisor-level</td>
+                            <td>OS Login / Cloud Shell + AVML; no hypervisor-level</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Container runtime</th>
+                            <td>GuardDuty EKS Runtime / ECS Fargate Runtime</td>
+                            <td>Defender for Containers (eBPF)</td>
+                            <td>GKE Threat Detection, Workload Vuln Scanning</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Isolation primitive</th>
+                            <td>Quarantine Security Group</td>
+                            <td>Quarantine NSG / NIC isolation</td>
+                            <td>Network tag + firewall rule</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Session revocation</th>
+                            <td>AWSRevokeOlderSessions inline policy</td>
+                            <td>Entra ID refresh-token revocation</td>
+                            <td>Workspace session reset, IAM key disable</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">IR-specific service</th>
+                            <td><a href="https://aws.amazon.com/security-incident-response/" target="_blank" rel="noopener noreferrer">AWS Security Incident Response</a> (CIRT-as-a-service)</td>
+                            <td>Microsoft Incident Response (paid engagement)</td>
+                            <td>Mandiant (Google Cloud) consulting + retainers</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Vendor IR contact</th>
+                            <td>AWS Customer Incident Response Team (CIRT) via Support</td>
+                            <td>Microsoft Detection &amp; Response Team (DART)</td>
+                            <td>Google Cloud TAM / Security Response</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Native tools are necessary but not sufficient. None of the three clouds ship a complete forensics workbench, and the cross-cloud IR tooling section below fills the gap that all three leave open.</p>
+        </section>
+
+        <section id="tooling">
+            <h2>Specialized cloud-IR tooling</h2>
+            <p>Beyond the native services, a category of tooling specifically targets cloud forensics and IR workflows:</p>
+            <ul>
+                <li><strong><a href="https://www.cadosecurity.com/" target="_blank" rel="noopener noreferrer">Cado Security</a></strong> — cloud-native investigation platform; automated evidence capture for AWS / Azure / GCP, containers, serverless. The closest thing to a turnkey cloud-forensics workbench.</li>
+                <li><strong><a href="https://www.mitiga.io/" target="_blank" rel="noopener noreferrer">Mitiga</a></strong> — cloud IR-as-a-service, plus a platform for cloud-incident readiness and investigation.</li>
+                <li><strong><a href="https://www.magnetforensics.com/products/magnet-axiom-cyber/" target="_blank" rel="noopener noreferrer">Magnet Axiom Cyber</a></strong> — broader DFIR suite with cloud collectors; strong on Microsoft 365, Google Workspace, and SaaS-side evidence.</li>
+                <li><strong><a href="https://cloud.google.com/security/products/mandiant-managed-defense" target="_blank" rel="noopener noreferrer">Mandiant Managed Defense</a></strong> — outsourced detection + IR; particularly valuable for orgs that can't staff 24/7 internally.</li>
+                <li><strong><a href="https://docs.velociraptor.app/" target="_blank" rel="noopener noreferrer">Velociraptor</a></strong> — open-source endpoint visibility and digital-forensics tool; deploys agents to cloud VMs for query-based collection.</li>
+                <li><strong><a href="https://github.com/google/grr" target="_blank" rel="noopener noreferrer">GRR Rapid Response</a></strong> — Google's open-source remote live forensics framework; mature, scriptable, free.</li>
+                <li><strong><a href="https://github.com/google/timesketch" target="_blank" rel="noopener noreferrer">Timesketch</a></strong> — collaborative forensic timeline analysis tool. Plays well with Plaso for evidence ingestion.</li>
+                <li><strong><a href="https://github.com/google/cloud-forensics-utils" target="_blank" rel="noopener noreferrer">cloud-forensics-utils</a></strong> (Google) — Python library that automates disk-acquisition workflows across AWS, Azure, and GCP.</li>
+                <li><strong><a href="https://github.com/aws-samples/aws-incident-response-playbooks" target="_blank" rel="noopener noreferrer">AWS Incident Response Playbooks repo</a></strong> — reference playbooks, not tooling, but the structure many teams adopt.</li>
+                <li><strong><a href="https://www.cisa.gov/news-events/cybersecurity-advisories" target="_blank" rel="noopener noreferrer">CISA playbooks &amp; advisories</a></strong> — federal but generally useful; the Cybersecurity Incident &amp; Vulnerability Response Playbooks are good baseline reading.</li>
+            </ul>
+        </section>
+
+        <section id="maturity">
+            <h2>Maturity stages</h2>
+            <p>A useful staging model for a cloud IR program:</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-stage1">
+                    <h3>Stage 1 — Reactive</h3>
+                    <p>An incident happens; the team scrambles. Logs are partially captured. Runbooks are tribal knowledge. The forensics work happens in the production account. Detection is mostly post-hoc — billing alerts, customer complaints, external researcher tips. Survives small incidents, breaks on big ones.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage2">
+                    <h3>Stage 2 — Documented</h3>
+                    <p>Immutable log archive is live. Forensics account exists. The most common runbooks (compromised credential, exposed bucket, crypto-mining) are written down. On-call rotation defined. A DFIR phone-and-email relationship with one firm. First tabletop completed.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage3">
+                    <h3>Stage 3 — Practiced</h3>
+                    <p>Quarterly tabletops with multiple scenarios. Annual full-day exercise with Legal and execs. DFIR retainer in place; firm has been through an environment-familiarization engagement. <a href="detection-engineering.html">Detection engineering</a> matures alongside IR; detections tied to MITRE ATT&amp;CK Cloud. SLA-tracked time-to-detect, time-to-contain.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage4">
+                    <h3>Stage 4 — Automated</h3>
+                    <p>High-confidence playbooks auto-execute: GuardDuty finding → snapshot the workload, apply quarantine SG, page the on-call, file a ticket — all in seconds. Continuous tabletop via purple-team exercises. Forensics-as-code; evidence collection is reproducible from a runbook commit hash. The IR program is a competitive advantage in enterprise sales conversations about security maturity.</p>
+                </div>
+            </div>
+            <p>The skip-stage cost is real. An org trying to automate IR without runbooks is automating against nothing; the automation will be wrong, and people will distrust it. Sequence matters.</p>
+        </section>
+
+        <section id="pitfalls">
+            <h2>Common pitfalls</h2>
+            <ul>
+                <li><strong>No immutable log archive.</strong> The single most common — and most consequential — IR readiness failure. The attacker disables logging on day zero; without a tamper-resistant archive in a separate account, the investigation goes blind.</li>
+                <li><strong>Doing forensics in the production account.</strong> Contaminates evidence, exposes the IR team to whatever the attacker is still doing, and gives auditors and Legal heartburn. The dedicated forensics account is a precondition, not a nice-to-have.</li>
+                <li><strong>No forensics account at all.</strong> Adjacent to the above. "We'll figure it out when it happens" is a Stage 1 program; setting it up takes a week and pays for itself the first time.</li>
+                <li><strong>Rotating credentials before capturing evidence.</strong> Destroys the live session state that's often the best evidence of what the attacker is doing right now. Disable first, capture, then rotate.</li>
+                <li><strong>No tabletop, ever.</strong> Runbooks that have never been practiced fail on the worst day. Quarterly is the minimum cadence that produces lasting muscle memory.</li>
+                <li><strong>Conflating containment with eradication.</strong> Quarantining the workload buys time; it doesn't end the incident. Eradication — finding and removing the attacker's full set of footholds — is the work that prevents the second incident an hour later.</li>
+                <li><strong>Forgetting identity-side persistence.</strong> An attacker who compromised an IdP admin can plant trust relationships, app consent grants, IdP-side users, and federation backdoors that survive every workload-side cleanup. Audit the IdP after every credential-compromise incident.</li>
+                <li><strong>"We'll buy a tool when we need it."</strong> The tool that needs to be deployed and configured under incident pressure won't be useful in that incident. Pre-stage the forensics AMI, the collector agents, the network rules.</li>
+                <li><strong>Underestimating regulatory clocks.</strong> GDPR's 72-hour window, SEC's four-business-day clock, state breach laws, sector regulators — these don't pause for your investigation. The runbook needs the clocks pre-mapped; the response needs Legal in the room from hour one.</li>
+                <li><strong>Skipping the retro.</strong> The team is exhausted; everyone wants the incident to be over; the retro slips. Six months later, the same incident class recurs because the action items were never identified. Retro within two weeks, no exceptions.</li>
+            </ul>
+        </section>
+
+        <section id="further">
+            <h2>Further reading</h2>
+            <h3>Standards &amp; frameworks</h3>
+            <ul>
+                <li><a href="https://csrc.nist.gov/pubs/sp/800/61/r2/final" target="_blank" rel="noopener noreferrer">NIST SP 800-61r2 — Computer Security Incident Handling Guide</a></li>
+                <li><a href="https://csrc.nist.gov/pubs/sp/800/86/final" target="_blank" rel="noopener noreferrer">NIST SP 800-86 — Guide to Integrating Forensic Techniques into IR</a></li>
+                <li><a href="https://www.sans.org/white-papers/incident-handlers-handbook/" target="_blank" rel="noopener noreferrer">SANS — Incident Handler's Handbook (PICERL)</a></li>
+                <li><a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK Cloud Matrix</a></li>
+                <li><a href="https://www.cisa.gov/sites/default/files/publications/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf" target="_blank" rel="noopener noreferrer">CISA — Federal IR &amp; Vulnerability Response Playbooks</a></li>
+            </ul>
+            <h3>Provider IR documentation</h3>
+            <ul>
+                <li><a href="https://docs.aws.amazon.com/security-ir/latest/userguide/security-incident-response-guide.html" target="_blank" rel="noopener noreferrer">AWS Security Incident Response Guide</a></li>
+                <li><a href="https://github.com/aws-samples/aws-incident-response-playbooks" target="_blank" rel="noopener noreferrer">AWS Incident Response Playbooks (GitHub)</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/security/operations/incident-response-overview" target="_blank" rel="noopener noreferrer">Microsoft Incident Response documentation</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/security/operations/incident-response-playbooks" target="_blank" rel="noopener noreferrer">Microsoft Incident Response Playbooks</a></li>
+                <li><a href="https://cloud.google.com/architecture/framework/security/incident-response" target="_blank" rel="noopener noreferrer">Google Cloud — Incident Response Best Practices</a></li>
+                <li><a href="https://services.google.com/fh/files/misc/data_incident_response_process.pdf" target="_blank" rel="noopener noreferrer">Google — Data Incident Response Process</a></li>
+            </ul>
+            <h3>Tooling</h3>
+            <ul>
+                <li><a href="https://volatilityfoundation.org/" target="_blank" rel="noopener noreferrer">Volatility 3</a> — memory forensics framework</li>
+                <li><a href="https://docs.velociraptor.app/" target="_blank" rel="noopener noreferrer">Velociraptor</a> — endpoint visibility &amp; live forensics</li>
+                <li><a href="https://github.com/google/grr" target="_blank" rel="noopener noreferrer">GRR Rapid Response</a></li>
+                <li><a href="https://github.com/google/cloud-forensics-utils" target="_blank" rel="noopener noreferrer">cloud-forensics-utils</a></li>
+                <li><a href="https://github.com/microsoft/avml" target="_blank" rel="noopener noreferrer">AVML</a> — Linux memory acquisition</li>
+                <li><a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a> — runtime security for containers</li>
+            </ul>
+            <h3>Related CSOH pages</h3>
+            <ul>
+                <li><a href="detection-engineering.html">Detection engineering</a> — the discipline that produces the alerts IR investigates.</li>
+                <li><a href="cloud-soc.html">Cloud SOC</a> — the operating model around detection and response.</li>
+                <li><a href="threat-research.html">Threat research</a> — the threats your IR program is defending against.</li>
+                <li><a href="breach-timeline.html">Breach kill chains</a> — anatomies of real cloud incidents, end-to-end.</li>
+                <li><a href="shared-responsibility-model.html">Shared responsibility</a> — where your IR scope ends and the provider's begins.</li>
+                <li><a href="glossary.html">Glossary</a> — every term on this page, defined.</li>
+            </ul>
+        </section>
+
+        <section id="faq">
+            <h2>FAQ</h2>
+
+            <h3>How is cloud incident response different from on-prem IR?</h3>
+            <p>Three big shifts. First, <strong>ephemerality</strong> — the instance, container, or function that you want to image may not exist by the time you reach for it; if you didn't snapshot disk and capture logs proactively, that evidence is gone. Second, <strong>the API is the attack surface</strong> — most cloud breaches are not "shell on a box" but "stolen credential calling APIs", so CloudTrail / Activity Log / Cloud Audit Logs are the primary evidence source, not memory dumps. Third, <strong>shared responsibility</strong> — the hypervisor, the physical network, the underlying storage hardware are not yours to investigate; you work with what the provider exposes, and you escalate to the provider's IR team when an incident crosses that line.</p>
+
+            <h3>What's the single highest-leverage thing to do before an incident happens?</h3>
+            <p>Build an immutable, cross-account log archive that an attacker who compromises your production environment cannot tamper with. In AWS, that's CloudTrail (org trail, all regions, management + data events) writing to an S3 bucket in a dedicated Log Archive account, with bucket policies and SCPs that prevent deletion or alteration. In Azure, it's Activity Log + Diagnostic Settings exported to a Log Analytics workspace and a locked storage account in a separate subscription. In GCP, it's organization-aggregated Cloud Audit Logs sinking to a retention-locked bucket in a dedicated logging project. Without this, the attacker rotates credentials, disables CloudTrail, deletes logs, and you investigate blind.</p>
+
+            <h3>Do I really need a separate forensics account?</h3>
+            <p>Yes, and you need it provisioned <em>before</em> the incident, not during. A forensics account / subscription / project is a clean environment with pre-staged tooling (a forensics AMI or VM image, scripting, disk-imaging utilities, packet-capture tools, Velociraptor / GRR collectors), an isolated VPC with no route to production, IAM trust policies that allow the IR team to assume roles into compromised accounts in read-only or evidence-collection modes, and a budget. Doing forensics in the prod account contaminates evidence, exposes the IR team to whatever the attacker is still doing, and gives auditors and lawyers heartburn.</p>
+
+            <h3>Should I rotate credentials immediately when I detect a compromise?</h3>
+            <p>Not before you've captured what you need from the credential's audit trail and decided on a containment strategy. The instinct to "kill the access key" is right eventually, but rotating credentials prematurely (a) tips off the attacker, (b) destroys live session state that may be the best evidence of what's happening right now, and (c) can lock out legitimate workloads if the credential is shared. The order is: identify the compromised principal, query CloudTrail / Activity / Audit Logs for the credential's full activity history, snapshot any associated workloads, <em>then</em> rotate — and use AssumeRole session revocation (the <code>AWSRevokeOlderSessions</code> inline policy) to kill active sessions, not just the long-term credential.</p>
+
+            <h3>How long do we have to disclose a breach?</h3>
+            <p>It depends on jurisdiction and data type. GDPR requires notification to the supervisory authority within 72 hours of becoming aware of a personal-data breach, and to affected individuals "without undue delay" if there's high risk. U.S. state breach-notification laws vary (most 30–60 days, some shorter for specific data types). SEC Item 1.05 requires public companies to disclose material cybersecurity incidents within four business days of materiality determination. HIPAA breach notification is 60 days. Sector-specific rules (NYDFS Part 500, FFIEC, NERC CIP, NIS2, DORA) add their own clocks. Your IR runbook should include a decision tree that maps incident type to the regulatory clocks that apply — and your General Counsel should be in the war room from the first hour.</p>
+
+            <h3>Is memory forensics still relevant on cloud VMs?</h3>
+            <p>Yes for workloads that meaningfully run anything in memory beyond what's on disk — long-running services with in-memory state, JIT-compiled malware, fileless attacks that hide in process memory. The mechanics on cloud VMs work: LiME or AVML can capture RAM from a running Linux instance, MAGNET RAM Capture or similar from Windows. The constraint is that ephemeral cloud VMs may be gone by the time you reach for them, and capturing memory requires the instance to still be running (or for the hypervisor to support live snapshots — AWS / Azure / GCP don't generally expose this to tenants). For containers and serverless, memory forensics is largely impractical; you fall back on runtime-security telemetry (Falco, Tracee, eBPF-based sensors) captured before the workload terminates.</p>
+
+            <h3>When does a DFIR retainer pay off?</h3>
+            <p>When you have meaningful cloud presence, sensitive data, and an internal IR team that's small enough to be overwhelmed by a serious incident. A retainer (Mandiant, CrowdStrike, Kroll, Unit 42, Arctic Wolf, and similar) buys you a contracted response SLA — typically 1–4 hours to first responder — and pre-negotiated rates instead of emergency premium pricing. It also forces you to do a tabletop with the firm in advance so they know your environment when the call comes in. The math works above roughly 100 employees, or earlier if you're in a regulated industry. Below that, a "best-efforts" relationship with one or two firms you've talked to in calm times is often enough.</p>
+        </section>
+
+        <section class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="detection-engineering.html">Detection engineering</a> — the discipline that produces the alerts IR responds to.</li>
+                <li><a href="cloud-soc.html">Cloud SOC</a> — the operating model that wraps detection and IR together.</li>
+                <li><a href="threat-research.html">Threat research</a> — the attacker techniques your IR program defends against.</li>
+                <li><a href="breach-timeline.html">Breach kill chains</a> — real incidents, end-to-end, with timelines and lessons.</li>
+                <li><a href="sessions.html">Friday Zoom</a> — IR readiness, tabletops, and post-incident retros come up regularly. Drop in.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section footer-about">
+        <h3>CSOH</h3>
+        <p>A vendor-neutral community for cloud security professionals. Weekly Zoom sessions and curated resources.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="index.html#about">About CSOH</a></li>
+          <li><a href="learning-path.html">Learning Path</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="sessions.html">Zoom Sessions</a></li>
+          <li><a href="meetings.html">Meeting Recaps</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="mailto:admin@csoh.org">Contact</a></li>
+          <li><a href="https://csoh.kit.com/39feb4f397" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+          <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="rss.html">RSS Feed</a></li>
+          <li><a href="contribute.html">Contribute</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Developer Docs</h3>
+        <ul>
+          <li><a href="github-actions.html">GitHub Actions</a></li>
+          <li><a href="cloud-deployment.html">Deploy to GCP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023-2026 Cloud Security Office Hours</p>
+      <ul class="footer-legal">
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="code-of-conduct.html">Code of Conduct</a></li>
+        <li><a href="security-policy.html">Security</a></li>
+      </ul>
+    </div>
+  </footer>
+
+    <script src="/main.js?v=28d03270" integrity="sha384-rL3h8+9Zf3OnCebAlc/aSSGella8hnqqGbOKQv9QcZGh3P6vA0z6yQp8JLYgBTqc"
+        defer></script>
+</body>
+</html>

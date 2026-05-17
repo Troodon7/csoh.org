@@ -226,6 +226,54 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- IAM & Cloud Identity - reference page -->
+  <url>
+    <loc>https://csoh.org/iam.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Zero Trust Architecture - reference page -->
+  <url>
+    <loc>https://csoh.org/zero-trust.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Data Security, KMS & Secrets - reference page -->
+  <url>
+    <loc>https://csoh.org/data-security.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Compliance Frameworks in Cloud - reference page -->
+  <url>
+    <loc>https://csoh.org/compliance-frameworks.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Detection Engineering & Cloud Logging - reference page -->
+  <url>
+    <loc>https://csoh.org/detection-engineering.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Incident Response & Cloud Forensics - reference page -->
+  <url>
+    <loc>https://csoh.org/incident-response.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- GitHub Actions - Educational page on CI/CD via our workflows -->
   <url>
     <loc>https://csoh.org/github-actions.html</loc>

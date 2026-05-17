@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="description"
+        content="Data Security, KMS &amp; Secrets Management for cloud — encryption at rest and in transit, envelope encryption (DEK/KEK), BYOK / HYOK / CMK, HSMs, key rotation, AWS Secrets Manager / Azure Key Vault / GCP Secret Manager / HashiCorp Vault, Kubernetes secrets, tokenization, DLP, confidential computing, and side-by-side AWS / Azure / GCP. Vendor-neutral.">
+    <meta name="keywords"
+        content="data security, cloud KMS, secrets management, envelope encryption, DEK, KEK, BYOK, HYOK, CMK, customer-managed keys, HSM, CloudHSM, Azure Key Vault Managed HSM, FIPS 140-3, AWS Secrets Manager, HashiCorp Vault, Kubernetes secrets, SOPS, sealed-secrets, external-secrets, key rotation, tokenization, DLP, Macie, Purview, Cloud DLP, confidential computing, Nitro Enclaves, AMD SEV-SNP, Intel TDX, TDE">
+    <title>Data Security, KMS &amp; Secrets for Cloud - CSOH</title>
+
+    <link rel="canonical" href="https://csoh.org/data-security.html">
+    <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <meta name="theme-color" content="#0f172a">
+
+    <meta property="og:title" content="Data Security, KMS &amp; Secrets for Cloud - CSOH">
+    <meta property="og:description"
+        content="A practitioner's guide to cloud data security — encryption at rest and in transit, envelope encryption, KMS, BYOK / HYOK, HSMs, secrets management, key rotation, tokenization, DLP, confidential computing, and AWS / Azure / GCP side-by-side.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://csoh.org/data-security.html">
+    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Data Security, KMS &amp; Secrets for Cloud">
+    <meta name="twitter:description"
+        content="Vendor-neutral guide to cloud data security — encryption at rest / in transit, KMS, BYOK, HSMs, envelope encryption, secrets management, key rotation, and AWS / Azure / GCP.">
+    <meta name="twitter:image" content="https://csoh.org/banner.png">
+
+    <link rel="preconnect" href="https://csoh.kit.com" crossorigin>
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+
+    <link rel="preload" href="/style.css?v=0e1857bd" as="style"
+        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+    <link rel="stylesheet" href="/style.css?v=0e1857bd"
+        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Data Security, KMS & Secrets for Cloud",
+      "description": "A vendor-neutral practitioner's guide to cloud data security — encryption at rest and in transit, envelope encryption, KMS, BYOK / HYOK, HSMs, secrets management, key rotation, tokenization, DLP, confidential computing, and AWS / Azure / GCP side-by-side.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
+        "name": "Shawn Nunley",
+        "url": "https://csoh.org/about-shawn-nunley.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cloud Security Office Hours",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://csoh.org/banner.png"
+        }
+      },
+      "datePublished": "2026-05-17",
+      "dateModified": "2026-05-17",
+      "mainEntityOfPage": "https://csoh.org/data-security.html",
+      "image": "https://csoh.org/banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csoh.org/"},
+        {"@type": "ListItem", "position": 2, "name": "Data Security", "item": "https://csoh.org/data-security.html"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is envelope encryption and why does every cloud KMS use it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Envelope encryption is a two-layer scheme: the data is encrypted with a data encryption key (DEK), and the DEK itself is encrypted with a key encryption key (KEK) that lives inside the KMS or HSM. The encrypted DEK travels alongside the data; the plaintext KEK never leaves the secure module. The reason every cloud KMS works this way is performance and blast-radius: bulk symmetric encryption of a 10 GB object with a local DEK is orders of magnitude faster than round-tripping every byte through KMS, and rotating the KEK only requires re-wrapping the small DEK, not re-encrypting petabytes of data. It also means that revoking access to the KEK instantly renders all the data ciphertexts undecryptable, even if an attacker has copied them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between BYOK, HYOK, and customer-managed keys?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Customer-managed keys (CMK) are keys you create and administer inside the provider's KMS — the key material is generated by the provider's HSMs, and you control the policy, rotation, and lifecycle. BYOK (Bring Your Own Key) means you generate the key material outside the cloud (often on an on-prem HSM) and import it; the cloud KMS still operates the cryptography, but the root entropy came from you. HYOK (Hold Your Own Key) means the key material never enters the cloud at all — the KMS calls out to an external key manager (Azure Key Vault Managed HSM with HYOK, GCP External Key Manager, AWS KMS XKS) for every cryptographic operation. CMK is the right default for almost everyone; BYOK is for orgs with a regulatory or contractual requirement to control key generation; HYOK is for the small set of workloads where the provider must never have unilateral access to the plaintext, and you are willing to accept the latency, availability, and operational cost."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are Kubernetes secrets actually encrypted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By default, no. A Kubernetes Secret object is base64-encoded — not encrypted. Anyone with read access to the etcd database, or to the Kubernetes API with the right RBAC, sees the plaintext after a trivial decode. To get real encryption you need encryption-at-rest configured on etcd (a KMS provider plugin pointing at AWS KMS, Azure Key Vault, or GCP KMS), and you should additionally pull secrets from an external secrets manager via External Secrets Operator, the Secrets Store CSI driver, or SOPS-encrypted manifests. Sealed-secrets is a related pattern that lets you commit encrypted secrets to git safely. Treat the in-cluster Secret object as a delivery mechanism, not as the source of truth."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often should keys be rotated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the key's role. KEKs in a cloud KMS rotate cheaply (annual is the common cadence, and AWS, Azure, and GCP all support automatic annual rotation of customer-managed symmetric keys) because rotation only re-wraps the DEKs — it does not re-encrypt the underlying data. DEKs rotate per object or per session; the application generates a fresh DEK for each large object or each connection. Long-lived secrets (database passwords, API tokens) should rotate on a 30-90 day cadence, ideally driven by a secrets manager that brokers dynamic credentials so the rotation is invisible to the consumer. Certificates rotate per their lifetime (90 days for Let's Encrypt and ACM private CA defaults). Static service-account keys should not exist at all — replace with workload identity or short-lived OIDC tokens."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I tokenize instead of encrypt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tokenize when the goal is to remove sensitive data from a system entirely, not just to make it unreadable in storage. The canonical use case is PCI DSS scope reduction: a tokenization service holds the cardholder data, every other system holds only opaque tokens, and PCI scope shrinks to the tokenization vault. Tokenization is also a good fit for GDPR pseudonymization — the analytics system gets tokens, the lookup table sits in a controlled environment. Encrypt when the data has to remain usable in place (the application needs to decrypt and operate on it). Hash when you only need a one-way comparison and never need to recover the original (passwords, deduplication keys); use a slow KDF like Argon2id, scrypt, or bcrypt for password hashing, never a raw SHA-256."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need an HSM, or is the cloud KMS enough?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For the vast majority of workloads, the cloud's default KMS is enough. AWS KMS, Azure Key Vault Standard, and Google Cloud KMS all back keys with FIPS 140-2 Level 3 (and increasingly FIPS 140-3) validated HSMs under the hood — you don't see the HSM, but the cryptography is HSM-protected. Step up to a dedicated HSM (CloudHSM, Azure Key Vault Managed HSM, Google Cloud HSM) when you need single-tenant key isolation, full FIPS 140-3 Level 3 attestation for an auditor who specifically asks, or PKCS#11 / JCE / KSP-style direct API access for legacy applications. Dedicated HSMs cost meaningfully more and have lower availability guarantees than shared KMS — pay for them only when the requirement is named."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is confidential computing and when does it matter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Confidential computing keeps data encrypted while it is being processed — not just at rest and in transit, but in CPU registers and RAM. Hardware Trusted Execution Environments (TEEs) — Intel SGX and TDX, AMD SEV-SNP, AWS Nitro Enclaves, Azure Confidential VMs, Confidential GKE — create an isolated execution context whose memory is encrypted and whose state cannot be inspected by the host OS, hypervisor, or cloud provider personnel. It matters in three scenarios: regulatory or contractual requirements that the cloud provider not be able to read the data even theoretically (sovereign workloads, some financial-services and healthcare use cases); multi-party computation where two distrustful parties want to compute on combined data without revealing it to each other; and processing of high-value secrets like signing keys or model weights where you want hardware attestation of the runtime. For most workloads, confidential computing is overkill; for the ones that need it, nothing else will do."
+          }
+        }
+      ]
+    }
+    </script>
+  <noscript><style>.js-enabled header nav{display:block !important}</style></noscript>
+</head>
+
+<body class="js-enabled">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+          <svg class="logo-mark" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="CSOH logo"><defs><linearGradient id="lm-cloud" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7dd3fc"/><stop offset="100%" stop-color="#0284c7"/></linearGradient></defs><path d="M7 19 a4 4 0 0 1 4-4 a6 6 0 0 1 11 0 a3.5 3.5 0 0 1 3.5 3.5 a3.5 3.5 0 0 1 -3.5 3.5 H8 a3.5 3.5 0 0 1 -1-7 z" fill="url(#lm-cloud)"/><path d="M11 13 L21 13 L21 18 a5 5.5 0 0 1 -5 5 a5 5.5 0 0 1 -5 -5 z" fill="#f59e0b"/><path d="M13.5 16.7 L15.3 18.4 L18.6 15" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="logo">
+                    <div class="logo-title">CSOH</div>
+                    <p>Cloud Security Office Hours</p>
+                </div>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <button class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+            <nav>
+                <ul>
+                    <li class="has-dropdown has-mega">
+                      <button class="dropdown-toggle active" aria-expanded="true" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
+                      <div class="dropdown-menu mega-menu mega-3col">
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Foundations</h4>
+                          <ul>
+                            <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
+                            <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
+                            <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a></li>
+                            <li><a href="glossary.html">Glossary</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Topics</h4>
+                          <ul>
+                            <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
+                            <li><a href="containers.html">Containers</a></li>
+                            <li><a href="kubernetes.html">Kubernetes</a></li>
+                            <li><a href="serverless.html">Serverless</a></li>
+                            <li><a href="ci-cd.html">CI/CD</a></li>
+                            <li><a href="landing-zones.html">Landing Zones</a></li>
+                            <li><a href="iam.html">IAM &amp; Identity</a></li>
+                            <li><a href="zero-trust.html">Zero Trust</a></li>
+                            <li><a href="data-security.html" aria-current="page">Data Security &amp; KMS</a></li>
+                            <li><a href="grc.html">GRC</a></li>
+                            <li><a href="compliance-frameworks.html">Compliance Frameworks</a></li>
+                            <li><a href="ai-learning.html">AI Learning</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Career &amp; Growth</h4>
+                          <ul>
+                            <li><a href="learning-path.html">Learning Path</a></li>
+                            <li><a href="cloud-security-certifications.html">Certifications</a></li>
+                            <li><a href="cloud-security-degree-programs.html">Degree Programs</a></li>
+                            <li><a href="cloud-security-home-lab.html">Home Lab</a></li>
+                            <li><a href="cloud-security-portfolio-projects.html">Portfolio Projects</a></li>
+                            <li><a href="cloud-security-careers.html">Careers</a></li>
+                            <li><a href="cloud-security-reading-list.html">Reading List</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Threat Intel <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="threat-research.html">Threat Research</a></li>
+                        <li><a href="breach-timeline.html">Breach Kill Chains</a></li>
+                        <li><a href="cloud-soc.html">Cloud SOC</a></li>
+                        <li><a href="detection-engineering.html">Detection Engineering</a></li>
+                        <li><a href="incident-response.html">Incident Response</a></li>
+                        <li><a href="ctfs.html">CTFs</a></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown has-mega">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Community <span class="caret" aria-hidden="true">▾</span></button>
+                      <div class="dropdown-menu mega-menu mega-2col">
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Live</h4>
+                          <ul>
+                            <li><a href="sessions.html">Friday Zoom Sessions</a></li>
+                            <li><a href="community.html">Community &amp; Signal</a></li>
+                            <li><a href="conferences.html">Conferences</a></li>
+                          </ul>
+                        </div>
+                        <div class="mega-col">
+                          <h4 class="mega-heading">Archive</h4>
+                          <ul>
+                            <li><a href="meetings.html">Meeting Recaps</a></li>
+                            <li><a href="presentations.html">Presentations</a></li>
+                            <li><a href="chat-resources.html">Chat Resources</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="has-dropdown">
+                      <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Contribute <span class="caret" aria-hidden="true">▾</span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="contribute.html">Contribute</a></li>
+                        <li><a href="contribute-resources.html">Add a Resource</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-cta-item"><a href="https://csoh.kit.com/39feb4f397" class="nav-cta" target="_blank" rel="noopener noreferrer">Join Friday Zoom →</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span aria-current="page">Data Security &amp; KMS</span></li>
+        </ol>
+    </nav>
+
+    <section class="hero hero--illustrated">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1>Data Security, KMS &amp; Secrets</h1>
+          <p>Encryption at rest, encryption in transit, envelope encryption, key management, secrets, and the operational reality of running all of it across AWS, Azure, and Google Cloud. A vendor-neutral practitioner's guide to the cryptographic plumbing of cloud — what the providers give you by default, what you have to add, and where the real failure modes live.</p>
+          <div class="cta-buttons">
+            <a href="#kms" class="btn btn-primary">KMS fundamentals →</a>
+            <a href="#comparison" class="btn btn-secondary">AWS / Azure / GCP comparison</a>
+          </div>
+        </div>
+        <div class="hero-illustration" aria-hidden="true">
+          <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of envelope encryption — a master key (KEK) wrapping a data key (DEK) wrapping an encrypted data object, with a cloud and HSM in the background">
+            <defs>
+              <linearGradient id="ds-cloud" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="60%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
+              <linearGradient id="ds-kek" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#b45309"/></linearGradient>
+              <linearGradient id="ds-dek" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/></linearGradient>
+              <linearGradient id="ds-data" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#a7f3d0"/><stop offset="100%" stop-color="#047857"/></linearGradient>
+              <radialGradient id="ds-halo" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.35"/><stop offset="100%" stop-color="#7dd3fc" stop-opacity="0"/></radialGradient>
+            </defs>
+            <circle cx="300" cy="240" r="200" fill="url(#ds-halo)"/>
+
+            <!-- Cloud at top -->
+            <path d="M 200,80 a 50,50 0 0,1 60,-30 a 70,70 0 0,1 130,0 a 50,50 0 0,1 50,30 a 45,45 0 0,1 -25,80 H 220 a 45,45 0 0,1 -20,-80 z" fill="url(#ds-cloud)" stroke="#fff" stroke-width="1.5" stroke-opacity="0.4"/>
+            <text x="300" y="105" text-anchor="middle" fill="#0c4a6e" font-size="14" font-weight="700">Cloud KMS / HSM</text>
+            <text x="300" y="125" text-anchor="middle" fill="#0c4a6e" font-size="11">FIPS 140-3 boundary</text>
+
+            <!-- Outer envelope: KEK -->
+            <g>
+              <rect x="80" y="200" width="440" height="220" rx="14" fill="#0d1424" stroke="url(#ds-kek)" stroke-width="3"/>
+              <!-- KEK keyhole at top of envelope -->
+              <circle cx="300" cy="200" r="22" fill="#0d1424" stroke="url(#ds-kek)" stroke-width="3"/>
+              <path d="M 290,196 L 310,196 L 310,202 L 304,202 L 304,212 L 296,212 L 296,202 L 290,202 Z" fill="url(#ds-kek)"/>
+              <text x="300" y="230" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="800">KEK (Key Encryption Key)</text>
+              <text x="300" y="246" text-anchor="middle" fill="#fcd34d" font-size="10">never leaves the HSM · rotated annually</text>
+            </g>
+
+            <!-- Middle envelope: DEK -->
+            <g>
+              <rect x="140" y="270" width="320" height="130" rx="10" fill="#0d1424" stroke="url(#ds-dek)" stroke-width="3"/>
+              <circle cx="300" cy="270" r="16" fill="#0d1424" stroke="url(#ds-dek)" stroke-width="3"/>
+              <path d="M 292,267 L 308,267 L 308,272 L 304,272 L 304,278 L 296,278 L 296,272 L 292,272 Z" fill="url(#ds-dek)"/>
+              <text x="300" y="298" text-anchor="middle" fill="#7dd3fc" font-size="12" font-weight="700">DEK (Data Encryption Key)</text>
+              <text x="300" y="313" text-anchor="middle" fill="#bae6fd" font-size="10">per-object · wrapped by KEK · ephemeral</text>
+            </g>
+
+            <!-- Inner: the data -->
+            <g>
+              <rect x="200" y="330" width="200" height="60" rx="6" fill="url(#ds-data)" stroke="#a7f3d0" stroke-width="2"/>
+              <text x="300" y="354" text-anchor="middle" fill="#022c22" font-size="13" font-weight="800">Encrypted data</text>
+              <text x="300" y="372" text-anchor="middle" fill="#022c22" font-size="10">AES-256-GCM ciphertext</text>
+            </g>
+
+            <!-- Arrows: KMS → KEK -->
+            <g stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4 4" fill="none" opacity="0.7">
+              <line x1="300" y1="160" x2="300" y2="178"/>
+            </g>
+
+            <!-- Side labels -->
+            <g>
+              <rect x="20" y="280" width="50" height="22" rx="11" fill="#0d1424" stroke="#fbbf24" stroke-width="1"/>
+              <text x="45" y="295" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700">wrap</text>
+              <line x1="70" y1="291" x2="138" y2="291" stroke="#fbbf24" stroke-width="1" stroke-dasharray="2 3"/>
+
+              <rect x="530" y="335" width="50" height="22" rx="11" fill="#0d1424" stroke="#34d399" stroke-width="1"/>
+              <text x="555" y="350" text-anchor="middle" fill="#34d399" font-size="10" font-weight="700">data</text>
+              <line x1="400" y1="360" x2="528" y2="346" stroke="#34d399" stroke-width="1" stroke-dasharray="2 3"/>
+            </g>
+
+            <!-- Base label -->
+            <rect x="70" y="430" width="460" height="20" rx="3" fill="#1f2937" stroke="#fbbf24" stroke-width="1"/>
+            <text x="300" y="444" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">Envelope encryption — encrypt the data with the DEK, encrypt the DEK with the KEK</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <main class="container contribute-article" id="main-content">
+
+        <figure class="page-photo">
+          <picture>
+            <source srcset="/img/photos/vault-keys.webp" type="image/webp">
+            <img src="/img/photos/vault-keys.jpg" alt="Close-up of a vault door with keys" width="1880" height="1253" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Photo by Pixabay on Pexels</figcaption>
+        </figure>
+
+        <p class="page-meta"><time datetime="2026-05-17">Last updated <strong>2026-05-17</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/data-security.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
+
+        <div class="info-box--blue">
+            <p><strong>The 30-second version:</strong> Cloud data security is two disciplines stitched together: <strong>cryptography</strong> (the math — AES-GCM, RSA, ECDSA, the curves, the modes, the algorithms) and <strong>key management</strong> (the operational layer — who holds the keys, how they rotate, how they're audited, what happens when one is compromised). The first is solved; the providers ship the same NIST-approved primitives. The second is where every cloud breach involving "encrypted" data actually fails: a KMS key with a permissive policy, a secret committed to git, a database connection string in an environment variable, a service account with permanent credentials.</p>
+            <p style="margin-top:0.75rem;">The modern stack is <strong>customer-managed keys (CMK)</strong> in a cloud KMS, <strong>envelope encryption</strong> for everything that scales (DEK/KEK), an <strong>HSM</strong> only when a regulator or contract names it, a <strong>secrets manager</strong> with rotation and dynamic credentials, <strong>TLS everywhere</strong> with mTLS for service-to-service, and a small set of <strong>confidential-computing</strong> workloads where the provider must never see plaintext. The work is making all of that legible to an auditor and resilient to the human mistakes that produce most incidents.</p>
+        </div>
+
+        <div class="toc">
+            <h2>On this page</h2>
+            <ol>
+                <li><a href="#classification">Data classification</a></li>
+                <li><a href="#at-rest">Encryption at rest</a></li>
+                <li><a href="#in-transit">Encryption in transit</a></li>
+                <li><a href="#kms">KMS fundamentals — envelope encryption</a></li>
+                <li><a href="#byok">BYOK, HYOK, CMK &amp; customer-managed keys</a></li>
+                <li><a href="#hsm">HSMs &amp; FIPS levels</a></li>
+                <li><a href="#secrets">Secrets management</a></li>
+                <li><a href="#k8s-secrets">Kubernetes secrets</a></li>
+                <li><a href="#rotation">Key rotation</a></li>
+                <li><a href="#tokenization">Tokenization vs encryption vs hashing</a></li>
+                <li><a href="#dlp">Data Loss Prevention (DLP)</a></li>
+                <li><a href="#confidential">Confidential computing</a></li>
+                <li><a href="#database">Database encryption nuances</a></li>
+                <li><a href="#comparison">AWS, Azure, and GCP side-by-side</a></li>
+                <li><a href="#maturity">Maturity stages</a></li>
+                <li><a href="#pitfalls">Common pitfalls</a></li>
+                <li><a href="#further">Further reading</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ol>
+        </div>
+
+        <section id="classification">
+            <h2>Data classification — the upstream of every other control</h2>
+            <p>Every other control on this page is downstream of one question: <em>what is this data, and how bad is it if the wrong person sees it?</em> An org that has never classified its data ends up either over-protecting everything (expensive, slow, and so painful that engineers route around the controls) or under-protecting everything (cheap right up until the incident). Classification is the cheapest, highest-leverage upstream investment in a data-security program.</p>
+            <p>A workable four-tier scheme — the one most enterprises converge on after a few iterations:</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-stage1">
+                    <h3>Public</h3>
+                    <p>Marketing pages, open-source code, published research. No restriction on disclosure. The control is integrity (don't let it be tampered with), not confidentiality. Sits in CDNs, public buckets, public repos — and the only data-security question is "did we accidentally publish something from a higher tier here?"</p>
+                </div>
+                <div class="pillar-card pillar-card-stage2">
+                    <h3>Internal</h3>
+                    <p>Internal documents, employee directories, non-sensitive operational metrics. Disclosure is embarrassing but not damaging. Encrypted at rest by default; access controlled by org-membership and SSO; no special handling beyond standard logging.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage3">
+                    <h3>Confidential</h3>
+                    <p>Customer data, source code, financial records, employee PII, business plans. Disclosure damages the business or a customer. Encrypted at rest with customer-managed keys; access logged and reviewed; egress monitored; DLP rules apply; backups separately encrypted; production environments segregated from dev/test.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage4">
+                    <h3>Restricted</h3>
+                    <p>Cardholder data (PCI), protected health information (HIPAA), authentication secrets, signing keys, source data subject to legal hold, defense or government data. Disclosure is regulator-reportable, contractually breach-triggering, or career-ending. Tokenized or vaulted where possible; HSM-backed keys; field-level encryption; tight IAM with break-glass auditing; often segregated cloud accounts, sometimes confidential computing.</p>
+                </div>
+            </div>
+            <p>The tiers are not academic. They determine which KMS key family encrypts the data, which secrets manager holds the credentials, whether DLP rules apply, which network paths the data can traverse, where backups land, and whether confidential computing is on the table. <em>Without classification, every control discussion is about "data" in the abstract</em> — and abstract controls tend to be either everywhere (expensive) or nowhere (insecure).</p>
+            <p>Practical execution: classify by data owner and storage location, not by individual record. A bucket holds restricted data; a table contains confidential records; a Kafka topic carries internal events. Tag the resource with the classification, propagate the tag through IaC, and let policy enforcement key off the tag. Tools like Macie, Purview Information Protection, and Cloud DLP can auto-discover and label data at scale, but the human-curated owner-mapping is still the spine.</p>
+        </section>
+
+        <section id="at-rest">
+            <h2>Encryption at rest — what the cloud gives you, what you add</h2>
+            <p>All three major clouds encrypt managed storage at rest by default, with provider-owned keys, using AES-256. S3, EBS, RDS, DynamoDB, Azure Blob, Azure Disks, Azure SQL, GCS, Persistent Disks, BigQuery, Spanner — all of it, encrypted out of the box. This is necessary and insufficient. The defaults protect against physical theft of disks from a data center; they do not protect against an IAM principal in your account who has permission to read the bucket. <em>"Encrypted at rest" in the marketing sense is not what an auditor or regulator means by the same phrase.</em></p>
+            <h3>The hierarchy you actually want</h3>
+            <ul>
+                <li><strong>Provider-managed keys (AWS-owned, Microsoft-managed, Google-managed).</strong> The default. Zero operational overhead, no key policy to manage, no rotation work. Appropriate for public and internal-tier data. Cannot satisfy a regulator who asks "can you revoke the cloud provider's ability to decrypt this?"</li>
+                <li><strong>Customer-managed keys (CMK).</strong> Keys you create inside the cloud KMS — AWS KMS, Azure Key Vault, GCP Cloud KMS. The key material is generated inside the provider's HSM, but you own the policy, the rotation schedule, the audit logs, and (importantly) the ability to revoke. This is the right default for confidential-tier data. Minor cost per key and per call; meaningful operational discipline (key policies must be correct or workloads break).</li>
+                <li><strong>BYOK (Bring Your Own Key).</strong> You generate the key material outside the cloud (typically on an on-prem HSM) and import it. Useful when a regulator asks where the key entropy came from. The provider's KMS still operates the crypto.</li>
+                <li><strong>HYOK / External keys.</strong> The key never enters the cloud at all. AWS KMS External Key Store (XKS), Azure Key Vault Managed HSM with HYOK, GCP External Key Manager. The cloud KMS calls out to your external key manager for every operation. Maximum control, real latency cost, real availability risk — the external key manager becoming unavailable means the data is unavailable.</li>
+            </ul>
+            <p>For an opinionated default at most companies: <strong>customer-managed keys for everything containing confidential or restricted data</strong>, provider-managed for the rest. Don't go to BYOK or HYOK unless a named requirement forces it; the operational tax is real, and CMK satisfies most "we control the keys" questions.</p>
+            <h3>Storage-level details</h3>
+            <ul>
+                <li><strong>S3 / Blob / GCS.</strong> SSE-S3 (provider key), SSE-KMS (CMK), SSE-C (customer-supplied per-request key, rare). For confidential data, use SSE-KMS with a dedicated CMK per workload — not the default account-level key. Bucket-level "encrypt by default" should be enforced via SCP / Azure Policy / Org Policy so a developer can't create an unencrypted bucket.</li>
+                <li><strong>EBS / Azure Disks / Persistent Disks.</strong> Disk encryption is account-default toggleable on all three. Enable the default; volumes created without encryption should fail policy.</li>
+                <li><strong>RDS / Azure SQL / Cloud SQL.</strong> Encryption-at-rest is per-instance and immutable after creation on all three — you cannot retrofit encryption onto an existing unencrypted database without a dump/restore. Get it right at provisioning.</li>
+                <li><strong>Backups and snapshots.</strong> Easy to forget: a CMK-encrypted database with a default-key-encrypted snapshot is one snapshot copy away from being decryptable by a different key authority. Use the same CMK (or a CMK with explicit cross-account access) for snapshots.</li>
+            </ul>
+        </section>
+
+        <section id="in-transit">
+            <h2>Encryption in transit — TLS everywhere, mTLS for service-to-service</h2>
+            <p>The minimum bar in 2026 is TLS 1.2+ on every external endpoint and every internal service-to-service hop. Anything less is a finding in every framework and a real-world risk on any shared network. TLS 1.3 is now broadly supported and should be preferred where it works; legacy TLS 1.0 / 1.1 should be off by policy, not by intention.</p>
+            <h3>Certificate management</h3>
+            <ul>
+                <li><strong><a href="https://aws.amazon.com/certificate-manager/" target="_blank" rel="noopener noreferrer">AWS Certificate Manager (ACM)</a></strong> — free public certs for ALB / NLB / CloudFront / API Gateway, auto-rotation. ACM Private CA for internal PKI. The right default on AWS.</li>
+                <li><strong><a href="https://azure.microsoft.com/en-us/products/key-vault/" target="_blank" rel="noopener noreferrer">Azure Key Vault Certificates</a></strong> — managed certs integrated with App Service, Front Door, Application Gateway. Pairs with a public CA (DigiCert, GlobalSign integration) or internal CA.</li>
+                <li><strong><a href="https://cloud.google.com/certificate-manager/docs" target="_blank" rel="noopener noreferrer">Google Cloud Certificate Manager</a></strong> — managed certs for Load Balancing, with Google-managed and customer-uploaded options. Pairs with <a href="https://cloud.google.com/certificate-authority-service" target="_blank" rel="noopener noreferrer">Certificate Authority Service (CAS)</a> for private PKI.</li>
+                <li><strong><a href="https://cert-manager.io/" target="_blank" rel="noopener noreferrer">cert-manager</a></strong> — the Kubernetes-native cert lifecycle controller. Issues from Let's Encrypt, internal CAs, Vault, or the cloud CA services; renews automatically. Pair with a <code>ClusterIssuer</code> pointed at ACM PCA / CAS / Key Vault for production clusters.</li>
+                <li><strong><a href="https://letsencrypt.org/" target="_blank" rel="noopener noreferrer">Let's Encrypt</a></strong> — free 90-day public certs, automation-only issuance. The right answer for most public-facing services that don't need EV/OV validation.</li>
+            </ul>
+            <h3>mTLS for service-to-service</h3>
+            <p>Server-only TLS verifies the server to the client. Mutual TLS (mTLS) verifies both — every service presents a cert, every connection validates both sides. The argument for mTLS is that any plaintext-trusted internal network is a flat network; if a workload is compromised, the attacker can talk to every other service. mTLS forces the attacker to also steal a valid client cert.</p>
+            <p>The 2026 way to do mTLS at scale is <strong>service mesh</strong> — <a href="https://istio.io/" target="_blank" rel="noopener noreferrer">Istio</a>, <a href="https://linkerd.io/" target="_blank" rel="noopener noreferrer">Linkerd</a>, <a href="https://www.consul.io/use-cases/multi-platform-service-mesh" target="_blank" rel="noopener noreferrer">Consul Connect</a>, <a href="https://aws.amazon.com/app-mesh/" target="_blank" rel="noopener noreferrer">AWS App Mesh</a> — or the cloud-native equivalents (<a href="https://cloud.google.com/service-mesh" target="_blank" rel="noopener noreferrer">Anthos Service Mesh</a>, AWS VPC Lattice). The mesh handles cert issuance and rotation transparently via SPIFFE/SPIRE-style identity, so applications don't manage certs themselves.</p>
+            <p>For non-mesh workloads, <a href="https://spiffe.io/" target="_blank" rel="noopener noreferrer">SPIFFE / SPIRE</a> provides workload identity and short-lived certs for any compute; AWS Private CA Connector for Kubernetes, Azure AD workload identity, and GCP Workload Identity Federation cover the cloud-native paths.</p>
+            <h3>Don't forget the boring parts</h3>
+            <ul>
+                <li><strong>HSTS</strong> on every public site. <code>Strict-Transport-Security: max-age=31536000; includeSubDomains; preload</code>. Then submit to the preload list.</li>
+                <li><strong>HTTP→HTTPS redirects</strong> at the edge, not the application.</li>
+                <li><strong>Database connections</strong> — RDS, Aurora, Cloud SQL, Azure SQL all support TLS, but it is not always on by default. Enforce <code>rds.force_ssl</code> / equivalent at the parameter-group level.</li>
+                <li><strong>Inter-region replication</strong> — same story. S3 cross-region replication is over TLS, but check the assumption for any data-replication path that crosses a region or VPC boundary.</li>
+                <li><strong>Cert expiry monitoring</strong> — every team has the story of the outage caused by an expired cert nobody owned. The cloud-native cert managers above eliminate this for managed endpoints; the residual risk is internal services using uploaded certs that nobody renewed. Monitor expiry as a first-class metric.</li>
+            </ul>
+        </section>
+
+        <section id="kms">
+            <h2>KMS fundamentals — envelope encryption</h2>
+            <p>Every cloud KMS works the same way under the hood: <strong>envelope encryption</strong>. Understanding the pattern is the foundation for understanding everything else on this page.</p>
+            <p>The naïve approach to encrypting an object is to call the KMS, ask it to encrypt N bytes, and store the ciphertext. This breaks immediately at scale: every megabyte of data means a round-trip to the KMS, the KMS becomes a bottleneck, and the cost of N calls × M bytes for any nontrivial workload is untenable. Envelope encryption solves this with two layers.</p>
+            <h3>The two-layer scheme</h3>
+            <ol>
+                <li><strong>The application asks KMS for a new data key (DEK)</strong>. KMS generates a random 256-bit AES key, encrypts it with the long-lived <em>key encryption key</em> (KEK) inside the HSM, and returns <em>both</em> — the plaintext DEK (for immediate use) and the encrypted DEK (for storage).</li>
+                <li><strong>The application uses the plaintext DEK to encrypt the data</strong> locally — AES-256-GCM, AES-256-CBC, ChaCha20-Poly1305, whatever's appropriate. Then the plaintext DEK is wiped from memory; only the ciphertext data and the encrypted DEK remain.</li>
+                <li><strong>To decrypt</strong>: the application sends the encrypted DEK to KMS, KMS unwraps it with the KEK and returns the plaintext DEK, the application decrypts the data, the plaintext DEK is wiped again.</li>
+            </ol>
+            <p>The encrypted DEK is small (a few hundred bytes); it travels with the data, gets stored alongside it. The plaintext KEK never leaves the HSM. The pattern means:</p>
+            <ul>
+                <li><strong>Bulk crypto is fast.</strong> Encrypting a 10 GB object means one KMS call (for the DEK) and one local AES operation — not 10 GB of API traffic.</li>
+                <li><strong>Rotation is cheap.</strong> Rotating the KEK doesn't re-encrypt the data; it re-wraps the encrypted DEK (a few hundred bytes per object). Old ciphertext stays valid until the next KEK rotation.</li>
+                <li><strong>Revocation is instant.</strong> Disabling or scheduling-deletion of the KEK renders every encrypted DEK undecryptable, which renders every encrypted ciphertext irretrievable. No need to crawl billions of objects to "delete" them.</li>
+                <li><strong>The blast radius of a stolen DEK is bounded.</strong> A leaked DEK decrypts only the data it was minted for. The KEK never leaves the HSM, so it cannot be leaked.</li>
+            </ul>
+            <h3>Key hierarchies</h3>
+            <p>Mature programs don't have a single KEK; they have a tree. A typical hierarchy:</p>
+            <ul>
+                <li><strong>Root key</strong> — held in an HSM, used only to wrap account/region master keys. Touched extremely rarely.</li>
+                <li><strong>Account / region master KEKs</strong> — one per account, per region. Used to wrap workload-level KEKs.</li>
+                <li><strong>Workload KEKs</strong> — one per service or per data classification. Different access policies; rotation cadences can differ.</li>
+                <li><strong>DEKs</strong> — generated per object or per session. Ephemeral.</li>
+            </ul>
+            <p>In practice on cloud, the "root" lives in the cloud KMS or an HSM, and you get one or two layers above DEKs (account-level CMK + workload-level CMK). The benefit of layering is that you can rotate a workload key without touching the account key, and revoke access to a workload key without affecting others.</p>
+            <h3>Key policies vs IAM</h3>
+            <p>A subtle and frequently-misconfigured detail: in AWS KMS, the <em>key policy</em> is the primary access-control mechanism, and IAM is secondary. A user with full IAM permissions on KMS does <em>not</em> automatically have permission to use a specific key — the key policy must also grant it (or delegate to IAM via <code>kms:CallerAccount</code>). This is intentional: it prevents an account-wide IAM compromise from automatically giving the attacker key access. Azure Key Vault and GCP Cloud KMS use a single RBAC / IAM model on the key resource; the same defense-in-depth principle applies — keep the key policy tight, audit who is on it, and never use a wildcard <code>*</code> principal unless you really mean it.</p>
+        </section>
+
+        <section id="byok">
+            <h2>BYOK, HYOK, CMK &amp; customer-managed keys</h2>
+            <p>The terminology in this space is genuinely confusing because different vendors use the same acronyms with different meanings. The practical taxonomy:</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Model</th>
+                            <th scope="col">Key material generated</th>
+                            <th scope="col">Key material lives</th>
+                            <th scope="col">Crypto operations performed by</th>
+                            <th scope="col">When to use</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Provider-managed</th>
+                            <td>In provider HSM</td>
+                            <td>Provider HSM</td>
+                            <td>Provider KMS</td>
+                            <td>Default. Public / internal data.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">CMK (customer-managed)</th>
+                            <td>In provider HSM</td>
+                            <td>Provider HSM, customer-controlled policy</td>
+                            <td>Provider KMS</td>
+                            <td>Default for confidential data. Right answer for most.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">BYOK (import)</th>
+                            <td>On customer HSM</td>
+                            <td>Provider HSM (imported)</td>
+                            <td>Provider KMS</td>
+                            <td>Regulator asks where entropy came from.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">HYOK / External keys</th>
+                            <td>On customer HSM</td>
+                            <td>Customer HSM (never enters cloud)</td>
+                            <td>Customer's external HSM, called by provider</td>
+                            <td>Provider must never have unilateral plaintext access.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>The right model for most cloud workloads is <strong>CMK</strong>. It satisfies "do you control the keys?" in every audit context that matters, costs cents per key per month, and doesn't impose latency or availability penalties. The cloud's HSMs are FIPS-validated and operationally hardened in ways that most on-prem HSM deployments aren't.</p>
+            <p>BYOK is a real, named requirement in a small number of regulatory contexts (some financial-services and government regimes that audit key generation entropy). It is also frequently asked for by procurement teams without a clear understanding of what they're buying — pushing back is reasonable. If you must do BYOK, the operational pattern is: generate the key on an on-prem HSM (Thales / Entrust / Utimaco), import to the cloud KMS via the documented BYOK flow, store the original somewhere safe in case you need to re-import, and rotate on a defined cadence.</p>
+            <p>HYOK is the answer to "we must be able to revoke the provider's access by yanking the key out of their environment, instantly." That requirement is rare and consequential — every cryptographic operation now depends on the external key manager being reachable, which means the data is unavailable any time the external key manager is. Implementations: <a href="https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html" target="_blank" rel="noopener noreferrer">AWS KMS External Key Store (XKS)</a>, Azure Key Vault Managed HSM with HYOK, <a href="https://cloud.google.com/kms/docs/ekm" target="_blank" rel="noopener noreferrer">Google Cloud External Key Manager</a>. Vendors providing the external HSM side: Thales CipherTrust, Entrust KeyControl, Fortanix, Virtru.</p>
+        </section>
+
+        <section id="hsm">
+            <h2>HSMs &amp; FIPS levels</h2>
+            <p>An HSM (Hardware Security Module) is a dedicated cryptographic appliance — physical or virtual-but-isolated — that stores keys and performs cryptographic operations without ever exposing the key material to general-purpose compute. The cloud KMS services are backed by HSMs under the hood (the multi-tenant kind); dedicated HSM services give you a single-tenant boundary.</p>
+            <h3>The cloud HSM offerings</h3>
+            <ul>
+                <li><strong><a href="https://aws.amazon.com/cloudhsm/" target="_blank" rel="noopener noreferrer">AWS CloudHSM</a></strong> — single-tenant FIPS 140-2 Level 3 HSMs (Cavium / Marvell hardware). PKCS#11, JCE, KSP/CNG APIs. Used when an application requires direct HSM API access, or when key isolation per tenant is mandated.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/" target="_blank" rel="noopener noreferrer">Azure Key Vault Managed HSM</a></strong> — single-tenant FIPS 140-3 Level 3 HSMs. Same API surface as the standard Key Vault, just dedicated hardware. The 2026 default for regulated Azure workloads needing dedicated HSM.</li>
+                <li><strong><a href="https://cloud.google.com/kms/docs/hsm" target="_blank" rel="noopener noreferrer">Google Cloud HSM</a></strong> — FIPS 140-2 Level 3 HSMs, integrated transparently with Cloud KMS (no separate API; you just choose the HSM protection level when creating the key). The lowest-friction model of the three.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/azure/dedicated-hsm/overview" target="_blank" rel="noopener noreferrer">Azure Dedicated HSM</a></strong> — full Thales Luna HSMs in a VNet. Lift-and-shift target for existing on-prem HSM applications; less common now that Managed HSM exists.</li>
+            </ul>
+            <h3>FIPS 140-2 / 140-3 levels — what they actually mean</h3>
+            <p>NIST FIPS 140 is the standard cryptographic-module validation framework. Level numbers don't compose simply; they describe distinct properties:</p>
+            <ul>
+                <li><strong>Level 1.</strong> Approved algorithms, no physical protection. A software cryptographic library can be Level 1.</li>
+                <li><strong>Level 2.</strong> Tamper-evident physical packaging — you can tell if someone opened it.</li>
+                <li><strong>Level 3.</strong> Tamper-resistant — the device actively responds to physical tampering (zeroizes keys, locks down). This is the common bar for cloud HSM services.</li>
+                <li><strong>Level 4.</strong> Tamper-active environmental protection — voltage, temperature, EM emission protection. Rare; nation-state / defense use.</li>
+            </ul>
+            <p>FIPS 140-3 is the current version, superseding 140-2; new validations are 140-3. Most cloud HSM services validate at Level 3, which is what regulated industries typically require. If a customer or regulator asks for "FIPS 140-3 Level 3", the cloud HSM offerings (or the multi-tenant KMS, depending on the precise requirement) check the box.</p>
+            <p><strong>Practical guidance:</strong> use the cloud KMS for almost everything. Step up to a dedicated HSM when one of: (a) a regulator names "dedicated HSM" or "single-tenant key isolation" specifically; (b) the application requires PKCS#11 or KSP/CNG direct access; (c) you have an existing on-prem HSM-rooted PKI you're migrating. Don't pay for a dedicated HSM because someone said "HSM" in a meeting.</p>
+        </section>
+
+        <section id="secrets">
+            <h2>Secrets management — passwords, tokens, API keys, certs</h2>
+            <p>Encryption protects data; <em>secrets management</em> protects the credentials that grant access to data. The two failure modes a secrets manager prevents: secrets committed to source control, and secrets that never rotate. Every cloud has a managed secrets service; HashiCorp Vault is the open-source / multi-cloud heavyweight; the ecosystem has converged on a common feature surface.</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Capability</th>
+                            <th scope="col" class="ct-aws"><span class="ct-dot ct-dot-aws" aria-hidden="true"></span> AWS Secrets Manager</th>
+                            <th scope="col" class="ct-azure"><span class="ct-dot ct-dot-azure" aria-hidden="true"></span> Azure Key Vault</th>
+                            <th scope="col" class="ct-gcp"><span class="ct-dot ct-dot-gcp" aria-hidden="true"></span> GCP Secret Manager</th>
+                            <th scope="col">HashiCorp Vault</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Automatic rotation</th>
+                            <td>Native for RDS, DocumentDB, Redshift; Lambda for custom</td>
+                            <td>Native for Azure SQL, MySQL, PostgreSQL via Event Grid</td>
+                            <td>Customer Lambda-style via Cloud Functions / Workflows</td>
+                            <td>Native for many engines (DB, AD, cloud)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Dynamic secrets</th>
+                            <td>Limited — rotation, not on-demand minting</td>
+                            <td>No</td>
+                            <td>No</td>
+                            <td>Yes — the headline feature</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Versioning</th>
+                            <td>Yes (AWSCURRENT / AWSPENDING / AWSPREVIOUS)</td>
+                            <td>Yes (per-secret version history)</td>
+                            <td>Yes (numbered versions)</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Cross-region replication</th>
+                            <td>Yes</td>
+                            <td>Via geo-replication of Key Vault</td>
+                            <td>Yes (per-secret replication policy)</td>
+                            <td>Performance replication tier</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Audit log</th>
+                            <td>CloudTrail (every Get is logged)</td>
+                            <td>Activity Log + Key Vault diagnostic logs</td>
+                            <td>Cloud Audit Logs</td>
+                            <td>Vault audit devices (file, syslog, socket)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Cost shape</th>
+                            <td>Per-secret/month + API calls</td>
+                            <td>Per-transaction</td>
+                            <td>Per-version-month + access ops</td>
+                            <td>License + ops (open-source available)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Multi-cloud</th>
+                            <td>No</td>
+                            <td>No</td>
+                            <td>No</td>
+                            <td>Yes — the headline reason to choose Vault</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>Dynamic secrets — why Vault is different</h3>
+            <p>The cloud-native secrets managers store and rotate <em>static</em> secrets — they hold a value, return it on request, and rotate it on a schedule. <a href="https://developer.hashicorp.com/vault" target="_blank" rel="noopener noreferrer">HashiCorp Vault</a>'s headline capability is <em>dynamic secrets</em>: when a workload requests a database credential, Vault mints a brand-new one on the fly (creates the user in the database, returns the credential, sets a TTL), and revokes it when the TTL expires. The credential exists only for the lifetime of the workload that asked for it. There is no "current password" to rotate; every credential is single-use.</p>
+            <p>Dynamic secrets eliminate the "secret in memory long enough to be exfiltrated" risk for whole categories of workload. AWS, Azure, and GCP have partial equivalents — IAM Roles for EC2, Managed Identities, Workload Identity — but those are cloud-native and don't extend to the database, the message broker, the CA, or the partner API. Vault's value proposition is uniform dynamic-secrets mechanics across all of them.</p>
+            <h3>Ergonomics — the often-decisive factor</h3>
+            <p>Secrets managers fail when developers route around them. The patterns that make adoption stick:</p>
+            <ul>
+                <li><strong>Workload identity, not credentials.</strong> The application authenticates to the secrets manager via its <em>cloud identity</em> (IAM role, managed identity, workload identity) — never with a static credential. This is the prerequisite; if your app needs a username/password to fetch its other secrets, you've recursed the problem.</li>
+                <li><strong>SDK or sidecar injection, not env vars.</strong> Secrets retrieved at runtime, held in memory, never written to disk or env. <a href="https://github.com/aws/aws-secretsmanager-agent" target="_blank" rel="noopener noreferrer">AWS Secrets Manager Agent</a>, <a href="https://learn.microsoft.com/en-us/azure/key-vault/general/quick-create-cli" target="_blank" rel="noopener noreferrer">Azure Key Vault SDK</a>, <a href="https://developer.hashicorp.com/vault/docs/platform/k8s/injector" target="_blank" rel="noopener noreferrer">Vault Agent</a> sidecars.</li>
+                <li><strong>Reasonable caching with bounded TTL.</strong> Hitting the secrets manager on every request is slow and expensive. Cache for a defined TTL (5–15 minutes is typical) and refresh on cache miss or rotation event.</li>
+                <li><strong>Local-dev parity.</strong> If the secrets manager doesn't have a sane local-dev story (LocalStack, a dev tenant, a stub), developers will hardcode a value "just for testing" and forget. Provide the dev path explicitly.</li>
+            </ul>
+        </section>
+
+        <section id="k8s-secrets">
+            <h2>Kubernetes secrets — base64 isn't encryption</h2>
+            <p>The number-one cloud-security pitfall in Kubernetes is the assumption that <code>kind: Secret</code> means encrypted. It doesn't. A Kubernetes Secret object is base64-encoded YAML; <code>echo $value | base64 -d</code> recovers the plaintext, and anyone with the right RBAC to call <code>kubectl get secret</code> (or to read etcd directly) sees it.</p>
+            <p>The patterns that actually protect secrets in Kubernetes — typically used in combination:</p>
+            <h3>1. Encrypt etcd at rest</h3>
+            <p>The first thing: configure the API server to encrypt Secret resources before writing them to etcd. <a href="https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/" target="_blank" rel="noopener noreferrer">KMS providers</a> for AWS KMS, Azure Key Vault, and GCP KMS make this seamless on managed clusters (EKS, AKS, GKE all support it natively). This protects against etcd snapshot exfiltration and against attackers who reach the underlying storage. It does <em>not</em> protect against an attacker who has API access — the API server will happily decrypt and serve.</p>
+            <h3>2. External secrets operator (ESO)</h3>
+            <p><a href="https://external-secrets.io/" target="_blank" rel="noopener noreferrer">External Secrets Operator</a> is the de-facto standard for pulling secrets from an external secrets manager (AWS Secrets Manager, Azure Key Vault, GCP Secret Manager, Vault, 1Password, others) into Kubernetes Secret objects on demand. The cluster doesn't store the secret long-term; ESO refreshes it on a schedule. This keeps the source of truth in the secrets manager and gives you rotation for free.</p>
+            <h3>3. Secrets Store CSI driver</h3>
+            <p>The <a href="https://secrets-store-csi-driver.sigs.k8s.io/" target="_blank" rel="noopener noreferrer">Secrets Store CSI Driver</a> mounts secrets directly as volumes from the external secrets manager — they never become Kubernetes Secret objects at all. Lower attack surface than ESO (no etcd write), but a different operational model (volume-mounted files rather than env vars). Most cloud providers ship a provider plugin (AWS, Azure, GCP, Vault).</p>
+            <h3>4. SOPS for git-stored encrypted secrets</h3>
+            <p><a href="https://github.com/getsops/sops" target="_blank" rel="noopener noreferrer">SOPS</a> (Secrets OPerationS) encrypts individual values inside YAML / JSON / env / ini files, using a cloud KMS or PGP. The encrypted file is safe to commit to git; only the values are encrypted, the keys remain readable so diffs are sane. Pairs with <a href="https://fluxcd.io/" target="_blank" rel="noopener noreferrer">Flux</a> and <a href="https://argo-cd.readthedocs.io/en/stable/operator-manual/secret-management/#sealed-secrets-via-bitnami" target="_blank" rel="noopener noreferrer">Argo CD</a> for GitOps workflows. Right answer for declarative cluster configs where the secrets need to ship through git.</p>
+            <h3>5. Sealed Secrets</h3>
+            <p><a href="https://github.com/bitnami-labs/sealed-secrets" target="_blank" rel="noopener noreferrer">Bitnami Sealed Secrets</a> is the original "commit encrypted secrets to git" pattern — a controller in-cluster has a public key, anyone can encrypt a secret against it, only that controller can decrypt. The trade-off vs SOPS: cluster-bound (secrets are encrypted to a specific cluster's keypair), and the controller is single-point-of-failure for decryption.</p>
+            <h3>Picking among them</h3>
+            <ul>
+                <li>Production cluster, secrets live in a cloud secrets manager: <strong>ESO or CSI driver</strong>.</li>
+                <li>GitOps workflow with secrets in repo: <strong>SOPS</strong> (multi-cluster) or <strong>Sealed Secrets</strong> (single-cluster).</li>
+                <li>Multi-cloud, want one secrets layer for everything: <strong>Vault + ESO/CSI</strong>.</li>
+                <li>Any of the above without etcd encryption enabled: incomplete — turn on etcd encryption first.</li>
+            </ul>
+            <p>See the <a href="kubernetes.html">Kubernetes page</a> for the broader cluster-hardening context.</p>
+        </section>
+
+        <section id="rotation">
+            <h2>Key rotation — what it actually does</h2>
+            <p>"Rotate your keys" is one of those compliance-checkbox phrases that hides genuinely different mechanics depending on what kind of key. Treating them all the same is how programs end up either over-rotating (operational pain, outages) or under-rotating (the auditor finds the 4-year-old static key).</p>
+            <h3>KEK rotation — re-wrap, not re-encrypt</h3>
+            <p>When AWS KMS, Azure Key Vault, or GCP Cloud KMS rotates a customer-managed symmetric key, it creates a new key version. The old version stays around (because it's needed to decrypt old data); new encrypt operations use the new version. The <em>data itself is not re-encrypted</em>. The encrypted DEKs in storage are still wrapped with the old KEK version, and the KMS keeps that version available indefinitely for decryption. Eventually — on the next backup cycle, on the next write — the DEK is unwrapped, the data is rewritten, and the new DEK is wrapped with the current KEK version.</p>
+            <p>Automatic annual rotation is offered on all three clouds for customer-managed symmetric keys; turn it on and largely forget about it. Asymmetric keys (RSA, ECDSA) used for signing typically don't auto-rotate because rotating them means re-issuing every signed artifact — handle manually with a planned cadence and overlap.</p>
+            <h3>DEK rotation — per-object or per-session</h3>
+            <p>DEKs are ephemeral by design. A new one is generated for each object or each session. "Rotating" a DEK means generating a new one for the next write; the old encrypted data is still readable via its own (still-wrapped) DEK until it's overwritten. There is no separate operation to perform.</p>
+            <h3>Secret rotation — actually changing the credential</h3>
+            <p>When you rotate a database password or an API key, the credential value changes. Every consumer needs the new value. The two patterns:</p>
+            <ul>
+                <li><strong>Brokered rotation.</strong> A secrets manager owns the password, rotates it in both the consumer and the producer (database). The consumer reads the secret on each connection — it always gets the current value. AWS Secrets Manager's RDS rotation works this way.</li>
+                <li><strong>Two-secret overlap.</strong> AWSPENDING and AWSCURRENT — a new secret is provisioned, consumers start receiving it, after a grace period the old one is decommissioned. Required when the producer can't atomically update.</li>
+            </ul>
+            <h3>Cadence by data class</h3>
+            <ul>
+                <li><strong>Restricted (PCI, HIPAA, signing keys).</strong> KEKs annually (or per regulator); secrets every 30–90 days; static service-account keys eliminated entirely.</li>
+                <li><strong>Confidential.</strong> KEKs annually; secrets 90 days; certs at issuer cadence (90 days for ACM / Let's Encrypt, 1 year for many internal CAs).</li>
+                <li><strong>Internal / public.</strong> KEKs annually (it's nearly free); secrets when needed (compromise, departure).</li>
+            </ul>
+            <p>The single highest-leverage move is <strong>eliminate long-lived static credentials</strong> — service account keys, IAM access keys, machine passwords. Replace with workload identity (IRSA, Managed Identity, Workload Identity Federation, SPIFFE) and short-lived OIDC tokens. A credential that lives for 15 minutes doesn't need a rotation policy.</p>
+        </section>
+
+        <section id="tokenization">
+            <h2>Tokenization vs encryption vs hashing</h2>
+            <p>Three related-but-distinct techniques. Choosing wrong is a common cause of "we technically protect this data, but the protection doesn't help us."</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Technique</th>
+                            <th scope="col">Reversible?</th>
+                            <th scope="col">Original value usable in place?</th>
+                            <th scope="col">Reduces audit scope?</th>
+                            <th scope="col">Use when</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Encryption</th>
+                            <td>Yes, with the key</td>
+                            <td>After decrypt</td>
+                            <td>No (the encrypted data is still the data)</td>
+                            <td>Application needs the original; protection is at rest / in transit</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Tokenization</th>
+                            <td>Yes, by lookup against the vault</td>
+                            <td>No (token has no relation to value)</td>
+                            <td>Yes — non-vault systems hold only tokens</td>
+                            <td>PCI scope reduction, GDPR pseudonymization, sharing data with third parties</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Hashing (one-way)</th>
+                            <td>No</td>
+                            <td>No (only comparison)</td>
+                            <td>Yes — hash is not the data</td>
+                            <td>Passwords, deduplication keys, anonymous IDs — never recover the original</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>Tokenization — the PCI scope-reduction lever</h3>
+            <p>The classic example: a SaaS company processes credit cards. The naïve approach stores the PAN (primary account number) encrypted in the production database; every system that touches that database is now in PCI DSS scope. The tokenized approach stores the PAN <em>only</em> in a dedicated tokenization vault (typically a third-party service: Stripe, Adyen, Braintree, Skyflow, VGS); every other system holds an opaque token like <code>tok_3K7s...</code>. PCI scope shrinks to the vault and the small set of systems that detokenize. Order of magnitude cost reduction in audit, in pen-test, in controls implementation.</p>
+            <p>Tokenization is also the cleanest implementation of GDPR pseudonymization (Article 4(5)) — the personal data is in the vault, the analytics warehouse holds tokens, the lookup table is the controlled re-identification path.</p>
+            <h3>Hashing — only one-way</h3>
+            <p>Hashing is for cases where you never need to recover the original. Two common uses: password storage (use a slow KDF — Argon2id, scrypt, or bcrypt with a strong cost factor — never raw SHA-256, which can be brute-forced billions of times per second on a GPU), and stable anonymous identifiers (hash an email address with a secret salt to produce a consistent identifier that can't be reversed without the salt).</p>
+            <p>For password hashing specifically: Argon2id with at least 19 MiB memory, 2 iterations, 1 parallelism is the OWASP 2024 recommendation. If using bcrypt, cost factor 12+. Never SHA-256, MD5, or any unsalted hash.</p>
+            <h3>Format-preserving encryption (FPE)</h3>
+            <p>A specialty technique — encrypts so that the ciphertext has the same length and character set as the plaintext (e.g., a 16-digit number stays 16 digits). Useful when retrofitting encryption into a legacy system that can't accept variable-length blobs. NIST SP 800-38G defines FF1 and FF3 modes. Use only when format preservation is genuinely required; standard AES is preferable when the schema allows it.</p>
+        </section>
+
+        <section id="dlp">
+            <h2>Data Loss Prevention (DLP)</h2>
+            <p>DLP is the discipline of finding sensitive data where it shouldn't be — PCI card numbers in a Slack channel, social security numbers in a misclassified bucket, source code on a personal Gmail. The cloud-native services emphasize <em>data discovery and classification</em>; the third-party tools emphasize <em>egress monitoring and exfiltration prevention</em>. Mature programs run both.</p>
+            <h3>Cloud-native DLP</h3>
+            <ul>
+                <li><strong><a href="https://aws.amazon.com/macie/" target="_blank" rel="noopener noreferrer">Amazon Macie</a></strong> — sensitive-data discovery in S3. Built-in identifiers for PII, PCI, PHI, credentials; custom identifiers via regex and keyword. Findings to Security Hub and EventBridge. Pricing has historically been the limiting factor at scale; read the docs before turning it loose on a petabyte.</li>
+                <li><strong><a href="https://www.microsoft.com/en-us/security/business/microsoft-purview" target="_blank" rel="noopener noreferrer">Microsoft Purview Information Protection</a> + Purview DLP</strong> — broader scope: data discovery across M365, Azure storage, on-prem, plus DLP policies that block sharing and copying. Strong fit if you're already a heavy M365 / Azure shop.</li>
+                <li><strong><a href="https://cloud.google.com/sensitive-data-protection" target="_blank" rel="noopener noreferrer">GCP Sensitive Data Protection (formerly Cloud DLP)</a></strong> — API-based inspection of any data you send it; integrates with BigQuery, GCS, and arbitrary text. Strong de-identification primitives (tokenization, masking, FPE, k-anonymity) built in.</li>
+            </ul>
+            <h3>Third-party DLP</h3>
+            <ul>
+                <li><strong><a href="https://nightfall.ai/" target="_blank" rel="noopener noreferrer">Nightfall</a></strong> — SaaS-data-leak focused (Slack, GitHub, GDrive, Jira, Salesforce). Good fit for the "PCI ended up in a Slack channel" problem class.</li>
+                <li><strong><a href="https://www.cyberhaven.com/" target="_blank" rel="noopener noreferrer">Cyberhaven</a></strong> — data lineage and tracing approach; tracks where data actually flows rather than relying on classification patterns. Useful for IP-theft / insider-risk programs.</li>
+                <li><strong><a href="https://www.netskope.com/" target="_blank" rel="noopener noreferrer">Netskope</a></strong>, <strong><a href="https://www.zscaler.com/" target="_blank" rel="noopener noreferrer">Zscaler</a></strong>, <strong><a href="https://www.skyhighsecurity.com/" target="_blank" rel="noopener noreferrer">Skyhigh Security</a></strong> — CASB / SSE platforms with DLP modules for SaaS and web egress.</li>
+                <li><strong><a href="https://www.varonis.com/" target="_blank" rel="noopener noreferrer">Varonis</a></strong>, <strong><a href="https://bigid.com/" target="_blank" rel="noopener noreferrer">BigID</a></strong> — data discovery and classification at enterprise scale, deeper than Macie/Purview on legacy and on-prem data stores.</li>
+            </ul>
+            <p>DLP is high-noise by nature — false positives are inevitable, and a DLP program that doesn't tune aggressively becomes either ignored (alert fatigue) or hated (false blocks). Start with <em>monitor mode</em>, classify the findings by signal-to-noise ratio, and only move the highest-confidence rule families into blocking mode after tuning.</p>
+        </section>
+
+        <section id="confidential">
+            <h2>Confidential computing — protecting data in use</h2>
+            <p>Encryption at rest and in transit protect data when it's stored and when it's moving. They don't protect it while it's being processed — at the moment the CPU operates on data, it's in plaintext in memory. <strong>Confidential computing</strong> closes that third gap with hardware Trusted Execution Environments (TEEs) that keep memory encrypted even from the host OS, hypervisor, and cloud-provider personnel.</p>
+            <h3>The hardware primitives</h3>
+            <ul>
+                <li><strong>Intel SGX</strong> — application-level enclaves. Small TCB, strong isolation, but requires application-level porting. Older approach; deprecated for client CPUs, available on select Xeon Scalable.</li>
+                <li><strong>Intel TDX (Trust Domain Extensions)</strong> — VM-level confidential computing. The whole VM runs in a TDX trust domain; the hypervisor cannot read its memory. The 2026 mainstream Intel approach.</li>
+                <li><strong>AMD SEV-SNP</strong> — Secure Encrypted Virtualization with Secure Nested Paging. VM-level memory encryption with integrity protection. The mainstream AMD approach; broadly deployed in cloud.</li>
+                <li><strong>ARM CCA (Confidential Compute Architecture)</strong> — Realms on ARMv9. Emerging; relevant for ARM-based cloud instances.</li>
+            </ul>
+            <h3>The cloud offerings</h3>
+            <ul>
+                <li><strong><a href="https://aws.amazon.com/ec2/nitro/nitro-enclaves/" target="_blank" rel="noopener noreferrer">AWS Nitro Enclaves</a></strong> — isolated CPU/memory regions carved out of a parent EC2 instance; no networking, no persistent storage, attestation via Nitro hypervisor. Different model from SGX/TDX/SEV — leverages the Nitro architecture rather than CPU enclaves directly. Popular for key-management workloads (KMS custom key stores, signing services), private LLM inference, multi-party computation.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/azure/confidential-computing/overview" target="_blank" rel="noopener noreferrer">Azure Confidential VMs &amp; Confidential Containers</a></strong> — VMs on AMD SEV-SNP or Intel TDX; container support via Confidential Container Instances and AKS Confidential Containers. Broad and increasingly default-on for sensitive workloads.</li>
+                <li><strong><a href="https://cloud.google.com/confidential-computing" target="_blank" rel="noopener noreferrer">Google Confidential VMs &amp; Confidential GKE Nodes</a></strong> — AMD SEV-SNP and Intel TDX. Confidential GKE Nodes is the easiest entry path on GCP; just a node-pool flag.</li>
+            </ul>
+            <h3>When confidential computing matters</h3>
+            <p>It's overkill for most workloads. The named use cases:</p>
+            <ul>
+                <li><strong>Cloud-provider zero-trust scenarios.</strong> Regulatory or contractual requirement that the provider not be able to read data even in theory — sovereign workloads, certain financial-services and healthcare deployments.</li>
+                <li><strong>Multi-party computation.</strong> Two distrustful parties want to compute on combined data (joint analytics, fraud detection across institutions) without revealing the underlying records to each other. The TEE is the trusted intermediary.</li>
+                <li><strong>High-value secrets in use.</strong> Signing services, LLM inference on proprietary models, root-of-trust operations. The TEE protects the secret while it's being used, not just while it's stored.</li>
+                <li><strong>Attestation requirements.</strong> "Prove to me that this code is running on this hardware in this configuration." TEE remote attestation produces a hardware-signed measurement.</li>
+            </ul>
+            <p>If none of those apply, default to good IAM, good KMS, and good network controls. Confidential computing has real cost — instance-type restrictions, slightly higher pricing, attestation operational overhead — that's worth paying when the requirement is named and skipped otherwise.</p>
+        </section>
+
+        <section id="database">
+            <h2>Database encryption nuances</h2>
+            <p>"Encrypt the database" hides several distinct controls operating at different layers. Knowing which one you have determines what threat it actually mitigates.</p>
+            <h3>Transparent Data Encryption (TDE)</h3>
+            <p>The database engine encrypts files on disk as it writes them, decrypts as it reads. Transparent to the application; SQL sees plaintext. Protects against attackers who get the raw storage (a stolen disk, an exfiltrated backup file). Does <em>not</em> protect against attackers with database credentials or with DBA access. AWS RDS, Azure SQL, Cloud SQL all do this by default with provider-managed or customer-managed keys.</p>
+            <p>TDE alone is what "encrypted database" means in most marketing copy. It's necessary, it's not sufficient for sensitive data — anyone who can log into the database sees plaintext.</p>
+            <h3>Column-level / field-level encryption</h3>
+            <p>Specific columns (the SSN, the credit card, the medical record number) are encrypted, with the key held outside the database. The application encrypts before insert and decrypts after read; the database stores only ciphertext. Protects against DBA access, against compromised database credentials with limited read scope, and against backup exfiltration. Adds complexity — searching encrypted columns requires special handling.</p>
+            <h3>Deterministic vs randomized encryption</h3>
+            <p>A subtle but important choice for column-level encryption:</p>
+            <ul>
+                <li><strong>Randomized.</strong> Each encryption of the same plaintext produces different ciphertext (random IV). Stronger; no information leakage. But: <code>WHERE column = 'value'</code> doesn't work — every row has different ciphertext.</li>
+                <li><strong>Deterministic.</strong> Same plaintext always produces the same ciphertext. Allows equality lookups (you encrypt the search value and compare). But: leaks frequency information (an attacker sees which rows have the same value).</li>
+            </ul>
+            <p>The right answer depends on the column. A patient's last name probably needs randomized (and you index on a separate keyed hash for lookups); a country code probably tolerates deterministic.</p>
+            <h3>Application-level encryption</h3>
+            <p>The encryption happens entirely in the application; the database is just a blob store. Maximum control, maximum complexity, no database features (indexing, full-text search, aggregations on encrypted fields) work without specialized infrastructure (searchable encryption, ORE schemes, or homomorphic encryption — all with real performance costs).</p>
+            <p>The pragmatic guidance: TDE everywhere as the floor. Column-level for restricted data (PCI / PHI / authentication). Application-level for the rare case where you don't want the database engine to ever have access to plaintext (and you're willing to live without indexes on those fields).</p>
+        </section>
+
+        <section id="comparison">
+            <h2>AWS, Azure, and GCP side-by-side</h2>
+            <p>The native data-security capabilities each cloud ships, reduced to a one-screen reference:</p>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ct-row-head">Capability</th>
+                            <th scope="col" class="ct-aws"><span class="ct-dot ct-dot-aws" aria-hidden="true"></span> AWS</th>
+                            <th scope="col" class="ct-azure"><span class="ct-dot ct-dot-azure" aria-hidden="true"></span> Azure</th>
+                            <th scope="col" class="ct-gcp"><span class="ct-dot ct-dot-gcp" aria-hidden="true"></span> GCP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Managed KMS</th>
+                            <td>AWS KMS (multi-tenant HSM-backed)</td>
+                            <td>Azure Key Vault (Standard / Premium)</td>
+                            <td>Cloud KMS</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Dedicated HSM</th>
+                            <td>CloudHSM (FIPS 140-2 L3)</td>
+                            <td>Key Vault Managed HSM (FIPS 140-3 L3); Dedicated HSM (Thales Luna)</td>
+                            <td>Cloud HSM (FIPS 140-2 L3)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">External keys (HYOK)</th>
+                            <td>KMS External Key Store (XKS)</td>
+                            <td>Key Vault Managed HSM HYOK</td>
+                            <td>External Key Manager (EKM)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Secrets management</th>
+                            <td>Secrets Manager; SSM Parameter Store (free, simpler)</td>
+                            <td>Key Vault (secrets + keys + certs unified)</td>
+                            <td>Secret Manager</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Certificate management</th>
+                            <td>ACM (public + Private CA)</td>
+                            <td>Key Vault Certificates</td>
+                            <td>Certificate Manager + CAS</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Confidential compute</th>
+                            <td>Nitro Enclaves; SEV-SNP &amp; TDX instance families</td>
+                            <td>Confidential VMs (SEV-SNP, TDX); Confidential Containers</td>
+                            <td>Confidential VMs (SEV-SNP, TDX); Confidential GKE Nodes</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Data classification / DLP</th>
+                            <td>Macie</td>
+                            <td>Purview Information Protection &amp; DLP</td>
+                            <td>Sensitive Data Protection (Cloud DLP)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Workload identity</th>
+                            <td>IAM Roles for Service Accounts (IRSA); EC2 Instance Profile</td>
+                            <td>Managed Identity; AKS Workload Identity</td>
+                            <td>Workload Identity Federation; GKE Workload Identity</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Database TDE</th>
+                            <td>RDS, Aurora, Redshift — CMK supported</td>
+                            <td>Azure SQL, Managed Instance — CMK supported</td>
+                            <td>Cloud SQL, Spanner, BigQuery — CMEK supported</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Storage default encryption</th>
+                            <td>S3, EBS, RDS, DDB — on by default</td>
+                            <td>Blob, Disks, SQL — on by default</td>
+                            <td>GCS, PD, Cloud SQL — on by default</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Key audit log</th>
+                            <td>CloudTrail (every KMS operation)</td>
+                            <td>Key Vault diagnostic logs to Log Analytics</td>
+                            <td>Cloud Audit Logs (data access)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>The native primitives are functionally equivalent at the 80% mark. The interesting differences are operational ergonomics: Azure Key Vault unifies keys / secrets / certs in one service (convenient when you want everything together; awkward when you want them on separate policies); AWS separates KMS / Secrets Manager / ACM (cleaner separation, more services to wire up); GCP's Cloud KMS is the lowest-friction model for envelope encryption integration with managed data services (most have a one-line "use this CMEK" flag).</p>
+        </section>
+
+        <section id="maturity">
+            <h2>Maturity stages</h2>
+            <p>A staging model for a cloud data-security program:</p>
+            <div class="pillar-grid">
+                <div class="pillar-card pillar-card-stage1">
+                    <h3>Stage 1 — Defaults on</h3>
+                    <p>Provider-managed encryption at rest on all storage. TLS on all public endpoints. Some secrets are in environment variables, some in Parameter Store / Key Vault. No formal data classification. KMS used "for things that need it" without a written policy. Key rotation is manual when it happens.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage2">
+                    <h3>Stage 2 — Customer-managed</h3>
+                    <p>Data classification scheme published and tagged on resources. Confidential and restricted data on customer-managed KMS keys with automatic annual rotation. Secrets centralized in a managed secrets service with rotation enabled for databases. No static IAM access keys in production. TLS 1.2+ enforced via policy. Etcd encryption on Kubernetes.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage3">
+                    <h3>Stage 3 — Engineered</h3>
+                    <p>Key hierarchy with per-workload CMKs. Dynamic secrets for databases via Vault or equivalent. mTLS between services via service mesh. External Secrets Operator (or equivalent) in every cluster. DLP discovery running on data lakes. CSPM rules ensure no untagged or improperly classified resources. SBOM and signed artifacts in the deploy pipeline.</p>
+                </div>
+                <div class="pillar-card pillar-card-stage4">
+                    <h3>Stage 4 — Strategic</h3>
+                    <p>Confidential computing for the named workloads. HYOK for the specific regulatory case. Field-level encryption for restricted columns. Tokenization vault reducing PCI scope. Hardware-attested LLM inference. Key compromise drills run quarterly. Data security informs product (tenant-managed keys as a feature, data-residency as a SKU).</p>
+                </div>
+            </div>
+            <p>The skip-stage cost is real here. Jumping to Stage 4 (confidential computing, HYOK) before Stage 2 (basic CMK and secrets hygiene) is paying for nation-state-resistant cryptography while still committing API keys to git.</p>
+        </section>
+
+        <section id="pitfalls">
+            <h2>Common pitfalls</h2>
+            <ul>
+                <li><strong>Secrets in environment variables committed to git.</strong> The single most common cloud-breach precursor. A leaked AWS key gets weaponized in minutes. Pre-commit scanning (Gitleaks, TruffleHog) + secrets manager + workload identity is the answer. Rotate every secret that touched a public repo, immediately and irrevocably.</li>
+                <li><strong>IAM-only key policies.</strong> An AWS KMS key with the default key policy (and only the default) grants the whole account root + admin IAM access. If a developer with admin IAM is compromised, the keys are compromised. Tighten key policies to specific principals; don't rely on IAM alone.</li>
+                <li><strong>Encrypted bucket with public read.</strong> S3 encryption protects the bytes from someone who steals the disk. It does <em>not</em> stop a public-read bucket policy from serving the plaintext to the internet. "Encrypted" and "private" are independent properties. Both must be enforced.</li>
+                <li><strong>No rotation policy because "automatic rotation is on."</strong> Automatic KEK rotation on the cloud KMS doesn't rotate database passwords, API keys, certificates, or service account keys. Inventory every secret category, define a rotation cadence per category, automate or alert when it lapses.</li>
+                <li><strong>One KMS key for everything.</strong> A single account-level CMK encrypting every workload's data is one access-policy mistake away from a blast-radius incident. Per-workload CMKs are cheap (cents per month) and contain the blast radius.</li>
+                <li><strong>Backups encrypted with a different key authority than primary.</strong> The production database uses your CMK, the cross-region snapshot uses the default key, the audit log says "encrypted" but you can't actually revoke the snapshot. Check the encryption configuration of every replica, snapshot, and backup explicitly.</li>
+                <li><strong>Treating <code>kind: Secret</code> as encrypted.</strong> It isn't. Enable etcd encryption-at-rest with a KMS provider, and pull real secrets from a real secrets manager via ESO or the CSI driver.</li>
+                <li><strong>Static service account / IAM keys with no expiry.</strong> A 4-year-old service account JSON file in a CI environment is a finding waiting to happen. Eliminate via Workload Identity Federation / OIDC / IRSA. If you must use a key, set a calendar reminder and rotate.</li>
+                <li><strong>TDE called out as "encryption" in audit responses without context.</strong> TDE protects against disk theft, not against credential compromise. If the auditor's actual question is "can a rogue DBA read this data?" TDE is not the answer; column-level encryption or tokenization is.</li>
+                <li><strong>Self-signed or never-renewed internal certs.</strong> Internal-only doesn't mean unmonitored. Expired internal certs cause outages; self-signed certs prevent meaningful trust verification. Run a proper internal CA (ACM PCA, CAS, Vault PKI) and let cert-manager / equivalent handle the lifecycle.</li>
+            </ul>
+        </section>
+
+        <section id="further">
+            <h2>Further reading</h2>
+            <h3>Standards &amp; specifications</h3>
+            <ul>
+                <li><a href="https://csrc.nist.gov/projects/cryptographic-module-validation-program/standards" target="_blank" rel="noopener noreferrer">NIST FIPS 140-3 / 140-2 — Cryptographic Module Validation</a></li>
+                <li><a href="https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final" target="_blank" rel="noopener noreferrer">NIST SP 800-57 — Key Management Recommendations</a></li>
+                <li><a href="https://csrc.nist.gov/pubs/sp/800/38/d/final" target="_blank" rel="noopener noreferrer">NIST SP 800-38D — AES-GCM</a></li>
+                <li><a href="https://csrc.nist.gov/pubs/sp/800/38/g/final" target="_blank" rel="noopener noreferrer">NIST SP 800-38G — Format-Preserving Encryption</a></li>
+                <li><a href="https://datatracker.ietf.org/doc/html/rfc8446" target="_blank" rel="noopener noreferrer">RFC 8446 — TLS 1.3</a></li>
+                <li><a href="https://datatracker.ietf.org/doc/html/rfc9106" target="_blank" rel="noopener noreferrer">RFC 9106 — Argon2 password hashing</a></li>
+            </ul>
+            <h3>Provider docs</h3>
+            <ul>
+                <li><a href="https://docs.aws.amazon.com/kms/latest/developerguide/" target="_blank" rel="noopener noreferrer">AWS KMS Developer Guide</a></li>
+                <li><a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/" target="_blank" rel="noopener noreferrer">AWS Secrets Manager</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/key-vault/" target="_blank" rel="noopener noreferrer">Azure Key Vault documentation</a></li>
+                <li><a href="https://cloud.google.com/kms/docs" target="_blank" rel="noopener noreferrer">Google Cloud KMS</a></li>
+                <li><a href="https://cloud.google.com/secret-manager/docs" target="_blank" rel="noopener noreferrer">GCP Secret Manager</a></li>
+            </ul>
+            <h3>Tooling</h3>
+            <ul>
+                <li><a href="https://developer.hashicorp.com/vault" target="_blank" rel="noopener noreferrer">HashiCorp Vault</a></li>
+                <li><a href="https://external-secrets.io/" target="_blank" rel="noopener noreferrer">External Secrets Operator</a></li>
+                <li><a href="https://github.com/getsops/sops" target="_blank" rel="noopener noreferrer">SOPS</a></li>
+                <li><a href="https://github.com/bitnami-labs/sealed-secrets" target="_blank" rel="noopener noreferrer">Bitnami Sealed Secrets</a></li>
+                <li><a href="https://cert-manager.io/" target="_blank" rel="noopener noreferrer">cert-manager</a></li>
+                <li><a href="https://spiffe.io/" target="_blank" rel="noopener noreferrer">SPIFFE / SPIRE</a></li>
+            </ul>
+            <h3>Confidential computing</h3>
+            <ul>
+                <li><a href="https://confidentialcomputing.io/" target="_blank" rel="noopener noreferrer">Confidential Computing Consortium</a></li>
+                <li><a href="https://aws.amazon.com/ec2/nitro/nitro-enclaves/" target="_blank" rel="noopener noreferrer">AWS Nitro Enclaves</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/confidential-computing/" target="_blank" rel="noopener noreferrer">Azure Confidential Computing</a></li>
+                <li><a href="https://cloud.google.com/confidential-computing" target="_blank" rel="noopener noreferrer">GCP Confidential Computing</a></li>
+            </ul>
+            <h3>Related CSOH pages</h3>
+            <ul>
+                <li><a href="iam.html">IAM &amp; Identity</a> — the access-control side of data protection.</li>
+                <li><a href="zero-trust.html">Zero Trust</a> — the architectural pattern that ties IAM, network, and data together.</li>
+                <li><a href="grc.html">GRC</a> — where data-security controls become audit evidence.</li>
+                <li><a href="kubernetes.html">Kubernetes</a> — cluster-level secrets and crypto patterns.</li>
+                <li><a href="shared-responsibility-model.html">Shared responsibility</a> — where provider crypto ends and yours begins.</li>
+                <li><a href="glossary.html">Glossary</a> — every term on this page, defined.</li>
+            </ul>
+        </section>
+
+        <section id="faq">
+            <h2>FAQ</h2>
+
+            <h3>What is envelope encryption and why does every cloud KMS use it?</h3>
+            <p>Envelope encryption is a two-layer scheme: the data is encrypted with a data encryption key (DEK), and the DEK itself is encrypted with a key encryption key (KEK) that lives inside the KMS or HSM. The encrypted DEK travels alongside the data; the plaintext KEK never leaves the secure module. The reason every cloud KMS works this way is performance and blast-radius: bulk symmetric encryption of a 10 GB object with a local DEK is orders of magnitude faster than round-tripping every byte through KMS, and rotating the KEK only requires re-wrapping the small DEK, not re-encrypting petabytes of data. It also means that revoking access to the KEK instantly renders all the data ciphertexts undecryptable, even if an attacker has copied them.</p>
+
+            <h3>What is the difference between BYOK, HYOK, and customer-managed keys?</h3>
+            <p>Customer-managed keys (CMK) are keys you create and administer inside the provider's KMS — the key material is generated by the provider's HSMs, and you control the policy, rotation, and lifecycle. BYOK (Bring Your Own Key) means you generate the key material outside the cloud (often on an on-prem HSM) and import it; the cloud KMS still operates the cryptography, but the root entropy came from you. HYOK (Hold Your Own Key) means the key material never enters the cloud at all — the KMS calls out to an external key manager (Azure Key Vault Managed HSM with HYOK, GCP External Key Manager, AWS KMS XKS) for every cryptographic operation. CMK is the right default for almost everyone; BYOK is for orgs with a regulatory or contractual requirement to control key generation; HYOK is for the small set of workloads where the provider must never have unilateral access to the plaintext, and you are willing to accept the latency, availability, and operational cost.</p>
+
+            <h3>Are Kubernetes secrets actually encrypted?</h3>
+            <p>By default, no. A Kubernetes Secret object is base64-encoded — not encrypted. Anyone with read access to the etcd database, or to the Kubernetes API with the right RBAC, sees the plaintext after a trivial decode. To get real encryption you need encryption-at-rest configured on etcd (a KMS provider plugin pointing at AWS KMS, Azure Key Vault, or GCP KMS), and you should additionally pull secrets from an external secrets manager via External Secrets Operator, the Secrets Store CSI driver, or SOPS-encrypted manifests. Sealed-secrets is a related pattern that lets you commit encrypted secrets to git safely. Treat the in-cluster Secret object as a delivery mechanism, not as the source of truth.</p>
+
+            <h3>How often should keys be rotated?</h3>
+            <p>It depends on the key's role. KEKs in a cloud KMS rotate cheaply (annual is the common cadence, and AWS, Azure, and GCP all support automatic annual rotation of customer-managed symmetric keys) because rotation only re-wraps the DEKs — it does not re-encrypt the underlying data. DEKs rotate per object or per session; the application generates a fresh DEK for each large object or each connection. Long-lived secrets (database passwords, API tokens) should rotate on a 30–90 day cadence, ideally driven by a secrets manager that brokers dynamic credentials so the rotation is invisible to the consumer. Certificates rotate per their lifetime (90 days for Let's Encrypt and ACM private CA defaults). Static service-account keys should not exist at all — replace with workload identity or short-lived OIDC tokens.</p>
+
+            <h3>When should I tokenize instead of encrypt?</h3>
+            <p>Tokenize when the goal is to remove sensitive data from a system entirely, not just to make it unreadable in storage. The canonical use case is PCI DSS scope reduction: a tokenization service holds the cardholder data, every other system holds only opaque tokens, and PCI scope shrinks to the tokenization vault. Tokenization is also a good fit for GDPR pseudonymization — the analytics system gets tokens, the lookup table sits in a controlled environment. Encrypt when the data has to remain usable in place (the application needs to decrypt and operate on it). Hash when you only need a one-way comparison and never need to recover the original (passwords, deduplication keys); use a slow KDF like Argon2id, scrypt, or bcrypt for password hashing, never a raw SHA-256.</p>
+
+            <h3>Do I need an HSM, or is the cloud KMS enough?</h3>
+            <p>For the vast majority of workloads, the cloud's default KMS is enough. AWS KMS, Azure Key Vault Standard, and Google Cloud KMS all back keys with FIPS 140-2 Level 3 (and increasingly FIPS 140-3) validated HSMs under the hood — you don't see the HSM, but the cryptography is HSM-protected. Step up to a dedicated HSM (CloudHSM, Azure Key Vault Managed HSM, Google Cloud HSM) when you need single-tenant key isolation, full FIPS 140-3 Level 3 attestation for an auditor who specifically asks, or PKCS#11 / JCE / KSP-style direct API access for legacy applications. Dedicated HSMs cost meaningfully more and have lower availability guarantees than shared KMS — pay for them only when the requirement is named.</p>
+
+            <h3>What is confidential computing and when does it matter?</h3>
+            <p>Confidential computing keeps data encrypted while it is being processed — not just at rest and in transit, but in CPU registers and RAM. Hardware Trusted Execution Environments (TEEs) — Intel SGX and TDX, AMD SEV-SNP, AWS Nitro Enclaves, Azure Confidential VMs, Confidential GKE — create an isolated execution context whose memory is encrypted and whose state cannot be inspected by the host OS, hypervisor, or cloud provider personnel. It matters in three scenarios: regulatory or contractual requirements that the cloud provider not be able to read the data even theoretically (sovereign workloads, some financial-services and healthcare use cases); multi-party computation where two distrustful parties want to compute on combined data without revealing it to each other; and processing of high-value secrets like signing keys or model weights where you want hardware attestation of the runtime. For most workloads, confidential computing is overkill; for the ones that need it, nothing else will do.</p>
+        </section>
+
+        <section class="cta-section">
+            <h2>Where next</h2>
+            <ul>
+                <li><a href="iam.html">IAM &amp; Identity</a> — the access control that decides who can call your KMS in the first place.</li>
+                <li><a href="zero-trust.html">Zero Trust</a> — the architectural pattern data security plugs into.</li>
+                <li><a href="grc.html">GRC</a> — turning key-rotation and encryption posture into audit evidence.</li>
+                <li><a href="kubernetes.html">Kubernetes</a> — cluster-level secrets, etcd encryption, and CSI patterns.</li>
+                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> — the posture tooling that catches data-security drift.</li>
+                <li><a href="sessions.html">Friday Zoom</a> — KMS hierarchies, secrets rotation, and confidential computing come up often. Drop in.</li>
+            </ul>
+        </section>
+
+        <aside class="author-card" style="max-width:720px;margin:3rem auto 2rem;padding:1.5rem;border-top:2px solid var(--border-color, #e0e0e0);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap;"><picture><source srcset="/img/authors/shawn-nunley.webp" type="image/webp"><img src="/img/authors/shawn-nunley.jpg" alt="Shawn Nunley" width="80" height="80" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy" decoding="async"></picture><div style="flex:1;min-width:240px;"><p style="margin:0 0 0.25rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted, #777);">About the author</p><p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;"><a href="/about-shawn-nunley.html" rel="author">Shawn Nunley</a></p><p style="margin:0;color:var(--text-muted, #555);">Founder of Cloud Security Office Hours and Solutions Architect at Wiz, with 7+ years specializing in cloud security across AWS, Azure, and Google Cloud. <a href="/about-shawn-nunley.html">Read more →</a></p></div></aside>
+    </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section footer-about">
+        <h3>CSOH</h3>
+        <p>A vendor-neutral community for cloud security professionals. Weekly Zoom sessions and curated resources.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="index.html#about">About CSOH</a></li>
+          <li><a href="learning-path.html">Learning Path</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="sessions.html">Zoom Sessions</a></li>
+          <li><a href="meetings.html">Meeting Recaps</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="mailto:admin@csoh.org">Contact</a></li>
+          <li><a href="https://csoh.kit.com/39feb4f397" target="_blank" rel="noopener noreferrer">Mailing List</a></li>
+          <li><a href="https://github.com/CloudSecurityOfficeHours/csoh.org" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="rss.html">RSS Feed</a></li>
+          <li><a href="contribute.html">Contribute</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Developer Docs</h3>
+        <ul>
+          <li><a href="github-actions.html">GitHub Actions</a></li>
+          <li><a href="cloud-deployment.html">Deploy to GCP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023-2026 Cloud Security Office Hours</p>
+      <ul class="footer-legal">
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="code-of-conduct.html">Code of Conduct</a></li>
+        <li><a href="security-policy.html">Security</a></li>
+      </ul>
+    </div>
+  </footer>
+
+    <script src="/main.js?v=28d03270" integrity="sha384-rL3h8+9Zf3OnCebAlc/aSSGella8hnqqGbOKQv9QcZGh3P6vA0z6yQp8JLYgBTqc"
+        defer></script>
+</body>
+</html>
