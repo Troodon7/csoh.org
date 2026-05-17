@@ -399,7 +399,7 @@
                 </div>
                 <div class="pillar-card pillar-card-stage1">
                     <h3>5. Validate</h3>
-                    <p>Execute the matching technique with <a href="https://stratus-red-team.cloud/" target="_blank" rel="noopener noreferrer">Stratus Red Team</a> (cloud) or <a href="https://atomicredteam.io/" target="_blank" rel="noopener noreferrer">Atomic Red Team</a> (general). Confirm the rule fires, the alert reaches the right queue, and the metadata is intact. Re-run on a schedule (monthly or quarterly). Output: a validation log entry tied to the rule.</p>
+                    <p>Execute the matching technique with <a href="https://stratus-red-team.cloud/" target="_blank" rel="noopener noreferrer">Stratus Red Team</a> (cloud) or <a href="https://www.atomicredteam.io/" target="_blank" rel="noopener noreferrer">Atomic Red Team</a> (general). Confirm the rule fires, the alert reaches the right queue, and the metadata is intact. Re-run on a schedule (monthly or quarterly). Output: a validation log entry tied to the rule.</p>
                 </div>
                 <div class="pillar-card pillar-card-compliance">
                     <h3>6. Retire</h3>
@@ -442,7 +442,7 @@
 
             <h3>GCP</h3>
             <ul>
-                <li><strong><a href="https://cloud.google.com/logging/docs/audit" target="_blank" rel="noopener noreferrer">Cloud Audit Logs</a> — Admin Activity</strong>. Control-plane operations. Free, always on, 400-day retention by default at the project level. Aggregate to an org-level log sink for cross-project queryability.</li>
+                <li><strong><a href="https://docs.cloud.google.com/logging/docs/audit" target="_blank" rel="noopener noreferrer">Cloud Audit Logs</a> — Admin Activity</strong>. Control-plane operations. Free, always on, 400-day retention by default at the project level. Aggregate to an org-level log sink for cross-project queryability.</li>
                 <li><strong>Cloud Audit Logs — System Event</strong>. Google-initiated events affecting your resources (live migration, automated maintenance, defender actions). Free, always on.</li>
                 <li><strong>Cloud Audit Logs — Policy Denied</strong>. Logs when an IAM or VPC-SC policy denies an action. Free, opt-in. Excellent attack-surface signal.</li>
                 <li><strong>Cloud Audit Logs — Data Access</strong>. The data-plane stream — reads of data in BigQuery, Cloud Storage, Pub/Sub, etc. <strong>Off by default for most services; paid.</strong> See the <a href="#data-access">data-access gotcha section</a>.</li>
@@ -575,7 +575,7 @@
             <h3>Microsoft Defender for Cloud</h3>
             <p><a href="https://azure.microsoft.com/en-us/products/defender-for-cloud" target="_blank" rel="noopener noreferrer">Defender for Cloud</a> bundles CSPM and CWPP plans, each producing findings. Defender for Servers, Containers, Storage, SQL, Key Vault, App Service, ARM, DNS, Cloud Database, and APIs each shed detections. Tightly integrated with Sentinel (the SIEM) and Defender XDR (the unified XDR plane). Strong on Microsoft-platform context — Entra, M365, Windows — and on integrating identity-side and infrastructure-side signal. Cost is per-plan and per-resource; the bill is non-trivial at scale.</p>
             <h3>Google Security Command Center</h3>
-            <p><a href="https://cloud.google.com/security-command-center" target="_blank" rel="noopener noreferrer">Security Command Center</a> comes in Standard, Premium, and Enterprise tiers. Premium and Enterprise add Event Threat Detection (audit-log-based), Container Threat Detection, VM Threat Detection (memory scanning), Web Security Scanner, and Security Health Analytics. Enterprise (formerly Mandiant Hunt / Chronicle integration) layers Chronicle SecOps and Mandiant threat intelligence on top. Findings stream to Pub/Sub for SIEM ingestion. Strong areas: GCP-native API anomalies, container runtime threats. Weak areas: cross-cloud correlation, custom detection logic — for which you'd use Chronicle SecOps directly.</p>
+            <p><a href="https://cloud.google.com/security/products/security-command-center" target="_blank" rel="noopener noreferrer">Security Command Center</a> comes in Standard, Premium, and Enterprise tiers. Premium and Enterprise add Event Threat Detection (audit-log-based), Container Threat Detection, VM Threat Detection (memory scanning), Web Security Scanner, and Security Health Analytics. Enterprise (formerly Mandiant Hunt / Chronicle integration) layers Chronicle SecOps and Mandiant threat intelligence on top. Findings stream to Pub/Sub for SIEM ingestion. Strong areas: GCP-native API anomalies, container runtime threats. Weak areas: cross-cloud correlation, custom detection logic — for which you'd use Chronicle SecOps directly.</p>
             <h3>What native services don't replace</h3>
             <p>Every native service is built around the patterns its vendor has seen across all customers. Environment-specific detections — your access patterns, your service accounts, your geo footprint, your business-hours norms — only you can write. The native finding stream is one of many signal sources in your SIEM; treat it as a high-priority queue, not as the whole detection program.</p>
         </section>
@@ -634,8 +634,8 @@
             <h2>Signal sources beyond audit logs</h2>
             <p>Audit logs cover the API plane; the workload plane and the data plane have their own signal sources, and a mature detection program incorporates them all.</p>
             <ul>
-                <li><strong>EDR / XDR</strong> — <a href="https://www.crowdstrike.com/" target="_blank" rel="noopener noreferrer">Crowdstrike Falcon</a>, <a href="https://www.sentinelone.com/" target="_blank" rel="noopener noreferrer">SentinelOne</a>, <a href="https://www.paloaltonetworks.com/cortex/cortex-xdr" target="_blank" rel="noopener noreferrer">Cortex XDR</a>, <a href="https://www.microsoft.com/en-us/security/business/siem-and-xdr/microsoft-defender-xdr" target="_blank" rel="noopener noreferrer">Defender XDR</a>. Process, file, network, and registry telemetry from endpoints and (increasingly) VMs. Vendor-curated detections cover most known endpoint attacker behaviors; the custom-content surface is for environment-specific patterns.</li>
-                <li><strong>CNAPP runtime</strong> — <a href="https://www.wiz.io/" target="_blank" rel="noopener noreferrer">Wiz</a>, <a href="https://sysdig.com/" target="_blank" rel="noopener noreferrer">Sysdig</a>, <a href="https://www.aquasec.com/" target="_blank" rel="noopener noreferrer">Aqua</a>, <a href="https://orca.security/" target="_blank" rel="noopener noreferrer">Orca</a>, <a href="https://www.paloaltonetworks.com/prisma/cloud" target="_blank" rel="noopener noreferrer">Prisma Cloud</a>, <a href="https://www.upwind.io/" target="_blank" rel="noopener noreferrer">Upwind</a>. Runtime visibility inside containers and VMs — syscalls, process trees, network flows, file modifications — correlated with the posture findings from the same platform.</li>
+                <li><strong>EDR / XDR</strong> — <a href="https://www.crowdstrike.com/en-us/" target="_blank" rel="noopener noreferrer">Crowdstrike Falcon</a>, <a href="https://www.sentinelone.com/" target="_blank" rel="noopener noreferrer">SentinelOne</a>, <a href="https://www.paloaltonetworks.com/cortex/cortex-xdr" target="_blank" rel="noopener noreferrer">Cortex XDR</a>, <a href="https://www.microsoft.com/en-us/security/business/siem-and-xdr/microsoft-defender-xdr" target="_blank" rel="noopener noreferrer">Defender XDR</a>. Process, file, network, and registry telemetry from endpoints and (increasingly) VMs. Vendor-curated detections cover most known endpoint attacker behaviors; the custom-content surface is for environment-specific patterns.</li>
+                <li><strong>CNAPP runtime</strong> — <a href="https://www.wiz.io/" target="_blank" rel="noopener noreferrer">Wiz</a>, <a href="https://www.sysdig.com/" target="_blank" rel="noopener noreferrer">Sysdig</a>, <a href="https://www.aquasec.com/" target="_blank" rel="noopener noreferrer">Aqua</a>, <a href="https://orca.security/" target="_blank" rel="noopener noreferrer">Orca</a>, <a href="https://www.paloaltonetworks.com/prisma/cloud" target="_blank" rel="noopener noreferrer">Prisma Cloud</a>, <a href="https://www.upwind.io/" target="_blank" rel="noopener noreferrer">Upwind</a>. Runtime visibility inside containers and VMs — syscalls, process trees, network flows, file modifications — correlated with the posture findings from the same platform.</li>
                 <li><strong>eBPF runtime tools</strong> — <a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a>, <a href="https://github.com/aquasecurity/tracee" target="_blank" rel="noopener noreferrer">Tracee</a>, <a href="https://github.com/cilium/tetragon" target="_blank" rel="noopener noreferrer">Tetragon</a>. Open-source kernel-level observability. Falco rules are YAML and live in your detection-as-code repo alongside Sigma.</li>
                 <li><strong>Application logs.</strong> The custom-written telemetry your services emit — authentication outcomes, sensitive-action audits, business-logic events. Often the most diagnostic signal for application-layer attacks and the least-instrumented in immature programs.</li>
                 <li><strong>SaaS audit APIs.</strong> GitHub Enterprise audit log, GitLab audit events, Slack audit, Okta system log, Salesforce event monitoring, Snowflake account usage. The kill chain often starts in SaaS before reaching the cloud.</li>
@@ -682,7 +682,7 @@
             <p>A rule library you've never tested is a rule library you have to assume is broken. Validation falls into three flavors that complement each other.</p>
             <h3>Atomic-style automated emulation</h3>
             <ul>
-                <li><strong><a href="https://atomicredteam.io/" target="_blank" rel="noopener noreferrer">Atomic Red Team</a></strong>. Open-source library of small attack-technique scripts, organized by ATT&amp;CK. General-purpose; strong on Windows / Linux endpoint. Run them on a schedule against test hosts and verify the corresponding detections fire.</li>
+                <li><strong><a href="https://www.atomicredteam.io/" target="_blank" rel="noopener noreferrer">Atomic Red Team</a></strong>. Open-source library of small attack-technique scripts, organized by ATT&amp;CK. General-purpose; strong on Windows / Linux endpoint. Run them on a schedule against test hosts and verify the corresponding detections fire.</li>
                 <li><strong><a href="https://stratus-red-team.cloud/" target="_blank" rel="noopener noreferrer">Stratus Red Team</a></strong>. The DataDog-built cloud-specific equivalent. Dozens of AWS, Azure, GCP, and Kubernetes techniques, each invokable with one command (e.g. <code>stratus detonate aws.persistence.iam-backdoor-user</code>). Maps every technique to ATT&amp;CK. The single most useful cloud-detection validation tool.</li>
                 <li><strong><a href="https://github.com/mitre/caldera" target="_blank" rel="noopener noreferrer">MITRE CALDERA</a></strong>. Automated adversary emulation framework. Heavier-weight than Atomic; chains techniques into full operations. Good for end-to-end kill-chain testing rather than per-rule validation.</li>
                 <li><strong><a href="https://github.com/cyberark/SkyArk" target="_blank" rel="noopener noreferrer">SkyArk</a></strong>, <strong><a href="https://github.com/RhinoSecurityLabs/pacu" target="_blank" rel="noopener noreferrer">Pacu</a></strong>, <strong><a href="https://github.com/Azure/MicroBurst" target="_blank" rel="noopener noreferrer">MicroBurst</a></strong>, <strong><a href="https://github.com/RyanJarv/awspx" target="_blank" rel="noopener noreferrer">awspx</a></strong>. Cloud-attack toolkits with overlapping coverage; useful for adversary-shaped testing of specific techniques.</li>
@@ -820,7 +820,7 @@
             <h3>Foundational</h3>
             <ul>
                 <li><a href="https://medium.com/palantir/alerting-and-detection-strategy-framework-52dc33722df2" target="_blank" rel="noopener noreferrer">Palantir — Alerting and Detection Strategy Framework</a></li>
-                <li><a href="https://posts.specterops.io/detection-as-code-overcoming-the-limitations-of-traditional-detection-engineering-d5fc719fa9ba" target="_blank" rel="noopener noreferrer">SpecterOps — Detection-as-Code</a></li>
+                <li><a href="https://specterops.io/blog/" target="_blank" rel="noopener noreferrer">SpecterOps — Detection-as-Code</a></li>
                 <li><a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK Cloud Matrix</a></li>
                 <li><a href="https://github.com/center-for-threat-informed-defense/security-stack-mappings" target="_blank" rel="noopener noreferrer">Center for Threat-Informed Defense — Stack Mappings</a></li>
                 <li><a href="https://github.com/0x4D31/awesome-threat-detection" target="_blank" rel="noopener noreferrer">awesome-threat-detection</a></li>
@@ -831,7 +831,7 @@
                 <li><a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener noreferrer">SigmaHQ public rule library</a></li>
                 <li><a href="https://github.com/SigmaHQ/pySigma" target="_blank" rel="noopener noreferrer">pySigma</a></li>
                 <li><a href="https://learn.microsoft.com/en-us/kusto/query/" target="_blank" rel="noopener noreferrer">KQL reference (Microsoft)</a></li>
-                <li><a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/UnderstandingSPLsyntax" target="_blank" rel="noopener noreferrer">Splunk SPL reference</a></li>
+                <li><a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.2/introduction/understanding-spl-syntax" target="_blank" rel="noopener noreferrer">Splunk SPL reference</a></li>
             </ul>
             <h3>Open-source detection content</h3>
             <ul>
@@ -843,7 +843,7 @@
             </ul>
             <h3>Validation</h3>
             <ul>
-                <li><a href="https://atomicredteam.io/" target="_blank" rel="noopener noreferrer">Atomic Red Team</a></li>
+                <li><a href="https://www.atomicredteam.io/" target="_blank" rel="noopener noreferrer">Atomic Red Team</a></li>
                 <li><a href="https://stratus-red-team.cloud/" target="_blank" rel="noopener noreferrer">Stratus Red Team</a></li>
                 <li><a href="https://github.com/mitre/caldera" target="_blank" rel="noopener noreferrer">MITRE CALDERA</a></li>
                 <li><a href="https://github.com/RhinoSecurityLabs/pacu" target="_blank" rel="noopener noreferrer">Pacu — AWS attack toolkit</a></li>
@@ -854,8 +854,8 @@
                 <li><a href="https://docs.aws.amazon.com/guardduty/" target="_blank" rel="noopener noreferrer">AWS GuardDuty docs</a></li>
                 <li><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/" target="_blank" rel="noopener noreferrer">Azure Monitor docs</a></li>
                 <li><a href="https://learn.microsoft.com/en-us/azure/sentinel/" target="_blank" rel="noopener noreferrer">Microsoft Sentinel docs</a></li>
-                <li><a href="https://cloud.google.com/logging/docs/audit" target="_blank" rel="noopener noreferrer">GCP Cloud Audit Logs</a></li>
-                <li><a href="https://cloud.google.com/security-command-center/docs" target="_blank" rel="noopener noreferrer">Security Command Center docs</a></li>
+                <li><a href="https://docs.cloud.google.com/logging/docs/audit" target="_blank" rel="noopener noreferrer">GCP Cloud Audit Logs</a></li>
+                <li><a href="https://cloud.google.com/security/products/security-command-center/docs" target="_blank" rel="noopener noreferrer">Security Command Center docs</a></li>
             </ul>
             <h3>Related CSOH pages</h3>
             <ul>
