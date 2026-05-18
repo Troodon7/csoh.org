@@ -18,11 +18,11 @@
     <meta property="og:description" content="The meeting focused on discussing the current crisis in open source security, particularly regarding supply chain attacks and the impact of generative AI…">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://csoh.org/meetings/2026-04-10.html">
-    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta property="og:image" content="https://csoh.org/img/og/meetings/2026-04-10.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Friday, April 10, 2026 CSOH Recap">
     <meta name="twitter:description" content="The meeting focused on discussing the current crisis in open source security, particularly regarding supply chain attacks and the impact of generative AI…">
-    <meta name="twitter:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:image" content="https://csoh.org/img/og/meetings/2026-04-10.jpg">
     <!-- Resource hints: warm up TCP+TLS to high-traffic external origins
          (the Zoom signup, GitHub, sponsor link, and YouTube image CDN
          that hosts the presentation card thumbnails). Saves 100-300ms
@@ -208,7 +208,7 @@
 
     <main class="container" id="main-content">
         <article class="section meeting-page">
-<h2><time datetime="2026-04-10">Friday, April 10, 2026</time> — Open-source supply chain attacks, GitHub Actions hardening, early-computing nostalgia</h2>
+<h2><time datetime="2026-04-10">Friday, April 10, 2026</time> — Open-source supply chain attacks, <a href="../github-actions.html">GitHub Actions</a> hardening, early-computing nostalgia</h2>
             <p><strong>Quick recap.</strong> The meeting focused on discussing the current crisis in open source security, particularly regarding supply chain attacks and the impact of generative <a class="glossary-link" href="../glossary.html#term-ai">AI</a> tools like Claude on vulnerability research. Participants, including Neil, Jay, Matt, and others, discussed the challenges of securing software dependencies, the effectiveness of defense-in-depth strategies, and the difficulties in implementing <a class="glossary-link" href="../glossary.html#term-ingress">egress</a> restrictions and package management controls. The conversation also touched on the trustworthiness of different package repositories, the risks of using third-party GitHub Actions, and the importance of separating build and publish processes to mitigate security risks. Additionally, the group shared personal experiences with early computing and hacking, reflecting on how learning environments and legal consequences have evolved over time.</p>
             <div class="resource-tags meeting-tags"><span class="tag">2026-04</span><span class="tag">Supply Chain</span><span class="tag">GitHub Actions</span><span class="tag">Community</span></div>
             <details class="meeting-topics">
@@ -220,7 +220,7 @@
             <p>The group discussed challenges in cloud security, particularly around mitigating risks from tools like TinyLM and Trivy that can steal cloud secrets. Jay emphasized the difficulty of implementing egress blocking measures, which Rev noted would be prohibitively expensive without strategic direction. Don explained that while there might not be misunderstandings about the problem, there is often ignorance about the consequences, comparing it to unknown vulnerabilities in widely-used products. The discussion also touched on user education needs and the complexity of modern technical systems, with Paul arguing that security responsibility should primarily rest with technology providers rather than end users.</p>
 
             <h3>Supply Chain Security Measures</h3>
-            <p>The group discussed security measures and supply chain attack mitigation strategies. Matt and Neil discussed how attack methods are evolving to be more stealthy, with Matt predicting that supply chain attacks like XZ/CLAB will become more common and less detectable. Neil shared insights about AppLocker and Aaron Locker as security tools for Windows systems, suggesting the need for similar models to secure egress. The discussion concluded with participants sharing their cautious approaches to software updates, with Shawn and others expressing reluctance to perform blanket updates due to security concerns, and Neil mentioning plans to develop product functionality that includes cool-down periods for package updates.</p>
+            <p>The group discussed security measures and <a href="../ci-cd.html">supply chain attack</a> mitigation strategies. Matt and Neil discussed how attack methods are evolving to be more stealthy, with Matt predicting that supply chain attacks like XZ/CLAB will become more common and less detectable. Neil shared insights about AppLocker and Aaron Locker as security tools for Windows systems, suggesting the need for similar models to secure egress. The discussion concluded with participants sharing their cautious approaches to software updates, with Shawn and others expressing reluctance to perform blanket updates due to security concerns, and Neil mentioning plans to develop product functionality that includes cool-down periods for package updates.</p>
 
             <h3>Package Repository Security</h3>
             <p>The team discussed security concerns around package repositories and supply chain attacks. They debated the trustworthiness of different package ecosystems, with Matt and others noting that <a class="glossary-link" href="../glossary.html#term-npm">NPM</a> and <a class="glossary-link" href="../glossary.html#term-pypi">PyPI</a> are particularly risky due to their open contribution models, while apt repositories in Ubuntu/Debian offer better security through stable release streams. Pavel suggested separating <a class="glossary-link" href="../glossary.html#term-ci-cd">CI</a> pipelines from publishing pipelines in different repositories to better protect secrets, and emphasized the importance of using hardware security keys like YubiKey for authentication. The discussion highlighted the growing risk of open source supply chain attacks and the need for more robust security measures in development processes.</p>

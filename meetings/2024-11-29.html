@@ -18,11 +18,11 @@
     <meta property="og:description" content="The team discussed the importance of considering the self-selected nature of data in security reports, particularly in relation to AI models and cloud…">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://csoh.org/meetings/2024-11-29.html">
-    <meta property="og:image" content="https://csoh.org/banner.png">
+    <meta property="og:image" content="https://csoh.org/img/og/meetings/2024-11-29.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Friday, November 29, 2024 CSOH Recap">
     <meta name="twitter:description" content="The team discussed the importance of considering the self-selected nature of data in security reports, particularly in relation to AI models and cloud…">
-    <meta name="twitter:image" content="https://csoh.org/banner.png">
+    <meta name="twitter:image" content="https://csoh.org/img/og/meetings/2024-11-29.jpg">
     <!-- Resource hints: warm up TCP+TLS to high-traffic external origins
          (the Zoom signup, GitHub, sponsor link, and YouTube image CDN
          that hosts the presentation card thumbnails). Saves 100-300ms
@@ -219,7 +219,7 @@
             <p>Neil discussed the vulnerabilities in AI packages and components, noting that while they are not currently publicly exploitable, he expects this to change as researchers focus on these areas. He highlighted a specific issue with Amazon Sagemaker, which automatically creates an <a class="glossary-link" href="../glossary.html#term-s3">S3</a> bucket for storing files, using a default naming convention that makes it easily discoverable. Neil emphasized that many new services, particularly those driven by developers, are not secure by default. He also pointed out that many organizations have exposed access keys to AI services, which could be exploited for malicious purposes.</p>
             <h3>Secure Design and Default Settings</h3>
             <p>Neil discussed the importance of secure design and default settings in cloud computing. He highlighted the risks of exposing secrets in Git commit history and the need for a plan to remove them. He also pointed out the vulnerabilities in using Sagemaker with admin privileges and the lack of configuration for <a class="glossary-link" href="../glossary.html#term-imds">IMDSv2</a> in many instances. Neil emphasized the need for secure practices, such as disabling route access from notebook instances and configuring private endpoints in Azure Openai. He concluded by noting the high percentage of instances without IMDSv2 configuration and the potential for significant security breaches.</p>
-            <h3>Addressing AI Security Risks and Challenges</h3>
+            <h3>Addressing <a href="../ai-ml-security.html">AI Security</a> Risks and Challenges</h3>
             <p>Neil discussed the challenges and risks associated with AI security, particularly in relation to Azure Open AI accounts. He highlighted that 27% of organizations have not configured their accounts to be privately accessible, making them publicly accessible. He also noted that most organizations are not encrypting their notebooks, training pipelines, or models, making them vulnerable to unauthorized access. Neil emphasized the need for better security measures, such as <a class="glossary-link" href="../glossary.html#term-iac">infrastructure as code</a>, <a class="glossary-link" href="../glossary.html#term-vulnerability-management">vulnerability management</a>, and secure data practices. He also mentioned the AI Goat project, an open-source initiative that aims to illustrate common security risks in AI applications.</p>
             <h3>Exploring Cloud Security and Infrastructure</h3>
             <p>Neil discussed the team&#x27;s desire for input and pull requests on a project, mentioning that it could be found on the Cloud Security Office hours website. Chris suggested sharing the project with others and noted that it could be a good entry point for those wanting to get hands-on experience. Kyle added that the internet was designed with security and privacy as afterthoughts, necessitating the addition of features like HTTPS and <a class="glossary-link" href="../glossary.html#term-tls">TLS</a>. Richard shared his experience with default passwords in mid-range systems and suggested exploring the infrastructure of the AS-400 series as a potential entry point. Shawn agreed that all this information exists in the cloud and will continue to do so.</p>
