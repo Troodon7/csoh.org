@@ -8,7 +8,7 @@ Regenerates the `VideoObject` JSON-LD block in `presentations.html` from the You
 python3 tools/update_presentations_schema.py
 ```
 
-Prints how many `VideoObject` entries were emitted. Idempotent — re-runs report "already up to date".
+Prints how many `VideoObject` entries were emitted. Idempotent - re-runs report "already up to date".
 
 ## How It Works
 
@@ -33,4 +33,4 @@ Non-YouTube cards (e.g., the "Community Contributions" section) are ignored. Onl
 ## Requirements
 
 - Python 3.9+ (standard library only)
-- Run from any directory — the script resolves `presentations.html` relative to the repo root
+- Run from any directory - the script resolves `presentations.html` relative to the repo root

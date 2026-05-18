@@ -1,4 +1,4 @@
-// glossary.html search — filters dt/dd pairs and section headings
+// glossary.html search - filters dt/dd pairs and section headings
 // based on a single search input. Lives in an external file because
 // the site's strict CSP (`script-src 'self'`) blocks inline <script>.
 (function () {

@@ -1,6 +1,6 @@
 # Backfill Zoom AI Companion Summaries
 
-Bulk-imports CSOH meeting recaps into [`meetings.html`](../meetings.html) from Zoom's AI Companion meeting summaries. Complementary to [`fetch_zoom_transcript.py`](fetch_zoom_transcript.py) — that tool pulls VTT transcripts one at a time; this one pulls every AI-generated summary on the account in a single batch.
+Bulk-imports CSOH meeting recaps into [`meetings.html`](../meetings.html) from Zoom's AI Companion meeting summaries. Complementary to [`fetch_zoom_transcript.py`](fetch_zoom_transcript.py) - that tool pulls VTT transcripts one at a time; this one pulls every AI-generated summary on the account in a single batch.
 
 ## When you'd use each
 
@@ -22,7 +22,7 @@ See [FETCH_ZOOM_TRANSCRIPT_README.md](FETCH_ZOOM_TRANSCRIPT_README.md) for the f
 ## Usage
 
 ```bash
-# Dry run — list candidate dates + inferred tags, make no changes
+# Dry run - list candidate dates + inferred tags, make no changes
 python3 tools/backfill_zoom_summaries.py --dry-run
 
 # Full backfill (skips dates already on the page)
@@ -37,16 +37,16 @@ python3 tools/backfill_zoom_summaries.py --replace-existing
 
 ### Flags
 
-- `--dry-run` — print the plan, make no changes.
-- `--limit N` — process at most N dates (useful to preview quality on a small sample).
-- `--replace-existing` — regenerate entries that are already on the page. Off by default to preserve hand-authored content.
-- `--months-back N` — how far back to scan (default 60).
-- `--target-hour H` / `--hour-slack MINS` — Pacific time target for the Friday filter (defaults: 7:00 PT, 90-minute slack).
-- `--env-file PATH` — use a non-default `.env`.
+- `--dry-run` - print the plan, make no changes.
+- `--limit N` - process at most N dates (useful to preview quality on a small sample).
+- `--replace-existing` - regenerate entries that are already on the page. Off by default to preserve hand-authored content.
+- `--months-back N` - how far back to scan (default 60).
+- `--target-hour H` / `--hour-slack MINS` - Pacific time target for the Friday filter (defaults: 7:00 PT, 90-minute slack).
+- `--env-file PATH` - use a non-default `.env`.
 
 ## How it selects the summary per date
 
-Zoom's AI Companion often produces multiple `summary_content` records for one Friday — if the host stopped and restarted the recording, each instance has its own summary. The script picks the **longest-duration** candidate per date. If that one has empty content (can happen for very short fragments), it falls back to the next-longest.
+Zoom's AI Companion often produces multiple `summary_content` records for one Friday - if the host stopped and restarted the recording, each instance has its own summary. The script picks the **longest-duration** candidate per date. If that one has empty content (can happen for very short fragments), it falls back to the next-longest.
 
 ## What it does to `meetings.html`
 
@@ -67,5 +67,5 @@ For each selected date, the script:
 
 ## Requirements
 
-- Python 3.9+ (standard library only — `zoneinfo` used for US/Pacific conversion)
+- Python 3.9+ (standard library only - `zoneinfo` used for US/Pacific conversion)
 - An active Zoom Server-to-Server OAuth app with the three summary scopes listed above

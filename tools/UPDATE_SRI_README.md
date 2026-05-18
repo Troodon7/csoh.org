@@ -4,7 +4,7 @@
 
 **SRI (Subresource Integrity)** is a browser security feature that protects your website's visitors. Here's the idea in plain English:
 
-Every time someone visits csoh.org, their browser downloads files like `style.css` (which controls how the site looks) and `main.js` (which powers search and filtering). SRI adds a **fingerprint** (a cryptographic hash) to each of those files. When the browser downloads the file, it checks: "Does this file's fingerprint match what the HTML page says it should be?" If it doesn't match — maybe the file was tampered with or corrupted — the browser **refuses to use it**. This protects visitors from loading malicious code.
+Every time someone visits csoh.org, their browser downloads files like `style.css` (which controls how the site looks) and `main.js` (which powers search and filtering). SRI adds a **fingerprint** (a cryptographic hash) to each of those files. When the browser downloads the file, it checks: "Does this file's fingerprint match what the HTML page says it should be?" If it doesn't match - maybe the file was tampered with or corrupted - the browser **refuses to use it**. This protects visitors from loading malicious code.
 
 In our HTML, it looks like this:
 
@@ -22,7 +22,7 @@ In our HTML, it looks like this:
 
 Browsers **cache** (save a local copy of) CSS and JS files to make pages load faster on repeat visits. The problem: if we update `style.css`, returning visitors might still see the old cached version for days or even months.
 
-**Cache-busting** solves this by adding a version tag to the file URL: `/style.css?v=892ae8aa`. The `?v=` value is based on the file's content — so when the file changes, the version tag changes, and the browser treats it as a brand new file and downloads the fresh version.
+**Cache-busting** solves this by adding a version tag to the file URL: `/style.css?v=892ae8aa`. The `?v=` value is based on the file's content - so when the file changes, the version tag changes, and the browser treats it as a brand new file and downloads the fresh version.
 
 ---
 
@@ -73,9 +73,9 @@ This Python script does all the work. Note that `style.css` includes a large dar
 4. Scans every `.html` file in the repo
 5. Updates the `integrity` attribute with the new fingerprint
 6. Updates the `href`/`src` URL with the new `?v=` tag
-7. Removes any `crossorigin` attribute (not needed for same-origin files — having it caused mobile browsers to block the CSS)
+7. Removes any `crossorigin` attribute (not needed for same-origin files - having it caused mobile browsers to block the CSS)
 
-To add a new tracked asset, append a line to the `files_to_hash` map and a corresponding regex block in `update_html_file` — see how `meetings.js` and `glossary.js` are wired up.
+To add a new tracked asset, append a line to the `files_to_hash` map and a corresponding regex block in `update_html_file` - see how `meetings.js` and `glossary.js` are wired up.
 
 ### Running manually
 
@@ -99,7 +99,7 @@ Done! Modified 0 of 12 files.
 
 ### Requirements
 
-- Python 3.x (standard library only — no `pip install` needed)
+- Python 3.x (standard library only - no `pip install` needed)
 
 ---
 
@@ -118,15 +118,15 @@ SRI and cache-busting are handled as part of the unified workflow, not a separat
 1. Checks out the latest code
 2. Runs `python3 update_sri.py` to recalculate SRI hashes and `?v=` cache-busting params
 3. Commits and pushes updated HTML files if hashes changed
-4. Checks URL safety — blocks deploy if unsafe URLs are detected (using `check_all_site_urls.py`)
-5. Normalizes URLs — strips tracking parameters, upgrades HTTP to HTTPS, resolves redirects (using `normalize_urls.py`)
+4. Checks URL safety - blocks deploy if unsafe URLs are detected (using `check_all_site_urls.py`)
+5. Normalizes URLs - strips tracking parameters, upgrades HTTP to HTTPS, resolves redirects (using `normalize_urls.py`)
 6. Generates preview images for any new resources in `resources.html`
 7. Checks for broken links (non-blocking warning)
 8. Deploys the site via FTP in smart passes:
-   - **Pass 1:** When deploy is triggered — all HTML/CSS/JS and site files (skips image directories)
-   - **Pass 2:** Only when new previews were generated — uploads `img/previews/`
+   - **Pass 1:** When deploy is triggered - all HTML/CSS/JS and site files (skips image directories)
+   - **Pass 2:** Only when new previews were generated - uploads `img/previews/`
    - **Pass 3:** Always syncs news source banner images (`img/news-banners/`)
-   - **Pass 4:** Only when new files exist in `chat-screenshots/` — uploads `chat-screenshots/`
+   - **Pass 4:** Only when new files exist in `chat-screenshots/` - uploads `chat-screenshots/`
 
 ---
 
@@ -145,8 +145,8 @@ openssl dgst -sha384 -binary style.css | openssl base64 -A
 | Problem | Cause | Fix |
 |---------|-------|-----|
 | CSS not loading on mobile | SRI fingerprint doesn't match the file content | Run `python3 update_sri.py` and deploy |
-| CSS not loading despite correct hash | `crossorigin="anonymous"` attribute present | Remove `crossorigin` from the HTML tags — the script does this automatically |
-| Visitors seeing old styles after a CSS update | Browser cache serving the old file | The `?v=` cache-busting parameter should prevent this — run `update_sri.py` to regenerate |
+| CSS not loading despite correct hash | `crossorigin="anonymous"` attribute present | Remove `crossorigin` from the HTML tags - the script does this automatically |
+| Visitors seeing old styles after a CSS update | Browser cache serving the old file | The `?v=` cache-busting parameter should prevent this - run `update_sri.py` to regenerate |
 | Workflow fails at "Mint installation token" | App private key missing/expired/revoked | Generate a new key in the `csoh-ci` GitHub App settings and update the `CSOH_CI_PRIVATE_KEY` org-level secret |
 | Workflow fails at "Auto approve" with HTTP 401 | `CSOH_PAT` expired or revoked | Regenerate the fine-grained PAT (see `UPDATE_NEWS_README.md` → Setup Requirements) and replace the `CSOH_PAT` org secret |
 
@@ -162,7 +162,7 @@ The workflow now uses a **GitHub App** (`csoh-ci`) rather than a long-lived PAT 
 |--------|---------------|---------|
 | `CSOH_CI_CLIENT_ID` | Org-level | GitHub App's Client ID (`Iv23.*`); used to mint short-lived installation tokens |
 | `CSOH_CI_PRIVATE_KEY` | Org-level | GitHub App's RSA private key (PEM); used to sign the JWT for token minting |
-| `CSOH_PAT` | Org-level | Fine-grained PAT scoped to `csoh.org` with `Pull requests: Read & Write` only — used solely to auto-approve App-opened PRs (GitHub blocks self-approval) |
+| `CSOH_PAT` | Org-level | Fine-grained PAT scoped to `csoh.org` with `Pull requests: Read & Write` only - used solely to auto-approve App-opened PRs (GitHub blocks self-approval) |
 | `FTP_HOST` | Repo-level | FTP hostname of the web server (must match the host's TLS cert subject) |
 | `FTP_USER` | Repo-level | FTP username |
 | `FTP_PASS` | Repo-level | FTP password |

@@ -383,9 +383,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Resource card tooltips — shows destination URL on hover
+    // Resource card tooltips - shows destination URL on hover
     function initTooltips() {
-        // Skip on touch devices — no hover available
+        // Skip on touch devices - no hover available
         if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
 
         var tooltip = document.createElement('div');

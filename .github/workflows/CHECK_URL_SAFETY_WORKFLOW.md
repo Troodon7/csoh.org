@@ -6,12 +6,12 @@ This GitHub Actions workflow automatically validates all URLs across **all HTML 
 
 The standalone workflow (`.github/workflows/check-url-safety.yml`) triggers on:
 - **Pull Requests** that modify any `.html` file
-- **Weekly schedule** — every Monday at 06:30 UTC
+- **Weekly schedule** - every Monday at 06:30 UTC
 - **Manual trigger** via workflow_dispatch
 
 URL safety checks also run as a **blocking gate** inside two other workflows:
-- **`site-update-deploy.yml`** — runs after SRI hashes, blocks normalization/preview/deploy if unsafe URLs are found
-- **`normalize-urls.yml`** — runs before URL normalization, blocks the entire workflow if unsafe URLs are found
+- **`site-update-deploy.yml`** - runs after SRI hashes, blocks normalization/preview/deploy if unsafe URLs are found
+- **`normalize-urls.yml`** - runs before URL normalization, blocks the entire workflow if unsafe URLs are found
 
 ## What It Does
 
@@ -85,6 +85,6 @@ To adjust what URLs are flagged, edit:
 This workflow ensures that:
 - No unsafe URLs slip through in PRs for **any page** on your site
 - Weekly scans catch URLs that may have gone bad since they were added
-- Security issues are caught before deployment — the deploy and normalize workflows both block on unsafe URLs
+- Security issues are caught before deployment - the deploy and normalize workflows both block on unsafe URLs
 - URLs are verified safe before any normalization or preview generation occurs
 - New pages automatically get URL validation

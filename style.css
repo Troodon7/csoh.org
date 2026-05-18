@@ -513,7 +513,7 @@ nav a:focus {
     text-decoration: underline;
 }
 
-/* Internal cross-references between glossary terms — styled like normal
+/* Internal cross-references between glossary terms - styled like normal
    hyperlinks so they're obviously clickable. */
 .glossary-list dd a.glossary-link {
     color: var(--secondary-color);
@@ -1993,7 +1993,7 @@ footer {
 }
 
 /* =========================================================================
-   INDEX.HTML — Community section cards & grid
+   INDEX.HTML - Community section cards & grid
    ========================================================================= */
 
 .community-card {
@@ -2063,7 +2063,7 @@ footer {
 }
 
 /* =========================================================================
-   KEVIN-MITNICK.HTML — Memorial page (moved from <style> block)
+   KEVIN-MITNICK.HTML - Memorial page (moved from <style> block)
    ========================================================================= */
 
 .memorial-content {
@@ -2181,7 +2181,7 @@ footer {
 }
 
 /* =========================================================================
-   CONTRIBUTE-RESOURCES.HTML — Tutorial page (moved from <style> block)
+   CONTRIBUTE-RESOURCES.HTML - Tutorial page (moved from <style> block)
    ========================================================================= */
 
 .contribute-article {
@@ -2381,7 +2381,7 @@ footer {
 }
 
 /* =========================================================================
-   404.HTML / 403.HTML — Error pages (moved from <style> block)
+   404.HTML / 403.HTML - Error pages (moved from <style> block)
    ========================================================================= */
 
 .error-container {
@@ -2414,7 +2414,7 @@ footer {
 }
 
 /* =========================================================================
-   SECURITY-POLICY.HTML & PRESENTATIONS.HTML — Info boxes
+   SECURITY-POLICY.HTML & PRESENTATIONS.HTML - Info boxes
    ========================================================================= */
 
 .info-box--blue {
@@ -3601,7 +3601,7 @@ footer {
     }
 
     /* Mobile: the current-page indicator keeps the row's full-width
-       shape — desktop's small rounded pill (padding 0.35rem 0.6rem,
+       shape - desktop's small rounded pill (padding 0.35rem 0.6rem,
        border-radius 6px) shrinks the active row vs its siblings and
        drops the dropdown sub-item's left indent. Override here so the
        active row is the same height & indent as everything else; just
@@ -3632,7 +3632,7 @@ footer {
    MEGA-MENU + NAV CTA  (added in 2026-05 nav redesign)
    ========================================================================= */
 
-/* Mega-menu container — wider than the standard dropdown, multi-column.
+/* Mega-menu container - wider than the standard dropdown, multi-column.
    The .dropdown-menu base styles still apply (positioning, hover reveal,
    etc.); these rules override the width/layout so it can hold columns. */
 .has-mega > .dropdown-menu.mega-menu {
@@ -3709,7 +3709,7 @@ footer {
     background-color: rgba(255, 255, 255, 0.18);
 }
 
-/* Persistent nav CTA — promotes Friday Zoom out of a dropdown.
+/* Persistent nav CTA - promotes Friday Zoom out of a dropdown.
    Designed to stand out without fighting the logo or hero CTA. */
 .nav-cta-item {
     margin-left: 0.5rem;
@@ -3757,7 +3757,7 @@ footer {
 
     .has-mega.open > .dropdown-menu.mega-menu {
         transform: none;
-        /* Mega-menus hold ~20 items + 3 section headings — well over the
+        /* Mega-menus hold ~20 items + 3 section headings - well over the
            standard 800px ceiling. Give them enough room to render fully
            inside the mobile accordion without scroll-clipping. */
         max-height: 1500px;
@@ -3899,7 +3899,7 @@ footer {
 
 /* =========================================================================
    Per-meeting recap page (e.g. /meetings/2026-05-08.html). 94 pages share
-   the same markup pattern, so all styling happens here — no per-page edits.
+   the same markup pattern, so all styling happens here - no per-page edits.
    ========================================================================= */
 .meeting-page {
     background: var(--white);
@@ -4011,7 +4011,7 @@ footer {
 }
 
 /* Bottom prev/next/index pager. Styles live in breach-timeline.css for the
-   breach pages, but meeting pages only load style.css — so duplicate here. */
+   breach pages, but meeting pages only load style.css - so duplicate here. */
 .meeting-page + .incident-pager,
 main > .incident-pager {
     display: flex;
@@ -4139,7 +4139,7 @@ main > .incident-pager .pager-index { font-weight: 600; }
 
 
 /* =========================================================================
-   Illustrated hero — gradient + dot pattern + side-by-side text & SVG art.
+   Illustrated hero - gradient + dot pattern + side-by-side text & SVG art.
    Used on pillar pages to replace the generic banner.
    ========================================================================= */
 .hero--illustrated {
@@ -4220,7 +4220,7 @@ main > .incident-pager .pager-index { font-weight: 600; }
     .hero--illustrated { padding: 2rem 1rem 2.25rem; }
 }
 
-/* Light theme variants for the illustrated hero — keep brand accents
+/* Light theme variants for the illustrated hero - keep brand accents
    but lift the base so light mode reads bright on mobile. */
 [data-theme="light"] .hero--illustrated {
     background:
@@ -4261,7 +4261,7 @@ main > .incident-pager .pager-index { font-weight: 600; }
     filter: drop-shadow(0 18px 32px rgba(2,132,199,0.18));
 }
 
-/* Hero illustration tiles — theme-aware fills so they don't look out of place
+/* Hero illustration tiles - theme-aware fills so they don't look out of place
    in light mode. The line-icon strokes inside each tile keep their accent
    colors from the inline SVG. */
 .hero-svg-tile {
@@ -4275,7 +4275,7 @@ main > .incident-pager .pager-index { font-weight: 600; }
 }
 
 /* =========================================================================
-   Pillar-card grid — color-coded gradient icon tiles for pillar pages.
+   Pillar-card grid - color-coded gradient icon tiles for pillar pages.
    ========================================================================= */
 .pillar-grid {
     display: grid;
@@ -4379,7 +4379,7 @@ main > .incident-pager .pager-index { font-weight: 600; }
 [data-theme="dark"] .pillar-card p { color: #94a3b8; }
 
 /* =========================================================================
-   Threats grid — illustrated tiles with red accent for breach patterns.
+   Threats grid - illustrated tiles with red accent for breach patterns.
    ========================================================================= */
 .threats-grid {
     display: grid;
@@ -4556,7 +4556,7 @@ main > .incident-pager .pager-index { font-weight: 600; }
 }
 [data-theme="dark"] .lede { color: #e2e8f0; }
 
-/* H2 accent — small colored bar above each section's h2 on long pillar pages.
+/* H2 accent - small colored bar above each section's h2 on long pillar pages.
    Adds visual rhythm so each section starts with a clear anchor instead of
    landing in another wall of text. Scoped to <main class="contribute-article">
    so listing/utility pages keep their existing styling. */
@@ -4579,7 +4579,7 @@ main > .incident-pager .pager-index { font-weight: 600; }
     background: linear-gradient(90deg, #38bdf8, transparent);
 }
 
-/* Pull-quote callout — pulls a key sentence out of paragraph runs into a
+/* Pull-quote callout - pulls a key sentence out of paragraph runs into a
    visually-distinct, magazine-style block. Use sparingly, ~1 per long page. */
 .pull-quote {
     margin: 2.25rem 0;
@@ -4622,7 +4622,7 @@ main > .incident-pager .pager-index { font-weight: 600; }
 [data-theme="dark"] .pull-quote::before { color: #38bdf8; }
 [data-theme="dark"] .pull-quote cite { color: #94a3b8; }
 
-/* Page photos — Pexels-sourced JPGs with webp fallback. */
+/* Page photos - Pexels-sourced JPGs with webp fallback. */
 .page-photo {
     margin: 2rem 0;
     border-radius: 14px;
@@ -4689,7 +4689,7 @@ main > .incident-pager .pager-index { font-weight: 600; }
 [data-theme="dark"] .cnapp-figure figcaption { color: #94a3b8; }
 
 /* =========================================================================
-   Inline SVG diagram figure — wraps responsive SVG with caption.
+   Inline SVG diagram figure - wraps responsive SVG with caption.
    ========================================================================= */
 .diagram-figure {
     margin: 1.5rem 0;
@@ -4719,7 +4719,7 @@ main > .incident-pager .pager-index { font-weight: 600; }
 }
 
 /* =========================================================================
-   Comparison table — used for side-by-side multi-column comparisons
+   Comparison table - used for side-by-side multi-column comparisons
    (e.g. AWS / Azure / GCP on landing-zones.html). Replaces the older
    inline-styled tables which got cramped at narrow viewports.
    ========================================================================= */
@@ -4843,7 +4843,7 @@ main > .incident-pager .pager-index { font-weight: 600; }
     .comparison-table tbody td { padding: 0.7rem 0.8rem; }
 }
 
-/* Stat strip — quantified social proof row used near the top of the home page. */
+/* Stat strip - quantified social proof row used near the top of the home page. */
 .stat-strip {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

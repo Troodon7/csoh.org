@@ -1,10 +1,10 @@
 # check_lighthouse.py
 
-Runs [Lighthouse](https://developer.chrome.com/docs/lighthouse) against a representative sample of pages and asserts SEO / accessibility / performance / best-practices thresholds. Print a pass/fail table and exit non-zero if anything misses target — wire into CI to catch regressions before they ship.
+Runs [Lighthouse](https://developer.chrome.com/docs/lighthouse) against a representative sample of pages and asserts SEO / accessibility / performance / best-practices thresholds. Print a pass/fail table and exit non-zero if anything misses target - wire into CI to catch regressions before they ship.
 
 ## Why
 
-Real audits beat hunches. We've added meta tags, schema, lazy-loading, WebP, resource hints — but a one-line CSS regression or a giant un-optimized image can quietly tank the score. Lighthouse runs the same checks Google Search Console uses, so this is the closest proxy we have to "what does Google think of this page right now."
+Real audits beat hunches. We've added meta tags, schema, lazy-loading, WebP, resource hints - but a one-line CSS regression or a giant un-optimized image can quietly tank the score. Lighthouse runs the same checks Google Search Console uses, so this is the closest proxy we have to "what does Google think of this page right now."
 
 ## Install (once)
 
@@ -34,13 +34,13 @@ python3 tools/check_lighthouse.py --perf 70
 
 The default sample picks one of each kind of page:
 
-- `/` — homepage
-- `/what-is-cloud-security.html` — pillar page
-- `/cspm-vs-cnapp.html` — comparison pillar
-- `/resources.html` — card-heavy listing page
-- `/cloud-security-certifications.html` — pillar with FAQ schema
-- `/breaches/capital-one-2019.html` — per-breach split page
-- `/github-actions.html` — internal docs page
+- `/` - homepage
+- `/what-is-cloud-security.html` - pillar page
+- `/cspm-vs-cnapp.html` - comparison pillar
+- `/resources.html` - card-heavy listing page
+- `/cloud-security-certifications.html` - pillar with FAQ schema
+- `/breaches/capital-one-2019.html` - per-breach split page
+- `/github-actions.html` - internal docs page
 
 Pass `--pages` to override.
 
@@ -64,9 +64,9 @@ page                                                    perf a11y best  seo
 
 ## Targets and why they're set where they are
 
-- **SEO ≥ 95** — meta tags, structured data, crawlability are non-negotiable. Anything less means we're losing free traffic.
-- **Accessibility ≥ 95** — both ethical and an SEO ranking factor; aria/contrast/labels matter.
-- **Performance ≥ 80** — strict 90+ would make the card-heavy resource pages noisy. 80 catches major regressions without flagging "many cards = big DOM" as a bug.
-- **Best practices ≥ 90** — security headers, no console errors, https everywhere.
+- **SEO ≥ 95** - meta tags, structured data, crawlability are non-negotiable. Anything less means we're losing free traffic.
+- **Accessibility ≥ 95** - both ethical and an SEO ranking factor; aria/contrast/labels matter.
+- **Performance ≥ 80** - strict 90+ would make the card-heavy resource pages noisy. 80 catches major regressions without flagging "many cards = big DOM" as a bug.
+- **Best practices ≥ 90** - security headers, no console errors, https everywhere.
 
 Override per-run with `--seo`, `--a11y`, `--perf`, `--best`.

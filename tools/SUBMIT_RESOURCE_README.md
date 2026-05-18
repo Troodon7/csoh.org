@@ -64,7 +64,7 @@ Tooltip description (press Enter to skip):
 CloudGoat deploys real AWS resources with intentional misconfigurations you
 exploit using the AWS CLI and console. Scenarios cover IAM privilege
 escalation, Lambda abuse, and S3 data exfiltration. Requires an AWS account
-with admin access — all resources are cleaned up with a single destroy command.
+with admin access - all resources are cleaned up with a single destroy command.
 ```
 
 #### Step 5: Category
@@ -176,7 +176,7 @@ After you open a pull request, the **unified workflow** will automatically:
 - Update SRI hashes and cache-busting tags if CSS/JS changed
 - Deploy the site after merge
 
-You do not need to run any SRI or preview scripts manually—just submit your resource and the workflow will handle the rest.
+You do not need to run any SRI or preview scripts manually - just submit your resource and the workflow will handle the rest.
 
 ### 📋 Smart Category Selection
 

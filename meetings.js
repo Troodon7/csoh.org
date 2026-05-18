@@ -1,4 +1,4 @@
-// meetings.html (index) — search + filter buttons across the meeting cards.
+// meetings.html (index) - search + filter buttons across the meeting cards.
 // Lives in an external file because the site's strict CSP
 // (`script-src 'self'`) blocks any inline <script> block.
 (function () {

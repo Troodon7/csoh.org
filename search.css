@@ -1,6 +1,6 @@
 /* Page-specific styling for /search.html. Lives in an external file
    because the site's CSP includes `style-src 'self'` with no nonce or
-   'unsafe-inline' — an inline <style> block here gets silently dropped
+   'unsafe-inline' - an inline <style> block here gets silently dropped
    by the browser, taking all of these rules with it. */
 
 /* Center the search widget and give it room to breathe. The Pagefind
@@ -30,7 +30,7 @@
    the layout its intended breathing room. */
 :root {
     /* CSS-level color-scheme declaration. Belt-and-braces with the
-       <meta name="color-scheme"> in search.html's <head> — both should
+       <meta name="color-scheme"> in search.html's <head> - both should
        opt this page out of browser-level "force dark" filters. */
     color-scheme: dark light;
     --pagefind-ui-scale: 1;
@@ -47,7 +47,7 @@
 /* Dark-mode override. The site sets <html data-theme="dark"> from
    main.js once it runs, but the page background already goes dark via
    the @media (prefers-color-scheme: dark) rules in style.css the
-   instant CSS is parsed. So there's a window (or a state — JS
+   instant CSS is parsed. So there's a window (or a state - JS
    disabled, SRI mismatch, etc.) where the page is visually dark but
    data-theme is unset, and a [data-theme="dark"]-only override leaves
    Pagefind's text painted with the LIGHT-mode #1a1f24 against a dark
@@ -125,7 +125,7 @@
 
 /* Pagefind's default 30px top + 40px bottom is a lot of whitespace
    per result; tighten so users see more at once. The border-top/bottom
-   on every result is what visually separates them — keep that styling,
+   on every result is what visually separates them - keep that styling,
    just compress padding. */
 #pagefind-search .pagefind-ui__result {
     padding: 1.25rem 0;

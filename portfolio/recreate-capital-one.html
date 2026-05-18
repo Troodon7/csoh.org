@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-    <meta name="description" content="Build the vulnerable Capital One architecture in your lab — WAF + SSRF + IMDSv1 + over-privileged role — exploit it end-to-end, then build the controls and detections that close it.">
+    <meta name="description" content="Build the vulnerable Capital One architecture in your lab - WAF + SSRF + IMDSv1 + over-privileged role - exploit it end-to-end, then build the controls and detections that close it.">
     <meta name="keywords" content="capital one breach lab, ssrf imdsv1, recreate capital one, aws breach lab, breach recreation portfolio, cloud security portfolio capital one">
     <title>Recreate the Capital One breach - CSOH Portfolio Project</title>
 
@@ -17,13 +17,13 @@
     <meta name="theme-color" content="#2c3e50">
 
     <meta property="og:title" content="Recreate the Capital One breach - CSOH Portfolio Project">
-    <meta property="og:description" content="Build the vulnerable Capital One architecture in your lab — WAF + SSRF + IMDSv1 + over-privileged role — exploit it end-to-end, then build the controls and detections that close it.">
+    <meta property="og:description" content="Build the vulnerable Capital One architecture in your lab - WAF + SSRF + IMDSv1 + over-privileged role - exploit it end-to-end, then build the controls and detections that close it.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://csoh.org/portfolio/recreate-capital-one.html">
     <meta property="og:image" content="https://csoh.org/img/og/portfolio/recreate-capital-one.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Recreate the Capital One breach in your lab">
-    <meta name="twitter:description" content="Build the vulnerable Capital One architecture in your lab — WAF + SSRF + IMDSv1 + over-privileged role — exploit it end-to-end, then build the controls and detections that close it.">
+    <meta name="twitter:description" content="Build the vulnerable Capital One architecture in your lab - WAF + SSRF + IMDSv1 + over-privileged role - exploit it end-to-end, then build the controls and detections that close it.">
     <meta name="twitter:image" content="https://csoh.org/img/og/portfolio/recreate-capital-one.jpg">
 
     <link rel="preconnect" href="https://csoh.kit.com" crossorigin>
@@ -42,7 +42,7 @@
       "@context": "https://schema.org",
       "@type": "HowTo",
       "name": "Recreate the Capital One breach in your lab",
-      "description": "Build the vulnerable Capital One architecture in your lab — WAF + SSRF + IMDSv1 + over-privileged role — exploit it end-to-end, then build the controls and detections that close it.",
+      "description": "Build the vulnerable Capital One architecture in your lab - WAF + SSRF + IMDSv1 + over-privileged role - exploit it end-to-end, then build the controls and detections that close it.",
       "totalTime": "PT8H",
       "image": "https://csoh.org/banner.png",
       "datePublished": "2026-05-04",
@@ -200,7 +200,7 @@
         </div>
 
         <section id="intro">
-            <p>Recreating a real breach end-to-end is the single most compelling portfolio piece in cloud security. The <a href="/breaches/capital-one.html">2019 Capital One breach</a> is the canonical AWS choice — the kill chain is well-documented, every step maps to a control you can demonstrate, and most cloud security engineers can pattern-match on it instantly.</p><p>The artifact is a public repo that, given an AWS account, will deploy the vulnerable setup, walk you through the exploit, then deploy the fixes — all via Terraform. Hiring managers will remember this one.</p>
+            <p>Recreating a real breach end-to-end is the single most compelling portfolio piece in cloud security. The <a href="/breaches/capital-one.html">2019 Capital One breach</a> is the canonical AWS choice - the kill chain is well-documented, every step maps to a control you can demonstrate, and most cloud security engineers can pattern-match on it instantly.</p><p>The artifact is a public repo that, given an AWS account, will deploy the vulnerable setup, walk you through the exploit, then deploy the fixes - all via Terraform. Hiring managers will remember this one.</p>
         </section>
 
         <div class="toc">
@@ -232,7 +232,7 @@
             <ul>
                 <li>Strong comfort with Terraform and AWS. This is an advanced project.</li>
                 <li>Read the <a href="/breaches/capital-one.html">CSOH Capital One kill chain</a> and the original Krebs / DOJ write-ups first.</li>
-                <li><a href="/cloud-security-home-lab.html">Home lab guardrails</a> — this project spins up a NAT gateway and an EC2 instance; tear them down at end of session.</li>
+                <li><a href="/cloud-security-home-lab.html">Home lab guardrails</a> - this project spins up a NAT gateway and an EC2 instance; tear them down at end of session.</li>
                 <li>An ethical reminder: this is for self-education in your own lab account. Don't replicate against anything you don't own.</li>
             </ul>
         </section>
@@ -246,9 +246,9 @@
             <h3>3. Execute the exploit</h3>
             <p>From your laptop, hit the SSRF endpoint to fetch <code>http://169.254.169.254/latest/meta-data/iam/security-credentials/&lt;role-name&gt;</code>. You should get back temporary credentials. Use <code>aws configure</code> with those creds, then <code>aws s3 ls</code> across the buckets. Screenshot every step.</p>
             <h3>4. Capture the CloudTrail of your own attack</h3>
-            <p>Pull the CloudTrail events your exploit generated. Note: the IMDS call itself doesn't show in CloudTrail — only the subsequent <code>sts:AssumeRole</code> (if any) and the S3 calls do. This is itself a teaching moment about the limits of AWS detection.</p>
-            <h3>5. Now build the fixes — one at a time</h3>
-            <p>Walk through the Capital One root causes and Terraform a fix per cause:</p><ul><li><strong>IMDSv2 enforcement</strong> via <code>http_tokens = required</code> at the launch template, plus an SCP that denies launching with v1.</li><li><strong>Scoped IAM role</strong> — read access on one bucket, no list-buckets, no cross-account.</li><li><strong>WAF rule</strong> blocking requests targeting <code>169.254.169.254</code> (or other internal IPs).</li><li><strong>Egress restrictions</strong> — VPC endpoint for S3 + NAT egress restricted to known destinations.</li><li><strong>S3 access logging</strong> + bucket policies preventing exfiltration.</li><li><strong>GuardDuty</strong> enabled with the relevant findings turned on.</li></ul>
+            <p>Pull the CloudTrail events your exploit generated. Note: the IMDS call itself doesn't show in CloudTrail - only the subsequent <code>sts:AssumeRole</code> (if any) and the S3 calls do. This is itself a teaching moment about the limits of AWS detection.</p>
+            <h3>5. Now build the fixes - one at a time</h3>
+            <p>Walk through the Capital One root causes and Terraform a fix per cause:</p><ul><li><strong>IMDSv2 enforcement</strong> via <code>http_tokens = required</code> at the launch template, plus an SCP that denies launching with v1.</li><li><strong>Scoped IAM role</strong> - read access on one bucket, no list-buckets, no cross-account.</li><li><strong>WAF rule</strong> blocking requests targeting <code>169.254.169.254</code> (or other internal IPs).</li><li><strong>Egress restrictions</strong> - VPC endpoint for S3 + NAT egress restricted to known destinations.</li><li><strong>S3 access logging</strong> + bucket policies preventing exfiltration.</li><li><strong>GuardDuty</strong> enabled with the relevant findings turned on.</li></ul>
             <h3>6. Re-run the exploit against the fixed architecture</h3>
             <p>Try the SSRF again. With IMDSv2 enforced, the simple SSRF can't get credentials (it needs to PUT first to get a session token). With the WAF rule, the request is blocked at the edge. Document each "now blocked" outcome with a screenshot.</p>
             <h3>7. Validate detection</h3>
@@ -263,10 +263,10 @@
             <h2>What hiring managers look for</h2>
             <ul>
                 <li>You actually did the exploit, not just described it. The screenshots show CLI output, not theory.</li>
-                <li>Your fixes are technically specific and Terraformed — not generic "apply least privilege."</li>
+                <li>Your fixes are technically specific and Terraformed - not generic "apply least privilege."</li>
                 <li>You map each fix to the original root cause; this proves you understood the breach, not just memorized it.</li>
-                <li>You demonstrate awareness that defense in depth means multiple controls — IMDSv2 + scoped IAM + WAF + egress, not just one.</li>
-                <li>You speak to what GuardDuty would and wouldn't catch — shows mature understanding of detection limits.</li>
+                <li>You demonstrate awareness that defense in depth means multiple controls - IMDSv2 + scoped IAM + WAF + egress, not just one.</li>
+                <li>You speak to what GuardDuty would and wouldn't catch - shows mature understanding of detection limits.</li>
             </ul>
         </section>
 
@@ -289,10 +289,10 @@
         <section id="next" class="cta-section">
             <h2>Where next</h2>
             <ul>
-                <li><a href="../cloud-security-portfolio-projects.html">All 7 portfolio projects</a> — pick your next one.</li>
-                <li><a href="../cloud-security-home-lab.html">Home lab setup</a> — the safe environment this project runs in.</li>
-                <li><a href="../cloud-security-careers.html">Careers guide</a> — how this project fits into the hiring story.</li>
-                <li><a href="../community.html">Friday Zoom + Signal chat</a> — share your write-up with practitioners.</li>
+                <li><a href="../cloud-security-portfolio-projects.html">All 7 portfolio projects</a> - pick your next one.</li>
+                <li><a href="../cloud-security-home-lab.html">Home lab setup</a> - the safe environment this project runs in.</li>
+                <li><a href="../cloud-security-careers.html">Careers guide</a> - how this project fits into the hiring story.</li>
+                <li><a href="../community.html">Friday Zoom + Signal chat</a> - share your write-up with practitioners.</li>
             </ul>
         </section>
 

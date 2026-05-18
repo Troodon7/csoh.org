@@ -20,7 +20,7 @@
 
     <meta property="og:title" content="How We Use GitHub Actions - CSOH">
     <meta property="og:description"
-        content="Learn GitHub Actions by reading CSOH's actual workflow files — triggers, secrets, concurrency, common gotchas, all explained against real production examples.">
+        content="Learn GitHub Actions by reading CSOH's actual workflow files - triggers, secrets, concurrency, common gotchas, all explained against real production examples.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://csoh.org/github-actions.html">
     <meta property="og:image" content="https://csoh.org/img/og/github-actions.jpg">
@@ -49,7 +49,7 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "How We Use GitHub Actions",
-      "description": "GitHub Actions explained through CSOH's real workflow files — triggers, concurrency, secrets, common gotchas.",
+      "description": "GitHub Actions explained through CSOH's real workflow files - triggers, concurrency, secrets, common gotchas.",
       "author": {
         "@type": "Person",
         "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
@@ -232,7 +232,7 @@
       <div class="hero-inner">
         <div class="hero-text">
           <h1>How We Use GitHub Actions</h1>
-          <p>GitHub Actions explained against real, working production code — every concept tied to a specific line in CSOH's own workflows. If you learn better by reading other people's YAML than by reading the docs, this is for you.</p>
+          <p>GitHub Actions explained against real, working production code - every concept tied to a specific line in CSOH's own workflows. If you learn better by reading other people's YAML than by reading the docs, this is for you.</p>
           <div class="cta-buttons">
             <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/tree/main/.github/workflows" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Browse the Workflows</a>
             <a href="#workflows-tour" class="btn btn-secondary">Take the Tour</a>
@@ -247,7 +247,7 @@
         
         <p class="page-meta"><time datetime="2026-04-30">Last updated <strong>2026-04-30</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/github-actions.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
 <div class="info-box--blue">
-            <p><strong>The honest version:</strong> GitHub Actions is the friendliest <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a>/CD platform you'll meet. It runs a script when something happens in your repo — a push, a pull request, a scheduled time, or a button click. That's it. Everything else is configuration. The docs are good but vast; the fastest way to actually <em>get</em> Actions is to read someone else's working YAML and trace what each line does. That's what this page is — every concept comes with a "go look at line N of this file in our repo" pointer.</p>
+            <p><strong>The honest version:</strong> GitHub Actions is the friendliest <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a>/CD platform you'll meet. It runs a script when something happens in your repo - a push, a pull request, a scheduled time, or a button click. That's it. Everything else is configuration. The docs are good but vast; the fastest way to actually <em>get</em> Actions is to read someone else's working YAML and trace what each line does. That's what this page is - every concept comes with a "go look at line N of this file in our repo" pointer.</p>
             <p style="margin-top:0.75rem;"><strong>What you'll need:</strong> a GitHub repository, comfort with git basics, and willingness to read shell. No prior CI/CD experience required.</p>
         </div>
 
@@ -267,13 +267,13 @@
 
         <section id="what-is-it">
             <h2>What GitHub Actions actually is</h2>
-            <p>GitHub Actions is GitHub's built-in automation runner. You drop a YAML file under <code>.github/workflows/</code>, and GitHub watches your repository for the events you list — a push to main, a new pull request, a cron schedule, a manual button click. When a matching event fires, GitHub spins up a fresh virtual machine ("runner"), runs the steps you wrote, and tears it down.</p>
+            <p>GitHub Actions is GitHub's built-in automation runner. You drop a YAML file under <code>.github/workflows/</code>, and GitHub watches your repository for the events you list - a push to main, a new pull request, a cron schedule, a manual button click. When a matching event fires, GitHub spins up a fresh virtual machine ("runner"), runs the steps you wrote, and tears it down.</p>
             <p>Every workflow file boils down to:</p>
             <ul>
-                <li><strong>name</strong> — what to call this workflow in the UI</li>
-                <li><strong>on</strong> — what events trigger it</li>
-                <li><strong>jobs</strong> — one or more named bundles of steps</li>
-                <li><strong>steps</strong> — what to actually do (run a script, use a published Action, set an output)</li>
+                <li><strong>name</strong> - what to call this workflow in the UI</li>
+                <li><strong>on</strong> - what events trigger it</li>
+                <li><strong>jobs</strong> - one or more named bundles of steps</li>
+                <li><strong>steps</strong> - what to actually do (run a script, use a published Action, set an output)</li>
             </ul>
             <p>Here's the absolute minimum:</p>
             <div class="code-block"><pre>name: Hello
@@ -284,7 +284,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Hi, $GITHUB_ACTOR pushed to $GITHUB_REF"</pre></div>
-            <p>Drop that at <code>.github/workflows/hello.yml</code> and every push to your repo will produce a 5-second run that prints your username. From there, the surface area expands fast — but the shape stays the same.</p>
+            <p>Drop that at <code>.github/workflows/hello.yml</code> and every push to your repo will produce a 5-second run that prints your username. From there, the surface area expands fast - but the shape stays the same.</p>
         </section>
 
         <section id="why-cool">
@@ -294,13 +294,13 @@ jobs:
                 <li><strong>Zero infrastructure to run.</strong> No Jenkins server, no agents to patch, no SSH keys to rotate. You write YAML; GitHub gives you fresh VMs.</li>
                 <li><strong>Free for public repos, generous for private.</strong> Public repos get unlimited Linux minutes. Private gets a meaningful free tier for small teams.</li>
                 <li><strong>Marketplace ecosystem.</strong> 20,000+ pre-built Actions for common tasks (checkout, build, deploy, sign artifacts, post Slack messages). Most are 2–3 lines to use.</li>
-                <li><strong>Tight integration.</strong> Actions read your code, comment on PRs, set commit statuses, and modify the repo as a first-class citizen — no external bot infrastructure.</li>
+                <li><strong>Tight integration.</strong> Actions read your code, comment on PRs, set commit statuses, and modify the repo as a first-class citizen - no external bot infrastructure.</li>
                 <li><strong>Schedules.</strong> Cron-on-the-internet, free. We use this to refresh news every 3 hours and run weekly link checks.</li>
                 <li><strong>Inspectable.</strong> Every run, every step, every line of output is logged and downloadable. The full history of "did our deploy succeed?" is there forever.</li>
             </ul>
             <h3>Where it isn't</h3>
             <ul>
-                <li><strong>YAML.</strong> Whitespace-sensitive, easy to break, no compile-time error for most mistakes — you push, you wait, you find out it didn't fire.</li>
+                <li><strong>YAML.</strong> Whitespace-sensitive, easy to break, no compile-time error for most mistakes - you push, you wait, you find out it didn't fire.</li>
                 <li><strong>Hard to test locally.</strong> Tools like <a href="https://github.com/nektos/act" target="_blank" rel="noopener noreferrer">act</a> exist but only approximate the real environment. The real test is "push and watch."</li>
                 <li><strong>Slow feedback for small fixes.</strong> A typo in <code>if: condition</code> is a 30-second wait per attempt to verify.</li>
                 <li><strong>The free tier is metered for private repos.</strong> Heavy CI use can rack up minutes; macOS and Windows runners cost more than Linux.</li>
@@ -314,7 +314,7 @@ jobs:
               <svg viewBox="0 0 820 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="wf-fig-title wf-fig-desc">
                 <title id="wf-fig-title">Anatomy of a GitHub Actions workflow</title>
                 <desc id="wf-fig-desc">A workflow is triggered by an event, defines one or more jobs, each composed of steps that run on a runner.</desc>
-                <text x="410" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">From trigger to artifact — what GitHub Actions actually does</text>
+                <text x="410" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">From trigger to artifact - what GitHub Actions actually does</text>
                 <g transform="translate(20, 50)">
                   <rect width="140" height="80" rx="10" fill="#fff" stroke="#3b82f6" stroke-width="2"/>
                   <rect width="140" height="26" rx="10" fill="#3b82f6"/>
@@ -384,7 +384,7 @@ jobs:
             <p>Open <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/validate-html.yml" target="_blank" rel="noopener noreferrer"><code>.github/workflows/validate-html.yml</code></a> in another tab and follow along. It's short and exhibits most of the moving parts.</p>
             <p><strong>Tip:</strong> the workflow file has matching <code>§1</code>–<code>§4</code> markers in its comments. <kbd>Ctrl/Cmd+F</kbd> for <code>§3</code> in the file to jump straight to the section we're discussing here.</p>
 
-            <h3 id="anatomy-1">§1 — Triggers (<code>on:</code>)</h3>
+            <h3 id="anatomy-1">§1 - Triggers (<code>on:</code>)</h3>
             <p>This workflow runs in three situations:</p>
             <div class="code-block"><pre>on:
   pull_request:
@@ -393,21 +393,21 @@ jobs:
   schedule:
     - cron: '0 7 * * 1'
   workflow_dispatch:</pre></div>
-            <p>Translation: when a PR touches any HTML file, every Monday at 07:00 UTC, or whenever someone clicks "Run workflow." The <code>paths</code> filter is the secret to a fast CI — if you only validate HTML, don't run on CSS-only PRs.</p>
+            <p>Translation: when a PR touches any HTML file, every Monday at 07:00 UTC, or whenever someone clicks "Run workflow." The <code>paths</code> filter is the secret to a fast CI - if you only validate HTML, don't run on CSS-only PRs.</p>
 
-            <h3 id="anatomy-2">§2 — Permissions</h3>
+            <h3 id="anatomy-2">§2 - Permissions</h3>
             <div class="code-block"><pre>permissions:
   contents: read
   pull-requests: write</pre></div>
             <p>Default GitHub-Actions permissions are broader than they need to be. We pin every workflow to the minimum: read the code, post PR comments, nothing else. If a malicious dependency ever lands in one of our Actions, it can't push to the repo because we never gave it that scope.</p>
 
-            <h3 id="anatomy-3">§3 — Concurrency</h3>
+            <h3 id="anatomy-3">§3 - Concurrency</h3>
             <div class="code-block"><pre>concurrency:
   group: validate-html-${{ github.ref }}
   cancel-in-progress: true</pre></div>
-            <p>Runs of this workflow on the same git ref (the same PR or branch) cancel each other. Push a fix, the in-flight validation stops and a fresh one starts on the new commit. Different PRs run in parallel because the group includes <code>${{ github.ref }}</code>. We learned this lesson the hard way — see "<a href="#concepts">Concepts that bite newcomers</a>".</p>
+            <p>Runs of this workflow on the same git ref (the same PR or branch) cancel each other. Push a fix, the in-flight validation stops and a fresh one starts on the new commit. Different PRs run in parallel because the group includes <code>${{ github.ref }}</code>. We learned this lesson the hard way - see "<a href="#concepts">Concepts that bite newcomers</a>".</p>
 
-            <h3 id="anatomy-4">§4 — Jobs and steps</h3>
+            <h3 id="anatomy-4">§4 - Jobs and steps</h3>
             <div class="code-block"><pre>jobs:
   validate-html:
     runs-on: ubuntu-latest
@@ -431,7 +431,7 @@ jobs:
             <title id="sl-title">DevSecOps shift-left timeline</title>
             <desc id="sl-desc">Six SDLC stages from Plan to Monitor with the security controls that fit at each stage. Earlier in the pipeline = cheaper to fix.</desc>
             <defs><marker id="sl-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1e293b"/></marker></defs>
-            <text x="410" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Shift-left — bug found in Plan costs $1, found in Monitor costs $1,000</text>
+            <text x="410" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Shift-left - bug found in Plan costs $1, found in Monitor costs $1,000</text>
             <line x1="40" y1="55" x2="780" y2="55" stroke="#1e293b" stroke-width="2" marker-end="url(#sl-arrow)"/>
             <text x="40"  y="48" font-size="10" font-weight="600" fill="#10b981">CHEAPER TO FIX</text>
             <text x="780" y="48" text-anchor="end" font-size="10" font-weight="600" fill="#dc2626">EXPENSIVE TO FIX</text>
@@ -503,7 +503,7 @@ jobs:
             </g>
             <text x="410" y="290" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7" font-style="italic">A misconfig caught at Plan is a comment in a doc; the same misconfig caught at Monitor is an incident retro.</text>
           </svg>
-          <figcaption>Every control should run as early in the pipeline as it can — but the late-stage controls don't go away, they catch what slipped through.</figcaption>
+          <figcaption>Every control should run as early in the pipeline as it can - but the late-stage controls don't go away, they catch what slipped through.</figcaption>
         </figure>
 
         <figure class="workflow-figure">
@@ -511,7 +511,7 @@ jobs:
             <title id="orch-title">CSOH&rsquo;s GitHub Actions deploy pipeline</title>
             <desc id="orch-desc">End-to-end flow from a developer&rsquo;s git push through path filtering, concurrency locking, sequential build steps, validation, FTP mirror, and final deploy to production.</desc>
             <defs><marker id="orch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/></marker></defs>
-            <text x="410" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">From <tspan font-family="monospace">git push</tspan> to live on csoh.org — what actually happens</text>
+            <text x="410" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">From <tspan font-family="monospace">git push</tspan> to live on csoh.org - what actually happens</text>
 
             <rect x="280" y="40" width="260" height="48" rx="24" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
             <text x="410" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="monospace">git push origin main</text>
@@ -537,19 +537,19 @@ jobs:
 
             <rect x="280" y="278" width="260" height="34" rx="6" fill="#fff" stroke="#06b6d4" stroke-width="2"/>
             <text x="410" y="294" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Checkout repository (PAT-authed)</text>
-            <text x="410" y="307" text-anchor="middle" font-size="9" fill="#475569">actions/checkout — full history for SRI diff</text>
+            <text x="410" y="307" text-anchor="middle" font-size="9" fill="#475569">actions/checkout - full history for SRI diff</text>
 
             <path d="M 410 312 L 410 332" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
 
             <rect x="280" y="334" width="260" height="34" rx="6" fill="#fff" stroke="#06b6d4" stroke-width="2"/>
             <text x="410" y="350" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Update SRI integrity hashes</text>
-            <text x="410" y="363" text-anchor="middle" font-size="9" fill="#475569" font-family="monospace">tools/update_sri.py — rewrites all *.html if css/js changed</text>
+            <text x="410" y="363" text-anchor="middle" font-size="9" fill="#475569" font-family="monospace">tools/update_sri.py - rewrites all *.html if css/js changed</text>
 
             <path d="M 410 368 L 410 388" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
 
             <rect x="280" y="390" width="260" height="34" rx="6" fill="#fff" stroke="#06b6d4" stroke-width="2"/>
             <text x="410" y="406" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Generate preview images</text>
-            <text x="410" y="419" text-anchor="middle" font-size="9" fill="#475569" font-family="monospace">img/previews — for new pages</text>
+            <text x="410" y="419" text-anchor="middle" font-size="9" fill="#475569" font-family="monospace">img/previews - for new pages</text>
 
             <path d="M 410 424 L 410 444" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
 
@@ -568,7 +568,7 @@ jobs:
 
             <rect x="280" y="572" width="260" height="34" rx="6" fill="#fff" stroke="#10b981" stroke-width="2"/>
             <text x="410" y="588" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Commit + push any changes back</text>
-            <text x="410" y="601" text-anchor="middle" font-size="9" fill="#475569" font-family="monospace">[skip ci] — avoids loop</text>
+            <text x="410" y="601" text-anchor="middle" font-size="9" fill="#475569" font-family="monospace">[skip ci] - avoids loop</text>
 
             <path d="M 410 606 L 410 626" stroke="#475569" stroke-width="2" marker-end="url(#orch-arrow)"/>
 
@@ -618,30 +618,30 @@ jobs:
 
         <section id="workflows-tour">
             <h2>A tour of CSOH's eight workflows</h2>
-            <p>Each one solves a single, named problem. Click through to read the source — every file is heavily commented for new readers.</p>
+            <p>Each one solves a single, named problem. Click through to read the source - every file is heavily commented for new readers.</p>
 
-            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/gcp-deploy.yml" target="_blank" rel="noopener noreferrer">gcp-deploy.yml</a> — Container build, scan, deploy to Google Cloud Run</h3>
-            <p>Runs on every push to main that touches site or Docker files. Authenticates to GCP via <strong><a class="glossary-link" href="glossary.html#term-wif">Workload Identity Federation</a></strong> — no <a class="glossary-link" href="glossary.html#term-service-account">service account</a> JSON key, just a short-lived <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a> token GitHub mints for the run and exchanges for a 1-hour GCP access token (the WIF policy only accepts tokens claiming this exact repo). Builds the container, scans it with <a href="https://trivy.dev/" target="_blank" rel="noopener noreferrer">Trivy</a> failing on HIGH/CRITICAL CVEs, pushes to Artifact Registry with an <strong>immutable</strong> SHA-based tag, then deploys a new <a class="glossary-link" href="glossary.html#term-lambda">Cloud Run</a> revision pinned to that SHA. Gated by GitHub's <code>environment: production</code> so only commits on <code>main</code> can deploy. The full architecture (Cloud Run → HTTPS LB with Cloud Armor <a class="glossary-link" href="glossary.html#term-waf">WAF</a> + Cloud <a class="glossary-link" href="glossary.html#term-cdn">CDN</a> → managed <a class="glossary-link" href="glossary.html#term-tls">TLS</a>) is written up in <a href="cloud-deployment.html">our cloud deployment page</a>.</p>
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/gcp-deploy.yml" target="_blank" rel="noopener noreferrer">gcp-deploy.yml</a> - Container build, scan, deploy to Google Cloud Run</h3>
+            <p>Runs on every push to main that touches site or Docker files. Authenticates to GCP via <strong><a class="glossary-link" href="glossary.html#term-wif">Workload Identity Federation</a></strong> - no <a class="glossary-link" href="glossary.html#term-service-account">service account</a> JSON key, just a short-lived <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a> token GitHub mints for the run and exchanges for a 1-hour GCP access token (the WIF policy only accepts tokens claiming this exact repo). Builds the container, scans it with <a href="https://trivy.dev/" target="_blank" rel="noopener noreferrer">Trivy</a> failing on HIGH/CRITICAL CVEs, pushes to Artifact Registry with an <strong>immutable</strong> SHA-based tag, then deploys a new <a class="glossary-link" href="glossary.html#term-lambda">Cloud Run</a> revision pinned to that SHA. Gated by GitHub's <code>environment: production</code> so only commits on <code>main</code> can deploy. The full architecture (Cloud Run → HTTPS LB with Cloud Armor <a class="glossary-link" href="glossary.html#term-waf">WAF</a> + Cloud <a class="glossary-link" href="glossary.html#term-cdn">CDN</a> → managed <a class="glossary-link" href="glossary.html#term-tls">TLS</a>) is written up in <a href="cloud-deployment.html">our cloud deployment page</a>.</p>
 
-            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/site-update-deploy.yml" target="_blank" rel="noopener noreferrer">site-update-deploy.yml</a> — Site housekeeping</h3>
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/site-update-deploy.yml" target="_blank" rel="noopener noreferrer">site-update-deploy.yml</a> - Site housekeeping</h3>
             <p>Runs on every push to main that touches site files. Walks through several housekeeping steps (SRI hashes, URL safety check, URL normalization, presentations schema, sitemap dates, preview screenshot generation, image optimization), committing each one back to main if anything changed. Those housekeeping commits then trigger <code>gcp-deploy.yml</code> to ship the post-housekeeping state. Read this if you want to see <strong>conditional steps</strong>, <strong>step outputs</strong>, <strong>committing back to the same repo</strong>, and <strong>chained workflows via push events</strong>.</p>
 
-            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/update-news.yml" target="_blank" rel="noopener noreferrer">update-news.yml</a> — Scheduled content updates</h3>
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/update-news.yml" target="_blank" rel="noopener noreferrer">update-news.yml</a> - Scheduled content updates</h3>
             <p>Every 3 hours, refreshes <a href="news.html">news.html</a> from configured RSS/Atom feeds, opens a PR with the changes, auto-approves it (using a separate bot account so we don't violate "can't approve your own PR"), and auto-merges if only news files were touched. Read this if you want to see <strong>cron schedules</strong>, <strong>auto-PR creation</strong>, and the <strong>two-PAT pattern</strong>.</p>
 
-            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/normalize-urls.yml" target="_blank" rel="noopener noreferrer">normalize-urls.yml</a> — Monthly maintenance</h3>
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/normalize-urls.yml" target="_blank" rel="noopener noreferrer">normalize-urls.yml</a> - Monthly maintenance</h3>
             <p>Once a month, strips tracking parameters and resolves redirects on every link, then opens a PR for human review. Auto-approved but not auto-merged because cross-domain redirects deserve eyes. Good example of <strong>auto-PR with mandatory human gate</strong>.</p>
 
-            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/validate-html.yml" target="_blank" rel="noopener noreferrer">validate-html.yml</a> — PR check</h3>
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/validate-html.yml" target="_blank" rel="noopener noreferrer">validate-html.yml</a> - PR check</h3>
             <p>Runs the <a href="https://github.com/Cyb3r-Jak3/html5validator-action" target="_blank" rel="noopener noreferrer">W3C HTML5 validator</a> on every HTML-touching PR. Posts a comment on failure with the first 50 lines of the error log. Read this for <strong>PR comments via github-script</strong> and <strong>conditional posting (<code>if: failure() &amp;&amp; github.event_name == 'pull_request'</code>)</strong>.</p>
 
-            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/lint.yml" target="_blank" rel="noopener noreferrer">lint.yml</a> — Code &amp; workflow lint</h3>
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/lint.yml" target="_blank" rel="noopener noreferrer">lint.yml</a> - Code &amp; workflow lint</h3>
             <p>Quality gate that runs on every push and PR. Three parallel jobs: <a href="https://github.com/rhysd/actionlint" target="_blank" rel="noopener noreferrer">actionlint</a> for workflow YAML (with bundled shellcheck on inline <code>run:</code> blocks), <a href="https://github.com/astral-sh/ruff" target="_blank" rel="noopener noreferrer">ruff</a> for the Python housekeeping scripts, and <a href="https://github.com/adrienverge/yamllint" target="_blank" rel="noopener noreferrer">yamllint</a> for structural YAML sanity. Read this for <strong>parallel jobs in one workflow</strong>, <strong>SHA-pinned third-party actions</strong>, and how to relax <code>yamllint</code>'s defaults to play nicely with GitHub Actions YAML (see <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.yamllint.yml" target="_blank" rel="noopener noreferrer">.yamllint.yml</a>).</p>
 
-            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/check-broken-links.yml" target="_blank" rel="noopener noreferrer">check-broken-links.yml</a> — External link rot</h3>
-            <p>Crawls every link in the site with <a href="https://github.com/lycheeverse/lychee" target="_blank" rel="noopener noreferrer">lychee</a>, weekly and per-PR. Caches HTTP responses for 3 days so it's fast. Read this for <strong>cache restoration</strong> and a non-blocking check (<code>fail: false</code>) — link rot is everywhere and shouldn't gate merges.</p>
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/check-broken-links.yml" target="_blank" rel="noopener noreferrer">check-broken-links.yml</a> - External link rot</h3>
+            <p>Crawls every link in the site with <a href="https://github.com/lycheeverse/lychee" target="_blank" rel="noopener noreferrer">lychee</a>, weekly and per-PR. Caches HTTP responses for 3 days so it's fast. Read this for <strong>cache restoration</strong> and a non-blocking check (<code>fail: false</code>) - link rot is everywhere and shouldn't gate merges.</p>
 
-            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/check-url-safety.yml" target="_blank" rel="noopener noreferrer">check-url-safety.yml</a> — Malware/phishing check</h3>
+            <h3><a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/check-url-safety.yml" target="_blank" rel="noopener noreferrer">check-url-safety.yml</a> - Malware/phishing check</h3>
             <p>Validates every external URL against safety lists. Runs on PRs and weekly. Hard fails the workflow if anything unsafe is found and posts a summary comment. Sister workflow to broken-links.</p>
         </section>
 
@@ -649,25 +649,25 @@ jobs:
             <h2>Concepts that bite newcomers</h2>
 
             <h3>1. <code>GITHUB_TOKEN</code> vs Personal Access Token (PAT)</h3>
-            <p>Every workflow run gets an automatic, scoped <code>GITHUB_TOKEN</code> — usable for most repo operations, but commits made with it <strong>do not trigger downstream workflows</strong>. That's a deliberate anti-loop measure. We use a Personal Access Token (<code>PAT_TOKEN</code>) when we want a bot-pushed commit to trigger another workflow — for example, when <code>update-news</code> opens a PR that needs <code>validate-html</code> and <code>check-broken-links</code> to run on it.</p>
+            <p>Every workflow run gets an automatic, scoped <code>GITHUB_TOKEN</code> - usable for most repo operations, but commits made with it <strong>do not trigger downstream workflows</strong>. That's a deliberate anti-loop measure. We use a Personal Access Token (<code>PAT_TOKEN</code>) when we want a bot-pushed commit to trigger another workflow - for example, when <code>update-news</code> opens a PR that needs <code>validate-html</code> and <code>check-broken-links</code> to run on it.</p>
             <p>If your bot's commits are mysteriously not triggering CI: you're using <code>GITHUB_TOKEN</code> and need a PAT.</p>
 
             <h3>2. PATs need <code>workflow</code> scope to push workflow files</h3>
-            <p>This bit us in late April 2026. GitHub blocks any PAT push that touches <code>.github/workflows/*</code> unless the PAT carries the <code>workflow</code> scope — a security guardrail that prevents a leaked PAT from rewriting CI to deploy malicious code. The catch: the check runs against every commit in the push range, not just the bot's own commit. So once main has any workflow file changes, every subsequent bot-driven force-push of a derived branch will fail until the PAT has <code>workflow</code> scope.</p>
+            <p>This bit us in late April 2026. GitHub blocks any PAT push that touches <code>.github/workflows/*</code> unless the PAT carries the <code>workflow</code> scope - a security guardrail that prevents a leaked PAT from rewriting CI to deploy malicious code. The catch: the check runs against every commit in the push range, not just the bot's own commit. So once main has any workflow file changes, every subsequent bot-driven force-push of a derived branch will fail until the PAT has <code>workflow</code> scope.</p>
             <p>Lesson: when you create your <code>PAT_TOKEN</code>, give it <code>workflow</code> scope from day one. Otherwise the day you edit a workflow file, your bots break.</p>
 
             <h3>3. Concurrency: queue, cancel, or both?</h3>
             <p>Two common patterns, and getting them mixed up causes either lost runs or lost time:</p>
             <ul>
-                <li><strong>Queue (don't cancel):</strong> <code>cancel-in-progress: false</code>. Right for things you can't lose — auto-PR creators, scheduled content jobs, manual deploys, anything you'd rather queue than drop. Multiple triggers stack and run one after another.</li>
-                <li><strong>Cancel old runs:</strong> <code>cancel-in-progress: true</code>. Right for read-only checks per branch — validators, linters, link checkers — and for idempotent deploys where the latest push is the one you want shipped. Push a fix, the old run dies, the new one starts.</li>
+                <li><strong>Queue (don't cancel):</strong> <code>cancel-in-progress: false</code>. Right for things you can't lose - auto-PR creators, scheduled content jobs, manual deploys, anything you'd rather queue than drop. Multiple triggers stack and run one after another.</li>
+                <li><strong>Cancel old runs:</strong> <code>cancel-in-progress: true</code>. Right for read-only checks per branch - validators, linters, link checkers - and for idempotent deploys where the latest push is the one you want shipped. Push a fix, the old run dies, the new one starts.</li>
             </ul>
             <p>How CSOH currently splits these:</p>
             <ul>
-                <li><strong><code>site-update-deploy</code> (deploy-pipeline group, cancel old):</strong> housekeeping is idempotent — the latest commit always reflects the right state. Cancelling an in-flight run when a new push arrives avoids the "stale SRI commit wins the race" failure mode.</li>
+                <li><strong><code>site-update-deploy</code> (deploy-pipeline group, cancel old):</strong> housekeeping is idempotent - the latest commit always reflects the right state. Cancelling an in-flight run when a new push arrives avoids the "stale SRI commit wins the race" failure mode.</li>
                 <li><strong><code>normalize-urls</code> (same deploy-pipeline group, queue):</strong> shares the lock with site-update-deploy so the two never collide on the same commit-push sequence, but stays queued because losing a URL-normalization sweep would be silent and surprising.</li>
-                <li><strong><code>gcp-deploy</code> (its own group, cancel old):</strong> Cloud Run deploys are idempotent — only the latest image needs to ship. Cancelling avoids racing two deploys that could deploy out of order.</li>
-                <li><strong><code>update-news</code> (its own group, queue):</strong> opens a PR on its own branch — doesn't push to main or run a deploy, so it doesn't need the deploy-pipeline lock. Keeping a separate group means a freshly queued site update doesn't cancel a news refresh mid-run.</li>
+                <li><strong><code>gcp-deploy</code> (its own group, cancel old):</strong> Cloud Run deploys are idempotent - only the latest image needs to ship. Cancelling avoids racing two deploys that could deploy out of order.</li>
+                <li><strong><code>update-news</code> (its own group, queue):</strong> opens a PR on its own branch - doesn't push to main or run a deploy, so it doesn't need the deploy-pipeline lock. Keeping a separate group means a freshly queued site update doesn't cancel a news refresh mid-run.</li>
                 <li><strong>Per-PR check workflows (per-ref group, cancel old):</strong> push a fix, kill the stale check, start fresh on the new commit.</li>
             </ul>
             <p>Mistake we made: at first, our deploy workflow had no concurrency at all. Two news-update commits within a minute spawned two simultaneous deploys that interleaved their commits and corrupted the deployed site. Adding any concurrency group fixed the corruption; getting the queue/cancel split right took a few iterations.</p>
@@ -691,19 +691,19 @@ jobs:
 - name: Deploy
   if: steps.detect.outputs.changed == 'true'
   run: ./deploy.sh</pre></div>
-            <p>This is how our deploy job decides whether to actually run the FTP step at all — if no SRI hashes, no sitemap, no previews, no HTML changed, the whole deploy is skipped.</p>
+            <p>This is how our deploy job decides whether to actually run the FTP step at all - if no SRI hashes, no sitemap, no previews, no HTML changed, the whole deploy is skipped.</p>
 
             <h3>6. <code>if: always()</code> vs <code>if: failure()</code></h3>
-            <p>By default, a step skips if any earlier step failed. <code>if: always()</code> forces it to run anyway — handy for uploading a debug log. <code>if: failure()</code> only runs the step <em>because</em> something earlier failed — handy for posting "your build broke" comments. We use both extensively in our PR-check workflows.</p>
+            <p>By default, a step skips if any earlier step failed. <code>if: always()</code> forces it to run anyway - handy for uploading a debug log. <code>if: failure()</code> only runs the step <em>because</em> something earlier failed - handy for posting "your build broke" comments. We use both extensively in our PR-check workflows.</p>
 
             <h3>7. Artifacts: download for offline debugging</h3>
-            <p><code>actions/upload-artifact</code> stuffs files into per-run storage that you can download from the run page. Critical for any step that produces a report — we use it for the safety-scan output, the link-rot crawl, the HTML validator log. <code>retention-days: 30</code> keeps your storage usage bounded.</p>
+            <p><code>actions/upload-artifact</code> stuffs files into per-run storage that you can download from the run page. Critical for any step that produces a report - we use it for the safety-scan output, the link-rot crawl, the HTML validator log. <code>retention-days: 30</code> keeps your storage usage bounded.</p>
 
             <h3>8. Secrets are write-only and masked</h3>
-            <p>Anything in <code>secrets.X</code> is automatically masked in run logs (printed as <code>***</code>). Never <code>echo</code> a secret to debug it — even if you wrote the workflow yourself, the masking still applies. To <em>see</em> a secret, you have to use it. Never put secrets in the YAML directly; always reference them by name.</p>
+            <p>Anything in <code>secrets.X</code> is automatically masked in run logs (printed as <code>***</code>). Never <code>echo</code> a secret to debug it - even if you wrote the workflow yourself, the masking still applies. To <em>see</em> a secret, you have to use it. Never put secrets in the YAML directly; always reference them by name.</p>
 
-            <h3>9. <code>actions/checkout</code> resets every file's mtime — incremental deploys break</h3>
-            <p>A fresh checkout gives every file the SAME mtime: the moment it was checked out. If you're using <code>rsync</code>, <code>lftp mirror</code>, or any other tool that decides what to upload by comparing mtimes, every run will re-upload the entire tree. Took us months to notice — the deploy was just slow.</p>
+            <h3>9. <code>actions/checkout</code> resets every file's mtime - incremental deploys break</h3>
+            <p>A fresh checkout gives every file the SAME mtime: the moment it was checked out. If you're using <code>rsync</code>, <code>lftp mirror</code>, or any other tool that decides what to upload by comparing mtimes, every run will re-upload the entire tree. Took us months to notice - the deploy was just slow.</p>
             <p>The fix is a one-liner before the deploy step: walk every tracked file and rewind its mtime to the date of its last git commit. Then your housekeeping scripts (which only write files that actually change) generate a fresh "now" mtime on exactly the files that need it, and the deploy uploads only those:</p>
             <div class="code-block"><pre>git ls-files -z | while IFS= read -r -d '' file; do
   ts=$(git log -1 --format=%ct -- "$file" 2&gt;/dev/null)
@@ -713,8 +713,8 @@ done</pre></div>
         </section>
 
         <blockquote class="pull-quote">
-          <code>GITHUB_TOKEN</code> is read-only by default for a reason — every workflow that needs more should justify it in a comment.
-          <cite>— the rule we apply across CSOH&rsquo;s eight workflows</cite>
+          <code>GITHUB_TOKEN</code> is read-only by default for a reason - every workflow that needs more should justify it in a comment.
+          <cite>- the rule we apply across CSOH&rsquo;s eight workflows</cite>
         </blockquote>
 
         <section id="security">
@@ -725,7 +725,7 @@ done</pre></div>
                 <li><strong>Set explicit <code>permissions:</code> on every workflow.</strong> Default to <code>contents: read</code>. Add only what you need.</li>
                 <li><strong>Avoid <code>pull_request_target</code> unless you fully understand it.</strong> It runs in the context of the base branch with full secrets, on code from a fork. Footgun. The <a href="breach-timeline.html">breach kill chains</a> page covers an attack pattern that exploited this on a major OSS project.</li>
                 <li><strong>Don't echo secrets, don't log them, don't write them to artifacts.</strong> Even if it's "just a debug step you'll remove later."</li>
-                <li><strong>Use OIDC for cloud credentials when you can.</strong> AWS, GCP, and Azure all support short-lived federated tokens via OIDC — no long-lived access keys to leak. We don't use this on CSOH (FTP-based deploy), but for any cloud deploy this is the modern default.</li>
+                <li><strong>Use OIDC for cloud credentials when you can.</strong> AWS, GCP, and Azure all support short-lived federated tokens via OIDC - no long-lived access keys to leak. We don't use this on CSOH (FTP-based deploy), but for any cloud deploy this is the modern default.</li>
                 <li><strong>Treat <code>${{ github.event.* }}</code> as untrusted input</strong> when interpolating into shell. PR titles, branch names, and commit messages can contain attacker-controlled strings. Use <code>${VAR}</code> from <code>env:</code> instead of inline <code>${{ }}</code> in run blocks.</li>
             </ol>
         </section>
@@ -740,20 +740,20 @@ done</pre></div>
                 <li><strong>Then the WIF-deploy one:</strong> <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/gcp-deploy.yml" target="_blank" rel="noopener noreferrer">gcp-deploy.yml</a>. The OIDC-token-to-cloud-credential exchange in action, plus container build / scan / deploy. Short, but every line is doing real security work.</li>
                 <li><strong>Finally, the big one:</strong> <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/.github/workflows/site-update-deploy.yml" target="_blank" rel="noopener noreferrer">site-update-deploy.yml</a>. Step outputs, conditional steps, committing back to the repo, chained workflows via push events.</li>
             </ol>
-            <p>Every workflow file in our repo is heavily commented — every non-obvious line has a 1–3 line explanation aimed at someone who has never written GitHub Actions before.</p>
+            <p>Every workflow file in our repo is heavily commented - every non-obvious line has a 1–3 line explanation aimed at someone who has never written GitHub Actions before.</p>
             <p>You can fork the repo, gut the content, keep the workflow scaffolding, and have a working static-site CI/CD in an hour. We'd love it if you did. Send us a link in the <a href="sessions.html">Friday Zoom</a>.</p>
         </section>
 
         <section id="further">
             <h2>Further reading</h2>
             <ul>
-                <li><a href="https://docs.github.com/en/actions" target="_blank" rel="noopener noreferrer">GitHub Actions documentation</a> — the official source of truth, well-organized.</li>
-                <li><a href="https://docs.github.com/en/actions/reference/security/secure-use" target="_blank" rel="noopener noreferrer">Security hardening for GitHub Actions</a> — required reading. Bookmark and re-read.</li>
-                <li><a href="https://docs.github.com/en/actions/reference/workflows-and-actions/contexts" target="_blank" rel="noopener noreferrer">Contexts and expressions</a> — what <code>${{ github.x }}</code>, <code>${{ steps.x.y }}</code>, <code>${{ secrets.X }}</code> actually evaluate to.</li>
-                <li><a href="https://github.com/marketplace?type=actions" target="_blank" rel="noopener noreferrer">Actions Marketplace</a> — pre-built actions for most common tasks. Always check the source before using.</li>
-                <li><a href="https://github.com/sethvargo/ratchet" target="_blank" rel="noopener noreferrer">ratchet</a> — pin tags to SHAs automatically.</li>
-                <li><a href="https://github.com/nektos/act" target="_blank" rel="noopener noreferrer">act</a> — run GitHub Actions workflows locally for faster iteration.</li>
-                <li><a href="https://www.stepsecurity.io/" target="_blank" rel="noopener noreferrer">StepSecurity</a> — opinionated tooling for hardening Actions across an org.</li>
+                <li><a href="https://docs.github.com/en/actions" target="_blank" rel="noopener noreferrer">GitHub Actions documentation</a> - the official source of truth, well-organized.</li>
+                <li><a href="https://docs.github.com/en/actions/reference/security/secure-use" target="_blank" rel="noopener noreferrer">Security hardening for GitHub Actions</a> - required reading. Bookmark and re-read.</li>
+                <li><a href="https://docs.github.com/en/actions/reference/workflows-and-actions/contexts" target="_blank" rel="noopener noreferrer">Contexts and expressions</a> - what <code>${{ github.x }}</code>, <code>${{ steps.x.y }}</code>, <code>${{ secrets.X }}</code> actually evaluate to.</li>
+                <li><a href="https://github.com/marketplace?type=actions" target="_blank" rel="noopener noreferrer">Actions Marketplace</a> - pre-built actions for most common tasks. Always check the source before using.</li>
+                <li><a href="https://github.com/sethvargo/ratchet" target="_blank" rel="noopener noreferrer">ratchet</a> - pin tags to SHAs automatically.</li>
+                <li><a href="https://github.com/nektos/act" target="_blank" rel="noopener noreferrer">act</a> - run GitHub Actions workflows locally for faster iteration.</li>
+                <li><a href="https://www.stepsecurity.io/" target="_blank" rel="noopener noreferrer">StepSecurity</a> - opinionated tooling for hardening Actions across an org.</li>
             </ul>
         </section>
 

@@ -262,7 +262,7 @@
       <div class="hero-inner">
         <div class="hero-text">
           <h1>Cloud Security Home Lab</h1>
-          <p>Build a real cloud security learning environment without the surprise four-figure bill. Free-tier limits, hard budget alerts, kill-switches, and starter setups for AWS, Azure, GCP — and local-only options if you can't risk a credit card at all.</p>
+          <p>Build a real cloud security learning environment without the surprise four-figure bill. Free-tier limits, hard budget alerts, kill-switches, and starter setups for AWS, Azure, GCP - and local-only options if you can't risk a credit card at all.</p>
           <div class="cta-buttons">
             <a href="#guardrails" class="btn btn-primary">Set Up Guardrails First</a>
             <a href="ctfs.html" class="btn btn-secondary">CTFs to Run In It</a>
@@ -286,7 +286,7 @@
         <p class="page-meta"><time datetime="2026-05-03">Last updated <strong>2026-05-03</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/cloud-security-home-lab.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
 
         <div class="info-box--blue">
-            <p><strong>The honest version:</strong> The number-one reason people don't get hands-on cloud experience is fear of a runaway bill. The fear is rational — leaving an unused NAT gateway, RDS instance, or Kubernetes cluster running for a month genuinely costs hundreds of dollars. The fix is also straightforward: budget alerts before you deploy anything, hard kill-switches you trust, and the habit of tearing down at end of session. Set this up once and it stops being scary.</p>
+            <p><strong>The honest version:</strong> The number-one reason people don't get hands-on cloud experience is fear of a runaway bill. The fear is rational - leaving an unused NAT gateway, RDS instance, or Kubernetes cluster running for a month genuinely costs hundreds of dollars. The fix is also straightforward: budget alerts before you deploy anything, hard kill-switches you trust, and the habit of tearing down at end of session. Set this up once and it stops being scary.</p>
             <p style="margin-top:0.75rem;">If you cannot put a credit card on file at all, skip to the <a href="#local">local-only options</a>. They're more limited but they will never bill you.</p>
         </div>
 
@@ -371,7 +371,7 @@
               <rect width="200" height="32" rx="10" fill="#8b5cf6"/>
               <rect y="22" width="200" height="10" fill="#8b5cf6"/>
               <text x="100" y="22" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">Local-only</text>
-              <text x="100" y="56" text-anchor="middle" font-size="10" font-weight="600" fill="#0f172a">$0 — laptop only</text>
+              <text x="100" y="56" text-anchor="middle" font-size="10" font-weight="600" fill="#0f172a">$0 - laptop only</text>
               <line x1="20" y1="68" x2="180" y2="68" stroke="#ddd6fe" stroke-width="1"/>
               <text x="100" y="86" text-anchor="middle" font-size="10" fill="#374151">LocalStack (mock AWS)</text>
               <text x="100" y="106" text-anchor="middle" font-size="10" fill="#374151">Azurite (mock Azure)</text>
@@ -392,24 +392,24 @@
             <p>Different goals deserve different environments. Don't overspend on a real cloud account if a local one teaches the same thing.</p>
             <ul>
                 <li><strong>Want to learn IAM, services, and the cloud console at depth.</strong> You need a real account in your chosen cloud. Use the free tier with the guardrails below.</li>
-                <li><strong>Want to practice CTFs (CloudGoat, IAM Vulnerable, etc.).</strong> Real account. The CTFs deploy real resources via Terraform — that's the point.</li>
+                <li><strong>Want to practice CTFs (CloudGoat, IAM Vulnerable, etc.).</strong> Real account. The CTFs deploy real resources via Terraform - that's the point.</li>
                 <li><strong>Want to learn AWS APIs and SDKs.</strong> <a href="https://www.localstack.cloud/" target="_blank" rel="noopener noreferrer">LocalStack</a> gets you 90% of the way for free.</li>
                 <li><strong>Want to practice Kubernetes security.</strong> Local kind / minikube / k3s. No cloud needed for the fundamentals; only spin up a managed cluster (EKS/AKS/GKE) when you specifically need cloud-IAM-to-cluster integration. Start from the <a href="kubernetes.html">Kubernetes &amp; managed Kubernetes</a> reference for what to focus on.</li>
-                <li><strong>Want to study container and image security.</strong> Local Docker. Trivy, Grype, Dockle all run against local images. The <a href="containers.html">Containers &amp; cloud security</a> page has the threat-model context — escapes, identity chaining, supply chain.</li>
+                <li><strong>Want to study container and image security.</strong> Local Docker. Trivy, Grype, Dockle all run against local images. The <a href="containers.html">Containers &amp; cloud security</a> page has the threat-model context - escapes, identity chaining, supply chain.</li>
                 <li><strong>Want to build detection content.</strong> Local SIEM (Wazuh, Elastic, <a href="https://docs.matanolabs.com/" target="_blank" rel="noopener noreferrer">Matano</a> in a free-tier account) plus a small cloud account generating real CloudTrail.</li>
-                <li><strong>Want to learn IaC scanning.</strong> Local. Checkov, KICS, Terrascan, tfsec all scan files — no deploy required.</li>
+                <li><strong>Want to learn IaC scanning.</strong> Local. Checkov, KICS, Terrascan, tfsec all scan files - no deploy required.</li>
             </ul>
         </section>
 
         <section id="guardrails">
             <h2>Cost guardrails (do this first, before deploying anything)</h2>
-            <p>Set these up the day you create the account. Don't wait until you "need" them — by then it's too late.</p>
+            <p>Set these up the day you create the account. Don't wait until you "need" them - by then it's too late.</p>
 
             <h3>1. Use a separate billing email and a low-limit prepaid card if possible</h3>
             <p>Some banks issue virtual cards with a hard monthly cap (privacy.com, Revolut disposable cards, Capital One virtual cards). $50 cap on the card is a hard backstop the cloud provider can't override.</p>
 
             <h3>2. Enable MFA on the root account immediately</h3>
-            <p>Hardware key or TOTP, not SMS. Store the recovery codes in a password manager. The root account is your billing identity — protect it accordingly.</p>
+            <p>Hardware key or TOTP, not SMS. Store the recovery codes in a password manager. The root account is your billing identity - protect it accordingly.</p>
 
             <h3>3. Set three budget alerts: $1, $5, and your monthly cap</h3>
             <ul>
@@ -417,7 +417,7 @@
                 <li><strong>Azure</strong>: Cost Management → Budgets. Same pattern.</li>
                 <li><strong>GCP</strong>: Billing → Budgets &amp; alerts. Same pattern.</li>
             </ul>
-            <p>The $1 alert is a smoke detector — anything billable triggers it and you learn fast what costs money.</p>
+            <p>The $1 alert is a smoke detector - anything billable triggers it and you learn fast what costs money.</p>
 
             <h3>4. Add a CloudWatch / Azure Monitor / Cloud Monitoring billing alarm</h3>
             <p>Backup to the budget alert. Different code path; if one misfires the other catches it.</p>
@@ -426,7 +426,7 @@
             <p>You don't need workloads in 17 regions. AWS SCP / Azure Policy / GCP Org Policy can restrict to a single region. Forgotten resources in unused regions are a classic billing-surprise pattern.</p>
 
             <h3>6. Use SCPs / Azure Policy / Org Policy to deny expensive instance types</h3>
-            <p>Deny anything bigger than t3.medium / B2s / e2-medium. You don't need a p4d for learning. This is also good practice — production environments use these guardrails too.</p>
+            <p>Deny anything bigger than t3.medium / B2s / e2-medium. You don't need a p4d for learning. This is also good practice - production environments use these guardrails too.</p>
 
             <h3>7. Set up auto-shutdown for compute</h3>
             <ul>
@@ -451,7 +451,7 @@
                 <li><strong>EC2 t2.micro / t3.micro</strong>: 750 hours/month for 12 months. Enough to keep one VM running 24/7.</li>
                 <li><strong>S3</strong>: 5 GB standard storage, 20K GET, 2K PUT requests/month. Plenty for learning.</li>
                 <li><strong>Lambda</strong>: 1M requests + 400K GB-seconds always free. You'll never bust this learning.</li>
-                <li><strong>CloudWatch logs</strong>: 5 GB ingest, 5 GB storage. Watch this — verbose CloudTrail can blow past it.</li>
+                <li><strong>CloudWatch logs</strong>: 5 GB ingest, 5 GB storage. Watch this - verbose CloudTrail can blow past it.</li>
                 <li><strong>GuardDuty</strong>: 30-day free trial. After that, ~$1-3/month for a quiet lab account. Worth keeping on.</li>
                 <li><strong>Always free</strong>: DynamoDB 25 GB, SNS 1M publishes, CloudTrail (one trail of management events).</li>
             </ul>
@@ -555,7 +555,7 @@
                 <li><strong>IaC scanning</strong>: Checkov, KICS, Terrascan, tfsec all run on your laptop against any Terraform / CloudFormation / ARM / Bicep file. The CTF here is "find the issues in this real production-shaped repo."</li>
                 <li><strong>Container security</strong>: Trivy, Grype, Dockle, Hadolint, Syft. All local-only. Pull a popular image and audit it.</li>
                 <li><strong>Local SIEM lab</strong>: <a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener noreferrer">Sigma</a> rules + <a href="https://github.com/OTRF/Security-Datasets" target="_blank" rel="noopener noreferrer">Mordor</a>/<a href="https://github.com/OTRF/Security-Datasets" target="_blank" rel="noopener noreferrer">Security Datasets</a> + Wazuh or local Elastic stack. Practice writing detections on real attack telemetry without ever leaving your laptop.</li>
-                <li><strong>Browser-based CTFs</strong>: <a href="http://flaws.cloud/" target="_blank" rel="noopener noreferrer">flaws.cloud</a> and <a href="http://flaws2.cloud/" target="_blank" rel="noopener noreferrer">flaws2.cloud</a> require no account at all — entirely browser-based AWS challenges.</li>
+                <li><strong>Browser-based CTFs</strong>: <a href="http://flaws.cloud/" target="_blank" rel="noopener noreferrer">flaws.cloud</a> and <a href="http://flaws2.cloud/" target="_blank" rel="noopener noreferrer">flaws2.cloud</a> require no account at all - entirely browser-based AWS challenges.</li>
             </ul>
         </section>
 
@@ -568,24 +568,24 @@
         </figure>
 
         <blockquote class="pull-quote">
-          The biggest cloud bills come from forgotten resources — not from active learning.
-          <cite>— the actual home-lab failure mode</cite>
+          The biggest cloud bills come from forgotten resources - not from active learning.
+          <cite>- the actual home-lab failure mode</cite>
         </blockquote>
 
         <section id="expensive">
             <h2>The 10 most expensive things to leave running by accident</h2>
             <p>The classic four-figure-bill horror stories almost all involve one of these. Tag them aggressively, set alarms, tear them down at end of session.</p>
             <ol>
-                <li><strong>NAT Gateway (AWS)</strong> — ~$33/month just to exist, plus data transfer. Number one surprise-bill cause.</li>
-                <li><strong>Application Load Balancer / Standard Load Balancer</strong> — $16-22/month each.</li>
-                <li><strong>RDS / Cloud SQL / Azure SQL Database</strong> — even t3.micro RDS is ~$15/month; bigger sizes go fast.</li>
-                <li><strong>EKS / AKS / GKE control plane</strong> — varies, but easy to forget. Tear down when not in use.</li>
-                <li><strong>Public IPv4 addresses (AWS)</strong> — $3.65/month each since 2024. Add up if you spin up many things.</li>
-                <li><strong>Unattached EBS / disk volumes</strong> — they keep billing after you terminate the VM.</li>
-                <li><strong>Snapshots and AMIs</strong> — cheap individually, expensive in aggregate over time.</li>
-                <li><strong>VPN / ExpressRoute / Cloud Interconnect</strong> — billed by the hour, easy to forget.</li>
-                <li><strong>Sagemaker / Vertex AI / Azure ML notebooks</strong> — GPU-backed instances are hundreds of dollars per day.</li>
-                <li><strong>S3 / Blob / GCS in the wrong storage class</strong> — usually small, occasionally terrible (Glacier early-deletion fees, frequent reads on archive class).</li>
+                <li><strong>NAT Gateway (AWS)</strong> - ~$33/month just to exist, plus data transfer. Number one surprise-bill cause.</li>
+                <li><strong>Application Load Balancer / Standard Load Balancer</strong> - $16-22/month each.</li>
+                <li><strong>RDS / Cloud SQL / Azure SQL Database</strong> - even t3.micro RDS is ~$15/month; bigger sizes go fast.</li>
+                <li><strong>EKS / AKS / GKE control plane</strong> - varies, but easy to forget. Tear down when not in use.</li>
+                <li><strong>Public IPv4 addresses (AWS)</strong> - $3.65/month each since 2024. Add up if you spin up many things.</li>
+                <li><strong>Unattached EBS / disk volumes</strong> - they keep billing after you terminate the VM.</li>
+                <li><strong>Snapshots and AMIs</strong> - cheap individually, expensive in aggregate over time.</li>
+                <li><strong>VPN / ExpressRoute / Cloud Interconnect</strong> - billed by the hour, easy to forget.</li>
+                <li><strong>Sagemaker / Vertex AI / Azure ML notebooks</strong> - GPU-backed instances are hundreds of dollars per day.</li>
+                <li><strong>S3 / Blob / GCS in the wrong storage class</strong> - usually small, occasionally terrible (Glacier early-deletion fees, frequent reads on archive class).</li>
             </ol>
         </section>
 
@@ -643,7 +643,7 @@
                 <li><strong>Spinning up a managed Kubernetes cluster to learn pod security.</strong> kind on your laptop teaches the same lesson, costs nothing.</li>
                 <li><strong>Not tearing down at end of session.</strong> The bill comes from forgotten resources, not active learning. Build the <code>terraform destroy</code> reflex.</li>
                 <li><strong>Trying to learn three clouds simultaneously in one lab.</strong> Pick one. Add the others after you're competent in the first.</li>
-                <li><strong>Treating GuardDuty findings as garbage to ignore.</strong> Every finding is a learning opportunity — a real attack pattern in a controlled environment. Read each one.</li>
+                <li><strong>Treating GuardDuty findings as garbage to ignore.</strong> Every finding is a learning opportunity - a real attack pattern in a controlled environment. Read each one.</li>
                 <li><strong>Storing real credentials in lab repos.</strong> Even labs leak. Use a separate IAM user, scope its permissions tightly, never commit a key.</li>
             </ul>
         </section>
@@ -651,11 +651,11 @@
         <section class="cta-section">
             <h2>Where next</h2>
             <ul>
-                <li><a href="ctfs.html">Cloud CTF directory</a> — what to actually deploy in your lab.</li>
-                <li><a href="learning-path.html">Learning path</a> — how the lab fits into the bigger picture.</li>
-                <li><a href="cloud-security-careers.html">Careers guide</a> — turn lab work into a portfolio that lands jobs.</li>
-                <li><a href="cloud-security-best-practices.html">Best practices</a> — the controls you'll build and break in your lab.</li>
-                <li><a href="sessions.html">Friday Zoom</a> — bring your lab questions; someone has solved your problem before.</li>
+                <li><a href="ctfs.html">Cloud CTF directory</a> - what to actually deploy in your lab.</li>
+                <li><a href="learning-path.html">Learning path</a> - how the lab fits into the bigger picture.</li>
+                <li><a href="cloud-security-careers.html">Careers guide</a> - turn lab work into a portfolio that lands jobs.</li>
+                <li><a href="cloud-security-best-practices.html">Best practices</a> - the controls you'll build and break in your lab.</li>
+                <li><a href="sessions.html">Friday Zoom</a> - bring your lab questions; someone has solved your problem before.</li>
             </ul>
         </section>
 

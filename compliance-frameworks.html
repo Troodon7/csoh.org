@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta name="description"
-        content="Compliance frameworks in the cloud — deep practitioner guide to SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP, CMMC, NIST CSF, NIST 800-53/171, CIS Benchmarks, GDPR, SOX, NIS2, DORA, and regional regulations. Cloud-specific control mapping, AWS / Azure / GCP attestations, GRC platforms, and pitfalls. Vendor-neutral.">
+        content="Compliance frameworks in the cloud - deep practitioner guide to SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP, CMMC, NIST CSF, NIST 800-53/171, CIS Benchmarks, GDPR, SOX, NIS2, DORA, and regional regulations. Cloud-specific control mapping, AWS / Azure / GCP attestations, GRC platforms, and pitfalls. Vendor-neutral.">
     <meta name="keywords"
         content="compliance frameworks, SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP, CMMC, NIST CSF, NIST 800-53, NIST 800-171, CIS Benchmarks, GDPR, CCPA, SOX, NIS2, DORA, AWS compliance, Azure compliance, GCP compliance, AWS Artifact, Azure Service Trust Portal, GCP Compliance Reports Manager, Vanta, Drata, Secureframe, control mapping, OSCAL, Secure Controls Framework">
     <title>Compliance Frameworks in Cloud (SOC 2, ISO 27001, PCI, FedRAMP, GDPR) - CSOH</title>
@@ -20,7 +20,7 @@
 
     <meta property="og:title" content="Compliance Frameworks in Cloud (SOC 2, ISO 27001, PCI, FedRAMP, GDPR) - CSOH">
     <meta property="og:description"
-        content="A practitioner's deep dive into cloud compliance frameworks — SOC 2, ISO 27001, PCI DSS v4, HIPAA, FedRAMP, CMMC 2.0, NIST CSF, CIS Benchmarks, GDPR, and how AWS, Azure, and GCP each attest.">
+        content="A practitioner's deep dive into cloud compliance frameworks - SOC 2, ISO 27001, PCI DSS v4, HIPAA, FedRAMP, CMMC 2.0, NIST CSF, CIS Benchmarks, GDPR, and how AWS, Azure, and GCP each attest.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://csoh.org/compliance-frameworks.html">
     <meta property="og:image" content="https://csoh.org/banner.png">
@@ -44,7 +44,7 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "Compliance Frameworks in Cloud",
-      "description": "A vendor-neutral practitioner's deep dive into the compliance frameworks that apply to cloud workloads — SOC 2, ISO 27001, PCI DSS v4, HIPAA, FedRAMP, CMMC 2.0, NIST CSF 2.0, NIST 800-53/171, CIS Benchmarks, GDPR, SOX, NIS2, DORA, and regional regulations — with framework-by-framework structure, cloud mapping, and AWS / Azure / GCP attestation coverage.",
+      "description": "A vendor-neutral practitioner's deep dive into the compliance frameworks that apply to cloud workloads - SOC 2, ISO 27001, PCI DSS v4, HIPAA, FedRAMP, CMMC 2.0, NIST CSF 2.0, NIST 800-53/171, CIS Benchmarks, GDPR, SOX, NIS2, DORA, and regional regulations - with framework-by-framework structure, cloud mapping, and AWS / Azure / GCP attestation coverage.",
       "author": {
         "@type": "Person",
         "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
@@ -85,7 +85,7 @@
           "name": "Which compliance framework should I start with?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Start with the one your customers ask for. For most B2B SaaS in North America that's SOC 2 Type II. If you sell to EU enterprises, ISO 27001 is the more common ask and may be required co-equally. If you handle payment cards, PCI DSS is non-negotiable. If you handle PHI, HIPAA. If you sell to the US federal government, FedRAMP. Pick the one with revenue attached, run it as your primary, and map every other framework to it — they overlap 60–80% so a second framework is far cheaper than the first."
+            "text": "Start with the one your customers ask for. For most B2B SaaS in North America that's SOC 2 Type II. If you sell to EU enterprises, ISO 27001 is the more common ask and may be required co-equally. If you handle payment cards, PCI DSS is non-negotiable. If you handle PHI, HIPAA. If you sell to the US federal government, FedRAMP. Pick the one with revenue attached, run it as your primary, and map every other framework to it - they overlap 60–80% so a second framework is far cheaper than the first."
           }
         },
         {
@@ -93,7 +93,7 @@
           "name": "What is the difference between SOC 2 Type I and Type II?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Type I is a point-in-time assessment: the auditor evaluates whether your controls are designed appropriately on a specific date. It's faster (a few weeks of fieldwork) and cheaper, but enterprise buyers rarely accept it as the final answer. Type II covers an observation period — typically 6 or 12 months — and the auditor tests whether the controls actually operated effectively the whole time. Type II is what procurement teams want; Type I is a stepping stone or a stop-gap during the first observation window."
+            "text": "Type I is a point-in-time assessment: the auditor evaluates whether your controls are designed appropriately on a specific date. It's faster (a few weeks of fieldwork) and cheaper, but enterprise buyers rarely accept it as the final answer. Type II covers an observation period - typically 6 or 12 months - and the auditor tests whether the controls actually operated effectively the whole time. Type II is what procurement teams want; Type I is a stepping stone or a stop-gap during the first observation window."
           }
         },
         {
@@ -101,7 +101,7 @@
           "name": "How do SOC 2, ISO 27001, and PCI DSS overlap?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "They overlap by roughly 60–80% on the underlying technical controls — access management, encryption, logging, change management, incident response, vulnerability management, vendor risk. Where they diverge: SOC 2 emphasizes service-organization commitments and Trust Services Criteria; ISO 27001 requires a formal Information Security Management System with management review and continual improvement; PCI DSS is highly prescriptive on network segmentation, cardholder data handling, and quarterly scanning. The pragmatic approach is to maintain one internal control set, map all frameworks to it, and add framework-specific overlays where needed. Tools like the Secure Controls Framework (SCF), the Unified Compliance Framework (UCF), and OSCAL exist specifically to make this mapping reusable."
+            "text": "They overlap by roughly 60–80% on the underlying technical controls - access management, encryption, logging, change management, incident response, vulnerability management, vendor risk. Where they diverge: SOC 2 emphasizes service-organization commitments and Trust Services Criteria; ISO 27001 requires a formal Information Security Management System with management review and continual improvement; PCI DSS is highly prescriptive on network segmentation, cardholder data handling, and quarterly scanning. The pragmatic approach is to maintain one internal control set, map all frameworks to it, and add framework-specific overlays where needed. Tools like the Secure Controls Framework (SCF), the Unified Compliance Framework (UCF), and OSCAL exist specifically to make this mapping reusable."
           }
         },
         {
@@ -117,7 +117,7 @@
           "name": "Does using AWS, Azure, or GCP make my workload compliant?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No — it makes the provider's part of the stack compliant. Under the shared responsibility model, the cloud provider attests to the controls they own (physical security, hypervisor, managed-service internals); you attest to the controls you own (IAM configuration, data encryption decisions, application security, customer access). AWS Artifact, Azure Service Trust Portal, and Google Cloud Compliance Reports Manager give you the provider-side reports to share with your auditor; you still need to demonstrate your half. Inheriting a provider's FedRAMP authorization does not authorize your service — it just means the underlying platform is in scope of the authorization you'll pursue."
+            "text": "No - it makes the provider's part of the stack compliant. Under the shared responsibility model, the cloud provider attests to the controls they own (physical security, hypervisor, managed-service internals); you attest to the controls you own (IAM configuration, data encryption decisions, application security, customer access). AWS Artifact, Azure Service Trust Portal, and Google Cloud Compliance Reports Manager give you the provider-side reports to share with your auditor; you still need to demonstrate your half. Inheriting a provider's FedRAMP authorization does not authorize your service - it just means the underlying platform is in scope of the authorization you'll pursue."
           }
         },
         {
@@ -281,7 +281,7 @@
       <div class="hero-inner">
         <div class="hero-text">
           <h1>Compliance Frameworks in Cloud</h1>
-          <p>A practitioner's framework-by-framework guide to the standards that shape cloud security work in 2026 — <a class="glossary-link" href="glossary.html#term-soc">SOC</a> 2, <a class="glossary-link" href="glossary.html#term-iso">ISO</a> 27001, <a class="glossary-link" href="glossary.html#term-pci-dss">PCI DSS</a> v4, <a class="glossary-link" href="glossary.html#term-hipaa">HIPAA</a>, <a class="glossary-link" href="glossary.html#term-fedramp">FedRAMP</a>, <a class="glossary-link" href="glossary.html#term-cmmc">CMMC</a> 2.0, <a class="glossary-link" href="glossary.html#term-nist">NIST</a> CSF, NIST 800-53/171, <a class="glossary-link" href="glossary.html#term-cis-benchmarks">CIS Benchmarks</a>, <a class="glossary-link" href="glossary.html#term-gdpr">GDPR</a>, <a class="glossary-link" href="glossary.html#term-sox">SOX</a>, NIS2, <a class="glossary-link" href="glossary.html#term-dora">DORA</a>, and the regional and sector-specific regulations behind them. Companion deep dive to the <a href="grc.html">GRC overview</a>: what each framework actually requires, how it maps to cloud, what AWS / Azure / GCP attest to, and where it usually goes wrong.</p>
+          <p>A practitioner's framework-by-framework guide to the standards that shape cloud security work in 2026 - <a class="glossary-link" href="glossary.html#term-soc">SOC</a> 2, <a class="glossary-link" href="glossary.html#term-iso">ISO</a> 27001, <a class="glossary-link" href="glossary.html#term-pci-dss">PCI DSS</a> v4, <a class="glossary-link" href="glossary.html#term-hipaa">HIPAA</a>, <a class="glossary-link" href="glossary.html#term-fedramp">FedRAMP</a>, <a class="glossary-link" href="glossary.html#term-cmmc">CMMC</a> 2.0, <a class="glossary-link" href="glossary.html#term-nist">NIST</a> CSF, NIST 800-53/171, <a class="glossary-link" href="glossary.html#term-cis-benchmarks">CIS Benchmarks</a>, <a class="glossary-link" href="glossary.html#term-gdpr">GDPR</a>, <a class="glossary-link" href="glossary.html#term-sox">SOX</a>, NIS2, <a class="glossary-link" href="glossary.html#term-dora">DORA</a>, and the regional and sector-specific regulations behind them. Companion deep dive to the <a href="grc.html">GRC overview</a>: what each framework actually requires, how it maps to cloud, what AWS / Azure / GCP attest to, and where it usually goes wrong.</p>
           <div class="cta-buttons">
             <a href="#decision-tree" class="btn btn-primary">Which frameworks apply →</a>
             <a href="#provider-comparison" class="btn btn-secondary">AWS / Azure / GCP coverage</a>
@@ -372,8 +372,8 @@
         <p class="page-meta"><time datetime="2026-05-17">Last updated <strong>2026-05-17</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/compliance-frameworks.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
 
         <div class="info-box--blue">
-            <p><strong>The 30-second version:</strong> Compliance frameworks are external requirements you map your internal control set to. They overlap heavily — SOC 2, ISO 27001, and most other security frameworks share 60–80% of the underlying controls — which means a second framework is far cheaper than the first <em>if</em> you build the mapping deliberately. Pick the framework with revenue or regulatory force attached, run it as your <em>primary</em>, and layer overlays for everything else.</p>
-            <p style="margin-top:0.75rem;">This page is the framework-by-framework deep dive. For the meta-discipline of running a GRC program, see <a href="grc.html">GRC for Cloud</a>. For the live sensor that produces evidence, see <a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a>. Compliance is not security — the auditor's sign-off and the attacker's failure are independent events. Build for both.</p>
+            <p><strong>The 30-second version:</strong> Compliance frameworks are external requirements you map your internal control set to. They overlap heavily - SOC 2, ISO 27001, and most other security frameworks share 60–80% of the underlying controls - which means a second framework is far cheaper than the first <em>if</em> you build the mapping deliberately. Pick the framework with revenue or regulatory force attached, run it as your <em>primary</em>, and layer overlays for everything else.</p>
+            <p style="margin-top:0.75rem;">This page is the framework-by-framework deep dive. For the meta-discipline of running a GRC program, see <a href="grc.html">GRC for Cloud</a>. For the live sensor that produces evidence, see <a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a>. Compliance is not security - the auditor's sign-off and the attacker's failure are independent events. Build for both.</p>
         </div>
 
         <div class="toc">
@@ -406,7 +406,7 @@
 
         <section id="decision-tree">
             <h2>Which frameworks apply to you?</h2>
-            <p>The meta-question every practitioner asks first. The answer is the intersection of three forces — what your <em>customers</em> require to buy, what <em>regulators</em> require to operate, and what <em>contracts</em> you've already signed. The decision tree below covers most cases:</p>
+            <p>The meta-question every practitioner asks first. The answer is the intersection of three forces - what your <em>customers</em> require to buy, what <em>regulators</em> require to operate, and what <em>contracts</em> you've already signed. The decision tree below covers most cases:</p>
             <ul>
                 <li><strong>Are you B2B <a class="glossary-link" href="glossary.html#term-saas">SaaS</a> selling to North American enterprises?</strong> → <strong>SOC 2 Type II</strong> is the default ask. Without one, deals stall in security review.</li>
                 <li><strong>Selling to EU enterprises, or operating outside North America?</strong> → <strong>ISO 27001</strong> is more commonly preferred, often co-required with SOC 2 above ~$50k ACV. ISO 27017 (cloud) and ISO <a class="glossary-link" href="glossary.html#term-iso-27017">27018</a> (PII in cloud) are often bundled.</li>
@@ -416,7 +416,7 @@
                 <li><strong>DoD contractor handling FCI or CUI?</strong> → <strong>CMMC 2.0</strong> Level 1, 2, or 3 depending on data sensitivity, plus <strong>DFARS 252.204-7012</strong> contractual requirements.</li>
                 <li><strong>US public company, or subsidiary of one?</strong> → <strong>SOX</strong> ITGCs over financial-reporting systems.</li>
                 <li><strong>Processing personal data of EU/UK residents?</strong> → <strong>GDPR</strong> (and UK GDPR), regardless of where your company is incorporated. EDPB-tested cross-border transfer mechanism required.</li>
-                <li><strong>Processing personal data of California residents (and revenue thresholds met)?</strong> → <strong>CCPA / CPRA</strong>. A growing number of US states (Virginia, Colorado, Connecticut, Texas, Utah, Oregon, Washington and more) have parallel laws — most converge on similar primitives.</li>
+                <li><strong>Processing personal data of California residents (and revenue thresholds met)?</strong> → <strong>CCPA / CPRA</strong>. A growing number of US states (Virginia, Colorado, Connecticut, Texas, Utah, Oregon, Washington and more) have parallel laws - most converge on similar primitives.</li>
                 <li><strong>EU operator of essential / important services?</strong> → <strong>NIS2</strong> (cybersecurity), and for financial services, <strong>DORA</strong> (operational resilience, in force January 2025).</li>
                 <li><strong>Regulated industry?</strong> → Add sector-specific frameworks (FERPA for education, GLBA Safeguards Rule for financial, CJIS for criminal-justice data, TISAX for automotive, ISO 13485 for medical-device QMS, NERC CIP for North American electric utilities).</li>
             </ul>
@@ -425,22 +425,22 @@
 
         <section id="overlap">
             <h2>The 60–80% overlap reality</h2>
-            <p>SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP, <a class="glossary-link" href="glossary.html#term-nist-csf">NIST CSF</a>, CIS Controls, and most other security frameworks all require the same foundational controls — they just describe them differently. <a class="glossary-link" href="glossary.html#term-mfa">Multi-factor authentication</a> on privileged accounts is the same engineering work whether SOC 2 calls it CC6.1, ISO 27001 calls it A.5.17, PCI DSS calls it Requirement 8.4, NIST 800-53 calls it IA-2(1), or HITRUST calls it 01.j. The auditor needs to see the control in the format their framework expects; the underlying control runs once.</p>
+            <p>SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP, <a class="glossary-link" href="glossary.html#term-nist-csf">NIST CSF</a>, CIS Controls, and most other security frameworks all require the same foundational controls - they just describe them differently. <a class="glossary-link" href="glossary.html#term-mfa">Multi-factor authentication</a> on privileged accounts is the same engineering work whether SOC 2 calls it CC6.1, ISO 27001 calls it A.5.17, PCI DSS calls it Requirement 8.4, NIST 800-53 calls it IA-2(1), or HITRUST calls it 01.j. The auditor needs to see the control in the format their framework expects; the underlying control runs once.</p>
             <p>This is the single highest-leverage insight in multi-framework programs: <strong>maintain one internal control set, map every external framework to it, and only add framework-specific overlays where genuinely required.</strong> Building one control set per framework is the most expensive mistake any GRC program can make.</p>
             <p>The mapping work itself is mostly solved by industry-standard crosswalks. The most useful:</p>
             <ul>
-                <li><strong><a href="https://securecontrolsframework.com/" target="_blank" rel="noopener noreferrer">Secure Controls Framework (SCF)</a></strong> — a free, open meta-framework with ~1,100 controls mapped to ~150 external frameworks. Excellent starting point for unified-control-set design.</li>
-                <li><strong><a href="https://www.unifiedcompliance.com/home" target="_blank" rel="noopener noreferrer">Unified Compliance Framework (UCF)</a></strong> — commercial, exhaustive, the database that most GRC platforms license under the hood.</li>
-                <li><strong><a href="https://pages.nist.gov/OSCAL/" target="_blank" rel="noopener noreferrer">OSCAL (Open Security Controls Assessment Language)</a></strong> — NIST's machine-readable format for controls, profiles, and assessments. FedRAMP is moving authorization packages to OSCAL; smart programs author internal control sets in OSCAL too.</li>
-                <li><strong><a href="https://complianceforge.com/" target="_blank" rel="noopener noreferrer">ComplianceForge</a></strong> — the team behind SCF; sells reference policy/procedure libraries pre-mapped to SCF.</li>
-                <li><strong><a href="https://cloudsecurityalliance.org/research/cloud-controls-matrix" target="_blank" rel="noopener noreferrer">CSA Cloud Controls Matrix (CCM)</a></strong> — cloud-specific control framework with framework crosswalks; the basis for the <a class="glossary-link" href="glossary.html#term-csa">CSA</a> STAR program.</li>
+                <li><strong><a href="https://securecontrolsframework.com/" target="_blank" rel="noopener noreferrer">Secure Controls Framework (SCF)</a></strong> - a free, open meta-framework with ~1,100 controls mapped to ~150 external frameworks. Excellent starting point for unified-control-set design.</li>
+                <li><strong><a href="https://www.unifiedcompliance.com/home" target="_blank" rel="noopener noreferrer">Unified Compliance Framework (UCF)</a></strong> - commercial, exhaustive, the database that most GRC platforms license under the hood.</li>
+                <li><strong><a href="https://pages.nist.gov/OSCAL/" target="_blank" rel="noopener noreferrer">OSCAL (Open Security Controls Assessment Language)</a></strong> - NIST's machine-readable format for controls, profiles, and assessments. FedRAMP is moving authorization packages to OSCAL; smart programs author internal control sets in OSCAL too.</li>
+                <li><strong><a href="https://complianceforge.com/" target="_blank" rel="noopener noreferrer">ComplianceForge</a></strong> - the team behind SCF; sells reference policy/procedure libraries pre-mapped to SCF.</li>
+                <li><strong><a href="https://cloudsecurityalliance.org/research/cloud-controls-matrix" target="_blank" rel="noopener noreferrer">CSA Cloud Controls Matrix (CCM)</a></strong> - cloud-specific control framework with framework crosswalks; the basis for the <a class="glossary-link" href="glossary.html#term-csa">CSA</a> STAR program.</li>
             </ul>
             <p>The remaining 20–40% is where frameworks diverge. PCI DSS has hard requirements for network segmentation, cardholder data flow diagrams, and quarterly ASV scans that other frameworks don't share. FedRAMP requires US-citizen-only personnel for some baselines. HIPAA requires Breach Notification Rule processes with specific timelines. GDPR requires data subject rights workflows. These are the overlays; build them once and don't pretend the underlying engineering work is different.</p>
         </section>
 
         <section id="soc2">
             <h2>SOC 2</h2>
-            <p>The de facto B2B SaaS attestation in North America. Authored by the <a href="https://www.aicpa-cima.com/resources/landing/system-and-organization-controls-soc-suite-of-services" target="_blank" rel="noopener noreferrer">AICPA</a> and performed by licensed CPA firms. Not a certification — it's an attestation report describing the auditor's opinion on the design (Type I) or operating effectiveness (Type II) of your controls against the Trust Services Criteria.</p>
+            <p>The de facto B2B SaaS attestation in North America. Authored by the <a href="https://www.aicpa-cima.com/resources/landing/system-and-organization-controls-soc-suite-of-services" target="_blank" rel="noopener noreferrer">AICPA</a> and performed by licensed CPA firms. Not a certification - it's an attestation report describing the auditor's opinion on the design (Type I) or operating effectiveness (Type II) of your controls against the Trust Services Criteria.</p>
 
             <h3>Type I vs Type II</h3>
             <ul>
@@ -450,15 +450,15 @@
 
             <h3>The five Trust Services Criteria (TSC)</h3>
             <ul>
-                <li><strong>Security</strong> — required. Sometimes called Common Criteria; the bulk of the control universe lives here (CC1–CC9 covering control environment, communication, risk assessment, monitoring, control activities, logical access, system operations, change management, risk mitigation).</li>
-                <li><strong>Availability</strong> — optional. Uptime commitments, capacity planning, environmental protections, DR. Common addition for infrastructure-heavy SaaS.</li>
-                <li><strong>Confidentiality</strong> — optional. Identification and protection of confidential data per agreement. Common for B2B with customer-data sensitivity.</li>
-                <li><strong>Processing Integrity</strong> — optional. Data is processed completely, accurately, timely, and authorized. Common for fintech and data-processing platforms.</li>
-                <li><strong>Privacy</strong> — optional. Personal information collection, use, retention, disclosure, and disposal. Less common because GDPR / CCPA already drive parallel work.</li>
+                <li><strong>Security</strong> - required. Sometimes called Common Criteria; the bulk of the control universe lives here (CC1–CC9 covering control environment, communication, risk assessment, monitoring, control activities, logical access, system operations, change management, risk mitigation).</li>
+                <li><strong>Availability</strong> - optional. Uptime commitments, capacity planning, environmental protections, DR. Common addition for infrastructure-heavy SaaS.</li>
+                <li><strong>Confidentiality</strong> - optional. Identification and protection of confidential data per agreement. Common for B2B with customer-data sensitivity.</li>
+                <li><strong>Processing Integrity</strong> - optional. Data is processed completely, accurately, timely, and authorized. Common for fintech and data-processing platforms.</li>
+                <li><strong>Privacy</strong> - optional. Personal information collection, use, retention, disclosure, and disposal. Less common because GDPR / CCPA already drive parallel work.</li>
             </ul>
 
             <h3>Audit firm selection</h3>
-            <p>The big four (Deloitte, PwC, EY, KPMG) audit large public companies expensively. Mid-market and <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> firms — Schellman, A-LIGN, Coalfire, Insight Assurance, Prescient Assurance, Sensiba, BARR Advisory, Johanson Group — dominate SaaS SOC 2 work and are usually a much better fit for the first audit. <strong>Pick the firm by the lead auditor's cloud literacy and prior engagements on your stack</strong>, not the brand on the report. Stable multi-year relationships drive cost down materially.</p>
+            <p>The big four (Deloitte, PwC, EY, KPMG) audit large public companies expensively. Mid-market and <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> firms - Schellman, A-LIGN, Coalfire, Insight Assurance, Prescient Assurance, Sensiba, BARR Advisory, Johanson Group - dominate SaaS SOC 2 work and are usually a much better fit for the first audit. <strong>Pick the firm by the lead auditor's cloud literacy and prior engagements on your stack</strong>, not the brand on the report. Stable multi-year relationships drive cost down materially.</p>
 
             <h3>Typical cost and timeline</h3>
             <p>For a 20–50-person SaaS using a compliance-automation platform: $20k–$40k for a Type I, $40k–$80k for a Type II (Security only), $60k–$120k+ if you add Availability and Confidentiality. Add 6 months of observation period before the audit can be performed. Total elapsed from "we should do this" to a signed Type II report: 9–12 months realistic, 6 months aggressive. Large enterprises spend $200k+ on annual SOC 2s with broader TSC coverage and bigger control populations.</p>
@@ -473,38 +473,38 @@
 
         <section id="iso27001">
             <h2>ISO/IEC 27001 (and 27017, 27018, 27701)</h2>
-            <p>The international standard for an Information Security Management System (ISMS). Unlike SOC 2, ISO 27001 is a true certification — issued by an accredited registrar — and the standard prescribes the <em>management system</em> structure (risk-based, with management review, internal audit, continual improvement) in addition to the controls. ISO 27001 is more common than SOC 2 outside North America and increasingly co-required.</p>
+            <p>The international standard for an Information Security Management System (ISMS). Unlike SOC 2, ISO 27001 is a true certification - issued by an accredited registrar - and the standard prescribes the <em>management system</em> structure (risk-based, with management review, internal audit, continual improvement) in addition to the controls. ISO 27001 is more common than SOC 2 outside North America and increasingly co-required.</p>
 
             <h3>Structure</h3>
             <ul>
-                <li><strong>Clauses 4–10</strong> define the mandatory ISMS — context, leadership, planning, support, operation, performance evaluation, improvement. Skipping any of these is a non-conformity that blocks certification.</li>
+                <li><strong>Clauses 4–10</strong> define the mandatory ISMS - context, leadership, planning, support, operation, performance evaluation, improvement. Skipping any of these is a non-conformity that blocks certification.</li>
                 <li><strong>Annex A</strong> (in the <a href="https://www.iso.org/standard/27001" target="_blank" rel="noopener noreferrer">2022 revision</a>) lists 93 reference controls in four themes: Organizational (37), People (8), Physical (14), Technological (34). You select applicable controls in a Statement of Applicability (SoA), justifying inclusions and exclusions against your risk treatment.</li>
             </ul>
 
             <h3>Related ISO standards</h3>
             <ul>
-                <li><strong>ISO/IEC 27017</strong> — code of practice for cloud-services-specific information-security controls. Add-on to 27001 for cloud providers and consumers.</li>
-                <li><strong>ISO/IEC 27018</strong> — code of practice for protection of PII in public clouds. The de facto standard cloud providers attest to for PII handling.</li>
-                <li><strong>ISO/IEC 27701</strong> — Privacy Information Management System extension. Maps to GDPR articles; the privacy counterpart to ISO 27001.</li>
-                <li><strong>ISO/IEC 27017 + 27018 together</strong> — the cloud bundle most major providers and SaaS shops pursue alongside 27001.</li>
+                <li><strong>ISO/IEC 27017</strong> - code of practice for cloud-services-specific information-security controls. Add-on to 27001 for cloud providers and consumers.</li>
+                <li><strong>ISO/IEC 27018</strong> - code of practice for protection of PII in public clouds. The de facto standard cloud providers attest to for PII handling.</li>
+                <li><strong>ISO/IEC 27701</strong> - Privacy Information Management System extension. Maps to GDPR articles; the privacy counterpart to ISO 27001.</li>
+                <li><strong>ISO/IEC 27017 + 27018 together</strong> - the cloud bundle most major providers and SaaS shops pursue alongside 27001.</li>
             </ul>
 
             <h3>Certification cycle</h3>
             <ul>
-                <li><strong>Stage 1.</strong> Documentation review — does the ISMS exist on paper, with scope, SoA, risk register, policies?</li>
-                <li><strong>Stage 2.</strong> Operational audit — does the ISMS actually run? Sampling of evidence, interviews with control owners, observation of processes. The certification decision is made here.</li>
+                <li><strong>Stage 1.</strong> Documentation review - does the ISMS exist on paper, with scope, SoA, risk register, policies?</li>
+                <li><strong>Stage 2.</strong> Operational audit - does the ISMS actually run? Sampling of evidence, interviews with control owners, observation of processes. The certification decision is made here.</li>
                 <li><strong>Surveillance audits.</strong> Year 1 and Year 2 after certification, reduced-scope audits to confirm the ISMS still operates.</li>
-                <li><strong>Recertification.</strong> Year 3 — full audit again. Cycle repeats.</li>
+                <li><strong>Recertification.</strong> Year 3 - full audit again. Cycle repeats.</li>
             </ul>
 
             <h3>Cost and timeline</h3>
-            <p>Initial certification: $25k–$60k for the audit itself (3-year cycle), plus 6–12 months of internal work to stand up the ISMS, run an internal audit, and complete a management review. Surveillance audits typically run 40–60% of the initial cost. Pick an accredited registrar (BSI, DNV, BSI Group, TÜV, Schellman, A-LIGN, Coalfire ISO, Mastermind) — non-accredited certificates are not recognized.</p>
+            <p>Initial certification: $25k–$60k for the audit itself (3-year cycle), plus 6–12 months of internal work to stand up the ISMS, run an internal audit, and complete a management review. Surveillance audits typically run 40–60% of the initial cost. Pick an accredited registrar (BSI, DNV, BSI Group, TÜV, Schellman, A-LIGN, Coalfire ISO, Mastermind) - non-accredited certificates are not recognized.</p>
 
             <h3>Cloud-specific gotchas</h3>
             <ul>
                 <li><strong>The 2022 revision restructured Annex A.</strong> Programs certified under the 2013 revision must transition by October 2025; mapping work is required.</li>
                 <li><strong>SoA discipline.</strong> Excluded controls must be justified; lazy SoAs are a top finding.</li>
-                <li><strong>Management review evidence.</strong> The ISMS must demonstrate top-management engagement — meeting minutes, decisions, action items. Programs run by security teams in isolation fail this clause.</li>
+                <li><strong>Management review evidence.</strong> The ISMS must demonstrate top-management engagement - meeting minutes, decisions, action items. Programs run by security teams in isolation fail this clause.</li>
             </ul>
         </section>
 
@@ -540,7 +540,7 @@
             <p>The Cardholder Data Environment (CDE) is the in-scope set of systems that store, process, transmit, or could impact cardholder data security. <strong>Anything you can remove from the CDE saves audit work for the life of the program.</strong> The standard mechanisms:</p>
             <ul>
                 <li><strong>Tokenization.</strong> Replace the PAN with a token; only the tokenization vault holds the PAN. The vault is in scope; everything downstream is not.</li>
-                <li><strong>Hosted payment pages / redirect.</strong> The payment form is served by a PCI Level 1 <a class="glossary-link" href="glossary.html#term-sp">service provider</a> (Stripe, Braintree, Adyen, Worldpay); your application never touches PAN. SAQ A becomes available — the lightest of all SAQs.</li>
+                <li><strong>Hosted payment pages / redirect.</strong> The payment form is served by a PCI Level 1 <a class="glossary-link" href="glossary.html#term-sp">service provider</a> (Stripe, Braintree, Adyen, Worldpay); your application never touches PAN. SAQ A becomes available - the lightest of all SAQs.</li>
                 <li><strong>Network segmentation.</strong> Cleanly separate the CDE from everything else, with controls verifying the segmentation works. Misimplemented segmentation is a top QSA finding.</li>
                 <li><strong>Card brand-specific volume thresholds.</strong> Level 1 (annual transactions ≥6M Visa/MC) requires an annual Report on Compliance (ROC) attested by a Qualified Security Assessor (QSA). Levels 2–4 can use a Self-Assessment Questionnaire (SAQ); pick the right SAQ for your scope (A, A-EP, B, B-IP, C, C-VT, D, P2PE).</li>
             </ul>
@@ -548,9 +548,9 @@
             <h3>Cloud-specific guidance</h3>
             <p>The <a href="https://www.pcisecuritystandards.org/document_library/?category=guidance" target="_blank" rel="noopener noreferrer">PCI Cloud Computing SIG guidance</a> (Information Supplement) covers shared-responsibility mapping for cloud workloads. AWS, Azure, and GCP each publish PCI DSS responsibility matrices that explicitly delineate which requirements they cover, which you cover, and which are shared. Use the matrix from your provider; do not let your QSA assume.</p>
             <ul>
-                <li><strong>AWS</strong> — <a href="https://aws.amazon.com/compliance/pci-faqs/" target="_blank" rel="noopener noreferrer">PCI DSS Level 1 Service Provider</a>, ~120 services in scope, AWS Artifact provides the AOC and responsibility matrix.</li>
-                <li><strong>Azure</strong> — <a href="https://learn.microsoft.com/en-us/compliance/regulatory/offering-pci-dss" target="_blank" rel="noopener noreferrer">PCI DSS Level 1 Service Provider</a>, comparable scope, Service Trust Portal hosts the documentation.</li>
-                <li><strong>GCP</strong> — <a href="https://cloud.google.com/security/compliance/pci-dss" target="_blank" rel="noopener noreferrer">PCI DSS Level 1 Service Provider</a>, Compliance Reports Manager hosts the AOC.</li>
+                <li><strong>AWS</strong> - <a href="https://aws.amazon.com/compliance/pci-faqs/" target="_blank" rel="noopener noreferrer">PCI DSS Level 1 Service Provider</a>, ~120 services in scope, AWS Artifact provides the AOC and responsibility matrix.</li>
+                <li><strong>Azure</strong> - <a href="https://learn.microsoft.com/en-us/compliance/regulatory/offering-pci-dss" target="_blank" rel="noopener noreferrer">PCI DSS Level 1 Service Provider</a>, comparable scope, Service Trust Portal hosts the documentation.</li>
+                <li><strong>GCP</strong> - <a href="https://cloud.google.com/security/compliance/pci-dss" target="_blank" rel="noopener noreferrer">PCI DSS Level 1 Service Provider</a>, Compliance Reports Manager hosts the AOC.</li>
             </ul>
 
             <h3>Cost</h3>
@@ -559,51 +559,51 @@
 
         <section id="hipaa">
             <h2>HIPAA / HITECH (and HITRUST)</h2>
-            <p>The <a href="https://www.hhs.gov/hipaa/for-professionals/index.html" target="_blank" rel="noopener noreferrer">Health Insurance Portability and Accountability Act</a> (1996) and the HITECH Act (2009) together form the US federal framework for protecting health information. Applies to covered entities (providers, payers, clearinghouses) and their business associates (BAs) — including any cloud or SaaS that handles Protected Health Information (PHI) on a covered entity's behalf.</p>
+            <p>The <a href="https://www.hhs.gov/hipaa/for-professionals/index.html" target="_blank" rel="noopener noreferrer">Health Insurance Portability and Accountability Act</a> (1996) and the HITECH Act (2009) together form the US federal framework for protecting health information. Applies to covered entities (providers, payers, clearinghouses) and their business associates (BAs) - including any cloud or SaaS that handles Protected Health Information (PHI) on a covered entity's behalf.</p>
 
             <h3>Three rules</h3>
             <ul>
                 <li><strong>Privacy Rule.</strong> Governs the use and disclosure of PHI. Permissible uses, minimum necessary, individual rights (access, amendment, accounting of disclosures), Notice of Privacy Practices.</li>
                 <li><strong>Security Rule.</strong> Required safeguards for electronic PHI (ePHI). The technical part of the standard for cloud practitioners.</li>
-                <li><strong>Breach Notification Rule.</strong> Disclosure timelines and obligations when unsecured PHI is breached — 60-day notification to affected individuals, 60-day notification to HHS (annual roll-up for breaches under 500 individuals), media notification for breaches over 500 in a state.</li>
+                <li><strong>Breach Notification Rule.</strong> Disclosure timelines and obligations when unsecured PHI is breached - 60-day notification to affected individuals, 60-day notification to HHS (annual roll-up for breaches under 500 individuals), media notification for breaches over 500 in a state.</li>
             </ul>
 
             <h3>Security Rule safeguards</h3>
             <ul>
-                <li><strong>Administrative safeguards</strong> — security management process, workforce security, information access management, security awareness training, contingency plan, evaluation, BAAs.</li>
-                <li><strong>Physical safeguards</strong> — facility access, workstation use, device and media controls.</li>
-                <li><strong>Technical safeguards</strong> — access controls, audit controls, integrity, person/entity authentication, transmission security.</li>
+                <li><strong>Administrative safeguards</strong> - security management process, workforce security, information access management, security awareness training, contingency plan, evaluation, BAAs.</li>
+                <li><strong>Physical safeguards</strong> - facility access, workstation use, device and media controls.</li>
+                <li><strong>Technical safeguards</strong> - access controls, audit controls, integrity, person/entity authentication, transmission security.</li>
             </ul>
             <p>Note: HIPAA distinguishes "required" from "addressable" implementation specifications. <strong>Addressable does not mean optional</strong>; it means you implement, or document a justification for an equivalent alternative. This is a common misread.</p>
 
             <h3>BAAs with cloud providers</h3>
-            <p>You must have a signed Business Associate Agreement with any subprocessor that handles PHI. <strong>Critically, the BAA does not automatically cover every service the provider offers</strong> — you must use a HIPAA-eligible service from the provider's list. Putting PHI in a non-eligible service is a violation regardless of the BAA being in place.</p>
+            <p>You must have a signed Business Associate Agreement with any subprocessor that handles PHI. <strong>Critically, the BAA does not automatically cover every service the provider offers</strong> - you must use a HIPAA-eligible service from the provider's list. Putting PHI in a non-eligible service is a violation regardless of the BAA being in place.</p>
             <ul>
-                <li><strong>AWS</strong> — <a href="https://aws.amazon.com/compliance/hipaa-eligible-services-reference/" target="_blank" rel="noopener noreferrer">~150 HIPAA-eligible services</a>; BAA signable through AWS Artifact.</li>
-                <li><strong>Azure</strong> — <a href="https://learn.microsoft.com/en-us/azure/compliance/offerings/offering-hipaa-hitech" target="_blank" rel="noopener noreferrer">Microsoft BAA</a> covers covered Azure services via the Online Services Terms.</li>
-                <li><strong>GCP</strong> — <a href="https://cloud.google.com/security/compliance/hipaa" target="_blank" rel="noopener noreferrer">~140 covered services</a>; BAA signable for Google Workspace and Google Cloud.</li>
+                <li><strong>AWS</strong> - <a href="https://aws.amazon.com/compliance/hipaa-eligible-services-reference/" target="_blank" rel="noopener noreferrer">~150 HIPAA-eligible services</a>; BAA signable through AWS Artifact.</li>
+                <li><strong>Azure</strong> - <a href="https://learn.microsoft.com/en-us/azure/compliance/offerings/offering-hipaa-hitech" target="_blank" rel="noopener noreferrer">Microsoft BAA</a> covers covered Azure services via the Online Services Terms.</li>
+                <li><strong>GCP</strong> - <a href="https://cloud.google.com/security/compliance/hipaa" target="_blank" rel="noopener noreferrer">~140 covered services</a>; BAA signable for Google Workspace and Google Cloud.</li>
             </ul>
 
             <h3>HITRUST CSF</h3>
             <p>The <a href="https://hitrustalliance.net/" target="_blank" rel="noopener noreferrer">HITRUST Common Security Framework</a> is the de facto unified control framework healthcare customers ask for. It harmonizes HIPAA, NIST 800-53, ISO 27001, PCI DSS, COBIT, and more into one assessable control set. Three assessment types:</p>
             <ul>
-                <li><strong>e1</strong> — Essentials, 44 controls, ~1-year validity. Entry-level.</li>
-                <li><strong>i1</strong> — Implemented, 182 controls, 1-year validity. Threat-adaptive baseline.</li>
-                <li><strong>r2</strong> — Risk-based, 200–2,000+ controls scaled to scope, 2-year validity with interim assessment. The audit healthcare enterprises actually require from vendors.</li>
+                <li><strong>e1</strong> - Essentials, 44 controls, ~1-year validity. Entry-level.</li>
+                <li><strong>i1</strong> - Implemented, 182 controls, 1-year validity. Threat-adaptive baseline.</li>
+                <li><strong>r2</strong> - Risk-based, 200–2,000+ controls scaled to scope, 2-year validity with interim assessment. The audit healthcare enterprises actually require from vendors.</li>
             </ul>
-            <p>HITRUST r2 is expensive — $100k–$500k+ — but a single r2 satisfies most healthcare customer security reviews and crosswalks to many other frameworks.</p>
+            <p>HITRUST r2 is expensive - $100k–$500k+ - but a single r2 satisfies most healthcare customer security reviews and crosswalks to many other frameworks.</p>
         </section>
 
         <section id="fedramp">
             <h2>FedRAMP</h2>
-            <p>The <a href="https://www.fedramp.gov/" target="_blank" rel="noopener noreferrer">Federal Risk and Authorization Management Program</a> — the standardized authorization process for cloud services used by US federal agencies. Drawn from <a href="https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final" target="_blank" rel="noopener noreferrer">NIST SP 800-53 Rev 5</a>, with FedRAMP-specific overlay (the FedRAMP Baselines).</p>
+            <p>The <a href="https://www.fedramp.gov/" target="_blank" rel="noopener noreferrer">Federal Risk and Authorization Management Program</a> - the standardized authorization process for cloud services used by US federal agencies. Drawn from <a href="https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final" target="_blank" rel="noopener noreferrer">NIST SP 800-53 Rev 5</a>, with FedRAMP-specific overlay (the FedRAMP Baselines).</p>
 
             <h3>Baselines</h3>
             <ul>
-                <li><strong>Low</strong> — ~125 controls. Public-facing or non-sensitive data. Authorization process is the lightest.</li>
-                <li><strong>Moderate</strong> — ~325 controls. The most common baseline; covers CUI and most sensitive-but-unclassified government data. ~80% of FedRAMP authorizations are Moderate.</li>
-                <li><strong>High</strong> — ~425 controls. Data whose loss would have severe or catastrophic effect. Required for certain agencies and use cases (DoD, IRS, law enforcement).</li>
-                <li><strong>LI-SaaS (Tailored Low Impact SaaS)</strong> — ~125 reduced-scope controls. Lightweight track for low-impact SaaS that does not store federal data.</li>
+                <li><strong>Low</strong> - ~125 controls. Public-facing or non-sensitive data. Authorization process is the lightest.</li>
+                <li><strong>Moderate</strong> - ~325 controls. The most common baseline; covers CUI and most sensitive-but-unclassified government data. ~80% of FedRAMP authorizations are Moderate.</li>
+                <li><strong>High</strong> - ~425 controls. Data whose loss would have severe or catastrophic effect. Required for certain agencies and use cases (DoD, IRS, law enforcement).</li>
+                <li><strong>LI-SaaS (Tailored Low Impact SaaS)</strong> - ~125 reduced-scope controls. Lightweight track for low-impact SaaS that does not store federal data.</li>
             </ul>
 
             <h3>Authorization paths</h3>
@@ -614,17 +614,17 @@
             </ul>
 
             <h3>FedRAMP 20x</h3>
-            <p><a href="https://www.fedramp.gov/20x/" target="_blank" rel="noopener noreferrer">FedRAMP 20x</a> is the program's 2025 modernization initiative — automated continuous monitoring with key security indicators (KSIs), OSCAL-native authorization packages, reduced documentation overhead, and a more contemporary control-mapping approach. Early-adopter vendors are seeing materially faster authorizations; if you are starting FedRAMP now, evaluate the 20x path before defaulting to the legacy process.</p>
+            <p><a href="https://www.fedramp.gov/20x/" target="_blank" rel="noopener noreferrer">FedRAMP 20x</a> is the program's 2025 modernization initiative - automated continuous monitoring with key security indicators (KSIs), OSCAL-native authorization packages, reduced documentation overhead, and a more contemporary control-mapping approach. Early-adopter vendors are seeing materially faster authorizations; if you are starting FedRAMP now, evaluate the 20x path before defaulting to the legacy process.</p>
 
             <h3>3PAO assessment</h3>
             <p>A FedRAMP-accredited Third-Party Assessment Organization performs the security assessment. The 3PAO writes a Security Assessment Report (SAR) and Security Assessment Plan (SAP); the package includes a System Security Plan (SSP), continuous-monitoring strategy, and POA&amp;M (Plan of Action and Milestones) for residual findings. Major 3PAOs: <a href="https://coalfire.com:443/" target="_blank" rel="noopener noreferrer">Coalfire</a>, Kratos, A-LIGN, Schellman, BARR Advisory, Fortreum.</p>
 
             <h3>Cloud boundaries</h3>
             <ul>
-                <li><strong>AWS GovCloud (US)</strong> — separate cloud, US-citizen personnel, FedRAMP High authorized at the platform level. Required for ITAR-controlled workloads and FedRAMP High for many agencies.</li>
-                <li><strong>Azure Government</strong> — separate cloud, similar profile, FedRAMP High authorized. DoD IL5 also available.</li>
-                <li><strong>Google Cloud Assured Workloads</strong> — overlay on commercial GCP that enforces FedRAMP / IL2-IL5 boundaries without requiring a separate cloud. Plus dedicated Government Cloud regions for High and beyond.</li>
-                <li><strong>StateRAMP and TX-RAMP</strong> — state-level analogs. <a href="https://govramp.org/" target="_blank" rel="noopener noreferrer">StateRAMP</a> reciprocates with FedRAMP authorizations for most state and local governments; TX-RAMP is the Texas-specific program.</li>
+                <li><strong>AWS GovCloud (US)</strong> - separate cloud, US-citizen personnel, FedRAMP High authorized at the platform level. Required for ITAR-controlled workloads and FedRAMP High for many agencies.</li>
+                <li><strong>Azure Government</strong> - separate cloud, similar profile, FedRAMP High authorized. DoD IL5 also available.</li>
+                <li><strong>Google Cloud Assured Workloads</strong> - overlay on commercial GCP that enforces FedRAMP / IL2-IL5 boundaries without requiring a separate cloud. Plus dedicated Government Cloud regions for High and beyond.</li>
+                <li><strong>StateRAMP and TX-RAMP</strong> - state-level analogs. <a href="https://govramp.org/" target="_blank" rel="noopener noreferrer">StateRAMP</a> reciprocates with FedRAMP authorizations for most state and local governments; TX-RAMP is the Texas-specific program.</li>
             </ul>
 
             <h3>Cost and timeline</h3>
@@ -633,13 +633,13 @@
 
         <section id="cmmc">
             <h2>CMMC 2.0</h2>
-            <p><a href="https://dodcio.defense.gov/CMMC/" target="_blank" rel="noopener noreferrer">Cybersecurity Maturity Model Certification</a> 2.0 — the US Department of Defense's framework for contractors handling Federal Contract Information (FCI) or Controlled Unclassified Information (CUI). Final rule effective December 2024; phased contract incorporation begins 2025 and continues over a 3-year rollout.</p>
+            <p><a href="https://dodcio.defense.gov/CMMC/" target="_blank" rel="noopener noreferrer">Cybersecurity Maturity Model Certification</a> 2.0 - the US Department of Defense's framework for contractors handling Federal Contract Information (FCI) or Controlled Unclassified Information (CUI). Final rule effective December 2024; phased contract incorporation begins 2025 and continues over a 3-year rollout.</p>
 
             <h3>Levels</h3>
             <ul>
-                <li><strong>Level 1 — Foundational.</strong> 17 basic safeguarding practices for FCI. Annual self-assessment with affirmation by a senior official.</li>
-                <li><strong>Level 2 — Advanced.</strong> 110 controls of <a href="https://csrc.nist.gov/pubs/sp/800/171/r2/final" target="_blank" rel="noopener noreferrer">NIST SP 800-171 Rev 2</a> (transitioning to Rev 3) for CUI. Most contractors are assessed by a C3PAO (Certified Third-Party Assessor Organization) every 3 years; a small subset of Level 2 contracts allow self-assessment.</li>
-                <li><strong>Level 3 — Expert.</strong> ~110 controls of NIST 800-171 plus a subset of <a href="https://csrc.nist.gov/pubs/sp/800/172/upd1/final" target="_blank" rel="noopener noreferrer">NIST SP 800-172</a> (enhanced security for high-value CUI). Assessed by the DoD's DIBCAC (Defense Industrial Base Cybersecurity Assessment Center).</li>
+                <li><strong>Level 1 - Foundational.</strong> 17 basic safeguarding practices for FCI. Annual self-assessment with affirmation by a senior official.</li>
+                <li><strong>Level 2 - Advanced.</strong> 110 controls of <a href="https://csrc.nist.gov/pubs/sp/800/171/r2/final" target="_blank" rel="noopener noreferrer">NIST SP 800-171 Rev 2</a> (transitioning to Rev 3) for CUI. Most contractors are assessed by a C3PAO (Certified Third-Party Assessor Organization) every 3 years; a small subset of Level 2 contracts allow self-assessment.</li>
+                <li><strong>Level 3 - Expert.</strong> ~110 controls of NIST 800-171 plus a subset of <a href="https://csrc.nist.gov/pubs/sp/800/172/upd1/final" target="_blank" rel="noopener noreferrer">NIST SP 800-172</a> (enhanced security for high-value CUI). Assessed by the DoD's DIBCAC (Defense Industrial Base Cybersecurity Assessment Center).</li>
             </ul>
 
             <h3>DFARS 252.204-7012 and friends</h3>
@@ -651,7 +651,7 @@
                 <li><strong>AWS GovCloud (US)</strong> or commercial AWS with the appropriate boundary plus Microsoft 365 GCC High for productivity.</li>
                 <li><strong>Azure Government</strong> + <strong>Microsoft 365 GCC High</strong> is the canonical Microsoft stack for CUI.</li>
                 <li><strong>GCP Assured Workloads</strong> for FedRAMP High / IL4 boundary.</li>
-                <li><strong>Enclave models</strong> — PreVeil, Exostar, Kiteworks — for organizations that don't want to move their whole IT footprint into a regulated boundary.</li>
+                <li><strong>Enclave models</strong> - PreVeil, Exostar, Kiteworks - for organizations that don't want to move their whole IT footprint into a regulated boundary.</li>
             </ul>
         </section>
 
@@ -659,14 +659,14 @@
             <h2>NIST CSF 2.0</h2>
             <p>The <a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer">NIST Cybersecurity Framework</a>, first published 2014, updated to 2.0 in February 2024. Voluntary framework, not an attestation, but the most-cited common-language reference in security programs worldwide. CSF 2.0 organizes work into six Functions:</p>
             <ul>
-                <li><strong>Govern</strong> (new in 2.0) — organizational context, risk management strategy, roles, policies, oversight, cybersecurity supply-chain risk management.</li>
-                <li><strong>Identify</strong> — asset management, business environment, governance, risk assessment, risk-management strategy.</li>
-                <li><strong>Protect</strong> — identity management and access control, awareness and training, data security, info-protection processes, maintenance, protective technology.</li>
-                <li><strong>Detect</strong> — anomalies and events, continuous monitoring, detection processes.</li>
-                <li><strong>Respond</strong> — response planning, communications, analysis, mitigation, improvements.</li>
-                <li><strong>Recover</strong> — recovery planning, improvements, communications.</li>
+                <li><strong>Govern</strong> (new in 2.0) - organizational context, risk management strategy, roles, policies, oversight, cybersecurity supply-chain risk management.</li>
+                <li><strong>Identify</strong> - asset management, business environment, governance, risk assessment, risk-management strategy.</li>
+                <li><strong>Protect</strong> - identity management and access control, awareness and training, data security, info-protection processes, maintenance, protective technology.</li>
+                <li><strong>Detect</strong> - anomalies and events, continuous monitoring, detection processes.</li>
+                <li><strong>Respond</strong> - response planning, communications, analysis, mitigation, improvements.</li>
+                <li><strong>Recover</strong> - recovery planning, improvements, communications.</li>
             </ul>
-            <p>CSF 2.0 underneath uses 22 Categories and ~106 Subcategories — the actual outcomes you implement. Each Subcategory maps to controls in 800-53, ISO 27001, COBIT, ISA/IEC 62443, and others via the <a href="https://www.nist.gov/cyberframework/informative-references" target="_blank" rel="noopener noreferrer">Informative References</a>.</p>
+            <p>CSF 2.0 underneath uses 22 Categories and ~106 Subcategories - the actual outcomes you implement. Each Subcategory maps to controls in 800-53, ISO 27001, COBIT, ISA/IEC 62443, and others via the <a href="https://www.nist.gov/cyberframework/informative-references" target="_blank" rel="noopener noreferrer">Informative References</a>.</p>
             <p>Use CSF as the <em>meta-framework</em> for executive reporting and program structure, layered above whichever attestation frameworks you target. Boards and CISOs find the Function/Category vocabulary far more legible than SOC 2 Trust Services Criteria or ISO 27001 Annex A. Many regulators (NYDFS, FTC) reference CSF in expected practice.</p>
         </section>
 
@@ -674,7 +674,7 @@
             <h2>NIST SP 800-53 &amp; 800-171</h2>
 
             <h3>NIST SP 800-53 Rev 5</h3>
-            <p>The <a href="https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final" target="_blank" rel="noopener noreferrer">comprehensive US federal control catalog</a> — ~1,000 controls organized into 20 families (Access Control, Audit and Accountability, Identification and Authentication, System and Communications Protection, etc.). The basis for FedRAMP baselines and many other federal frameworks. Rev 5 introduced privacy controls inline with security controls and added supply-chain risk management (SR family).</p>
+            <p>The <a href="https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final" target="_blank" rel="noopener noreferrer">comprehensive US federal control catalog</a> - ~1,000 controls organized into 20 families (Access Control, Audit and Accountability, Identification and Authentication, System and Communications Protection, etc.). The basis for FedRAMP baselines and many other federal frameworks. Rev 5 introduced privacy controls inline with security controls and added supply-chain risk management (SR family).</p>
             <p>You will rarely implement 800-53 directly as a private-sector entity unless you are pursuing FedRAMP. But 800-53 is the largest control vocabulary; crosswalks to almost everything else flow through it.</p>
 
             <h3>NIST SP 800-171 Rev 2 (Rev 3 transitioning)</h3>
@@ -690,17 +690,17 @@
             <p>The <a href="https://www.cisecurity.org/" target="_blank" rel="noopener noreferrer">Center for Internet Security</a> publishes two distinct things often confused: <strong>Benchmarks</strong> (per-platform configuration baselines) and <strong>Controls</strong> (a prioritized control framework).</p>
 
             <h3>CIS Benchmarks</h3>
-            <p>Specific, configuration-level baselines per platform — CIS AWS Foundations, CIS Azure Foundations, CIS GCP Foundations, CIS <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a> Benchmark, CIS Docker, CIS Ubuntu / Windows / RHEL, plus dozens of application and database benchmarks. <strong>Not attestations</strong>; they are the implementation-layer baseline every modern <a class="glossary-link" href="glossary.html#term-cspm">CSPM</a> scores against by default.</p>
+            <p>Specific, configuration-level baselines per platform - CIS AWS Foundations, CIS Azure Foundations, CIS GCP Foundations, CIS <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a> Benchmark, CIS Docker, CIS Ubuntu / Windows / RHEL, plus dozens of application and database benchmarks. <strong>Not attestations</strong>; they are the implementation-layer baseline every modern <a class="glossary-link" href="glossary.html#term-cspm">CSPM</a> scores against by default.</p>
             <p>Aligning with the CIS AWS / Azure / GCP Foundations Benchmark produces evidence that crosswalks cleanly to SOC 2 CC controls, ISO 27001 Annex A technical controls, PCI DSS Requirements 1, 2, 7, 8, 10, and HIPAA Security Rule technical safeguards. For most cloud-native programs, "comply with CIS Foundations Benchmark" is the highest-leverage single starting goal.</p>
 
             <h3>CIS Controls v8</h3>
             <p>18 prioritized security controls with ~153 safeguards. Stratified into three Implementation Groups by organization profile:</p>
             <ul>
-                <li><strong>IG1</strong> — essential cyber hygiene. ~56 safeguards. Small businesses with limited security resources and non-sensitive data.</li>
-                <li><strong>IG2</strong> — ~74 additional safeguards (130 total). Mid-size with some regulatory exposure.</li>
-                <li><strong>IG3</strong> — ~23 additional safeguards (153 total). Large enterprises with sensitive data and sophisticated adversaries.</li>
+                <li><strong>IG1</strong> - essential cyber hygiene. ~56 safeguards. Small businesses with limited security resources and non-sensitive data.</li>
+                <li><strong>IG2</strong> - ~74 additional safeguards (130 total). Mid-size with some regulatory exposure.</li>
+                <li><strong>IG3</strong> - ~23 additional safeguards (153 total). Large enterprises with sensitive data and sophisticated adversaries.</li>
             </ul>
-            <p>CIS Controls v8 is a useful prioritization layer above your framework-of-record — it tells you which controls to implement first based on adversary realism, not just compliance order. Many regulators (FTC, state AGs in data-breach cases) reference CIS Controls as expected practice.</p>
+            <p>CIS Controls v8 is a useful prioritization layer above your framework-of-record - it tells you which controls to implement first based on adversary realism, not just compliance order. Many regulators (FTC, state AGs in data-breach cases) reference CIS Controls as expected practice.</p>
         </section>
 
         <section id="gdpr">
@@ -709,11 +709,11 @@
             <h3>GDPR</h3>
             <p>The <a href="https://gdpr.eu/" target="_blank" rel="noopener noreferrer">General Data Protection Regulation</a> applies to processing of personal data of EU/EEA residents, regardless of where the controller or processor is located. Extraterritorial scope means most cloud services with EU users are in scope.</p>
             <ul>
-                <li><strong>Article 32 — Security of processing.</strong> Risk-appropriate technical and organizational measures: pseudonymization and encryption, confidentiality/integrity/availability/resilience, ability to restore availability, regular testing of effectiveness.</li>
+                <li><strong>Article 32 - Security of processing.</strong> Risk-appropriate technical and organizational measures: pseudonymization and encryption, confidentiality/integrity/availability/resilience, ability to restore availability, regular testing of effectiveness.</li>
                 <li><strong>DPIAs (Article 35).</strong> Data Protection Impact Assessment required when processing is likely to result in a high risk to rights and freedoms.</li>
                 <li><strong>DPO (Article 37).</strong> Data Protection Officer required for public authorities, large-scale monitoring, or large-scale processing of special categories.</li>
                 <li><strong>Breach notification (Article 33).</strong> 72-hour notification to supervisory authority; data-subject notification when high risk.</li>
-                <li><strong>Data subject rights.</strong> Access, rectification, erasure ("right to be forgotten"), portability, restriction, objection — workflows required.</li>
+                <li><strong>Data subject rights.</strong> Access, rectification, erasure ("right to be forgotten"), portability, restriction, objection - workflows required.</li>
                 <li><strong>Sanctions.</strong> Up to €20M or 4% of global annual turnover. Real enforcement; not hypothetical.</li>
             </ul>
 
@@ -737,7 +737,7 @@
 
         <section id="sox">
             <h2>SOX (ITGCs)</h2>
-            <p>The Sarbanes-Oxley Act (2002) governs US public companies. SOX Section 404 requires management to assess internal controls over financial reporting (ICFR) and the external auditor to attest. The cloud-security-relevant slice is <strong>IT General Controls (ITGCs)</strong> — controls over the IT environment supporting financial reporting systems.</p>
+            <p>The Sarbanes-Oxley Act (2002) governs US public companies. SOX Section 404 requires management to assess internal controls over financial reporting (ICFR) and the external auditor to attest. The cloud-security-relevant slice is <strong>IT General Controls (ITGCs)</strong> - controls over the IT environment supporting financial reporting systems.</p>
             <h3>The four ITGC domains</h3>
             <ul>
                 <li><strong>Access to Programs and Data.</strong> Logical access, segregation of duties, privileged access, user-access reviews on a quarterly cadence. The single largest source of SOX findings in cloud environments.</li>
@@ -752,31 +752,31 @@
             <h2>Regional: NIS2, DORA, APRA, PIPL, LGPD</h2>
 
             <h3>NIS2 (EU)</h3>
-            <p><a href="https://eur-lex.europa.eu/eli/dir/2022/2555/oj" target="_blank" rel="noopener noreferrer">Directive (EU) 2022/2555</a> on the security of network and information systems. Applies to essential and important entities across ~18 sectors (energy, transport, banking, health, digital infrastructure, ICT service management, public administration, food, manufacturing, postal, water, space, etc.). Member-state transposition required by October 2024 — uneven in practice but enforceable now in most member states. Imposes risk-management measures, incident-reporting timelines (24h early warning, 72h notification, 1-month final report), and management-body accountability with potential personal liability.</p>
+            <p><a href="https://eur-lex.europa.eu/eli/dir/2022/2555/oj" target="_blank" rel="noopener noreferrer">Directive (EU) 2022/2555</a> on the security of network and information systems. Applies to essential and important entities across ~18 sectors (energy, transport, banking, health, digital infrastructure, ICT service management, public administration, food, manufacturing, postal, water, space, etc.). Member-state transposition required by October 2024 - uneven in practice but enforceable now in most member states. Imposes risk-management measures, incident-reporting timelines (24h early warning, 72h notification, 1-month final report), and management-body accountability with potential personal liability.</p>
 
             <h3>DORA (EU)</h3>
-            <p><a href="https://eur-lex.europa.eu/eli/reg/2022/2554/oj" target="_blank" rel="noopener noreferrer">Digital Operational Resilience Act</a> — Regulation (EU) 2022/2554, in force <strong>January 17, 2025</strong>. Applies to ~22,000 EU financial entities (banks, insurance, investment firms, crypto-asset service providers) and their ICT third-party service providers including critical CSPs. Five pillars: ICT risk management, incident reporting, digital operational resilience testing (including threat-led penetration testing — TLPT), ICT third-party risk, information sharing. Critical Third-Party Providers (CTPPs) — designation pending — face direct oversight from the ESAs.</p>
+            <p><a href="https://eur-lex.europa.eu/eli/reg/2022/2554/oj" target="_blank" rel="noopener noreferrer">Digital Operational Resilience Act</a> - Regulation (EU) 2022/2554, in force <strong>January 17, 2025</strong>. Applies to ~22,000 EU financial entities (banks, insurance, investment firms, crypto-asset service providers) and their ICT third-party service providers including critical CSPs. Five pillars: ICT risk management, incident reporting, digital operational resilience testing (including threat-led penetration testing - TLPT), ICT third-party risk, information sharing. Critical Third-Party Providers (CTPPs) - designation pending - face direct oversight from the ESAs.</p>
 
             <h3>APRA CPS 234 (Australia)</h3>
-            <p><a href="https://www.apra.gov.au/information-security-prudential-standard-cps-234" target="_blank" rel="noopener noreferrer">APRA Prudential Standard CPS 234</a> — information security obligations for Australian regulated financial entities. Plus CPS 230 (operational risk management) and CPS 231 (outsourcing) for the broader risk landscape. AWS, Azure, and GCP have all published APRA-specific guidance.</p>
+            <p><a href="https://www.apra.gov.au/information-security-prudential-standard-cps-234" target="_blank" rel="noopener noreferrer">APRA Prudential Standard CPS 234</a> - information security obligations for Australian regulated financial entities. Plus CPS 230 (operational risk management) and CPS 231 (outsourcing) for the broader risk landscape. AWS, Azure, and GCP have all published APRA-specific guidance.</p>
 
             <h3>PIPL (China)</h3>
-            <p><a href="https://www.pipc.gov.cn/" target="_blank" rel="noopener noreferrer">Personal Information Protection Law</a> (2021) — comprehensive personal-data law analogous to GDPR. Cross-border transfer mechanisms (security assessment by CAC, certification, <a class="glossary-link" href="glossary.html#term-guardduty">SCC</a>) required. Data Security Law (DSL) and Cybersecurity Law (CSL) sit alongside. Operating in China generally requires a local entity or in-country partner.</p>
+            <p><a href="https://www.pipc.gov.cn/" target="_blank" rel="noopener noreferrer">Personal Information Protection Law</a> (2021) - comprehensive personal-data law analogous to GDPR. Cross-border transfer mechanisms (security assessment by CAC, certification, <a class="glossary-link" href="glossary.html#term-guardduty">SCC</a>) required. Data Security Law (DSL) and Cybersecurity Law (CSL) sit alongside. Operating in China generally requires a local entity or in-country partner.</p>
 
             <h3>LGPD (Brazil)</h3>
-            <p><a href="https://www.gov.br/anpd/pt-br" target="_blank" rel="noopener noreferrer">Lei Geral de Proteção de Dados</a> (2020) — GDPR-aligned Brazilian privacy law enforced by the ANPD. Most GDPR-compliant programs map cleanly with localization for legal bases and breach notification specifics.</p>
+            <p><a href="https://www.gov.br/anpd/pt-br" target="_blank" rel="noopener noreferrer">Lei Geral de Proteção de Dados</a> (2020) - GDPR-aligned Brazilian privacy law enforced by the ANPD. Most GDPR-compliant programs map cleanly with localization for legal bases and breach notification specifics.</p>
         </section>
 
         <section id="sector">
             <h2>Sector-specific: FERPA, GLBA, CJIS, TISAX, ISO 13485</h2>
             <ul>
-                <li><strong>FERPA</strong> — <a href="https://studentprivacy.ed.gov/" target="_blank" rel="noopener noreferrer">Family Educational Rights and Privacy Act</a>. US K-12 and higher education. Cloud vendors handling student records sign FERPA-compliant data-handling agreements (school-officials exception). EdTech adds state-level laws (SOPIPA in California, SOPPA in Illinois, NY Ed Law 2-d).</li>
-                <li><strong>GLBA Safeguards Rule</strong> — <a href="https://www.ftc.gov/legal-library/browse/rules/safeguards-rule" target="_blank" rel="noopener noreferrer">Gramm-Leach-Bliley Act</a>. US financial institutions. FTC Safeguards Rule revised 2021 with explicit security requirements (designated qualified individual, written program, risk assessment, access controls, encryption, MFA, monitoring, training, <a class="glossary-link" href="glossary.html#term-incident-response">incident response</a> plan, board reporting).</li>
-                <li><strong>CJIS</strong> — <a href="https://le.fbi.gov/cjis-division/cjis-security-policy-resource-center" target="_blank" rel="noopener noreferrer">Criminal Justice Information Services</a> Security Policy. Required for any system handling FBI CJIS data — fingerprints, criminal history, NCIC records. AWS GovCloud, Azure Government, and GCP all have CJIS-compatible offerings. Personnel screening, advanced authentication, and audit logging are the heavy lifts.</li>
-                <li><strong>TISAX</strong> — <a href="https://enx.com/en-US/tisax/" target="_blank" rel="noopener noreferrer">Trusted Information Security Assessment Exchange</a>. The German automotive industry's information-security assessment (managed by ENX). Required to participate in OEM supply chains (VW, BMW, Mercedes-Benz, Audi, others). Three assessment levels with prototypes / classified data driving the highest.</li>
-                <li><strong>ISO 13485</strong> — quality management for medical devices. Adjacent to ISO 27001 but distinct; required for medical-device software (SaMD).</li>
-                <li><strong>NERC CIP</strong> — North American electric utility cybersecurity. 13 reliability standards (CIP-002 through CIP-014) covering Bulk Electric System cyber assets. Heavy compliance overhead; cloud adoption is constrained by personnel and connectivity requirements.</li>
-                <li><strong>FFIEC and NYDFS Part 500</strong> — US financial services. FFIEC is the inter-agency examination handbook (not a regulation but supervisory expectation); NYDFS Part 500 is the binding New York cybersecurity regulation for covered entities including notification timelines and CISO certifications.</li>
+                <li><strong>FERPA</strong> - <a href="https://studentprivacy.ed.gov/" target="_blank" rel="noopener noreferrer">Family Educational Rights and Privacy Act</a>. US K-12 and higher education. Cloud vendors handling student records sign FERPA-compliant data-handling agreements (school-officials exception). EdTech adds state-level laws (SOPIPA in California, SOPPA in Illinois, NY Ed Law 2-d).</li>
+                <li><strong>GLBA Safeguards Rule</strong> - <a href="https://www.ftc.gov/legal-library/browse/rules/safeguards-rule" target="_blank" rel="noopener noreferrer">Gramm-Leach-Bliley Act</a>. US financial institutions. FTC Safeguards Rule revised 2021 with explicit security requirements (designated qualified individual, written program, risk assessment, access controls, encryption, MFA, monitoring, training, <a class="glossary-link" href="glossary.html#term-incident-response">incident response</a> plan, board reporting).</li>
+                <li><strong>CJIS</strong> - <a href="https://le.fbi.gov/cjis-division/cjis-security-policy-resource-center" target="_blank" rel="noopener noreferrer">Criminal Justice Information Services</a> Security Policy. Required for any system handling FBI CJIS data - fingerprints, criminal history, NCIC records. AWS GovCloud, Azure Government, and GCP all have CJIS-compatible offerings. Personnel screening, advanced authentication, and audit logging are the heavy lifts.</li>
+                <li><strong>TISAX</strong> - <a href="https://enx.com/en-US/tisax/" target="_blank" rel="noopener noreferrer">Trusted Information Security Assessment Exchange</a>. The German automotive industry's information-security assessment (managed by ENX). Required to participate in OEM supply chains (VW, BMW, Mercedes-Benz, Audi, others). Three assessment levels with prototypes / classified data driving the highest.</li>
+                <li><strong>ISO 13485</strong> - quality management for medical devices. Adjacent to ISO 27001 but distinct; required for medical-device software (SaMD).</li>
+                <li><strong>NERC CIP</strong> - North American electric utility cybersecurity. 13 reliability standards (CIP-002 through CIP-014) covering Bulk Electric System cyber assets. Heavy compliance overhead; cloud adoption is constrained by personnel and connectivity requirements.</li>
+                <li><strong>FFIEC and NYDFS Part 500</strong> - US financial services. FFIEC is the inter-agency examination handbook (not a regulation but supervisory expectation); NYDFS Part 500 is the binding New York cybersecurity regulation for covered entities including notification timelines and CISO certifications.</li>
             </ul>
         </section>
 
@@ -784,13 +784,13 @@
             <h2>Framework crosswalks &amp; mapping tools</h2>
             <p>The mapping work is mostly already done. Use these instead of reinventing the crosswalk:</p>
             <ul>
-                <li><strong><a href="https://securecontrolsframework.com/" target="_blank" rel="noopener noreferrer">Secure Controls Framework (SCF)</a></strong> — free, ~1,100 meta-controls mapped to ~150 frameworks (SOC 2, ISO 27001/27002, PCI DSS, HIPAA, NIST 800-53, NIST 800-171, NIST CSF, CIS, GDPR, FedRAMP, CMMC, NIS2, DORA, and on). Maintained by ComplianceForge. The best free starting point.</li>
-                <li><strong><a href="https://www.unifiedcompliance.com/home" target="_blank" rel="noopener noreferrer">Unified Compliance Framework (UCF)</a></strong> — commercial, exhaustive, the database many GRC platforms license behind the scenes. ~1,200+ authority documents. Expensive but comprehensive.</li>
-                <li><strong><a href="https://pages.nist.gov/OSCAL/" target="_blank" rel="noopener noreferrer">OSCAL</a></strong> — NIST's machine-readable XML/JSON/YAML format for controls, profiles, components, and SSPs. The future of compliance content interchange. FedRAMP authorization packages are migrating to OSCAL; smart programs author internal catalogs natively in OSCAL.</li>
-                <li><strong><a href="https://complianceforge.com/" target="_blank" rel="noopener noreferrer">ComplianceForge</a></strong> — reference policy and procedure libraries pre-mapped to SCF. Useful starting templates for organizations that want documentation faster than from scratch.</li>
-                <li><strong><a href="https://cloudsecurityalliance.org/research/cloud-controls-matrix" target="_blank" rel="noopener noreferrer">CSA Cloud Controls Matrix (CCM)</a></strong> + <strong>CAIQ</strong> — cloud-specific control framework and the questionnaire vendors complete for the CSA STAR Registry. Widely accepted by enterprise procurement.</li>
-                <li><strong><a href="https://www.nist.gov/cyberframework/informative-references" target="_blank" rel="noopener noreferrer">NIST CSF Informative References</a></strong> — official mappings from CSF 2.0 Subcategories to 800-53, 800-171, ISO 27001, COBIT, ISA 62443, and others.</li>
-                <li><strong><a href="https://www.cisecurity.org/controls/cis-controls-navigator" target="_blank" rel="noopener noreferrer">CIS Controls Navigator</a></strong> — CIS's published crosswalks from CIS Controls v8 to other frameworks.</li>
+                <li><strong><a href="https://securecontrolsframework.com/" target="_blank" rel="noopener noreferrer">Secure Controls Framework (SCF)</a></strong> - free, ~1,100 meta-controls mapped to ~150 frameworks (SOC 2, ISO 27001/27002, PCI DSS, HIPAA, NIST 800-53, NIST 800-171, NIST CSF, CIS, GDPR, FedRAMP, CMMC, NIS2, DORA, and on). Maintained by ComplianceForge. The best free starting point.</li>
+                <li><strong><a href="https://www.unifiedcompliance.com/home" target="_blank" rel="noopener noreferrer">Unified Compliance Framework (UCF)</a></strong> - commercial, exhaustive, the database many GRC platforms license behind the scenes. ~1,200+ authority documents. Expensive but comprehensive.</li>
+                <li><strong><a href="https://pages.nist.gov/OSCAL/" target="_blank" rel="noopener noreferrer">OSCAL</a></strong> - NIST's machine-readable XML/JSON/YAML format for controls, profiles, components, and SSPs. The future of compliance content interchange. FedRAMP authorization packages are migrating to OSCAL; smart programs author internal catalogs natively in OSCAL.</li>
+                <li><strong><a href="https://complianceforge.com/" target="_blank" rel="noopener noreferrer">ComplianceForge</a></strong> - reference policy and procedure libraries pre-mapped to SCF. Useful starting templates for organizations that want documentation faster than from scratch.</li>
+                <li><strong><a href="https://cloudsecurityalliance.org/research/cloud-controls-matrix" target="_blank" rel="noopener noreferrer">CSA Cloud Controls Matrix (CCM)</a></strong> + <strong>CAIQ</strong> - cloud-specific control framework and the questionnaire vendors complete for the CSA STAR Registry. Widely accepted by enterprise procurement.</li>
+                <li><strong><a href="https://www.nist.gov/cyberframework/informative-references" target="_blank" rel="noopener noreferrer">NIST CSF Informative References</a></strong> - official mappings from CSF 2.0 Subcategories to 800-53, 800-171, ISO 27001, COBIT, ISA 62443, and others.</li>
+                <li><strong><a href="https://www.cisecurity.org/controls/cis-controls-navigator" target="_blank" rel="noopener noreferrer">CIS Controls Navigator</a></strong> - CIS's published crosswalks from CIS Controls v8 to other frameworks.</li>
             </ul>
         </section>
 
@@ -816,9 +816,9 @@
                         </tr>
                         <tr>
                             <th scope="row">SOC 1 / 2 / 3</th>
-                            <td>Yes — semiannual reports in Artifact</td>
-                            <td>Yes — semiannual reports via STP</td>
-                            <td>Yes — semiannual reports via Reports Manager</td>
+                            <td>Yes - semiannual reports in Artifact</td>
+                            <td>Yes - semiannual reports via STP</td>
+                            <td>Yes - semiannual reports via Reports Manager</td>
                         </tr>
                         <tr>
                             <th scope="row">ISO 27001 / 27017 / 27018 / 27701</th>
@@ -828,9 +828,9 @@
                         </tr>
                         <tr>
                             <th scope="row">PCI DSS Level 1</th>
-                            <td>Yes — ~120 services</td>
-                            <td>Yes — comparable scope</td>
-                            <td>Yes — comparable scope</td>
+                            <td>Yes - ~120 services</td>
+                            <td>Yes - comparable scope</td>
+                            <td>Yes - comparable scope</td>
                         </tr>
                         <tr>
                             <th scope="row">HIPAA BAA-eligible services</th>
@@ -895,29 +895,29 @@
                     </tbody>
                 </table>
             </div>
-            <p>Three takeaways. <strong>One:</strong> attestation coverage at the provider level is roughly parity across all three; the differences that matter are at the customer-implementation layer and the regulated-boundary offerings. <strong>Two:</strong> the evidence portals — Artifact, STP, Reports Manager — are where you collect provider AOCs and SOC reports for your auditor. Bookmark all three early. <strong>Three:</strong> the customer-side assessment tools (Audit Manager, Purview Compliance Manager, Assured Workloads + SCC) are valuable but they don't replace a GRC platform — they instrument the cloud-native portion of evidence collection.</p>
+            <p>Three takeaways. <strong>One:</strong> attestation coverage at the provider level is roughly parity across all three; the differences that matter are at the customer-implementation layer and the regulated-boundary offerings. <strong>Two:</strong> the evidence portals - Artifact, STP, Reports Manager - are where you collect provider AOCs and SOC reports for your auditor. Bookmark all three early. <strong>Three:</strong> the customer-side assessment tools (Audit Manager, Purview Compliance Manager, Assured Workloads + SCC) are valuable but they don't replace a GRC platform - they instrument the cloud-native portion of evidence collection.</p>
         </section>
 
         <section id="continuous">
             <h2>Continuous compliance &amp; evidence automation</h2>
-            <p>For the deep dive on this, see the <a href="grc.html#policy-as-code">GRC policy-as-code section</a> and the <a href="grc.html#continuous">continuous compliance with CSPM/CNAPP section</a> — this page is about the frameworks themselves; the implementation pattern is the same regardless of which frameworks you target.</p>
+            <p>For the deep dive on this, see the <a href="grc.html#policy-as-code">GRC policy-as-code section</a> and the <a href="grc.html#continuous">continuous compliance with CSPM/CNAPP section</a> - this page is about the frameworks themselves; the implementation pattern is the same regardless of which frameworks you target.</p>
             <p>The short version: every modern framework now <em>expects</em> continuous monitoring evidence rather than point-in-time snapshots. PCI DSS v4.0, FedRAMP 20x, SOC 2 with revised TSC, and the trend across ISO 27001 audits all push toward "show me the rule, show me the evaluation log, show me the remediation workflow" instead of "send me a screenshot taken last Tuesday." Programs that have built compliance-as-code in <a href="ci-cd.html">CI/CD</a>, CSPM/<a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a> rule packs aligned to their target frameworks, and a <a href="cspm-vs-cnapp.html">CSPM</a> or GRC platform that pulls evidence on a schedule sail through audits; programs still on screenshot-driven evidence collection are about to face increasing auditor friction.</p>
         </section>
 
         <section id="platforms">
             <h2>GRC platform landscape</h2>
-            <p>The system-of-record layer that organizes evidence, framework mappings, exceptions, vendor risk, and audit readiness. Brief differentiation — see <a href="grc.html#platforms">the GRC page</a> for a deeper take:</p>
+            <p>The system-of-record layer that organizes evidence, framework mappings, exceptions, vendor risk, and audit readiness. Brief differentiation - see <a href="grc.html#platforms">the GRC page</a> for a deeper take:</p>
             <ul>
-                <li><strong><a href="https://www.vanta.com/" target="_blank" rel="noopener noreferrer">Vanta</a></strong> — fastest first SOC 2 in market; deepest integration breadth; expanding into ISO 27001, HIPAA, PCI DSS, GDPR, FedRAMP support. The default for SaaS startups.</li>
-                <li><strong><a href="https://drata.com/" target="_blank" rel="noopener noreferrer">Drata</a></strong> — comparable to Vanta on coverage; somewhat heavier customization; strong on multi-framework programs.</li>
-                <li><strong><a href="https://secureframe.com/" target="_blank" rel="noopener noreferrer">Secureframe</a></strong> — comparable; differentiating on <a class="glossary-link" href="glossary.html#term-ai">AI</a> features and FedRAMP support.</li>
-                <li><strong><a href="https://hyperproof.io/" target="_blank" rel="noopener noreferrer">Hyperproof</a></strong> — strong control-framework structure; geared toward larger compliance teams running 5+ frameworks.</li>
-                <li><strong><a href="https://www.onetrust.com/" target="_blank" rel="noopener noreferrer">OneTrust</a></strong> — broad GRC suite, particularly strong on privacy (DSARs, ROPAs, cookies) and third-party risk; heavier than the compliance-automation-first tools.</li>
-                <li><strong><a href="https://www.servicenow.com/products/governance-risk-and-compliance.html" target="_blank" rel="noopener noreferrer">ServiceNow GRC / IRM</a></strong> — enterprise-grade; right when your organization is already on ServiceNow for ITSM and you have GRC team size to match.</li>
-                <li><strong><a href="https://optro.ai/" target="_blank" rel="noopener noreferrer">AuditBoard</a></strong> — strong on internal audit and SOX programs; expanding into broader IT GRC.</li>
-                <li><strong><a href="https://www.logicgate.com/" target="_blank" rel="noopener noreferrer">LogicGate</a></strong> — workflow-driven; good for organizations that want to model bespoke risk and compliance processes.</li>
+                <li><strong><a href="https://www.vanta.com/" target="_blank" rel="noopener noreferrer">Vanta</a></strong> - fastest first SOC 2 in market; deepest integration breadth; expanding into ISO 27001, HIPAA, PCI DSS, GDPR, FedRAMP support. The default for SaaS startups.</li>
+                <li><strong><a href="https://drata.com/" target="_blank" rel="noopener noreferrer">Drata</a></strong> - comparable to Vanta on coverage; somewhat heavier customization; strong on multi-framework programs.</li>
+                <li><strong><a href="https://secureframe.com/" target="_blank" rel="noopener noreferrer">Secureframe</a></strong> - comparable; differentiating on <a class="glossary-link" href="glossary.html#term-ai">AI</a> features and FedRAMP support.</li>
+                <li><strong><a href="https://hyperproof.io/" target="_blank" rel="noopener noreferrer">Hyperproof</a></strong> - strong control-framework structure; geared toward larger compliance teams running 5+ frameworks.</li>
+                <li><strong><a href="https://www.onetrust.com/" target="_blank" rel="noopener noreferrer">OneTrust</a></strong> - broad GRC suite, particularly strong on privacy (DSARs, ROPAs, cookies) and third-party risk; heavier than the compliance-automation-first tools.</li>
+                <li><strong><a href="https://www.servicenow.com/products/governance-risk-and-compliance.html" target="_blank" rel="noopener noreferrer">ServiceNow GRC / IRM</a></strong> - enterprise-grade; right when your organization is already on ServiceNow for ITSM and you have GRC team size to match.</li>
+                <li><strong><a href="https://optro.ai/" target="_blank" rel="noopener noreferrer">AuditBoard</a></strong> - strong on internal audit and SOX programs; expanding into broader IT GRC.</li>
+                <li><strong><a href="https://www.logicgate.com/" target="_blank" rel="noopener noreferrer">LogicGate</a></strong> - workflow-driven; good for organizations that want to model bespoke risk and compliance processes.</li>
             </ul>
-            <p>The choice criterion that matters most: <strong>integration depth with your cloud(s), identity provider, and ticketing</strong>. The whole value proposition is automated evidence collection. A platform that pulls 80% of evidence automatically is worth 2–3× one that pulls 30%. Talk to your target auditor about which platforms they're efficient on before signing the contract — the same auditor on their preferred platform is a meaningfully cheaper engagement.</p>
+            <p>The choice criterion that matters most: <strong>integration depth with your cloud(s), identity provider, and ticketing</strong>. The whole value proposition is automated evidence collection. A platform that pulls 80% of evidence automatically is worth 2–3× one that pulls 30%. Talk to your target auditor about which platforms they're efficient on before signing the contract - the same auditor on their preferred platform is a meaningfully cheaper engagement.</p>
         </section>
 
         <section id="pitfalls">
@@ -925,7 +925,7 @@
             <ul>
                 <li><strong>Chasing every framework.</strong> Five frameworks is a real program; ten is a paperwork factory that compounds into duplicated controls and confused owners. Pursue frameworks against named revenue or regulation; defer the rest.</li>
                 <li><strong>Confusing compliance with security.</strong> The auditor will sign off whether the breach is coming or not. Risk-rank, then implement; do not let SOC 2 priorities crowd out the controls that close real attack paths. The Capital One breach was at a SOC-compliant company.</li>
-                <li><strong>Screenshot-driven evidence collection.</strong> A Stage 1 pattern. Past 20 controls it dominates program cost and goes stale immediately. Automate evidence collection from cloud APIs, IdP, code repo, MDM — this is what compliance-automation platforms exist for.</li>
+                <li><strong>Screenshot-driven evidence collection.</strong> A Stage 1 pattern. Past 20 controls it dominates program cost and goes stale immediately. Automate evidence collection from cloud APIs, IdP, code repo, MDM - this is what compliance-automation platforms exist for.</li>
                 <li><strong>No continuous monitoring.</strong> Frameworks increasingly expect continuous control verification, not annual sampling. PCI DSS v4.0 explicitly added frequency-based assurance requirements. Programs designed around the audit window are about to face increasing auditor friction.</li>
                 <li><strong>Treating PCI DSS scope as unavoidable.</strong> Tokenization and hosted payment pages collapse your CDE to almost nothing. Many companies pay for full PCI scope they could have eliminated with a Stripe Elements / Adyen / Braintree redirect.</li>
                 <li><strong>Putting PHI in non-BAA-covered services.</strong> The BAA covers eligible services. Using a non-eligible service with PHI is a HIPAA violation even if the BAA is signed. Check the provider's HIPAA-eligible services list <em>every release</em>.</li>
@@ -940,7 +940,7 @@
             <h2>Further reading</h2>
             <h3>Framework primary sources</h3>
             <ul>
-                <li><a href="https://www.aicpa-cima.com/resources/landing/system-and-organization-controls-soc-suite-of-services" target="_blank" rel="noopener noreferrer">AICPA — SOC 2 Trust Services Criteria</a></li>
+                <li><a href="https://www.aicpa-cima.com/resources/landing/system-and-organization-controls-soc-suite-of-services" target="_blank" rel="noopener noreferrer">AICPA - SOC 2 Trust Services Criteria</a></li>
                 <li><a href="https://www.iso.org/standard/27001" target="_blank" rel="noopener noreferrer">ISO/IEC 27001:2022</a></li>
                 <li><a href="https://www.pcisecuritystandards.org/document_library/" target="_blank" rel="noopener noreferrer">PCI DSS v4.0.1 document library</a></li>
                 <li><a href="https://www.hhs.gov/hipaa/for-professionals/index.html" target="_blank" rel="noopener noreferrer">HHS HIPAA for Professionals</a></li>
@@ -968,13 +968,13 @@
             </ul>
             <h3>Related CSOH pages</h3>
             <ul>
-                <li><a href="grc.html">GRC for Cloud</a> — the meta-program that runs frameworks.</li>
-                <li><a href="shared-responsibility-model.html">Shared responsibility</a> — where provider attestation ends and yours begins.</li>
-                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> — the live sensor that produces evidence.</li>
-                <li><a href="cloud-soc.html">Cloud SOC</a> — the detection/response counterpart.</li>
-                <li><a href="ci-cd.html">CI/CD</a> — where compliance-as-code lives.</li>
-                <li><a href="landing-zones.html">Landing zones</a> — the architectural foundation.</li>
-                <li><a href="glossary.html">Glossary</a> — every framework acronym on this page, defined.</li>
+                <li><a href="grc.html">GRC for Cloud</a> - the meta-program that runs frameworks.</li>
+                <li><a href="shared-responsibility-model.html">Shared responsibility</a> - where provider attestation ends and yours begins.</li>
+                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> - the live sensor that produces evidence.</li>
+                <li><a href="cloud-soc.html">Cloud SOC</a> - the detection/response counterpart.</li>
+                <li><a href="ci-cd.html">CI/CD</a> - where compliance-as-code lives.</li>
+                <li><a href="landing-zones.html">Landing zones</a> - the architectural foundation.</li>
+                <li><a href="glossary.html">Glossary</a> - every framework acronym on this page, defined.</li>
             </ul>
         </section>
 
@@ -982,19 +982,19 @@
             <h2>FAQ</h2>
 
             <h3>Which compliance framework should I start with?</h3>
-            <p>Start with the one your customers ask for. For most B2B SaaS in North America that's SOC 2 Type II. If you sell to EU enterprises, ISO 27001 is the more common ask and may be required co-equally. If you handle payment cards, PCI DSS is non-negotiable. If you handle PHI, HIPAA. If you sell to the US federal government, FedRAMP. Pick the one with revenue attached, run it as your primary, and map every other framework to it — they overlap 60–80% so a second framework is far cheaper than the first.</p>
+            <p>Start with the one your customers ask for. For most B2B SaaS in North America that's SOC 2 Type II. If you sell to EU enterprises, ISO 27001 is the more common ask and may be required co-equally. If you handle payment cards, PCI DSS is non-negotiable. If you handle PHI, HIPAA. If you sell to the US federal government, FedRAMP. Pick the one with revenue attached, run it as your primary, and map every other framework to it - they overlap 60–80% so a second framework is far cheaper than the first.</p>
 
             <h3>What is the difference between SOC 2 Type I and Type II?</h3>
-            <p>Type I is a point-in-time assessment: the auditor evaluates whether your controls are designed appropriately on a specific date. It's faster (a few weeks of fieldwork) and cheaper, but enterprise buyers rarely accept it as the final answer. Type II covers an observation period — typically 6 or 12 months — and the auditor tests whether the controls actually operated effectively the whole time. Type II is what procurement teams want; Type I is a stepping stone or a stop-gap during the first observation window.</p>
+            <p>Type I is a point-in-time assessment: the auditor evaluates whether your controls are designed appropriately on a specific date. It's faster (a few weeks of fieldwork) and cheaper, but enterprise buyers rarely accept it as the final answer. Type II covers an observation period - typically 6 or 12 months - and the auditor tests whether the controls actually operated effectively the whole time. Type II is what procurement teams want; Type I is a stepping stone or a stop-gap during the first observation window.</p>
 
             <h3>How do SOC 2, ISO 27001, and PCI DSS overlap?</h3>
-            <p>They overlap by roughly 60–80% on the underlying technical controls — access management, encryption, logging, change management, incident response, <a class="glossary-link" href="glossary.html#term-vulnerability-management">vulnerability management</a>, vendor risk. Where they diverge: SOC 2 emphasizes service-organization commitments and Trust Services Criteria; ISO 27001 requires a formal ISMS with management review and continual improvement; PCI DSS is highly prescriptive on network segmentation, cardholder data handling, and quarterly scanning. The pragmatic approach is to maintain one internal control set, map all frameworks to it, and add framework-specific overlays where needed. The <a href="https://securecontrolsframework.com/" target="_blank" rel="noopener noreferrer">Secure Controls Framework</a>, the Unified Compliance Framework, and OSCAL exist specifically to make this mapping reusable.</p>
+            <p>They overlap by roughly 60–80% on the underlying technical controls - access management, encryption, logging, change management, incident response, <a class="glossary-link" href="glossary.html#term-vulnerability-management">vulnerability management</a>, vendor risk. Where they diverge: SOC 2 emphasizes service-organization commitments and Trust Services Criteria; ISO 27001 requires a formal ISMS with management review and continual improvement; PCI DSS is highly prescriptive on network segmentation, cardholder data handling, and quarterly scanning. The pragmatic approach is to maintain one internal control set, map all frameworks to it, and add framework-specific overlays where needed. The <a href="https://securecontrolsframework.com/" target="_blank" rel="noopener noreferrer">Secure Controls Framework</a>, the Unified Compliance Framework, and OSCAL exist specifically to make this mapping reusable.</p>
 
             <h3>Is FedRAMP worth pursuing for a commercial SaaS?</h3>
             <p>Only if you have an identified federal customer with budget. FedRAMP Moderate authorization typically takes 12–18 months and $500k–$2M+ in first-year cost, plus ongoing continuous-monitoring overhead. The path: choose a baseline (Low, Moderate, High, or LI-SaaS for the new lightweight track), build in a FedRAMP-aligned cloud (AWS GovCloud, Azure Government, GCP with Assured Workloads, or the commercial regions where the providers' attestation extends), engage a 3PAO, and pursue an Agency ATO or the legacy JAB P-ATO. <a href="https://www.fedramp.gov/20x/" target="_blank" rel="noopener noreferrer">FedRAMP 20x</a> is the program's modernization effort and may shorten this materially for vendors who join early. "Maybe federal eventually" is not a business case.</p>
 
             <h3>Does using AWS, Azure, or GCP make my workload compliant?</h3>
-            <p>No — it makes the provider's part of the stack compliant. Under the <a href="shared-responsibility-model.html">shared responsibility model</a>, the cloud provider attests to the controls they own (physical security, <a class="glossary-link" href="glossary.html#term-hypervisor">hypervisor</a>, managed-service internals); you attest to the controls you own (IAM configuration, data encryption decisions, application security, customer access). AWS Artifact, Azure Service Trust Portal, and Google Cloud Compliance Reports Manager give you the provider-side reports to share with your auditor; you still need to demonstrate your half. Inheriting a provider's FedRAMP authorization does not authorize <em>your</em> service — it just means the underlying platform is in scope of the authorization you'll pursue.</p>
+            <p>No - it makes the provider's part of the stack compliant. Under the <a href="shared-responsibility-model.html">shared responsibility model</a>, the cloud provider attests to the controls they own (physical security, <a class="glossary-link" href="glossary.html#term-hypervisor">hypervisor</a>, managed-service internals); you attest to the controls you own (IAM configuration, data encryption decisions, application security, customer access). AWS Artifact, Azure Service Trust Portal, and Google Cloud Compliance Reports Manager give you the provider-side reports to share with your auditor; you still need to demonstrate your half. Inheriting a provider's FedRAMP authorization does not authorize <em>your</em> service - it just means the underlying platform is in scope of the authorization you'll pursue.</p>
 
             <h3>What is CMMC 2.0 and who needs it?</h3>
             <p>CMMC (Cybersecurity Maturity Model Certification) 2.0 is the US Department of Defense's framework for contractors handling Federal Contract Information (FCI) or Controlled Unclassified Information (CUI). Level 1 (Foundational) covers FCI and is self-assessed against 17 practices. Level 2 (Advanced) covers CUI and requires a C3PAO assessment against the 110 controls of <a class="glossary-link" href="glossary.html#term-nist-sp-800-171">NIST SP 800-171</a>. Level 3 (Expert) is for the most sensitive CUI and is assessed by the government's DIBCAC against a subset of NIST SP 800-172. Phased rollout into DoD contracts is underway; any prime or subcontractor that touches CUI needs to be planning their level now.</p>
@@ -1006,13 +1006,13 @@
         <section class="cta-section">
             <h2>Where next</h2>
             <ul>
-                <li><a href="grc.html">GRC for Cloud</a> — the program-level discipline that runs these frameworks. Read this companion piece next.</li>
-                <li><a href="shared-responsibility-model.html">Shared responsibility</a> — what provider attestation actually covers.</li>
-                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> — the live sensor that produces continuous compliance evidence.</li>
-                <li><a href="cloud-soc.html">Cloud SOC</a> — the detection/response side of the control universe.</li>
-                <li><a href="ci-cd.html">CI/CD</a> — where compliance-as-code enforcement lives in the pipeline.</li>
-                <li><a href="landing-zones.html">Landing zones</a> — the architectural foundation that makes frameworks enforceable.</li>
-                <li><a href="sessions.html">Friday Zoom</a> — framework strategy, auditor selection, and continuous-compliance tooling come up regularly. Drop in.</li>
+                <li><a href="grc.html">GRC for Cloud</a> - the program-level discipline that runs these frameworks. Read this companion piece next.</li>
+                <li><a href="shared-responsibility-model.html">Shared responsibility</a> - what provider attestation actually covers.</li>
+                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> - the live sensor that produces continuous compliance evidence.</li>
+                <li><a href="cloud-soc.html">Cloud SOC</a> - the detection/response side of the control universe.</li>
+                <li><a href="ci-cd.html">CI/CD</a> - where compliance-as-code enforcement lives in the pipeline.</li>
+                <li><a href="landing-zones.html">Landing zones</a> - the architectural foundation that makes frameworks enforceable.</li>
+                <li><a href="sessions.html">Friday Zoom</a> - framework strategy, auditor selection, and continuous-compliance tooling come up regularly. Drop in.</li>
             </ul>
         </section>
 

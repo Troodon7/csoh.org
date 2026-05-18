@@ -94,11 +94,11 @@ Push now? (y/n): y
 | 6 | `multi-cloud-ctfs` | AWS + Azure + GCP in one |
 | 7 | `specialty-ctfs` | AI/ML, Secrets, CI/CD |
 
-The monthly `wiz-championship` section is intentionally excluded from the script — those are edited directly as part of the calendar.
+The monthly `wiz-championship` section is intentionally excluded from the script - those are edited directly as part of the calendar.
 
 ## Tags
 
-- `CTF` — always included automatically as the first tag
+- `CTF` - always included automatically as the first tag
 - Cloud tags: `AWS`, `Azure`, `GCP`, `Kubernetes`, `Multi-Cloud`
 - Focus tags: `IAM`, `Containers`, `Serverless`, `Recon`, `Incident Response`, `Reverse Engineering`, `IaC`, `Secrets Management`, `CI/CD`, `AI/ML`, `Cloud Security`
 
@@ -106,6 +106,6 @@ Pick 1–3 tags beyond `CTF`.
 
 ## See Also
 
-- [CONTRIBUTING_CTFS.md](../CONTRIBUTING_CTFS.md) — full contribution guide
-- [SUBMIT_RESOURCE_README.md](SUBMIT_RESOURCE_README.md) — sibling tool for general resources
-- [GENERATE_PREVIEW_README.md](GENERATE_PREVIEW_README.md) — how preview images are generated
+- [CONTRIBUTING_CTFS.md](../CONTRIBUTING_CTFS.md) - full contribution guide
+- [SUBMIT_RESOURCE_README.md](SUBMIT_RESOURCE_README.md) - sibling tool for general resources
+- [GENERATE_PREVIEW_README.md](GENERATE_PREVIEW_README.md) - how preview images are generated

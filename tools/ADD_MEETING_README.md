@@ -18,7 +18,7 @@ The script:
 6. Adds a `<url>` entry to `sitemap.xml` and a record to `meetings-search-index.json`.
 7. Fixes broken entities common in Apple Notes exports (`&quot` → `"`, `&amp` → `&`).
 
-Re-running with the same date is idempotent — the existing page is replaced in place.
+Re-running with the same date is idempotent - the existing page is replaced in place.
 
 ## Workflow from an Apple Notes note
 
@@ -33,7 +33,7 @@ Re-running with the same date is idempotent — the existing page is replaced in
    ```
 3. **Review the diff**, commit, push. The deploy workflow will refresh `sitemap.xml` for `meetings.html` automatically.
 
-If you don't have the MCP set up locally, you can also copy/paste the note contents into a plain text file and feed that to the script — see "Input formats" below.
+If you don't have the MCP set up locally, you can also copy/paste the note contents into a plain text file and feed that to the script - see "Input formats" below.
 
 ## Input formats
 
@@ -73,9 +73,9 @@ Body paragraph.
 
 ## Flags
 
-- `--headline "Short headline"` — override the TOC entry's short headline. Default is the first topic heading.
-- `--tag "Foo"` — topical tag for the filter bar (repeatable). Example: `--tag AI --tag Conferences --tag "Supply Chain"`. A month tag (`YYYY-MM`) is always added automatically from the meeting date.
-- `--meetings-file path/to/meetings.html` — operate on a different file (useful for testing).
+- `--headline "Short headline"` - override the TOC entry's short headline. Default is the first topic heading.
+- `--tag "Foo"` - topical tag for the filter bar (repeatable). Example: `--tag AI --tag Conferences --tag "Supply Chain"`. A month tag (`YYYY-MM`) is always added automatically from the meeting date.
+- `--meetings-file path/to/meetings.html` - operate on a different file (useful for testing).
 
 ### Tag conventions
 
@@ -83,7 +83,7 @@ Tags appear as filter buttons on `meetings.html`. Keep them short, Title Case, a
 
 `AI`, `Anniversary`, `Community`, `Conferences`, `Education`, `GitHub Actions`, `Governance`, `Guest Speaker`, `Industry News`, `Insider Threats`, `Passwords`, `SBOM`, `Supply Chain`, `Vulnerabilities`.
 
-Add new ones sparingly — each one creates a new filter button.
+Add new ones sparingly - each one creates a new filter button.
 
 ## Expected structure
 
@@ -99,11 +99,11 @@ An empty `<h2>Summary</h2>` placeholder (as produced by some Apple Notes transcr
 
 - **OG card generation.** The new meeting page initially uses `banner.png` as its `og:image` fallback. Run `python3 tools/generate_meeting_og_images.py --pages meetings/YYYY-MM-DD.html` to render a per-meeting 1200×630 card and rewrite the meta tags. See [GENERATE_MEETING_OG_README.md](GENERATE_MEETING_OG_README.md).
 - **Topic-page link injection.** Optional pass to wrap cloud-security keywords in the recap body with links to topic pages (e.g. "disaster recovery" → `../backup-dr.html`). Run `python3 tools/inject_meeting_topic_links.py --pages meetings/YYYY-MM-DD.html`. See [INJECT_MEETING_TOPIC_LINKS_README.md](INJECT_MEETING_TOPIC_LINKS_README.md).
-- **Commits and pushes.** Stage and commit the changes yourself — the script never touches git. Affected files: `meetings/YYYY-MM-DD.html` (new), `meetings.html`, `meetings-search-index.json`, `sitemap.xml`, and the previously-newest meeting page (its pager is patched).
+- **Commits and pushes.** Stage and commit the changes yourself - the script never touches git. Affected files: `meetings/YYYY-MM-DD.html` (new), `meetings.html`, `meetings-search-index.json`, `sitemap.xml`, and the previously-newest meeting page (its pager is patched).
 - **Removing meetings.** To remove a stale meeting, delete `meetings/YYYY-MM-DD.html`, the matching card in `meetings.html`, the search-index record, and the sitemap entry. Fix the pager on neighboring meeting pages by hand.
 - **Renaming/redating.** If you got the date wrong, delete the old page and re-run the tool with the corrected note.
 
 ## Requirements
 
 - Python 3.9+ (standard library only)
-- Run from the repo root or anywhere — the script resolves `meetings.html` relative to its own location.
+- Run from the repo root or anywhere - the script resolves `meetings.html` relative to its own location.

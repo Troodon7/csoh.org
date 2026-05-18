@@ -1,10 +1,10 @@
 # 🤝 Contributing to CSOH.org
 
-Welcome! This guide covers **any change you want to suggest** to the CSOH website — whether it's adding news sources, improving descriptions, fixing typos, or redesigning the homepage. You don't need to be a developer.
+Welcome! This guide covers **any change you want to suggest** to the CSOH website - whether it's adding news sources, improving descriptions, fixing typos, or redesigning the homepage. You don't need to be a developer.
 
-> **Before you contribute**, please read the [Code of Conduct](code-of-conduct.html). It applies to every CSOH-organized space — Friday Zoom, the mailing list, GitHub issues, and pull-request review. Our [Privacy Policy](privacy.html) covers how the site handles your data (short version: no cookies, no marketing).
+> **Before you contribute**, please read the [Code of Conduct](code-of-conduct.html). It applies to every CSOH-organized space - Friday Zoom, the mailing list, GitHub issues, and pull-request review. Our [Privacy Policy](privacy.html) covers how the site handles your data (short version: no cookies, no marketing).
 
-> **🎉 First time contributing?** Start here — pick whichever feels easiest:
+> **🎉 First time contributing?** Start here - pick whichever feels easiest:
 >
 > | What you want to do | Easiest way | Time |
 > |---------------------|-------------|------|
@@ -599,12 +599,12 @@ Before you submit, make sure:
 
 ### What happens after your PR merges
 
-Two workflows fire on every merge to `main`: `site-update-deploy.yml` does the housekeeping (SRI hashing, URL safety checks, URL normalization, preview-image generation, sitemap refresh) and commits the results back to `main`; `gcp-deploy.yml` then builds the container, runs Trivy, and deploys to Cloud Run via Workload Identity Federation. You don't need to run any of this locally — see [README.md#how-automation-works](README.md#-how-automation-works) for the full pipeline.
+Two workflows fire on every merge to `main`: `site-update-deploy.yml` does the housekeeping (SRI hashing, URL safety checks, URL normalization, preview-image generation, sitemap refresh) and commits the results back to `main`; `gcp-deploy.yml` then builds the container, runs Trivy, and deploys to Cloud Run via Workload Identity Federation. You don't need to run any of this locally - see [README.md#how-automation-works](README.md#-how-automation-works) for the full pipeline.
 
 **Quick tips for URLs you add:**
 - Use HTTPS when available.
 - Link to the official source (GitHub, AWS docs, vendor blog).
-- Skip URL shorteners — paste the final destination.
+- Skip URL shorteners - paste the final destination.
 - Test the link before submitting.
 
 ---

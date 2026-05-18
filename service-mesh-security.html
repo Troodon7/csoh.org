@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta name="description"
-        content="Service mesh security — securing east-west traffic in Kubernetes with Istio, Linkerd, Cilium, and Consul Connect. Vendor-neutral guide to mTLS, workload identity (SPIFFE/SPIRE), authorization policy, sidecar vs ambient/sidecarless architectures, multi-cluster mesh, egress control, observability, and the managed offerings from AWS, Azure, and GCP.">
+        content="Service mesh security - securing east-west traffic in Kubernetes with Istio, Linkerd, Cilium, and Consul Connect. Vendor-neutral guide to mTLS, workload identity (SPIFFE/SPIRE), authorization policy, sidecar vs ambient/sidecarless architectures, multi-cluster mesh, egress control, observability, and the managed offerings from AWS, Azure, and GCP.">
     <meta name="keywords"
         content="service mesh, service mesh security, Istio, Linkerd, Cilium, Consul Connect, mTLS, SPIFFE, SPIRE, sidecar, ambient mesh, sidecarless, Envoy, AuthorizationPolicy, ClusterMesh, east-west traffic, zero trust kubernetes, Hubble, Kiali, multi-cluster mesh, egress gateway, App Mesh, Anthos Service Mesh">
-    <title>Service Mesh Security — Securing East-West Traffic in Kubernetes - CSOH</title>
+    <title>Service Mesh Security - Securing East-West Traffic in Kubernetes - CSOH</title>
 
     <link rel="canonical" href="https://csoh.org/service-mesh-security.html">
     <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
@@ -18,16 +18,16 @@
     <link rel="author" type="text/plain" href="/humans.txt">
     <meta name="theme-color" content="#0f172a">
 
-    <meta property="og:title" content="Service Mesh Security — Securing East-West Traffic in Kubernetes - CSOH">
+    <meta property="og:title" content="Service Mesh Security - Securing East-West Traffic in Kubernetes - CSOH">
     <meta property="og:description"
-        content="A practitioner's guide to service mesh security — Istio, Linkerd, Cilium, Consul; mTLS, SPIFFE/SPIRE workload identity, authorization policy, sidecar vs ambient/sidecarless, multi-cluster, egress, and the managed offerings.">
+        content="A practitioner's guide to service mesh security - Istio, Linkerd, Cilium, Consul; mTLS, SPIFFE/SPIRE workload identity, authorization policy, sidecar vs ambient/sidecarless, multi-cluster, egress, and the managed offerings.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://csoh.org/service-mesh-security.html">
     <meta property="og:image" content="https://csoh.org/banner.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Service Mesh Security — Securing East-West Traffic in Kubernetes">
+    <meta name="twitter:title" content="Service Mesh Security - Securing East-West Traffic in Kubernetes">
     <meta name="twitter:description"
-        content="Vendor-neutral guide to service mesh security — Istio, Linkerd, Cilium, Consul; mTLS, SPIFFE, AuthorizationPolicy, ambient mode, multi-cluster.">
+        content="Vendor-neutral guide to service mesh security - Istio, Linkerd, Cilium, Consul; mTLS, SPIFFE, AuthorizationPolicy, ambient mode, multi-cluster.">
     <meta name="twitter:image" content="https://csoh.org/banner.png">
 
     <link rel="preconnect" href="https://csoh.kit.com" crossorigin>
@@ -43,8 +43,8 @@
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": "Service Mesh Security — Securing East-West Traffic in Kubernetes",
-      "description": "A vendor-neutral practitioner's guide to service mesh security — Istio, Linkerd, Cilium, Consul Connect; mTLS, workload identity (SPIFFE/SPIRE), authorization policy, sidecar vs ambient/sidecarless architectures, multi-cluster mesh, egress control, and the managed offerings.",
+      "headline": "Service Mesh Security - Securing East-West Traffic in Kubernetes",
+      "description": "A vendor-neutral practitioner's guide to service mesh security - Istio, Linkerd, Cilium, Consul Connect; mTLS, workload identity (SPIFFE/SPIRE), authorization policy, sidecar vs ambient/sidecarless architectures, multi-cluster mesh, egress control, and the managed offerings.",
       "author": {
         "@type": "Person",
         "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
@@ -90,10 +90,10 @@
         },
         {
           "@type": "Question",
-          "name": "Istio vs Linkerd — which should I pick?",
+          "name": "Istio vs Linkerd - which should I pick?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Linkerd if you want the smallest, fastest path to mTLS and basic policy with the least operational surface. Linkerd's Rust micro-proxy is dramatically lighter than Envoy, its config surface is small, and CNCF graduated status makes the project a safe bet. Istio if you need everything — rich L7 traffic management, JWT validation, sophisticated authorization, multi-cluster federation, an integrated ingress story (Gateway API), and the ambient data plane option. Istio's config surface is the price of that flexibility. Both are CNCF projects and both ship strong defaults; pick on operational appetite, not on feature checklist marketing."
+            "text": "Linkerd if you want the smallest, fastest path to mTLS and basic policy with the least operational surface. Linkerd's Rust micro-proxy is dramatically lighter than Envoy, its config surface is small, and CNCF graduated status makes the project a safe bet. Istio if you need everything - rich L7 traffic management, JWT validation, sophisticated authorization, multi-cluster federation, an integrated ingress story (Gateway API), and the ambient data plane option. Istio's config surface is the price of that flexibility. Both are CNCF projects and both ship strong defaults; pick on operational appetite, not on feature checklist marketing."
           }
         },
         {
@@ -101,7 +101,7 @@
           "name": "Is sidecar-less (ambient mesh or eBPF) ready for production?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, with caveats. Cilium Service Mesh (eBPF-based, no sidecar) has been in production at significant scale for several years and is GA. Istio Ambient was declared GA at Istio 1.22 and continues to mature — many teams have moved production workloads to it specifically to escape the sidecar operational tax. The caveats: ambient's L7 features (HTTP-level authorization, JWT validation) require a separate per-namespace 'waypoint proxy', so the operational model is two-tier; some advanced Istio features still lag in ambient mode; and the failure modes are different from sidecar (node-level rather than pod-level blast radius). The trajectory is unambiguous, though — new mesh deployments in 2026 default to sidecarless unless there's a specific reason not to."
+            "text": "Yes, with caveats. Cilium Service Mesh (eBPF-based, no sidecar) has been in production at significant scale for several years and is GA. Istio Ambient was declared GA at Istio 1.22 and continues to mature - many teams have moved production workloads to it specifically to escape the sidecar operational tax. The caveats: ambient's L7 features (HTTP-level authorization, JWT validation) require a separate per-namespace 'waypoint proxy', so the operational model is two-tier; some advanced Istio features still lag in ambient mode; and the failure modes are different from sidecar (node-level rather than pod-level blast radius). The trajectory is unambiguous, though - new mesh deployments in 2026 default to sidecarless unless there's a specific reason not to."
           }
         },
         {
@@ -109,15 +109,15 @@
           "name": "Does Cilium replace my mesh AND my CNI?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, and that's the pitch. Cilium is a CNI (the pod-networking layer), a Kubernetes-aware NetworkPolicy engine with L7 enforcement, a service mesh (mTLS, identity, L7 routing, no sidecar), and a deep observability tool (Hubble) — one eBPF data plane underneath all of it. The trade-off is concentration: one project owns more of the stack than was traditionally true. The upside is fewer moving parts and a single mental model. The downside is fewer escape hatches if you need a behavior the project hasn't shipped. For most clusters in 2026, the simplification is worth it — Cilium has CNCF graduated status, Isovalent (the originator) was acquired by Cisco, and the production track record is at hyperscaler scale."
+            "text": "Yes, and that's the pitch. Cilium is a CNI (the pod-networking layer), a Kubernetes-aware NetworkPolicy engine with L7 enforcement, a service mesh (mTLS, identity, L7 routing, no sidecar), and a deep observability tool (Hubble) - one eBPF data plane underneath all of it. The trade-off is concentration: one project owns more of the stack than was traditionally true. The upside is fewer moving parts and a single mental model. The downside is fewer escape hatches if you need a behavior the project hasn't shipped. For most clusters in 2026, the simplification is worth it - Cilium has CNCF graduated status, Isovalent (the originator) was acquired by Cisco, and the production track record is at hyperscaler scale."
           }
         },
         {
           "@type": "Question",
-          "name": "Service mesh vs API gateway — when do I need which?",
+          "name": "Service mesh vs API gateway - when do I need which?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "API gateway lives at the edge of the cluster (north-south traffic): authentication of external callers, rate limiting, API key management, request transformation, WAF, traffic from clients into the cluster. Service mesh lives inside the cluster (east-west traffic): mTLS between services, workload-identity-based authorization, retries and circuit breaking between services, observability of service-to-service calls. The line blurs at the ingress: Istio's Gateway API integration and Envoy-based gateways like Emissary or Kong make the same proxy do both jobs in some architectures. The right question is rarely 'which one' — it's 'what concerns live at what layer', and the answer usually involves both."
+            "text": "API gateway lives at the edge of the cluster (north-south traffic): authentication of external callers, rate limiting, API key management, request transformation, WAF, traffic from clients into the cluster. Service mesh lives inside the cluster (east-west traffic): mTLS between services, workload-identity-based authorization, retries and circuit breaking between services, observability of service-to-service calls. The line blurs at the ingress: Istio's Gateway API integration and Envoy-based gateways like Emissary or Kong make the same proxy do both jobs in some architectures. The right question is rarely 'which one' - it's 'what concerns live at what layer', and the answer usually involves both."
           }
         },
         {
@@ -125,7 +125,7 @@
           "name": "What is SPIFFE/SPIRE and why does it matter?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "SPIFFE (Secure Production Identity Framework For Everyone) is an open standard for workload identity — every workload gets a cryptographically verifiable identity (an SVID, Secure Verifiable Identity Document) instead of relying on a shared secret or a network position. SPIRE is the reference implementation. The reason it matters: every modern service mesh's mTLS is grounded in a workload-identity model, and SPIFFE is the standard that makes those identities portable across mesh implementations, cloud providers, and even across organizations (federation). If you've ever wondered 'what's actually in the certificate the mesh is issuing?' — that's an SVID, and the trust domain (spiffe://example.org/...) is the SPIFFE concept underneath."
+            "text": "SPIFFE (Secure Production Identity Framework For Everyone) is an open standard for workload identity - every workload gets a cryptographically verifiable identity (an SVID, Secure Verifiable Identity Document) instead of relying on a shared secret or a network position. SPIRE is the reference implementation. The reason it matters: every modern service mesh's mTLS is grounded in a workload-identity model, and SPIFFE is the standard that makes those identities portable across mesh implementations, cloud providers, and even across organizations (federation). If you've ever wondered 'what's actually in the certificate the mesh is issuing?' - that's an SVID, and the trust domain (spiffe://example.org/...) is the SPIFFE concept underneath."
           }
         },
         {
@@ -133,7 +133,7 @@
           "name": "Doesn't strict mTLS break legacy services that don't speak it?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, which is why every production-grade mesh ships a permissive transition mode. Istio's PeerAuthentication has a PERMISSIVE mode that accepts both mTLS and plaintext on the same port; Linkerd's mTLS is opt-out for legacy ingress; Cilium's mTLS is per-policy. The migration pattern is: enable mesh injection / participation cluster-wide in PERMISSIVE; verify with telemetry that traffic is using mTLS; flip to STRICT namespace-by-namespace once each is clean. Skipping the permissive step and going straight to STRICT is one of the top-three mesh outages — the mesh works, the legacy CI runner doesn't, and the war room is unhappy."
+            "text": "Yes, which is why every production-grade mesh ships a permissive transition mode. Istio's PeerAuthentication has a PERMISSIVE mode that accepts both mTLS and plaintext on the same port; Linkerd's mTLS is opt-out for legacy ingress; Cilium's mTLS is per-policy. The migration pattern is: enable mesh injection / participation cluster-wide in PERMISSIVE; verify with telemetry that traffic is using mTLS; flip to STRICT namespace-by-namespace once each is clean. Skipping the permissive step and going straight to STRICT is one of the top-three mesh outages - the mesh works, the legacy CI runner doesn't, and the war room is unhappy."
           }
         }
       ]
@@ -282,14 +282,14 @@
       <div class="hero-inner">
         <div class="hero-text">
           <h1>Service Mesh Security</h1>
-          <p>Securing east-west traffic in <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a> — the mesh layer that gives every service-to-service call a cryptographic identity, an encrypted channel, an authorization decision, and an observable trace, without changing application code. Vendor-neutral guide to <strong>Istio</strong>, <strong>Linkerd</strong>, <strong>Cilium</strong>, and <strong>Consul Connect</strong>; the <a class="glossary-link" href="glossary.html#term-sidecar">sidecar</a> vs ambient/sidecarless architectures; <a class="glossary-link" href="glossary.html#term-mtls">mTLS</a>, <a class="glossary-link" href="glossary.html#term-spiffe">SPIFFE</a>/<a class="glossary-link" href="glossary.html#term-spire">SPIRE</a> <a class="glossary-link" href="glossary.html#term-service-account">workload identity</a>, and AuthorizationPolicy; multi-cluster mesh; <a class="glossary-link" href="glossary.html#term-ingress">egress</a> control; and the managed offerings.</p>
+          <p>Securing east-west traffic in <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a> - the mesh layer that gives every service-to-service call a cryptographic identity, an encrypted channel, an authorization decision, and an observable trace, without changing application code. Vendor-neutral guide to <strong>Istio</strong>, <strong>Linkerd</strong>, <strong>Cilium</strong>, and <strong>Consul Connect</strong>; the <a class="glossary-link" href="glossary.html#term-sidecar">sidecar</a> vs ambient/sidecarless architectures; <a class="glossary-link" href="glossary.html#term-mtls">mTLS</a>, <a class="glossary-link" href="glossary.html#term-spiffe">SPIFFE</a>/<a class="glossary-link" href="glossary.html#term-spire">SPIRE</a> <a class="glossary-link" href="glossary.html#term-service-account">workload identity</a>, and AuthorizationPolicy; multi-cluster mesh; <a class="glossary-link" href="glossary.html#term-ingress">egress</a> control; and the managed offerings.</p>
           <div class="cta-buttons">
             <a href="#landscape" class="btn btn-primary">Mesh landscape →</a>
             <a href="#comparison" class="btn btn-secondary">Istio vs Linkerd vs Cilium vs Consul</a>
           </div>
         </div>
         <div class="hero-illustration" aria-hidden="true">
-          <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a Kubernetes service mesh — pods connected by encrypted mTLS lines with sidecar proxies">
+          <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a Kubernetes service mesh - pods connected by encrypted mTLS lines with sidecar proxies">
             <defs>
               <linearGradient id="sm-sky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient>
               <linearGradient id="sm-pod" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#1e40af"/><stop offset="100%" stop-color="#1e3a8a"/></linearGradient>
@@ -424,8 +424,8 @@
         <p class="page-meta"><time datetime="2026-05-17">Last updated <strong>2026-05-17</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/service-mesh-security.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
 
         <div class="info-box--blue">
-            <p><strong>The 30-second version:</strong> A <strong><a class="glossary-link" href="glossary.html#term-service-mesh">service mesh</a></strong> is a dedicated infrastructure layer for service-to-service communication inside a Kubernetes cluster. It gives every east-west call three things — <strong>encryption</strong> (mTLS), <strong>identity</strong> (a cryptographic workload identity, usually SPIFFE-based), and <strong>policy</strong> (authorization decisions on every hop) — without changing application code.</p>
-            <p style="margin-top:0.75rem;">The four meshes that matter in 2026: <strong>Istio</strong> (most powerful, most complex; <a class="glossary-link" href="glossary.html#term-cncf">CNCF</a> graduated; sidecar and ambient modes), <strong>Linkerd</strong> (smallest operational surface; CNCF graduated; Rust micro-proxy), <strong>Cilium Service Mesh</strong> (no sidecar; <a class="glossary-link" href="glossary.html#term-ebpf">eBPF</a>; bundled with the CNI), <strong>Consul Connect</strong> (HashiCorp; strong multi-runtime story including VMs). The major architecture shift since 2024 is the move away from per-<a class="glossary-link" href="glossary.html#term-pod">pod</a> sidecars toward <strong>ambient</strong> (Istio) and <strong>sidecarless</strong> (Cilium) data planes — same outcomes, dramatically less operational tax.</p>
+            <p><strong>The 30-second version:</strong> A <strong><a class="glossary-link" href="glossary.html#term-service-mesh">service mesh</a></strong> is a dedicated infrastructure layer for service-to-service communication inside a Kubernetes cluster. It gives every east-west call three things - <strong>encryption</strong> (mTLS), <strong>identity</strong> (a cryptographic workload identity, usually SPIFFE-based), and <strong>policy</strong> (authorization decisions on every hop) - without changing application code.</p>
+            <p style="margin-top:0.75rem;">The four meshes that matter in 2026: <strong>Istio</strong> (most powerful, most complex; <a class="glossary-link" href="glossary.html#term-cncf">CNCF</a> graduated; sidecar and ambient modes), <strong>Linkerd</strong> (smallest operational surface; CNCF graduated; Rust micro-proxy), <strong>Cilium Service Mesh</strong> (no sidecar; <a class="glossary-link" href="glossary.html#term-ebpf">eBPF</a>; bundled with the CNI), <strong>Consul Connect</strong> (HashiCorp; strong multi-runtime story including VMs). The major architecture shift since 2024 is the move away from per-<a class="glossary-link" href="glossary.html#term-pod">pod</a> sidecars toward <strong>ambient</strong> (Istio) and <strong>sidecarless</strong> (Cilium) data planes - same outcomes, dramatically less operational tax.</p>
         </div>
 
         <div class="toc">
@@ -434,10 +434,10 @@
                 <li><a href="#what-is">What a service mesh is</a></li>
                 <li><a href="#sidecar-pattern">Sidecar vs sidecar-less</a></li>
                 <li><a href="#landscape">The service mesh landscape</a></li>
-                <li><a href="#mtls">mTLS — encryption everywhere</a></li>
+                <li><a href="#mtls">mTLS - encryption everywhere</a></li>
                 <li><a href="#authentication">Authentication &amp; workload identity</a></li>
                 <li><a href="#authorization">Authorization policy</a></li>
-                <li><a href="#three-pillars">Encryption, identity, policy — the three pillars</a></li>
+                <li><a href="#three-pillars">Encryption, identity, policy - the three pillars</a></li>
                 <li><a href="#observability">Observability for security</a></li>
                 <li><a href="#zero-trust">Zero-trust east-west</a></li>
                 <li><a href="#mesh-vs-gateway">Service mesh vs API gateway</a></li>
@@ -458,14 +458,14 @@
 
         <section id="what-is">
             <h2>What a service mesh is</h2>
-            <p>A service mesh is a dedicated infrastructure layer that intercepts every service-to-service network call in a Kubernetes cluster and adds <em>encryption</em>, <em>identity</em>, <em>policy</em>, <em>observability</em>, and <em>traffic management</em> — all without requiring the application code to know it's there. The interception happens either via a sidecar proxy injected into each pod, or via a node-level data plane (ambient or eBPF) that performs the same job without modifying the pod.</p>
+            <p>A service mesh is a dedicated infrastructure layer that intercepts every service-to-service network call in a Kubernetes cluster and adds <em>encryption</em>, <em>identity</em>, <em>policy</em>, <em>observability</em>, and <em>traffic management</em> - all without requiring the application code to know it's there. The interception happens either via a sidecar proxy injected into each pod, or via a node-level data plane (ambient or eBPF) that performs the same job without modifying the pod.</p>
             <p>The problems the mesh solves are the problems every microservices architecture eventually develops:</p>
             <ul>
                 <li><strong>East-west encryption.</strong> Service-to-service traffic inside the cluster is usually plaintext by default. Once any workload is breached, <a class="glossary-link" href="glossary.html#term-lateral-movement">lateral movement</a> is trivial. The mesh gives every hop mTLS without an SDK change.</li>
-                <li><strong>Workload identity.</strong> "Service A is calling service B" is normally inferred from network position — an IP, a port, a NetworkPolicy. The mesh gives every workload a cryptographic identity that the receiving service can verify, regardless of network position.</li>
+                <li><strong>Workload identity.</strong> "Service A is calling service B" is normally inferred from network position - an IP, a port, a NetworkPolicy. The mesh gives every workload a cryptographic identity that the receiving service can verify, regardless of network position.</li>
                 <li><strong>Policy that follows the workload.</strong> Authorization decisions on every call ("can the orders service call the payments service?") in a uniform language, applied at the proxy, not buried in each application's middleware.</li>
-                <li><strong>Observability of east-west traffic.</strong> Distributed traces, golden-signal metrics, and connection-level logs for every call, automatically — without instrumenting each service.</li>
-                <li><strong>Traffic management.</strong> Retries, timeouts, circuit breakers, canary releases, fault injection — all decoupled from application code.</li>
+                <li><strong>Observability of east-west traffic.</strong> Distributed traces, golden-signal metrics, and connection-level logs for every call, automatically - without instrumenting each service.</li>
+                <li><strong>Traffic management.</strong> Retries, timeouts, circuit breakers, canary releases, fault injection - all decoupled from application code.</li>
             </ul>
             <p>The cost of the mesh is real: a new control plane to operate, a new failure mode to understand, latency added at every hop, and CPU/memory consumed by every sidecar (mitigated heavily in ambient and sidecarless modes). Whether it's worth that cost depends on how many services you have, how regulated the traffic is, and how much your application code already does the mesh's jobs poorly.</p>
             <p>For Kubernetes fundamentals that underpin this discussion, see <a href="kubernetes.html">Kubernetes security</a>; for the layer beneath the mesh, see <a href="network-security.html">network security</a>; for the philosophy the mesh implements, see <a href="zero-trust.html">zero trust</a>.</p>
@@ -473,7 +473,7 @@
 
         <section id="sidecar-pattern">
             <h2>The sidecar pattern vs sidecar-less</h2>
-            <p>The original service mesh architecture put a proxy container (almost always <a href="https://www.envoyproxy.io/" target="_blank" rel="noopener noreferrer">Envoy</a>) into every application pod as a <em>sidecar</em>. Every packet leaving the application container was redirected (via <code>iptables</code> rules installed by an init container) into the local sidecar, which then handled mTLS, policy, observability, and traffic management before sending the packet out to its destination — where another sidecar received it and reversed the process.</p>
+            <p>The original service mesh architecture put a proxy container (almost always <a href="https://www.envoyproxy.io/" target="_blank" rel="noopener noreferrer">Envoy</a>) into every application pod as a <em>sidecar</em>. Every packet leaving the application container was redirected (via <code>iptables</code> rules installed by an init container) into the local sidecar, which then handled mTLS, policy, observability, and traffic management before sending the packet out to its destination - where another sidecar received it and reversed the process.</p>
             <p>The sidecar pattern works, and it shipped to production for the better part of a decade. It has well-known costs:</p>
             <ul>
                 <li><strong>Resource overhead.</strong> A sidecar Envoy adds 50–200 MB of memory and a fraction of a CPU per pod. Across a 5,000-pod cluster, that's hundreds of GB of RAM and dozens of cores spent on proxies.</li>
@@ -496,46 +496,46 @@
             <p>The meshes you will encounter, in rough order of mindshare and production adoption:</p>
             <h3>Open-source, CNCF projects</h3>
             <ul>
-                <li><strong><a href="https://istio.io/" target="_blank" rel="noopener noreferrer">Istio</a></strong> — CNCF graduated (2023). Originated at Google and IBM; control plane is <em>istiod</em>; data plane is Envoy in either sidecar or ambient mode. The most feature-complete mesh — <a class="glossary-link" href="glossary.html#term-jwt">JWT</a> auth, request authentication, ingress / egress gateway, multi-cluster, Gateway API. Operational complexity is the trade-off.</li>
-                <li><strong><a href="https://linkerd.io/" target="_blank" rel="noopener noreferrer">Linkerd</a></strong> — CNCF graduated (2021). Originated at Buoyant. Lightweight Rust micro-proxy as the sidecar, small control plane, opinionated defaults. Easiest mesh to operate. Strong on the "boring is good" axis. Note: Linkerd stable releases moved to a commercial offering in 2024 (Buoyant Enterprise for Linkerd); edge releases remain freely available.</li>
-                <li><strong><a href="https://cilium.io/" target="_blank" rel="noopener noreferrer">Cilium</a></strong> — CNCF graduated (2023). Originated at Isovalent (acquired by Cisco in 2024). Not just a service mesh — a CNI, NetworkPolicy engine, service mesh, and observability tool, all backed by eBPF. No sidecar. The most "rethink the stack" of the four; rapidly becoming the default for new clusters that want one project to own the network and security path.</li>
-                <li><strong><a href="https://kuma.io/" target="_blank" rel="noopener noreferrer">Kuma</a></strong> — CNCF sandbox. Originated at Kong. Envoy-based; multi-zone / multi-cluster as first-class concepts. Less production scale than the above three, but a real contender in <a class="glossary-link" href="glossary.html#term-public">multi-cloud</a>, multi-cluster environments.</li>
+                <li><strong><a href="https://istio.io/" target="_blank" rel="noopener noreferrer">Istio</a></strong> - CNCF graduated (2023). Originated at Google and IBM; control plane is <em>istiod</em>; data plane is Envoy in either sidecar or ambient mode. The most feature-complete mesh - <a class="glossary-link" href="glossary.html#term-jwt">JWT</a> auth, request authentication, ingress / egress gateway, multi-cluster, Gateway API. Operational complexity is the trade-off.</li>
+                <li><strong><a href="https://linkerd.io/" target="_blank" rel="noopener noreferrer">Linkerd</a></strong> - CNCF graduated (2021). Originated at Buoyant. Lightweight Rust micro-proxy as the sidecar, small control plane, opinionated defaults. Easiest mesh to operate. Strong on the "boring is good" axis. Note: Linkerd stable releases moved to a commercial offering in 2024 (Buoyant Enterprise for Linkerd); edge releases remain freely available.</li>
+                <li><strong><a href="https://cilium.io/" target="_blank" rel="noopener noreferrer">Cilium</a></strong> - CNCF graduated (2023). Originated at Isovalent (acquired by Cisco in 2024). Not just a service mesh - a CNI, NetworkPolicy engine, service mesh, and observability tool, all backed by eBPF. No sidecar. The most "rethink the stack" of the four; rapidly becoming the default for new clusters that want one project to own the network and security path.</li>
+                <li><strong><a href="https://kuma.io/" target="_blank" rel="noopener noreferrer">Kuma</a></strong> - CNCF sandbox. Originated at Kong. Envoy-based; multi-zone / multi-cluster as first-class concepts. Less production scale than the above three, but a real contender in <a class="glossary-link" href="glossary.html#term-public">multi-cloud</a>, multi-cluster environments.</li>
             </ul>
             <h3>Vendor-led, open-source</h3>
             <ul>
-                <li><strong><a href="https://developer.hashicorp.com/consul" target="_blank" rel="noopener noreferrer">Consul Connect</a></strong> — HashiCorp. Service mesh capability built into Consul; strong story for mixed Kubernetes + VM + multi-cloud workloads where Consul is already the service catalog and KV store. Envoy-based.</li>
-                <li><strong><a href="https://www.f5.com/products/nginx" target="_blank" rel="noopener noreferrer">NGINX Service Mesh</a></strong> — F5/NGINX. NGINX-based data plane; integrates with NGINX Plus Ingress Controller.</li>
-                <li><strong><a href="https://traefik.io/traefik-mesh" target="_blank" rel="noopener noreferrer">Traefik Mesh</a></strong> (formerly Maesh) — Traefik Labs. Different model: per-node mesh proxy, not per-pod sidecar. Simple to operate.</li>
+                <li><strong><a href="https://developer.hashicorp.com/consul" target="_blank" rel="noopener noreferrer">Consul Connect</a></strong> - HashiCorp. Service mesh capability built into Consul; strong story for mixed Kubernetes + VM + multi-cloud workloads where Consul is already the service catalog and KV store. Envoy-based.</li>
+                <li><strong><a href="https://www.f5.com/products/nginx" target="_blank" rel="noopener noreferrer">NGINX Service Mesh</a></strong> - F5/NGINX. NGINX-based data plane; integrates with NGINX Plus Ingress Controller.</li>
+                <li><strong><a href="https://traefik.io/traefik-mesh" target="_blank" rel="noopener noreferrer">Traefik Mesh</a></strong> (formerly Maesh) - Traefik Labs. Different model: per-node mesh proxy, not per-pod sidecar. Simple to operate.</li>
             </ul>
             <h3>Managed and provider-integrated</h3>
             <ul>
-                <li><strong><a href="https://aws.amazon.com/app-mesh/" target="_blank" rel="noopener noreferrer">AWS App Mesh</a></strong> — Envoy-based managed mesh; works across <a class="glossary-link" href="glossary.html#term-eks">EKS</a>, <a class="glossary-link" href="glossary.html#term-ecs">ECS</a>, <a class="glossary-link" href="glossary.html#term-ec2">EC2</a>, and Fargate. Less feature-rich than vanilla Istio; tightly integrated with AWS networking and <a class="glossary-link" href="glossary.html#term-iam">IAM</a>.</li>
-                <li><strong><a href="https://cloud.google.com/products/service-mesh" target="_blank" rel="noopener noreferrer">Cloud Service Mesh</a></strong> (the consolidated successor to Anthos Service Mesh) — Google's managed Istio. Both sidecar and ambient modes; cross-cluster <a class="glossary-link" href="glossary.html#term-federation">federation</a> across GKE, on-prem, and other clouds.</li>
-                <li><strong>Azure Service Mesh add-on for AKS</strong> — Microsoft retired Open Service Mesh (OSM) in 2024 and now ships managed Istio as the AKS add-on (Istio-based service mesh). Linkerd is also commonly run on AKS unmanaged.</li>
-                <li><strong>Red Hat OpenShift Service Mesh</strong> — productized Istio for OpenShift, with Maistra components on top.</li>
-                <li><strong>Solo.io Gloo Mesh</strong> — commercial Istio distribution and federation control plane; widely used in regulated enterprises.</li>
-                <li><strong>Buoyant Enterprise for Linkerd</strong> — commercial Linkerd from the maintainers; FIPS builds, longer-support stable channel.</li>
+                <li><strong><a href="https://aws.amazon.com/app-mesh/" target="_blank" rel="noopener noreferrer">AWS App Mesh</a></strong> - Envoy-based managed mesh; works across <a class="glossary-link" href="glossary.html#term-eks">EKS</a>, <a class="glossary-link" href="glossary.html#term-ecs">ECS</a>, <a class="glossary-link" href="glossary.html#term-ec2">EC2</a>, and Fargate. Less feature-rich than vanilla Istio; tightly integrated with AWS networking and <a class="glossary-link" href="glossary.html#term-iam">IAM</a>.</li>
+                <li><strong><a href="https://cloud.google.com/products/service-mesh" target="_blank" rel="noopener noreferrer">Cloud Service Mesh</a></strong> (the consolidated successor to Anthos Service Mesh) - Google's managed Istio. Both sidecar and ambient modes; cross-cluster <a class="glossary-link" href="glossary.html#term-federation">federation</a> across GKE, on-prem, and other clouds.</li>
+                <li><strong>Azure Service Mesh add-on for AKS</strong> - Microsoft retired Open Service Mesh (OSM) in 2024 and now ships managed Istio as the AKS add-on (Istio-based service mesh). Linkerd is also commonly run on AKS unmanaged.</li>
+                <li><strong>Red Hat OpenShift Service Mesh</strong> - productized Istio for OpenShift, with Maistra components on top.</li>
+                <li><strong>Solo.io Gloo Mesh</strong> - commercial Istio distribution and federation control plane; widely used in regulated enterprises.</li>
+                <li><strong>Buoyant Enterprise for Linkerd</strong> - commercial Linkerd from the maintainers; FIPS builds, longer-support stable channel.</li>
             </ul>
             <h3>Notable transitions</h3>
             <ul>
-                <li><strong>Open Service Mesh (OSM)</strong> — Microsoft-led CNCF project; archived in 2024. The CNCF-graduated alternatives absorbed the use cases.</li>
+                <li><strong>Open Service Mesh (OSM)</strong> - Microsoft-led CNCF project; archived in 2024. The CNCF-graduated alternatives absorbed the use cases.</li>
                 <li><strong>AWS App Mesh</strong> still receives updates but AWS has shifted its strategic emphasis toward managed open-source meshes via the EKS add-on framework.</li>
             </ul>
         </section>
 
         <section id="mtls">
-            <h2>mTLS — encryption everywhere</h2>
-            <p>Mutual <a class="glossary-link" href="glossary.html#term-tls">TLS</a> is the most-cited single feature of a service mesh, and the easiest one to grasp. Every connection between two mesh-enrolled workloads is encrypted with TLS, and both sides present and verify certificates. The mesh control plane runs the certificate authority that issues these certs and rotates them on a tight schedule (every 24 hours is typical) — short-lived enough that revocation isn't even a meaningful operation.</p>
+            <h2>mTLS - encryption everywhere</h2>
+            <p>Mutual <a class="glossary-link" href="glossary.html#term-tls">TLS</a> is the most-cited single feature of a service mesh, and the easiest one to grasp. Every connection between two mesh-enrolled workloads is encrypted with TLS, and both sides present and verify certificates. The mesh control plane runs the certificate authority that issues these certs and rotates them on a tight schedule (every 24 hours is typical) - short-lived enough that revocation isn't even a meaningful operation.</p>
             <h3>What changes about your network when every hop is mTLS</h3>
             <ul>
                 <li><strong>Eavesdropping in the cluster fails.</strong> A compromised node, a misconfigured CNI, or a packet capture from a sidecar process all return ciphertext, not credentials and PII.</li>
                 <li><strong>Spoofing by IP/DNS fails.</strong> An attacker who has redirected DNS or hijacked an IP can't impersonate a service because they don't hold the right certificate.</li>
                 <li><strong>"Encryption <a class="glossary-link" href="glossary.html#term-encryption-at-rest">in transit</a>" boxes light up.</strong> <a class="glossary-link" href="glossary.html#term-soc">SOC</a> 2, <a class="glossary-link" href="glossary.html#term-pci-dss">PCI DSS</a>, <a class="glossary-link" href="glossary.html#term-hipaa">HIPAA</a>, <a class="glossary-link" href="glossary.html#term-fedramp">FedRAMP</a>, and most modern privacy regulations all want encrypted-in-transit assertions for sensitive data, including between internal services. The mesh produces this evidence trivially.</li>
                 <li><strong>Network-based debugging gets harder.</strong> <code>tcpdump</code> stops being useful at the application layer; you need to debug at the proxy admin endpoint or use Hubble/Kiali to see L7 context.</li>
-                <li><strong>Some sidecars to legacy systems break.</strong> Anything that expects plaintext on the wire — a legacy database client, a TCP-based health check — needs to be configured to bypass the mesh or upgraded to participate in it.</li>
+                <li><strong>Some sidecars to legacy systems break.</strong> Anything that expects plaintext on the wire - a legacy database client, a TCP-based health check - needs to be configured to bypass the mesh or upgraded to participate in it.</li>
             </ul>
             <h3>Permissive transition mode is mandatory</h3>
-            <p>Every production mesh supports a mode where mTLS is offered but not required — the receiving side accepts both encrypted and plaintext connections. This exists precisely because flipping a real cluster to strict mTLS in one move is how you cause an outage. The pattern is: enable mesh-wide in permissive mode, observe telemetry until you can prove every connection is mTLS, then move namespace-by-namespace to strict. Anything else is courage masquerading as engineering.</p>
+            <p>Every production mesh supports a mode where mTLS is offered but not required - the receiving side accepts both encrypted and plaintext connections. This exists precisely because flipping a real cluster to strict mTLS in one move is how you cause an outage. The pattern is: enable mesh-wide in permissive mode, observe telemetry until you can prove every connection is mTLS, then move namespace-by-namespace to strict. Anything else is courage masquerading as engineering.</p>
             <h3>Certificate-authority architecture</h3>
             <p>Where the mesh's CA roots are anchored matters for security and for compliance. Common patterns:</p>
             <ul>
@@ -548,17 +548,17 @@
 
         <section id="authentication">
             <h2>Authentication &amp; workload identity</h2>
-            <p>"Authentication" in a mesh has two distinct meanings. <em>Peer authentication</em> is the workload-to-workload identity verified by mTLS — service A is provably service A because it presents the cert for service A's identity. <em>Request authentication</em> is the end-user (or upstream service) credential carried in the request, almost always a JWT, that the mesh validates at the proxy.</p>
+            <p>"Authentication" in a mesh has two distinct meanings. <em>Peer authentication</em> is the workload-to-workload identity verified by mTLS - service A is provably service A because it presents the cert for service A's identity. <em>Request authentication</em> is the end-user (or upstream service) credential carried in the request, almost always a JWT, that the mesh validates at the proxy.</p>
             <h3>Workload identity (peer authentication)</h3>
-            <p>Every mesh-enrolled workload gets a cryptographic identity. In SPIFFE-conformant meshes (Istio, Cilium, Consul), that identity is an SPIFFE URI like <code>spiffe://cluster.local/ns/payments/sa/checkout</code> — encoding the trust domain, namespace, and Kubernetes ServiceAccount. The certificate the workload presents includes this URI in its SAN extension; the receiving sidecar verifies the signature and reads off the identity, no IP address required.</p>
+            <p>Every mesh-enrolled workload gets a cryptographic identity. In SPIFFE-conformant meshes (Istio, Cilium, Consul), that identity is an SPIFFE URI like <code>spiffe://cluster.local/ns/payments/sa/checkout</code> - encoding the trust domain, namespace, and Kubernetes ServiceAccount. The certificate the workload presents includes this URI in its SAN extension; the receiving sidecar verifies the signature and reads off the identity, no IP address required.</p>
             <p>Linkerd uses an analogous identity model bound to the ServiceAccount; the URL format differs but the semantic is the same.</p>
             <h3>Request authentication (end-user / upstream JWT validation)</h3>
-            <p>For HTTP requests, the mesh can additionally validate a JWT presented by the caller — checking signature, issuer, audience, and expiration, and exposing claims to authorization policy. This pushes authentication out of every application and into the data plane.</p>
+            <p>For HTTP requests, the mesh can additionally validate a JWT presented by the caller - checking signature, issuer, audience, and expiration, and exposing claims to authorization policy. This pushes authentication out of every application and into the data plane.</p>
             <ul>
-                <li><strong>Istio</strong> — <code>RequestAuthentication</code> resource defines JWT issuers and JWKS endpoints; combined with <code>AuthorizationPolicy</code> referencing JWT claims.</li>
-                <li><strong>Cilium</strong> — L7 NetworkPolicy can match JWT-aware rules via Envoy filters; policy syntax is Cilium's native YAML.</li>
-                <li><strong>Linkerd</strong> — historically lighter on request-level features; JWT validation typically happens at the ingress (e.g., Linkerd's authorization policy with an ingress-level <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a> proxy).</li>
-                <li><strong>Consul</strong> — JWT auth via the API gateway or Consul-aware proxy filters.</li>
+                <li><strong>Istio</strong> - <code>RequestAuthentication</code> resource defines JWT issuers and JWKS endpoints; combined with <code>AuthorizationPolicy</code> referencing JWT claims.</li>
+                <li><strong>Cilium</strong> - L7 NetworkPolicy can match JWT-aware rules via Envoy filters; policy syntax is Cilium's native YAML.</li>
+                <li><strong>Linkerd</strong> - historically lighter on request-level features; JWT validation typically happens at the ingress (e.g., Linkerd's authorization policy with an ingress-level <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a> proxy).</li>
+                <li><strong>Consul</strong> - JWT auth via the API gateway or Consul-aware proxy filters.</li>
             </ul>
             <p>Pushing JWT validation to the mesh has a non-obvious benefit: the application no longer holds the JWKS, doesn't rotate its own validation keys, and doesn't ship a JWT library in every language. The mesh does it once.</p>
         </section>
@@ -567,11 +567,11 @@
             <h2>Authorization policy</h2>
             <p>Encryption proves <em>who</em> is calling; authorization decides whether they're <em>allowed</em>. Each mesh ships its own policy language:</p>
             <h3>Istio AuthorizationPolicy</h3>
-            <p>Resource-based YAML; matches on principal (the SPIFFE identity), namespace, source IP, request method, path, headers, and JWT claims. Supports <code>ALLOW</code>, <code>DENY</code>, <code>AUDIT</code>, and <code>CUSTOM</code> (delegating to an external authorization service via the Envoy <code>ext_authz</code> filter — frequently <a class="glossary-link" href="glossary.html#term-opa">OPA</a>). Default semantics: allow everything unless a policy applies; if any <code>ALLOW</code> applies, only matching requests are allowed; <code>DENY</code> always wins.</p>
+            <p>Resource-based YAML; matches on principal (the SPIFFE identity), namespace, source IP, request method, path, headers, and JWT claims. Supports <code>ALLOW</code>, <code>DENY</code>, <code>AUDIT</code>, and <code>CUSTOM</code> (delegating to an external authorization service via the Envoy <code>ext_authz</code> filter - frequently <a class="glossary-link" href="glossary.html#term-opa">OPA</a>). Default semantics: allow everything unless a policy applies; if any <code>ALLOW</code> applies, only matching requests are allowed; <code>DENY</code> always wins.</p>
             <h3>Linkerd Server / ServerAuthorization</h3>
             <p>Two-resource pattern: <code>Server</code> declares "this port on these pods is the back end I'm protecting" and <code>ServerAuthorization</code> declares "these identities can connect to that Server". Smaller policy surface than Istio, deliberately. HTTPRoute (Gateway API) layered on top for route-level allow rules.</p>
             <h3>Cilium L7 NetworkPolicy + Hubble</h3>
-            <p>Cilium extends standard Kubernetes NetworkPolicy with L7 awareness — match HTTP method, path, header values, and Kafka topic without leaving the NetworkPolicy mental model. Hubble (the observability companion) shows policy decisions in real time, including "this connection was allowed by rule X" and "this one was denied". The bridge to authentication is the Cilium identity (a label-derived workload identity) which can be tied to SPIFFE in newer releases.</p>
+            <p>Cilium extends standard Kubernetes NetworkPolicy with L7 awareness - match HTTP method, path, header values, and Kafka topic without leaving the NetworkPolicy mental model. Hubble (the observability companion) shows policy decisions in real time, including "this connection was allowed by rule X" and "this one was denied". The bridge to authentication is the Cilium identity (a label-derived workload identity) which can be tied to SPIFFE in newer releases.</p>
             <h3>Consul intentions</h3>
             <p>Consul models authorization as <em>intentions</em>: "service A intends to talk to service B, allow / deny". Simpler than the others for the "is this service-to-service call allowed" question; less expressive at L7 unless layered with API-gateway policies.</p>
             <h3>The pattern they share</h3>
@@ -585,16 +585,16 @@
         </section>
 
         <section id="three-pillars">
-            <h2>The three pillars — encryption, identity, policy</h2>
+            <h2>The three pillars - encryption, identity, policy</h2>
             <p>The whole mesh security model rests on three things working together. Each is necessary; none is sufficient.</p>
             <div class="pillar-grid">
                 <div class="pillar-card pillar-card-iam">
                     <h3>Encryption (mTLS)</h3>
-                    <p>Every byte on the wire is encrypted, every connection is mutually authenticated. Without it, identity assertions can be eavesdropped or replayed; with it, a node-level compromise doesn't immediately yield credentials and PII. Cheap and necessary — there is no good reason in 2026 not to have it.</p>
+                    <p>Every byte on the wire is encrypted, every connection is mutually authenticated. Without it, identity assertions can be eavesdropped or replayed; with it, a node-level compromise doesn't immediately yield credentials and PII. Cheap and necessary - there is no good reason in 2026 not to have it.</p>
                 </div>
                 <div class="pillar-card pillar-card-detect">
                     <h3>Identity (SPIFFE / workload identity)</h3>
-                    <p>Every workload presents a cryptographic identity, not a network position. Without it, the policy engine has only IPs and ports to reason about — useless in a Kubernetes cluster where both change constantly. With it, policy follows the workload.</p>
+                    <p>Every workload presents a cryptographic identity, not a network position. Without it, the policy engine has only IPs and ports to reason about - useless in a Kubernetes cluster where both change constantly. With it, policy follows the workload.</p>
                 </div>
                 <div class="pillar-card pillar-card-compliance">
                     <h3>Policy (authorization)</h3>
@@ -603,9 +603,9 @@
             </div>
             <p>What breaks if you skip one:</p>
             <ul>
-                <li><strong>Encryption without identity</strong> — TLS that doesn't verify the peer is just an obfuscated channel. The breach reads exactly the same; the auditor finding is slightly different. Don't ship this.</li>
-                <li><strong>Identity without policy</strong> — every service knows who is calling, but every service is also still allowed to be called by anyone. Common starting state, common stopping state. The identity is doing nothing useful without policy enforcing it.</li>
-                <li><strong>Policy without identity</strong> — IP-based authorization in a cluster where pods churn. Either too permissive (broad CIDRs) or constantly breaking. The reason NetworkPolicy alone is hard.</li>
+                <li><strong>Encryption without identity</strong> - TLS that doesn't verify the peer is just an obfuscated channel. The breach reads exactly the same; the auditor finding is slightly different. Don't ship this.</li>
+                <li><strong>Identity without policy</strong> - every service knows who is calling, but every service is also still allowed to be called by anyone. Common starting state, common stopping state. The identity is doing nothing useful without policy enforcing it.</li>
+                <li><strong>Policy without identity</strong> - IP-based authorization in a cluster where pods churn. Either too permissive (broad CIDRs) or constantly breaking. The reason NetworkPolicy alone is hard.</li>
             </ul>
         </section>
 
@@ -619,14 +619,14 @@
 
         <section id="observability">
             <h2>Observability for security</h2>
-            <p>The mesh is also one of the best places in the stack to <em>see</em> east-west traffic. Every connection generates structured signal — golden-signal metrics (request rate, error rate, latency), distributed-trace spans, and connection-level logs — without instrumenting application code.</p>
+            <p>The mesh is also one of the best places in the stack to <em>see</em> east-west traffic. Every connection generates structured signal - golden-signal metrics (request rate, error rate, latency), distributed-trace spans, and connection-level logs - without instrumenting application code.</p>
             <h3>Tools that consume mesh telemetry</h3>
             <ul>
-                <li><strong><a href="https://www.jaegertracing.io/" target="_blank" rel="noopener noreferrer">Jaeger</a></strong> and <strong><a href="https://grafana.com/oss/tempo/" target="_blank" rel="noopener noreferrer">Tempo</a></strong> — distributed-trace backends. The mesh emits spans for every hop; Jaeger / Tempo reconstruct the call graph.</li>
-                <li><strong><a href="https://prometheus.io/" target="_blank" rel="noopener noreferrer">Prometheus</a></strong> — every mesh emits Prometheus-format metrics out of the box. The standard dashboards for request rate, error rate, latency, and TLS-cert expiry.</li>
-                <li><strong><a href="https://kiali.io/" target="_blank" rel="noopener noreferrer">Kiali</a></strong> — Istio-specific observability UI; visualizes the service graph, traffic policies in effect, and certificate health.</li>
-                <li><strong><a href="https://github.com/cilium/hubble" target="_blank" rel="noopener noreferrer">Hubble</a></strong> — Cilium's observability companion. Real-time flow logs (including encrypted-flow metadata), policy decisions, and a service-map UI.</li>
-                <li><strong>Linkerd Viz</strong> — Linkerd's bundled dashboards; tap-style live request inspection.</li>
+                <li><strong><a href="https://www.jaegertracing.io/" target="_blank" rel="noopener noreferrer">Jaeger</a></strong> and <strong><a href="https://grafana.com/oss/tempo/" target="_blank" rel="noopener noreferrer">Tempo</a></strong> - distributed-trace backends. The mesh emits spans for every hop; Jaeger / Tempo reconstruct the call graph.</li>
+                <li><strong><a href="https://prometheus.io/" target="_blank" rel="noopener noreferrer">Prometheus</a></strong> - every mesh emits Prometheus-format metrics out of the box. The standard dashboards for request rate, error rate, latency, and TLS-cert expiry.</li>
+                <li><strong><a href="https://kiali.io/" target="_blank" rel="noopener noreferrer">Kiali</a></strong> - Istio-specific observability UI; visualizes the service graph, traffic policies in effect, and certificate health.</li>
+                <li><strong><a href="https://github.com/cilium/hubble" target="_blank" rel="noopener noreferrer">Hubble</a></strong> - Cilium's observability companion. Real-time flow logs (including encrypted-flow metadata), policy decisions, and a service-map UI.</li>
+                <li><strong>Linkerd Viz</strong> - Linkerd's bundled dashboards; tap-style live request inspection.</li>
             </ul>
             <h3>What security teams use the telemetry for</h3>
             <ul>
@@ -678,7 +678,7 @@
 
         <section id="mesh-vs-gateway">
             <h2>Service mesh vs API gateway</h2>
-            <p>The two get confused because they're both Envoy-based proxies that handle authentication, authorization, and observability — they just live at different layers.</p>
+            <p>The two get confused because they're both Envoy-based proxies that handle authentication, authorization, and observability - they just live at different layers.</p>
             <div class="comparison-table">
                 <table>
                     <thead>
@@ -696,8 +696,8 @@
                         </tr>
                         <tr>
                             <th scope="row">Caller identity</th>
-                            <td>End users, partner APIs, mobile apps — usually JWTs / API keys</td>
-                            <td>Workloads — SPIFFE / mesh-issued identity</td>
+                            <td>End users, partner APIs, mobile apps - usually JWTs / API keys</td>
+                            <td>Workloads - SPIFFE / mesh-issued identity</td>
                         </tr>
                         <tr>
                             <th scope="row">Primary auth</th>
@@ -711,8 +711,8 @@
                         </tr>
                         <tr>
                             <th scope="row">Topology</th>
-                            <td>Centralized at the edge — a few gateway pods</td>
-                            <td>Distributed — a proxy at every pod (sidecar) or every node (sidecarless)</td>
+                            <td>Centralized at the edge - a few gateway pods</td>
+                            <td>Distributed - a proxy at every pod (sidecar) or every node (sidecarless)</td>
                         </tr>
                         <tr>
                             <th scope="row">Examples</th>
@@ -737,19 +737,19 @@
                 <li><strong>NetworkPolicy as the floor.</strong> Default-deny <a class="glossary-link" href="glossary.html#term-network-policy">network policy</a> at every namespace; only allow the egress and ingress the namespace actually needs. Limits the blast radius of any sidecar or mesh-control-plane compromise.</li>
                 <li><strong>Mesh policy as the L7 ceiling.</strong> Within the allowed L3/L4 paths, the mesh enforces method-level and identity-level rules.</li>
             </ol>
-            <p><strong>Cilium L7 NetworkPolicy</strong> is the most interesting cross-over: it extends the NetworkPolicy API itself to L7 semantics, so a single policy resource specifies both "this service may connect" and "only via these HTTP routes". The bridge between the two paradigms — useful in clusters where one team owns both layers.</p>
+            <p><strong>Cilium L7 NetworkPolicy</strong> is the most interesting cross-over: it extends the NetworkPolicy API itself to L7 semantics, so a single policy resource specifies both "this service may connect" and "only via these HTTP routes". The bridge between the two paradigms - useful in clusters where one team owns both layers.</p>
             <p>For the wider topic see <a href="kubernetes.html">Kubernetes security</a> and <a href="network-security.html">network security</a>.</p>
         </section>
 
         <section id="multi-cluster">
             <h2>Multi-cluster mesh</h2>
-            <p>One cluster is the easy case. Most real production environments end up with multiple clusters — per environment, per region, per blast-radius boundary, per acquisition. A multi-cluster mesh extends identity, encryption, and policy across those clusters so a service in cluster A can call a service in cluster B with the same primitives it would use locally.</p>
+            <p>One cluster is the easy case. Most real production environments end up with multiple clusters - per environment, per region, per blast-radius boundary, per acquisition. A multi-cluster mesh extends identity, encryption, and policy across those clusters so a service in cluster A can call a service in cluster B with the same primitives it would use locally.</p>
             <h3>The common architectures</h3>
             <ul>
-                <li><strong>Istio multi-cluster</strong> — three deployment models: primary-remote (one control plane, multiple data planes), multi-primary (independent control planes federated via shared root CA), and multi-network (mesh spans clusters on different networks via east-west gateways). All three rely on a shared trust domain or federated trust domains via SPIFFE.</li>
-                <li><strong>Linkerd multi-cluster</strong> — explicit "mirroring" model. Services in cluster A are mirrored as virtual services in cluster B; traffic to the mirror goes through a gateway. Simpler model, fewer modes.</li>
-                <li><strong>Cilium ClusterMesh</strong> — shared cluster identity and global service abstraction; pods in different clusters appear in each other's service discovery and can connect with mTLS and policy enforced uniformly. Works particularly well with Cilium's eBPF data plane.</li>
-                <li><strong>Consul WAN federation</strong> — long-standing multi-datacenter pattern; mesh gateways forward traffic between Consul-managed clusters / datacenters.</li>
+                <li><strong>Istio multi-cluster</strong> - three deployment models: primary-remote (one control plane, multiple data planes), multi-primary (independent control planes federated via shared root CA), and multi-network (mesh spans clusters on different networks via east-west gateways). All three rely on a shared trust domain or federated trust domains via SPIFFE.</li>
+                <li><strong>Linkerd multi-cluster</strong> - explicit "mirroring" model. Services in cluster A are mirrored as virtual services in cluster B; traffic to the mirror goes through a gateway. Simpler model, fewer modes.</li>
+                <li><strong>Cilium ClusterMesh</strong> - shared cluster identity and global service abstraction; pods in different clusters appear in each other's service discovery and can connect with mTLS and policy enforced uniformly. Works particularly well with Cilium's eBPF data plane.</li>
+                <li><strong>Consul WAN federation</strong> - long-standing multi-datacenter pattern; mesh gateways forward traffic between Consul-managed clusters / datacenters.</li>
             </ul>
             <h3>What's hard about it</h3>
             <ul>
@@ -762,21 +762,21 @@
 
         <section id="egress">
             <h2>Egress control via the mesh</h2>
-            <p>Most cluster security stories focus on what comes in. Egress — what leaves the cluster — is just as important, and the mesh is a useful enforcement point for it.</p>
+            <p>Most cluster security stories focus on what comes in. Egress - what leaves the cluster - is just as important, and the mesh is a useful enforcement point for it.</p>
             <h3>Why mesh-managed egress</h3>
             <p>Without an egress policy, any compromised workload can reach the internet, exfiltrate data, and pull down second-stage payloads. Network egress restrictions at the firewall help, but they're coarse-grained (CIDR-based) and not workload-aware. The mesh adds identity-aware egress: "the payments service may call <code>api.stripe.com:443</code> over HTTPS; nothing else may."</p>
             <h3>The mechanisms</h3>
             <ul>
                 <li><strong>Istio egress gateway.</strong> A dedicated set of pods that all egress traffic routes through, with policies governing which workloads may reach which external destinations and under what TLS configuration. Provides logging, mTLS termination toward external <a class="glossary-link" href="glossary.html#term-saas">SaaS</a>, and a single audit point.</li>
                 <li><strong>Cilium egress <a class="glossary-link" href="glossary.html#term-nat">NAT</a> gateway.</strong> Pin egress traffic from selected workloads to a specific source IP so external firewalls / SaaS allowlists can be tightened. Combined with FQDN-aware policies that allow specific external hostnames.</li>
-                <li><strong>Linkerd</strong> — handles external HTTPS naturally via its policy model; egress filtering typically layered with NetworkPolicy and a separate egress proxy.</li>
+                <li><strong>Linkerd</strong> - handles external HTTPS naturally via its policy model; egress filtering typically layered with NetworkPolicy and a separate egress proxy.</li>
                 <li><strong>Consul terminating gateway.</strong> The Consul-side equivalent of the egress gateway; bridges to external services not on the mesh.</li>
             </ul>
             <h3>Common egress controls</h3>
             <ul>
                 <li>Allow only the FQDNs the service has declared in its config.</li>
                 <li>Force TLS termination at the egress gateway so the security team can attest to TLS configuration.</li>
-                <li>Log every egress connection with workload identity, destination FQDN, bytes transferred — feed to SIEM.</li>
+                <li>Log every egress connection with workload identity, destination FQDN, bytes transferred - feed to SIEM.</li>
                 <li>Block egress to known-bad indicators from threat intel feeds.</li>
             </ul>
             <p>See also <a href="cspm-vs-cnapp.html">CSPM / CNAPP</a> for the wider data-<a class="glossary-link" href="glossary.html#term-exfiltration">exfiltration</a> detection story.</p>
@@ -786,9 +786,9 @@
             <h2>Sidecar attack surface</h2>
             <p>The mesh is infrastructure; like all infrastructure, it is itself a target. Treating the data plane as automatically secure because it is "the security layer" misses several real risks.</p>
             <h3>Envoy CVEs</h3>
-            <p>Envoy is one of the most widely deployed proxies in the world, and like any complex C++ codebase it ships CVEs. <a href="https://github.com/envoyproxy/envoy/security/advisories" target="_blank" rel="noopener noreferrer">The Envoy security advisories page</a> publishes them; the cadence is monthly-to-quarterly with occasional critical fixes. Every Istio, Cilium, Consul, and App Mesh release ships a specific Envoy version; staying current is part of the operational tax of running the mesh. Linkerd's Rust micro-proxy has a meaningfully smaller CVE surface but is not immune — Rust eliminates whole bug classes, not all bugs.</p>
+            <p>Envoy is one of the most widely deployed proxies in the world, and like any complex C++ codebase it ships CVEs. <a href="https://github.com/envoyproxy/envoy/security/advisories" target="_blank" rel="noopener noreferrer">The Envoy security advisories page</a> publishes them; the cadence is monthly-to-quarterly with occasional critical fixes. Every Istio, Cilium, Consul, and App Mesh release ships a specific Envoy version; staying current is part of the operational tax of running the mesh. Linkerd's Rust micro-proxy has a meaningfully smaller CVE surface but is not immune - Rust eliminates whole bug classes, not all bugs.</p>
             <h3>Sidecar config injection</h3>
-            <p>If an attacker can edit the EnvoyFilter (Istio) or equivalent resource in your cluster, they can rewrite parts of the data plane — redirect traffic, downgrade TLS, exfiltrate logs. Treat EnvoyFilter and similar resources as production-critical <a class="glossary-link" href="glossary.html#term-rbac">RBAC</a> subjects; review every change.</p>
+            <p>If an attacker can edit the EnvoyFilter (Istio) or equivalent resource in your cluster, they can rewrite parts of the data plane - redirect traffic, downgrade TLS, exfiltrate logs. Treat EnvoyFilter and similar resources as production-critical <a class="glossary-link" href="glossary.html#term-rbac">RBAC</a> subjects; review every change.</p>
             <h3>Admin-port exposure</h3>
             <p>Every Envoy ships an admin interface on a local port (usually <code>15000</code>) that lets the operator inspect and modify config. By default it's bound only to localhost in the pod, but historical misconfigurations have exposed it cluster-wide. The admin port should never be reachable from outside the pod's network namespace.</p>
             <h3>Resource exhaustion</h3>
@@ -796,7 +796,7 @@
             <h3>Control-plane compromise</h3>
             <p>If <em>istiod</em> (or the Linkerd / Cilium / Consul control plane) is compromised, every certificate in the mesh becomes untrustworthy. RBAC the control plane like the secret it administers; isolate it to a hardened namespace with deny-by-default NetworkPolicy; rotate its root CA on a defined cadence; alert on every API change to it.</p>
             <h3>Sidecar lifecycle bugs</h3>
-            <p>Pre-Kubernetes-1.29, sidecars had no formal lifecycle relationship with the application container — they started in arbitrary order and could outlive the app, causing the "job pod that never terminates" class of bugs. Kubernetes 1.29's native sidecars (KEP-753, GA in 1.29) finally fixed this, but old clusters may still hit it.</p>
+            <p>Pre-Kubernetes-1.29, sidecars had no formal lifecycle relationship with the application container - they started in arbitrary order and could outlive the app, causing the "job pod that never terminates" class of bugs. Kubernetes 1.29's native sidecars (KEP-753, GA in 1.29) finally fixed this, but old clusters may still hit it.</p>
         </section>
 
         <section id="ambient">
@@ -805,12 +805,12 @@
             <h3>Istio Ambient</h3>
             <p>Two-tier data plane:</p>
             <ul>
-                <li><strong>ztunnel</strong> — a per-node L4 proxy (one DaemonSet pod per node) that handles mTLS, identity, and L4 authorization for every pod on the node. Written in Rust; HBONE (HTTP-Based Overlay Network Environment) protocol for inter-node transport.</li>
-                <li><strong>Waypoint proxy</strong> — optional, per-namespace or per-service-account Envoy that handles L7 features (HTTP-level authorization, JWT validation, request transformation). Deployed only where the L7 features are actually needed.</li>
+                <li><strong>ztunnel</strong> - a per-node L4 proxy (one DaemonSet pod per node) that handles mTLS, identity, and L4 authorization for every pod on the node. Written in Rust; HBONE (HTTP-Based Overlay Network Environment) protocol for inter-node transport.</li>
+                <li><strong>Waypoint proxy</strong> - optional, per-namespace or per-service-account Envoy that handles L7 features (HTTP-level authorization, JWT validation, request transformation). Deployed only where the L7 features are actually needed.</li>
             </ul>
             <p>GA at Istio 1.22 (mid-2024) and steadily maturing through 2025–2026. The migration story from sidecar to ambient is supported by the Istio operator; ambient and sidecar pods can coexist during transition.</p>
             <h3>Cilium Service Mesh (sidecarless from the start)</h3>
-            <p>Cilium's mesh has never used sidecars. The L4 path (mTLS, identity, encryption, NetworkPolicy enforcement) runs in eBPF programs attached to network hooks in the Linux kernel; there is no proxy in the pod. L7 features (HTTP-level routing, authorization with HTTP-aware predicates) run in a per-node Envoy that Cilium manages. The result is one of the leanest data planes in the ecosystem — most of the work happens in the kernel, on the packet, without a userspace proxy round-trip.</p>
+            <p>Cilium's mesh has never used sidecars. The L4 path (mTLS, identity, encryption, NetworkPolicy enforcement) runs in eBPF programs attached to network hooks in the Linux kernel; there is no proxy in the pod. L7 features (HTTP-level routing, authorization with HTTP-aware predicates) run in a per-node Envoy that Cilium manages. The result is one of the leanest data planes in the ecosystem - most of the work happens in the kernel, on the packet, without a userspace proxy round-trip.</p>
             <h3>What sidecarless costs you</h3>
             <ul>
                 <li><strong>Different blast-radius model.</strong> A sidecar fails per pod; a node-level proxy fails per node. Different failure modes need different SLOs.</li>
@@ -823,7 +823,7 @@
 
         <section id="spiffe">
             <h2>SPIFFE / SPIRE deep-dive</h2>
-            <p><a href="https://spiffe.io/" target="_blank" rel="noopener noreferrer">SPIFFE</a> (Secure Production Identity Framework For Everyone) is the open standard for workload identity, hosted by CNCF (graduated). <a href="https://github.com/spiffe/spire" target="_blank" rel="noopener noreferrer">SPIRE</a> is the reference implementation. If you only learn one cross-mesh concept, this is the one — every modern mesh's identity model is SPIFFE-aligned in spirit if not always in name.</p>
+            <p><a href="https://spiffe.io/" target="_blank" rel="noopener noreferrer">SPIFFE</a> (Secure Production Identity Framework For Everyone) is the open standard for workload identity, hosted by CNCF (graduated). <a href="https://github.com/spiffe/spire" target="_blank" rel="noopener noreferrer">SPIRE</a> is the reference implementation. If you only learn one cross-mesh concept, this is the one - every modern mesh's identity model is SPIFFE-aligned in spirit if not always in name.</p>
             <h3>The core concepts</h3>
             <ul>
                 <li><strong>Trust domain.</strong> A namespace for identities; typically one per organization or one per high-level boundary (per cloud, per cluster of clusters). Written as <code>spiffe://example.org</code>.</li>
@@ -834,15 +834,15 @@
                 <li><strong>Attestation.</strong> The process of verifying "is this really the workload it claims to be?" before issuing an SVID. SPIRE supports many attestors: Kubernetes (ServiceAccount + pod label + node identity), AWS (IAM role, instance metadata), GCP (instance identity), Docker (container properties), and more.</li>
             </ul>
             <h3>Federation</h3>
-            <p>Two organizations (or two clusters with different roots) can federate their trust domains — each trusts the other's CA, identities from one are accepted by services in the other. This is the unlock for cross-cloud and cross-organization workload identity: a service in your trust domain can authenticate to a service in your partner's trust domain without either side having to share secrets or terminate at an API gateway.</p>
+            <p>Two organizations (or two clusters with different roots) can federate their trust domains - each trusts the other's CA, identities from one are accepted by services in the other. This is the unlock for cross-cloud and cross-organization workload identity: a service in your trust domain can authenticate to a service in your partner's trust domain without either side having to share secrets or terminate at an API gateway.</p>
             <h3>SPIFFE in each mesh</h3>
             <ul>
-                <li><strong>Istio</strong> — native SPIFFE identities; certs include SPIFFE URIs in the SAN. Trust domain configurable. SPIRE integration documented for orgs that want SPIRE as the CA instead of istiod's built-in CA.</li>
-                <li><strong>Consul</strong> — SPIFFE-based identities since Connect launched; explicitly designed around the standard.</li>
-                <li><strong>Cilium</strong> — added SPIFFE identity support in 1.14 (2023); workloads can have SPIFFE SVIDs for mTLS with SPIRE as the issuer.</li>
-                <li><strong>Linkerd</strong> — uses an analogous identity model bound to the Kubernetes ServiceAccount; not strictly SPIFFE-formatted by default, though the conceptual model is the same.</li>
+                <li><strong>Istio</strong> - native SPIFFE identities; certs include SPIFFE URIs in the SAN. Trust domain configurable. SPIRE integration documented for orgs that want SPIRE as the CA instead of istiod's built-in CA.</li>
+                <li><strong>Consul</strong> - SPIFFE-based identities since Connect launched; explicitly designed around the standard.</li>
+                <li><strong>Cilium</strong> - added SPIFFE identity support in 1.14 (2023); workloads can have SPIFFE SVIDs for mTLS with SPIRE as the issuer.</li>
+                <li><strong>Linkerd</strong> - uses an analogous identity model bound to the Kubernetes ServiceAccount; not strictly SPIFFE-formatted by default, though the conceptual model is the same.</li>
             </ul>
-            <p>For a cluster running just one mesh, SPIFFE may feel like a detail. For an environment with multiple meshes, multiple clusters, or partners — SPIFFE is the standard that lets workload identity travel.</p>
+            <p>For a cluster running just one mesh, SPIFFE may feel like a detail. For an environment with multiple meshes, multiple clusters, or partners - SPIFFE is the standard that lets workload identity travel.</p>
         </section>
 
         <figure class="page-photo">
@@ -943,10 +943,10 @@
             </div>
             <p>The honest choice criteria:</p>
             <ul>
-                <li>If you don't yet know what you need — pick <strong>Linkerd</strong>. Smallest surface, hardest to misconfigure.</li>
-                <li>If you're replacing more than one networking layer — pick <strong>Cilium</strong>. The whole-stack consolidation is the value.</li>
-                <li>If you need rich L7 features, multi-cluster federation, or already have a platform team — pick <strong>Istio</strong>. In ambient mode, the historical operational tax is much lower.</li>
-                <li>If you have significant VM and bare-metal alongside Kubernetes — pick <strong>Consul</strong>. It's the only one that treats VMs as first-class.</li>
+                <li>If you don't yet know what you need - pick <strong>Linkerd</strong>. Smallest surface, hardest to misconfigure.</li>
+                <li>If you're replacing more than one networking layer - pick <strong>Cilium</strong>. The whole-stack consolidation is the value.</li>
+                <li>If you need rich L7 features, multi-cluster federation, or already have a platform team - pick <strong>Istio</strong>. In ambient mode, the historical operational tax is much lower.</li>
+                <li>If you have significant VM and bare-metal alongside Kubernetes - pick <strong>Consul</strong>. It's the only one that treats VMs as first-class.</li>
             </ul>
         </section>
 
@@ -990,7 +990,7 @@
                         </tr>
                         <tr>
                             <th scope="row">Retired predecessors</th>
-                            <td>—</td>
+                            <td>-</td>
                             <td>Open Service Mesh (OSM) retired 2024</td>
                             <td>Anthos Service Mesh consolidated into Cloud Service Mesh</td>
                         </tr>
@@ -1017,23 +1017,23 @@
             <p>A staging model for mesh adoption in a real organization:</p>
             <div class="pillar-grid">
                 <div class="pillar-card pillar-card-stage1">
-                    <h3>Stage 1 — Pilot</h3>
+                    <h3>Stage 1 - Pilot</h3>
                     <p>One mesh chosen, deployed in one non-production cluster. A handful of services enrolled. mTLS in permissive mode. The team learns the failure modes, the upgrade story, the observability story. Three to six months at this stage is normal.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage2">
-                    <h3>Stage 2 — Production</h3>
+                    <h3>Stage 2 - Production</h3>
                     <p>Mesh running in the production cluster(s). Permissive mTLS cluster-wide; strict mTLS in selected namespaces. Basic AuthorizationPolicy (deny-by-default at the namespace level for new services). Dashboards live; on-call runbooks for mesh failures exist. The team has hit, and survived, at least one mesh-related incident.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage3">
-                    <h3>Stage 3 — Default</h3>
+                    <h3>Stage 3 - Default</h3>
                     <p>Strict mTLS cluster-wide. Every service has an AuthorizationPolicy. JWT validation at the mesh for end-user-bearing services. Egress gateway operational. Multi-cluster mesh either deployed or actively planned. Sidecar / sidecarless decision made on basis of operational fit.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage4">
-                    <h3>Stage 4 — Platform</h3>
+                    <h3>Stage 4 - Platform</h3>
                     <p>Mesh is part of the platform team's product; new services get mesh enrollment automatically via templates / golden-path tooling. SPIFFE-based federation either live or evaluated for partner integration. The mesh is invisible to most developers because it just works. Observability and policy are the abstractions developers see; the mesh is a load-bearing implementation detail.</p>
                 </div>
             </div>
-            <p>The skip-stage cost is real: an org that goes straight from Stage 1 pilot to Stage 3 default usually finds the operational failures it didn't learn at Stage 2 — and they happen in production.</p>
+            <p>The skip-stage cost is real: an org that goes straight from Stage 1 pilot to Stage 3 default usually finds the operational failures it didn't learn at Stage 2 - and they happen in production.</p>
         </section>
 
         <section id="pitfalls">
@@ -1074,21 +1074,21 @@
             </ul>
             <h3>Practitioner background</h3>
             <ul>
-                <li><a href="https://landscape.cncf.io/?group=projects-and-products&view-mode=card#runtime--service-mesh" target="_blank" rel="noopener noreferrer">CNCF landscape — service mesh</a></li>
+                <li><a href="https://landscape.cncf.io/?group=projects-and-products&view-mode=card#runtime--service-mesh" target="_blank" rel="noopener noreferrer">CNCF landscape - service mesh</a></li>
                 <li><a href="https://servicemesh.es/" target="_blank" rel="noopener noreferrer">Service Mesh Comparison (community)</a></li>
                 <li><a href="https://github.com/envoyproxy/envoy/security/advisories" target="_blank" rel="noopener noreferrer">Envoy security advisories</a></li>
-                <li><a href="https://buoyant.io/research" target="_blank" rel="noopener noreferrer">Buoyant — service mesh research</a></li>
+                <li><a href="https://buoyant.io/research" target="_blank" rel="noopener noreferrer">Buoyant - service mesh research</a></li>
             </ul>
             <h3>Related CSOH pages</h3>
             <ul>
-                <li><a href="kubernetes.html">Kubernetes security</a> — the platform the mesh runs on.</li>
-                <li><a href="network-security.html">Network security</a> — the L3/L4 layer beneath the mesh.</li>
-                <li><a href="zero-trust.html">Zero trust</a> — the philosophy the mesh implements east-west.</li>
-                <li><a href="api-security.html">API security</a> — the north-south complement at the gateway.</li>
-                <li><a href="iam.html">IAM &amp; identity</a> — where workload identity ties to cloud IAM.</li>
-                <li><a href="containers.html">Containers</a> — the workload layer the mesh secures.</li>
-                <li><a href="detection-engineering.html">Detection engineering</a> — turning mesh telemetry into alerts.</li>
-                <li><a href="glossary.html">Glossary</a> — every term on this page, defined.</li>
+                <li><a href="kubernetes.html">Kubernetes security</a> - the platform the mesh runs on.</li>
+                <li><a href="network-security.html">Network security</a> - the L3/L4 layer beneath the mesh.</li>
+                <li><a href="zero-trust.html">Zero trust</a> - the philosophy the mesh implements east-west.</li>
+                <li><a href="api-security.html">API security</a> - the north-south complement at the gateway.</li>
+                <li><a href="iam.html">IAM &amp; identity</a> - where workload identity ties to cloud IAM.</li>
+                <li><a href="containers.html">Containers</a> - the workload layer the mesh secures.</li>
+                <li><a href="detection-engineering.html">Detection engineering</a> - turning mesh telemetry into alerts.</li>
+                <li><a href="glossary.html">Glossary</a> - every term on this page, defined.</li>
             </ul>
         </section>
 
@@ -1098,20 +1098,20 @@
             <h3>Do I need a service mesh?</h3>
             <p>Probably not on day one, and possibly never. A mesh earns its operational cost when you have enough services that <a class="glossary-link" href="glossary.html#term-pinning">pinning</a> identity, encrypting east-west traffic, applying L7 authorization, and observing service-to-service behavior all become important at the same time. Below ten or so services that talk to each other, the same outcomes are cheaper to reach with NetworkPolicy, application-level mTLS via SDK or cert-manager, and per-service tracing. Once you cross fifty services, multi-team ownership, and any meaningful regulatory requirement around encryption-in-transit between services, the math flips. Pilot one before you commit, pick the smallest mesh that fits, and budget for the operational tax it adds.</p>
 
-            <h3>Istio vs Linkerd — which should I pick?</h3>
-            <p>Linkerd if you want the smallest, fastest path to mTLS and basic policy with the least operational surface. Istio if you need everything — rich L7 traffic management, JWT validation, sophisticated authorization, multi-cluster federation, the ambient data plane option. Both are CNCF graduated; pick on operational appetite, not on feature checklist marketing.</p>
+            <h3>Istio vs Linkerd - which should I pick?</h3>
+            <p>Linkerd if you want the smallest, fastest path to mTLS and basic policy with the least operational surface. Istio if you need everything - rich L7 traffic management, JWT validation, sophisticated authorization, multi-cluster federation, the ambient data plane option. Both are CNCF graduated; pick on operational appetite, not on feature checklist marketing.</p>
 
             <h3>Is sidecar-less ready for production?</h3>
             <p>Yes, with caveats. Cilium Service Mesh has been in production at significant scale for several years and is GA. Istio Ambient was declared GA at 1.22 and continues to mature; many teams have moved production workloads to it specifically to escape sidecar operational tax. The caveats: ambient's L7 features require a separate per-namespace waypoint proxy; some advanced Istio features still lag in ambient; the failure modes are different from sidecar (node-level rather than pod-level blast radius).</p>
 
             <h3>Does Cilium replace my mesh AND my CNI?</h3>
-            <p>Yes, and that's the pitch. Cilium is a CNI, a NetworkPolicy engine with L7 enforcement, a service mesh (mTLS, identity, L7 routing, no sidecar), and a deep observability tool (Hubble) — one eBPF data plane underneath all of it. The trade-off is concentration: one project owns more of the stack than was traditionally true. The upside is fewer moving parts. For most new clusters in 2026, the simplification is worth it.</p>
+            <p>Yes, and that's the pitch. Cilium is a CNI, a NetworkPolicy engine with L7 enforcement, a service mesh (mTLS, identity, L7 routing, no sidecar), and a deep observability tool (Hubble) - one eBPF data plane underneath all of it. The trade-off is concentration: one project owns more of the stack than was traditionally true. The upside is fewer moving parts. For most new clusters in 2026, the simplification is worth it.</p>
 
-            <h3>Service mesh vs API gateway — when do I need which?</h3>
-            <p>API gateway lives at the edge of the cluster (north-south traffic). Service mesh lives inside the cluster (east-west traffic). The right question is rarely "which one" — it's "what concerns live at what layer", and the answer usually involves both. See the <a href="#mesh-vs-gateway">comparison above</a>.</p>
+            <h3>Service mesh vs API gateway - when do I need which?</h3>
+            <p>API gateway lives at the edge of the cluster (north-south traffic). Service mesh lives inside the cluster (east-west traffic). The right question is rarely "which one" - it's "what concerns live at what layer", and the answer usually involves both. See the <a href="#mesh-vs-gateway">comparison above</a>.</p>
 
             <h3>What is SPIFFE/SPIRE and why does it matter?</h3>
-            <p>SPIFFE is the open standard for workload identity — every workload gets a cryptographically verifiable identity instead of relying on a shared secret or a network position. SPIRE is the reference implementation. Every modern mesh's mTLS is grounded in a workload-identity model, and SPIFFE makes those identities portable across mesh implementations, cloud providers, and even organizations (federation). See the <a href="#spiffe">deep-dive above</a>.</p>
+            <p>SPIFFE is the open standard for workload identity - every workload gets a cryptographically verifiable identity instead of relying on a shared secret or a network position. SPIRE is the reference implementation. Every modern mesh's mTLS is grounded in a workload-identity model, and SPIFFE makes those identities portable across mesh implementations, cloud providers, and even organizations (federation). See the <a href="#spiffe">deep-dive above</a>.</p>
 
             <h3>Doesn't strict mTLS break legacy services?</h3>
             <p>Yes, which is why every production-grade mesh ships a permissive transition mode. Enable mesh-wide PERMISSIVE; verify via telemetry that traffic is using mTLS; flip to STRICT namespace-by-namespace once each is clean. Skipping the permissive step is one of the top-three mesh outages.</p>
@@ -1120,11 +1120,11 @@
         <section class="cta-section">
             <h2>Where next</h2>
             <ul>
-                <li><a href="kubernetes.html">Kubernetes security</a> — the platform under the mesh; admission control, RBAC, pod security.</li>
-                <li><a href="network-security.html">Network security</a> — the L3/L4 layer; NetworkPolicy, segmentation, the layered defense.</li>
-                <li><a href="zero-trust.html">Zero trust</a> — the philosophy the mesh implements east-west.</li>
-                <li><a href="api-security.html">API security</a> — the north-south complement at the gateway.</li>
-                <li><a href="sessions.html">Friday Zoom</a> — service mesh, eBPF, and ambient-mode migrations come up regularly. Drop in.</li>
+                <li><a href="kubernetes.html">Kubernetes security</a> - the platform under the mesh; admission control, RBAC, pod security.</li>
+                <li><a href="network-security.html">Network security</a> - the L3/L4 layer; NetworkPolicy, segmentation, the layered defense.</li>
+                <li><a href="zero-trust.html">Zero trust</a> - the philosophy the mesh implements east-west.</li>
+                <li><a href="api-security.html">API security</a> - the north-south complement at the gateway.</li>
+                <li><a href="sessions.html">Friday Zoom</a> - service mesh, eBPF, and ambient-mode migrations come up regularly. Drop in.</li>
             </ul>
         </section>
 

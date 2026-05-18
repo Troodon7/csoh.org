@@ -1,4 +1,4 @@
-# Security Documentation — csoh.org
+# Security Documentation - csoh.org
 
 This document describes the security measures in place for [csoh.org](https://csoh.org), a static website for the Cloud Security Office Hours community.
 
@@ -6,11 +6,11 @@ This document describes the security measures in place for [csoh.org](https://cs
 
 ## Architecture
 
-csoh.org is a **pure static site** — no server-side code, no database, no user accounts, no cookies, no sessions. This eliminates entire classes of vulnerabilities (SQL injection, RCE, auth bypass, session hijacking, CSRF).
+csoh.org is a **pure static site** - no server-side code, no database, no user accounts, no cookies, no sessions. This eliminates entire classes of vulnerabilities (SQL injection, RCE, auth bypass, session hijacking, CSRF).
 
-**Hosting is on Google Cloud Run**, fronted by Cloudflare (proxy mode) and a Google Cloud HTTPS load balancer with Cloud Armor (WAF), Cloud CDN, and modern TLS. Container images are built, scanned, and deployed by GitHub Actions via Workload Identity Federation — there is no long-lived service-account key. The full architecture (Cloud Run, LB + WAF, Workload Identity Federation, Artifact Registry with immutable tags, 400-day log retention) is documented in [infra/README.md](infra/README.md).
+**Hosting is on Google Cloud Run**, fronted by Cloudflare (proxy mode) and a Google Cloud HTTPS load balancer with Cloud Armor (WAF), Cloud CDN, and modern TLS. Container images are built, scanned, and deployed by GitHub Actions via Workload Identity Federation - there is no long-lived service-account key. The full architecture (Cloud Run, LB + WAF, Workload Identity Federation, Artifact Registry with immutable tags, 400-day log retention) is documented in [infra/README.md](infra/README.md).
 
-The site previously deployed via FTPS to a LiteSpeed shared host. That path was retired after the cutover to GCP — the FTPS step is removed from `site-update-deploy.yml`, the standalone `manual-deploy.yml` workflow is deleted, and the `FTP_*` secrets are gone.
+The site previously deployed via FTPS to a LiteSpeed shared host. That path was retired after the cutover to GCP - the FTPS step is removed from `site-update-deploy.yml`, the standalone `manual-deploy.yml` workflow is deleted, and the `FTP_*` secrets are gone.
 
 ---
 
@@ -46,18 +46,18 @@ object-src 'none'
 ```
 
 Key points:
-- **No `unsafe-inline` or `unsafe-eval`** in `script-src` — inline scripts and `eval()` are blocked
-- **No wildcards** — every external domain is explicitly listed
-- **`frame-ancestors 'none'`** — supersedes `X-Frame-Options` for modern browsers
-- **`object-src 'none'`** — blocks Flash, Java applets, and other plugin content
+- **No `unsafe-inline` or `unsafe-eval`** in `script-src` - inline scripts and `eval()` are blocked
+- **No wildcards** - every external domain is explicitly listed
+- **`frame-ancestors 'none'`** - supersedes `X-Frame-Options` for modern browsers
+- **`object-src 'none'`** - blocks Flash, Java applets, and other plugin content
 - Only YouTube and Web Archive are allowed as iframe sources
 - Only YouTube thumbnail domains are allowed as external image sources
 - The `.htaccess` and `nginx.conf` CSPs are byte-identical (no drift)
 
 In addition to CSP, the following cross-origin isolation headers are set:
 
-- `Cross-Origin-Opener-Policy: same-origin` — only same-origin windows can hold a reference to ours; defends against cross-origin info leaks via `window.opener` and Spectre-class side channels.
-- `Cross-Origin-Resource-Policy: same-origin` — resources from this origin can only be loaded by same-origin contexts; stops arbitrary sites from embedding our images/scripts/etc.
+- `Cross-Origin-Opener-Policy: same-origin` - only same-origin windows can hold a reference to ours; defends against cross-origin info leaks via `window.opener` and Spectre-class side channels.
+- `Cross-Origin-Resource-Policy: same-origin` - resources from this origin can only be loaded by same-origin contexts; stops arbitrary sites from embedding our images/scripts/etc.
 
 ---
 
@@ -74,9 +74,9 @@ The `.htaccess` and `nginx.conf` block direct access to sensitive files:
 | `\.(bak\|config\|sh\|sql\|log\|ini)$` | 403 | Backups, configs, scripts, logs |
 
 **Exceptions:** three JSON files are explicitly allowlisted because the site needs to fetch them:
-- `preview-mapping.json` — resource preview thumbnails (`main.js`)
-- `manifest.json` — PWA "Add to Home Screen" metadata
-- `meetings-search-index.json` — meetings.html full-text search index (`meetings.js`)
+- `preview-mapping.json` - resource preview thumbnails (`main.js`)
+- `manifest.json` - PWA "Add to Home Screen" metadata
+- `meetings-search-index.json` - meetings.html full-text search index (`meetings.js`)
 
 Directory listing is disabled globally (`Options -Indexes` / `autoindex off`).
 
@@ -106,7 +106,7 @@ This means even if the hosting account were compromised and files were tampered 
 ## JavaScript Security
 
 **XSS Prevention:**
-- All user input (search queries, URL parameters) is passed through a `sanitize()` function that uses `textContent` encoding — the safest DOM-based sanitization method
+- All user input (search queries, URL parameters) is passed through a `sanitize()` function that uses `textContent` encoding - the safest DOM-based sanitization method
 - No `eval()`, no `document.write()`, no `Function()` constructors
 - `innerHTML` is only used with sanitized or non-user-controlled content
 
@@ -115,7 +115,7 @@ This means even if the hosting account were compromised and files were tampered 
 - This prevents reverse tabnapping attacks
 
 **No Third-Party JavaScript:**
-- Zero external scripts — no analytics, no tracking pixels, no CDN-hosted libraries
+- Zero external scripts - no analytics, no tracking pixels, no CDN-hosted libraries
 - All JavaScript is first-party, self-hosted, and SRI-hashed
 
 **No Cookies or Tracking:**
@@ -168,7 +168,7 @@ All third-party GitHub Actions are pinned to exact commit SHAs rather than mutab
 | `lycheeverse/lychee-action` | `8646ba30535128ac92d33dfc9133794bfdd9b411` | v2.8.0 |
 | `Cyb3r-Jak3/html5validator-action` | `443b108eb8e134b63a1f8a8ba0c942d552608ed7` | master 2025-09-19 |
 
-Every third-party action used by the workflows is pinned by SHA — no remaining `@v*` major-tag references. To update a pinned action, look up the commit SHA for the new tag:
+Every third-party action used by the workflows is pinned by SHA - no remaining `@v*` major-tag references. To update a pinned action, look up the commit SHA for the new tag:
 ```bash
 curl -s "https://api.github.com/repos/actions/checkout/git/ref/tags/v6.0.2" | grep sha
 ```
@@ -197,11 +197,11 @@ CI workflows authenticate to GitHub via a **GitHub App** (`csoh-ci`) rather than
 |----------|---------|----------------------|------|
 | `update-news.yml` | `csoh-ci` App + `CSOH_PAT` (for auto-approve) | n/a | via PR + auto-merge |
 | `normalize-urls.yml` | `csoh-ci` App | n/a | via PR (human reviews + merges) |
-| `site-update-deploy.yml` | `csoh-ci` App | n/a (housekeeping only — deploy is `gcp-deploy.yml`) | direct (App is on ruleset bypass) |
-| `gcp-deploy.yml` | auto-injected `GITHUB_TOKEN` (`id-token: write` for OIDC) | **WIF — no key** (impersonates `csoh-deployer` SA via OIDC) | no |
+| `site-update-deploy.yml` | `csoh-ci` App | n/a (housekeeping only - deploy is `gcp-deploy.yml`) | direct (App is on ruleset bypass) |
+| `gcp-deploy.yml` | auto-injected `GITHUB_TOKEN` (`id-token: write` for OIDC) | **WIF - no key** (impersonates `csoh-deployer` SA via OIDC) | no |
 | `lint.yml`, `validate-html.yml`, `check-broken-links.yml`, `check-url-safety.yml` | auto-injected `GITHUB_TOKEN` | n/a | no |
 
-Every workflow declares an explicit top-level `permissions:` block scoping the auto-injected `GITHUB_TOKEN`. The read-only check workflows use `contents: read` (plus `pull-requests: write` where they post comments). The write-capable workflows (`update-news`, `normalize-urls`, `site-update-deploy`) declare `contents: read` for the auto-injected token, because they handle write access through the App instead — keeping the default token strictly minimal. `gcp-deploy.yml` adds `id-token: write` for the OIDC token GitHub mints for WIF.
+Every workflow declares an explicit top-level `permissions:` block scoping the auto-injected `GITHUB_TOKEN`. The read-only check workflows use `contents: read` (plus `pull-requests: write` where they post comments). The write-capable workflows (`update-news`, `normalize-urls`, `site-update-deploy`) declare `contents: read` for the auto-injected token, because they handle write access through the App instead - keeping the default token strictly minimal. `gcp-deploy.yml` adds `id-token: write` for the OIDC token GitHub mints for WIF.
 
 ### Why we migrated from PATs to a GitHub App
 
@@ -209,11 +209,11 @@ The original CI design used two personal access tokens belonging to a human (Sha
 
 1. **Long-lived.** PATs don't expire unless you set an explicit expiry. Once granted, the token is valid until manually revoked. A leaked PAT remains useful to an attacker for as long as it takes you to notice.
 
-2. **Broadly scoped (classic PATs especially).** A classic PAT with `repo` scope can read and write *every* repository the owning user has access to — public, private, and forked. Even fine-grained PATs are awkward to constrain to one repository while still permitting all the operations a busy CI pipeline needs.
+2. **Broadly scoped (classic PATs especially).** A classic PAT with `repo` scope can read and write *every* repository the owning user has access to - public, private, and forked. Even fine-grained PATs are awkward to constrain to one repository while still permitting all the operations a busy CI pipeline needs.
 
 3. **Tied to a personal identity.** Bot commits authored under a PAT show up as the human account on the audit log, blurring the distinction between automation and operator action. If the human leaves the project (or the org), every workflow that depends on their PAT breaks.
 
-4. **No native rotation.** Rotating a PAT means generating a new one, updating every secret, and revoking the old one — a manual process that tends to get postponed.
+4. **No native rotation.** Rotating a PAT means generating a new one, updating every secret, and revoking the old one - a manual process that tends to get postponed.
 
 A GitHub App fixes all four:
 
@@ -229,7 +229,7 @@ In numbers: blast radius of a leaked CI token went from "everything Shawn's PAT 
 
 ### App configuration
 
-- **Installation:** `csoh-ci` is installed on `CloudSecurityOfficeHours/csoh.org` only — not at the org-wide level.
+- **Installation:** `csoh-ci` is installed on `CloudSecurityOfficeHours/csoh.org` only - not at the org-wide level.
 - **Repository permissions:** `contents: read & write`, `pull-requests: read & write`. No other permissions granted.
 - **Webhooks:** disabled. The App is purely an authentication identity; it does not consume events.
 - **Branch protection / rulesets:** `csoh-ci` is on the main-branch ruleset bypass list with mode "Always," because `site-update-deploy.yml` does direct in-place commits to `main` (with `[skip ci]` markers) for housekeeping (SRI hashes, sitemap dates, normalized URLs, generated preview images). PRs from `update-news.yml` and `normalize-urls.yml` go through the normal merge path and don't need the bypass.
@@ -251,20 +251,20 @@ Subsequent steps reference `${{ steps.app-token.outputs.token }}` wherever they 
 
 ### Why one PAT remains: GitHub auto-merge does not honor ruleset bypass
 
-GitHub does not allow an actor to approve its own PRs (this restriction applies to GitHub Apps too — an App that opens a PR cannot approve it). The main-branch ruleset has a `pull_request` rule requiring 1 approval before merging.
+GitHub does not allow an actor to approve its own PRs (this restriction applies to GitHub Apps too - an App that opens a PR cannot approve it). The main-branch ruleset has a `pull_request` rule requiring 1 approval before merging.
 
-We initially expected that putting the `csoh-ci` App on the ruleset's **bypass list** with mode `Always` would let the App auto-merge its own PRs without any approval — the bypass should apply to *all* rules including `pull_request`, and the merge action is performed by the App. **Empirically, this is not the case.** Verified on 2026-05-08 with PR #650:
+We initially expected that putting the `csoh-ci` App on the ruleset's **bypass list** with mode `Always` would let the App auto-merge its own PRs without any approval - the bypass should apply to *all* rules including `pull_request`, and the merge action is performed by the App. **Empirically, this is not the case.** Verified on 2026-05-08 with PR #650:
 
 - All required status checks: passing
 - App on bypass list with `mode: always`
 - Auto-merge enabled by the App
-- Result: `mergeStateStatus: BLOCKED`, `reviewDecision: REVIEW_REQUIRED` — auto-merge sat indefinitely
+- Result: `mergeStateStatus: BLOCKED`, `reviewDecision: REVIEW_REQUIRED` - auto-merge sat indefinitely
 
-GitHub's auto-merge feature evaluates `reviewDecision` independently and does not consult the bypass list. (Bypass *does* work for direct API merges by the same actor — it's specific to the auto-merge scheduler.) So one narrow PAT remains: `CSOH_PAT`, a fine-grained org-scoped token used exclusively to approve PRs that the App has just opened, satisfying the approval rule so that auto-merge can fire.
+GitHub's auto-merge feature evaluates `reviewDecision` independently and does not consult the bypass list. (Bypass *does* work for direct API merges by the same actor - it's specific to the auto-merge scheduler.) So one narrow PAT remains: `CSOH_PAT`, a fine-grained org-scoped token used exclusively to approve PRs that the App has just opened, satisfying the approval rule so that auto-merge can fire.
 
 `normalize-urls.yml` keeps its "human reviews + merges" flow without an auto-approve step; the auto-approve there was a one-click convenience and added no real safety. Removing it is a strict improvement (humans now click both "approve" and "merge" instead of just "merge").
 
-`site-update-deploy.yml` is unaffected — it does direct in-place commits to `main` (not via PR), and the App's bypass *does* apply to direct pushes.
+`site-update-deploy.yml` is unaffected - it does direct in-place commits to `main` (not via PR), and the App's bypass *does* apply to direct pushes.
 
 ### Repository secrets currently in use
 
@@ -275,30 +275,30 @@ GitHub's auto-merge feature evaluates `reviewDecision` independently and does no
 | `CSOH_PAT` | Approve App-opened PRs (auto-merge driver) | medium-sensitivity (narrow scope) |
 | `SSH_PRIVATE_KEY` | Reserved for future use | high-sensitivity |
 
-**No GCP secret in this list — that's deliberate.** The `gcp-deploy.yml` workflow needs no service-account key, no project-scoped PAT, and no GCP-side stored secret. It authenticates by:
+**No GCP secret in this list - that's deliberate.** The `gcp-deploy.yml` workflow needs no service-account key, no project-scoped PAT, and no GCP-side stored secret. It authenticates by:
 
 1. GitHub Actions mints an OIDC token for the run, signed by GitHub's identity provider.
 2. Google Cloud's STS exchanges that token for a short-lived (1-hour) access token, gated by a Workload Identity Federation policy that requires:
    - `assertion.repository == 'CloudSecurityOfficeHours/csoh.org'` (other repos cannot mint tokens for this pool)
    - `aud` matching the configured pool/provider
 3. The access token is scoped to impersonating one specific service account (`csoh-deployer`) which has narrowly-scoped roles: `roles/run.admin`, `roles/artifactregistry.writer`, plus `iam.serviceAccountUser` on the runtime SA.
-4. The runtime SA (`csoh-run-runtime`, what the actual container runs as) has **zero IAM roles** — the static container makes no GCP API calls, so it gets nothing.
+4. The runtime SA (`csoh-run-runtime`, what the actual container runs as) has **zero IAM roles** - the static container makes no GCP API calls, so it gets nothing.
 
 Net effect: a leaked workflow log compromises one ~1-hour token scoped to one repo's deploy permissions on one project. There is no long-lived credential to rotate or revoke.
 
 `PAT_TOKEN` (the original CI PAT), `CSOH_CI_APP_ID` (deprecated numeric input, replaced by `CSOH_CI_CLIENT_ID`), and `APPROVAL_PAT_TOKEN` (replaced by `CSOH_PAT`) have all been removed.
 
-`CSOH_PAT` is a **fine-grained PAT** scoped to `CloudSecurityOfficeHours/csoh.org` only, with permissions limited to **Pull requests: Read & Write** (no contents, no actions, no anything else). Even if it leaks, the only damage an attacker can do is approve PRs — they cannot push, merge by themselves, or read code beyond what's already in the public repo. Replaced the broader classic-PAT `APPROVAL_PAT_TOKEN` on 2026-05-08.
+`CSOH_PAT` is a **fine-grained PAT** scoped to `CloudSecurityOfficeHours/csoh.org` only, with permissions limited to **Pull requests: Read & Write** (no contents, no actions, no anything else). Even if it leaks, the only damage an attacker can do is approve PRs - they cannot push, merge by themselves, or read code beyond what's already in the public repo. Replaced the broader classic-PAT `APPROVAL_PAT_TOKEN` on 2026-05-08.
 
 ### Rotation guidance
 
 | Item | Rotation cadence | Process |
 |------|-----------------|---------|
-| App installation token | Automatic, every ~1 hour | None — handled by GitHub |
+| App installation token | Automatic, every ~1 hour | None - handled by GitHub |
 | App private key | Annually or on suspected compromise | Generate new key in App settings; replace `CSOH_CI_PRIVATE_KEY` secret; revoke old key |
 | `CSOH_PAT` | Every 6–12 months (or before its set expiry) | Generate new fine-grained PAT (resource owner: `CloudSecurityOfficeHours`, repo: `csoh.org`, permission: pull-requests: write only); replace org-level Actions secret |
-| GCP WIF access token | Automatic, every ~1 hour | None — minted per workflow run, no stored credential |
-| GCP runtime SA roles | On every Terraform apply | The runtime SA's IAM bindings live in [`infra/terraform/service_accounts.tf`](infra/terraform/service_accounts.tf) — review on every change |
+| GCP WIF access token | Automatic, every ~1 hour | None - minted per workflow run, no stored credential |
+| GCP runtime SA roles | On every Terraform apply | The runtime SA's IAM bindings live in [`infra/terraform/service_accounts.tf`](infra/terraform/service_accounts.tf) - review on every change |
 
 ---
 
@@ -308,18 +308,18 @@ Net effect: a leaked workflow log compromises one ~1-hour token scoped to one re
 
 `gcp-deploy.yml` builds a container image, scans it, and deploys to Cloud Run on every push to `main` that touches site files.
 
-**Authentication — Workload Identity Federation, no stored credential:**
+**Authentication - Workload Identity Federation, no stored credential:**
 - GitHub Actions mints an OIDC token for the run.
 - A WIF policy in the GCP project gates the exchange: only OIDC tokens whose `repository` claim equals `CloudSecurityOfficeHours/csoh.org` are accepted ([`infra/terraform/wif.tf`](infra/terraform/wif.tf)).
 - The exchanged GCP access token is short-lived (~1 hour), scoped to impersonating the `csoh-deployer` service account.
-- The deploy SA has only the roles needed to push images and deploy revisions — no broader project access.
+- The deploy SA has only the roles needed to push images and deploy revisions - no broader project access.
 - The runtime SA the container runs as (`csoh-run-runtime`) has **zero IAM roles**.
 
 **Image supply chain:**
 - Base image (`nginx:1.27-alpine`) is **digest-pinned** in the [`Dockerfile`](Dockerfile). A compromised registry tag cannot ship malicious bytes into our build.
-- `RUN apk upgrade --no-cache` after `FROM` refreshes Alpine packages on top of the pinned base — supply-chain integrity for the base layer plus current security patches for libraries.
+- `RUN apk upgrade --no-cache` after `FROM` refreshes Alpine packages on top of the pinned base - supply-chain integrity for the base layer plus current security patches for libraries.
 - Every PR's container is **Trivy-scanned** for HIGH and CRITICAL CVEs (with fixes available); the build fails if any are found.
-- Artifact Registry has `immutable_tags=true` — once an image tag is pushed, it cannot be overwritten or moved. Cloud Run revisions pin a specific SHA tag, so rollback is `gcloud run services update-traffic --to-revisions <name>=100` and there is no ambiguity about what bytes ran.
+- Artifact Registry has `immutable_tags=true` - once an image tag is pushed, it cannot be overwritten or moved. Cloud Run revisions pin a specific SHA tag, so rollback is `gcloud run services update-traffic --to-revisions <name>=100` and there is no ambiguity about what bytes ran.
 - Cleanup policy keeps the most recent 30 versions and deletes untagged versions older than 7 days.
 
 **Workflow hardening:**
@@ -328,7 +328,7 @@ Net effect: a leaked workflow log compromises one ~1-hour token scoped to one re
 
 **Edge defenses (load balancer in front of Cloud Run):**
 - **Cloud Armor** policy with OWASP Core Rule Set (SQLi, XSS, LFI, RFI, RCE), per-IP rate limit (600 req/min, 10-min ban on exceed), and adaptive L7 DDoS defense ([`infra/terraform/cloud_armor.tf`](infra/terraform/cloud_armor.tf)).
-- **Modern TLS policy** — TLS 1.2+ only, restricted cipher suite.
+- **Modern TLS policy** - TLS 1.2+ only, restricted cipher suite.
 - **HTTP→HTTPS redirect** at the LB; the Cloud Run service's ingress is `internal-and-cloud-load-balancing` so direct hits to the Run URL get blocked at the edge.
 
 **Logging:**
@@ -367,7 +367,7 @@ If you discover a security vulnerability on csoh.org:
 - **security.txt:** https://csoh.org/.well-known/security.txt (RFC 9116)
 - **Community:** Bring it up during our Friday Zoom session
 
-We take security seriously — especially as a cloud security community.
+We take security seriously - especially as a cloud security community.
 
 ---
 

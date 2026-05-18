@@ -1,6 +1,6 @@
 // 404 redirect-hint: detect a few common old-URL patterns and offer the
 // new URL. Runs purely on the client because the server returns this
-// static 404 page — we don't have access to server logs from here.
+// static 404 page - we don't have access to server logs from here.
 // The original URL the user tried lives in document.referrer (if they
 // followed a link) or window.location.search (if a 301-from-X landing
 // page passed it through). Both are best-effort hints.

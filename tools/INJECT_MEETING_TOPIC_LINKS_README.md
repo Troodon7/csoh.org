@@ -2,7 +2,7 @@
 
 Wraps the first occurrence of cloud-security topic keywords in each meeting recap with a link to the matching topic page (e.g. `disaster recovery` → `../backup-dr.html`).
 
-Used to give each meeting recap 2–3 contextual internal links to topic pages — improves both reader navigation and internal-link equity flowing into the pillar/topic pages.
+Used to give each meeting recap 2–3 contextual internal links to topic pages - improves both reader navigation and internal-link equity flowing into the pillar/topic pages.
 
 ## How it works
 
@@ -20,7 +20,7 @@ Generic single-token terms (`AWS`, `IAM`, `S3`, etc.) are denylisted to avoid we
 ## Usage
 
 ```bash
-# Dry-run across all 94 meetings — prints what would change, writes nothing
+# Dry-run across all 94 meetings - prints what would change, writes nothing
 python3 tools/inject_meeting_topic_links.py --dry-run
 
 # Apply across all 94 meetings
@@ -30,7 +30,7 @@ python3 tools/inject_meeting_topic_links.py
 python3 tools/inject_meeting_topic_links.py --pages meetings/2026-05-08.html
 ```
 
-Idempotent in practice — re-running finds the same first-occurrences already inside `<a>` tags and skips them.
+Idempotent in practice - re-running finds the same first-occurrences already inside `<a>` tags and skips them.
 
 ## Tuning
 

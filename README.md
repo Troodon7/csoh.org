@@ -17,10 +17,10 @@ The vendor-neutral curriculum, written by practitioners. **Foundations**, **disc
 ### Foundations
 | Guide | What it covers |
 |---|---|
-| 📚 [What is Cloud Security?](https://csoh.org/what-is-cloud-security.html) | Plain-English foundation — shared responsibility, threats, tool landscape |
+| 📚 [What is Cloud Security?](https://csoh.org/what-is-cloud-security.html) | Plain-English foundation - shared responsibility, threats, tool landscape |
 | 🛣️ [Cloud Security Learning Path](https://csoh.org/learning-path.html) | Beginner → working practitioner roadmap with milestones |
 | ⚖️ [Shared Responsibility Model](https://csoh.org/shared-responsibility-model.html) | What the cloud provider secures vs. what you secure (AWS / Azure / GCP) |
-| 🛠️ [CSPM vs CNAPP vs CWPP vs CIEM vs DSPM](https://csoh.org/cspm-vs-cnapp.html) | The acronym soup decoded — when you need each tool |
+| 🛠️ [CSPM vs CNAPP vs CWPP vs CIEM vs DSPM](https://csoh.org/cspm-vs-cnapp.html) | The acronym soup decoded - when you need each tool |
 | 🗺️ [Vendor Landscape](https://csoh.org/vendor-landscape.html) | 350+ cloud-security vendors across 30 categories. No rankings, just orientation |
 
 ### Disciplines
@@ -40,13 +40,13 @@ The vendor-neutral curriculum, written by practitioners. **Foundations**, **disc
 | 🎯 [Cloud Pentesting & Red Teaming](https://csoh.org/cloud-pentesting.html) | AWS/Azure/GCP attack paths, Pacu/ROADtools/BloodHound, MITRE ATT&CK Cloud |
 | 🤖 [AI/ML & LLM Security](https://csoh.org/ai-ml-security.html) | OWASP LLM Top 10, prompt injection, agentic AI, model supply chain, ATLAS |
 | 🕸️ [Service Mesh Security](https://csoh.org/service-mesh-security.html) | Istio / Linkerd / Cilium / Consul, mTLS, SPIFFE/SPIRE, ambient mode |
-| 📐 [Landing Zones](https://csoh.org/landing-zones.html) | Cloud foundations — Control Tower / Azure CAF / GCP blueprint |
+| 📐 [Landing Zones](https://csoh.org/landing-zones.html) | Cloud foundations - Control Tower / Azure CAF / GCP blueprint |
 | 📦 [Containers & Cloud Security](https://csoh.org/containers.html) | Trust boundary, escape paths, identity chaining via IMDS, supply chain |
-| ☸️ [Kubernetes & Managed Kubernetes](https://csoh.org/kubernetes.html) | EKS / AKS / GKE — shared responsibility, workload identity, RBAC, admission |
-| ⚡ [Serverless Functions](https://csoh.org/serverless.html) | Lambda / Azure Functions / Cloud Functions — event injection, IAM, denial of wallet |
+| ☸️ [Kubernetes & Managed Kubernetes](https://csoh.org/kubernetes.html) | EKS / AKS / GKE - shared responsibility, workload identity, RBAC, admission |
+| ⚡ [Serverless Functions](https://csoh.org/serverless.html) | Lambda / Azure Functions / Cloud Functions - event injection, IAM, denial of wallet |
 | 🔄 [CI/CD for Cloud Deployments](https://csoh.org/ci-cd.html) | Pipeline anatomy, OIDC federation, AWS/Azure/GCP toolchains |
 | 🛰️ [Cloud SOC & Threat Monitoring](https://csoh.org/cloud-soc.html) | Log-driven detection, native services, SIEM, detection engineering, IR |
-| 📜 [GRC for Cloud](https://csoh.org/grc.html) | Governance, Risk, Compliance — frameworks, policy-as-code, audit evidence |
+| 📜 [GRC for Cloud](https://csoh.org/grc.html) | Governance, Risk, Compliance - frameworks, policy-as-code, audit evidence |
 | 📋 [Compliance Frameworks](https://csoh.org/compliance-frameworks.html) | SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP, CMMC, NIST CSF, GDPR |
 
 ### By Cloud
@@ -55,7 +55,7 @@ The vendor-neutral curriculum, written by practitioners. **Foundations**, **disc
 | 🟧 [AWS Security](https://csoh.org/aws-security.html) | Well-Architected, service catalog, top-10 misconfigs, AWS attack paths |
 | 🟦 [Azure Security](https://csoh.org/azure-security.html) | CAF Secure, Entra/Defender/Sentinel, Entra-vs-AD, Azure attack paths |
 | 🟩 [GCP Security](https://csoh.org/gcp-security.html) | Encryption-by-default, SCC Enterprise, VPC Service Controls deep-dive |
-| ⚖️ [AWS vs Azure vs GCP](https://csoh.org/cloud-security-comparison.html) | Definitive side-by-side — 10 comparison tables and a 20-row scorecard |
+| ⚖️ [AWS vs Azure vs GCP](https://csoh.org/cloud-security-comparison.html) | Definitive side-by-side - 10 comparison tables and a 20-row scorecard |
 
 ### Career & community
 | Guide | What it covers |
@@ -66,7 +66,7 @@ The vendor-neutral curriculum, written by practitioners. **Foundations**, **disc
 | 🧰 [Cloud Security Home Lab](https://csoh.org/cloud-security-home-lab.html) | Free-tier setups, budget guardrails, kill-switches |
 | ✅ [Cloud Security Best Practices](https://csoh.org/cloud-security-best-practices.html) | The controls that actually prevent breaches, ranked by real incidents |
 | ⚙️ [How We Use GitHub Actions](https://csoh.org/github-actions.html) | Learn CI/CD by reading our heavily-commented workflows |
-| ☁️ [How We Deploy to GCP](https://csoh.org/cloud-deployment.html) | Cloud Run + WIF + Cloud CDN + Cloud Armor — the full dogfooded stack |
+| ☁️ [How We Deploy to GCP](https://csoh.org/cloud-deployment.html) | Cloud Run + WIF + Cloud CDN + Cloud Armor - the full dogfooded stack |
 
 ## 📚 Reference & Practice
 
@@ -79,7 +79,7 @@ The vendor-neutral curriculum, written by practitioners. **Foundations**, **disc
 | 🚩 [CTF Challenges](https://csoh.org/ctfs.html) | 37+ hands-on cloud CTFs across AWS / Azure / GCP / Kubernetes / AI |
 | 🏟️ [Conferences](https://csoh.org/conferences.html) | 27 security & hacker conferences, with pros & cons |
 | 🔗 [Breach Kill Chains](https://csoh.org/breach-timeline.html) | 10 real cloud breaches mapped to MITRE ATT&CK |
-| 🔬 [Threat Research Sources](https://csoh.org/threat-research.html) | Curated directory of vendor research, IOC feeds, advisories — includes a Supply Chain Attacks section |
+| 🔬 [Threat Research Sources](https://csoh.org/threat-research.html) | Curated directory of vendor research, IOC feeds, advisories - includes a Supply Chain Attacks section |
 | 📰 [Cloud Security News](https://csoh.org/news.html) | 120+ articles, refreshed every 3 hours from 39 sources |
 | 📅 [Meeting Recaps](https://csoh.org/meetings.html) | 94 weekly session recaps, searchable |
 
@@ -95,17 +95,17 @@ Sign up for the weekly Zoom link at **[csoh.kit.com](https://csoh.kit.com/39feb4
 
 ## 🎓 Getting Started
 
-**New to cloud security?** It's the practice of protecting data, applications, and infrastructure hosted in cloud environments like AWS, Azure, and Google Cloud — one of the fastest-growing areas in cybersecurity.
+**New to cloud security?** It's the practice of protecting data, applications, and infrastructure hosted in cloud environments like AWS, Azure, and Google Cloud - one of the fastest-growing areas in cybersecurity.
 
 Our recommended learning sequence:
 
-1. **Get the Lay of the Land**: [What is Cloud Security?](https://csoh.org/what-is-cloud-security.html) — vendor-neutral pillar overview of the field
-2. **Follow the Roadmap**: [Cloud Security Learning Path](https://csoh.org/learning-path.html) — beginner → advanced with milestones, free labs, study targets
+1. **Get the Lay of the Land**: [What is Cloud Security?](https://csoh.org/what-is-cloud-security.html) - vendor-neutral pillar overview of the field
+2. **Follow the Roadmap**: [Cloud Security Learning Path](https://csoh.org/learning-path.html) - beginner → advanced with milestones, free labs, study targets
 3. **Master the Fundamentals**: [Best Practices](https://csoh.org/cloud-security-best-practices.html) and the [Shared Responsibility Model](https://csoh.org/shared-responsibility-model.html)
-4. **Decode the Acronyms**: [Glossary](https://csoh.org/glossary.html) — 300+ terms, every cross-reference hyperlinked
+4. **Decode the Acronyms**: [Glossary](https://csoh.org/glossary.html) - 300+ terms, every cross-reference hyperlinked
 5. **Get Hands-On**: [CTF Challenges](https://csoh.org/ctfs.html) and [Resources](https://csoh.org/resources.html) for practice
-6. **Choose a Certification**: [Cloud Security Certifications guide](https://csoh.org/cloud-security-certifications.html) — CCSK, CCSP, AWS, Azure, GCP, CKS
-7. **Read Real Breaches**: [Breach Kill Chains](https://csoh.org/breach-timeline.html) — see how attacks actually happen
+6. **Choose a Certification**: [Cloud Security Certifications guide](https://csoh.org/cloud-security-certifications.html) - CCSK, CCSP, AWS, Azure, GCP, CKS
+7. **Read Real Breaches**: [Breach Kill Chains](https://csoh.org/breach-timeline.html) - see how attacks actually happen
 8. **Join the Community**: [csoh.kit.com](https://csoh.kit.com/39feb4f397) for the Friday Zoom link
 9. **Stay Updated**: [News](https://csoh.org/news.html), [RSS feed](https://csoh.org/feed.xml), or any [Friday Zoom recap](https://csoh.org/meetings.html)
 
@@ -122,7 +122,7 @@ Central hub featuring:
 - Testimonials and member count (2000+)
 
 ### ☁️ What is Cloud Security? (`what-is-cloud-security.html`)
-Vendor-neutral pillar page introducing the field — shared responsibility model, core pillars, top threats, the CSPM/CNAPP/CWPP/CIEM tool landscape, and a pointer-rich getting-started roadmap. Targets the high-volume "what is cloud security" search query and serves as the hub that links into the rest of the site. FAQ schema for rich snippets.
+Vendor-neutral pillar page introducing the field - shared responsibility model, core pillars, top threats, the CSPM/CNAPP/CWPP/CIEM tool landscape, and a pointer-rich getting-started roadmap. Targets the high-volume "what is cloud security" search query and serves as the hub that links into the rest of the site. FAQ schema for rich snippets.
 
 ### 🛣️ Learning Path (`learning-path.html`)
 Step-by-step roadmap from "no cloud experience" to working practitioner: prerequisites, beginner / intermediate / advanced stages with milestones, specialization tracks, and a "stay current" rhythm. Marked up with `HowTo` schema. Built from what actually works for the 2000+ members of the community.
@@ -137,10 +137,10 @@ Roles and salary bands, what hiring managers actually look for, interview format
 Free-tier setups across AWS / Azure / GCP, budget guardrails, kill-switches, and the lab progression that builds a real portfolio without a surprise bill.
 
 ### 🎓 Cloud Security Certifications (`cloud-security-certifications.html`)
-Side-by-side comparison of the major cloud security certifications — CCSK, CCSP, AWS Security Specialty, Microsoft AZ-500/SC-100, Google PCSE, and CKS. Includes a comparison table, recommended paths by role (career switcher / established engineer / senior architect / detection specialist), and an FAQ.
+Side-by-side comparison of the major cloud security certifications - CCSK, CCSP, AWS Security Specialty, Microsoft AZ-500/SC-100, Google PCSE, and CKS. Includes a comparison table, recommended paths by role (career switcher / established engineer / senior architect / detection specialist), and an FAQ.
 
 ### ✅ Cloud Security Best Practices (`cloud-security-best-practices.html`)
-Practitioner's checklist of the controls that actually prevent breaches, ordered by what shows up as root cause in our breach kill chains. Covers identity, configuration, network, data, detection, supply chain, workloads, AI, governance — plus an explicit "anti-patterns" section.
+Practitioner's checklist of the controls that actually prevent breaches, ordered by what shows up as root cause in our breach kill chains. Covers identity, configuration, network, data, detection, supply chain, workloads, AI, governance - plus an explicit "anti-patterns" section.
 
 ### ⚖️ Shared Responsibility Model (`shared-responsibility-model.html`)
 What the cloud provider secures vs. what you secure across IaaS, PaaS, SaaS, and FaaS. Includes the AWS / Azure / GCP differences (and Google's "shared fate" extension), a per-service-tier table, the contractual layer, and the gotchas behind every "who's responsible for X?" argument.
@@ -149,19 +149,19 @@ What the cloud provider secures vs. what you secure across IaaS, PaaS, SaaS, and
 The acronym soup decoded. Side-by-side comparison of cloud-security tool categories with explicit "when do I need each" guidance, an open-source-only reference stack, and an FAQ on whether CNAPP is "just marketing" (mostly: no).
 
 ### 📦 Containers & Cloud Security (`containers.html`)
-Vendor-neutral guide to containers in the cloud — what they actually are, why the boundary is process-isolation rather than tenant-isolation, the real escape paths (privileged flags, kernel CVEs, hostPath, docker.sock), identity chaining via the instance metadata service, flat networking, supply chain, minimal/hardened base images (Chainguard, Minimus, Wiz, Distroless), runtime detection, and an AWS/Azure/GCP service comparison.
+Vendor-neutral guide to containers in the cloud - what they actually are, why the boundary is process-isolation rather than tenant-isolation, the real escape paths (privileged flags, kernel CVEs, hostPath, docker.sock), identity chaining via the instance metadata service, flat networking, supply chain, minimal/hardened base images (Chainguard, Minimus, Wiz, Distroless), runtime detection, and an AWS/Azure/GCP service comparison.
 
 ### ☸️ Kubernetes & Managed Kubernetes (`kubernetes.html`)
-Practitioner's guide to EKS / AKS / GKE — what's managed vs. what you still own, the pod-to-node-to-cloud threat arc, workload identity (IRSA / WIF / AKS Workload Identity), RBAC sprawl, Pod Security Standards, default-flat pod networking, admission control (Kyverno / OPA Gatekeeper), and a side-by-side comparison of the three managed offerings.
+Practitioner's guide to EKS / AKS / GKE - what's managed vs. what you still own, the pod-to-node-to-cloud threat arc, workload identity (IRSA / WIF / AKS Workload Identity), RBAC sprawl, Pod Security Standards, default-flat pod networking, admission control (Kyverno / OPA Gatekeeper), and a side-by-side comparison of the three managed offerings.
 
 ### ⚡ Serverless Functions & Cloud Security (`serverless.html`)
-Practitioner's guide to AWS Lambda, Azure Functions, and Google Cloud Functions — what they are, when to use them, the good/bad tradeoffs, and the seven security risk categories: event injection from S3/SQS/HTTP triggers, identity sprawl across per-function roles, supply-chain risk, secrets handling, network egress, denial of wallet, and the observability gap.
+Practitioner's guide to AWS Lambda, Azure Functions, and Google Cloud Functions - what they are, when to use them, the good/bad tradeoffs, and the seven security risk categories: event injection from S3/SQS/HTTP triggers, identity sprawl across per-function roles, supply-chain risk, secrets handling, network egress, denial of wallet, and the observability gap.
 
 ### 🔄 CI/CD for Cloud Deployments (`ci-cd.html`)
-Vendor-neutral CI/CD reference focused on cloud — pipeline anatomy, OIDC federation (replacing long-lived cloud keys), AWS / Azure / GCP per-cloud deep dives, deployment strategies (blue/green, canary, rolling), securing the pipeline itself, IaC in the pipeline, and the DORA-aligned bootstrapping path.
+Vendor-neutral CI/CD reference focused on cloud - pipeline anatomy, OIDC federation (replacing long-lived cloud keys), AWS / Azure / GCP per-cloud deep dives, deployment strategies (blue/green, canary, rolling), securing the pipeline itself, IaC in the pipeline, and the DORA-aligned bootstrapping path.
 
 ### 🛰️ Cloud SOC & Threat Monitoring (`cloud-soc.html`)
-Cloud-side detection and response — how cloud SOC differs from packet-driven traditional SOC, the log sources that matter (CloudTrail / Activity Log / Cloud Audit Logs, identity events, VPC flow, DNS, data plane), native cloud detection (GuardDuty / Defender for Cloud / SCC), the modern SIEM landscape (Splunk, Sentinel, Chronicle, Elastic, CrowdStrike, Datadog), detection engineering as a practice, MITRE-mapped detection categories, threat intel, IR specifics, and a 4-stage SOC maturity model.
+Cloud-side detection and response - how cloud SOC differs from packet-driven traditional SOC, the log sources that matter (CloudTrail / Activity Log / Cloud Audit Logs, identity events, VPC flow, DNS, data plane), native cloud detection (GuardDuty / Defender for Cloud / SCC), the modern SIEM landscape (Splunk, Sentinel, Chronicle, Elastic, CrowdStrike, Datadog), detection engineering as a practice, MITRE-mapped detection categories, threat intel, IR specifics, and a 4-stage SOC maturity model.
 
 ### 🔐 IAM & Cloud Identity (`iam.html`)
 Cloud identity is the #1 root-cause category in breach reports. This page covers federation (SAML/OIDC/SCIM), RBAC vs ABAC vs ReBAC, JIT access and PAM, workload identity (IRSA / Workload Identity Federation / Managed Identities), and the per-cloud privilege-escalation paths (`iam:PassRole`, AssumeRole chains, GCP service-account impersonation, Azure managed-identity abuse). FAQ schema.
@@ -179,7 +179,7 @@ Data classification, encryption at rest / in transit, envelope encryption with D
 CVSS is not a priority score. The prioritization stack: CVSS → EPSS → KEV → reachability → asset criticality. SCA, SAST, DAST, container image scanning, IaC scanning, agentless vs agent-based cloud scanners, SBOM (CycloneDX/SPDX), VEX, runtime detection (eBPF), patch management in cloud, ASPM, and SLAs by severity.
 
 ### 🔌 API Security (`api-security.html`)
-OWASP API Security Top 10 (2023) walked end to end — BOLA, broken auth, BOPLA, unrestricted resource consumption, BFLA, business-flow abuse, SSRF, misconfig, inventory drift, unsafe consumption. Plus auth patterns (OAuth/OIDC/JWT pitfalls/mTLS), rate limiting, gateway landscape, schema validation, GraphQL/gRPC specifics, runtime API platforms, and testing.
+OWASP API Security Top 10 (2023) walked end to end - BOLA, broken auth, BOPLA, unrestricted resource consumption, BFLA, business-flow abuse, SSRF, misconfig, inventory drift, unsafe consumption. Plus auth patterns (OAuth/OIDC/JWT pitfalls/mTLS), rate limiting, gateway landscape, schema validation, GraphQL/gRPC specifics, runtime API platforms, and testing.
 
 ### 📡 SaaS Security & SSPM (`saas-security.html`)
 The third leg of the *PM stool. Four pillars (identity / config / data / detection), the OAuth-app problem, shadow IT discovery, SSPM vs CASB, ITDR, and per-app guides for Microsoft 365, Google Workspace, Salesforce, GitHub, Slack/Teams. SSPM and CASB landscape, plus a SaaS security program model.
@@ -188,7 +188,7 @@ The third leg of the *PM stool. Four pillars (identity / config / data / detecti
 Why backup became a security control. 3-2-1-1-0, RTO/RPO, immutability (S3 Object Lock Compliance, Azure Immutable Storage, GCS Bucket Lock), virtual air gap, KMS key custody (the killer detail), the cloud-ransomware kill chain (encrypt backups FIRST), per-cloud landscape, restoration drills, cyber insurance reality, and tabletop scenarios.
 
 ### 🧠 Cloud Threat Modeling (`threat-modeling.html`)
-Shostack's four questions, STRIDE / PASTA / LINDDUN compared, attack trees, MITRE ATT&CK Cloud as a threat library, OWASP Threat Dragon and Microsoft TMT, commercial platforms (IriusRisk, ThreatModeler), and three worked examples — a 3-tier AWS app, an LLM RAG app, and a multi-account landing zone.
+Shostack's four questions, STRIDE / PASTA / LINDDUN compared, attack trees, MITRE ATT&CK Cloud as a threat library, OWASP Threat Dragon and Microsoft TMT, commercial platforms (IriusRisk, ThreatModeler), and three worked examples - a 3-tier AWS app, an LLM RAG app, and a multi-account landing zone.
 
 ### 🕵️ Detection Engineering & Cloud Logging (`detection-engineering.html`)
 The build side of cloud SOC. Detection-engineering lifecycle (research → develop → tune → deploy → validate), cloud logging fundamentals per cloud, Sigma + vendor detection languages, MITRE ATT&CK Cloud Matrix, detection-as-code workflow, SIEM vs Data Lake vs XDR, log retention economics, and validation tooling (Atomic / Stratus Red Team / CALDERA).
@@ -200,7 +200,7 @@ The IR lifecycle adapted for cloud. Forensic readiness before the incident (immu
 The offensive complement to detection-engineering. Provider testing policies, RoE, methodology (PTES / ATT&CK / Hacking the Cloud), per-cloud attack paths (AWS / Azure / GCP / Kubernetes), the open-source toolkit catalog (Pacu, ROADtools, BloodHound, Cloudfox, MicroBurst, Stratus Red Team, CloudGoat, AzureHound). Explicit authorized-testing-only banner.
 
 ### 📜 GRC for Cloud (`grc.html`)
-Governance, Risk, Compliance — the discipline that makes cloud security legible to auditors and regulators. Three pillars, framework landscape (SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP, NIST CSF, CIS, GDPR), policy-as-code, compliance-as-code, continuous compliance with CSPM/CNAPP, audit evidence in cloud, AWS Audit Manager vs Azure Policy vs GCP Assured Workloads.
+Governance, Risk, Compliance - the discipline that makes cloud security legible to auditors and regulators. Three pillars, framework landscape (SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP, NIST CSF, CIS, GDPR), policy-as-code, compliance-as-code, continuous compliance with CSPM/CNAPP, audit evidence in cloud, AWS Audit Manager vs Azure Policy vs GCP Assured Workloads.
 
 ### 📋 Compliance Frameworks in Cloud (`compliance-frameworks.html`)
 The deep-dive companion to GRC: framework-by-framework breakdowns (SOC 2 Type I/II, ISO 27001/27017/27018, PCI DSS v4, HIPAA, FedRAMP Low/Mod/High + 20x, CMMC 2.0, NIST CSF 2.0, NIST SP 800-53/171, CIS Benchmarks, GDPR, SOX, NIS2, DORA, plus industry-specific). Control crosswalks, GRC platform landscape, and AWS / Azure / GCP compliance program comparison.
@@ -212,7 +212,7 @@ Securing AI workloads (distinct from `ai-learning.html`, which is about using AI
 Securing east-west traffic. Istio / Linkerd / Cilium / Consul Connect, mTLS, authentication (SPIFFE/SPIRE workload identity), authorization policy, observability (Hubble, Kiali), sidecar vs sidecarless (ambient mode, eBPF), multi-cluster meshes, mesh attack surface, AWS App Mesh / Anthos Service Mesh / AKS Istio add-on.
 
 ### 📐 Landing Zones & Cloud Foundations (`landing-zones.html`)
-The foundation layer — AWS Control Tower + Organizations + SCPs, Azure CAF Enterprise-scale + Management Groups + Azure Policy, GCP Org → Folders → Projects + Org Policies + VPC Service Controls. Account-vault patterns, identity layer placement, tagging strategy.
+The foundation layer - AWS Control Tower + Organizations + SCPs, Azure CAF Enterprise-scale + Management Groups + Azure Policy, GCP Org → Folders → Projects + Org Policies + VPC Service Controls. Account-vault patterns, identity layer placement, tagging strategy.
 
 ### 🟧 AWS Security Hub (`aws-security.html`)
 SEO-targeted hub page for the "AWS security" search intent (~10× the volume of "cloud security"). Well-Architected Security pillar, the full AWS service catalog (detection / identity / data / network / compliance / IR), reference landing-zone architecture, top-10 AWS misconfigurations, AWS attack paths, and discipline cross-links with `#aws` anchors.
@@ -227,7 +227,7 @@ Same SEO play for Google Cloud. Encryption-by-default story, Security Command Ce
 The definitive vendor-neutral comparison. Ten side-by-side `.comparison-table` blocks (identity, detection, data, network, compliance, pricing, customer identity, compute, container, serverless), conceptual differences that bite you (IAM-policy languages, org-boundary models, log pricing, VPC SC), a "which cloud for which job" guidance section, and a 20-row score-card summary.
 
 ### 🗺️ Vendor Landscape (`vendor-landscape.html`)
-A directory of **350+ cloud-security vendors** across 30 categories — CNAPP, CSPM, KSPM, CIEM, SSPM, DSPM, SIEM, EDR/XDR, MDR, SOAR, ASPM, SAST/SCA, IaC scanning, secrets, PAM, IdP, WAF/DDoS, API security, CASB, SASE, ZTNA, DevSecOps, image hardening, supply chain, AI security, vuln mgmt, forensics, MSSPs, GRC platforms. Vendor-neutral one-liners, no rankings. Wiz affiliation disclosed.
+A directory of **350+ cloud-security vendors** across 30 categories - CNAPP, CSPM, KSPM, CIEM, SSPM, DSPM, SIEM, EDR/XDR, MDR, SOAR, ASPM, SAST/SCA, IaC scanning, secrets, PAM, IdP, WAF/DDoS, API security, CASB, SASE, ZTNA, DevSecOps, image hardening, supply chain, AI security, vuln mgmt, forensics, MSSPs, GRC platforms. Vendor-neutral one-liners, no rankings. Wiz affiliation disclosed.
 
 ### 🔍 Site Search (`search.html`)
 Pagefind-powered full-text search across every page. Static index generated at deploy time and served from `/pagefind/`. CSS lives in `/search.css` (extracted from inline so CSP doesn't drop it); init lives in `/pagefind-init.js`.
@@ -310,7 +310,7 @@ Information about weekly community gatherings:
 - Format details and speaker information
 
 ### 🏟️ Conferences (`conferences.html`)
-A practitioner's directory of security and hacker conferences worldwide — RSA, DEF CON, Black Hat, fwd:cloudsec, KubeCon, CCC, Troopers, OffensiveCon, HITB, NULLCON, BSides, ShmooCon, Pwn2Own, and the rest. Each entry covers what makes the event unique plus its honest pros and cons.
+A practitioner's directory of security and hacker conferences worldwide - RSA, DEF CON, Black Hat, fwd:cloudsec, KubeCon, CCC, Troopers, OffensiveCon, HITB, NULLCON, BSides, ShmooCon, Pwn2Own, and the rest. Each entry covers what makes the event unique plus its honest pros and cons.
 
 ### 🎬 Presentations (`presentations.html`)
 Archive of past Zoom session presentations:
@@ -323,30 +323,30 @@ Archive of past Zoom session presentations:
 Topic-by-topic recaps of every weekly session:
 - **94+ meeting recaps** with per-topic summaries and speaker notes
 - Searchable, filterable by tag (AWS, Azure, AI, supply chain, conferences, etc.)
-- **Speaker filter** — auto-detects recurring community members across recaps and surfaces a one-click filter row (Shawn, Neil, Jay, Matt, etc.) with appearance counts
+- **Speaker filter** - auto-detects recurring community members across recaps and surfaces a one-click filter row (Shawn, Neil, Jay, Matt, etc.) with appearance counts
 - Auto-ingested from Zoom AI Companion summaries or VTT transcripts via `tools/add_meeting.py`
 
 ### 🚩 Cloud CTFs (`ctfs.html`)
 Dedicated directory for hands-on cloud CTF challenges:
 - **39+ challenges** across AWS, Azure, GCP, Kubernetes, and AI security
 - Includes the full Wiz Cloud Security Championship calendar
-- Submit a new CTF with `python3 tools/submit_ctf.py` — see [CONTRIBUTING_CTFS.md](CONTRIBUTING_CTFS.md)
+- Submit a new CTF with `python3 tools/submit_ctf.py` - see [CONTRIBUTING_CTFS.md](CONTRIBUTING_CTFS.md)
 
 ### 📡 RSS Subscribe (`rss.html`)
 Plain-English landing page for the `feed.xml` feed: explains what RSS is, recommends readers (Feedly, Inoreader, NetNewsWire, Thunderbird), and gives one-click subscribe instructions.
 
 ### 📖 Glossary (`glossary.html`)
 A plain-English glossary of cloud-security acronyms and concepts:
-- **300+ terms** across 13 sections — cloud models, IAM, network, data, detection, the *PM family, supply-chain, ATT&CK, AI/LLM, DevOps, standards bodies
+- **300+ terms** across 13 sections - cloud models, IAM, network, data, detection, the *PM family, supply-chain, ATT&CK, AI/LLM, DevOps, standards bodies
 - **Live search** filters terms and definitions as you type, hiding sections with no matches
-- **Cross-linked**: every glossary term mentioned in any other definition is automatically hyperlinked to its entry — see `tools/crosslink_glossary.py`
+- **Cross-linked**: every glossary term mentioned in any other definition is automatically hyperlinked to its entry - see `tools/crosslink_glossary.py`
 - Targeted terms (arrived via `#term-...` anchor) get a yellow highlight so the reader can immediately spot them
 
 ### ❓ FAQ (`faq.html`)
 Frequently asked questions covering CSOH's format, mailing list, recording policy, contributing, and presenter pitches. Backed by `FAQPage` schema for rich-snippet eligibility.
 
 ### 🤝 Code of Conduct (`code-of-conduct.html`)
-Community standards for every CSOH-organized space — Friday Zoom session, mailing list, GitHub repo. Covers expected and unacceptable behavior, reporting, and enforcement. Adapted from the Contributor Covenant.
+Community standards for every CSOH-organized space - Friday Zoom session, mailing list, GitHub repo. Covers expected and unacceptable behavior, reporting, and enforcement. Adapted from the Contributor Covenant.
 
 ### 🔐 Privacy Policy (`privacy.html`)
 Plain-English privacy policy. Short version: no cookies, no analytics, no marketing trackers, never sell or share data. The only personal data we hold is your mailing-list email. External links are scrubbed of tracking parameters before publication.
@@ -355,7 +355,7 @@ Plain-English privacy policy. Short version: no cookies, no analytics, no market
 RFC 9116-compliant vulnerability disclosure policy. Mirrored at `/.well-known/security.txt`.
 
 ### 🔬 Threat Research (`threat-research.html`)
-Curated directory of primary sources for cloud-focused threat intel — vendor research teams, annual threat reports, IOC feeds, attack frameworks, and government advisories. Companion to `breach-timeline.html`: kill chains cover specific historical incidents, threat-research is the living index of where defenders go for ongoing intel. See the full section below.
+Curated directory of primary sources for cloud-focused threat intel - vendor research teams, annual threat reports, IOC feeds, attack frameworks, and government advisories. Companion to `breach-timeline.html`: kill chains cover specific historical incidents, threat-research is the living index of where defenders go for ongoing intel. See the full section below.
 
 ---
 
@@ -392,7 +392,7 @@ To **nominate an incident** without writing it yourself, open an issue using the
 
 Kill chain entries require:
 - A real post-mortem or official technical disclosure (vendor blog, CISA advisory, court documents)
-- Step-by-step technical detail — not just a summary
+- Step-by-step technical detail - not just a summary
 - Every step mapped to a MITRE ATT&CK Cloud technique
 - Actionable defender recommendations tied to specific controls
 
@@ -406,18 +406,18 @@ A curated directory of primary sources for cloud-focused threat research. Unlike
 
 ### Sections
 
-- **Vendor Research Teams** — Wiz Research, Unit 42, Mandiant, Microsoft Threat Intelligence, Google TAG, CrowdStrike Counter Adversary Ops, SentinelLabs, Datadog Security Labs, Sysdig TRT, Aqua Nautilus, Permiso, Cado Security, AWS Security Bulletins, MSRC, IBM X-Force, Trellix, Proofpoint
-- **Annual Threat Reports** — Mandiant M-Trends, CrowdStrike Global Threat Report, Unit 42 Cloud Threat Report, Verizon DBIR, IBM X-Force Index, Datadog State of Cloud Security, CSA Top Threats, ENISA, Sophos State of Ransomware
-- **Notable Incidents & Post-Mortems** — cross-links to `breach-timeline.html` plus primary sources for Capital One, Storm-0558, SolarWinds, LastPass, Scattered Spider/MGM, Snowflake/UNC5537, Uber, Microsoft SAS Token Leak, Codecov, Okta HAR
-- **IOC Feeds & Threat Intel Platforms** — AlienVault OTX, abuse.ch, VirusTotal, MISP, Shodan, GreyNoise, Censys, CIRCL, Feodo Tracker, Spamhaus, IBM X-Force Exchange, OSINT Framework
-- **Attack Frameworks & Matrices** — MITRE ATT&CK Cloud / Containers, D3FEND, Microsoft Kubernetes Threat Matrix, OWASP Cloud-Native Top 10, TheHive, Sigma, Elastic Detection Rules
-- **Government & Regulatory Advisories** — CISA (+KEV), FBI IC3, NSA, UK NCSC, ACSC, NIST NVD, CVE.org
+- **Vendor Research Teams** - Wiz Research, Unit 42, Mandiant, Microsoft Threat Intelligence, Google TAG, CrowdStrike Counter Adversary Ops, SentinelLabs, Datadog Security Labs, Sysdig TRT, Aqua Nautilus, Permiso, Cado Security, AWS Security Bulletins, MSRC, IBM X-Force, Trellix, Proofpoint
+- **Annual Threat Reports** - Mandiant M-Trends, CrowdStrike Global Threat Report, Unit 42 Cloud Threat Report, Verizon DBIR, IBM X-Force Index, Datadog State of Cloud Security, CSA Top Threats, ENISA, Sophos State of Ransomware
+- **Notable Incidents & Post-Mortems** - cross-links to `breach-timeline.html` plus primary sources for Capital One, Storm-0558, SolarWinds, LastPass, Scattered Spider/MGM, Snowflake/UNC5537, Uber, Microsoft SAS Token Leak, Codecov, Okta HAR
+- **IOC Feeds & Threat Intel Platforms** - AlienVault OTX, abuse.ch, VirusTotal, MISP, Shodan, GreyNoise, Censys, CIRCL, Feodo Tracker, Spamhaus, IBM X-Force Exchange, OSINT Framework
+- **Attack Frameworks & Matrices** - MITRE ATT&CK Cloud / Containers, D3FEND, Microsoft Kubernetes Threat Matrix, OWASP Cloud-Native Top 10, TheHive, Sigma, Elastic Detection Rules
+- **Government & Regulatory Advisories** - CISA (+KEV), FBI IC3, NSA, UK NCSC, ACSC, NIST NVD, CVE.org
 
 ### How to contribute a source
 
-Edit `threat-research.html` directly — each link is a standard `.resource-card` in the same format as `resources.html` and `presentations.html`. Open a PR with:
+Edit `threat-research.html` directly - each link is a standard `.resource-card` in the same format as `resources.html` and `presentations.html`. Open a PR with:
 
-- A link to the primary research output (blog index, report landing page, or feed URL — not a marketing page)
+- A link to the primary research output (blog index, report landing page, or feed URL - not a marketing page)
 - A one-sentence description of what's unique about the source
 - 2–3 tags (use existing tag classes where possible: `ctf`, `tool`, `lab`, `certification`, `job`, `ai-security`, `new`)
 
@@ -426,12 +426,12 @@ Edit `threat-research.html` directly — each link is a standard `.resource-card
 
 ## Features
 
-- Static HTML — no database, no server-side code; deploys to GitHub Pages, Vercel, S3.
-- URL-safety gate — every PR is scanned for unsafe URLs before merge (`check_all_site_urls.py`).
-- RSS feed — `feed.xml` regenerated with each news update. See [RSS_FEED_README.md](RSS_FEED_README.md).
-- Dark mode — toggle plus `prefers-color-scheme` detection, persisted in `localStorage`.
-- Schema markup — NewsArticle, FAQPage, Organization, Event, CollectionPage.
-- Accessibility — semantic HTML5, ARIA labels, WCAG AA contrast in both themes.
+- Static HTML - no database, no server-side code; deploys to GitHub Pages, Vercel, S3.
+- URL-safety gate - every PR is scanned for unsafe URLs before merge (`check_all_site_urls.py`).
+- RSS feed - `feed.xml` regenerated with each news update. See [RSS_FEED_README.md](RSS_FEED_README.md).
+- Dark mode - toggle plus `prefers-color-scheme` detection, persisted in `localStorage`.
+- Schema markup - NewsArticle, FAQPage, Organization, Event, CollectionPage.
+- Accessibility - semantic HTML5, ARIA labels, WCAG AA contrast in both themes.
 - Search + tag filtering on news and resources pages.
 
 ---
@@ -470,7 +470,7 @@ csoh.org/
 ├── landing-zones.html                  # Cloud foundations (AWS / Azure / GCP reference designs)
 ├── containers.html                     # Container security: boundary, escapes, IMDS, supply chain
 ├── kubernetes.html                     # Kubernetes & managed K8s (EKS / AKS / GKE) security
-├── serverless.html                     # Lambda / Functions security — event injection, IAM, denial of wallet
+├── serverless.html                     # Lambda / Functions security - event injection, IAM, denial of wallet
 ├── ci-cd.html                          # CI/CD pipelines for cloud, OIDC federation, deploy strategies
 ├── cloud-soc.html                      # Cloud threat monitoring, SIEM, detection engineering, IR
 ├── threat-research.html        # Curated cloud threat research directory
@@ -607,7 +607,7 @@ csoh.org/
 
 ### Adding a New Article to News
 
-News articles are **updated automatically** — you don't need to add them by hand. A GitHub Actions workflow runs every 3 hours, pulls articles from 39 cloud security RSS feeds, and creates a pull request with the new content. See the [How Automation Works](#-how-automation-works) section below for details, or read the full docs in [tools/UPDATE_NEWS_README.md](tools/UPDATE_NEWS_README.md).
+News articles are **updated automatically** - you don't need to add them by hand. A GitHub Actions workflow runs every 3 hours, pulls articles from 39 cloud security RSS feeds, and creates a pull request with the new content. See the [How Automation Works](#-how-automation-works) section below for details, or read the full docs in [tools/UPDATE_NEWS_README.md](tools/UPDATE_NEWS_README.md).
 
 To **add a new news source**, either:
 
@@ -643,8 +643,8 @@ Run `python3 tools/submit_ctf.py` to add a challenge to `ctfs.html` interactivel
 ### Adding a Glossary Term
 
 1. Open `glossary.html` and locate the right `<h2 id="...">` section (cloud models, IAM, network, data, detection, posture, vuln, compliance, attack, AI, ops, standards bodies).
-2. Add a new `<dt>...</dt>` + `<dd>...</dd>` pair anywhere inside that section's `<dl class="glossary-list">`. Format the headword as `ABBR — Long Form` or just `Term Name`; aliases can be separated by `/`.
-3. Run `python3 tools/crosslink_glossary.py` — it will:
+2. Add a new `<dt>...</dt>` + `<dd>...</dd>` pair anywhere inside that section's `<dl class="glossary-list">`. Format the headword as `ABBR - Long Form` or just `Term Name`; aliases can be separated by `/`.
+3. Run `python3 tools/crosslink_glossary.py` - it will:
    - Add an `id="term-..."` to your new `<dt>`.
    - Hyperlink your new term wherever it appears in other definitions.
    - Hyperlink any existing terms that appear in your new definition.
@@ -677,10 +677,10 @@ This site uses **GitHub Actions workflows** to automate all major site updates. 
 - `update_sri.py`
 - Manual trigger via the GitHub Actions tab
 
-**What it does (housekeeping only — actual deploy is `gcp-deploy.yml`):**
+**What it does (housekeeping only - actual deploy is `gcp-deploy.yml`):**
 - Updates SRI hashes and cache-busting tags if CSS/JS changed (using `update_sri.py`)
-- Checks URL safety — blocks normalization if unsafe URLs are detected (using `check_all_site_urls.py`)
-- Normalizes URLs — strips tracking parameters, upgrades HTTP to HTTPS, resolves redirects (using `normalize_urls.py`)
+- Checks URL safety - blocks normalization if unsafe URLs are detected (using `check_all_site_urls.py`)
+- Normalizes URLs - strips tracking parameters, upgrades HTTP to HTTPS, resolves redirects (using `normalize_urls.py`)
 - Regenerates the `VideoObject` JSON-LD on `presentations.html` (using `update_presentations_schema.py`)
 - Rebuilds the meetings.html search index
 - Refreshes `<lastmod>` dates in `sitemap.xml` from git history (using `update_sitemap.py`)
@@ -688,7 +688,7 @@ This site uses **GitHub Actions workflows** to automate all major site updates. 
 - Optimizes generated images
 - Each step that mutates files commits the change back to `main` (with `[skip ci]` markers) so the next workflow run sees fresh state
 
-**Why this is separate from the deploy:** the housekeeping commits this workflow makes (SRI updates, sitemap refreshes, etc.) are themselves what triggers `gcp-deploy.yml` — that workflow watches the same paths and picks up the post-housekeeping state. Splitting them keeps each workflow's responsibility narrow.
+**Why this is separate from the deploy:** the housekeeping commits this workflow makes (SRI updates, sitemap refreshes, etc.) are themselves what triggers `gcp-deploy.yml` - that workflow watches the same paths and picks up the post-housekeeping state. Splitting them keeps each workflow's responsibility narrow.
 
 **News updates** are still handled by a separate scheduled workflow (`update-news.yml`) that runs every 3 hours and creates a PR with new articles. Once merged, the housekeeping workflow runs against the new content, then `gcp-deploy.yml` ships it.
 
@@ -700,7 +700,7 @@ In addition to the URL normalization that runs as part of every deploy, a **stan
 
 - **Schedule:** Monthly on the 1st at 08:00 UTC (also available via manual trigger)
 - **What it does:**
-  - Checks URL safety first — blocks normalization if unsafe URLs are found
+  - Checks URL safety first - blocks normalization if unsafe URLs are found
   - Strips tracking parameters (`utm_*`, `fbclid`, `gclid`, `msclkid`, etc.)
   - Upgrades HTTP links to HTTPS
   - Resolves redirecting URLs to their final destinations
@@ -720,7 +720,7 @@ Builds a container image, scans it for HIGH/CRITICAL CVEs, pushes to Artifact Re
 - Manual trigger via the GitHub Actions tab
 
 **What it does:**
-- Authenticates to GCP via **Workload Identity Federation** — no service account JSON key is stored or rotated. The OIDC token GitHub mints for the run is exchanged at run-time for a 1-hour GCP access token, gated to this repository only.
+- Authenticates to GCP via **Workload Identity Federation** - no service account JSON key is stored or rotated. The OIDC token GitHub mints for the run is exchanged at run-time for a 1-hour GCP access token, gated to this repository only.
 - Builds the container with `Dockerfile` (digest-pinned `nginx:1.27-alpine` + `apk upgrade` + the `nginx-security-headers.conf` snippet that's `include`d into every location block).
 - Runs Trivy against the built image; build fails on any HIGH or CRITICAL CVE that has a fix available.
 - Pushes to Artifact Registry with an immutable SHA-based tag (no `:latest`).
@@ -732,34 +732,34 @@ Builds a container image, scans it for HIGH/CRITICAL CVEs, pushes to Artifact Re
 
 ### Setup Note
 
-Workflows authenticate to GitHub via a **GitHub App** (`csoh-ci`) that mints short-lived (~1h) installation tokens at job start, plus a small fine-grained PAT (`CSOH_PAT`) used only to approve App-opened PRs (GitHub blocks self-approval). The full model — App config, ruleset bypass, why one PAT remains — is documented in [SECURITY.md → CI/CD Authentication](SECURITY.md#cicd-authentication). Setup / rotation steps for the PAT are in [tools/UPDATE_NEWS_README.md](tools/UPDATE_NEWS_README.md#setup-requirements).
+Workflows authenticate to GitHub via a **GitHub App** (`csoh-ci`) that mints short-lived (~1h) installation tokens at job start, plus a small fine-grained PAT (`CSOH_PAT`) used only to approve App-opened PRs (GitHub blocks self-approval). The full model - App config, ruleset bypass, why one PAT remains - is documented in [SECURITY.md → CI/CD Authentication](SECURITY.md#cicd-authentication). Setup / rotation steps for the PAT are in [tools/UPDATE_NEWS_README.md](tools/UPDATE_NEWS_README.md#setup-requirements).
 
-`gcp-deploy.yml` does *not* use the GitHub App — it authenticates to GCP via Workload Identity Federation and only needs the auto-injected `GITHUB_TOKEN` (with `id-token: write` for the OIDC exchange). There is no GCP-side credential to set up or rotate.
+`gcp-deploy.yml` does *not* use the GitHub App - it authenticates to GCP via Workload Identity Federation and only needs the auto-injected `GITHUB_TOKEN` (with `id-token: write` for the OIDC exchange). There is no GCP-side credential to set up or rotate.
 
 ---
 
 ## 🔍 SEO & Search Optimization
 
-CSOH is engineered for organic discovery across traditional search (Google, Bing), AI search/answer engines (ChatGPT, Perplexity, Claude, Gemini), and social previews (LinkedIn, Twitter/X, Slack). The site uses no tracking, no analytics, and no third-party scripts — just clean semantic HTML, structured data, and disciplined metadata.
+CSOH is engineered for organic discovery across traditional search (Google, Bing), AI search/answer engines (ChatGPT, Perplexity, Claude, Gemini), and social previews (LinkedIn, Twitter/X, Slack). The site uses no tracking, no analytics, and no third-party scripts - just clean semantic HTML, structured data, and disciplined metadata.
 
 ### Schema.org structured data (25+ types)
 
-**Page-level schema** — each page declares what kind of thing it is:
-- ✅ **Article** / **NewsArticle** — pillar pages and the news index, with `datePublished`, `dateModified`, `author`, `publisher`
-- ✅ **HowTo** + **HowToStep** — step-by-step content (e.g. learning path, GitHub Actions guide)
-- ✅ **Course** + **CourseInstance** — learning-path roadmap and certifications comparison (Google Course rich result eligible)
-- ✅ **FAQPage** + **Question** / **Answer** — 15 pages with structured Q&A for featured snippets
-- ✅ **CollectionPage** — resource hub pages eligible for sitelinks rich results
-- ✅ **Event** + **VirtualLocation** + **Schedule** — weekly Friday Zoom session
-- ✅ **VideoObject** — each YouTube talk on `presentations.html` and meeting recaps
-- ✅ **DefinedTermSet** — the glossary, with 300+ individual terms
+**Page-level schema** - each page declares what kind of thing it is:
+- ✅ **Article** / **NewsArticle** - pillar pages and the news index, with `datePublished`, `dateModified`, `author`, `publisher`
+- ✅ **HowTo** + **HowToStep** - step-by-step content (e.g. learning path, GitHub Actions guide)
+- ✅ **Course** + **CourseInstance** - learning-path roadmap and certifications comparison (Google Course rich result eligible)
+- ✅ **FAQPage** + **Question** / **Answer** - 15 pages with structured Q&A for featured snippets
+- ✅ **CollectionPage** - resource hub pages eligible for sitelinks rich results
+- ✅ **Event** + **VirtualLocation** + **Schedule** - weekly Friday Zoom session
+- ✅ **VideoObject** - each YouTube talk on `presentations.html` and meeting recaps
+- ✅ **DefinedTermSet** - the glossary, with 300+ individual terms
 
-**Entity schema** — who/what is responsible for the content:
-- ✅ **Organization** — CSOH itself, with founding date, contact point, sameAs links, search action
-- ✅ **Person** + **ProfilePage** — founder bio with `jobTitle`, `worksFor`, `founder`, `knowsAbout`, `sameAs`
-- ✅ **Author attribution** — pillar articles credit the Person via `@id` reference (E-E-A-T signal)
-- ✅ **ItemList** — certifications comparison, news listings, and resource directories
-- ✅ **BreadcrumbList** — full navigation hierarchy on every content page
+**Entity schema** - who/what is responsible for the content:
+- ✅ **Organization** - CSOH itself, with founding date, contact point, sameAs links, search action
+- ✅ **Person** + **ProfilePage** - founder bio with `jobTitle`, `worksFor`, `founder`, `knowsAbout`, `sameAs`
+- ✅ **Author attribution** - pillar articles credit the Person via `@id` reference (E-E-A-T signal)
+- ✅ **ItemList** - certifications comparison, news listings, and resource directories
+- ✅ **BreadcrumbList** - full navigation hierarchy on every content page
 
 ### Author authority (E-E-A-T)
 
@@ -771,23 +771,23 @@ CSOH is engineered for organic discovery across traditional search (Google, Bing
 
 ### Discoverability
 
-- ✅ **`sitemap.xml`** — 128 URLs, `<lastmod>` refreshed from git commit dates on every deploy ([tools/update_sitemap.py](tools/update_sitemap.py))
-- ✅ **`robots.txt`** — Allow: / for all major crawlers, plus explicit allow-rules for 21 AI/LLM bots (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, MistralAI-User, Cohere, etc.)
+- ✅ **`sitemap.xml`** - 128 URLs, `<lastmod>` refreshed from git commit dates on every deploy ([tools/update_sitemap.py](tools/update_sitemap.py))
+- ✅ **`robots.txt`** - Allow: / for all major crawlers, plus explicit allow-rules for 21 AI/LLM bots (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, MistralAI-User, Cohere, etc.)
 - ✅ **RSS feed** (`feed.xml`) for the news aggregator
 - ✅ **`humans.txt`** for human-readable credits, linked via `<link rel="author">`
 - ✅ **`security.txt`** at the well-known location for vulnerability disclosure
 - ✅ Site-wide **canonical URLs** to consolidate ranking signals
-- ✅ **Glossary cross-linking** — first occurrence of each of 300+ terms auto-linked to the glossary on every content page ([tools/crosslink_pages.py](tools/crosslink_pages.py))
+- ✅ **Glossary cross-linking** - first occurrence of each of 300+ terms auto-linked to the glossary on every content page ([tools/crosslink_pages.py](tools/crosslink_pages.py))
 
 ### Social previews
 
 - ✅ **Open Graph** + **Twitter Card** meta on every indexable page (title, description, type, url, image)
-- ✅ **Per-article social images** — 140+ unique 1200×630 JPG previews under `img/og/` (top-level pages via [tools/generate_og_images.py](tools/generate_og_images.py), 94 meeting recaps via [tools/generate_meeting_og_images.py](tools/generate_meeting_og_images.py)) so each page has its own LinkedIn/Slack/Twitter preview, not a generic site banner
+- ✅ **Per-article social images** - 140+ unique 1200×630 JPG previews under `img/og/` (top-level pages via [tools/generate_og_images.py](tools/generate_og_images.py), 94 meeting recaps via [tools/generate_meeting_og_images.py](tools/generate_meeting_og_images.py)) so each page has its own LinkedIn/Slack/Twitter preview, not a generic site banner
 - ✅ **`og:type`: profile** on the bio page with `profile:first_name` / `profile:last_name`
 
 ### Performance signals (Core Web Vitals)
 
-- ✅ **WebP everywhere** — homepage banner, all 29 news-source banners, and the author photo all serve WebP via `<picture>` with JPG/PNG fallback (≈40-60% smaller payloads)
+- ✅ **WebP everywhere** - homepage banner, all 29 news-source banners, and the author photo all serve WebP via `<picture>` with JPG/PNG fallback (≈40-60% smaller payloads)
 - ✅ **`<link rel="preload">`** for critical CSS, with **SRI integrity hashes** auto-updated on every deploy
 - ✅ **`loading="lazy"`** on below-the-fold images
 - ✅ **`width` / `height`** attributes on every `<img>` to prevent CLS
@@ -813,7 +813,7 @@ The result: rich-snippet eligibility across Google's full catalog of result type
 
 ## 🤝 Contributing
 
-Want to help improve CSOH? We have **beginner-friendly guides** for contributing—no coding experience needed!
+Want to help improve CSOH? We have **beginner-friendly guides** for contributing - no coding experience needed!
 
 ### 📚 Contribution Guides
 
@@ -866,7 +866,7 @@ See **[DEVELOPMENT.md](DEVELOPMENT.md)** for the full local setup guide, project
 ### Need Help?
 - **Email**: admin@csoh.org for general questions or to reach community admins
 - **Issues**: Create a [GitHub issue](https://github.com/CloudSecurityOfficeHours/csoh.org/issues)
-- **Friday Zoom**: Bring questions live — sign up at [csoh.kit.com](https://csoh.kit.com/39feb4f397) for the link
+- **Friday Zoom**: Bring questions live - sign up at [csoh.kit.com](https://csoh.kit.com/39feb4f397) for the link
 
 ### Support CSOH
 - ❤️ **Star** this repository
@@ -875,9 +875,9 @@ See **[DEVELOPMENT.md](DEVELOPMENT.md)** for the full local setup guide, project
 - 💰 **Donate** via [PayPal](https://www.paypal.com/paypalme/cloudsec) (optional, fully community-run)
 
 ### Policies
-- 🤝 **[Code of Conduct](code-of-conduct.html)** — community standards across Friday Zoom, mailing list, and GitHub
-- 🔐 **[Privacy Policy](privacy.html)** — no cookies, no trackers, no marketing
-- 🔒 **[Security Policy](security-policy.html)** / [SECURITY.md](SECURITY.md) — coordinated disclosure
+- 🤝 **[Code of Conduct](code-of-conduct.html)** - community standards across Friday Zoom, mailing list, and GitHub
+- 🔐 **[Privacy Policy](privacy.html)** - no cookies, no trackers, no marketing
+- 🔒 **[Security Policy](security-policy.html)** / [SECURITY.md](SECURITY.md) - coordinated disclosure
 
 ---
 

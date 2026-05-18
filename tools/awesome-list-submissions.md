@@ -22,7 +22,7 @@ cd awesome-cloud-security
 # 3. Create a topic branch
 git checkout -b add-cloud-security-office-hours
 
-# 4. Edit README.md — paste the entry text from below into the right section,
+# 4. Edit README.md - paste the entry text from below into the right section,
 #    keeping the list's existing format (numbered list, dash list, etc.)
 
 # 5. Commit
@@ -42,12 +42,12 @@ self-promotional language.
 
 ---
 
-## Target 1 — `4ndersonLin/awesome-cloud-security` (high priority)
+## Target 1 - `4ndersonLin/awesome-cloud-security` (high priority)
 
 **Default branch:** `master`
 **Where to add:** under `## Others` in the **Reading Materials** section
 (the existing entries there are general-cloud, multi-cloud, or community
-resources — the right home for CSOH).
+resources - the right home for CSOH).
 
 **Format:** ordered list (`1.`, `2.`, `3.` ...), continue numbering from the
 last existing entry.
@@ -75,7 +75,7 @@ Cloud Risk Encyclopedia entry.
 
 ---
 
-## Target 2 — `iknowjason/Awesome-CloudSec-Labs`
+## Target 2 - `iknowjason/Awesome-CloudSec-Labs`
 
 This list is focused on hands-on labs and CTFs. CSOH's CTF directory and
 Friday Zoom community are what fit.
@@ -88,7 +88,7 @@ most general "Resources" / "Other" section near the end.
 **Entry text (adapt bullet style to match the list's conventions):**
 
 ```markdown
-- [Cloud Security Office Hours](https://csoh.org/) — Vendor-neutral community with weekly Friday Zoom sessions, a [37+ cloud CTF directory](https://csoh.org/ctfs.html), [breach kill chains](https://csoh.org/breach-timeline.html) mapped to MITRE ATT&CK, and pillar guides on cloud security fundamentals. Free and open.
+- [Cloud Security Office Hours](https://csoh.org/) - Vendor-neutral community with weekly Friday Zoom sessions, a [37+ cloud CTF directory](https://csoh.org/ctfs.html), [breach kill chains](https://csoh.org/breach-timeline.html) mapped to MITRE ATT&CK, and pillar guides on cloud security fundamentals. Free and open.
 ```
 
 **PR title:** `Add Cloud Security Office Hours community + CTF directory`
@@ -96,7 +96,7 @@ most general "Resources" / "Other" section near the end.
 **PR body:**
 
 ```
-Adds Cloud Security Office Hours (https://csoh.org) — a vendor-neutral
+Adds Cloud Security Office Hours (https://csoh.org) - a vendor-neutral
 cloud-security community founded in 2023.
 
 Relevant for this list:
@@ -111,7 +111,7 @@ Happy to move it to a different section if there's a better fit.
 
 ---
 
-## Target 3 — `The-Art-of-Hacking/h4cker`
+## Target 3 - `The-Art-of-Hacking/h4cker`
 
 Maintained by Omar Santos (Cisco PSIRT). Massive list of cybersecurity
 GitHub repos. They accept community resource submissions.
@@ -124,7 +124,7 @@ most likely targets. Read the README for current structure.
 **Entry text:**
 
 ```markdown
-- [Cloud Security Office Hours (CSOH)](https://csoh.org/) — Vendor-neutral community resource hub for cloud security: weekly Friday Zoom sessions, [pillar guides](https://csoh.org/) (What is Cloud Security?, Best Practices, Shared Responsibility, CSPM vs CNAPP), a [230+ term glossary](https://csoh.org/glossary.html), [breach kill chains](https://csoh.org/breach-timeline.html), and a [37+ CTF directory](https://csoh.org/ctfs.html). Free and open, no marketing.
+- [Cloud Security Office Hours (CSOH)](https://csoh.org/) - Vendor-neutral community resource hub for cloud security: weekly Friday Zoom sessions, [pillar guides](https://csoh.org/) (What is Cloud Security?, Best Practices, Shared Responsibility, CSPM vs CNAPP), a [230+ term glossary](https://csoh.org/glossary.html), [breach kill chains](https://csoh.org/breach-timeline.html), and a [37+ CTF directory](https://csoh.org/ctfs.html). Free and open, no marketing.
 ```
 
 **PR title:** `Add Cloud Security Office Hours to Cloud Security resources`
@@ -142,7 +142,7 @@ Let me know if there's a more specific section you'd prefer it in.
 
 ---
 
-## Target 4 — `sbilly/awesome-security`
+## Target 4 - `sbilly/awesome-security`
 
 Long-running, broad infosec list. Cloud security is a sub-section.
 
@@ -153,14 +153,14 @@ Resources` or `Communities` sub-section, prefer that.
 **Entry text:**
 
 ```markdown
-- [Cloud Security Office Hours](https://csoh.org/) — Vendor-neutral cloud-security community with weekly Zoom sessions, pillar guides, glossary, breach kill chains mapped to MITRE ATT&CK, and a curated CTF directory.
+- [Cloud Security Office Hours](https://csoh.org/) - Vendor-neutral cloud-security community with weekly Zoom sessions, pillar guides, glossary, breach kill chains mapped to MITRE ATT&CK, and a curated CTF directory.
 ```
 
 **PR title:** `Add Cloud Security Office Hours under Cloud Security`
 
 ---
 
-## Target 5 — `paragonie/awesome-appsec`
+## Target 5 - `paragonie/awesome-appsec`
 
 App-sec focused. CSOH's coverage of cloud-native app security and AI/LLM
 security is the relevant angle.
@@ -171,24 +171,24 @@ Reading Material`, depending on current structure.
 **Entry text:**
 
 ```markdown
-- [Cloud Security Office Hours](https://csoh.org/) — Free vendor-neutral cloud-security community covering AppSec topics including [supply-chain security](https://csoh.org/cloud-security-best-practices.html#supply-chain), [Kubernetes hardening](https://csoh.org/cloud-security-best-practices.html#workloads), and [AI/LLM workload security](https://csoh.org/cloud-security-best-practices.html#ai). Pillar guides + glossary + breach kill chains.
+- [Cloud Security Office Hours](https://csoh.org/) - Free vendor-neutral cloud-security community covering AppSec topics including [supply-chain security](https://csoh.org/cloud-security-best-practices.html#supply-chain), [Kubernetes hardening](https://csoh.org/cloud-security-best-practices.html#workloads), and [AI/LLM workload security](https://csoh.org/cloud-security-best-practices.html#ai). Pillar guides + glossary + breach kill chains.
 ```
 
 ---
 
-## Target 6 — `rmusser01/Infosec_Reference`
+## Target 6 - `rmusser01/Infosec_Reference`
 
 Comprehensive reference repo by Robert Musser. Has dedicated cloud security
 sections.
 
 **Where to add:** Cloud Security section, likely under `Resources` or
-`Communities`. The README is large — grep for "Cloud Security" or look at
+`Communities`. The README is large - grep for "Cloud Security" or look at
 existing `cloud-security.md` if there's a dedicated file.
 
 **Entry text:**
 
 ```markdown
-- [Cloud Security Office Hours](https://csoh.org/) — Community-run vendor-neutral cloud-security hub. Weekly Friday Zoom (7am PT), pillar guides, [230+ term glossary](https://csoh.org/glossary.html), [10 breach kill chains](https://csoh.org/breach-timeline.html) mapped to MITRE ATT&CK Cloud, [91 weekly meeting recaps](https://csoh.org/meetings.html), [37+ CTFs](https://csoh.org/ctfs.html).
+- [Cloud Security Office Hours](https://csoh.org/) - Community-run vendor-neutral cloud-security hub. Weekly Friday Zoom (7am PT), pillar guides, [230+ term glossary](https://csoh.org/glossary.html), [10 breach kill chains](https://csoh.org/breach-timeline.html) mapped to MITRE ATT&CK Cloud, [91 weekly meeting recaps](https://csoh.org/meetings.html), [37+ CTFs](https://csoh.org/ctfs.html).
 ```
 
 ---
@@ -204,7 +204,7 @@ backlink profile. Same workflow.
 | `forter/security-101-for-saas-startups` | Learning Resources (has a "communities" list) |
 | `wtsxDev/Penetration-Testing` | Cloud Security |
 | `jpiechowka/free-cybersec-resources` | Cloud Security |
-| `hslatman/awesome-threat-intelligence` | only relevant if the list has a "communities" or "blog" section — skip if not a clean fit |
+| `hslatman/awesome-threat-intelligence` | only relevant if the list has a "communities" or "blog" section - skip if not a clean fit |
 | `Hack-with-Github/Awesome-Hacking` | Cloud Security |
 
 ---

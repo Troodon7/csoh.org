@@ -37,7 +37,7 @@
     .prov-aws   { background: rgba(251,191,36,.15); color: #fbbf24; }
     .prov-azure { background: rgba(96,165,250,.15);  color: #60a5fa; }
 
-/* Main content — light mode defaults */
+/* Main content - light mode defaults */
     .kc-main { background: var(--light-bg, #f8f9fa); min-height: 60vh; padding: 0 0 4rem; }
     .incident-panel { display: none; }
     .incident-panel.active { display: block; }
@@ -188,7 +188,7 @@
 }
 .mitnick-note a { color: #7e22ce; }
 
-/* Dark mode — auto (prefers-color-scheme) + explicit toggle */
+/* Dark mode - auto (prefers-color-scheme) + explicit toggle */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) .incident-tabs { background: #0f172a; border-color: #1e293b; }
   :root:not([data-theme]) .kc-main { background: #080d18; }

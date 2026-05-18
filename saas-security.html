@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta name="description"
-        content="SaaS security and SSPM (SaaS Security Posture Management) — the practitioner's guide to securing Microsoft 365, Google Workspace, Salesforce, Slack, GitHub, and the 200+ other SaaS apps in your environment. SSPM vs CASB, the OAuth app problem, shadow IT discovery, ITDR, and how to build a SaaS security program. Vendor-neutral.">
+        content="SaaS security and SSPM (SaaS Security Posture Management) - the practitioner's guide to securing Microsoft 365, Google Workspace, Salesforce, Slack, GitHub, and the 200+ other SaaS apps in your environment. SSPM vs CASB, the OAuth app problem, shadow IT discovery, ITDR, and how to build a SaaS security program. Vendor-neutral.">
     <meta name="keywords"
         content="SaaS security, SSPM, SaaS Security Posture Management, CASB, shadow IT, OAuth apps, ITDR, Microsoft 365 security, Google Workspace security, Salesforce security, GitHub security, Slack security, Adaptive Shield, AppOmni, Obsidian, Netskope, Zscaler, Defender for Cloud Apps">
     <title>SaaS Security &amp; SSPM (SaaS Security Posture Management) - CSOH</title>
@@ -20,14 +20,14 @@
 
     <meta property="og:title" content="SaaS Security &amp; SSPM (SaaS Security Posture Management) - CSOH">
     <meta property="og:description"
-        content="A practitioner's guide to SaaS security — SSPM vs CASB, the OAuth app problem, shadow IT, ITDR, and securing M365, Google Workspace, Salesforce, GitHub, and Slack. Vendor-neutral.">
+        content="A practitioner's guide to SaaS security - SSPM vs CASB, the OAuth app problem, shadow IT, ITDR, and securing M365, Google Workspace, Salesforce, GitHub, and Slack. Vendor-neutral.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://csoh.org/saas-security.html">
     <meta property="og:image" content="https://csoh.org/banner.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SaaS Security &amp; SSPM">
     <meta name="twitter:description"
-        content="Vendor-neutral guide to SaaS security and SSPM — the third leg of the *PM stool. Shadow IT, OAuth apps, M365, Google Workspace, Salesforce, GitHub.">
+        content="Vendor-neutral guide to SaaS security and SSPM - the third leg of the *PM stool. Shadow IT, OAuth apps, M365, Google Workspace, Salesforce, GitHub.">
     <meta name="twitter:image" content="https://csoh.org/banner.png">
 
     <link rel="preconnect" href="https://csoh.kit.com" crossorigin>
@@ -44,7 +44,7 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "SaaS Security & SSPM (SaaS Security Posture Management)",
-      "description": "A vendor-neutral practitioner's guide to SaaS security and SSPM — the shadow IT problem, the OAuth app risk, SSPM vs CASB, ITDR, and securing the SaaS apps that hold most of an enterprise's actual data.",
+      "description": "A vendor-neutral practitioner's guide to SaaS security and SSPM - the shadow IT problem, the OAuth app risk, SSPM vs CASB, ITDR, and securing the SaaS apps that hold most of an enterprise's actual data.",
       "author": {
         "@type": "Person",
         "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
@@ -85,7 +85,7 @@
           "name": "What is SSPM (SaaS Security Posture Management)?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "SSPM is the discipline of continuously assessing the security configuration of SaaS applications — Microsoft 365, Google Workspace, Salesforce, Slack, GitHub, and others — through their administrative APIs. An SSPM tool inventories users, admin roles, sharing settings, third-party OAuth apps, and tenant-level policies, then evaluates them against a baseline and emits findings. It is to SaaS what CSPM is to IaaS: configuration-posture management, not network proxying or DLP. Mature programs run SSPM alongside a CASB (for inline DLP) and ITDR (for identity-layer threat detection)."
+            "text": "SSPM is the discipline of continuously assessing the security configuration of SaaS applications - Microsoft 365, Google Workspace, Salesforce, Slack, GitHub, and others - through their administrative APIs. An SSPM tool inventories users, admin roles, sharing settings, third-party OAuth apps, and tenant-level policies, then evaluates them against a baseline and emits findings. It is to SaaS what CSPM is to IaaS: configuration-posture management, not network proxying or DLP. Mature programs run SSPM alongside a CASB (for inline DLP) and ITDR (for identity-layer threat detection)."
           }
         },
         {
@@ -93,7 +93,7 @@
           "name": "What is the difference between SSPM and CASB?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A CASB (Cloud Access Security Broker) sits in the network path to SaaS — either as an inline proxy or via the SaaS app's API — and enforces DLP, access control, and shadow-IT discovery on traffic. An SSPM sits outside the data path and reads the SaaS admin APIs to assess configuration posture, OAuth apps, dormant accounts, and policy drift. CASB is about data in motion and inline control; SSPM is about how the SaaS itself is configured. The categories overlap on API-mode posture features, but their primary jobs are distinct. Most enterprise programs run both."
+            "text": "A CASB (Cloud Access Security Broker) sits in the network path to SaaS - either as an inline proxy or via the SaaS app's API - and enforces DLP, access control, and shadow-IT discovery on traffic. An SSPM sits outside the data path and reads the SaaS admin APIs to assess configuration posture, OAuth apps, dormant accounts, and policy drift. CASB is about data in motion and inline control; SSPM is about how the SaaS itself is configured. The categories overlap on API-mode posture features, but their primary jobs are distinct. Most enterprise programs run both."
           }
         },
         {
@@ -101,7 +101,7 @@
           "name": "Why is the OAuth app problem so urgent?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Third-party OAuth apps with broad scopes (read mail, read drive, send email as user, manage repos) are persistent, often unmonitored access into the tenant. Tokens rarely expire, IT has no inventory of which apps users have granted, and a single compromised vendor (see the 2023 Microsoft Storm-0558 keys, the GitHub OAuth-token incidents, the Okta cross-tenant takeover) becomes a backdoor into hundreds of customers at once. OAuth consent phishing has replaced password phishing as the higher-value attack — there is no MFA prompt to defeat, only a user clicking 'Allow'. Every SaaS security program needs an OAuth app inventory, a risk-tiering policy, and a revocation workflow."
+            "text": "Third-party OAuth apps with broad scopes (read mail, read drive, send email as user, manage repos) are persistent, often unmonitored access into the tenant. Tokens rarely expire, IT has no inventory of which apps users have granted, and a single compromised vendor (see the 2023 Microsoft Storm-0558 keys, the GitHub OAuth-token incidents, the Okta cross-tenant takeover) becomes a backdoor into hundreds of customers at once. OAuth consent phishing has replaced password phishing as the higher-value attack - there is no MFA prompt to defeat, only a user clicking 'Allow'. Every SaaS security program needs an OAuth app inventory, a risk-tiering policy, and a revocation workflow."
           }
         },
         {
@@ -109,7 +109,7 @@
           "name": "How is shadow IT discovered in 2026?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Four converging sources: DNS / network egress logs from SSE / SASE products (Zscaler, Netskope, Cisco Umbrella) — they see every SaaS domain a user hits; SSO logs combined with expense-report and corp-card data — the apps users pay for but did not get IT to integrate; email and calendar parsing — invite domains, sign-up confirmations, password resets reveal new SaaS adoption; and inline CASB or browser-extension telemetry — what users actually do once they reach the SaaS. The best programs reconcile all four into a single SaaS inventory; the typical finding is that the org runs 2–3x as many SaaS apps as the official catalogue says it does."
+            "text": "Four converging sources: DNS / network egress logs from SSE / SASE products (Zscaler, Netskope, Cisco Umbrella) - they see every SaaS domain a user hits; SSO logs combined with expense-report and corp-card data - the apps users pay for but did not get IT to integrate; email and calendar parsing - invite domains, sign-up confirmations, password resets reveal new SaaS adoption; and inline CASB or browser-extension telemetry - what users actually do once they reach the SaaS. The best programs reconcile all four into a single SaaS inventory; the typical finding is that the org runs 2–3x as many SaaS apps as the official catalogue says it does."
           }
         },
         {
@@ -117,7 +117,7 @@
           "name": "Does Microsoft Defender for Cloud Apps replace a dedicated SSPM?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It covers the M365 estate deeply and offers shadow-IT discovery and broad CASB capabilities, but it does not provide deep SSPM coverage across the long tail (Salesforce, Slack, Workday, GitHub, ServiceNow, Snowflake, Box, Atlassian). For Microsoft-first shops with limited non-MS SaaS, Defender for Cloud Apps is often enough. For diversified estates with Salesforce, Slack, GitHub, Workday, and dozens of others as core systems, a dedicated SSPM (Adaptive Shield / CrowdStrike Falcon, AppOmni, Obsidian, Wing, Reco, Valence) adds meaningful depth — particularly on Salesforce permission-set sprawl, Slack workspace fragmentation, and GitHub org configuration."
+            "text": "It covers the M365 estate deeply and offers shadow-IT discovery and broad CASB capabilities, but it does not provide deep SSPM coverage across the long tail (Salesforce, Slack, Workday, GitHub, ServiceNow, Snowflake, Box, Atlassian). For Microsoft-first shops with limited non-MS SaaS, Defender for Cloud Apps is often enough. For diversified estates with Salesforce, Slack, GitHub, Workday, and dozens of others as core systems, a dedicated SSPM (Adaptive Shield / CrowdStrike Falcon, AppOmni, Obsidian, Wing, Reco, Valence) adds meaningful depth - particularly on Salesforce permission-set sprawl, Slack workspace fragmentation, and GitHub org configuration."
           }
         },
         {
@@ -125,7 +125,7 @@
           "name": "What is ITDR and where does it fit?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "ITDR (Identity Threat Detection and Response) is the detection-and-response layer that sits over the identity provider (Okta, Entra ID, Google Workspace, Ping) and the SaaS audit logs (M365 Unified Audit Log, Workspace audit, Salesforce Event Monitoring). Where SSPM tells you the config is wrong, ITDR tells you an identity is being abused — impossible travel, MFA fatigue, session-token theft, malicious OAuth grants, golden-SAML, privilege-escalation patterns. Vendors in the space: Push Security, Permiso, Mitiga, Beyond Identity, Vectra Identity, plus the identity-detection features inside CrowdStrike Falcon Identity, Microsoft Defender for Identity, and major SIEMs. ITDR is the SOC-side complement to SSPM's preventive posture."
+            "text": "ITDR (Identity Threat Detection and Response) is the detection-and-response layer that sits over the identity provider (Okta, Entra ID, Google Workspace, Ping) and the SaaS audit logs (M365 Unified Audit Log, Workspace audit, Salesforce Event Monitoring). Where SSPM tells you the config is wrong, ITDR tells you an identity is being abused - impossible travel, MFA fatigue, session-token theft, malicious OAuth grants, golden-SAML, privilege-escalation patterns. Vendors in the space: Push Security, Permiso, Mitiga, Beyond Identity, Vectra Identity, plus the identity-detection features inside CrowdStrike Falcon Identity, Microsoft Defender for Identity, and major SIEMs. ITDR is the SOC-side complement to SSPM's preventive posture."
           }
         },
         {
@@ -133,7 +133,7 @@
           "name": "Where do I start building a SaaS security program?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Discovery first — you cannot secure what you cannot enumerate. Build a SaaS inventory from SSO logs, finance data, DNS / SSE telemetry, and email parsing. Tier the inventory by data sensitivity and blast radius (Tier 0: M365 / Workspace / IdP / GitHub / Salesforce; Tier 1: HR, finance, code-adjacent; Tier 2: marketing, the long tail). Baseline the Tier 0 apps against CIS Benchmarks or the SSPM's default policy. Stand up OAuth app review and dormant-account remediation as recurring operations, not one-time projects. Add ITDR detections for the IdP and the Tier 0 apps. Write IR playbooks per Tier 0 app. Then iterate down the tiers."
+            "text": "Discovery first - you cannot secure what you cannot enumerate. Build a SaaS inventory from SSO logs, finance data, DNS / SSE telemetry, and email parsing. Tier the inventory by data sensitivity and blast radius (Tier 0: M365 / Workspace / IdP / GitHub / Salesforce; Tier 1: HR, finance, code-adjacent; Tier 2: marketing, the long tail). Baseline the Tier 0 apps against CIS Benchmarks or the SSPM's default policy. Stand up OAuth app review and dormant-account remediation as recurring operations, not one-time projects. Add ITDR detections for the IdP and the Tier 0 apps. Write IR playbooks per Tier 0 app. Then iterate down the tiers."
           }
         }
       ]
@@ -281,7 +281,7 @@
       <div class="hero-inner">
         <div class="hero-text">
           <h1>SaaS Security &amp; SSPM</h1>
-          <p>The third leg of the *PM stool. <a class="glossary-link" href="glossary.html#term-cspm">CSPM</a> covers <a class="glossary-link" href="glossary.html#term-iaas">IaaS</a>, <a class="glossary-link" href="glossary.html#term-kspm">KSPM</a> covers <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a>, and <a class="glossary-link" href="glossary.html#term-sspm">SSPM</a> covers <a class="glossary-link" href="glossary.html#term-saas">SaaS</a> — the place most of an enterprise's actual data already lives. A vendor-neutral practitioner's guide to the SaaS security problem, the four pillars (identity, configuration, data, threat detection), the OAuth app risk, <a class="glossary-link" href="glossary.html#term-shadow-it">shadow IT</a> discovery, SSPM vs <a class="glossary-link" href="glossary.html#term-casb">CASB</a>, <a class="glossary-link" href="glossary.html#term-itdr">ITDR</a>, and the specific work of securing M365, Google Workspace, Salesforce, Slack, GitHub, and the long tail.</p>
+          <p>The third leg of the *PM stool. <a class="glossary-link" href="glossary.html#term-cspm">CSPM</a> covers <a class="glossary-link" href="glossary.html#term-iaas">IaaS</a>, <a class="glossary-link" href="glossary.html#term-kspm">KSPM</a> covers <a class="glossary-link" href="glossary.html#term-kubernetes">Kubernetes</a>, and <a class="glossary-link" href="glossary.html#term-sspm">SSPM</a> covers <a class="glossary-link" href="glossary.html#term-saas">SaaS</a> - the place most of an enterprise's actual data already lives. A vendor-neutral practitioner's guide to the SaaS security problem, the four pillars (identity, configuration, data, threat detection), the OAuth app risk, <a class="glossary-link" href="glossary.html#term-shadow-it">shadow IT</a> discovery, SSPM vs <a class="glossary-link" href="glossary.html#term-casb">CASB</a>, <a class="glossary-link" href="glossary.html#term-itdr">ITDR</a>, and the specific work of securing M365, Google Workspace, Salesforce, Slack, GitHub, and the long tail.</p>
           <div class="cta-buttons">
             <a href="#pillars" class="btn btn-primary">The four pillars →</a>
             <a href="#platforms" class="btn btn-secondary">SSPM &amp; CASB landscape</a>
@@ -377,7 +377,7 @@
         <p class="page-meta"><time datetime="2026-05-17">Last updated <strong>2026-05-17</strong></time> · <a href="about-shawn-nunley.html" rel="author">By Shawn Nunley</a> · Vendor-neutral · <a href="https://github.com/CloudSecurityOfficeHours/csoh.org/blob/main/saas-security.html" target="_blank" rel="noopener noreferrer">View source on GitHub</a></p>
 
         <div class="info-box--blue">
-            <p><strong>The 30-second version:</strong> The average enterprise runs <strong>200+ SaaS apps</strong>, and IT knows about roughly 40% of them. The rest is shadow IT. Each app holds identities, data, and OAuth grants — and most of them are configured to the vendor's defaults, which are written for adoption, not security. <strong>SSPM</strong> (SaaS Security Posture Management) is the configuration-posture management layer for SaaS — the third leg of the *PM stool alongside <a href="cspm-vs-cnapp.html">CSPM</a> for IaaS and KSPM for Kubernetes.</p>
+            <p><strong>The 30-second version:</strong> The average enterprise runs <strong>200+ SaaS apps</strong>, and IT knows about roughly 40% of them. The rest is shadow IT. Each app holds identities, data, and OAuth grants - and most of them are configured to the vendor's defaults, which are written for adoption, not security. <strong>SSPM</strong> (SaaS Security Posture Management) is the configuration-posture management layer for SaaS - the third leg of the *PM stool alongside <a href="cspm-vs-cnapp.html">CSPM</a> for IaaS and KSPM for Kubernetes.</p>
             <p style="margin-top:0.75rem;">A modern SaaS security program runs <strong>SSPM</strong> for posture, <strong>CASB</strong> for inline DLP and shadow-IT discovery, <strong>ITDR</strong> for identity-layer detection, and a recurring <strong>OAuth app review</strong> process that no tool does for you. The work tiers naturally: Microsoft 365, Google Workspace, the <a class="glossary-link" href="glossary.html#term-idp">IdP</a>, GitHub, and Salesforce are the Tier 0 systems whose compromise is an extinction event; everything else gets baselined as the program matures.</p>
         </div>
 
@@ -412,14 +412,14 @@
 
         <section id="problem">
             <h2>The SaaS security problem</h2>
-            <p>Two numbers frame the entire discipline. The first: the average enterprise runs <strong>200+ SaaS applications</strong> — somewhere between 130 and 400 depending on the study and the company size, and the trend is monotonically up. The second: IT inventories typically capture <strong>around 40% of them</strong>. The remainder is what the industry calls shadow IT — apps bought on a corporate card, signed up for with a work email, or onboarded through a free-tier link in someone's Slack DM.</p>
+            <p>Two numbers frame the entire discipline. The first: the average enterprise runs <strong>200+ SaaS applications</strong> - somewhere between 130 and 400 depending on the study and the company size, and the trend is monotonically up. The second: IT inventories typically capture <strong>around 40% of them</strong>. The remainder is what the industry calls shadow IT - apps bought on a corporate card, signed up for with a work email, or onboarded through a free-tier link in someone's Slack DM.</p>
             <p>That gap is not a hygiene problem; it is the structural reality of modern work. SaaS is too easy to adopt. Any employee with a credit card and 60 seconds can stand up a workspace, invite teammates, and pipe sensitive data through it before anyone in security knows it exists. The vendor's incentive is frictionless onboarding; the customer's discovery problem is the externality.</p>
             <p>The data inside those apps is not a side concern. The customer list lives in Salesforce; the source code lives in GitHub; the payroll and PII live in Workday; the strategy decks live in Google Drive and SharePoint; the production secrets live in 1Password or Vault; the customer support tickets live in Zendesk; the deal flow lives in HubSpot. The corporate file server moved into SaaS years ago. Most enterprises have more sensitive data in SaaS than in their cloud IaaS estate, and yet the cloud security program is often heavily IaaS-weighted because that is where the discipline grew up.</p>
-            <p>The other complication: SaaS apps each have their own admin console, their own permission model, their own audit log shape, their own concept of "external user," and their own definition of "public link." A security engineer who is fluent in <a class="glossary-link" href="glossary.html#term-s3">S3</a> bucket policies is still in week-one territory when they sit down in Salesforce's sharing model or Slack's Enterprise Grid org-vs-workspace controls. SaaS security is breadth work — many systems, shallow at first, deepening on the Tier 0 ones — where IaaS security is depth work in three near-identical cloud APIs.</p>
+            <p>The other complication: SaaS apps each have their own admin console, their own permission model, their own audit log shape, their own concept of "external user," and their own definition of "public link." A security engineer who is fluent in <a class="glossary-link" href="glossary.html#term-s3">S3</a> bucket policies is still in week-one territory when they sit down in Salesforce's sharing model or Slack's Enterprise Grid org-vs-workspace controls. SaaS security is breadth work - many systems, shallow at first, deepening on the Tier 0 ones - where IaaS security is depth work in three near-identical cloud APIs.</p>
         </section>
 
         <section id="model">
-            <h2>The SaaS security model — what shifts vs IaaS</h2>
+            <h2>The SaaS security model - what shifts vs IaaS</h2>
             <p>The <a href="shared-responsibility-model.html">shared responsibility model</a> tilts dramatically as you move from IaaS to <a class="glossary-link" href="glossary.html#term-paas">PaaS</a> to SaaS. In IaaS you are responsible for the operating system, the network, the runtime, the application, the identities, the data, and the configuration. In SaaS, the vendor owns the operating system, the runtime, the application, the network, and the physical infrastructure. What is left to you is narrower but no less important:</p>
             <div class="comparison-table">
                 <table>
@@ -459,7 +459,7 @@
                         <tr>
                             <th scope="row">Logging &amp; monitoring</th>
                             <td>You (<a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a>, Activity Log, Audit Logs)</td>
-                            <td><strong>You</strong> — but log access varies wildly by app and license tier</td>
+                            <td><strong>You</strong> - but log access varies wildly by app and license tier</td>
                         </tr>
                         <tr>
                             <th scope="row">Third-party app integrations</th>
@@ -469,37 +469,37 @@
                         <tr>
                             <th scope="row"><a class="glossary-link" href="glossary.html#term-incident-response">Incident response</a></th>
                             <td>Full forensic access</td>
-                            <td>Limited — depends on vendor cooperation and log retention</td>
+                            <td>Limited - depends on vendor cooperation and log retention</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p>Two consequences follow. First, every column where the answer is "you" needs a process, an owner, and a control — and there is no IaaS-style API-uniformity to ride on. Second, the columns where the answer is "vendor" are not free. Your vendor's incident is now your incident. A breach at Okta, Snowflake, GitHub, Twilio, MOVEit, Cloudflare, Microsoft, or any major SaaS becomes a same-day investigation for every customer. The third-party risk management discipline that used to be a once-a-year questionnaire is now a continuous monitoring problem.</p>
+            <p>Two consequences follow. First, every column where the answer is "you" needs a process, an owner, and a control - and there is no IaaS-style API-uniformity to ride on. Second, the columns where the answer is "vendor" are not free. Your vendor's incident is now your incident. A breach at Okta, Snowflake, GitHub, Twilio, MOVEit, Cloudflare, Microsoft, or any major SaaS becomes a same-day investigation for every customer. The third-party risk management discipline that used to be a once-a-year questionnaire is now a continuous monitoring problem.</p>
             <p>The other shift worth naming: <strong>log access is licensed</strong>. Microsoft 365 audit logs at the Purview Advanced tier vs the entry-level tier differ by months of retention and depth of fields. Salesforce Event Monitoring requires Shield. Slack Audit Logs require Enterprise Grid. The security team often finds out about these license gates during an incident, which is the worst time to discover them. Inventory the per-app log entitlements during program design, not during an investigation.</p>
         </section>
 
         <section id="sspm-def">
             <h2>What SSPM is (and isn't)</h2>
-            <p><strong>SSPM</strong> — SaaS Security Posture Management — is the discipline of continuously assessing the security <em>configuration</em> of SaaS applications through their administrative APIs and emitting findings against a baseline. The model is direct lift-and-shift from <a href="cspm-vs-cnapp.html">CSPM</a>: connect to the SaaS admin API, enumerate the tenant, evaluate against rules, surface drift.</p>
+            <p><strong>SSPM</strong> - SaaS Security Posture Management - is the discipline of continuously assessing the security <em>configuration</em> of SaaS applications through their administrative APIs and emitting findings against a baseline. The model is direct lift-and-shift from <a href="cspm-vs-cnapp.html">CSPM</a>: connect to the SaaS admin API, enumerate the tenant, evaluate against rules, surface drift.</p>
             <p>What an SSPM tool reads and evaluates per connected app:</p>
             <ul>
-                <li><strong>Users &amp; admin roles</strong> — who has access, who has elevated privileges, who has not logged in for 90 days, who has MFA enabled.</li>
-                <li><strong>Authentication settings</strong> — SSO enforcement, MFA policy, session timeouts, password policy where local auth exists.</li>
-                <li><strong>Sharing &amp; collaboration</strong> — public links, external collaborators, default link permissions, guest access scope.</li>
-                <li><strong>Third-party app integrations</strong> — every OAuth app installed in the tenant, its scopes, the users who granted it, when it was last used.</li>
-                <li><strong>Data exposure surface</strong> — public files, anonymous-link documents, externally shared channels / boards / repos.</li>
-                <li><strong>Audit log configuration</strong> — whether logs are enabled at the right tier, whether they are exported to your <a class="glossary-link" href="glossary.html#term-siem">SIEM</a>, whether retention is sufficient.</li>
-                <li><strong>Tenant-specific risky defaults</strong> — anonymous SharePoint link sharing, Salesforce guest-user object permissions, Slack workspace-app install permissions, GitHub default repo visibility, etc.</li>
+                <li><strong>Users &amp; admin roles</strong> - who has access, who has elevated privileges, who has not logged in for 90 days, who has MFA enabled.</li>
+                <li><strong>Authentication settings</strong> - SSO enforcement, MFA policy, session timeouts, password policy where local auth exists.</li>
+                <li><strong>Sharing &amp; collaboration</strong> - public links, external collaborators, default link permissions, guest access scope.</li>
+                <li><strong>Third-party app integrations</strong> - every OAuth app installed in the tenant, its scopes, the users who granted it, when it was last used.</li>
+                <li><strong>Data exposure surface</strong> - public files, anonymous-link documents, externally shared channels / boards / repos.</li>
+                <li><strong>Audit log configuration</strong> - whether logs are enabled at the right tier, whether they are exported to your <a class="glossary-link" href="glossary.html#term-siem">SIEM</a>, whether retention is sufficient.</li>
+                <li><strong>Tenant-specific risky defaults</strong> - anonymous SharePoint link sharing, Salesforce guest-user object permissions, Slack workspace-app install permissions, GitHub default repo visibility, etc.</li>
             </ul>
             <p>What SSPM is <em>not</em>:</p>
             <ul>
                 <li><strong>Not a CASB.</strong> SSPM does not sit in the data path; it does not inspect uploads / downloads for DLP; it does not block a user from typing customer PII into ChatGPT.</li>
                 <li><strong>Not an IdP.</strong> It reads the IdP's settings and consumes its logs, but it does not authenticate users.</li>
-                <li><strong>Not an ITDR.</strong> SSPM is preventive — config drift, weak settings, dormant accounts. The detection layer (impossible travel, <a class="glossary-link" href="glossary.html#term-mfa-fatigue">MFA fatigue</a>, session-token theft) is ITDR's job.</li>
+                <li><strong>Not an ITDR.</strong> SSPM is preventive - config drift, weak settings, dormant accounts. The detection layer (impossible travel, <a class="glossary-link" href="glossary.html#term-mfa-fatigue">MFA fatigue</a>, session-token theft) is ITDR's job.</li>
                 <li><strong>Not a DLP product.</strong> Some SSPMs surface public files; they don't classify content beyond what the SaaS already labels.</li>
                 <li><strong>Not a vendor risk management (VRM) tool.</strong> SSPM tells you about apps <em>you</em> run; VRM is about whether the <em>vendor</em> can be trusted.</li>
             </ul>
-            <p>The category overlaps with CSPM/<a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a> at the conceptual level (configuration posture, rule libraries, drift detection, framework mappings) but the underlying APIs are entirely different and the rules cannot be transferred. A CSPM that "also does SaaS" is, in practice, almost always thinner on the SaaS side than a dedicated SSPM — particularly for Salesforce permission-set rationalization, Slack workspace fragmentation, and the per-app deep checks that drive most of the value.</p>
+            <p>The category overlaps with CSPM/<a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a> at the conceptual level (configuration posture, rule libraries, drift detection, framework mappings) but the underlying APIs are entirely different and the rules cannot be transferred. A CSPM that "also does SaaS" is, in practice, almost always thinner on the SaaS side than a dedicated SSPM - particularly for Salesforce permission-set rationalization, Slack workspace fragmentation, and the per-app deep checks that drive most of the value.</p>
         </section>
 
         <section id="pillars">
@@ -508,7 +508,7 @@
             <div class="pillar-grid">
                 <div class="pillar-card pillar-card-iam">
                     <h3>Identity &amp; access</h3>
-                    <p>SSO coverage of every SaaS app (not just the integrated ones — the long tail too), SCIM provisioning so leavers actually lose access, MFA enforced including for break-glass paths, dormant accounts pruned on a cadence, admin roles tiered with <a class="glossary-link" href="glossary.html#term-pam">Privileged Access Management</a>, OAuth grants reviewed regularly. The bedrock pillar — most SaaS breaches are identity breaches first and configuration breaches second.</p>
+                    <p>SSO coverage of every SaaS app (not just the integrated ones - the long tail too), SCIM provisioning so leavers actually lose access, MFA enforced including for break-glass paths, dormant accounts pruned on a cadence, admin roles tiered with <a class="glossary-link" href="glossary.html#term-pam">Privileged Access Management</a>, OAuth grants reviewed regularly. The bedrock pillar - most SaaS breaches are identity breaches first and configuration breaches second.</p>
                 </div>
                 <div class="pillar-card pillar-card-posture">
                     <h3>Configuration posture</h3>
@@ -528,7 +528,7 @@
 
         <section id="oauth">
             <h2>The OAuth app problem</h2>
-            <p>Of all the structural risks unique to SaaS, OAuth app authorization is the one most under-managed by security teams in 2026. The mechanism: a user clicks a "Sign in with Google / Microsoft" button on a third-party app, the SaaS shows a consent screen requesting scopes ("read your email", "manage your repositories", "send email as you"), the user clicks "Allow", and the third-party app gets a refresh token that — depending on the platform — may never expire and may bypass conditional-access policies on subsequent uses.</p>
+            <p>Of all the structural risks unique to SaaS, OAuth app authorization is the one most under-managed by security teams in 2026. The mechanism: a user clicks a "Sign in with Google / Microsoft" button on a third-party app, the SaaS shows a consent screen requesting scopes ("read your email", "manage your repositories", "send email as you"), the user clicks "Allow", and the third-party app gets a refresh token that - depending on the platform - may never expire and may bypass conditional-access policies on subsequent uses.</p>
             <p>The properties of that token:</p>
             <ul>
                 <li><strong>No MFA prompt</strong> on subsequent use. The user already authenticated when they granted consent.</li>
@@ -537,25 +537,25 @@
                 <li><strong>Often invisible to the user.</strong> Most users cannot list the apps they have authorized; many admins cannot either, without an SSPM or the native admin console.</li>
                 <li><strong>Tenant-spanning when the app has admin consent.</strong> Some grants apply to the entire org, not just the granting user.</li>
             </ul>
-            <p>The result is that OAuth consent has functionally replaced credential <a class="glossary-link" href="glossary.html#term-phishing">phishing</a> as the higher-value attack path in many recent campaigns. The attacker does not need the user's password or MFA token — they need the user to click "Allow" on a convincing-looking consent screen. The 2022–2024 wave of OAuth-grant phishing campaigns (Storm-0558 keys, GitHub OAuth-token incidents from CircleCI and Heroku integrations, the Okta cross-tenant attacks, repeated abuse of compromised Mailchimp and HubSpot integrations) is the canonical example. Each demonstrates that a single compromised vendor with broad OAuth scopes can pivot into hundreds of customer tenants simultaneously.</p>
+            <p>The result is that OAuth consent has functionally replaced credential <a class="glossary-link" href="glossary.html#term-phishing">phishing</a> as the higher-value attack path in many recent campaigns. The attacker does not need the user's password or MFA token - they need the user to click "Allow" on a convincing-looking consent screen. The 2022–2024 wave of OAuth-grant phishing campaigns (Storm-0558 keys, GitHub OAuth-token incidents from CircleCI and Heroku integrations, the Okta cross-tenant attacks, repeated abuse of compromised Mailchimp and HubSpot integrations) is the canonical example. Each demonstrates that a single compromised vendor with broad OAuth scopes can pivot into hundreds of customer tenants simultaneously.</p>
             <p>The defensive posture every SaaS security program needs:</p>
             <ul>
                 <li><strong>App allowlist / admin consent.</strong> M365, Google Workspace, and most modern SaaS allow restricting user-grant of OAuth apps; net-new apps require admin approval. The default everywhere should be "no user-driven OAuth grants for non-trivial scopes."</li>
                 <li><strong>Continuous OAuth app inventory.</strong> SSPM tools pull the list of authorized apps, their scopes, the users who granted them, and last-used timestamps. Without this, you have no idea what is connected.</li>
                 <li><strong>Scope-based risk tiering.</strong> Read-email and write-email scopes are higher risk than calendar-read; tier the inventory by impact, review the high-impact apps quarterly.</li>
-                <li><strong>Revocation <a class="glossary-link" href="glossary.html#term-runbook">playbook</a>.</strong> When a vendor breach is disclosed (and they will be — frequently), you need to be able to revoke tokens at scale in M365, Workspace, GitHub, Slack, and Salesforce within an hour. Practice it.</li>
+                <li><strong>Revocation <a class="glossary-link" href="glossary.html#term-runbook">playbook</a>.</strong> When a vendor breach is disclosed (and they will be - frequently), you need to be able to revoke tokens at scale in M365, Workspace, GitHub, Slack, and Salesforce within an hour. Practice it.</li>
                 <li><strong>Detection for new grants.</strong> Alert on new OAuth app grants in the IdP audit log, particularly grants with mail / drive / admin scopes.</li>
             </ul>
-            <p>The vendors most active in this space — Push Security, Valence Security, Reco, Obsidian, AppOmni, Adaptive Shield, Spin.<a class="glossary-link" href="glossary.html#term-ai">AI</a> — all centre OAuth-app inventory and risk-scoring as a primary feature, not an afterthought. If you are evaluating SSPM and OAuth is a third-class feature, evaluate something else.</p>
+            <p>The vendors most active in this space - Push Security, Valence Security, Reco, Obsidian, AppOmni, Adaptive Shield, Spin.<a class="glossary-link" href="glossary.html#term-ai">AI</a> - all centre OAuth-app inventory and risk-scoring as a primary feature, not an afterthought. If you are evaluating SSPM and OAuth is a third-class feature, evaluate something else.</p>
         </section>
 
         <section id="shadow-it">
             <h2>Shadow IT discovery</h2>
             <p>You cannot secure what you cannot enumerate. Shadow IT discovery in 2026 is a multi-source reconciliation problem; no single signal catches everything, and the best programs fuse four:</p>
             <ul>
-                <li><strong>DNS / network <a class="glossary-link" href="glossary.html#term-ingress">egress</a> telemetry.</strong> <a class="glossary-link" href="glossary.html#term-sase">SSE</a> / SASE products — <a href="https://www.zscaler.com/" target="_blank" rel="noopener noreferrer">Zscaler</a>, <a href="https://www.netskope.com/" target="_blank" rel="noopener noreferrer">Netskope</a>, <a href="https://umbrella.cisco.com/" target="_blank" rel="noopener noreferrer">Cisco Umbrella</a>, <a href="https://www.paloaltonetworks.com/sase/access" target="_blank" rel="noopener noreferrer">Palo Alto Prisma Access</a>, <a href="https://www.cloudflare.com/sase/products/access/" target="_blank" rel="noopener noreferrer">Cloudflare One</a> — see every SaaS domain a managed user reaches. Categorization databases tag the SaaS, and the volume of traffic gives a usage signal.</li>
-                <li><strong>SSO + finance reconciliation.</strong> The IdP catalog (Okta, <a class="glossary-link" href="glossary.html#term-entra-id">Entra ID</a>, Google Workspace) lists the SaaS the org has officially integrated. Finance data — corporate-card transactions, expense reports, AP records — lists the SaaS the org is paying for. The delta between those two is high-signal shadow IT, often the most operationally important kind.</li>
-                <li><strong>Email &amp; calendar parsing.</strong> SaaS sign-ups generate password-reset emails, calendar invites use SaaS domains, vendor onboarding emails route to inboxes. Tooling that parses these — most modern SSPMs and some dedicated shadow-IT products like <a href="https://www.gripsecurity.com/" target="_blank" rel="noopener noreferrer">Grip Security</a> and <a href="https://wing.security/" target="_blank" rel="noopener noreferrer">Wing Security</a> do — surfaces apps that have neither network signal nor finance signal.</li>
+                <li><strong>DNS / network <a class="glossary-link" href="glossary.html#term-ingress">egress</a> telemetry.</strong> <a class="glossary-link" href="glossary.html#term-sase">SSE</a> / SASE products - <a href="https://www.zscaler.com/" target="_blank" rel="noopener noreferrer">Zscaler</a>, <a href="https://www.netskope.com/" target="_blank" rel="noopener noreferrer">Netskope</a>, <a href="https://umbrella.cisco.com/" target="_blank" rel="noopener noreferrer">Cisco Umbrella</a>, <a href="https://www.paloaltonetworks.com/sase/access" target="_blank" rel="noopener noreferrer">Palo Alto Prisma Access</a>, <a href="https://www.cloudflare.com/sase/products/access/" target="_blank" rel="noopener noreferrer">Cloudflare One</a> - see every SaaS domain a managed user reaches. Categorization databases tag the SaaS, and the volume of traffic gives a usage signal.</li>
+                <li><strong>SSO + finance reconciliation.</strong> The IdP catalog (Okta, <a class="glossary-link" href="glossary.html#term-entra-id">Entra ID</a>, Google Workspace) lists the SaaS the org has officially integrated. Finance data - corporate-card transactions, expense reports, AP records - lists the SaaS the org is paying for. The delta between those two is high-signal shadow IT, often the most operationally important kind.</li>
+                <li><strong>Email &amp; calendar parsing.</strong> SaaS sign-ups generate password-reset emails, calendar invites use SaaS domains, vendor onboarding emails route to inboxes. Tooling that parses these - most modern SSPMs and some dedicated shadow-IT products like <a href="https://www.gripsecurity.com/" target="_blank" rel="noopener noreferrer">Grip Security</a> and <a href="https://wing.security/" target="_blank" rel="noopener noreferrer">Wing Security</a> do - surfaces apps that have neither network signal nor finance signal.</li>
                 <li><strong>Inline CASB / browser-extension telemetry.</strong> Per-session view of where users are going and what they are doing once they get there. The most invasive source but also the highest-resolution. Browser-based products like <a href="https://pushsecurity.com/" target="_blank" rel="noopener noreferrer">Push Security</a>, <a href="https://www.island.io/" target="_blank" rel="noopener noreferrer">Island</a>, and <a href="https://www.paloaltonetworks.com/sase/prisma-browser" target="_blank" rel="noopener noreferrer">Talon</a> (now Palo Alto) sit at the browser layer specifically for this.</li>
             </ul>
             <p>The reconciliation produces a single SaaS inventory keyed by app, with a per-app evidence trail of how the app was discovered, how many users use it, what the org spends on it, and whether it has SSO integration. The typical first-pass finding when an org runs this exercise: they have 2–3x more SaaS apps <a class="glossary-link" href="glossary.html#term-encryption-at-rest">in use</a> than the official catalogue claims, and at least a handful of Tier-0-data apps (typically a file-sync tool, a survey tool, or a marketing-automation tool) are running outside IT's awareness.</p>
@@ -613,35 +613,35 @@
                     </tbody>
                 </table>
             </div>
-            <p>The categories overlap on API-mode posture features — most CASBs have an "API mode" that reads tenant configuration, and some SSPMs are starting to add lightweight DLP via the SaaS's native APIs. But the primary value propositions remain distinct. CASB is the inline-control layer; SSPM is the posture-management layer. Mature programs run both, and increasingly they run them from different vendors specifically because the depth of SSPM coverage in a CASB rarely matches a focused SSPM, and vice versa.</p>
-            <p>One emerging consolidation pattern: <strong>SSE platforms with bolted-on SSPM</strong>. Netskope, Zscaler, and Microsoft Defender for Cloud Apps each have SSPM-shaped features, and they are getting deeper. The trade-off is the same as any "platform with everything" play — a 70%-good integrated suite versus an 95%-good best-of-breed pair. Pick the trade-off knowingly.</p>
+            <p>The categories overlap on API-mode posture features - most CASBs have an "API mode" that reads tenant configuration, and some SSPMs are starting to add lightweight DLP via the SaaS's native APIs. But the primary value propositions remain distinct. CASB is the inline-control layer; SSPM is the posture-management layer. Mature programs run both, and increasingly they run them from different vendors specifically because the depth of SSPM coverage in a CASB rarely matches a focused SSPM, and vice versa.</p>
+            <p>One emerging consolidation pattern: <strong>SSE platforms with bolted-on SSPM</strong>. Netskope, Zscaler, and Microsoft Defender for Cloud Apps each have SSPM-shaped features, and they are getting deeper. The trade-off is the same as any "platform with everything" play - a 70%-good integrated suite versus an 95%-good best-of-breed pair. Pick the trade-off knowingly.</p>
         </section>
 
         <section id="platforms">
             <h2>SSPM platform landscape</h2>
             <p>The category has consolidated significantly in 2024–2025. The major dedicated vendors:</p>
             <ul>
-                <li><strong><a href="https://www.crowdstrike.com/en-us/en-us/platform/falcon-shield/" target="_blank" rel="noopener noreferrer">Adaptive Shield</a></strong> — acquired by <a href="https://www.crowdstrike.com/en-us/" target="_blank" rel="noopener noreferrer">CrowdStrike</a> in 2024 and now part of Falcon. Broad app coverage (150+), strong on Microsoft 365 and Salesforce.</li>
-                <li><strong><a href="https://appomni.com/" target="_blank" rel="noopener noreferrer">AppOmni</a></strong> — enterprise-focused, deepest Salesforce coverage of any SSPM (the founders came out of the Salesforce security team), strong on ServiceNow and Workday.</li>
-                <li><strong><a href="https://www.obsidiansecurity.com/" target="_blank" rel="noopener noreferrer">Obsidian Security</a></strong> — heavy ITDR overlap; strong threat detection and breach reconstruction in M365 and Workspace.</li>
-                <li><strong><a href="https://wing.security/" target="_blank" rel="noopener noreferrer">Wing Security</a></strong> — discovery-first model, broad app coverage, OAuth and supply-chain emphasis.</li>
-                <li><strong><a href="https://www.gripsecurity.com/" target="_blank" rel="noopener noreferrer">Grip Security</a></strong> — email-parsing-based shadow IT discovery as a primary entry point, growing into full SSPM.</li>
-                <li><strong><a href="https://www.reco.ai/" target="_blank" rel="noopener noreferrer">Reco</a></strong> — AI-led identity-graph approach, strong on cross-app data exposure and AI app sprawl (the ChatGPT / Copilot / Claude problem inside the enterprise).</li>
-                <li><strong><a href="https://www.valencesecurity.com/" target="_blank" rel="noopener noreferrer">Valence Security</a></strong> — workflow-automation emphasis, strong OAuth and supply-chain coverage.</li>
-                <li><strong><a href="https://www.suridata.ai/" target="_blank" rel="noopener noreferrer">Suridata</a></strong> — broad coverage, strong on identity and data exposure surfaces.</li>
-                <li><strong><a href="https://spin.ai/" target="_blank" rel="noopener noreferrer">Spin.AI</a></strong> — heritage in SaaS backup; SSPM features added more recently, strong on data-recovery integration.</li>
-                <li><strong><a href="https://pushsecurity.com/" target="_blank" rel="noopener noreferrer">Push Security</a></strong> — browser-extension-based, blurs SSPM / ITDR / shadow-IT lines; particularly strong on identity-attack detection in-session.</li>
-                <li><strong><a href="https://www.atomicwork.com/" target="_blank" rel="noopener noreferrer">Atomicwork</a></strong> — newer entrant, SaaS management with security overlap.</li>
+                <li><strong><a href="https://www.crowdstrike.com/en-us/en-us/platform/falcon-shield/" target="_blank" rel="noopener noreferrer">Adaptive Shield</a></strong> - acquired by <a href="https://www.crowdstrike.com/en-us/" target="_blank" rel="noopener noreferrer">CrowdStrike</a> in 2024 and now part of Falcon. Broad app coverage (150+), strong on Microsoft 365 and Salesforce.</li>
+                <li><strong><a href="https://appomni.com/" target="_blank" rel="noopener noreferrer">AppOmni</a></strong> - enterprise-focused, deepest Salesforce coverage of any SSPM (the founders came out of the Salesforce security team), strong on ServiceNow and Workday.</li>
+                <li><strong><a href="https://www.obsidiansecurity.com/" target="_blank" rel="noopener noreferrer">Obsidian Security</a></strong> - heavy ITDR overlap; strong threat detection and breach reconstruction in M365 and Workspace.</li>
+                <li><strong><a href="https://wing.security/" target="_blank" rel="noopener noreferrer">Wing Security</a></strong> - discovery-first model, broad app coverage, OAuth and supply-chain emphasis.</li>
+                <li><strong><a href="https://www.gripsecurity.com/" target="_blank" rel="noopener noreferrer">Grip Security</a></strong> - email-parsing-based shadow IT discovery as a primary entry point, growing into full SSPM.</li>
+                <li><strong><a href="https://www.reco.ai/" target="_blank" rel="noopener noreferrer">Reco</a></strong> - AI-led identity-graph approach, strong on cross-app data exposure and AI app sprawl (the ChatGPT / Copilot / Claude problem inside the enterprise).</li>
+                <li><strong><a href="https://www.valencesecurity.com/" target="_blank" rel="noopener noreferrer">Valence Security</a></strong> - workflow-automation emphasis, strong OAuth and supply-chain coverage.</li>
+                <li><strong><a href="https://www.suridata.ai/" target="_blank" rel="noopener noreferrer">Suridata</a></strong> - broad coverage, strong on identity and data exposure surfaces.</li>
+                <li><strong><a href="https://spin.ai/" target="_blank" rel="noopener noreferrer">Spin.AI</a></strong> - heritage in SaaS backup; SSPM features added more recently, strong on data-recovery integration.</li>
+                <li><strong><a href="https://pushsecurity.com/" target="_blank" rel="noopener noreferrer">Push Security</a></strong> - browser-extension-based, blurs SSPM / ITDR / shadow-IT lines; particularly strong on identity-attack detection in-session.</li>
+                <li><strong><a href="https://www.atomicwork.com/" target="_blank" rel="noopener noreferrer">Atomicwork</a></strong> - newer entrant, SaaS management with security overlap.</li>
             </ul>
             <p>Native and platform-vendor offerings:</p>
             <ul>
-                <li><strong><a href="https://learn.microsoft.com/en-us/defender-cloud-apps/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Cloud Apps</a></strong> — deep on M365, broad CASB capabilities, growing SSPM coverage of major non-Microsoft SaaS. For Microsoft-first shops the default choice; for diversified estates, often a complement to dedicated SSPM.</li>
-                <li><strong><a href="https://www.cisco.com/site/us/en/products/security/secure-cloudlock/index.html" target="_blank" rel="noopener noreferrer">Cisco Cloudlock</a></strong> — long-standing API-mode CASB / SSPM hybrid.</li>
-                <li><strong><a href="https://www.netskope.com/products/saas-security-posture-management" target="_blank" rel="noopener noreferrer">Netskope SSPM</a></strong>, <strong><a href="https://www.paloaltonetworks.com/sase/cloud-app-security-broker" target="_blank" rel="noopener noreferrer">Palo Alto Prisma SaaS Security Posture</a></strong>, <strong><a href="https://www.zscaler.com/products-and-solutions/zscaler-data-protection/saas-security-posture-management" target="_blank" rel="noopener noreferrer">Zscaler SSPM</a></strong> — SSPM modules inside the SSE platforms. Useful if the SSE is already in place; rarely the deepest option on a per-app basis.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/defender-cloud-apps/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Cloud Apps</a></strong> - deep on M365, broad CASB capabilities, growing SSPM coverage of major non-Microsoft SaaS. For Microsoft-first shops the default choice; for diversified estates, often a complement to dedicated SSPM.</li>
+                <li><strong><a href="https://www.cisco.com/site/us/en/products/security/secure-cloudlock/index.html" target="_blank" rel="noopener noreferrer">Cisco Cloudlock</a></strong> - long-standing API-mode CASB / SSPM hybrid.</li>
+                <li><strong><a href="https://www.netskope.com/products/saas-security-posture-management" target="_blank" rel="noopener noreferrer">Netskope SSPM</a></strong>, <strong><a href="https://www.paloaltonetworks.com/sase/cloud-app-security-broker" target="_blank" rel="noopener noreferrer">Palo Alto Prisma SaaS Security Posture</a></strong>, <strong><a href="https://www.zscaler.com/products-and-solutions/zscaler-data-protection/saas-security-posture-management" target="_blank" rel="noopener noreferrer">Zscaler SSPM</a></strong> - SSPM modules inside the SSE platforms. Useful if the SSE is already in place; rarely the deepest option on a per-app basis.</li>
             </ul>
             <h3>How to evaluate</h3>
             <ul>
-                <li><strong>Depth on your Tier 0 apps.</strong> Every SSPM lists 100+ supported apps. The relevant question is: how many checks does it run on M365, Workspace, Salesforce, GitHub, and Slack — and how do those compare to the same vendor's coverage of a long-tail app you also need?</li>
+                <li><strong>Depth on your Tier 0 apps.</strong> Every SSPM lists 100+ supported apps. The relevant question is: how many checks does it run on M365, Workspace, Salesforce, GitHub, and Slack - and how do those compare to the same vendor's coverage of a long-tail app you also need?</li>
                 <li><strong>OAuth-app inventory and risk-scoring.</strong> The feature most likely to deliver value in week one.</li>
                 <li><strong>Time-to-value.</strong> Connecting to M365 and Workspace should be 30 minutes each; if onboarding a Tier 0 app takes weeks, the vendor's integration depth is shallow.</li>
                 <li><strong>Workflow integration.</strong> Findings need to flow to your ticketing system (Jira / ServiceNow) and your SIEM, with the per-finding context the assignee needs.</li>
@@ -651,15 +651,15 @@
 
         <section id="casb-platforms">
             <h2>CASB platform landscape</h2>
-            <p>For completeness — the CASB category is mature and largely consolidated into the SSE platforms:</p>
+            <p>For completeness - the CASB category is mature and largely consolidated into the SSE platforms:</p>
             <ul>
-                <li><strong><a href="https://www.netskope.com/" target="_blank" rel="noopener noreferrer">Netskope</a></strong> — among the strongest standalone CASB capabilities, deep DLP, inline + API modes for most major SaaS.</li>
-                <li><strong><a href="https://www.zscaler.com/products-and-solutions/zscaler-internet-access" target="_blank" rel="noopener noreferrer">Zscaler ZIA</a></strong> — inline-first, very strong on shadow-IT discovery at the network egress layer.</li>
-                <li><strong><a href="https://www.cisco.com/site/us/en/products/security/secure-cloudlock/index.html" target="_blank" rel="noopener noreferrer">Cisco Cloudlock</a></strong> — API-mode CASB; integrates with Cisco's broader SSE.</li>
-                <li><strong><a href="https://www.paloaltonetworks.com/sase/cloud-app-security-broker" target="_blank" rel="noopener noreferrer">Palo Alto Prisma SaaS</a></strong> — part of Prisma Access SASE.</li>
-                <li><strong><a href="https://learn.microsoft.com/en-us/defender-cloud-apps/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Cloud Apps</a></strong> — particularly deep on M365 and Entra-integrated apps; included with E5.</li>
-                <li><strong><a href="https://www.trellix.com/products/skyhigh-security/" target="_blank" rel="noopener noreferrer">Skyhigh (Trellix)</a></strong> — heritage CASB lineage, now part of Trellix's portfolio.</li>
-                <li><strong><a href="https://www.broadcom.com/products/cybersecurity/network/web-protection/cloud-access-security-broker" target="_blank" rel="noopener noreferrer">Symantec / Broadcom CloudSOC</a></strong> — long-running enterprise CASB.</li>
+                <li><strong><a href="https://www.netskope.com/" target="_blank" rel="noopener noreferrer">Netskope</a></strong> - among the strongest standalone CASB capabilities, deep DLP, inline + API modes for most major SaaS.</li>
+                <li><strong><a href="https://www.zscaler.com/products-and-solutions/zscaler-internet-access" target="_blank" rel="noopener noreferrer">Zscaler ZIA</a></strong> - inline-first, very strong on shadow-IT discovery at the network egress layer.</li>
+                <li><strong><a href="https://www.cisco.com/site/us/en/products/security/secure-cloudlock/index.html" target="_blank" rel="noopener noreferrer">Cisco Cloudlock</a></strong> - API-mode CASB; integrates with Cisco's broader SSE.</li>
+                <li><strong><a href="https://www.paloaltonetworks.com/sase/cloud-app-security-broker" target="_blank" rel="noopener noreferrer">Palo Alto Prisma SaaS</a></strong> - part of Prisma Access SASE.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/defender-cloud-apps/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Cloud Apps</a></strong> - particularly deep on M365 and Entra-integrated apps; included with E5.</li>
+                <li><strong><a href="https://www.trellix.com/products/skyhigh-security/" target="_blank" rel="noopener noreferrer">Skyhigh (Trellix)</a></strong> - heritage CASB lineage, now part of Trellix's portfolio.</li>
+                <li><strong><a href="https://www.broadcom.com/products/cybersecurity/network/web-protection/cloud-access-security-broker" target="_blank" rel="noopener noreferrer">Symantec / Broadcom CloudSOC</a></strong> - long-running enterprise CASB.</li>
             </ul>
             <p>If you are starting from zero in 2026, the practical recommendation is: pick the SSE / SASE that your network team has already chosen, take its CASB module, and add a dedicated SSPM if the diversified-SaaS depth matters. Standalone CASB without an SSE wrapper has largely stopped being a viable category.</p>
         </section>
@@ -668,12 +668,12 @@
             <h2>SaaS apps to prioritize</h2>
             <p>Not every SaaS deserves the same investment. A useful tiering applied to most enterprises:</p>
             <ul>
-                <li><strong>Tier 0 — extinction-event apps.</strong> Microsoft 365 / Google Workspace (mail, files, identity, communication), the IdP (Okta, Entra ID, Ping, JumpCloud), Salesforce (customer data, deal pipeline), GitHub / GitLab (source code, deployment keys), the <a class="glossary-link" href="glossary.html#term-secrets-manager">secrets manager</a> (1Password, Vault, AWS Secrets Manager if SaaS-fronted).</li>
-                <li><strong>Tier 1 — major systems of record.</strong> Atlassian (Jira, Confluence), ServiceNow, Workday, Slack / Teams, Zoom, Box / Dropbox, Snowflake, Databricks.</li>
-                <li><strong>Tier 2 — operational SaaS.</strong> HubSpot, Marketo, Zendesk, Intercom, DocuSign, the BI tools, the survey tools, the marketing-stack tools.</li>
-                <li><strong>Tier 3 — the long tail.</strong> Everything else. Baselined to SSO + SCIM + MFA; not deeply audited.</li>
+                <li><strong>Tier 0 - extinction-event apps.</strong> Microsoft 365 / Google Workspace (mail, files, identity, communication), the IdP (Okta, Entra ID, Ping, JumpCloud), Salesforce (customer data, deal pipeline), GitHub / GitLab (source code, deployment keys), the <a class="glossary-link" href="glossary.html#term-secrets-manager">secrets manager</a> (1Password, Vault, AWS Secrets Manager if SaaS-fronted).</li>
+                <li><strong>Tier 1 - major systems of record.</strong> Atlassian (Jira, Confluence), ServiceNow, Workday, Slack / Teams, Zoom, Box / Dropbox, Snowflake, Databricks.</li>
+                <li><strong>Tier 2 - operational SaaS.</strong> HubSpot, Marketo, Zendesk, Intercom, DocuSign, the BI tools, the survey tools, the marketing-stack tools.</li>
+                <li><strong>Tier 3 - the long tail.</strong> Everything else. Baselined to SSO + SCIM + MFA; not deeply audited.</li>
             </ul>
-            <p>Coverage flows top-down. A program that has not baselined Tier 0 has no business spending time on Tier 3. The Tier 0 systems also share a property: their compromise <em>or</em> their vendor's compromise is a same-day, all-hands event, which is why their per-app deep work — Salesforce permission sets, GitHub branch protection, M365 <a class="glossary-link" href="glossary.html#term-conditional-access">Conditional Access</a> — pays off disproportionately.</p>
+            <p>Coverage flows top-down. A program that has not baselined Tier 0 has no business spending time on Tier 3. The Tier 0 systems also share a property: their compromise <em>or</em> their vendor's compromise is a same-day, all-hands event, which is why their per-app deep work - Salesforce permission sets, GitHub branch protection, M365 <a class="glossary-link" href="glossary.html#term-conditional-access">Conditional Access</a> - pays off disproportionately.</p>
         </section>
 
         <figure class="page-photo">
@@ -688,57 +688,57 @@
             <h2>Microsoft 365 security</h2>
             <p>M365 is, for most enterprises, the highest-stakes SaaS tenant in the estate. The control surface is broad; the licensing structure determines which controls you actually have access to. The work breaks down across several products:</p>
             <ul>
-                <li><strong><a href="https://learn.microsoft.com/en-us/defender-xdr/microsoft-secure-score" target="_blank" rel="noopener noreferrer">Microsoft Secure Score</a></strong> — the native posture-management dashboard. Useful as a baseline but shallow compared to a dedicated SSPM. Treat as the floor, not the ceiling.</li>
-                <li><strong><a href="https://learn.microsoft.com/en-us/entra/identity/conditional-access/" target="_blank" rel="noopener noreferrer">Conditional Access</a></strong> — the policy engine that decides who can authenticate from where, on what device, under what conditions. The single most important control surface in M365; the place where <a class="glossary-link" href="glossary.html#term-zero-trust">Zero Trust</a> intent meets enforcement.</li>
-                <li><strong><a href="https://learn.microsoft.com/en-us/defender-office-365/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Office 365</a></strong> — anti-phishing, Safe Links, Safe Attachments, attack simulation. Particularly important given the role email plays in initial-access attacks.</li>
-                <li><strong><a href="https://learn.microsoft.com/en-us/defender-cloud-apps/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Cloud Apps</a></strong> — the CASB / SSPM-adjacent layer.</li>
-                <li><strong><a href="https://learn.microsoft.com/en-us/defender-for-identity/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Identity</a></strong> — ITDR-shaped detections on <a class="glossary-link" href="glossary.html#term-active-directory">Active Directory</a> and Entra ID.</li>
-                <li><strong><a href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener noreferrer">Microsoft Purview</a></strong> — sensitivity labels, DLP, retention policies, e-discovery, Insider Risk Management. The data-governance layer.</li>
-                <li><strong>SharePoint &amp; OneDrive sharing</strong> — anonymous link sharing is the single most common public-data exposure in any M365 tenant; the default in many tenants still allows it. Default it off, override per-site where business justification exists.</li>
-                <li><strong>Exchange external sender rules, mail-forwarding restrictions, OAuth app consent policies</strong> — three quick wins that close a disproportionate share of M365 attack paths.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/defender-xdr/microsoft-secure-score" target="_blank" rel="noopener noreferrer">Microsoft Secure Score</a></strong> - the native posture-management dashboard. Useful as a baseline but shallow compared to a dedicated SSPM. Treat as the floor, not the ceiling.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/entra/identity/conditional-access/" target="_blank" rel="noopener noreferrer">Conditional Access</a></strong> - the policy engine that decides who can authenticate from where, on what device, under what conditions. The single most important control surface in M365; the place where <a class="glossary-link" href="glossary.html#term-zero-trust">Zero Trust</a> intent meets enforcement.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/defender-office-365/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Office 365</a></strong> - anti-phishing, Safe Links, Safe Attachments, attack simulation. Particularly important given the role email plays in initial-access attacks.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/defender-cloud-apps/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Cloud Apps</a></strong> - the CASB / SSPM-adjacent layer.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/defender-for-identity/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Identity</a></strong> - ITDR-shaped detections on <a class="glossary-link" href="glossary.html#term-active-directory">Active Directory</a> and Entra ID.</li>
+                <li><strong><a href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener noreferrer">Microsoft Purview</a></strong> - sensitivity labels, DLP, retention policies, e-discovery, Insider Risk Management. The data-governance layer.</li>
+                <li><strong>SharePoint &amp; OneDrive sharing</strong> - anonymous link sharing is the single most common public-data exposure in any M365 tenant; the default in many tenants still allows it. Default it off, override per-site where business justification exists.</li>
+                <li><strong>Exchange external sender rules, mail-forwarding restrictions, OAuth app consent policies</strong> - three quick wins that close a disproportionate share of M365 attack paths.</li>
             </ul>
             <p>Baseline references worth following: the <a href="https://www.cisecurity.org/benchmark/microsoft_365" target="_blank" rel="noopener noreferrer">CIS Microsoft 365 Foundations Benchmark</a> and the <a href="https://www.cisa.gov/resources-tools/services/secure-cloud-business-applications-scuba-project" target="_blank" rel="noopener noreferrer">CISA SCuBA</a> (Secure Cloud Business Applications) baselines. SCuBA in particular ships open-source assessment scripts (<a href="https://github.com/cisagov/ScubaGear" target="_blank" rel="noopener noreferrer">ScubaGear</a>) that produce evidence the auditors will accept.</p>
         </section>
 
         <section id="workspace">
             <h2>Google Workspace security</h2>
-            <p>Workspace's security model is more uniform than M365's — fewer products, more consolidated under the admin console — but the discipline is similar:</p>
+            <p>Workspace's security model is more uniform than M365's - fewer products, more consolidated under the admin console - but the discipline is similar:</p>
             <ul>
-                <li><strong><a href="https://support.google.com/a/answer/7491205" target="_blank" rel="noopener noreferrer">Security Center</a></strong> — posture dashboard, security investigation tool, the place to triage findings.</li>
-                <li><strong><a href="https://support.google.com/a/answer/9176228" target="_blank" rel="noopener noreferrer">Alert Center</a></strong> — the detection feed; surfaces phishing, suspicious logins, data exfil patterns. Forward to your SIEM.</li>
-                <li><strong>Drive sharing audit</strong> — the equivalent of M365's anonymous link problem. Audit "anyone with the link" sharing, restrict to internal-only by default, override per-folder where required.</li>
-                <li><strong>Context-Aware Access</strong> — Workspace's Conditional Access equivalent. Combine with <a class="glossary-link" href="glossary.html#term-beyondcorp">BeyondCorp</a> Enterprise for full Zero Trust enforcement on Workspace apps.</li>
-                <li><strong>Third-party app whitelisting</strong> — the OAuth app problem expressed in Workspace's vocabulary. Admin console → Apps → Third-party connected apps → restrict to allowed apps; require admin approval for new requests.</li>
-                <li><strong>2-Step Verification enforcement</strong> — including hardware keys (Titan / YubiKey) for admin and high-risk users.</li>
-                <li><strong>Data Loss Prevention</strong> — Workspace DLP scans Drive and Gmail for sensitive data patterns; pair with sensitivity labels and Vault retention.</li>
-                <li><strong>Vault</strong> — Workspace's e-discovery and retention. Critical for regulated industries; needs configuration before you need it.</li>
+                <li><strong><a href="https://support.google.com/a/answer/7491205" target="_blank" rel="noopener noreferrer">Security Center</a></strong> - posture dashboard, security investigation tool, the place to triage findings.</li>
+                <li><strong><a href="https://support.google.com/a/answer/9176228" target="_blank" rel="noopener noreferrer">Alert Center</a></strong> - the detection feed; surfaces phishing, suspicious logins, data exfil patterns. Forward to your SIEM.</li>
+                <li><strong>Drive sharing audit</strong> - the equivalent of M365's anonymous link problem. Audit "anyone with the link" sharing, restrict to internal-only by default, override per-folder where required.</li>
+                <li><strong>Context-Aware Access</strong> - Workspace's Conditional Access equivalent. Combine with <a class="glossary-link" href="glossary.html#term-beyondcorp">BeyondCorp</a> Enterprise for full Zero Trust enforcement on Workspace apps.</li>
+                <li><strong>Third-party app whitelisting</strong> - the OAuth app problem expressed in Workspace's vocabulary. Admin console → Apps → Third-party connected apps → restrict to allowed apps; require admin approval for new requests.</li>
+                <li><strong>2-Step Verification enforcement</strong> - including hardware keys (Titan / YubiKey) for admin and high-risk users.</li>
+                <li><strong>Data Loss Prevention</strong> - Workspace DLP scans Drive and Gmail for sensitive data patterns; pair with sensitivity labels and Vault retention.</li>
+                <li><strong>Vault</strong> - Workspace's e-discovery and retention. Critical for regulated industries; needs configuration before you need it.</li>
             </ul>
             <p>Reference baselines: <a href="https://www.cisecurity.org/benchmark/google_workspace" target="_blank" rel="noopener noreferrer">CIS Google Workspace Foundations Benchmark</a> and the <a href="https://www.cisa.gov/resources-tools/services/secure-cloud-business-applications-scuba-project" target="_blank" rel="noopener noreferrer">CISA SCuBA Workspace baseline</a>, which ships <a href="https://github.com/cisagov/ScubaGoggles" target="_blank" rel="noopener noreferrer">ScubaGoggles</a> for assessment.</p>
         </section>
 
         <section id="salesforce">
             <h2>Salesforce security</h2>
-            <p>Salesforce is the SaaS whose security model rewards specialization. The sharing model — org-wide defaults, role hierarchies, sharing rules, manual shares, account teams, opportunity teams, public groups, queues — is sufficiently nuanced that a generalist SSPM check is rarely sufficient. The Tier 0 work:</p>
+            <p>Salesforce is the SaaS whose security model rewards specialization. The sharing model - org-wide defaults, role hierarchies, sharing rules, manual shares, account teams, opportunity teams, public groups, queues - is sufficiently nuanced that a generalist SSPM check is rarely sufficient. The Tier 0 work:</p>
             <ul>
-                <li><strong><a href="https://help.salesforce.com/s/articleView?language=en_US&id=sf.security_health_check.htm" target="_blank" rel="noopener noreferrer">Health Check</a></strong> — the native posture score. Floor, not ceiling.</li>
-                <li><strong><a href="https://www.salesforce.com/platform/services/shield/" target="_blank" rel="noopener noreferrer">Salesforce Shield</a></strong> — paid add-on. Event Monitoring (the high-fidelity audit log), Field Audit Trail (long-term history of field changes), Platform Encryption (<a class="glossary-link" href="glossary.html#term-byok">BYOK</a> / HYOK), Einstein Data Detect. For any regulated industry, Shield is functionally required.</li>
-                <li><strong>Permission set rationalization</strong> — most production Salesforce orgs accumulate years of permission-set sprawl. Permission Set Groups + a regular review cadence is the only known cure. Tools like AppOmni and the native Permission Set Group Analyzer help.</li>
-                <li><strong>Guest user (Experience Cloud / Communities) controls</strong> — historically a source of major data exposures (multiple high-profile Salesforce-Communities incidents in 2020–2023). Audit guest-user object permissions, sharing rules, and Apex class access on every Experience Cloud site.</li>
-                <li><strong>Connected Apps / API access</strong> — OAuth app inventory in Salesforce vocabulary. Restrict who can install Connected Apps; require admin approval; audit IP restrictions on Connected App tokens.</li>
-                <li><strong>External-organization sharing</strong> — partner portals, Experience Cloud sites, Salesforce-to-Salesforce — each is a way data can leave the org's primary sharing model.</li>
-                <li><strong>Multi-Factor Authentication</strong> — required by Salesforce since 2022; verify enforcement, particularly for API users and integration accounts.</li>
+                <li><strong><a href="https://help.salesforce.com/s/articleView?language=en_US&id=sf.security_health_check.htm" target="_blank" rel="noopener noreferrer">Health Check</a></strong> - the native posture score. Floor, not ceiling.</li>
+                <li><strong><a href="https://www.salesforce.com/platform/services/shield/" target="_blank" rel="noopener noreferrer">Salesforce Shield</a></strong> - paid add-on. Event Monitoring (the high-fidelity audit log), Field Audit Trail (long-term history of field changes), Platform Encryption (<a class="glossary-link" href="glossary.html#term-byok">BYOK</a> / HYOK), Einstein Data Detect. For any regulated industry, Shield is functionally required.</li>
+                <li><strong>Permission set rationalization</strong> - most production Salesforce orgs accumulate years of permission-set sprawl. Permission Set Groups + a regular review cadence is the only known cure. Tools like AppOmni and the native Permission Set Group Analyzer help.</li>
+                <li><strong>Guest user (Experience Cloud / Communities) controls</strong> - historically a source of major data exposures (multiple high-profile Salesforce-Communities incidents in 2020–2023). Audit guest-user object permissions, sharing rules, and Apex class access on every Experience Cloud site.</li>
+                <li><strong>Connected Apps / API access</strong> - OAuth app inventory in Salesforce vocabulary. Restrict who can install Connected Apps; require admin approval; audit IP restrictions on Connected App tokens.</li>
+                <li><strong>External-organization sharing</strong> - partner portals, Experience Cloud sites, Salesforce-to-Salesforce - each is a way data can leave the org's primary sharing model.</li>
+                <li><strong>Multi-Factor Authentication</strong> - required by Salesforce since 2022; verify enforcement, particularly for API users and integration accounts.</li>
             </ul>
             <p>The Salesforce-focused security community is small but vocal; <a href="https://www.salesforceben.com/" target="_blank" rel="noopener noreferrer">Salesforce Ben</a>, <a href="https://trailhead.salesforce.com/" target="_blank" rel="noopener noreferrer">Trailhead</a>'s security trails, and the annual Salesforce TrailblazerDX security tracks are reasonable starting points for the depth this app needs.</p>
         </section>
 
         <section id="github">
             <h2>GitHub &amp; GitLab security</h2>
-            <p>The source-code system is the SaaS whose compromise is closest to "extinction event" for engineering organizations — your code, your <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a> / CD secrets, your deployment keys, often a path to your production cloud accounts via <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a>. The non-negotiables:</p>
+            <p>The source-code system is the SaaS whose compromise is closest to "extinction event" for engineering organizations - your code, your <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a> / CD secrets, your deployment keys, often a path to your production cloud accounts via <a class="glossary-link" href="glossary.html#term-oidc">OIDC</a>. The non-negotiables:</p>
             <ul>
                 <li><strong>SAML / SSO enforcement at the organization / group level.</strong> Without enforced SSO, ex-employees may retain personal-account access to org repos. Enforce it.</li>
                 <li><strong>SCIM provisioning.</strong> Tie membership to your IdP so leavers are removed automatically.</li>
                 <li><strong>Hardware-key MFA</strong> for every member of the org, particularly for accounts with org-admin or repo-admin rights. GitHub Enterprise allows enforcement.</li>
-                <li><strong>Branch protection</strong> on every default branch — required reviews, status checks, no force pushes, no direct pushes to main.</li>
+                <li><strong>Branch protection</strong> on every default branch - required reviews, status checks, no force pushes, no direct pushes to main.</li>
                 <li><strong>Secret scanning + push protection.</strong> GitHub Advanced Security (or open-source equivalents like Trufflehog, Gitleaks) catches credentials before they land in the repo. Push protection blocks the push instead of detecting it after.</li>
                 <li><strong>Dependabot / Renovate / GitLab dependency scanning.</strong> Supply-chain <a class="glossary-link" href="glossary.html#term-cve">CVE</a> coverage at the dependency level.</li>
                 <li><strong>Third-party OAuth app review.</strong> CI / CD vendors, IDE integrations, code-analysis tools all request broad GitHub scopes. Audit the org's authorized apps quarterly; revoke unused ones.</li>
@@ -751,28 +751,28 @@
 
         <section id="slack-teams">
             <h2>Slack &amp; Teams security</h2>
-            <p>Chat platforms are the corpus where the most sensitive ad-hoc conversations happen — incident bridges, deal negotiations, salary discussions, customer escalations. Their security controls are often underconfigured relative to the data they hold.</p>
+            <p>Chat platforms are the corpus where the most sensitive ad-hoc conversations happen - incident bridges, deal negotiations, salary discussions, customer escalations. Their security controls are often underconfigured relative to the data they hold.</p>
             <ul>
                 <li><strong>DLP &amp; sensitive-data detection.</strong> Slack DLP, <a class="glossary-link" href="glossary.html#term-purview">Microsoft Purview</a> Communication Compliance, and SSPM-side DLP all surface secrets, PII, and customer data in messages. The first scan of any organization's Slack typically finds AWS keys, Stripe keys, and customer records in DMs.</li>
                 <li><strong>App / bot whitelisting.</strong> Slack workspace apps and Teams apps each have their own marketplace and consent model. Restrict who can install apps to admins; require approval for new requests.</li>
-                <li><strong>Default channel sharing &amp; external connections.</strong> Slack Connect (cross-org channels) and Teams Shared Channels make external collaboration trivial — and easy to misuse. Default to off, allow per-channel with approval.</li>
+                <li><strong>Default channel sharing &amp; external connections.</strong> Slack Connect (cross-org channels) and Teams Shared Channels make external collaboration trivial - and easy to misuse. Default to off, allow per-channel with approval.</li>
                 <li><strong>Retention policies.</strong> Per-channel and per-workspace; aligned with regulatory and legal-hold requirements. The default in many tenants is "forever," which is rarely the right answer.</li>
                 <li><strong>E-discovery.</strong> Slack Discovery API and Teams Compliance Center; required for litigation hold and regulated industries.</li>
                 <li><strong>Enterprise Key Management.</strong> Slack EKM and Teams Customer Key let customers hold the keys; required for the most regulated tenants. Operationally heavy; do not adopt without a use case.</li>
-                <li><strong>Identity &amp; SCIM.</strong> Treat the same as any other Tier 0 SaaS — SSO, SCIM, dormant account pruning.</li>
+                <li><strong>Identity &amp; SCIM.</strong> Treat the same as any other Tier 0 SaaS - SSO, SCIM, dormant account pruning.</li>
                 <li><strong>Audit logs to SIEM.</strong> Slack Audit Logs API requires Enterprise Grid; M365 Unified Audit Log covers Teams. Forward both.</li>
             </ul>
         </section>
 
         <section id="itdr">
-            <h2>ITDR — Identity Threat Detection &amp; Response</h2>
-            <p><strong>ITDR</strong> is the detection-and-response layer over the identity provider and the SaaS audit logs — the SOC-side counterpart to SSPM's preventive posture. Where SSPM tells you the configuration is wrong, ITDR tells you an identity is being abused.</p>
+            <h2>ITDR - Identity Threat Detection &amp; Response</h2>
+            <p><strong>ITDR</strong> is the detection-and-response layer over the identity provider and the SaaS audit logs - the SOC-side counterpart to SSPM's preventive posture. Where SSPM tells you the configuration is wrong, ITDR tells you an identity is being abused.</p>
             <h3>The detections that matter</h3>
             <ul>
                 <li><strong>Impossible travel / geo anomalies.</strong> A login from New York at 09:00 and Singapore at 09:30; classic but still relevant when adversaries forget about residential-proxy hygiene.</li>
                 <li><strong>MFA fatigue / push-bombing.</strong> Repeated MFA pushes that eventually get approved by a frustrated user. The Uber 2022 pattern.</li>
                 <li><strong>Session-token theft.</strong> A token used from a different device fingerprint than where it was issued. The AiTM phishing pattern.</li>
-                <li><strong>Malicious OAuth app installation.</strong> A new OAuth grant with high-impact scopes — particularly mail.read or files.readwrite.all — appearing in the audit log. Often the first observable of a tenant-takeover campaign.</li>
+                <li><strong>Malicious OAuth app installation.</strong> A new OAuth grant with high-impact scopes - particularly mail.read or files.readwrite.all - appearing in the audit log. Often the first observable of a tenant-takeover campaign.</li>
                 <li><strong><a class="glossary-link" href="glossary.html#term-privilege-escalation">Privilege escalation</a> patterns.</strong> A user added to a privileged role group; an admin role granted outside the normal request workflow; a <a class="glossary-link" href="glossary.html#term-service-account">service account</a> given new permissions outside its <a class="glossary-link" href="glossary.html#term-iac">IaC</a> source.</li>
                 <li><strong><a class="glossary-link" href="glossary.html#term-golden-saml">Golden SAML</a> / cross-tenant trust abuse.</strong> Federated trust being abused to move from one tenant to another.</li>
                 <li><strong>Mass-download / mass-export events.</strong> A user downloading 10,000 Salesforce records in an hour. A user exporting an entire SharePoint site. A GitHub user cloning every repo in the org.</li>
@@ -780,22 +780,22 @@
             </ul>
             <h3>The data sources</h3>
             <ul>
-                <li><strong>IdP logs</strong> — Okta System Log, Entra ID Sign-in and Audit logs, Google Workspace Login Audit, Ping audit events.</li>
-                <li><strong>M365 Unified Audit Log</strong> — Exchange, SharePoint, OneDrive, Teams, Azure AD events in one stream.</li>
-                <li><strong>Workspace Reports API</strong> — Login, Drive, Admin, Token, SAML audits.</li>
-                <li><strong>Salesforce Event Monitoring</strong> — high-fidelity login, API, and data-access events (requires Shield).</li>
-                <li><strong>GitHub Audit Log</strong> — org, repo, and Actions events.</li>
-                <li><strong>Slack Audit Logs</strong> — Enterprise Grid only.</li>
+                <li><strong>IdP logs</strong> - Okta System Log, Entra ID Sign-in and Audit logs, Google Workspace Login Audit, Ping audit events.</li>
+                <li><strong>M365 Unified Audit Log</strong> - Exchange, SharePoint, OneDrive, Teams, Azure AD events in one stream.</li>
+                <li><strong>Workspace Reports API</strong> - Login, Drive, Admin, Token, SAML audits.</li>
+                <li><strong>Salesforce Event Monitoring</strong> - high-fidelity login, API, and data-access events (requires Shield).</li>
+                <li><strong>GitHub Audit Log</strong> - org, repo, and Actions events.</li>
+                <li><strong>Slack Audit Logs</strong> - Enterprise Grid only.</li>
             </ul>
             <h3>The vendor landscape</h3>
             <ul>
-                <li><strong><a href="https://pushsecurity.com/" target="_blank" rel="noopener noreferrer">Push Security</a></strong> — browser-extension-based identity attack detection at the session layer.</li>
-                <li><strong><a href="https://permiso.io/" target="_blank" rel="noopener noreferrer">Permiso</a></strong> — identity-graph approach across cloud and SaaS.</li>
-                <li><strong><a href="https://www.mitiga.io/" target="_blank" rel="noopener noreferrer">Mitiga</a></strong> — cloud and SaaS IR + ITDR overlap.</li>
-                <li><strong><a href="https://www.beyondidentity.com/" target="_blank" rel="noopener noreferrer">Beyond Identity</a></strong> — phishing-resistant authentication with ITDR overlap.</li>
-                <li><strong><a href="https://www.vectra.ai/solutions/identity-attack-defense" target="_blank" rel="noopener noreferrer">Vectra Identity</a></strong> — AI-led detection in Entra and Active Directory.</li>
-                <li><strong><a href="https://www.crowdstrike.com/en-us/platform/next-gen-identity-security/identity-protection/" target="_blank" rel="noopener noreferrer">CrowdStrike Falcon Identity Protection</a></strong>, <strong><a href="https://learn.microsoft.com/en-us/defender-for-identity/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Identity</a></strong>, <strong><a href="https://www.proofpoint.com/us/products/identity-threat-detection-response" target="_blank" rel="noopener noreferrer">Proofpoint ITM</a></strong> — major-platform identity-detection modules.</li>
-                <li><strong>SIEM-side</strong> — Splunk, Sentinel, Chronicle / SecOps, Panther all have identity-detection content packs; pair with a dedicated ITDR or build in-house using <a href="detection-engineering.html">detection-as-code</a> patterns.</li>
+                <li><strong><a href="https://pushsecurity.com/" target="_blank" rel="noopener noreferrer">Push Security</a></strong> - browser-extension-based identity attack detection at the session layer.</li>
+                <li><strong><a href="https://permiso.io/" target="_blank" rel="noopener noreferrer">Permiso</a></strong> - identity-graph approach across cloud and SaaS.</li>
+                <li><strong><a href="https://www.mitiga.io/" target="_blank" rel="noopener noreferrer">Mitiga</a></strong> - cloud and SaaS IR + ITDR overlap.</li>
+                <li><strong><a href="https://www.beyondidentity.com/" target="_blank" rel="noopener noreferrer">Beyond Identity</a></strong> - phishing-resistant authentication with ITDR overlap.</li>
+                <li><strong><a href="https://www.vectra.ai/solutions/identity-attack-defense" target="_blank" rel="noopener noreferrer">Vectra Identity</a></strong> - AI-led detection in Entra and Active Directory.</li>
+                <li><strong><a href="https://www.crowdstrike.com/en-us/platform/next-gen-identity-security/identity-protection/" target="_blank" rel="noopener noreferrer">CrowdStrike Falcon Identity Protection</a></strong>, <strong><a href="https://learn.microsoft.com/en-us/defender-for-identity/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Identity</a></strong>, <strong><a href="https://www.proofpoint.com/us/products/identity-threat-detection-response" target="_blank" rel="noopener noreferrer">Proofpoint ITM</a></strong> - major-platform identity-detection modules.</li>
+                <li><strong>SIEM-side</strong> - Splunk, Sentinel, Chronicle / SecOps, Panther all have identity-detection content packs; pair with a dedicated ITDR or build in-house using <a href="detection-engineering.html">detection-as-code</a> patterns.</li>
             </ul>
             <p>The model that works in practice: SSPM for the preventive baseline, ITDR for the live detection, both feeding a SIEM that the <a href="cloud-soc.html">Cloud SOC</a> watches with <a href="incident-response.html">IR playbooks</a> per Tier 0 app.</p>
         </section>
@@ -804,8 +804,8 @@
             <h2>Compliance for SaaS</h2>
             <p>SaaS-specific compliance work splits into two halves: what you owe your customers about <em>your</em> SaaS estate, and what you ensure your <em>vendors</em> deliver to you.</p>
             <ul>
-                <li><strong>Vendor <a class="glossary-link" href="glossary.html#term-soc-2">SOC 2</a> / ISO 27001 reports.</strong> Every Tier 0 SaaS should produce a current SOC 2 Type II or equivalent. The <a class="glossary-link" href="glossary.html#term-tsc">TSC</a> scope matters — Security plus Confidentiality is the minimum for most data-handling vendors. Review annually; track expirations.</li>
-                <li><strong>BAAs for <a class="glossary-link" href="glossary.html#term-hipaa">HIPAA</a>-adjacent SaaS.</strong> A <a class="glossary-link" href="glossary.html#term-baa">Business Associate Agreement</a> is required for any vendor that handles PHI. Verify the vendor's signed BAA and that the specific service in scope is on their BAA-eligible list — both M365 and Workspace have feature subsets that fall outside the BAA boundary.</li>
+                <li><strong>Vendor <a class="glossary-link" href="glossary.html#term-soc-2">SOC 2</a> / ISO 27001 reports.</strong> Every Tier 0 SaaS should produce a current SOC 2 Type II or equivalent. The <a class="glossary-link" href="glossary.html#term-tsc">TSC</a> scope matters - Security plus Confidentiality is the minimum for most data-handling vendors. Review annually; track expirations.</li>
+                <li><strong>BAAs for <a class="glossary-link" href="glossary.html#term-hipaa">HIPAA</a>-adjacent SaaS.</strong> A <a class="glossary-link" href="glossary.html#term-baa">Business Associate Agreement</a> is required for any vendor that handles PHI. Verify the vendor's signed BAA and that the specific service in scope is on their BAA-eligible list - both M365 and Workspace have feature subsets that fall outside the BAA boundary.</li>
                 <li><strong>Data residency.</strong> Where does the SaaS store data; can you constrain that region; what happens to backups? <a class="glossary-link" href="glossary.html#term-gdpr">GDPR</a>, China PIPL, India DPDP, and several other regimes have hard residency requirements that the SaaS may not natively enforce.</li>
                 <li><strong>Sub-processor lists.</strong> Major SaaS publish their list of sub-processors (the cloud providers and tools <em>they</em> use). GDPR requires the customer be notified of changes; CCPA / state-privacy regimes have similar mechanics. Track and review.</li>
                 <li><strong>Data Processing Addenda (DPAs) &amp; Standard Contractual Clauses (SCCs).</strong> The contractual layer for cross-border data flows; refreshed regularly as case law and adequacy decisions evolve.</li>
@@ -820,7 +820,7 @@
             <p>The work, sequenced:</p>
             <ol>
                 <li><strong>Discovery.</strong> Reconcile SSO + finance + DNS / SSE + email parsing into a single SaaS inventory. Expect to find 2–3x more apps than IT believed it ran.</li>
-                <li><strong>Inventory enrichment.</strong> Per app — owner, data classification, user count, SSO status, SCIM status, MFA status, last access, BAA / SOC 2 status, spend.</li>
+                <li><strong>Inventory enrichment.</strong> Per app - owner, data classification, user count, SSO status, SCIM status, MFA status, last access, BAA / SOC 2 status, spend.</li>
                 <li><strong>Tiering.</strong> Apply Tier 0 / 1 / 2 / 3 by data sensitivity and blast radius. Tier 0 gets per-app deep work; lower tiers get baselined.</li>
                 <li><strong>Baseline.</strong> Run an SSPM (or the equivalent native tooling per Tier 0 app) against CIS / SCuBA / framework-aligned baselines. Generate a backlog of findings.</li>
                 <li><strong>Remediation.</strong> Top of backlog: public-share remediation, dormant account removal, MFA enforcement, admin role rationalization, OAuth app review. Some of these are operational, not one-shot.</li>
@@ -830,12 +830,12 @@
                 <li><strong>IR playbooks per Tier 0 app.</strong> What does "compromised M365 tenant" look like; who do you call; what evidence do you collect; how do you revoke tokens; how do you communicate. See the <a href="incident-response.html">IR page</a>.</li>
                 <li><strong>Lifecycle.</strong> Onboarding workflow for new SaaS (SSO required, SCIM required, security review required, OAuth scopes reviewed). Offboarding workflow when an app retires (SCIM deprovisioning, tenant data export, account closure).</li>
             </ol>
-            <p>This is a 12–18-month program for a typical enterprise, and it does not finish — SaaS sprawl is monotonic; the work is permanent. The teams that do it well treat SaaS security like <a class="glossary-link" href="glossary.html#term-vulnerability-management">vulnerability management</a>: a continuous program with rotating per-app deep dives, not a project with an end date.</p>
+            <p>This is a 12–18-month program for a typical enterprise, and it does not finish - SaaS sprawl is monotonic; the work is permanent. The teams that do it well treat SaaS security like <a class="glossary-link" href="glossary.html#term-vulnerability-management">vulnerability management</a>: a continuous program with rotating per-app deep dives, not a project with an end date.</p>
         </section>
 
         <section id="comparison">
             <h2>AWS, Azure, and GCP side-by-side</h2>
-            <p>SaaS is, definitionally, not the hyperscalers' core business — but each cloud has identity, CASB, and SaaS-management capabilities that intersect with the SaaS-security discipline. The native overlap:</p>
+            <p>SaaS is, definitionally, not the hyperscalers' core business - but each cloud has identity, CASB, and SaaS-management capabilities that intersect with the SaaS-security discipline. The native overlap:</p>
             <div class="comparison-table">
                 <table>
                     <thead>
@@ -850,7 +850,7 @@
                         <tr>
                             <th scope="row">Identity provider</th>
                             <td>IAM Identity Center (workforce); not a general IdP</td>
-                            <td>Entra ID — major enterprise IdP</td>
+                            <td>Entra ID - major enterprise IdP</td>
                             <td>Cloud Identity / Workspace identity</td>
                         </tr>
                         <tr>
@@ -879,9 +879,9 @@
                         </tr>
                         <tr>
                             <th scope="row">Native SSPM</th>
-                            <td>None — partner ecosystem</td>
+                            <td>None - partner ecosystem</td>
                             <td>Defender for Cloud Apps SSPM features (M365 + selected SaaS)</td>
-                            <td>Limited — partner ecosystem</td>
+                            <td>Limited - partner ecosystem</td>
                         </tr>
                         <tr>
                             <th scope="row">SaaS audit log destination</th>
@@ -892,7 +892,7 @@
                     </tbody>
                 </table>
             </div>
-            <p>The pattern: Microsoft is by far the deepest of the three on SaaS security as a native discipline, because M365 itself is a major SaaS estate and Defender for Cloud Apps is a real CASB / SSPM hybrid. AWS is the thinnest — there is no AWS-native CASB. GCP sits between, with Workspace controls and BeyondCorp filling much of the gap. For most enterprises, native tooling is a starting point and a dedicated SSPM + CASB combination provides the depth.</p>
+            <p>The pattern: Microsoft is by far the deepest of the three on SaaS security as a native discipline, because M365 itself is a major SaaS estate and Defender for Cloud Apps is a real CASB / SSPM hybrid. AWS is the thinnest - there is no AWS-native CASB. GCP sits between, with Workspace controls and BeyondCorp filling much of the gap. For most enterprises, native tooling is a starting point and a dedicated SSPM + CASB combination provides the depth.</p>
         </section>
 
         <section id="maturity">
@@ -900,20 +900,20 @@
             <p>A useful staging model for a SaaS security program:</p>
             <div class="pillar-grid">
                 <div class="pillar-card pillar-card-stage1">
-                    <h3>Stage 1 — Aware</h3>
+                    <h3>Stage 1 - Aware</h3>
                     <p>SaaS inventory partial and SSO-driven only. Shadow IT is acknowledged but not measured. Tier 0 apps have MFA; lower tiers are inconsistent. No SSPM; native posture dashboards (Secure Score, Workspace Security Center, Salesforce Health Check) checked occasionally. OAuth apps are not inventoried. IR for a SaaS incident would be improvised.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage2">
-                    <h3>Stage 2 — Baselined</h3>
+                    <h3>Stage 2 - Baselined</h3>
                     <p>Full SaaS inventory with finance + SSO + DNS reconciliation. SSPM deployed against Tier 0 apps; CIS / SCuBA baselines established. OAuth app inventory exists and is reviewed quarterly. SSO + SCIM enforced for Tier 0 and most Tier 1 apps. M365 / Workspace audit logs forwarded to SIEM. Dormant-account remediation runs on a cadence.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage3">
-                    <h3>Stage 3 — Continuous</h3>
+                    <h3>Stage 3 - Continuous</h3>
                     <p>SSPM drift alerts feed the security backlog. ITDR detections live for IdP + Tier 0 apps. OAuth app governance is policy: admin-consent required, scopes reviewed at install. Per-Tier-0-app IR playbooks tested. CASB inline for major SaaS; DLP catches sensitive-data exposures. SaaS onboarding workflow gate at procurement.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage4">
-                    <h3>Stage 4 — Strategic</h3>
-                    <p>SaaS security is a product-roadmap input — data-residency requirements drive vendor selection, customer-required certifications shape the build vs buy on net-new SaaS. Quarterly purple-team exercises against M365, Workspace, Salesforce, and GitHub. SaaS-supply-chain risk monitoring continuous. The SaaS security team is its own function with engineering and operations sub-roles.</p>
+                    <h3>Stage 4 - Strategic</h3>
+                    <p>SaaS security is a product-roadmap input - data-residency requirements drive vendor selection, customer-required certifications shape the build vs buy on net-new SaaS. Quarterly purple-team exercises against M365, Workspace, Salesforce, and GitHub. SaaS-supply-chain risk monitoring continuous. The SaaS security team is its own function with engineering and operations sub-roles.</p>
                 </div>
             </div>
             <p>Most enterprises in 2026 are Stage 1 with pockets of Stage 2. Stage 3 is the realistic target for a mature security program with a year or two of dedicated SaaS-security investment.</p>
@@ -922,7 +922,7 @@
         <section id="pitfalls">
             <h2>Common pitfalls</h2>
             <ul>
-                <li><strong>Relying on SSO logs alone.</strong> SSO logs tell you about authentication; they tell you nothing about what happened inside the SaaS after authentication. You need the per-app audit logs too — M365 Unified Audit, Workspace Reports, Salesforce Event Monitoring, GitHub Audit Log, Slack Audit Logs.</li>
+                <li><strong>Relying on SSO logs alone.</strong> SSO logs tell you about authentication; they tell you nothing about what happened inside the SaaS after authentication. You need the per-app audit logs too - M365 Unified Audit, Workspace Reports, Salesforce Event Monitoring, GitHub Audit Log, Slack Audit Logs.</li>
                 <li><strong>No OAuth app review.</strong> Every SaaS security incident assessment in the last three years includes a finding about an unreviewed OAuth grant. Stand up the inventory and the review cadence before anything else.</li>
                 <li><strong>No shadow IT discovery.</strong> An inventory built from the SSO catalog alone misses 40%+ of the SaaS in use. The inventory you act on is wrong.</li>
                 <li><strong>SSPM bought but not configured to alert.</strong> The platform sits in "monitor" mode; findings accumulate in a dashboard nobody opens. Findings need to flow to a ticket queue with an owner.</li>
@@ -939,7 +939,7 @@
             <h2>Further reading</h2>
             <h3>Frameworks &amp; baselines</h3>
             <ul>
-                <li><a href="https://www.cisa.gov/resources-tools/services/secure-cloud-business-applications-scuba-project" target="_blank" rel="noopener noreferrer">CISA SCuBA — Secure Cloud Business Applications</a></li>
+                <li><a href="https://www.cisa.gov/resources-tools/services/secure-cloud-business-applications-scuba-project" target="_blank" rel="noopener noreferrer">CISA SCuBA - Secure Cloud Business Applications</a></li>
                 <li><a href="https://www.cisecurity.org/benchmark/microsoft_365" target="_blank" rel="noopener noreferrer">CIS Microsoft 365 Foundations Benchmark</a></li>
                 <li><a href="https://www.cisecurity.org/benchmark/google_workspace" target="_blank" rel="noopener noreferrer">CIS Google Workspace Foundations Benchmark</a></li>
                 <li><a href="https://cloudsecurityalliance.org/research/cloud-controls-matrix" target="_blank" rel="noopener noreferrer">CSA Cloud Controls Matrix</a></li>
@@ -957,19 +957,19 @@
             <h3>Industry research</h3>
             <ul>
                 <li><a href="https://cloudsecurityalliance.org/research/topics/saas-governance" target="_blank" rel="noopener noreferrer">CSA SaaS Governance research</a></li>
-                <li><a href="https://www.gartner.com/en/information-technology/glossary/saas-security-posture-management-sspm" target="_blank" rel="noopener noreferrer">Gartner — SSPM definition</a></li>
-                <li><a href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" rel="noopener noreferrer">Verizon DBIR — identity-driven breach trends</a></li>
+                <li><a href="https://www.gartner.com/en/information-technology/glossary/saas-security-posture-management-sspm" target="_blank" rel="noopener noreferrer">Gartner - SSPM definition</a></li>
+                <li><a href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" rel="noopener noreferrer">Verizon DBIR - identity-driven breach trends</a></li>
             </ul>
             <h3>Related CSOH pages</h3>
             <ul>
-                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> — the IaaS-side companion to this page; the two together cover most of the modern *PM landscape.</li>
-                <li><a href="iam.html">IAM &amp; Identity</a> — the bedrock that SaaS security depends on.</li>
-                <li><a href="detection-engineering.html">Detection Engineering</a> — how to build the ITDR detections referenced above.</li>
-                <li><a href="cloud-soc.html">Cloud SOC</a> — the operations function that consumes SaaS detections.</li>
-                <li><a href="incident-response.html">Incident Response</a> — the playbooks every Tier 0 SaaS needs.</li>
-                <li><a href="zero-trust.html">Zero Trust</a> — Conditional Access and Context-Aware Access fit here.</li>
-                <li><a href="grc.html">GRC</a> — the framework / audit-evidence layer SaaS security feeds.</li>
-                <li><a href="data-security.html">Data Security &amp; KMS</a> — Customer Key / EKM / BYOK across SaaS.</li>
+                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> - the IaaS-side companion to this page; the two together cover most of the modern *PM landscape.</li>
+                <li><a href="iam.html">IAM &amp; Identity</a> - the bedrock that SaaS security depends on.</li>
+                <li><a href="detection-engineering.html">Detection Engineering</a> - how to build the ITDR detections referenced above.</li>
+                <li><a href="cloud-soc.html">Cloud SOC</a> - the operations function that consumes SaaS detections.</li>
+                <li><a href="incident-response.html">Incident Response</a> - the playbooks every Tier 0 SaaS needs.</li>
+                <li><a href="zero-trust.html">Zero Trust</a> - Conditional Access and Context-Aware Access fit here.</li>
+                <li><a href="grc.html">GRC</a> - the framework / audit-evidence layer SaaS security feeds.</li>
+                <li><a href="data-security.html">Data Security &amp; KMS</a> - Customer Key / EKM / BYOK across SaaS.</li>
             </ul>
         </section>
 
@@ -977,37 +977,37 @@
             <h2>FAQ</h2>
 
             <h3>What is SSPM and how is it different from CSPM?</h3>
-            <p>SSPM (SaaS Security Posture Management) is the configuration-posture management discipline applied to SaaS applications — M365, Workspace, Salesforce, Slack, GitHub, and so on — read through their admin APIs. CSPM does the same job for IaaS / PaaS — AWS, Azure, GCP. The concept is identical: connect, enumerate, evaluate, alert on drift. The APIs and the rule sets are entirely different, and a CSPM that "also does SaaS" is almost always thinner than a focused SSPM, particularly on Salesforce and the long-tail SaaS depth.</p>
+            <p>SSPM (SaaS Security Posture Management) is the configuration-posture management discipline applied to SaaS applications - M365, Workspace, Salesforce, Slack, GitHub, and so on - read through their admin APIs. CSPM does the same job for IaaS / PaaS - AWS, Azure, GCP. The concept is identical: connect, enumerate, evaluate, alert on drift. The APIs and the rule sets are entirely different, and a CSPM that "also does SaaS" is almost always thinner than a focused SSPM, particularly on Salesforce and the long-tail SaaS depth.</p>
 
             <h3>Do I need SSPM if I already have a CASB?</h3>
-            <p>Most mature programs run both. CASB is inline (DLP, access control, traffic-side enforcement); SSPM is out-of-band (configuration posture, OAuth inventory, admin-role audit). They overlap at the edges — most CASBs have an API mode that does some SSPM-ish checks — but the depth on individual SaaS apps in a focused SSPM almost always exceeds the depth in a CASB's API mode. The decision tree: if you only have budget for one, pick CASB first if the dominant risk is data exfil via uploads / downloads, pick SSPM first if the dominant risk is misconfiguration and OAuth sprawl.</p>
+            <p>Most mature programs run both. CASB is inline (DLP, access control, traffic-side enforcement); SSPM is out-of-band (configuration posture, OAuth inventory, admin-role audit). They overlap at the edges - most CASBs have an API mode that does some SSPM-ish checks - but the depth on individual SaaS apps in a focused SSPM almost always exceeds the depth in a CASB's API mode. The decision tree: if you only have budget for one, pick CASB first if the dominant risk is data exfil via uploads / downloads, pick SSPM first if the dominant risk is misconfiguration and OAuth sprawl.</p>
 
             <h3>How urgent is the OAuth app problem really?</h3>
-            <p>Very. Recent campaigns — Storm-0558, Midnight Blizzard's M365 OAuth abuse, the GitHub OAuth incidents from compromised CircleCI and Heroku integrations, the Okta cross-tenant takeovers — all centred on OAuth-grant abuse, not credential phishing. OAuth tokens bypass MFA, often do not expire, survive password resets, and are typically invisible to the user. Every SaaS security program in 2026 needs an OAuth app inventory, an admin-consent policy, a revocation playbook, and detection rules for new grants with sensitive scopes. If the program does not have these, OAuth is the most likely future incident.</p>
+            <p>Very. Recent campaigns - Storm-0558, Midnight Blizzard's M365 OAuth abuse, the GitHub OAuth incidents from compromised CircleCI and Heroku integrations, the Okta cross-tenant takeovers - all centred on OAuth-grant abuse, not credential phishing. OAuth tokens bypass MFA, often do not expire, survive password resets, and are typically invisible to the user. Every SaaS security program in 2026 needs an OAuth app inventory, an admin-consent policy, a revocation playbook, and detection rules for new grants with sensitive scopes. If the program does not have these, OAuth is the most likely future incident.</p>
 
             <h3>Is Microsoft Defender for Cloud Apps enough on its own?</h3>
-            <p>For Microsoft-first shops whose non-MS SaaS estate is limited, frequently yes. For diversified estates with Salesforce, Slack, GitHub, Workday, ServiceNow, Snowflake, and others as core systems, Defender for Cloud Apps is best paired with a dedicated SSPM that goes deeper on those apps. The depth difference shows up in Salesforce permission-set rationalization, Slack workspace fragmentation, and GitHub org configuration — all places where a focused SSPM has hundreds of checks and Defender has dozens.</p>
+            <p>For Microsoft-first shops whose non-MS SaaS estate is limited, frequently yes. For diversified estates with Salesforce, Slack, GitHub, Workday, ServiceNow, Snowflake, and others as core systems, Defender for Cloud Apps is best paired with a dedicated SSPM that goes deeper on those apps. The depth difference shows up in Salesforce permission-set rationalization, Slack workspace fragmentation, and GitHub org configuration - all places where a focused SSPM has hundreds of checks and Defender has dozens.</p>
 
             <h3>How do I get started if I have nothing in place?</h3>
             <p>Start with discovery and OAuth. Run a discovery exercise that reconciles SSO + finance + DNS / SSE + email parsing into a single SaaS inventory. In parallel, pull the OAuth app list for M365 and Workspace (you can do this in the admin console without buying anything) and review the high-impact grants. Together those two exercises produce immediate findings and immediate value. From there, buy an SSPM if the budget exists; if not, start with the CISA SCuBA baselines for M365 and Workspace and the <a class="glossary-link" href="glossary.html#term-cis-benchmarks">CIS Benchmarks</a> for the rest of the Tier 0 apps.</p>
 
-            <h3>How does this relate to the *PM family — CSPM, KSPM, DSPM?</h3>
+            <h3>How does this relate to the *PM family - CSPM, KSPM, DSPM?</h3>
             <p>They are all configuration-posture management disciplines applied to different surfaces. <a href="cspm-vs-cnapp.html">CSPM</a> handles cloud infrastructure (AWS / Azure / GCP). KSPM handles Kubernetes. SSPM handles SaaS. <a class="glossary-link" href="glossary.html#term-dspm">DSPM</a> (Data Security Posture Management) handles data wherever it is. The *PM acronym proliferation reflects the same insight applied to different domains: configuration drift is the dominant <a class="glossary-link" href="glossary.html#term-attack-surface">attack surface</a> in modern cloud systems, and continuous-assessment-against-baseline is the dominant control. The unified tooling story (CNAPP for IaaS + workloads; emerging unified SSPM + DSPM platforms; SSE + SSPM bundles) is the industry's attempt to collapse them back together.</p>
 
             <h3>Where does AI-app sprawl (ChatGPT, Copilot, Claude in the enterprise) fit?</h3>
-            <p>It is the newest and fastest-growing slice of the SaaS-security problem. Every enterprise is now discovering AI tools in its environment — sanctioned and unsanctioned — and each one is a SaaS with identity, data, and OAuth implications. The discovery sources are the same (SSO, finance, DNS, email). The configuration questions are slightly different (does the tool train on your data, what's the retention, what's the data-residency posture, what tenant isolation does it provide). Several SSPM vendors — Reco and Push Security in particular — have made AI-app visibility a primary feature. See also the <a href="ai-ml-security.html">AI/ML Security page</a>.</p>
+            <p>It is the newest and fastest-growing slice of the SaaS-security problem. Every enterprise is now discovering AI tools in its environment - sanctioned and unsanctioned - and each one is a SaaS with identity, data, and OAuth implications. The discovery sources are the same (SSO, finance, DNS, email). The configuration questions are slightly different (does the tool train on your data, what's the retention, what's the data-residency posture, what tenant isolation does it provide). Several SSPM vendors - Reco and Push Security in particular - have made AI-app visibility a primary feature. See also the <a href="ai-ml-security.html">AI/ML Security page</a>.</p>
         </section>
 
         <section class="cta-section">
             <h2>Where next</h2>
             <ul>
-                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> — the IaaS-side companion to this page.</li>
-                <li><a href="iam.html">IAM &amp; Identity</a> — the foundation SaaS security depends on.</li>
-                <li><a href="detection-engineering.html">Detection Engineering</a> — how to write the ITDR detections referenced above.</li>
-                <li><a href="cloud-soc.html">Cloud SOC</a> — the operations team that consumes SaaS detections.</li>
-                <li><a href="incident-response.html">Incident Response</a> — IR playbooks per Tier 0 SaaS.</li>
-                <li><a href="grc.html">GRC</a> — the framework layer SaaS security feeds.</li>
-                <li><a href="sessions.html">Friday Zoom</a> — SaaS-security topics come up regularly. Drop in.</li>
+                <li><a href="cspm-vs-cnapp.html">CSPM vs CNAPP</a> - the IaaS-side companion to this page.</li>
+                <li><a href="iam.html">IAM &amp; Identity</a> - the foundation SaaS security depends on.</li>
+                <li><a href="detection-engineering.html">Detection Engineering</a> - how to write the ITDR detections referenced above.</li>
+                <li><a href="cloud-soc.html">Cloud SOC</a> - the operations team that consumes SaaS detections.</li>
+                <li><a href="incident-response.html">Incident Response</a> - IR playbooks per Tier 0 SaaS.</li>
+                <li><a href="grc.html">GRC</a> - the framework layer SaaS security feeds.</li>
+                <li><a href="sessions.html">Friday Zoom</a> - SaaS-security topics come up regularly. Drop in.</li>
             </ul>
         </section>
 

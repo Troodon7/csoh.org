@@ -460,7 +460,7 @@ function addIconsToCards() {
         // like "Daily" matching "ai" or "Chain" matching "ai".
         const tagEquals = (needle) => tags.some(tag => tag === needle);
 
-        // Determine icon based on tags and content. Order matters — earlier matches win.
+        // Determine icon based on tags and content. Order matters - earlier matches win.
         if (tagEquals('newsletter')) {
             icon = '📬';
             iconClass = 'newsletter';
@@ -527,7 +527,7 @@ function addPreviewImagesToCards() {
         const url = link.href;
         if (!url) return;
 
-        // Skip cards with no local preview available — no third-party fallback.
+        // Skip cards with no local preview available - no third-party fallback.
         // (Avoids inserting an empty <img> that renders as a broken-image placeholder.)
         if (!previewMap[url]) return;
 
@@ -819,7 +819,7 @@ function initShareButtons() {
 
 // Resource card tooltips
 function initTooltips() {
-    // Skip on touch devices — no hover available
+    // Skip on touch devices - no hover available
     if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
 
     var tooltip = document.createElement('div');
@@ -894,7 +894,7 @@ function initTooltips() {
 }
 
 // Add a site-wide "Search" link to the top-level header nav. Runs on every
-// page that loads main.js — saves us from editing the hardcoded <nav> in
+// page that loads main.js - saves us from editing the hardcoded <nav> in
 // ~30 HTML files. The link points at /search.html, where the Pagefind UI
 // renders. Idempotent: if a search link already exists in the markup (e.g.
 // search.html itself adds one statically in the future), the function does

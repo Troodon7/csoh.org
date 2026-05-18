@@ -122,7 +122,7 @@ csoh.org/
 ├── aws-security.html                # AWS security hub (high-volume search target)
 ├── azure-security.html              # Azure security hub
 ├── gcp-security.html                # GCP security hub
-├── cloud-security-comparison.html   # AWS vs Azure vs GCP — 10 comparison tables + scorecard
+├── cloud-security-comparison.html   # AWS vs Azure vs GCP - 10 comparison tables + scorecard
 │
 │  ── Career / community ──
 ├── learning-path.html               # Beginner→advanced learning roadmap (HowTo schema)
@@ -195,7 +195,7 @@ csoh.org/
 - Tooltip positions near the cursor and flips direction when close to viewport edges
 - Hidden on touch devices via `@media (hover: none) and (pointer: coarse)`
 - Dark mode styled via `[data-theme="dark"] .resource-tooltip`
-- Tooltip text is NOT included in search/filter — only `data-tooltip` attribute, not visible DOM text
+- Tooltip text is NOT included in search/filter - only `data-tooltip` attribute, not visible DOM text
 
 **Search & Filtering** (resources.html)
 - `main.js` reads resource cards from the DOM
@@ -219,11 +219,11 @@ csoh.org/
 - Mondays at 14:00 UTC, `anthropics/claude-code-action@v1` invokes Claude with a structured prompt to research and add 2-3 new resources to each of the six `resources.html` sections (CTF, Labs, Tools, Certs, AI Security, Job Search)
 - Auth: `CLAUDE_CODE_OAUTH_TOKEN` (subscription quota, not API billing) + the `csoh-ci` GitHub App for write-scoped PRs + `CSOH_PAT` to approve the bot's own PR so auto-merge can satisfy the "1 required approval" rule
 - The model checks for duplicates by grepping for URL + name before adding, follows the existing resource-card HTML pattern, and bumps the `<span id="visibleCount">` counter
-- **Auto-merge only fires when the diff is purely `resources.html`.** If Claude touches anything else, the PR stays open with a banner asking for human review — important safety valve
+- **Auto-merge only fires when the diff is purely `resources.html`.** If Claude touches anything else, the PR stays open with a banner asking for human review - important safety valve
 - Preview images for newly-added cards are generated post-merge by `site-update-deploy.yml`
 
 **Site-wide Search** (`search.html`, Pagefind)
-- [Pagefind](https://pagefind.app) builds a static, client-side search index from the deployed HTML — no server, no JS framework
+- [Pagefind](https://pagefind.app) builds a static, client-side search index from the deployed HTML - no server, no JS framework
 - The index is generated at deploy time and served from `/pagefind/`
 - `search.css` and `pagefind-init.js` are external files (not inline) because the site's strict Content-Security-Policy blocks inline styles and scripts
 - The search page has a 60-second `Cache-Control` cap so CSS tweaks propagate fast during iteration
@@ -372,7 +372,7 @@ See [CONTRIBUTING_KILL_CHAINS.md](CONTRIBUTING_KILL_CHAINS.md) for the full proc
    python3 tools/crosslink_pages.py
    ```
 
-   Same idempotent behavior — strips and rebuilds every cross-page link. See [tools/CROSSLINK_PAGES_README.md](tools/CROSSLINK_PAGES_README.md).
+   Same idempotent behavior - strips and rebuilds every cross-page link. See [tools/CROSSLINK_PAGES_README.md](tools/CROSSLINK_PAGES_README.md).
 
 5. If the term count crosses a round number (e.g. 200 → 250), update the search-bar placeholder and `<span id="visibleTerms">` count in `glossary.html`.
 
@@ -382,35 +382,35 @@ See [tools/CROSSLINK_GLOSSARY_README.md](tools/CROSSLINK_GLOSSARY_README.md) for
 
 ## SEO Conventions
 
-The site is search-optimized for cloud-security queries. The conventions below are enforced manually — none of the build scripts validate them, so please follow them when adding pages or editing existing ones. Regressing them silently hurts ranking for "cloud security" terms.
+The site is search-optimized for cloud-security queries. The conventions below are enforced manually - none of the build scripts validate them, so please follow them when adding pages or editing existing ones. Regressing them silently hurts ranking for "cloud security" terms.
 
 ### Page metadata
 
-- **`<title>`** — pattern: `Topic - Cloud Security Office Hours` (or `Topic - CSOH` on shorter pages). Front-load the topic, keep it under ~60 chars.
-- **`<meta name="description">`** — **strict 155-char limit** (Google truncates above ~155). Front-load "cloud security" + the page's distinct angle. Don't pad.
-- **Canonical** — every page must have `<link rel="canonical" href="https://csoh.org/PAGE.html">`.
-- **Open Graph / Twitter Card** — set both `og:title`/`og:description` and `twitter:title`/`twitter:description`. The OG description doesn't have the 155-char rule, but keep it tight.
+- **`<title>`** - pattern: `Topic - Cloud Security Office Hours` (or `Topic - CSOH` on shorter pages). Front-load the topic, keep it under ~60 chars.
+- **`<meta name="description">`** - **strict 155-char limit** (Google truncates above ~155). Front-load "cloud security" + the page's distinct angle. Don't pad.
+- **Canonical** - every page must have `<link rel="canonical" href="https://csoh.org/PAGE.html">`.
+- **Open Graph / Twitter Card** - set both `og:title`/`og:description` and `twitter:title`/`twitter:description`. The OG description doesn't have the 155-char rule, but keep it tight.
 
 ### Headings
 
 - **One `<h1>` per page.** Place it inside the hero (`<section class="hero hero--compact">` or `<section class="hero">`). The hero CSS already styles both `h1` and `h2` identically, so use `<h1>`.
-- **The `<h1>` must include cloud-security keywords** — e.g. `Cloud Security Resources`, not `Resources`. The page title should match what someone would Google.
-- **Do NOT put `<h1>` in the logo.** The logo is `<div class="logo-title">CSOH</div>` (a div, not a heading) — same on every page. Don't change this back to `<h1>`.
-- **Subsequent headings** are `<h2>` (section heads), then `<h3>` (subsections). Don't skip levels — TOC blocks (`<div class="toc">`) must use `<h2>`, never `<h3>`, since they sit directly under the page `<h1>`.
+- **The `<h1>` must include cloud-security keywords** - e.g. `Cloud Security Resources`, not `Resources`. The page title should match what someone would Google.
+- **Do NOT put `<h1>` in the logo.** The logo is `<div class="logo-title">CSOH</div>` (a div, not a heading) - same on every page. Don't change this back to `<h1>`.
+- **Subsequent headings** are `<h2>` (section heads), then `<h3>` (subsections). Don't skip levels - TOC blocks (`<div class="toc">`) must use `<h2>`, never `<h3>`, since they sit directly under the page `<h1>`.
 
 ### Images
 
-Every `<img>` needs descriptive attributes — search engines and Core Web Vitals both care:
+Every `<img>` needs descriptive attributes - search engines and Core Web Vitals both care:
 
-- **`alt`** — descriptive, never `alt="Preview"` or generic placeholders. For card thumbnails generated by `submit_resource.py` / `submit_ctf.py` / `update_news.py`, the alt is derived from the resource name automatically. If you hand-author a card, follow the same pattern: `alt="Resource Name preview"`.
+- **`alt`** - descriptive, never `alt="Preview"` or generic placeholders. For card thumbnails generated by `submit_resource.py` / `submit_ctf.py` / `update_news.py`, the alt is derived from the resource name automatically. If you hand-author a card, follow the same pattern: `alt="Resource Name preview"`.
 - **`loading="lazy"`** on every below-the-fold image. The only exceptions are hero images (`class="hero-img"`), which should use `loading="eager"` so the LCP isn't deferred.
 - **`decoding="async"`** on every image, including hero images.
 - **`width` / `height`** attributes on hero images and any image with a known intrinsic size, to prevent CLS.
-- **OG / social-card images** (`og:image`, `twitter:image`) must be the per-page `img/og/<page>.jpg` (1200×630) — never `banner.png` (1200×400, wrong aspect ratio for social cards).
+- **OG / social-card images** (`og:image`, `twitter:image`) must be the per-page `img/og/<page>.jpg` (1200×630) - never `banner.png` (1200×400, wrong aspect ratio for social cards).
 
 ### Adding a new page
 
-When you add a new HTML page, do all of the following — none are automated:
+When you add a new HTML page, do all of the following - none are automated:
 
 1. Copy an existing page that's structurally similar (e.g., `what-is-cloud-security.html` for an article-style pillar page; `resources.html` for a card directory).
 2. Write a < 155-char meta description, front-loaded with cloud-security keywords.
@@ -418,19 +418,19 @@ When you add a new HTML page, do all of the following — none are automated:
 4. Set `<link rel="canonical" href="https://csoh.org/yourpage.html">`.
 5. Add a `BreadcrumbList` JSON-LD block (`Home > Your Page`).
 6. Add a single keyword-rich `<h1>` in the hero.
-7. **Add the page to `sitemap.xml`** (a new `<url>` block). `update_sitemap.py` only refreshes `<lastmod>` for entries already in the sitemap — it does not auto-discover new pages.
-8. **Add the page to the nav** (`<ul class="dropdown-menu">` or mega-menu column) **on every existing HTML page**. The nav is duplicated per page, not shared — there is no shared template. Pick the right slot:
+7. **Add the page to `sitemap.xml`** (a new `<url>` block). `update_sitemap.py` only refreshes `<lastmod>` for entries already in the sitemap - it does not auto-discover new pages.
+8. **Add the page to the nav** (`<ul class="dropdown-menu">` or mega-menu column) **on every existing HTML page**. The nav is duplicated per page, not shared - there is no shared template. Pick the right slot:
 
-   - **Learn → Foundations** (mega-menu col) — orientation pages (what-is, shared responsibility, glossary, FAQ, vendor landscape)
-   - **Learn → Topics** (mega-menu col) — discipline / platform reference pages (IAM, networking, K8s, etc.)
-   - **Learn → Career & Growth** (mega-menu col) — careers, certs, learning path, home lab
-   - **Resources** (top-level link) — the catalog
-   - **By Cloud** (dropdown) — AWS / Azure / GCP / comparison hubs
-   - **Threat Intel** (dropdown) — news, threat research, kill chains, SOC, detection engineering, IR, pentesting, CTFs
-   - **Community** (mega-menu) — sessions, conferences, recaps, presentations, chat resources
-   - **Behind the Scenes** (dropdown) — the dogfooded ops pages (Deploy to GCP, GitHub Actions) plus Contribute / Add a Resource
+   - **Learn → Foundations** (mega-menu col) - orientation pages (what-is, shared responsibility, glossary, FAQ, vendor landscape)
+   - **Learn → Topics** (mega-menu col) - discipline / platform reference pages (IAM, networking, K8s, etc.)
+   - **Learn → Career & Growth** (mega-menu col) - careers, certs, learning path, home lab
+   - **Resources** (top-level link) - the catalog
+   - **By Cloud** (dropdown) - AWS / Azure / GCP / comparison hubs
+   - **Threat Intel** (dropdown) - news, threat research, kill chains, SOC, detection engineering, IR, pentesting, CTFs
+   - **Community** (mega-menu) - sessions, conferences, recaps, presentations, chat resources
+   - **Behind the Scenes** (dropdown) - the dogfooded ops pages (Deploy to GCP, GitHub Actions) plus Contribute / Add a Resource
 
-   The fastest way to apply changes site-wide is a small Python script — see `/tmp/update_nav_v3.py` from the May 2026 batch as a template. It uses regex to replace the mega-menu columns and dropdown `<ul>`s and re-applies `aria-current="page"` per file. Doing it by hand across 60+ pages is bug-prone (you'll inevitably drift on indent or aria attributes).
+   The fastest way to apply changes site-wide is a small Python script - see `/tmp/update_nav_v3.py` from the May 2026 batch as a template. It uses regex to replace the mega-menu columns and dropdown `<ul>`s and re-applies `aria-current="page"` per file. Doing it by hand across 60+ pages is bug-prone (you'll inevitably drift on indent or aria attributes).
 9. **Add the page to `TARGET_PAGES` in `tools/crosslink_pages.py`** so glossary terms get auto-linked across the new page. Then run:
    ```bash
    python3 tools/crosslink_pages.py
@@ -447,7 +447,7 @@ When you add a new HTML page, do all of the following — none are automated:
 
 ### Scripts that touch HTML are SEO-safe by design
 
-`update_news.py`, `add_meeting.py`, `submit_resource.py`, `submit_ctf.py`, `update_presentations_schema.py`, `crosslink_glossary.py`, and `crosslink_pages.py` all modify *content regions* (cards, meeting entries, schema JSON, glossary `<dd>` blocks, inline term anchors) — they never rewrite `<title>`, `<meta name="description">`, or `<h1>` tags. If you add a new HTML-generating script, follow the same rule: leave page-level SEO metadata alone.
+`update_news.py`, `add_meeting.py`, `submit_resource.py`, `submit_ctf.py`, `update_presentations_schema.py`, `crosslink_glossary.py`, and `crosslink_pages.py` all modify *content regions* (cards, meeting entries, schema JSON, glossary `<dd>` blocks, inline term anchors) - they never rewrite `<title>`, `<meta name="description">`, or `<h1>` tags. If you add a new HTML-generating script, follow the same rule: leave page-level SEO metadata alone.
 
 ### Scripts must only write when content actually changes
 
@@ -456,11 +456,11 @@ Every script in `tools/` (and `update_sri.py`, `update_news.py` at the repo root
 1. **Clean git history.** A no-op run produces no diff and no commits.
 2. **Cheap downstream deploys.** `gcp-deploy.yml` triggers off the housekeeping commits this workflow produces. If your script `open(..., 'w')`s a file unconditionally, every run produces a no-op commit that pointlessly triggers a full container rebuild and Cloud Run revision deploy. Don't.
 
-If your script needs to be sure it overwrote even an identical file (e.g., to re-run a destructive transformation), do that work explicitly — don't make it the default.
+If your script needs to be sure it overwrote even an identical file (e.g., to re-run a destructive transformation), do that work explicitly - don't make it the default.
 
 ### Tracking SEO performance
 
-Two complementary signals — both matter, neither alone is enough.
+Two complementary signals - both matter, neither alone is enough.
 
 #### 1. The codebase scorecard (this repo)
 
@@ -479,11 +479,11 @@ Four reports to check on a recurring cadence:
 | **Performance** | Reports → Performance → Search results | Weekly | Set comparison to "Last 28 days vs previous period." Sort queries by impressions. Pages in positions 5-15 with cloud-security terms = your low-hanging-fruit list for content tweaks. High impressions + low CTR = improve title/meta description. |
 | **Pages (Indexing)** | Indexing → Pages | After every deploy | Confirm nothing landed in "Page with redirect" (the recurring `.htaccess` gotcha) or "Crawled - currently not indexed." Anything in "Excluded by 'noindex' tag" should match what we deliberately noindex (`chat-resources.html`). |
 | **Sitemaps** | Indexing → Sitemaps | One-time submit | Submit `https://csoh.org/sitemap.xml` once. After that GSC shows submitted-vs-indexed gap automatically. |
-| **Core Web Vitals** | Experience → Core Web Vitals | Monthly | Real Chrome user data (CrUX). LCP < 2.5s, INP < 200ms, CLS < 0.1. This is the data the codebase audit can't see — only real users generate it. |
+| **Core Web Vitals** | Experience → Core Web Vitals | Monthly | Real Chrome user data (CrUX). LCP < 2.5s, INP < 200ms, CLS < 0.1. This is the data the codebase audit can't see - only real users generate it. |
 
 **Set up GSC email alerts** under Settings → Email preferences. GSC will email you when coverage drops or new errors appear.
 
-After every deploy that touches HTML structure or `.htaccess`, spot-check live URLs in the **URL Inspection** tool (top search bar in GSC) — paste a URL, click "Request Indexing" if you want Google to re-crawl sooner than its default cadence (~days).
+After every deploy that touches HTML structure or `.htaccess`, spot-check live URLs in the **URL Inspection** tool (top search bar in GSC) - paste a URL, click "Request Indexing" if you want Google to re-crawl sooner than its default cadence (~days).
 
 #### When the two disagree
 

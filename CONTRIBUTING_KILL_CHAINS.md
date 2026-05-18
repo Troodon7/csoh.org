@@ -6,7 +6,7 @@ Thank you for helping grow the CSOH Breach Kill Chain resource! This guide expla
 
 ## What is a kill chain entry?
 
-A kill chain is a **step-by-step reconstruction of a real cloud security breach** — from the attacker's first move to the moment of discovery. It's not a news summary. It's a structured breakdown of *exactly how* the attack progressed, mapped to MITRE ATT&CK Cloud techniques, so security professionals can learn from it and defend against it.
+A kill chain is a **step-by-step reconstruction of a real cloud security breach** - from the attacker's first move to the moment of discovery. It's not a news summary. It's a structured breakdown of *exactly how* the attack progressed, mapped to MITRE ATT&CK Cloud techniques, so security professionals can learn from it and defend against it.
 
 Each entry has:
 - A numbered sequence of attack steps (typically 4–8 steps)
@@ -21,10 +21,10 @@ Each entry has:
 
 Before you start, check these boxes:
 
-- [ ] **There is a real post-mortem or official disclosure.** The attack chain must be sourced — not reconstructed from speculation. Good sources: vendor security blogs (MSRC, AWS Security Blog, Wiz, CrowdStrike, Mandiant), CISA advisories, court documents/indictments, academic papers. News articles alone are not sufficient.
+- [ ] **There is a real post-mortem or official disclosure.** The attack chain must be sourced - not reconstructed from speculation. Good sources: vendor security blogs (MSRC, AWS Security Blog, Wiz, CrowdStrike, Mandiant), CISA advisories, court documents/indictments, academic papers. News articles alone are not sufficient.
 - [ ] **It involves cloud infrastructure.** AWS, Azure, GCP, GitHub Actions, cloud identity (Azure AD / Okta / Duo), or cloud-adjacent supply chain attacks that pivot into cloud environments.
 - [ ] **There is enough technical detail** to write meaningful steps. If the only public information is "company X was breached and data was stolen," there isn't enough to work with yet. Wait for a post-mortem.
-- [ ] **It adds something new.** Check the existing entries first — don't duplicate an incident already covered.
+- [ ] **It adds something new.** Check the existing entries first - don't duplicate an incident already covered.
 
 ---
 
@@ -47,12 +47,12 @@ These incidents have solid post-mortems and haven't been added yet. Pick one up!
 Each step should answer three questions:
 
 1. **What did the attacker do?** (the action)
-2. **How did they do it technically?** (the mechanism — command, API endpoint, exploit, technique)
+2. **How did they do it technically?** (the mechanism - command, API endpoint, exploit, technique)
 3. **Why did it work?** (the security failure that enabled it)
 
 **Good step example:**
-> **EC2 IAM role credentials retrieved from IMDS — no authentication required**
-> Thompson used the SSRF to GET `/latest/meta-data/iam/security-credentials/ISRM-WAF-Role`, which returned temporary AWS credentials (AccessKeyId, SecretAccessKey, SessionToken). IMDSv1 served these to any request made from the instance — no token required. The role had been granted far broader S3 permissions than a WAF function ever needs.
+> **EC2 IAM role credentials retrieved from IMDS - no authentication required**
+> Thompson used the SSRF to GET `/latest/meta-data/iam/security-credentials/ISRM-WAF-Role`, which returned temporary AWS credentials (AccessKeyId, SecretAccessKey, SessionToken). IMDSv1 served these to any request made from the instance - no token required. The role had been granted far broader S3 permissions than a WAF function ever needs.
 > `MITRE: T1552.005 – Cloud Instance Metadata API`
 
 **Bad step example (too vague):**
@@ -105,7 +105,7 @@ Also add a tab button to the `<nav class="incident-tabs">` section at the top.
 </button>
 ```
 
-> **Important:** The `data-year="YYYY"` attribute is required — it's what the page uses to automatically sort tabs into chronological order. Replace `YYYY` with the 4-digit year the incident occurred. If you forget it, your tab will sort to the beginning.
+> **Important:** The `data-year="YYYY"` attribute is required - it's what the page uses to automatically sort tabs into chronological order. Replace `YYYY` with the 4-digit year the incident occurred. If you forget it, your tab will sort to the beginning.
 
 ### Full panel template
 
@@ -172,7 +172,7 @@ Also add a tab button to the `<nav class="incident-tabs">` section at the top.
       <h3>🛡 How to Defend Against This Chain</h3>
       <div class="def-items">
         <div class="def-item"><strong>Specific control 1.</strong> Explanation of what to do and why it would have stopped this attack.</div>
-        <div class="def-item"><strong>Specific control 2.</strong> Be concrete — name the AWS service, Azure policy, or tool. Not "improve monitoring" but "enable GuardDuty finding X."</div>
+        <div class="def-item"><strong>Specific control 2.</strong> Be concrete - name the AWS service, Azure policy, or tool. Not "improve monitoring" but "enable GuardDuty finding X."</div>
         <!-- Add 3–5 defender items -->
       </div>
     </div>
@@ -203,12 +203,12 @@ If you've found a good post-mortem but don't want to write the HTML, you can use
    > *"Please add a kill chain for the Snowflake 2024 credential stuffing campaign to this file. Here's the post-mortem: [paste URL]"*
 
 5. Claude will research the incident, write the new panel in the exact same style as the existing entries, map each step to MITRE ATT&CK techniques, and return the updated file
-6. **Review the output** — check the sources, verify the MITRE mappings, and make any corrections
+6. **Review the output** - check the sources, verify the MITRE mappings, and make any corrections
 7. **Submit the updated file as a PR** following the steps below
 
-> **Important:** Always review what Claude produces before submitting. Check that every source link works, every MITRE technique ID is correct, and the technical details match what the post-mortem actually says. Claude can make mistakes, especially on specific command syntax or dates — you're the human reviewer.
+> **Important:** Always review what Claude produces before submitting. Check that every source link works, every MITRE technique ID is correct, and the technical details match what the post-mortem actually says. Claude can make mistakes, especially on specific command syntax or dates - you're the human reviewer.
 
-This approach is particularly useful if you attended a Friday Zoom session where a breach was discussed — you have the context, Claude can handle the formatting.
+This approach is particularly useful if you attended a Friday Zoom session where a breach was discussed - you have the context, Claude can handle the formatting.
 
 ---
 
@@ -216,7 +216,7 @@ This approach is particularly useful if you attended a Friday Zoom session where
 
 1. **Fork** the [CSOH GitHub repository](https://github.com/CloudSecurityOfficeHours/csoh.org)
 2. **Create a branch** named `kill-chain/incident-name-year` (e.g., `kill-chain/okta-2023`)
-3. **Edit `breach-timeline.html`** — add your tab button and panel following the template above
+3. **Edit `breach-timeline.html`** - add your tab button and panel following the template above
 4. **Open a pull request** with the title format: `Add kill chain: [Incident Name] [Year]`
 5. In the PR description, include:
    - A one-paragraph summary of the incident
@@ -229,15 +229,15 @@ This approach is particularly useful if you attended a Friday Zoom session where
 ## Quality checklist before submitting
 
 - [ ] Every step has a MITRE ATT&CK technique ID that links to attack.mitre.org
-- [ ] Every claim is sourced — no speculation or unverified assertions
+- [ ] Every claim is sourced - no speculation or unverified assertions
 - [ ] The `step-code` block contains technical specifics (commands, API paths, tool names) not just narrative
-- [ ] The defender section names specific controls, tools, or cloud service features — not generic advice
+- [ ] The defender section names specific controls, tools, or cloud service features - not generic advice
 - [ ] At least 2 primary sources are linked (post-mortem, vendor blog, official advisory, or academic paper)
 - [ ] The incident involves cloud infrastructure (not purely on-premises)
-- [ ] HTML validates — test by opening the file locally in a browser before submitting
+- [ ] HTML validates - test by opening the file locally in a browser before submitting
 
 ---
 
 ## Questions?
 
-Bring your incident to a [Friday Zoom session](https://csoh.kit.com/39feb4f397) — community discussion often surfaces the best technical detail for a step.
+Bring your incident to a [Friday Zoom session](https://csoh.kit.com/39feb4f397) - community discussion often surfaces the best technical detail for a step.

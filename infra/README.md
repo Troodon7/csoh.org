@@ -26,7 +26,7 @@ Serverless NEG → Cloud Run (csoh-site)
 Container image stored in Artifact Registry (immutable tags)
    - Built by GitHub Actions
    - Trivy-scanned (fails build on HIGH/CRITICAL)
-   - Pushed via WIF — no service account keys
+   - Pushed via WIF - no service account keys
 
 Logging:
    - Cloud Armor decisions, LB 4xx/5xx, IAM changes, audit logs
@@ -83,7 +83,7 @@ terraform apply tfplan
 ```
 
 Expect ~15–20 minutes for the managed SSL cert to provision once you've
-pointed DNS at the LB IP. Until the cert is `ACTIVE`, HTTPS will fail — `gcloud
+pointed DNS at the LB IP. Until the cert is `ACTIVE`, HTTPS will fail - `gcloud
 compute ssl-certificates describe csoh-cert --global` to watch status.
 
 ## DNS (Cloudflare)
@@ -108,7 +108,7 @@ Keep TTLs short (300s) during cutover so you can roll back fast.
 
 The `.github/workflows/gcp-deploy.yml` workflow is wired to the WIF pool created
 by Terraform. Required inputs are baked in (project, region, deployer SA, WIF
-provider) — no GitHub Secrets needed.
+provider) - no GitHub Secrets needed.
 
 It runs on every push to `main` that touches site files (mirroring the existing
 FTP deploy's path filter) plus manual `workflow_dispatch`. The two pipelines run
@@ -118,7 +118,7 @@ in parallel until you cut DNS over.
 
 ```bash
 # Force a redeploy (rebuilds latest image)
-gh workflow run "GCP — Build, Scan, and Deploy"
+gh workflow run "GCP - Build, Scan, and Deploy"
 
 # Roll back to a previous Cloud Run revision
 gcloud run services update-traffic csoh-site \

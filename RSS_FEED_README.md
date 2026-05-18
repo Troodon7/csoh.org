@@ -2,7 +2,7 @@
 
 ## What Is RSS?
 
-RSS (Really Simple Syndication) is a way to get updates from websites delivered straight to you — no need to keep checking the site manually. Think of it like subscribing to a newsletter, but instead of email, the updates go to a feed reader app of your choice.
+RSS (Really Simple Syndication) is a way to get updates from websites delivered straight to you - no need to keep checking the site manually. Think of it like subscribing to a newsletter, but instead of email, the updates go to a feed reader app of your choice.
 
 ## Our Feed URL
 
@@ -26,7 +26,7 @@ A feed reader is an app that collects and displays RSS feeds for you. Here are s
 | **Thunderbird** | Windows, macOS, Linux | [thunderbird.net](https://www.thunderbird.net) |
 | **Newsblur** | Web, iOS, Android | [newsblur.com](https://newsblur.com) |
 
-Don't overthink it — any of these will work. Feedly is the most beginner-friendly.
+Don't overthink it - any of these will work. Feedly is the most beginner-friendly.
 
 ### Step 2: Add Our Feed
 
@@ -48,7 +48,7 @@ Open your feed reader whenever you want to catch up. New articles appear in a si
 
 ### macOS
 
-**Option A — NetNewsWire (GUI, free & open-source):**
+**Option A - NetNewsWire (GUI, free & open-source):**
 
 1. Install from the App Store or [netnewswire.com](https://netnewswire.com).
 2. Open NetNewsWire → **File → New Web Feed** (or press ⌘N).
@@ -57,14 +57,14 @@ Open your feed reader whenever you want to catch up. New articles appear in a si
    https://csoh.org/feed.xml
    ```
 
-**Option B — Terminal (curl + xmllint):**
+**Option B - Terminal (curl + xmllint):**
 
 ```bash
 # Fetch and preview the 5 latest headlines
 curl -s https://csoh.org/feed.xml | xmllint --xpath '//item/title/text()' - 2>/dev/null | head -5
 ```
 
-**Option C — Homebrew + newsboat (terminal reader):**
+**Option C - Homebrew + newsboat (terminal reader):**
 
 ```bash
 brew install newsboat
@@ -76,7 +76,7 @@ newsboat
 
 ### Linux
 
-**Option A — Newsboat (terminal reader, most distros):**
+**Option A - Newsboat (terminal reader, most distros):**
 
 ```bash
 # Debian / Ubuntu
@@ -99,7 +99,7 @@ newsboat
 
 Use arrow keys to navigate, Enter to open an article, and `q` to quit.
 
-**Option B — Liferea (GUI reader):**
+**Option B - Liferea (GUI reader):**
 
 ```bash
 sudo apt install liferea   # Debian / Ubuntu
@@ -107,7 +107,7 @@ sudo apt install liferea   # Debian / Ubuntu
 
 Open Liferea → **Subscriptions → New Subscription** → paste `https://csoh.org/feed.xml`.
 
-**Option C — Terminal one-liner (curl + xmlstarlet):**
+**Option C - Terminal one-liner (curl + xmlstarlet):**
 
 ```bash
 # Print the 5 latest headlines
@@ -118,7 +118,7 @@ curl -s https://csoh.org/feed.xml | xmlstarlet sel -t -v '//item/title' -n | hea
 
 ### Windows
 
-**Option A — Thunderbird (GUI, free):**
+**Option A - Thunderbird (GUI, free):**
 
 1. Download from [thunderbird.net](https://www.thunderbird.net) and install.
 2. Open Thunderbird → **File → Subscribe** (or right-click **Feeds** → **Subscribe**).
@@ -127,7 +127,7 @@ curl -s https://csoh.org/feed.xml | xmlstarlet sel -t -v '//item/title' -n | hea
    https://csoh.org/feed.xml
    ```
 
-**Option B — PowerShell (built-in, no install needed):**
+**Option B - PowerShell (built-in, no install needed):**
 
 ```powershell
 # Fetch and display the 5 latest headlines
@@ -135,7 +135,7 @@ curl -s https://csoh.org/feed.xml | xmlstarlet sel -t -v '//item/title' -n | hea
 $feed.rss.channel.item | Select-Object -First 5 title, link | Format-Table -AutoSize
 ```
 
-**Option C — Windows Terminal + newsboat (via WSL):**
+**Option C - Windows Terminal + newsboat (via WSL):**
 
 ```powershell
 # First, install WSL if you haven't (run as Administrator):
@@ -168,7 +168,7 @@ Yes! Both Slack and Microsoft Teams support RSS:
 Services like [Blogtrottr](https://blogtrottr.com) or [IFTTT](https://ifttt.com) can send RSS updates to your inbox if you prefer email over a dedicated reader.
 
 ### What if my browser opens the feed as raw XML?
-That's normal — feed URLs are meant to be opened in a feed reader, not a browser. Just copy the URL and paste it into your reader app instead.
+That's normal - feed URLs are meant to be opened in a feed reader, not a browser. Just copy the URL and paste it into your reader app instead.
 
 ## About Cloud Security Office Hours
 

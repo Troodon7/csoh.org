@@ -200,7 +200,7 @@
         </div>
 
         <section id="intro">
-            <p>Detection engineering is the cloud security specialty with the lowest barrier-to-entry portfolio in the field. The pattern: get attack telemetry into a SIEM, write detections, prove they fire on the real attack technique. Doing this once on your own — and publishing it — puts you ahead of 80% of detection-engineer applicants.</p>
+            <p>Detection engineering is the cloud security specialty with the lowest barrier-to-entry portfolio in the field. The pattern: get attack telemetry into a SIEM, write detections, prove they fire on the real attack technique. Doing this once on your own - and publishing it - puts you ahead of 80% of detection-engineer applicants.</p>
         </section>
 
         <div class="toc">
@@ -231,7 +231,7 @@
             <h2>Prerequisites</h2>
             <ul>
                 <li>An AWS account with CloudTrail enabled.</li>
-                <li><a href="/cloud-security-home-lab.html">Home lab guardrails</a> — this project generates extra log volume and you don't want a runaway bill.</li>
+                <li><a href="/cloud-security-home-lab.html">Home lab guardrails</a> - this project generates extra log volume and you don't want a runaway bill.</li>
                 <li>Comfort with Linux and at least one query language (KQL, SPL, Lucene, or SQL).</li>
                 <li>Docker (for the SIEM stack).</li>
             </ul>
@@ -240,13 +240,13 @@
         <section id="steps">
             <h2>Step-by-step</h2>
             <h3>1. Pick your SIEM</h3>
-            <p>Three solid free options:</p><ul><li><strong><a href="https://wazuh.com/" target="_blank" rel="noopener noreferrer">Wazuh</a></strong> — free, self-hosted, includes the analytics layer. Good if you want to run everything on one EC2 box.</li><li><strong><a href="https://www.elastic.co/security" target="_blank" rel="noopener noreferrer">Elastic Security</a></strong> — free tier on Elastic Cloud or self-hosted. Mature rule library; what most enterprises run.</li><li><strong><a href="https://docs.matanolabs.com/" target="_blank" rel="noopener noreferrer">Matano</a></strong> — serverless, S3-native, written for cloud detection from the ground up. Best signal-to-resume-noise ratio.</li></ul>
+            <p>Three solid free options:</p><ul><li><strong><a href="https://wazuh.com/" target="_blank" rel="noopener noreferrer">Wazuh</a></strong> - free, self-hosted, includes the analytics layer. Good if you want to run everything on one EC2 box.</li><li><strong><a href="https://www.elastic.co/security" target="_blank" rel="noopener noreferrer">Elastic Security</a></strong> - free tier on Elastic Cloud or self-hosted. Mature rule library; what most enterprises run.</li><li><strong><a href="https://docs.matanolabs.com/" target="_blank" rel="noopener noreferrer">Matano</a></strong> - serverless, S3-native, written for cloud detection from the ground up. Best signal-to-resume-noise ratio.</li></ul>
             <h3>2. Stand up the SIEM</h3>
             <p>For Wazuh: <code>docker compose up -d</code> with the official compose file gets you running locally in 10 minutes. For Matano: deploy via AWS CDK to a new sub-account.</p>
             <h3>3. Wire CloudTrail into it</h3>
             <p>Configure CloudTrail to write to S3, then have the SIEM read from S3 (Matano native; Wazuh + Filebeat for the others). Confirm events are flowing by signing into the AWS console and verifying the sign-in event lands in the SIEM within ~5 minutes.</p>
             <h3>4. Pick 5 ATT&CK techniques to cover</h3>
-            <p>Don't pick at random. Choose techniques that are (a) common, (b) detectable in CloudTrail, and (c) mapped to real attacker behavior. Recommended starter set:</p><ul><li><strong>T1078.004</strong> — Valid Accounts: Cloud Accounts (impossible-travel sign-ins).</li><li><strong>T1098.001</strong> — Account Manipulation: Additional Cloud Credentials (CreateAccessKey on an existing user).</li><li><strong>T1530</strong> — Data from Cloud Storage (large S3 GetObject volume from a single principal).</li><li><strong>T1562.008</strong> — Impair Defenses: Disable Cloud Logs (CloudTrail StopLogging or DeleteTrail).</li><li><strong>T1538</strong> — Cloud Service Dashboard (unusual ConsoleLogin from a service account).</li></ul>
+            <p>Don't pick at random. Choose techniques that are (a) common, (b) detectable in CloudTrail, and (c) mapped to real attacker behavior. Recommended starter set:</p><ul><li><strong>T1078.004</strong> - Valid Accounts: Cloud Accounts (impossible-travel sign-ins).</li><li><strong>T1098.001</strong> - Account Manipulation: Additional Cloud Credentials (CreateAccessKey on an existing user).</li><li><strong>T1530</strong> - Data from Cloud Storage (large S3 GetObject volume from a single principal).</li><li><strong>T1562.008</strong> - Impair Defenses: Disable Cloud Logs (CloudTrail StopLogging or DeleteTrail).</li><li><strong>T1538</strong> - Cloud Service Dashboard (unusual ConsoleLogin from a service account).</li></ul>
             <h3>5. Write the detections</h3>
             <p>For each technique, write the rule in <a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener noreferrer">Sigma</a> and compile it to your SIEM's native query language. Commit both versions to your repo. Annotate each rule with the MITRE ID and a short "why this matters" note.</p>
             <h3>6. Test with Stratus Red Team</h3>
@@ -262,10 +262,10 @@ stratus detonate aws.credential-access.ec2-get-password-data</code></pre>
         <section id="managers">
             <h2>What hiring managers look for</h2>
             <ul>
-                <li>You used Sigma as the source-of-truth for detection logic — portable, reviewable, vendor-agnostic.</li>
+                <li>You used Sigma as the source-of-truth for detection logic - portable, reviewable, vendor-agnostic.</li>
                 <li>You validated the detections with Stratus Red Team or equivalent. "It fires when the technique runs" is the only proof that matters.</li>
                 <li>Your false-positive analysis is honest. Detection engineering is mostly tuning.</li>
-                <li>Your rule names and descriptions are good. Detection content is read by humans at 3am — clarity matters.</li>
+                <li>Your rule names and descriptions are good. Detection content is read by humans at 3am - clarity matters.</li>
                 <li>You can speak to what you'd add next and how you'd measure coverage over time.</li>
             </ul>
         </section>
@@ -289,10 +289,10 @@ stratus detonate aws.credential-access.ec2-get-password-data</code></pre>
         <section id="next" class="cta-section">
             <h2>Where next</h2>
             <ul>
-                <li><a href="../cloud-security-portfolio-projects.html">All 7 portfolio projects</a> — pick your next one.</li>
-                <li><a href="../cloud-security-home-lab.html">Home lab setup</a> — the safe environment this project runs in.</li>
-                <li><a href="../cloud-security-careers.html">Careers guide</a> — how this project fits into the hiring story.</li>
-                <li><a href="../community.html">Friday Zoom + Signal chat</a> — share your write-up with practitioners.</li>
+                <li><a href="../cloud-security-portfolio-projects.html">All 7 portfolio projects</a> - pick your next one.</li>
+                <li><a href="../cloud-security-home-lab.html">Home lab setup</a> - the safe environment this project runs in.</li>
+                <li><a href="../cloud-security-careers.html">Careers guide</a> - how this project fits into the hiring story.</li>
+                <li><a href="../community.html">Friday Zoom + Signal chat</a> - share your write-up with practitioners.</li>
             </ul>
         </section>
 

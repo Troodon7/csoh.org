@@ -1,12 +1,12 @@
 // Bootstraps the Pagefind UI on /search.html. Loaded after
 // /_pagefind/pagefind-ui.js (both via <script src defer>, which guarantees
 // in-order execution after DOMContentLoaded). Kept in its own file so the
-// CSP `script-src` directive can stay strict — no inline executable script
+// CSP `script-src` directive can stay strict - no inline executable script
 // blocks anywhere on the site.
 (function () {
     if (typeof PagefindUI === 'undefined') {
         // Defensive: /_pagefind/pagefind-ui.js failed to load (build
-        // issue, network failure, ad-blocker, etc.). Nothing to wire up —
+        // issue, network failure, ad-blocker, etc.). Nothing to wire up -
         // leave the empty container alone so the page doesn't throw.
         return;
     }

@@ -9,13 +9,13 @@ Pulls the VTT transcript of a CSOH meeting from your Zoom cloud recording, ready
 1. Go to <https://marketplace.zoom.us/develop/create> → **Build App** → **Server-to-Server OAuth**.
 2. Give it a name (e.g. `CSOH Transcript Fetcher`).
 3. Under **App Credentials** note the **Account ID**, **Client ID**, and **Client Secret**.
-4. Under **Scopes**, add (minimum). Zoom migrated to granular scopes — use these exact names:
-   - `cloud_recording:read:list_user_recordings` — list a user's cloud recordings (VTT transcripts tied to recordings)
-   - `cloud_recording:read:recording` — read a specific recording's metadata/files
-   - `user:read:user` — identify "me" (may show as `user:read` in older UIs)
-   - `meeting:read:list_summaries:admin` — list AI Companion meeting summaries across the account (optional, needed only for summary backfill)
-   - `meeting:read:list_meetings:admin` — list past meetings across the account (optional, pairs with the above)
-   - `meeting:read:summary:admin` — fetch the full text of a meeting summary (optional, needed only for summary backfill)
+4. Under **Scopes**, add (minimum). Zoom migrated to granular scopes - use these exact names:
+   - `cloud_recording:read:list_user_recordings` - list a user's cloud recordings (VTT transcripts tied to recordings)
+   - `cloud_recording:read:recording` - read a specific recording's metadata/files
+   - `user:read:user` - identify "me" (may show as `user:read` in older UIs)
+   - `meeting:read:list_summaries:admin` - list AI Companion meeting summaries across the account (optional, needed only for summary backfill)
+   - `meeting:read:list_meetings:admin` - list past meetings across the account (optional, pairs with the above)
+   - `meeting:read:summary:admin` - fetch the full text of a meeting summary (optional, needed only for summary backfill)
 5. Under **Activation**, click **Activate your app**.
 
 ### 2. Store the credentials
@@ -27,7 +27,7 @@ cp .env.example .env
 # edit .env with your Account ID, Client ID, Client Secret
 ```
 
-`.env` is gitignored — don't commit it.
+`.env` is gitignored - don't commit it.
 
 ### 3. Confirm Zoom has cloud recording + auto-transcription enabled
 
@@ -64,10 +64,10 @@ python3 tools/fetch_zoom_transcript.py --date 2026-04-24
 
 ### Other flags
 
-- `--days-back N` — widen the search window (default 14).
-- `--output /path/to/file.vtt` — override the output path.
-- `--user-id SOMEONE` — fetch a different user's recordings. Default `me` uses the S2S app's owner, i.e. **the Zoom account that created the app**.
-- `--env-file /path/to/.env` — use a non-default `.env` location.
+- `--days-back N` - widen the search window (default 14).
+- `--output /path/to/file.vtt` - override the output path.
+- `--user-id SOMEONE` - fetch a different user's recordings. Default `me` uses the S2S app's owner, i.e. **the Zoom account that created the app**.
+- `--env-file /path/to/.env` - use a non-default `.env` location.
 
 ## End-to-end workflow (Saturday morning)
 
@@ -94,9 +94,9 @@ If you prefer to run it by hand, stop after step 1 and paste the VTT into a chat
 | `Zoom OAuth failed: HTTP 400 unsupported_grant_type` | The app isn't **activated**. Go back to the Zoom Marketplace app settings and click Activate. |
 | `HTTP 403` on recordings list | Missing scope. Add `recording:read` to the app and re-activate. |
 | `No recording with a transcript found for YYYY-MM-DD` | Either the meeting wasn't cloud-recorded, transcription is off, or Zoom hasn't finished processing it. Try again later or run `--list` to see what's actually available. |
-| `Selected meeting has no transcript file` | Transcription toggle was off for that specific meeting. Nothing to do retroactively — Zoom only transcribes during recording. |
+| `Selected meeting has no transcript file` | Transcription toggle was off for that specific meeting. Nothing to do retroactively - Zoom only transcribes during recording. |
 
 ## Requirements
 
-- Python 3.9+ (standard library only — no `pip install` needed)
+- Python 3.9+ (standard library only - no `pip install` needed)
 - A Zoom plan that supports cloud recording and audio transcription (Pro or higher)

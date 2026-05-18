@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta name="description"
-        content="Detection engineering and cloud logging — a practitioner's guide. The detection lifecycle (research, develop, tune, deploy, validate, retire), CloudTrail, Azure Activity Log, GCP Cloud Audit Logs, GuardDuty, Defender for Cloud, Security Command Center, Sigma, detection-as-code, MITRE ATT&amp;CK Cloud, SIEM vs data lake, Atomic Red Team, Stratus Red Team. Vendor-neutral, AWS / Azure / GCP.">
+        content="Detection engineering and cloud logging - a practitioner's guide. The detection lifecycle (research, develop, tune, deploy, validate, retire), CloudTrail, Azure Activity Log, GCP Cloud Audit Logs, GuardDuty, Defender for Cloud, Security Command Center, Sigma, detection-as-code, MITRE ATT&amp;CK Cloud, SIEM vs data lake, Atomic Red Team, Stratus Red Team. Vendor-neutral, AWS / Azure / GCP.">
     <meta name="keywords"
         content="detection engineering, cloud logging, CloudTrail, VPC Flow Logs, Azure Activity Log, Diagnostic Settings, GCP Cloud Audit Logs, GuardDuty, Defender for Cloud, Security Command Center, Sigma, detection as code, MITRE ATT&CK Cloud, KQL, SPL, Splunk, Sentinel, Chronicle, Panther, Atomic Red Team, Stratus Red Team, SIEM, data lake, XDR">
     <title>Detection Engineering &amp; Cloud Logging - CSOH</title>
@@ -20,14 +20,14 @@
 
     <meta property="og:title" content="Detection Engineering &amp; Cloud Logging - CSOH">
     <meta property="og:description"
-        content="A practitioner's guide to detection engineering in the cloud — the lifecycle, log sources across AWS / Azure / GCP, Sigma and detection-as-code, MITRE ATT&amp;CK Cloud, validation with Stratus Red Team, SIEM vs data lake economics.">
+        content="A practitioner's guide to detection engineering in the cloud - the lifecycle, log sources across AWS / Azure / GCP, Sigma and detection-as-code, MITRE ATT&amp;CK Cloud, validation with Stratus Red Team, SIEM vs data lake economics.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://csoh.org/detection-engineering.html">
     <meta property="og:image" content="https://csoh.org/banner.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Detection Engineering &amp; Cloud Logging">
     <meta name="twitter:description"
-        content="Vendor-neutral guide to detection engineering in cloud — logging fundamentals, Sigma, detection-as-code, MITRE ATT&amp;CK Cloud, and the native tools across AWS, Azure, and GCP.">
+        content="Vendor-neutral guide to detection engineering in cloud - logging fundamentals, Sigma, detection-as-code, MITRE ATT&amp;CK Cloud, and the native tools across AWS, Azure, and GCP.">
     <meta name="twitter:image" content="https://csoh.org/banner.png">
 
     <link rel="preconnect" href="https://csoh.kit.com" crossorigin>
@@ -44,7 +44,7 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "Detection Engineering & Cloud Logging",
-      "description": "A vendor-neutral practitioner's guide to detection engineering in cloud — the lifecycle, logging fundamentals across AWS / Azure / GCP, Sigma and detection-as-code, MITRE ATT&CK Cloud, validation, and the SIEM / data-lake / XDR landscape.",
+      "description": "A vendor-neutral practitioner's guide to detection engineering in cloud - the lifecycle, logging fundamentals across AWS / Azure / GCP, Sigma and detection-as-code, MITRE ATT&CK Cloud, validation, and the SIEM / data-lake / XDR landscape.",
       "author": {
         "@type": "Person",
         "@id": "https://csoh.org/about-shawn-nunley.html#shawn-nunley",
@@ -85,7 +85,7 @@
           "name": "What is the difference between a SOC analyst and a detection engineer?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A SOC analyst consumes detections — they triage the alerts a rule fires, decide whether the activity is malicious, and escalate to incident response. A detection engineer builds detections — they research a technique, write the rule that catches it, tune out the false positives, deploy it through CI/CD, and validate it against simulated attacks. The roles overlap on tuning and on understanding the environment, but the detection engineer's day is mostly editing rule files in a Git repo and reading API documentation; the analyst's day is mostly working through a queue. Mature programs separate them; small programs combine them on one team that swaps between modes."
+            "text": "A SOC analyst consumes detections - they triage the alerts a rule fires, decide whether the activity is malicious, and escalate to incident response. A detection engineer builds detections - they research a technique, write the rule that catches it, tune out the false positives, deploy it through CI/CD, and validate it against simulated attacks. The roles overlap on tuning and on understanding the environment, but the detection engineer's day is mostly editing rule files in a Git repo and reading API documentation; the analyst's day is mostly working through a queue. Mature programs separate them; small programs combine them on one team that swaps between modes."
           }
         },
         {
@@ -93,7 +93,7 @@
           "name": "Which cloud logs do I actually need to enable?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "At minimum: an organization-level audit trail (CloudTrail org trail in AWS, Activity Log diagnostic settings in Azure, Cloud Audit Logs at the org node in GCP). Then identity provider sign-in logs (Entra ID sign-ins and audit logs, Okta system log, AWS IAM Identity Center). Then VPC / network flow logs at least on production VPCs. Then the platform-native threat detection findings — GuardDuty, Defender for Cloud, Security Command Center Premium. Data-plane / data-access logging (CloudTrail data events, GCP Data Access logs, Azure resource-specific diagnostic settings) is the expensive one — enable selectively on the resources that hold real data. Skipping data-plane is the single biggest detection blind spot in most cloud programs."
+            "text": "At minimum: an organization-level audit trail (CloudTrail org trail in AWS, Activity Log diagnostic settings in Azure, Cloud Audit Logs at the org node in GCP). Then identity provider sign-in logs (Entra ID sign-ins and audit logs, Okta system log, AWS IAM Identity Center). Then VPC / network flow logs at least on production VPCs. Then the platform-native threat detection findings - GuardDuty, Defender for Cloud, Security Command Center Premium. Data-plane / data-access logging (CloudTrail data events, GCP Data Access logs, Azure resource-specific diagnostic settings) is the expensive one - enable selectively on the resources that hold real data. Skipping data-plane is the single biggest detection blind spot in most cloud programs."
           }
         },
         {
@@ -101,7 +101,7 @@
           "name": "Is Sigma worth learning if my SIEM has its own query language?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes — for portability. Sigma is YAML, vendor-neutral, and converts to Splunk SPL, KQL, Elastic queries, Panther Python, Sumo Logic, and a dozen other backends via Sigmac (and the modern pySigma toolchain). The SigmaHQ public rule library is a free starting catalog you can adapt. The native query language is still where final tuning happens — Sigma converters can produce slow or imprecise queries on complex rules — but writing the canonical rule in Sigma and treating the vendor-specific output as a build artifact protects you from SIEM migrations and gives you a portable detection library."
+            "text": "Yes - for portability. Sigma is YAML, vendor-neutral, and converts to Splunk SPL, KQL, Elastic queries, Panther Python, Sumo Logic, and a dozen other backends via Sigmac (and the modern pySigma toolchain). The SigmaHQ public rule library is a free starting catalog you can adapt. The native query language is still where final tuning happens - Sigma converters can produce slow or imprecise queries on complex rules - but writing the canonical rule in Sigma and treating the vendor-specific output as a build artifact protects you from SIEM migrations and gives you a portable detection library."
           }
         },
         {
@@ -109,7 +109,7 @@
           "name": "How is detection-as-code different from compliance-as-code?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Both put rules in Git and deploy them through CI/CD. The artifacts differ: compliance-as-code rules ask 'is this resource configured correctly right now?' and evaluate against configuration state (an S3 bucket, an IAM policy). Detection-as-code rules ask 'did something bad just happen?' and evaluate against streaming events (a CloudTrail record, an Entra sign-in). The workflows look almost identical — branch, PR, test, deploy, version — but the test harness for detections has to replay sample logs against the rule, where the test harness for compliance can use IaC fixtures. Programs that have nailed one find the other much easier to adopt."
+            "text": "Both put rules in Git and deploy them through CI/CD. The artifacts differ: compliance-as-code rules ask 'is this resource configured correctly right now?' and evaluate against configuration state (an S3 bucket, an IAM policy). Detection-as-code rules ask 'did something bad just happen?' and evaluate against streaming events (a CloudTrail record, an Entra sign-in). The workflows look almost identical - branch, PR, test, deploy, version - but the test harness for detections has to replay sample logs against the rule, where the test harness for compliance can use IaC fixtures. Programs that have nailed one find the other much easier to adopt."
           }
         },
         {
@@ -117,7 +117,7 @@
           "name": "Why does GCP Data Access logging matter so much?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "GCP's Cloud Audit Logs are split into four streams: Admin Activity (free, always on), System Event (free, always on), Policy Denied (free, opt-in), and Data Access (paid, off by default for most services). Data Access is the stream that records reads of customer data — a service account listing objects in a sensitive bucket, querying a sensitive BigQuery table, decrypting a KMS key. Without it, the audit trail tells you who changed permissions but not who actually read the data. Most cloud breaches involve data access; turning the stream off saves money and blinds the detection program. Enable it deliberately on the projects that hold real data, scope it tight, and budget for the volume."
+            "text": "GCP's Cloud Audit Logs are split into four streams: Admin Activity (free, always on), System Event (free, always on), Policy Denied (free, opt-in), and Data Access (paid, off by default for most services). Data Access is the stream that records reads of customer data - a service account listing objects in a sensitive bucket, querying a sensitive BigQuery table, decrypting a KMS key. Without it, the audit trail tells you who changed permissions but not who actually read the data. Most cloud breaches involve data access; turning the stream off saves money and blinds the detection program. Enable it deliberately on the projects that hold real data, scope it tight, and budget for the volume."
           }
         },
         {
@@ -125,7 +125,7 @@
           "name": "Should I build on a SIEM or a data lake?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "SIEM (Splunk, Sentinel, Chronicle/Google SecOps, Elastic, QRadar) gives you a turnkey detection pipeline — ingest, parse, normalize, store, alert, dashboard — with the cost model and licensing of a packaged product. Data lake (Snowflake, Databricks, BigQuery, S3 + Athena/Iceberg) gives you cheaper long-term storage and arbitrary analytics, plus a 'security data lake' tool on top (Anvilogic, Hunters, Query.ai, Panther, Snowflake's own Horizon) to do the SIEM-shaped work. The 2026 reality: most large programs run both — a SIEM for the high-value real-time detections, a data lake for everything else, with the detection-as-code repo deploying rules to both backends. Small programs pick one and live with the trade-off."
+            "text": "SIEM (Splunk, Sentinel, Chronicle/Google SecOps, Elastic, QRadar) gives you a turnkey detection pipeline - ingest, parse, normalize, store, alert, dashboard - with the cost model and licensing of a packaged product. Data lake (Snowflake, Databricks, BigQuery, S3 + Athena/Iceberg) gives you cheaper long-term storage and arbitrary analytics, plus a 'security data lake' tool on top (Anvilogic, Hunters, Query.ai, Panther, Snowflake's own Horizon) to do the SIEM-shaped work. The 2026 reality: most large programs run both - a SIEM for the high-value real-time detections, a data lake for everything else, with the detection-as-code repo deploying rules to both backends. Small programs pick one and live with the trade-off."
           }
         },
         {
@@ -133,7 +133,7 @@
           "name": "How do I validate that my detections actually work?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Three complementary techniques. Unit tests: replay a sample log event against the rule and assert it fires (or doesn't). Atomic Red Team and Stratus Red Team: execute real attack techniques in a test environment and verify the corresponding detection lights up — Stratus is the cloud-specific one and ships dozens of AWS / Azure / GCP techniques as one-command executions. Purple-team exercises: a red team operates in the live environment under controlled conditions while the detection team watches; gaps surface immediately. Without at least one of these running continuously, you have a rule library, not a detection program — and you'll discover the gaps during an actual incident."
+            "text": "Three complementary techniques. Unit tests: replay a sample log event against the rule and assert it fires (or doesn't). Atomic Red Team and Stratus Red Team: execute real attack techniques in a test environment and verify the corresponding detection lights up - Stratus is the cloud-specific one and ships dozens of AWS / Azure / GCP techniques as one-command executions. Purple-team exercises: a red team operates in the live environment under controlled conditions while the detection team watches; gaps surface immediately. Without at least one of these running continuously, you have a rule library, not a detection program - and you'll discover the gaps during an actual incident."
           }
         }
       ]
@@ -281,7 +281,7 @@
       <div class="hero-inner">
         <div class="hero-text">
           <h1>Detection Engineering &amp; Cloud Logging</h1>
-          <p>The build side of cloud threat detection — the logs each cloud emits and where, the lifecycle that turns a threat-research finding into a tuned production rule, <a class="glossary-link" href="glossary.html#term-sigma">Sigma</a> and detection-as-code, <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud coverage, and how to validate that your detections actually fire when the technique runs. Vendor-neutral, opinionated, AWS / Azure / GCP.</p>
+          <p>The build side of cloud threat detection - the logs each cloud emits and where, the lifecycle that turns a threat-research finding into a tuned production rule, <a class="glossary-link" href="glossary.html#term-sigma">Sigma</a> and detection-as-code, <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud coverage, and how to validate that your detections actually fire when the technique runs. Vendor-neutral, opinionated, AWS / Azure / GCP.</p>
           <div class="cta-buttons">
             <a href="#lifecycle" class="btn btn-primary">The lifecycle →</a>
             <a href="#comparison" class="btn btn-secondary">AWS / Azure / GCP comparison</a>
@@ -371,7 +371,7 @@
                 <li><a href="#lifecycle">The detection engineering lifecycle</a></li>
                 <li><a href="#logging">Cloud logging fundamentals</a></li>
                 <li><a href="#data-access">The data-access log gotcha</a></li>
-                <li><a href="#sigma">Sigma — the lingua franca</a></li>
+                <li><a href="#sigma">Sigma - the lingua franca</a></li>
                 <li><a href="#vendor-langs">Vendor detection languages</a></li>
                 <li><a href="#attack">MITRE ATT&amp;CK Cloud Matrix</a></li>
                 <li><a href="#detection-as-code">Detection-as-code workflow</a></li>
@@ -379,7 +379,7 @@
                 <li><a href="#siem-lake">SIEM vs data lake vs XDR</a></li>
                 <li><a href="#retention">Log retention &amp; cost</a></li>
                 <li><a href="#beyond-audit">Signal sources beyond audit logs</a></li>
-                <li><a href="#example">Building a detection — walkthrough</a></li>
+                <li><a href="#example">Building a detection - walkthrough</a></li>
                 <li><a href="#tuning">Tuning &amp; noise reduction</a></li>
                 <li><a href="#validation">Validation &amp; purple teaming</a></li>
                 <li><a href="#comparison">AWS / Azure / GCP side-by-side</a></li>
@@ -392,27 +392,27 @@
 
         <section id="what-is">
             <h2>What detection engineering is</h2>
-            <p>Detection engineering is the discipline that produces, tests, and maintains the rules a <a class="glossary-link" href="glossary.html#term-soc">SOC</a> depends on. It is <em>not</em> the same as SOC analysis. The analyst sits in front of a queue of alerts and decides whether each one represents real malicious activity. The detection engineer sits in front of a code repo and a sample-log corpus and decides what the rule should match in the first place — and what it should ignore.</p>
-            <p>The two roles think differently. A SOC analyst's currency is triage minutes per alert and the false-positive rate of their queue; a detection engineer's currency is rules-deployed-per-quarter, mean time from threat-research finding to detection in production, and ATT&amp;CK technique coverage. They cooperate constantly — the analyst's "I'm seeing this pattern again" feeds the engineer's backlog, and the engineer's new rule lands in the analyst's queue.</p>
+            <p>Detection engineering is the discipline that produces, tests, and maintains the rules a <a class="glossary-link" href="glossary.html#term-soc">SOC</a> depends on. It is <em>not</em> the same as SOC analysis. The analyst sits in front of a queue of alerts and decides whether each one represents real malicious activity. The detection engineer sits in front of a code repo and a sample-log corpus and decides what the rule should match in the first place - and what it should ignore.</p>
+            <p>The two roles think differently. A SOC analyst's currency is triage minutes per alert and the false-positive rate of their queue; a detection engineer's currency is rules-deployed-per-quarter, mean time from threat-research finding to detection in production, and ATT&amp;CK technique coverage. They cooperate constantly - the analyst's "I'm seeing this pattern again" feeds the engineer's backlog, and the engineer's new rule lands in the analyst's queue.</p>
             <p>The reason the role exists separately is that modern detection looks much more like software engineering than like operations. Rules live in Git. They have unit tests. They go through code review. They deploy via <a class="glossary-link" href="glossary.html#term-ci-cd">CI</a>/CD to one or more SIEM or data-lake backends. They have version history, owners, ATT&amp;CK mappings, severity ratings, and an explicit retirement criterion. Programs that treat detection as a side-of-desk activity for the SOC team accumulate stale, untested rules and never close the coverage gaps that matter.</p>
-            <p>This page is the practitioner's view of the build side. For the consume side — alert triage, SOC structure, incident playbooks — see the <a href="cloud-soc.html">Cloud SOC page</a>.</p>
+            <p>This page is the practitioner's view of the build side. For the consume side - alert triage, SOC structure, incident playbooks - see the <a href="cloud-soc.html">Cloud SOC page</a>.</p>
         </section>
 
         <section id="lifecycle">
             <h2>The detection engineering lifecycle</h2>
-            <p>The widely-cited model is Palantir's: <strong>research → develop → tune → deploy → validate → retire</strong>. Each phase has explicit inputs, outputs, and exit criteria. The lifecycle isn't ceremony — it's the only thing that keeps a rule library from becoming a graveyard.</p>
+            <p>The widely-cited model is Palantir's: <strong>research → develop → tune → deploy → validate → retire</strong>. Each phase has explicit inputs, outputs, and exit criteria. The lifecycle isn't ceremony - it's the only thing that keeps a rule library from becoming a graveyard.</p>
             <div class="pillar-grid">
                 <div class="pillar-card pillar-card-iam">
                     <h3>1. Research</h3>
-                    <p>Start with a threat — an ATT&amp;CK technique, a <a class="glossary-link" href="glossary.html#term-threat-intelligence">CTI</a> report, a vendor advisory, an internal red-team finding, a real incident from yourself or a peer. Understand the technique end-to-end: what API calls it generates, what log fields are diagnostic, what benign activity looks similar. Output: a written hypothesis of "we should be able to detect X by looking for Y in Z."</p>
+                    <p>Start with a threat - an ATT&amp;CK technique, a <a class="glossary-link" href="glossary.html#term-threat-intelligence">CTI</a> report, a vendor advisory, an internal red-team finding, a real incident from yourself or a peer. Understand the technique end-to-end: what API calls it generates, what log fields are diagnostic, what benign activity looks similar. Output: a written hypothesis of "we should be able to detect X by looking for Y in Z."</p>
                 </div>
                 <div class="pillar-card pillar-card-detect">
                     <h3>2. Develop</h3>
-                    <p>Write the rule. Canonical form in Sigma where possible, or directly in the backend's query language. Include metadata — ATT&amp;CK technique IDs, severity, owner, references. Run the rule against a corpus of historical logs and a corpus of test attack telemetry. Iterate. Output: a rule file in the Git repo with passing unit tests.</p>
+                    <p>Write the rule. Canonical form in Sigma where possible, or directly in the backend's query language. Include metadata - ATT&amp;CK technique IDs, severity, owner, references. Run the rule against a corpus of historical logs and a corpus of test attack telemetry. Iterate. Output: a rule file in the Git repo with passing unit tests.</p>
                 </div>
                 <div class="pillar-card pillar-card-posture">
                     <h3>3. Tune</h3>
-                    <p>Run the rule against 7–30 days of historical production logs (a "backtest"). Measure the false-positive rate, identify benign sources, add suppressions or refine the logic. The acceptance bar is the analyst's tolerance — a rule that fires 50 times a day is dead on arrival unless every fire is an emergency. Output: a backtest report and a tuned rule.</p>
+                    <p>Run the rule against 7–30 days of historical production logs (a "backtest"). Measure the false-positive rate, identify benign sources, add suppressions or refine the logic. The acceptance bar is the analyst's tolerance - a rule that fires 50 times a day is dead on arrival unless every fire is an emergency. Output: a backtest report and a tuned rule.</p>
                 </div>
                 <div class="pillar-card pillar-card-network">
                     <h3>4. Deploy</h3>
@@ -427,7 +427,7 @@
                     <p>Every rule needs a retirement criterion. The underlying API is deprecated; the technique no longer applies; the false-positive rate has crept past tolerable; a better rule supersedes it. Without an explicit retirement step, dead rules accumulate and the analyst queue silently degrades. Output: an archived rule with a stated reason.</p>
                 </div>
             </div>
-            <p>Two things distinguish mature programs from immature ones in this lifecycle. First, every step produces an artifact that lives in version control — the hypothesis, the backtest, the validation result. Second, the loop closes: a missed-detection incident in production triggers a research item, not just a postmortem action that quietly never ships.</p>
+            <p>Two things distinguish mature programs from immature ones in this lifecycle. First, every step produces an artifact that lives in version control - the hypothesis, the backtest, the validation result. Second, the loop closes: a missed-detection incident in production triggers a research item, not just a postmortem action that quietly never ships.</p>
         </section>
 
         <section id="logging">
@@ -436,15 +436,15 @@
 
             <h3>AWS</h3>
             <ul>
-                <li><strong><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-record-contents.html" target="_blank" rel="noopener noreferrer">CloudTrail — management events</a></strong>. The control-plane audit log. Every API call against an AWS service: <code>CreateUser</code>, <code>AssumeRole</code>, <code>PutBucketPolicy</code>, <code>StartInstance</code>. On by default for the last 90 days in the console; you must create an organization trail to ship the events to <a class="glossary-link" href="glossary.html#term-s3">S3</a> and aggregate across accounts. This is the single most important AWS log source.</li>
-                <li><strong>CloudTrail — data events</strong>. The <em>data-plane</em> audit log: <code>GetObject</code> on S3, <code>Invoke</code> on <a class="glossary-link" href="glossary.html#term-lambda">Lambda</a>, queries on DynamoDB. <strong>Off by default and per-resource scoped.</strong> Charged per event. Without it, you cannot see who read sensitive data — only who changed its permissions.</li>
-                <li><strong>CloudTrail — Insights events</strong>. Anomaly detection on the management-event stream. Surfaces unusual write-API rates and error rates. Useful as a cheap "something is up" signal.</li>
+                <li><strong><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-record-contents.html" target="_blank" rel="noopener noreferrer">CloudTrail - management events</a></strong>. The control-plane audit log. Every API call against an AWS service: <code>CreateUser</code>, <code>AssumeRole</code>, <code>PutBucketPolicy</code>, <code>StartInstance</code>. On by default for the last 90 days in the console; you must create an organization trail to ship the events to <a class="glossary-link" href="glossary.html#term-s3">S3</a> and aggregate across accounts. This is the single most important AWS log source.</li>
+                <li><strong>CloudTrail - data events</strong>. The <em>data-plane</em> audit log: <code>GetObject</code> on S3, <code>Invoke</code> on <a class="glossary-link" href="glossary.html#term-lambda">Lambda</a>, queries on DynamoDB. <strong>Off by default and per-resource scoped.</strong> Charged per event. Without it, you cannot see who read sensitive data - only who changed its permissions.</li>
+                <li><strong>CloudTrail - Insights events</strong>. Anomaly detection on the management-event stream. Surfaces unusual write-API rates and error rates. Useful as a cheap "something is up" signal.</li>
                 <li><strong>CloudTrail Lake</strong>. A managed event data store on top of CloudTrail with SQL query, retention controls, and <a class="glossary-link" href="glossary.html#term-federation">federation</a>. Reduces the need to ship trails into a separate SIEM for the simplest cases.</li>
                 <li><strong><a class="glossary-link" href="glossary.html#term-vpc">VPC</a> Flow Logs</strong>. Network metadata (5-tuple + accept/reject) at the <a class="glossary-link" href="glossary.html#term-eni">ENI</a>, subnet, or VPC level. Choose v5 with custom fields for the useful ones (TCP flags, traffic path, region). The default sampling and aggregation interval (1 minute) is fine for detection; raise to per-flow for forensics.</li>
                 <li><strong>Route 53 query logs</strong>. DNS resolution events from your VPCs. Crucial for <a class="glossary-link" href="glossary.html#term-c2">C2</a> / DGA detection.</li>
                 <li><strong>S3 server access logs</strong> / <strong>S3 access logs via CloudTrail data events</strong>. Two ways to get S3 read/write logs; CloudTrail data events is structured JSON and is the modern choice. S3 server access logs are legacy text format.</li>
                 <li><strong>CloudWatch Logs</strong>. The umbrella destination for application logs, Lambda execution logs, <a class="glossary-link" href="glossary.html#term-eks">EKS</a> control plane logs, and many service-specific streams. Subscriptions to Kinesis Firehose / S3 / SIEM are the standard <a class="glossary-link" href="glossary.html#term-ingress">egress</a> pattern.</li>
-                <li><strong><a class="glossary-link" href="glossary.html#term-guardduty">GuardDuty</a> findings</strong>. Managed threat-detection findings as a structured stream — see the <a href="#native-detection">native section</a> below.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-guardduty">GuardDuty</a> findings</strong>. Managed threat-detection findings as a structured stream - see the <a href="#native-detection">native section</a> below.</li>
                 <li><strong>Security Hub findings</strong>. Aggregated findings from GuardDuty, Inspector, Macie, <a class="glossary-link" href="glossary.html#term-iam">IAM</a> Access Analyzer, Config Rules, and third-party CSPMs, in a normalized ASFF (AWS Security Finding Format) shape.</li>
                 <li><strong>IAM Identity Center / <a class="glossary-link" href="glossary.html#term-iam-access-analyzer">IAM Access Analyzer</a></strong>. Sign-in events, permission analyses, last-used reports. Identity-side detection signal.</li>
             </ul>
@@ -453,35 +453,35 @@
             <ul>
                 <li><strong><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/platform/activity-log" target="_blank" rel="noopener noreferrer">Activity Log</a></strong>. The Azure control-plane audit log at the subscription / management-group level. Equivalent of CloudTrail management events. Configure Diagnostic Settings to ship to Log Analytics / Event Hub / storage.</li>
                 <li><strong><a class="glossary-link" href="glossary.html#term-entra-id">Entra ID</a> Sign-in Logs</strong>. Every authentication against an Entra-protected resource: user, app, location, conditional-access result. The single most-queried log in any Microsoft environment.</li>
-                <li><strong>Entra ID Audit Logs</strong>. Directory-change events — user creation, group membership, role assignment, conditional-access policy edits. Pair with Sign-in for identity-side detection.</li>
+                <li><strong>Entra ID Audit Logs</strong>. Directory-change events - user creation, group membership, role assignment, conditional-access policy edits. Pair with Sign-in for identity-side detection.</li>
                 <li><strong>Diagnostic Settings (per-resource)</strong>. The mechanism by which resource-specific logs leave the resource and go somewhere queryable. Many high-value logs (<a class="glossary-link" href="glossary.html#term-key-vault">Key Vault</a> audit, Storage data-plane, SQL audit) are <strong>off by default</strong> until a Diagnostic Setting is configured.</li>
                 <li><strong><a class="glossary-link" href="glossary.html#term-nsg">NSG</a> Flow Logs</strong> / <strong>VNet Flow Logs</strong> (v2). Network metadata at the network-security-group or vnet level. VNet flow logs are the newer, recommended option.</li>
-                <li><strong>Microsoft Defender for Cloud — Recommendations &amp; Alerts</strong>. The posture and threat-detection findings stream from Defender for Cloud's <a class="glossary-link" href="glossary.html#term-cwpp">CWPP</a> plans.</li>
-                <li><strong><a class="glossary-link" href="glossary.html#term-sentinel">Microsoft Sentinel</a></strong>. Microsoft's SIEM — runs on top of Log Analytics workspaces and ingests Activity Log, Entra logs, Defender alerts, and third-party connectors. KQL is the query language.</li>
-                <li><strong>Microsoft 365 Unified Audit Log</strong>. <a class="glossary-link" href="glossary.html#term-saas">SaaS</a>-side audit events for Exchange, SharePoint, Teams, Purview. Critical if M365 is in scope — and it usually is.</li>
+                <li><strong>Microsoft Defender for Cloud - Recommendations &amp; Alerts</strong>. The posture and threat-detection findings stream from Defender for Cloud's <a class="glossary-link" href="glossary.html#term-cwpp">CWPP</a> plans.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-sentinel">Microsoft Sentinel</a></strong>. Microsoft's SIEM - runs on top of Log Analytics workspaces and ingests Activity Log, Entra logs, Defender alerts, and third-party connectors. KQL is the query language.</li>
+                <li><strong>Microsoft 365 Unified Audit Log</strong>. <a class="glossary-link" href="glossary.html#term-saas">SaaS</a>-side audit events for Exchange, SharePoint, Teams, Purview. Critical if M365 is in scope - and it usually is.</li>
             </ul>
 
             <h3>GCP</h3>
             <ul>
-                <li><strong><a href="https://docs.cloud.google.com/logging/docs/audit" target="_blank" rel="noopener noreferrer">Cloud Audit Logs</a> — Admin Activity</strong>. Control-plane operations. Free, always on, 400-day retention by default at the project level. Aggregate to an org-level log sink for cross-project queryability.</li>
-                <li><strong>Cloud Audit Logs — System Event</strong>. Google-initiated events affecting your resources (live migration, automated maintenance, defender actions). Free, always on.</li>
-                <li><strong>Cloud Audit Logs — Policy Denied</strong>. Logs when an IAM or VPC-SC policy denies an action. Free, opt-in. Excellent attack-surface signal.</li>
-                <li><strong>Cloud Audit Logs — Data Access</strong>. The data-plane stream — reads of data in BigQuery, Cloud Storage, Pub/Sub, etc. <strong>Off by default for most services; paid.</strong> See the <a href="#data-access">data-access gotcha section</a>.</li>
-                <li><strong><a class="glossary-link" href="glossary.html#term-vpc-flow-logs">VPC Flow Logs</a></strong>. Network metadata at the subnet level. Granular sampling controls. Don't forget Firewall Rules Logging — a separate enablement.</li>
+                <li><strong><a href="https://docs.cloud.google.com/logging/docs/audit" target="_blank" rel="noopener noreferrer">Cloud Audit Logs</a> - Admin Activity</strong>. Control-plane operations. Free, always on, 400-day retention by default at the project level. Aggregate to an org-level log sink for cross-project queryability.</li>
+                <li><strong>Cloud Audit Logs - System Event</strong>. Google-initiated events affecting your resources (live migration, automated maintenance, defender actions). Free, always on.</li>
+                <li><strong>Cloud Audit Logs - Policy Denied</strong>. Logs when an IAM or VPC-SC policy denies an action. Free, opt-in. Excellent attack-surface signal.</li>
+                <li><strong>Cloud Audit Logs - Data Access</strong>. The data-plane stream - reads of data in BigQuery, Cloud Storage, Pub/Sub, etc. <strong>Off by default for most services; paid.</strong> See the <a href="#data-access">data-access gotcha section</a>.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-vpc-flow-logs">VPC Flow Logs</a></strong>. Network metadata at the subnet level. Granular sampling controls. Don't forget Firewall Rules Logging - a separate enablement.</li>
                 <li><strong>Cloud DNS query logs</strong>. DNS-side detection signal, enabled per-policy.</li>
                 <li><strong>Security Command Center (SCC)</strong>. The aggregator: Event Threat Detection, Container Threat Detection, VM Threat Detection, Security Health Analytics. Findings stream out to Pub/Sub for SIEM ingestion. See the <a href="#native-detection">native section</a>.</li>
-                <li><strong>Access Transparency &amp; Access Approval</strong>. Logs and approvals for Google-personnel access to your data — an attestation source that's unusually well-developed on GCP.</li>
+                <li><strong>Access Transparency &amp; Access Approval</strong>. Logs and approvals for Google-personnel access to your data - an attestation source that's unusually well-developed on GCP.</li>
                 <li><strong>Google Workspace Admin SDK / Reports API</strong>. SaaS-side audit events. Pull via API or stream to BigQuery.</li>
             </ul>
 
             <h3>Identity providers (the often-skipped layer)</h3>
             <ul>
-                <li><strong>Okta</strong> — System Log API, every authentication and admin action.</li>
-                <li><strong>Entra ID</strong> — covered above; the cloud-provider audit logs don't show identity-provider activity that didn't reach the cloud.</li>
-                <li><strong>JumpCloud, OneLogin, Ping, Auth0</strong> — every modern <a class="glossary-link" href="glossary.html#term-idp">IdP</a> exposes an event stream, usually as webhook or API.</li>
-                <li><strong>Workspace / M365</strong> — the SaaS-platform audit logs that record what humans did in productivity tools.</li>
+                <li><strong>Okta</strong> - System Log API, every authentication and admin action.</li>
+                <li><strong>Entra ID</strong> - covered above; the cloud-provider audit logs don't show identity-provider activity that didn't reach the cloud.</li>
+                <li><strong>JumpCloud, OneLogin, Ping, Auth0</strong> - every modern <a class="glossary-link" href="glossary.html#term-idp">IdP</a> exposes an event stream, usually as webhook or API.</li>
+                <li><strong>Workspace / M365</strong> - the SaaS-platform audit logs that record what humans did in productivity tools.</li>
             </ul>
-            <p>If you ingest only one extra source beyond cloud control planes, ingest the IdP. The majority of cloud incidents start at identity — an <a class="glossary-link" href="glossary.html#term-mfa">MFA</a>-fatigue push, a stolen session token, a service-account key leaked to GitHub — and the IdP log sees the first event in the <a class="glossary-link" href="glossary.html#term-kill-chain">kill chain</a>.</p>
+            <p>If you ingest only one extra source beyond cloud control planes, ingest the IdP. The majority of cloud incidents start at identity - an <a class="glossary-link" href="glossary.html#term-mfa">MFA</a>-fatigue push, a stolen session token, a service-account key leaked to GitHub - and the IdP log sees the first event in the <a class="glossary-link" href="glossary.html#term-kill-chain">kill chain</a>.</p>
         </section>
 
         <section id="data-access">
@@ -512,8 +512,8 @@
                         </tr>
                         <tr>
                             <th scope="row">GCP</th>
-                            <td>Cloud Audit Logs — Admin Activity (free)</td>
-                            <td>Cloud Audit Logs — Data Access (paid)</td>
+                            <td>Cloud Audit Logs - Admin Activity (free)</td>
+                            <td>Cloud Audit Logs - Data Access (paid)</td>
                             <td>Off for most services; explicit opt-in in IAM audit-config</td>
                         </tr>
                     </tbody>
@@ -524,14 +524,14 @@
         </section>
 
         <section id="sigma">
-            <h2>Sigma — the lingua franca</h2>
+            <h2>Sigma - the lingua franca</h2>
             <p><a href="https://sigmahq.io/" target="_blank" rel="noopener noreferrer">Sigma</a> is a YAML-based, vendor-neutral format for describing log-based detections. It exists because every SIEM has its own query language (Splunk SPL, KQL for Sentinel and Defender, Elastic ESQL/EQL, Sumo Logic, Datadog, Panther's Python) and writing the same rule in five places is the worst possible use of detection-engineer time.</p>
             <p>A Sigma rule names the log source, declares match conditions, and tags ATT&amp;CK techniques, severity, references, and an owner. A converter (the original Sigmac, the modern <a href="https://github.com/SigmaHQ/pySigma" target="_blank" rel="noopener noreferrer">pySigma</a>, or a vendor-provided one) compiles it to the target SIEM's query language. The Sigma source is the canonical artifact in your detection-as-code repo; the compiled output is a build artifact.</p>
             <h3>What Sigma is good at</h3>
             <ul>
                 <li><strong>Portability.</strong> One rule, multiple backends. Useful if you run a SIEM and a data lake, or migrate between SIEMs.</li>
                 <li><strong>Shared catalogs.</strong> The <a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener noreferrer">SigmaHQ public rule library</a> is thousands of community-maintained rules covering Windows, Linux, AWS, Azure, GCP, Okta, GitHub, etc. A useful starter library and benchmark.</li>
-                <li><strong>Readability.</strong> Sigma is more readable than most native query languages — easier to review in a PR.</li>
+                <li><strong>Readability.</strong> Sigma is more readable than most native query languages - easier to review in a PR.</li>
                 <li><strong>Versioning.</strong> Stable rule IDs and explicit revision tracking are part of the spec.</li>
             </ul>
             <h3>What Sigma is not good at</h3>
@@ -550,55 +550,55 @@
                 <li><strong>Splunk SPL</strong>. Pipeline-style syntax (<code>search ... | stats ... | where ...</code>). The most widely-known SIEM language. Splunk Cloud and Splunk Enterprise Security are still industry-standard at large enterprises.</li>
                 <li><strong>KQL (Kusto Query Language)</strong>. Microsoft's language for Sentinel, Defender <a class="glossary-link" href="glossary.html#term-edr">XDR</a>, Defender for Cloud, and Azure Monitor / Log Analytics. Also pipeline-style; more SQL-like than SPL. Cross-workspace queries are first-class.</li>
                 <li><strong>Elastic ESQL &amp; EQL</strong>. Elastic's newer pipeline language (ESQL) and its older sequence-aware language (EQL) for endpoint-style chained detections. Lucene / KQL (the Kibana flavor, not Microsoft's) for ad-hoc.</li>
-                <li><strong>Panther (Python)</strong>. Detections-as-code platform where rules are Python functions. Strong story for testing — every detection comes with sample-event tests. Plays well with Snowflake and data-lake-style architectures.</li>
-                <li><strong>Chronicle / Google SecOps — <a class="glossary-link" href="glossary.html#term-yara">YARA</a>-L 2.0</strong>. Google's detection language, derived from YARA's pattern syntax. Sequence-aware, hyper-fast against Chronicle's columnar store. Built-in ATT&amp;CK and <a class="glossary-link" href="glossary.html#term-ioc">IOC</a> enrichment.</li>
+                <li><strong>Panther (Python)</strong>. Detections-as-code platform where rules are Python functions. Strong story for testing - every detection comes with sample-event tests. Plays well with Snowflake and data-lake-style architectures.</li>
+                <li><strong>Chronicle / Google SecOps - <a class="glossary-link" href="glossary.html#term-yara">YARA</a>-L 2.0</strong>. Google's detection language, derived from YARA's pattern syntax. Sequence-aware, hyper-fast against Chronicle's columnar store. Built-in ATT&amp;CK and <a class="glossary-link" href="glossary.html#term-ioc">IOC</a> enrichment.</li>
                 <li><strong>Sumo Logic</strong>. Pipeline language similar to SPL.</li>
                 <li><strong>Datadog (Cloud SIEM)</strong>. Tag-based query syntax aligned with Datadog's broader observability model.</li>
-                <li><strong>Snowflake / BigQuery / Athena (SQL)</strong>. When the backend is a data lake, the detection language is just SQL — with scheduled queries or a security-data-lake layer (Anvilogic, Hunters, Query.ai) on top.</li>
-                <li><strong><a class="glossary-link" href="glossary.html#term-falco">Falco</a> rules</strong> (YAML). The detection language for runtime / syscall events from Falco. Different shape — closer to <a class="glossary-link" href="glossary.html#term-opa">OPA</a> than SIEM.</li>
+                <li><strong>Snowflake / BigQuery / Athena (SQL)</strong>. When the backend is a data lake, the detection language is just SQL - with scheduled queries or a security-data-lake layer (Anvilogic, Hunters, Query.ai) on top.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-falco">Falco</a> rules</strong> (YAML). The detection language for runtime / syscall events from Falco. Different shape - closer to <a class="glossary-link" href="glossary.html#term-opa">OPA</a> than SIEM.</li>
             </ul>
-            <p>Pick the language your stack actually runs. Then read other languages' rule libraries — Splunk's public detections, Microsoft's <a href="https://github.com/Azure/Azure-Sentinel" target="_blank" rel="noopener noreferrer">Sentinel content hub</a>, Elastic's <a href="https://github.com/elastic/detection-rules" target="_blank" rel="noopener noreferrer">detection-rules</a> repo, Panther's analysis pack, and Chronicle's content packs are all valuable cross-reference even when you can't run their rules directly.</p>
+            <p>Pick the language your stack actually runs. Then read other languages' rule libraries - Splunk's public detections, Microsoft's <a href="https://github.com/Azure/Azure-Sentinel" target="_blank" rel="noopener noreferrer">Sentinel content hub</a>, Elastic's <a href="https://github.com/elastic/detection-rules" target="_blank" rel="noopener noreferrer">detection-rules</a> repo, Panther's analysis pack, and Chronicle's content packs are all valuable cross-reference even when you can't run their rules directly.</p>
         </section>
 
         <section id="attack">
             <h2>MITRE ATT&amp;CK Cloud Matrix</h2>
             <p><a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK</a> is the threat-model taxonomy detection engineers and SOC analysts share. The Enterprise matrix has cloud-specific sub-matrices that matter directly to the role:</p>
             <ul>
-                <li><strong><a class="glossary-link" href="glossary.html#term-iaas">IaaS</a></strong> — AWS, Azure, GCP infrastructure techniques: cloud account discovery, instance metadata abuse, modification of trust policies, snapshot <a class="glossary-link" href="glossary.html#term-exfiltration">exfiltration</a>.</li>
-                <li><strong>SaaS</strong> — generic SaaS-platform techniques: API exploitation, OAuth-app abuse, session-token theft.</li>
-                <li><strong>Office 365</strong> — Microsoft 365 / Exchange / SharePoint techniques: inbox rules, mailbox forwarding, eDiscovery abuse.</li>
-                <li><strong>Google Workspace</strong> — Workspace-specific techniques: app password abuse, Drive sharing exfiltration, Workspace admin role abuse.</li>
-                <li><strong>Azure AD / Entra ID</strong> — identity-platform techniques: device-code <a class="glossary-link" href="glossary.html#term-phishing">phishing</a>, Primary Refresh Token theft, conditional-access bypass, <a class="glossary-link" href="glossary.html#term-golden-saml">golden SAML</a>.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-iaas">IaaS</a></strong> - AWS, Azure, GCP infrastructure techniques: cloud account discovery, instance metadata abuse, modification of trust policies, snapshot <a class="glossary-link" href="glossary.html#term-exfiltration">exfiltration</a>.</li>
+                <li><strong>SaaS</strong> - generic SaaS-platform techniques: API exploitation, OAuth-app abuse, session-token theft.</li>
+                <li><strong>Office 365</strong> - Microsoft 365 / Exchange / SharePoint techniques: inbox rules, mailbox forwarding, eDiscovery abuse.</li>
+                <li><strong>Google Workspace</strong> - Workspace-specific techniques: app password abuse, Drive sharing exfiltration, Workspace admin role abuse.</li>
+                <li><strong>Azure AD / Entra ID</strong> - identity-platform techniques: device-code <a class="glossary-link" href="glossary.html#term-phishing">phishing</a>, Primary Refresh Token theft, conditional-access bypass, <a class="glossary-link" href="glossary.html#term-golden-saml">golden SAML</a>.</li>
             </ul>
-            <p>Every detection rule in a mature program tags one or more ATT&amp;CK techniques. The mappings are what produce the coverage report — "we have detections for 142 of the 213 cloud techniques relevant to our environment; here's the prioritized backlog of the rest." That coverage report is the single most-requested artifact when a CISO or a customer asks about the detection program's maturity.</p>
+            <p>Every detection rule in a mature program tags one or more ATT&amp;CK techniques. The mappings are what produce the coverage report - "we have detections for 142 of the 213 cloud techniques relevant to our environment; here's the prioritized backlog of the rest." That coverage report is the single most-requested artifact when a CISO or a customer asks about the detection program's maturity.</p>
             <p>Cross-reference ATT&amp;CK with the open-source <a href="https://github.com/center-for-threat-informed-defense/security-stack-mappings" target="_blank" rel="noopener noreferrer">Center for Threat-Informed Defense security stack mappings</a>, which connect ATT&amp;CK techniques to specific AWS, Azure, GCP service controls. Useful when planning <em>preventative</em> coverage alongside detective.</p>
         </section>
 
         <section id="detection-as-code">
             <h2>Detection-as-code workflow</h2>
-            <p>Detection-as-code treats detection rules with the engineering rigor any other production code gets — branching, code review, automated testing, CI/CD deployment, observability of failures. The mechanics:</p>
+            <p>Detection-as-code treats detection rules with the engineering rigor any other production code gets - branching, code review, automated testing, CI/CD deployment, observability of failures. The mechanics:</p>
             <ul>
                 <li><strong>The repo.</strong> One Git repository for the detection content. Top-level folders by log source or by ATT&amp;CK tactic; per-rule files contain the rule, sample events for tests, ATT&amp;CK tags, owner, severity, validation references. Schemas vary by tool (Panther, Splunk Content Control Tower / Splunk <a class="glossary-link" href="glossary.html#term-soar">SOAR</a> Content, Sentinel content hub, Elastic detection-rules, custom).</li>
                 <li><strong>The pipeline.</strong> On PR: lint the YAML / Python, validate against the rule schema, run unit tests (replay sample events, assert fire/no-fire), optionally compile Sigma → backend language, optionally backtest against a sample log corpus. On merge: deploy via the backend's API to staging; promote to production on a separate workflow.</li>
                 <li><strong>The tests.</strong> Every rule ships with at least one positive test (an event that should fire) and at least one negative test (an event that looks similar but shouldn't). Modern tools (Panther, Elastic detection-rules, Splunk Security Content) bake the test harness in.</li>
                 <li><strong>Versioning.</strong> Every rule has a stable ID; every revision is a commit; every deploy carries the commit SHA. When the SOC analyst asks "when did this rule change?" the answer is in the Git log.</li>
                 <li><strong>The build.</strong> Sigma-source rules compile to backend-specific output at build time, not runtime. The output is a deployment artifact.</li>
-                <li><strong>The deployment.</strong> SIEM APIs (Splunk REST, Sentinel ARM templates, Elastic Kibana Detection Engine API, Chronicle's API, Panther's deployment) are the destination. Manual rule edits in the SIEM UI are forbidden by policy — drift detection in the pipeline catches them.</li>
+                <li><strong>The deployment.</strong> SIEM APIs (Splunk REST, Sentinel ARM templates, Elastic Kibana Detection Engine API, Chronicle's API, Panther's deployment) are the destination. Manual rule edits in the SIEM UI are forbidden by policy - drift detection in the pipeline catches them.</li>
             </ul>
             <p>Reference open-source content repos for the shape: <a href="https://github.com/elastic/detection-rules" target="_blank" rel="noopener noreferrer">Elastic detection-rules</a>, <a href="https://github.com/Azure/Azure-Sentinel" target="_blank" rel="noopener noreferrer">Azure Sentinel</a>, <a href="https://github.com/splunk/security_content" target="_blank" rel="noopener noreferrer">Splunk Security Content</a>, <a href="https://github.com/panther-labs/panther-analysis" target="_blank" rel="noopener noreferrer">Panther Analysis</a>. Each has its own conventions; the patterns rhyme.</p>
         </section>
 
         <section id="native-detection">
             <h2>Native threat-detection services</h2>
-            <p>Each major cloud ships a managed threat-detection service. Detection engineers use them as <em>signal sources</em> — high-confidence findings that flow into the SIEM as one input among many — rather than as a complete detection program. The tradeoff is the same in every cloud: the managed service catches the well-known stuff cheaply; everything else still needs custom rules.</p>
+            <p>Each major cloud ships a managed threat-detection service. Detection engineers use them as <em>signal sources</em> - high-confidence findings that flow into the SIEM as one input among many - rather than as a complete detection program. The tradeoff is the same in every cloud: the managed service catches the well-known stuff cheaply; everything else still needs custom rules.</p>
             <h3>AWS GuardDuty</h3>
-            <p><a href="https://aws.amazon.com/guardduty/" target="_blank" rel="noopener noreferrer">GuardDuty</a> analyzes CloudTrail, VPC Flow Logs, DNS queries, S3 data events, EKS audit logs, Lambda invocation logs, EBS volume snapshots, and RDS login activity. Findings are categorized by attack stage (Reconnaissance, Discovery, CredentialAccess, etc.) and map to ATT&amp;CK. Strong areas: instance compromise, S3 anomalies, mining/crypto activity, credential exfiltration. Weak areas: low-and-slow insider activity, anything that requires environment-specific context (your "this user shouldn't be in this region" rule). Cost scales with API-call volume — large environments need budgeting.</p>
+            <p><a href="https://aws.amazon.com/guardduty/" target="_blank" rel="noopener noreferrer">GuardDuty</a> analyzes CloudTrail, VPC Flow Logs, DNS queries, S3 data events, EKS audit logs, Lambda invocation logs, EBS volume snapshots, and RDS login activity. Findings are categorized by attack stage (Reconnaissance, Discovery, CredentialAccess, etc.) and map to ATT&amp;CK. Strong areas: instance compromise, S3 anomalies, mining/crypto activity, credential exfiltration. Weak areas: low-and-slow insider activity, anything that requires environment-specific context (your "this user shouldn't be in this region" rule). Cost scales with API-call volume - large environments need budgeting.</p>
             <h3>Microsoft Defender for Cloud</h3>
-            <p><a href="https://azure.microsoft.com/en-us/products/defender-for-cloud" target="_blank" rel="noopener noreferrer">Defender for Cloud</a> bundles <a class="glossary-link" href="glossary.html#term-cspm">CSPM</a> and CWPP plans, each producing findings. Defender for Servers, Containers, Storage, SQL, Key Vault, App Service, ARM, DNS, Cloud Database, and APIs each shed detections. Tightly integrated with Sentinel (the SIEM) and Defender XDR (the unified XDR plane). Strong on Microsoft-platform context — Entra, M365, Windows — and on integrating identity-side and infrastructure-side signal. Cost is per-plan and per-resource; the bill is non-trivial at scale.</p>
+            <p><a href="https://azure.microsoft.com/en-us/products/defender-for-cloud" target="_blank" rel="noopener noreferrer">Defender for Cloud</a> bundles <a class="glossary-link" href="glossary.html#term-cspm">CSPM</a> and CWPP plans, each producing findings. Defender for Servers, Containers, Storage, SQL, Key Vault, App Service, ARM, DNS, Cloud Database, and APIs each shed detections. Tightly integrated with Sentinel (the SIEM) and Defender XDR (the unified XDR plane). Strong on Microsoft-platform context - Entra, M365, Windows - and on integrating identity-side and infrastructure-side signal. Cost is per-plan and per-resource; the bill is non-trivial at scale.</p>
             <h3>Google Security Command Center</h3>
-            <p><a href="https://cloud.google.com/security/products/security-command-center" target="_blank" rel="noopener noreferrer">Security Command Center</a> comes in Standard, Premium, and Enterprise tiers. Premium and Enterprise add Event Threat Detection (audit-log-based), Container Threat Detection, VM Threat Detection (memory scanning), Web Security Scanner, and Security Health Analytics. Enterprise (formerly Mandiant Hunt / Chronicle integration) layers Chronicle SecOps and Mandiant threat intelligence on top. Findings stream to Pub/Sub for SIEM ingestion. Strong areas: GCP-native API anomalies, container runtime threats. Weak areas: cross-cloud correlation, custom detection logic — for which you'd use Chronicle SecOps directly.</p>
+            <p><a href="https://cloud.google.com/security/products/security-command-center" target="_blank" rel="noopener noreferrer">Security Command Center</a> comes in Standard, Premium, and Enterprise tiers. Premium and Enterprise add Event Threat Detection (audit-log-based), Container Threat Detection, VM Threat Detection (memory scanning), Web Security Scanner, and Security Health Analytics. Enterprise (formerly Mandiant Hunt / Chronicle integration) layers Chronicle SecOps and Mandiant threat intelligence on top. Findings stream to Pub/Sub for SIEM ingestion. Strong areas: GCP-native API anomalies, container runtime threats. Weak areas: cross-cloud correlation, custom detection logic - for which you'd use Chronicle SecOps directly.</p>
             <h3>What native services don't replace</h3>
-            <p>Every native service is built around the patterns its vendor has seen across all customers. Environment-specific detections — your access patterns, your service accounts, your geo footprint, your business-hours norms — only you can write. The native finding stream is one of many signal sources in your SIEM; treat it as a high-priority queue, not as the whole detection program.</p>
+            <p>Every native service is built around the patterns its vendor has seen across all customers. Environment-specific detections - your access patterns, your service accounts, your geo footprint, your business-hours norms - only you can write. The native finding stream is one of many signal sources in your SIEM; treat it as a high-priority queue, not as the whole detection program.</p>
         </section>
 
         <section id="siem-lake">
@@ -607,7 +607,7 @@
             <div class="pillar-grid">
                 <div class="pillar-card pillar-card-iam">
                     <h3>Traditional SIEM</h3>
-                    <p><strong>Splunk Enterprise Security</strong>, <strong>QRadar</strong>, <strong>ArcSight</strong>, <strong>Elastic Security</strong>. Mature ecosystem, deep correlation engines, packaged dashboards and incident workflows. Cost model historically scales with ingest volume — the structural reason data-lake patterns are eating the low-end of this market.</p>
+                    <p><strong>Splunk Enterprise Security</strong>, <strong>QRadar</strong>, <strong>ArcSight</strong>, <strong>Elastic Security</strong>. Mature ecosystem, deep correlation engines, packaged dashboards and incident workflows. Cost model historically scales with ingest volume - the structural reason data-lake patterns are eating the low-end of this market.</p>
                 </div>
                 <div class="pillar-card pillar-card-detect">
                     <h3>Cloud-native SIEM</h3>
@@ -615,7 +615,7 @@
                 </div>
                 <div class="pillar-card pillar-card-posture">
                     <h3>Security data lake</h3>
-                    <p><strong>Snowflake</strong>, <strong>Databricks</strong>, <strong>BigQuery</strong>, <strong>S3 + Iceberg + Athena</strong>. Cheap, schema-on-read, long retention, arbitrary analytics. Pair with a security-analytics layer — <a href="https://www.anvilogic.com/" target="_blank" rel="noopener noreferrer">Anvilogic</a>, <a href="https://www.hunters.security/" target="_blank" rel="noopener noreferrer">Hunters</a>, <a href="https://www.query.ai/" target="_blank" rel="noopener noreferrer">Query.ai</a>, <a href="https://panther.com/" target="_blank" rel="noopener noreferrer">Panther</a>, or Snowflake's own Horizon — to do the SIEM-shaped work on top.</p>
+                    <p><strong>Snowflake</strong>, <strong>Databricks</strong>, <strong>BigQuery</strong>, <strong>S3 + Iceberg + Athena</strong>. Cheap, schema-on-read, long retention, arbitrary analytics. Pair with a security-analytics layer - <a href="https://www.anvilogic.com/" target="_blank" rel="noopener noreferrer">Anvilogic</a>, <a href="https://www.hunters.security/" target="_blank" rel="noopener noreferrer">Hunters</a>, <a href="https://www.query.ai/" target="_blank" rel="noopener noreferrer">Query.ai</a>, <a href="https://panther.com/" target="_blank" rel="noopener noreferrer">Panther</a>, or Snowflake's own Horizon - to do the SIEM-shaped work on top.</p>
                 </div>
                 <div class="pillar-card pillar-card-network">
                     <h3>XDR</h3>
@@ -655,10 +655,10 @@
             <h2>Signal sources beyond audit logs</h2>
             <p>Audit logs cover the API plane; the workload plane and the data plane have their own signal sources, and a mature detection program incorporates them all.</p>
             <ul>
-                <li><strong>EDR / XDR</strong> — <a href="https://www.crowdstrike.com/en-us/" target="_blank" rel="noopener noreferrer">Crowdstrike Falcon</a>, <a href="https://www.sentinelone.com/" target="_blank" rel="noopener noreferrer">SentinelOne</a>, <a href="https://www.paloaltonetworks.com/cortex/cortex-xdr" target="_blank" rel="noopener noreferrer">Cortex XDR</a>, <a href="https://www.microsoft.com/en-us/security/business/siem-and-xdr/microsoft-defender-xdr" target="_blank" rel="noopener noreferrer">Defender XDR</a>. Process, file, network, and registry telemetry from endpoints and (increasingly) VMs. Vendor-curated detections cover most known endpoint attacker behaviors; the custom-content surface is for environment-specific patterns.</li>
-                <li><strong><a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a> runtime</strong> — <a href="https://www.wiz.io/" target="_blank" rel="noopener noreferrer">Wiz</a>, <a href="https://www.sysdig.com/" target="_blank" rel="noopener noreferrer">Sysdig</a>, <a href="https://www.aquasec.com/" target="_blank" rel="noopener noreferrer">Aqua</a>, <a href="https://orca.security/" target="_blank" rel="noopener noreferrer">Orca</a>, <a href="https://www.paloaltonetworks.com/prisma/cloud" target="_blank" rel="noopener noreferrer">Prisma Cloud</a>, <a href="https://www.upwind.io/" target="_blank" rel="noopener noreferrer">Upwind</a>. Runtime visibility inside containers and VMs — syscalls, process trees, network flows, file modifications — correlated with the posture findings from the same platform.</li>
-                <li><strong><a class="glossary-link" href="glossary.html#term-ebpf">eBPF</a> runtime tools</strong> — <a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a>, <a href="https://github.com/aquasecurity/tracee" target="_blank" rel="noopener noreferrer">Tracee</a>, <a href="https://github.com/cilium/tetragon" target="_blank" rel="noopener noreferrer">Tetragon</a>. Open-source kernel-level observability. Falco rules are YAML and live in your detection-as-code repo alongside Sigma.</li>
-                <li><strong>Application logs.</strong> The custom-written telemetry your services emit — authentication outcomes, sensitive-action audits, business-logic events. Often the most diagnostic signal for application-layer attacks and the least-instrumented in immature programs.</li>
+                <li><strong>EDR / XDR</strong> - <a href="https://www.crowdstrike.com/en-us/" target="_blank" rel="noopener noreferrer">Crowdstrike Falcon</a>, <a href="https://www.sentinelone.com/" target="_blank" rel="noopener noreferrer">SentinelOne</a>, <a href="https://www.paloaltonetworks.com/cortex/cortex-xdr" target="_blank" rel="noopener noreferrer">Cortex XDR</a>, <a href="https://www.microsoft.com/en-us/security/business/siem-and-xdr/microsoft-defender-xdr" target="_blank" rel="noopener noreferrer">Defender XDR</a>. Process, file, network, and registry telemetry from endpoints and (increasingly) VMs. Vendor-curated detections cover most known endpoint attacker behaviors; the custom-content surface is for environment-specific patterns.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-cnapp">CNAPP</a> runtime</strong> - <a href="https://www.wiz.io/" target="_blank" rel="noopener noreferrer">Wiz</a>, <a href="https://www.sysdig.com/" target="_blank" rel="noopener noreferrer">Sysdig</a>, <a href="https://www.aquasec.com/" target="_blank" rel="noopener noreferrer">Aqua</a>, <a href="https://orca.security/" target="_blank" rel="noopener noreferrer">Orca</a>, <a href="https://www.paloaltonetworks.com/prisma/cloud" target="_blank" rel="noopener noreferrer">Prisma Cloud</a>, <a href="https://www.upwind.io/" target="_blank" rel="noopener noreferrer">Upwind</a>. Runtime visibility inside containers and VMs - syscalls, process trees, network flows, file modifications - correlated with the posture findings from the same platform.</li>
+                <li><strong><a class="glossary-link" href="glossary.html#term-ebpf">eBPF</a> runtime tools</strong> - <a href="https://falco.org/" target="_blank" rel="noopener noreferrer">Falco</a>, <a href="https://github.com/aquasecurity/tracee" target="_blank" rel="noopener noreferrer">Tracee</a>, <a href="https://github.com/cilium/tetragon" target="_blank" rel="noopener noreferrer">Tetragon</a>. Open-source kernel-level observability. Falco rules are YAML and live in your detection-as-code repo alongside Sigma.</li>
+                <li><strong>Application logs.</strong> The custom-written telemetry your services emit - authentication outcomes, sensitive-action audits, business-logic events. Often the most diagnostic signal for application-layer attacks and the least-instrumented in immature programs.</li>
                 <li><strong>SaaS audit APIs.</strong> GitHub Enterprise audit log, GitLab audit events, Slack audit, Okta system log, Salesforce event monitoring, Snowflake account usage. The kill chain often starts in SaaS before reaching the cloud.</li>
                 <li><strong>Network IDS / <a class="glossary-link" href="glossary.html#term-tls">TLS</a>-decrypting proxies.</strong> Suricata / Zeek for L7 detection inside transit VPCs, secure web gateways for egress, <a class="glossary-link" href="glossary.html#term-mtls">mTLS</a>-inspecting service meshes. Less universal in cloud than in on-prem, but invaluable where deployed.</li>
                 <li><strong>DNS.</strong> Route 53 query logs, Cloud DNS query logs, Azure DNS analytics, plus secure-DNS services (Umbrella, Quad9). C2 and DGA detection still works there.</li>
@@ -667,14 +667,14 @@
         </section>
 
         <section id="example">
-            <h2>Building a detection — walkthrough</h2>
+            <h2>Building a detection - walkthrough</h2>
             <p>A concrete example illustrates the lifecycle better than the abstract version. Threat: an attacker who has compromised an IAM principal in AWS creates a new access key for an existing IAM user as a <a class="glossary-link" href="glossary.html#term-persistence">persistence</a> mechanism, then uses that access key from outside the org's normal geography.</p>
             <h3>Research</h3>
-            <p>The ATT&amp;CK technique is <a href="https://attack.mitre.org/techniques/T1098/001/" target="_blank" rel="noopener noreferrer">T1098.001 — Account Manipulation: Additional Cloud Credentials</a>. The AWS API call is <code>CreateAccessKey</code> on IAM. The diagnostic fields in CloudTrail: <code>eventName=CreateAccessKey</code>, <code>userIdentity</code> (who did it), <code>requestParameters.userName</code> (the target user), <code>responseElements.accessKey.accessKeyId</code> (the new key ID). Benign cases: an admin onboarding a new service integration, a CI system rotating its own key.</p>
+            <p>The ATT&amp;CK technique is <a href="https://attack.mitre.org/techniques/T1098/001/" target="_blank" rel="noopener noreferrer">T1098.001 - Account Manipulation: Additional Cloud Credentials</a>. The AWS API call is <code>CreateAccessKey</code> on IAM. The diagnostic fields in CloudTrail: <code>eventName=CreateAccessKey</code>, <code>userIdentity</code> (who did it), <code>requestParameters.userName</code> (the target user), <code>responseElements.accessKey.accessKeyId</code> (the new key ID). Benign cases: an admin onboarding a new service integration, a CI system rotating its own key.</p>
             <h3>Develop</h3>
-            <p>Two rules, not one. Rule A: a high-signal-low-volume rule that fires on <em>any</em> <code>CreateAccessKey</code> against a user with the <code>service-account</code> tag (those keys should be rotated by the platform team's automation, not manually). Rule B: a correlation rule that fires when a key created in the last 24 hours is used from a country outside the operator's list. The second rule requires joining CloudTrail with IP-geolocation enrichment — easier in KQL / SPL than in pure Sigma.</p>
+            <p>Two rules, not one. Rule A: a high-signal-low-volume rule that fires on <em>any</em> <code>CreateAccessKey</code> against a user with the <code>service-account</code> tag (those keys should be rotated by the platform team's automation, not manually). Rule B: a correlation rule that fires when a key created in the last 24 hours is used from a country outside the operator's list. The second rule requires joining CloudTrail with IP-geolocation enrichment - easier in KQL / SPL than in pure Sigma.</p>
             <h3>Tune</h3>
-            <p>Backtest Rule A against 30 days of CloudTrail. Discover that the platform team's emergency-rotation <a class="glossary-link" href="glossary.html#term-runbook">runbook</a> also fires the rule. Add a suppression: <code>userIdentity.arn</code> matching the platform-team break-glass role. Backtest again — 2 fires/month, both genuine investigations. Acceptable. Backtest Rule B against the same window. Discover that traveling executives generate false positives. Add a per-user "approved geo" allowlist sourced from HRIS travel data.</p>
+            <p>Backtest Rule A against 30 days of CloudTrail. Discover that the platform team's emergency-rotation <a class="glossary-link" href="glossary.html#term-runbook">runbook</a> also fires the rule. Add a suppression: <code>userIdentity.arn</code> matching the platform-team break-glass role. Backtest again - 2 fires/month, both genuine investigations. Acceptable. Backtest Rule B against the same window. Discover that traveling executives generate false positives. Add a per-user "approved geo" allowlist sourced from HRIS travel data.</p>
             <h3>Deploy</h3>
             <p>Merge the PR. CI compiles the Sigma source to KQL (for Sentinel) and to Panther Python (for the data-lake side). Both deploy. Severity: Medium for Rule A, High for Rule B. SLA: 1 hour for High, 4 hours for Medium.</p>
             <h3>Validate</h3>
@@ -688,12 +688,12 @@
             <h2>Tuning &amp; noise reduction</h2>
             <p>Detection programs die of false positives. An analyst queue full of low-precision alerts trains the human to dismiss everything, and the real incident sits in the noise. The mechanics of keeping that from happening:</p>
             <ul>
-                <li><strong>Set a precision target per severity.</strong> Critical and High alerts should be ~90%+ true-positive when they fire — the analyst expects to act, not investigate. Medium can be lower. Low severity is for high-volume signal that batches into a daily review.</li>
+                <li><strong>Set a precision target per severity.</strong> Critical and High alerts should be ~90%+ true-positive when they fire - the analyst expects to act, not investigate. Medium can be lower. Low severity is for high-volume signal that batches into a daily review.</li>
                 <li><strong>Backtest before deploy.</strong> Run the rule against 7–30 days of historical production logs before any rule reaches the analyst queue. Most false-positive sources are obvious in the backtest.</li>
                 <li><strong>Baselines.</strong> "Anomalous" is a comparison to a baseline. Per-principal baselines (this user never assumed this role before), per-service baselines (this Lambda has never made an outbound call to this country), and per-environment baselines (production never sees PutBucketAcl) all narrow the rule.</li>
                 <li><strong>Suppression vs allowlist.</strong> A suppression is a rule-level exception ("don't fire when the platform-team break-glass role is the principal"). An allowlist is a data-level exception ("this IP is approved"). Both belong in the rule file under version control, not in the SIEM UI.</li>
                 <li><strong>Decay-and-revisit.</strong> Suppressions accumulate; review them on a cadence. A suppression added for a long-gone integration is a silent gap.</li>
-                <li><strong>Alert-fatigue metrics.</strong> Track per-rule fire rate, per-rule TP/FP, per-analyst dismiss rate. Rules that get dismissed without investigation are either broken or noise — both need fixing.</li>
+                <li><strong>Alert-fatigue metrics.</strong> Track per-rule fire rate, per-rule TP/FP, per-analyst dismiss rate. Rules that get dismissed without investigation are either broken or noise - both need fixing.</li>
                 <li><strong>Stacking signals.</strong> A single weak signal becomes a strong one in combination. The "create access key" rule is medium-confidence alone, high-confidence when stacked with "first use from new geography" and "principal has not used this region in 90 days." Risk-based alerting (Splunk RBA, Sentinel anomaly behavior analytics, custom risk scores) is the modern pattern.</li>
             </ul>
         </section>
@@ -709,11 +709,11 @@
                 <li><strong><a href="https://github.com/cyberark/SkyArk" target="_blank" rel="noopener noreferrer">SkyArk</a></strong>, <strong><a href="https://github.com/RhinoSecurityLabs/pacu" target="_blank" rel="noopener noreferrer">Pacu</a></strong>, <strong><a href="https://github.com/Azure/MicroBurst" target="_blank" rel="noopener noreferrer">MicroBurst</a></strong>, <strong><a href="https://github.com/RyanJarv/awspx" target="_blank" rel="noopener noreferrer">awspx</a></strong>. Cloud-attack toolkits with overlapping coverage; useful for adversary-shaped testing of specific techniques.</li>
             </ul>
             <h3>Purple teaming</h3>
-            <p>An offensive team (internal <a class="glossary-link" href="glossary.html#term-red-team">red team</a> or external engagement) runs realistic operations against the live environment with the detection team watching. Each technique → did the detection fire, on what severity, with what fidelity, in what time. Purple teaming is dense — a one-day exercise can surface a quarter's worth of detection-engineering backlog.</p>
+            <p>An offensive team (internal <a class="glossary-link" href="glossary.html#term-red-team">red team</a> or external engagement) runs realistic operations against the live environment with the detection team watching. Each technique → did the detection fire, on what severity, with what fidelity, in what time. Purple teaming is dense - a one-day exercise can surface a quarter's worth of detection-engineering backlog.</p>
             <h3>Breach &amp; attack simulation (BAS)</h3>
             <p>Commercial platforms (AttackIQ, SafeBreach, Picus, XM Cyber, Cymulate) automate the purple-team cadence with broad technique libraries and built-in reporting. The justification compared to OSS (Stratus + Atomic) is the reporting layer, the technique breadth, and the integration with the SIEM and ticketing.</p>
             <h3>Continuous validation</h3>
-            <p>Whichever stack you pick, run validation continuously — not just at the end of a quarter. A weekly Stratus run hitting every cloud-detection rule, with the result piped to a dashboard, is a sustainable cadence for a 1–2 person detection team. Detections decay silently (an API schema changes, a log field renames, a SIEM tuning regresses); continuous validation is the only way to catch the decay before an attacker does.</p>
+            <p>Whichever stack you pick, run validation continuously - not just at the end of a quarter. A weekly Stratus run hitting every cloud-detection rule, with the result piped to a dashboard, is a sustainable cadence for a 1–2 person detection team. Detections decay silently (an API schema changes, a log field renames, a SIEM tuning regresses); continuous validation is the only way to catch the decay before an attacker does.</p>
         </section>
 
         <section id="comparison">
@@ -734,13 +734,13 @@
                             <th scope="row">Control-plane audit log</th>
                             <td>CloudTrail (management events)</td>
                             <td>Activity Log (subscription / mgmt group)</td>
-                            <td>Cloud Audit Logs — Admin Activity</td>
+                            <td>Cloud Audit Logs - Admin Activity</td>
                         </tr>
                         <tr>
                             <th scope="row">Data-plane audit log</th>
                             <td>CloudTrail data events (paid, off by default)</td>
                             <td>Per-resource Diagnostic Settings (paid, off by default)</td>
-                            <td>Cloud Audit Logs — Data Access (paid, off by default)</td>
+                            <td>Cloud Audit Logs - Data Access (paid, off by default)</td>
                         </tr>
                         <tr>
                             <th scope="row">Identity sign-in log</th>
@@ -780,7 +780,7 @@
                         </tr>
                         <tr>
                             <th scope="row">SaaS audit (vendor's own)</th>
-                            <td>(N/A — IAM Identity Center only)</td>
+                            <td>(N/A - IAM Identity Center only)</td>
                             <td>Microsoft 365 Unified Audit Log</td>
                             <td>Google Workspace Reports API</td>
                         </tr>
@@ -801,19 +801,19 @@
             <p>A useful staging model for a cloud detection-engineering program:</p>
             <div class="pillar-grid">
                 <div class="pillar-card pillar-card-stage1">
-                    <h3>Stage 1 — Wired</h3>
+                    <h3>Stage 1 - Wired</h3>
                     <p>Control-plane audit logs (CloudTrail / Activity Log / Cloud Audit Logs) shipping to a SIEM. Native threat-detection services on (GuardDuty / Defender / SCC). Alerts route to one queue. Rules are mostly vendor-default. No detection-as-code yet; rule edits happen in the SIEM UI.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage2">
-                    <h3>Stage 2 — Authored</h3>
+                    <h3>Stage 2 - Authored</h3>
                     <p>Custom rules written for the environment's specific patterns. Sigma adopted for portable rules; vendor-language for the rest. ATT&amp;CK tags on every rule. A coverage dashboard exists. Identity-provider logs ingested. Data-plane logging enabled on crown-jewel resources.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage3">
-                    <h3>Stage 3 — Engineered</h3>
+                    <h3>Stage 3 - Engineered</h3>
                     <p>Detection-as-code repo with CI/CD to one or more SIEMs. Unit tests for every rule. Stratus Red Team running on a schedule against the cloud detection set. Per-rule precision targets tracked. Risk-based alerting stacking signals. Coverage report visible to the CISO.</p>
                 </div>
                 <div class="pillar-card pillar-card-stage4">
-                    <h3>Stage 4 — Adversarial</h3>
+                    <h3>Stage 4 - Adversarial</h3>
                     <p>Purple-team cadence quarterly or better. Threat-intel-driven research backlog. New ATT&amp;CK techniques (post-publication) have detections within an SLA. Detection-engineering team separate from SOC. Data-lake + SIEM hybrid with cost-aware log routing. Validation results feed engineering OKRs.</p>
                 </div>
             </div>
@@ -827,11 +827,11 @@
                 <li><strong>No version control on rules.</strong> Editing detections in the SIEM UI without a Git repo behind them is the equivalent of editing production config by SSH. Drift is silent, history is lost, and the post-incident "when did this rule change?" question has no answer.</li>
                 <li><strong>No validation.</strong> A rule library nobody has exercised is a list of confident assumptions. Stratus + Atomic + a quarterly purple team is table stakes; below that line the program is theoretical.</li>
                 <li><strong>Ignoring data-plane logs.</strong> Control-plane-only logging tells you who changed permissions, not who read the data. Most cloud-breach incidents involve data access. Enable data-plane on the crown jewels.</li>
-                <li><strong>Skipping the IdP.</strong> The first event of a typical cloud kill chain is in Entra, Okta, or Workspace — not in CloudTrail. Ingest the identity provider.</li>
+                <li><strong>Skipping the IdP.</strong> The first event of a typical cloud kill chain is in Entra, Okta, or Workspace - not in CloudTrail. Ingest the identity provider.</li>
                 <li><strong>Treating native threat detection as a complete program.</strong> GuardDuty / Defender / SCC each catch the well-known attacker behaviors well. They do not write your environment-specific detections. Use them as one signal source among many.</li>
                 <li><strong>Rule sprawl without ATT&amp;CK tags.</strong> A library of 500 rules with no consistent technique mapping cannot produce a coverage report and cannot be reasoned about by anyone but the author. Tag every rule.</li>
                 <li><strong>Compliance-driven detection.</strong> "We need to satisfy this control" produces rules that pass an auditor but don't catch attackers. Write detections from threat-research findings; map them to compliance controls after the fact, not the other way around.</li>
-                <li><strong>Logging volume budget set by Finance without security context.</strong> Cutting log ingest to save money sometimes saves money; sometimes blinds the detection program. The conversation is "which logs, at which retention, at which tier?" — not "cut 20%."</li>
+                <li><strong>Logging volume budget set by Finance without security context.</strong> Cutting log ingest to save money sometimes saves money; sometimes blinds the detection program. The conversation is "which logs, at which retention, at which tier?" - not "cut 20%."</li>
                 <li><strong>No retirement.</strong> Rules accumulate; dead rules persist. Every rule needs a retirement criterion at deploy time, not as an afterthought.</li>
             </ul>
         </section>
@@ -840,10 +840,10 @@
             <h2>Further reading</h2>
             <h3>Foundational</h3>
             <ul>
-                <li><a href="https://medium.com/palantir/alerting-and-detection-strategy-framework-52dc33722df2" target="_blank" rel="noopener noreferrer">Palantir — Alerting and Detection Strategy Framework</a></li>
-                <li><a href="https://specterops.io/blog/" target="_blank" rel="noopener noreferrer">SpecterOps — Detection-as-Code</a></li>
+                <li><a href="https://medium.com/palantir/alerting-and-detection-strategy-framework-52dc33722df2" target="_blank" rel="noopener noreferrer">Palantir - Alerting and Detection Strategy Framework</a></li>
+                <li><a href="https://specterops.io/blog/" target="_blank" rel="noopener noreferrer">SpecterOps - Detection-as-Code</a></li>
                 <li><a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK Cloud Matrix</a></li>
-                <li><a href="https://github.com/center-for-threat-informed-defense/security-stack-mappings" target="_blank" rel="noopener noreferrer">Center for Threat-Informed Defense — Stack Mappings</a></li>
+                <li><a href="https://github.com/center-for-threat-informed-defense/security-stack-mappings" target="_blank" rel="noopener noreferrer">Center for Threat-Informed Defense - Stack Mappings</a></li>
                 <li><a href="https://github.com/0x4D31/awesome-threat-detection" target="_blank" rel="noopener noreferrer">awesome-threat-detection</a></li>
             </ul>
             <h3>Sigma &amp; rule languages</h3>
@@ -867,7 +867,7 @@
                 <li><a href="https://www.atomicredteam.io/" target="_blank" rel="noopener noreferrer">Atomic Red Team</a></li>
                 <li><a href="https://stratus-red-team.cloud/" target="_blank" rel="noopener noreferrer">Stratus Red Team</a></li>
                 <li><a href="https://github.com/mitre/caldera" target="_blank" rel="noopener noreferrer">MITRE CALDERA</a></li>
-                <li><a href="https://github.com/RhinoSecurityLabs/pacu" target="_blank" rel="noopener noreferrer">Pacu — AWS attack toolkit</a></li>
+                <li><a href="https://github.com/RhinoSecurityLabs/pacu" target="_blank" rel="noopener noreferrer">Pacu - AWS attack toolkit</a></li>
             </ul>
             <h3>Provider documentation</h3>
             <ul>
@@ -880,13 +880,13 @@
             </ul>
             <h3>Related CSOH pages</h3>
             <ul>
-                <li><a href="cloud-soc.html">Cloud SOC</a> — the consume side of detection (analysts, queues, IR).</li>
-                <li><a href="incident-response.html">Incident response</a> — what happens after the alert.</li>
-                <li><a href="threat-research.html">Threat research</a> — where the detection-engineer's backlog comes from.</li>
-                <li><a href="breach-timeline.html">Breach kill chains</a> — real cloud incidents, organized by ATT&amp;CK.</li>
-                <li><a href="grc.html">GRC</a> — preventative controls upstream of detection.</li>
-                <li><a href="ci-cd.html">CI/CD</a> — where the detection-as-code pipeline runs.</li>
-                <li><a href="glossary.html">Glossary</a> — every term on this page, defined.</li>
+                <li><a href="cloud-soc.html">Cloud SOC</a> - the consume side of detection (analysts, queues, IR).</li>
+                <li><a href="incident-response.html">Incident response</a> - what happens after the alert.</li>
+                <li><a href="threat-research.html">Threat research</a> - where the detection-engineer's backlog comes from.</li>
+                <li><a href="breach-timeline.html">Breach kill chains</a> - real cloud incidents, organized by ATT&amp;CK.</li>
+                <li><a href="grc.html">GRC</a> - preventative controls upstream of detection.</li>
+                <li><a href="ci-cd.html">CI/CD</a> - where the detection-as-code pipeline runs.</li>
+                <li><a href="glossary.html">Glossary</a> - every term on this page, defined.</li>
             </ul>
         </section>
 
@@ -894,22 +894,22 @@
             <h2>FAQ</h2>
 
             <h3>What's the difference between a SOC analyst and a detection engineer?</h3>
-            <p>The analyst consumes alerts; the engineer builds the rules that produce them. The analyst's day is a queue and a clock — triage minutes per alert and time-to-acknowledge. The engineer's day is a Git repo, an ATT&amp;CK coverage map, and a CI/CD pipeline pushing rule changes to one or more SIEMs. The roles cooperate constantly — the analyst's "this rule's noisy" or "I'm seeing this pattern again" is the engineer's backlog — but they think differently and the disciplines benefit from being staffed separately at any reasonable scale.</p>
+            <p>The analyst consumes alerts; the engineer builds the rules that produce them. The analyst's day is a queue and a clock - triage minutes per alert and time-to-acknowledge. The engineer's day is a Git repo, an ATT&amp;CK coverage map, and a CI/CD pipeline pushing rule changes to one or more SIEMs. The roles cooperate constantly - the analyst's "this rule's noisy" or "I'm seeing this pattern again" is the engineer's backlog - but they think differently and the disciplines benefit from being staffed separately at any reasonable scale.</p>
 
             <h3>Which cloud logs do I actually need to enable?</h3>
-            <p>The non-negotiable set: an organization-level audit trail (CloudTrail org trail / Activity Log Diagnostic Settings / Cloud Audit Logs at the org node); identity-provider sign-in and audit logs (Entra, Okta, IAM Identity Center, Workspace); VPC / network flow logs on production VPCs; and the platform-native threat-detection findings (GuardDuty, Defender for Cloud, Security Command Center Premium). The expensive one — data-plane / data-access logs — should be enabled deliberately on resources holding real customer data, scoped tightly. Skipping data-plane is the single most common cloud detection blind spot.</p>
+            <p>The non-negotiable set: an organization-level audit trail (CloudTrail org trail / Activity Log Diagnostic Settings / Cloud Audit Logs at the org node); identity-provider sign-in and audit logs (Entra, Okta, IAM Identity Center, Workspace); VPC / network flow logs on production VPCs; and the platform-native threat-detection findings (GuardDuty, Defender for Cloud, Security Command Center Premium). The expensive one - data-plane / data-access logs - should be enabled deliberately on resources holding real customer data, scoped tightly. Skipping data-plane is the single most common cloud detection blind spot.</p>
 
             <h3>Is Sigma worth learning if my SIEM has its own query language?</h3>
-            <p>Yes — for portability. Sigma is the closest the industry has to a vendor-neutral detection format. Writing the canonical rule in Sigma and compiling to your SIEM's native language with pySigma protects you from SIEM migrations and gives you a portable detection library. The vendor language is still where final performance tuning happens; the Sigma source is where the rule lives in your repo.</p>
+            <p>Yes - for portability. Sigma is the closest the industry has to a vendor-neutral detection format. Writing the canonical rule in Sigma and compiling to your SIEM's native language with pySigma protects you from SIEM migrations and gives you a portable detection library. The vendor language is still where final performance tuning happens; the Sigma source is where the rule lives in your repo.</p>
 
             <h3>How is detection-as-code different from compliance-as-code?</h3>
-            <p>Both put rules in Git and deploy through CI/CD. The difference is the input data: compliance-as-code (see the <a href="grc.html">GRC page</a>) evaluates configuration state — is this S3 bucket configured correctly right now? Detection-as-code evaluates streaming events — did this CloudTrail event indicate malicious activity? The workflows look almost identical and the team skills transfer; the test harnesses and the evaluation engines differ.</p>
+            <p>Both put rules in Git and deploy through CI/CD. The difference is the input data: compliance-as-code (see the <a href="grc.html">GRC page</a>) evaluates configuration state - is this S3 bucket configured correctly right now? Detection-as-code evaluates streaming events - did this CloudTrail event indicate malicious activity? The workflows look almost identical and the team skills transfer; the test harnesses and the evaluation engines differ.</p>
 
             <h3>Why does GCP Data Access logging matter so much?</h3>
-            <p>GCP's Cloud Audit Logs split into Admin Activity (free, always on), System Event (free, always on), Policy Denied (free, opt-in), and Data Access (paid, off by default). Data Access is the stream that records reads of customer data — a <a class="glossary-link" href="glossary.html#term-service-account">service account</a> listing objects in a sensitive bucket, querying a sensitive BigQuery table, decrypting a <a class="glossary-link" href="glossary.html#term-kms">KMS</a> key. Most cloud breaches involve data access; turning the stream off saves money and blinds the detection program. Enable it deliberately on the projects that hold real data; budget for the volume.</p>
+            <p>GCP's Cloud Audit Logs split into Admin Activity (free, always on), System Event (free, always on), Policy Denied (free, opt-in), and Data Access (paid, off by default). Data Access is the stream that records reads of customer data - a <a class="glossary-link" href="glossary.html#term-service-account">service account</a> listing objects in a sensitive bucket, querying a sensitive BigQuery table, decrypting a <a class="glossary-link" href="glossary.html#term-kms">KMS</a> key. Most cloud breaches involve data access; turning the stream off saves money and blinds the detection program. Enable it deliberately on the projects that hold real data; budget for the volume.</p>
 
             <h3>Should I build on a SIEM or a data lake?</h3>
-            <p>Most large 2026 programs run both: a SIEM (Sentinel, Splunk, Chronicle, Elastic) for the real-time, high-value correlations the SOC depends on, and a data lake (Snowflake, Databricks, BigQuery, S3 + Iceberg) with a security-analytics layer (Anvilogic, Hunters, Query.ai, Panther) for the cheaper long-tail and forensic querying. Small programs pick one and accept the trade-off — usually a <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> SIEM for speed-of-stand-up.</p>
+            <p>Most large 2026 programs run both: a SIEM (Sentinel, Splunk, Chronicle, Elastic) for the real-time, high-value correlations the SOC depends on, and a data lake (Snowflake, Databricks, BigQuery, S3 + Iceberg) with a security-analytics layer (Anvilogic, Hunters, Query.ai, Panther) for the cheaper long-tail and forensic querying. Small programs pick one and accept the trade-off - usually a <a class="glossary-link" href="glossary.html#term-cloud-native">cloud-native</a> SIEM for speed-of-stand-up.</p>
 
             <h3>How do I validate that my detections actually work?</h3>
             <p>Three layers, complementary. Unit tests: replay a sample event against the rule and assert it fires (or doesn't). <a href="https://stratus-red-team.cloud/" target="_blank" rel="noopener noreferrer">Stratus Red Team</a>: execute real cloud attack techniques on a schedule and verify the corresponding detection lights up. Purple teaming: a red team operates in the live environment with the detection team watching, on a quarterly cadence. Without at least one of these running continuously, you have a rule library, not a detection program.</p>
@@ -918,12 +918,12 @@
         <section class="cta-section">
             <h2>Where next</h2>
             <ul>
-                <li><a href="cloud-soc.html">Cloud SOC</a> — the consume side: alert triage, SOC structure, IR playbooks.</li>
-                <li><a href="incident-response.html">Incident response</a> — what happens after the detection fires.</li>
-                <li><a href="threat-research.html">Threat research</a> — where the detection backlog comes from.</li>
-                <li><a href="breach-timeline.html">Breach kill chains</a> — real cloud incidents, mapped to ATT&amp;CK techniques.</li>
-                <li><a href="grc.html">GRC</a> — the preventative-control discipline upstream of detection.</li>
-                <li><a href="sessions.html">Friday Zoom</a> — detection engineering and Stratus Red Team come up regularly. Drop in.</li>
+                <li><a href="cloud-soc.html">Cloud SOC</a> - the consume side: alert triage, SOC structure, IR playbooks.</li>
+                <li><a href="incident-response.html">Incident response</a> - what happens after the detection fires.</li>
+                <li><a href="threat-research.html">Threat research</a> - where the detection backlog comes from.</li>
+                <li><a href="breach-timeline.html">Breach kill chains</a> - real cloud incidents, mapped to ATT&amp;CK techniques.</li>
+                <li><a href="grc.html">GRC</a> - the preventative-control discipline upstream of detection.</li>
+                <li><a href="sessions.html">Friday Zoom</a> - detection engineering and Stratus Red Team come up regularly. Drop in.</li>
             </ul>
         </section>
 

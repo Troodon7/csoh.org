@@ -10,9 +10,9 @@ Welcome! This guide will walk you through **adding a new resource** to our commu
 > 🤖 **Heads up: there's a weekly bot too.** Every Monday at 14:00 UTC, an
 > automated workflow (`.github/workflows/update-resources.yml`) uses Claude
 > Code to research and propose 2-3 new resources for each of the six
-> `resources.html` sections. The bot opens a PR for review — if the diff is
+> `resources.html` sections. The bot opens a PR for review - if the diff is
 > purely `resources.html`, the PR auto-merges; otherwise it waits for a
-> human. **Your human-submitted PRs are still very welcome** — they
+> human. **Your human-submitted PRs are still very welcome** - they
 > complement the bot, never conflict with it. The bot intentionally errs on
 > the side of well-known, well-documented sources; humans tend to surface
 > the more obscure, higher-signal finds. Both are valuable.
@@ -71,7 +71,7 @@ If you are new to GitHub or the command line, this is the easiest path. Follow t
   - Resource name
   - URL
   - Description
-  - Tooltip (extended hover description — optional)
+  - Tooltip (extended hover description - optional)
   - Category
   - Tags
   - Confirmation
@@ -82,7 +82,7 @@ If you are new to GitHub or the command line, this is the easiest path. Follow t
 ### 🔒 URL Safety, SRI, and Preview Images
 
 The script checks URL safety and can optionally generate a preview image for you.
-If you skip the preview, the unified workflow will capture a screenshot and update SRI hashes after you open a PR. You do not need to run any extra scripts—just open a pull request and the automation will handle it.
+If you skip the preview, the unified workflow will capture a screenshot and update SRI hashes after you open a PR. You do not need to run any extra scripts - just open a pull request and the automation will handle it.
 
 ### 🧰 Common Errors and Fixes
 
@@ -209,7 +209,7 @@ If you want to provide your own, save a JPG under ~150 KB with a clear name (e.g
 
 **What to change:**
 - `PASTE_YOUR_URL_HERE` → Your resource's URL
-- `data-tooltip="..."` → A richer 2-3 sentence description shown on hover (what makes it unique, who benefits, prerequisites). Use `&quot;` for quotes and `&amp;` for ampersands inside the attribute. Optional — you can remove the attribute if you don't have one.
+- `data-tooltip="..."` → A richer 2-3 sentence description shown on hover (what makes it unique, who benefits, prerequisites). Use `&quot;` for quotes and `&amp;` for ampersands inside the attribute. Optional - you can remove the attribute if you don't have one.
 - `Your Resource Name` → The actual name
 - `Your resource description...` → What you wrote in Step 1
 - The `<span class="tag">` lines → Your tags
@@ -223,7 +223,7 @@ If you want to provide your own, save a JPG under ~150 KB with a clear name (e.g
 - `<span class="tag job">` = Job Search (pink)
 - `<span class="tag">` = Regular tag (gray)
 
-> **Note:** All tag colors automatically adapt to dark mode — you don't need to add any dark mode–specific styles.
+> **Note:** All tag colors automatically adapt to dark mode - you don't need to add any dark mode–specific styles.
 
 **Don't worry about images or SRI hashes!** The site will handle those automatically after you open a pull request. If you want to add a custom preview image, [see Step 5](#step-5-add-a-preview-image-optional).
 
@@ -445,7 +445,7 @@ Places to find cloud security careers.
 2. **Write clear descriptions:** Pretend you're explaining this to a friend who's new to cloud security
 3. **Tag appropriately:** Pick tags that help people find it (be specific!)
 4. **Test your link:** Make sure the URL you're adding actually works
-5. **Welcome feedback:** Maintainers might suggest improvements—that's normal!
+5. **Welcome feedback:** Maintainers might suggest improvements - that's normal!
 6. **Start with one:** Add 1-2 resources first. You'll get the hang of it
 
 ---

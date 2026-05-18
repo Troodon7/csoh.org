@@ -111,7 +111,7 @@ preview-mapping.json
 **How it works now:**
 - Preview image generation is handled as part of the unified workflow, not a separate workflow.
 - The workflow automatically checks for missing previews and generates them when you open a pull request or push changes.
-- No manual action is needed—just add or update resources and the workflow will handle previews, SRI, and deploy in sequence.
+- No manual action is needed - just add or update resources and the workflow will handle previews, SRI, and deploy in sequence.
 
 **Steps (within the unified workflow):**
 1. Update SRI hashes and cache-busting tags

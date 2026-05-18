@@ -1,4 +1,4 @@
-# SEO Scorecard — csoh.org
+# SEO Scorecard - csoh.org
 
 Track audit scores over time. Add a new row each time `/seo-audit` is run. Lower scores = regression; investigate.
 
@@ -16,7 +16,7 @@ Track audit scores over time. Add a new row each time `/seo-audit` is run. Lower
 | 2026-05-09 | **98** | 99 | 100 | 99 | 95 | 96 | 0 | 0 | [report](2026-05-09.md) |
 | 2026-05-17 | **99** | 100 | 100 | 100 | 95 | 96 | 0 | 0 | [report](2026-05-17.md) |
 
-## PageSpeed Insights — homepage (https://csoh.org/)
+## PageSpeed Insights - homepage (https://csoh.org/)
 
 Each cell is `Performance / Accessibility / Best Practices / SEO` (out of 100). Run at [pagespeed.web.dev](https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fcsoh.org%2F).
 
@@ -30,12 +30,12 @@ Each cell is `Performance / Accessibility / Best Practices / SEO` (out of 100). 
 2. Save the full report as `seo-audits/YYYY-MM-DD.md`.
 3. Append a row to the **Internal SEO audit** table with the new scores.
 4. Run [PageSpeed Insights](https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fcsoh.org%2F) for both Mobile and Desktop tabs and append a row to the **PageSpeed Insights** table.
-5. Diff against the previous row — celebrate gains, investigate drops.
+5. Diff against the previous row - celebrate gains, investigate drops.
 
 ## External signals to track alongside this
 
-- **Google Search Console** — impressions, clicks, average position, CTR (set up email alerts for coverage/index drops)
-- **CrUX / Core Web Vitals** — real-user LCP, INP, CLS (the lab scores above are synthetic; CrUX appears in PSI's "Discover what your real users are experiencing" panel once enough traffic accumulates)
-- **Bing Webmaster Tools** — secondary search source
+- **Google Search Console** - impressions, clicks, average position, CTR (set up email alerts for coverage/index drops)
+- **CrUX / Core Web Vitals** - real-user LCP, INP, CLS (the lab scores above are synthetic; CrUX appears in PSI's "Discover what your real users are experiencing" panel once enough traffic accumulates)
+- **Bing Webmaster Tools** - secondary search source
 
 The scores in this scorecard measure on-site/codebase health. Search Console measures actual ranking outcomes. Both matter.

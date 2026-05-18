@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-    <meta name="description" content="Step-by-step walkthrough for completing and writing up Rhino Security Labs' CloudGoat scenarios — the canonical AWS-attack lab — as a portfolio piece.">
+    <meta name="description" content="Step-by-step walkthrough for completing and writing up Rhino Security Labs' CloudGoat scenarios - the canonical AWS-attack lab - as a portfolio piece.">
     <meta name="keywords" content="cloudgoat, cloudgoat write-up, aws security portfolio, aws attack lab, aws ctf, cloudgoat tutorial">
     <title>Walk every CloudGoat scenario - CSOH Portfolio Project</title>
 
@@ -17,13 +17,13 @@
     <meta name="theme-color" content="#2c3e50">
 
     <meta property="og:title" content="Walk every CloudGoat scenario - CSOH Portfolio Project">
-    <meta property="og:description" content="Step-by-step walkthrough for completing and writing up Rhino Security Labs' CloudGoat scenarios — the canonical AWS-attack lab — as a portfolio piece.">
+    <meta property="og:description" content="Step-by-step walkthrough for completing and writing up Rhino Security Labs' CloudGoat scenarios - the canonical AWS-attack lab - as a portfolio piece.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://csoh.org/portfolio/cloudgoat.html">
     <meta property="og:image" content="https://csoh.org/img/og/portfolio/cloudgoat.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Walk every CloudGoat scenario">
-    <meta name="twitter:description" content="Step-by-step walkthrough for completing and writing up Rhino Security Labs' CloudGoat scenarios — the canonical AWS-attack lab — as a portfolio piece.">
+    <meta name="twitter:description" content="Step-by-step walkthrough for completing and writing up Rhino Security Labs' CloudGoat scenarios - the canonical AWS-attack lab - as a portfolio piece.">
     <meta name="twitter:image" content="https://csoh.org/img/og/portfolio/cloudgoat.jpg">
 
     <link rel="preconnect" href="https://csoh.kit.com" crossorigin>
@@ -42,7 +42,7 @@
       "@context": "https://schema.org",
       "@type": "HowTo",
       "name": "Walk every CloudGoat scenario",
-      "description": "Step-by-step walkthrough for completing and writing up Rhino Security Labs' CloudGoat scenarios — the canonical AWS-attack lab — as a portfolio piece.",
+      "description": "Step-by-step walkthrough for completing and writing up Rhino Security Labs' CloudGoat scenarios - the canonical AWS-attack lab - as a portfolio piece.",
       "totalTime": "PT8H",
       "image": "https://csoh.org/banner.png",
       "datePublished": "2026-05-04",
@@ -200,7 +200,7 @@
         </div>
 
         <section id="intro">
-            <p><a href="https://github.com/RhinoSecurityLabs/cloudgoat" target="_blank" rel="noopener noreferrer">CloudGoat</a> is the AWS-attack lab almost every cloud security engineer has worked through at some point. The scenarios are intentionally vulnerable, you deploy them with Terraform into your own AWS account, you exploit them by hand, and then you tear them down. Walking every scenario and publishing your write-ups is the most common single answer to "what should I build for my portfolio?" — interviewers recognize the work instantly.</p><p>This page walks you through doing one scenario the way it deserves to be done — slowly, in your own voice, with screenshots — so it's interview-grade rather than a copy-paste of someone else's solution.</p>
+            <p><a href="https://github.com/RhinoSecurityLabs/cloudgoat" target="_blank" rel="noopener noreferrer">CloudGoat</a> is the AWS-attack lab almost every cloud security engineer has worked through at some point. The scenarios are intentionally vulnerable, you deploy them with Terraform into your own AWS account, you exploit them by hand, and then you tear them down. Walking every scenario and publishing your write-ups is the most common single answer to "what should I build for my portfolio?" - interviewers recognize the work instantly.</p><p>This page walks you through doing one scenario the way it deserves to be done - slowly, in your own voice, with screenshots - so it's interview-grade rather than a copy-paste of someone else's solution.</p>
         </section>
 
         <div class="toc">
@@ -246,7 +246,7 @@ pip3 install -r ./core/python/requirements.txt
 chmod u+x cloudgoat.py</code></pre><p>Configure CloudGoat with your default AWS profile and a whitelist of IPs allowed to reach the lab resources (your home IP):</p><pre><code>./cloudgoat.py config profile
 ./cloudgoat.py config whitelist --auto</code></pre>
             <h3>2. Pick your first scenario</h3>
-            <p>Start with <strong>iam_privesc_by_rollback</strong> or <strong>vulnerable_lambda</strong> — both are short, well-documented, and teach the core mental model. List all available scenarios with:</p><pre><code>./cloudgoat.py list scenarios</code></pre>
+            <p>Start with <strong>iam_privesc_by_rollback</strong> or <strong>vulnerable_lambda</strong> - both are short, well-documented, and teach the core mental model. List all available scenarios with:</p><pre><code>./cloudgoat.py list scenarios</code></pre>
             <h3>3. Deploy the scenario</h3>
             <pre><code>./cloudgoat.py create iam_privesc_by_rollback</code></pre><p>This Terraforms the vulnerable resources into your account and prints the starting credentials.</p>
             <h3>4. Exploit it without reading the solution</h3>
@@ -254,11 +254,11 @@ chmod u+x cloudgoat.py</code></pre><p>Configure CloudGoat with your default AWS 
             <h3>5. Confirm the goal</h3>
             <p>Each scenario has a defined goal ("escalate from this user to AdministratorAccess," "exfiltrate this S3 object," etc.). Confirm you actually achieved it. If you cheated and looked at the solution mid-way, do the next scenario without cheating to recalibrate.</p>
             <h3>6. Write up the kill chain</h3>
-            <p>In a <code>README.md</code> in your write-up repo, document:</p><ul><li>The scenario name + a one-line summary of the misconfiguration.</li><li>Initial access — the credentials you started with and what they could do.</li><li>Discovery — every CLI command you ran, with output excerpts (redact account IDs).</li><li>Exploitation — the specific command(s) that achieved the goal.</li><li>The MITRE ATT&amp;CK Cloud techniques the path maps to (<a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">attack.mitre.org/matrices/enterprise/cloud/</a>).</li></ul>
+            <p>In a <code>README.md</code> in your write-up repo, document:</p><ul><li>The scenario name + a one-line summary of the misconfiguration.</li><li>Initial access - the credentials you started with and what they could do.</li><li>Discovery - every CLI command you ran, with output excerpts (redact account IDs).</li><li>Exploitation - the specific command(s) that achieved the goal.</li><li>The MITRE ATT&amp;CK Cloud techniques the path maps to (<a href="https://attack.mitre.org/matrices/enterprise/cloud/" target="_blank" rel="noopener noreferrer">attack.mitre.org/matrices/enterprise/cloud/</a>).</li></ul>
             <h3>7. Write the remediation</h3>
-            <p>Equally important: how you'd fix the gap in production. Be specific. "Apply least privilege" doesn't count — write the IAM policy or the SCP. Bonus points: provide it as Terraform.</p>
+            <p>Equally important: how you'd fix the gap in production. Be specific. "Apply least privilege" doesn't count - write the IAM policy or the SCP. Bonus points: provide it as Terraform.</p>
             <h3>8. Tear down</h3>
-            <pre><code>./cloudgoat.py destroy iam_privesc_by_rollback</code></pre><p>Save the destroy log to your write-up repo as <code>destroy.log</code> — it shows you cleaned up.</p>
+            <pre><code>./cloudgoat.py destroy iam_privesc_by_rollback</code></pre><p>Save the destroy log to your write-up repo as <code>destroy.log</code> - it shows you cleaned up.</p>
             <h3>9. Publish</h3>
             <p>Push the repo to GitHub. Add a top-level README that links to each scenario's write-up. Pin the repo on your GitHub profile. Post one LinkedIn update per scenario or one summary post when you're done with all of them.</p>
             <h3>10. Repeat for every scenario</h3>
@@ -268,10 +268,10 @@ chmod u+x cloudgoat.py</code></pre><p>Configure CloudGoat with your default AWS 
         <section id="managers">
             <h2>What hiring managers look for</h2>
             <ul>
-                <li>Your write-up is in your own voice with your own screenshots — not paraphrased from the official solution.</li>
+                <li>Your write-up is in your own voice with your own screenshots - not paraphrased from the official solution.</li>
                 <li>You explain the <em>why</em> behind each step, not just the commands.</li>
-                <li>The remediation section is technically specific (an IAM policy snippet, an SCP, a Terraform diff) — not generic advice.</li>
-                <li>You map techniques to MITRE ATT&amp;CK Cloud — shows you understand the shared vocabulary.</li>
+                <li>The remediation section is technically specific (an IAM policy snippet, an SCP, a Terraform diff) - not generic advice.</li>
+                <li>You map techniques to MITRE ATT&amp;CK Cloud - shows you understand the shared vocabulary.</li>
                 <li>There's a "what surprised me" reflection section. Most write-ups skip this; it's the strongest signal of authentic learning.</li>
             </ul>
         </section>
@@ -284,7 +284,7 @@ chmod u+x cloudgoat.py</code></pre><p>Configure CloudGoat with your default AWS 
                 <li>Forgetting to <code>destroy</code>. NAT gateways and EC2 instances run up bills overnight. Tear down at end of session, every session.</li>
                 <li>Skipping the remediation section because "the exploit was the fun part." Hiring managers care more about defenders than attackers.</li>
                 <li>Putting it in a private repo. Half the value is being able to send the link.</li>
-                <li>Letting your account leak into the screenshots — redact account IDs, IPs, ARNs.</li>
+                <li>Letting your account leak into the screenshots - redact account IDs, IPs, ARNs.</li>
             </ul>
         </section>
 
@@ -296,10 +296,10 @@ chmod u+x cloudgoat.py</code></pre><p>Configure CloudGoat with your default AWS 
         <section id="next" class="cta-section">
             <h2>Where next</h2>
             <ul>
-                <li><a href="../cloud-security-portfolio-projects.html">All 7 portfolio projects</a> — pick your next one.</li>
-                <li><a href="../cloud-security-home-lab.html">Home lab setup</a> — the safe environment this project runs in.</li>
-                <li><a href="../cloud-security-careers.html">Careers guide</a> — how this project fits into the hiring story.</li>
-                <li><a href="../community.html">Friday Zoom + Signal chat</a> — share your write-up with practitioners.</li>
+                <li><a href="../cloud-security-portfolio-projects.html">All 7 portfolio projects</a> - pick your next one.</li>
+                <li><a href="../cloud-security-home-lab.html">Home lab setup</a> - the safe environment this project runs in.</li>
+                <li><a href="../cloud-security-careers.html">Careers guide</a> - how this project fits into the hiring story.</li>
+                <li><a href="../community.html">Friday Zoom + Signal chat</a> - share your write-up with practitioners.</li>
             </ul>
         </section>
 
