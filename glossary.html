@@ -37,19 +37,2429 @@
     <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
     <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=0e1857bd" as="style"
-        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
-    <link rel="stylesheet" href="/style.css?v=0e1857bd"
-        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+    <link rel="preload" href="/style.css?v=3fb52699" as="style"
+        integrity="sha384-ANJCGGd6EdsnPZTQ/b98RJyWsi8KOVi0IlIq/WWkE+mMZN/lW/1mYqnNme8uWcB7">
+    <link rel="stylesheet" href="/style.css?v=3fb52699"
+        integrity="sha384-ANJCGGd6EdsnPZTQ/b98RJyWsi8KOVi0IlIq/WWkE+mMZN/lW/1mYqnNme8uWcB7">
 
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "Cloud Security Glossary",
+  "description": "Plain-English definitions of cloud security terms maintained by the Cloud Security Office Hours community.",
+  "url": "https://csoh.org/glossary.html",
+  "hasDefinedTerm": [
     {
-      "@context": "https://schema.org",
-      "@type": "DefinedTermSet",
-      "name": "Cloud Security Glossary",
-      "description": "Plain-English definitions of cloud security terms maintained by the Cloud Security Office Hours community.",
-      "url": "https://csoh.org/glossary.html"
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-iaas",
+      "name": "IaaS — Infrastructure as a Service",
+      "description": "Raw compute, storage, and network resources on demand. You manage the OS and everything above. Examples: EC2, Azure VM, GCE.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-iaas"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-paas",
+      "name": "PaaS — Platform as a Service",
+      "description": "The provider runs the OS and runtime; you ship code. Examples: App Service, App Engine, Elastic Beanstalk.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-paas"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-saas",
+      "name": "SaaS — Software as a Service",
+      "description": "Fully hosted application; you manage only your data and users. Examples: Microsoft 365, Salesforce, Workday.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-saas"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-faas",
+      "name": "FaaS — Function as a Service",
+      "description": "Run a piece of code in response to an event. Provider handles everything else. Examples: AWS Lambda, Azure Functions, GCP Cloud Functions.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-faas"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-public",
+      "name": "Public / Private / Hybrid / Multi-Cloud",
+      "description": "Public is shared infrastructure (AWS, Azure, GCP). Private is dedicated. Hybrid mixes them. Multi-cloud uses two or more public providers.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-public"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cloud-native",
+      "name": "Cloud-Native",
+      "description": "Architecture that takes advantage of cloud-specific properties — elasticity, managed services, ephemeral compute, declarative APIs.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cloud-native"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-shared-responsibility-model",
+      "name": "Shared Responsibility Model",
+      "description": "The provider secures the cloud (hardware, hypervisor, physical sites); the customer secures what's in the cloud (data, identities, configuration). The line shifts depending on the service tier.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-shared-responsibility-model"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-tenant",
+      "name": "Tenant / Multi-Tenant",
+      "description": "A logical boundary for one customer's data, identities, and configuration in a shared platform. Multi-tenant SaaS keeps many tenants isolated on the same infrastructure; the cross-tenant boundary is the provider's most security-critical control.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-tenant"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-container",
+      "name": "Container",
+      "description": "An OS-level isolated process bundle. Same kernel as the host, separate userland.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-container"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-image",
+      "name": "Image",
+      "description": "The static template a container is launched from. Layered, immutable, and addressable by digest.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-image"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-registry",
+      "name": "Registry",
+      "description": "Where container images live (Docker Hub, ECR, GHCR, ACR, GAR).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-registry"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-kubernetes",
+      "name": "Kubernetes (K8s)",
+      "description": "Open-source container orchestration. Schedules workloads onto a fleet of nodes via a declarative API.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-kubernetes"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pod",
+      "name": "Pod",
+      "description": "The smallest deployable unit in K8s — one or more co-located containers that share a network namespace.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pod"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sidecar",
+      "name": "Sidecar",
+      "description": "A helper container co-located with an app container in the same pod (commonly for proxies, log shippers, secret fetchers).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sidecar"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-service-mesh",
+      "name": "Service Mesh",
+      "description": "An infrastructure layer that handles east-west service-to-service traffic — mTLS, retries, traffic shifting. Examples: Istio, Linkerd.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-service-mesh"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-serverless",
+      "name": "Serverless",
+      "description": "Compute model where you don't manage servers, scaling, or capacity — typically functions or container runtimes that scale to zero.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-serverless"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-eks",
+      "name": "EKS / AKS / GKE",
+      "description": "Managed Kubernetes from AWS / Azure / Google.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-eks"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ecs",
+      "name": "ECS / Fargate",
+      "description": "AWS container orchestration (ECS) and its serverless data plane (Fargate).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ecs"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ec2",
+      "name": "EC2 — Elastic Compute Cloud",
+      "description": "AWS's foundational IaaS compute service: virtual machines you launch, scale, and snapshot on demand. The historical entry point for cloud workloads and the surface most cloud-security misconfigurations show up on (open security groups, public AMIs, exposed IMDS).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ec2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-lambda",
+      "name": "Lambda / Functions / Cloud Functions / Cloud Run",
+      "description": "FaaS offerings from AWS (Lambda) / Azure (Functions) / Google (Cloud Functions and Cloud Run, the latter for container-based serverless).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-lambda"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-confidential-computing",
+      "name": "Confidential Computing",
+      "description": "Hardware-enforced memory encryption (Intel SGX, AMD SEV, AWS Nitro, Azure Confidential VMs) so the cloud provider can't see your workload memory in plaintext.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-confidential-computing"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-hypervisor",
+      "name": "Hypervisor",
+      "description": "Software that creates and isolates virtual machines. Type 1 runs on bare metal (ESXi, Xen, KVM); Type 2 runs on a host OS (VirtualBox, Parallels). The control plane the cloud provider secures.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-hypervisor"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ebpf",
+      "name": "eBPF",
+      "description": "Extended Berkeley Packet Filter — a Linux kernel runtime that safely executes sandboxed programs attached to syscalls, network paths, and tracepoints. The basis of modern runtime-security and observability tooling (Cilium, Falco, Tetragon).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ebpf"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-tetragon",
+      "name": "Tetragon",
+      "description": "Open-source eBPF-based runtime security from Isovalent. Provides Kubernetes-aware process, network, and file observability with optional inline enforcement.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-tetragon"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-container-security",
+      "name": "Container Security",
+      "description": "The practice of securing the full container lifecycle — base image hardening, registry scanning, signed builds, admission control, runtime detection, and pod-level isolation in Kubernetes. Sits at the intersection of CWPP, KSPM, and supply-chain tooling.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-container-security"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-iam",
+      "name": "IAM — Identity & Access Management",
+      "description": "Who you are and what you're allowed to do. The control plane for cloud security.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-iam"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-principal",
+      "name": "Principal",
+      "description": "The acting identity — a user, role, service account, or workload — making an authenticated request.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-principal"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-rbac",
+      "name": "RBAC — Role-Based Access Control",
+      "description": "Permissions assigned to roles, roles assigned to identities. Easy to reason about; coarse-grained.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-rbac"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-abac",
+      "name": "ABAC — Attribute-Based Access Control",
+      "description": "Permissions evaluated against attributes (tag, department, time of day). Fine-grained, harder to audit.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-abac"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pbac",
+      "name": "PBAC — Policy-Based Access Control",
+      "description": "Decisions made by a centralized policy engine (e.g., OPA) rather than scattered ACLs.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pbac"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-idp",
+      "name": "IdP — Identity Provider",
+      "description": "The system that authenticates users (Okta, Azure AD / Entra ID, Google Workspace).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-idp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sp",
+      "name": "SP — Service Provider / RP — Relying Party",
+      "description": "The application that trusts the IdP's assertion of who the user is.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sso",
+      "name": "SSO — Single Sign-On",
+      "description": "Sign in once, get into many applications without re-entering credentials.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sso"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-saml-2-0",
+      "name": "SAML 2.0",
+      "description": "XML-based federation protocol — the IdP sends a signed assertion to the SP.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-saml-2-0"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-oidc",
+      "name": "OIDC — OpenID Connect",
+      "description": "Identity layer on top of OAuth 2.0. Issues JWT ID tokens. The modern default.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-oidc"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-wif",
+      "name": "WIF — Workload Identity Federation",
+      "description": "Lets a workload (a CI runner, a Kubernetes pod, a service in another cloud) authenticate to a cloud provider without a long-lived service-account key. The workload presents an OIDC token from its own identity provider; the cloud trusts that token under a documented policy and exchanges it for a short-lived access token. Eliminates the \"JSON key sitting in a secrets manager that no one ever rotates\" failure mode.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-wif"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-oauth-2-0",
+      "name": "OAuth 2.0",
+      "description": "Delegated authorization framework. Issues access tokens; the spec doesn't define authentication.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-oauth-2-0"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-jwt",
+      "name": "JWT — JSON Web Token",
+      "description": "A signed (and optionally encrypted) JSON blob used as a token. Common in OIDC and API auth.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-jwt"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-phishing-resistant",
+      "name": "Phishing-Resistant MFA",
+      "description": "Multi-factor methods that can't be relayed or replayed by an attacker because the second factor is cryptographically bound to the origin — FIDO2 security keys, passkeys, smartcards. Push prompts, OTP codes, and SMS are explicitly not phishing-resistant.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-phishing-resistant"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-mfa",
+      "name": "MFA — Multi-Factor Authentication",
+      "description": "Something you know + something you have (or are). Phishing-resistant MFA = WebAuthn / FIDO2.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-mfa"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-fido2",
+      "name": "FIDO2 / WebAuthn / Passkeys",
+      "description": "Public-key authentication standards that resist phishing. Passkeys are syncable WebAuthn credentials.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-fido2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-federation",
+      "name": "Federation",
+      "description": "Trusting tokens from a foreign IdP (e.g., GitHub Actions OIDC tokens trusted by AWS to assume a role).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-federation"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sts",
+      "name": "STS — Security Token Service",
+      "description": "Issues short-lived credentials, typically by exchanging a long-lived identity for a temporary role session.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sts"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-assumerole",
+      "name": "AssumeRole",
+      "description": "The AWS STS call that swaps your identity for temporary credentials of a target role.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-assumerole"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-service-principal",
+      "name": "Service Principal",
+      "description": "An Entra ID identity for an application, service, or automation — the Azure analogue of an AWS IAM role for workloads. Pair with a managed identity when possible to avoid managing client secrets.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-service-principal"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-service-account",
+      "name": "Service Account / Managed Identity / Workload Identity",
+      "description": "The non-human principal a workload uses to authenticate (GCP service account, Azure managed identity, Kubernetes ServiceAccount → cloud role).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-service-account"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-oidc-federation",
+      "name": "OIDC Federation (workload identity federation)",
+      "description": "A workload presents a short-lived OIDC token from its host (e.g., GitHub Actions) which the cloud trusts to issue temporary credentials. Removes long-lived secrets from CI.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-oidc-federation"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-conditional-access",
+      "name": "Conditional Access",
+      "description": "Policy that grants access only when contextual conditions are met (device compliant, location, risk score).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-conditional-access"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-jit",
+      "name": "JIT — Just-In-Time Access",
+      "description": "Permissions are elevated only for the duration of a task, then expire.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-jit"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-least-privilege",
+      "name": "Least Privilege / Just-Enough Access",
+      "description": "Grant the minimum permissions necessary for the task. The defining principle of cloud IAM.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-least-privilege"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-scp",
+      "name": "SCP — Service Control Policy",
+      "description": "AWS Organizations guardrail; sets the maximum permissions an account can have, even for the root user.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-scp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-permission-boundary",
+      "name": "Permission Boundary",
+      "description": "An IAM policy that caps the effective permissions of an entity, regardless of attached policies.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-permission-boundary"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-imds",
+      "name": "IMDS / IMDSv1 / IMDSv2",
+      "description": "Instance Metadata Service — the link-local 169.254.169.254 endpoint that hands credentials to EC2 instances. IMDSv1 is unauthenticated and reachable via SSRF (the Capital One pattern). IMDSv2 requires a PUT-issued session token bound to the requester, defeating SSRF abuse — enforce v2-only on every account.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-imds"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-iam-access-analyzer",
+      "name": "IAM Access Analyzer",
+      "description": "AWS service that flags IAM roles, policies, and resources granting access to external accounts or principals you didn't intend. Also surfaces unused permissions, helping enforce least privilege.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-iam-access-analyzer"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-active-directory",
+      "name": "Active Directory (AD)",
+      "description": "Microsoft's directory service for on-prem identity. Still the primary user/group/auth backend for most enterprises; cloud identity providers federate to it.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-active-directory"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-entra-id",
+      "name": "Entra ID / Azure AD",
+      "description": "Microsoft's cloud identity service. \"Azure AD\" is the legacy name; Microsoft renamed it Entra ID in 2023 but the older name is still pervasive in tooling, documentation, and conversation. Hosts users, groups, conditional-access policies, and the SAML/OIDC endpoints behind Microsoft 365 and Azure.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-entra-id"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-kerberos",
+      "name": "Kerberos",
+      "description": "Network authentication protocol using time-bound encrypted tickets. The auth fabric of Active Directory; compromise of the krbtgt account yields a \"Golden Ticket\".",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-kerberos"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-acl",
+      "name": "ACL — Access Control List",
+      "description": "A list of rules attached to a resource specifying who can access it and how. Predates RBAC/ABAC; still common on filesystems, S3 objects, and network devices.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-acl"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-spiffe",
+      "name": "SPIFFE — Secure Production Identity Framework for Everyone",
+      "description": "CNCF standard for cryptographic workload identity. Every workload gets a SPIFFE ID (a URI like spiffe://prod.acme/billing) and is issued a short-lived SVID (X.509 or JWT) to prove it. Decouples identity from network location — the foundation under most modern service-mesh mTLS.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-spiffe"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-spire",
+      "name": "SPIRE — SPIFFE Runtime Environment",
+      "description": "The reference implementation of SPIFFE. A SPIRE Server issues SVIDs; SPIRE Agents on each node attest workloads (by Kubernetes pod metadata, AWS instance identity doc, GCP service account, etc.) and hand them their identity. Multi-cloud, multi-cluster federation included.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-spire"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-irsa",
+      "name": "IRSA — IAM Roles for Service Accounts",
+      "description": "The AWS pattern for giving an EKS pod a scoped AWS IAM role without long-lived keys: the cluster's OIDC provider is registered as an IAM identity provider, and the Kubernetes ServiceAccount is annotated with a role ARN. AWS also offers EKS Pod Identity, which uses an agent on the node instead of the OIDC token-exchange dance.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-irsa"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pam",
+      "name": "PAM — Privileged Access Management",
+      "description": "The discipline (and product category) for controlling who can use high-privilege accounts, when, and with what audit trail. Patterns: vaulted credentials with checkout, session recording, JIT elevation, break-glass workflows. Vendors: CyberArk, Delinea, BeyondTrust, StrongDM, Teleport, HashiCorp Boundary.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pam"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pim",
+      "name": "PIM — Privileged Identity Management",
+      "description": "Microsoft's name for JIT role activation in Entra ID and Azure RBAC. An eligible-but-not-active assignment lets a user request elevation for a bounded window with optional MFA and approval.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pim"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-rebac",
+      "name": "ReBAC — Relationship-Based Access Control",
+      "description": "Authorization based on relationships between principals and resources rather than roles or attributes (e.g., \"user X is an editor on document Y because X is in group G and G owns Y\"). Implementations: Google Zanzibar, OpenFGA, SpiceDB, AuthZed, Topaz. Useful for fine-grained, graph-shaped permissions like document sharing.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-rebac"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pdp",
+      "name": "PDP — Policy Decision Point",
+      "description": "The component in a zero-trust or fine-grained-authz architecture that evaluates a policy and answers \"permit\" or \"deny\" for a given request. Examples: OPA, AWS Verified Permissions, Microsoft Conditional Access engine.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pdp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pep",
+      "name": "PEP — Policy Enforcement Point",
+      "description": "The component that intercepts a request, asks the PDP for a decision, and enforces it. In zero trust this is the identity-aware proxy, the API gateway, the service mesh sidecar, or the application's own middleware.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pep"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-itdr",
+      "name": "ITDR — Identity Threat Detection and Response",
+      "description": "Detection and response focused on identity attack patterns — anomalous logins, impossible travel, mass OAuth-app consent, dormant-account use, role-assumption spikes — across IdPs and downstream SaaS. Vendors: Beyond Identity, Push Security, Permiso, Mitiga, Vectra Identity.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-itdr"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-iap",
+      "name": "IAP — Identity-Aware Proxy",
+      "description": "GCP's per-request, identity-aware gateway that fronts internal apps. The user authenticates once to Google; IAP enforces per-app and per-method authorization before the request reaches the backend. The vendor-neutral concept: a PEP that sits between user and internal service and asks \"should this identity be allowed to make this request right now?\"",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-iap"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-vpc",
+      "name": "VPC / VNet",
+      "description": "Virtual Private Cloud / Virtual Network — your isolated network space inside a cloud account.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-vpc"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-subnet",
+      "name": "Subnet",
+      "description": "A slice of a VPC's IP range, bound to one availability zone.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-subnet"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-security-group",
+      "name": "Security Group",
+      "description": "A stateful per-ENI firewall (AWS / Azure NSG / GCP firewall rule).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-security-group"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-nacl",
+      "name": "NACL — Network Access Control List",
+      "description": "A stateless subnet-level firewall (AWS).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-nacl"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-peering",
+      "name": "Peering / Transit Gateway / Cloud Interconnect",
+      "description": "Mechanisms for connecting VPCs / VNets to each other or to on-prem networks.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-peering"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-nat",
+      "name": "NAT — Network Address Translation",
+      "description": "Lets private-subnet workloads reach the internet through a shared egress IP.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-nat"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-privatelink",
+      "name": "PrivateLink / Private Endpoint / Private Service Connect",
+      "description": "Private routable endpoints for cloud services that never traverse the public internet.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-privatelink"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ingress",
+      "name": "Ingress / Egress",
+      "description": "Inbound / outbound traffic. Egress controls are where most data exfil hides.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ingress"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-waf",
+      "name": "WAF — Web Application Firewall",
+      "description": "Layer-7 filter for HTTP traffic — XSS, SQLi, rate limits, geo blocks.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-waf"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cdn",
+      "name": "CDN — Content Delivery Network",
+      "description": "A globally distributed cache that sits between users and your origin server. Static assets (HTML, images, CSS, JS) are served from the cache nearest the user instead of fetching from origin every time. Side benefits: absorbs DDoS traffic at the edge, hides your origin IP, and survives short origin outages on cached pages. Examples: Cloudflare, Fastly, AWS CloudFront, Google Cloud CDN.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cdn"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-hsts",
+      "name": "HSTS — HTTP Strict Transport Security",
+      "description": "An HTTP response header that tells the browser \"always use HTTPS for this site for the next N seconds, even if a link tries to send the user to plain HTTP.\" Defends against on-path attackers who try to downgrade the connection from HTTPS to HTTP and read or modify traffic. With preload + the browser's preload list, the protection is in effect on the very first visit too.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-hsts"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-csp",
+      "name": "CSP — Content Security Policy",
+      "description": "An HTTP response header that tells the browser exactly which scripts, styles, images, fonts, frames, etc. are allowed to load on a page. A strict CSP (no inline scripts, no eval(), no wildcards) is one of the strongest defenses against XSS — even if an attacker injects script tags, the browser refuses to execute them.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-csp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-acme",
+      "name": "ACME — Automated Certificate Management Environment",
+      "description": "The protocol Let's Encrypt and most modern managed-cert systems use to prove you control a domain and issue a TLS certificate for it. The most common challenge type is HTTP-01: the cert authority asks you to serve a specific token at a specific URL on the domain you're claiming, then verifies it with an HTTP request. DNS-01 is the alternative: you put the token in a DNS TXT record instead. ACME is what makes free, auto-renewing TLS certs the default in 2026.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-acme"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-bastion-host",
+      "name": "Bastion Host / Jump Box",
+      "description": "A hardened entry point into a private network. Modern equivalents: SSM Session Manager, IAP, Azure Bastion.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-bastion-host"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-zero-trust",
+      "name": "Zero Trust",
+      "description": "Architectural principle: assume the network is hostile. Authenticate and authorize every request, regardless of source.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-zero-trust"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-beyondcorp",
+      "name": "BeyondCorp",
+      "description": "Google's foundational zero-trust paper / model — access decisions based on user + device + context, not network location.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-beyondcorp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sase",
+      "name": "SASE / SSE",
+      "description": "Secure Access Service Edge / Security Service Edge — vendor-bundled cloud-delivered SWG + ZTNA + CASB + FWaaS.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sase"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ztna",
+      "name": "ZTNA — Zero-Trust Network Access",
+      "description": "Identity-aware proxy that replaces traditional VPN. Per-application access, not network-wide.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ztna"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-casb",
+      "name": "CASB — Cloud Access Security Broker",
+      "description": "Inline or API-based control point for SaaS usage — DLP, posture, shadow-IT discovery.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-casb"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-microsegmentation",
+      "name": "Microsegmentation",
+      "description": "Fine-grained network isolation between workloads, typically enforced by sidecar proxies or eBPF.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-microsegmentation"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-network-policy",
+      "name": "Network Policy",
+      "description": "Kubernetes-native firewall rules expressed as YAML, restricting which pods may talk to which. Default-deny network policies are a baseline cluster-hardening control.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-network-policy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ddos",
+      "name": "DDoS — Distributed Denial of Service",
+      "description": "Overwhelming a service with traffic from many sources to make it unavailable. Mitigated by CDNs, scrubbing services, and rate-limited APIs.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ddos"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-shield",
+      "name": "AWS Shield",
+      "description": "AWS's DDoS mitigation service. The Standard tier is on by default for all customers; Shield Advanced adds 24×7 DDoS Response Team access, cost protection during attacks, and tighter integration with WAF and Route 53.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-shield"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-eni",
+      "name": "ENI — Elastic Network Interface",
+      "description": "An AWS virtual NIC that can be detached and reattached between EC2 instances. The unit a Security Group is bound to.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-eni"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-nsg",
+      "name": "NSG — Network Security Group",
+      "description": "Azure's stateful packet-filtering primitive. Attached to subnets or NICs; rules are evaluated by priority. The Azure analogue of an AWS Security Group. Pair with Application Security Groups (ASGs) to abstract IP ranges into reusable workload labels.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-nsg"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-vpc-sc",
+      "name": "VPC Service Controls (VPC SC)",
+      "description": "GCP's perimeter for blocking data exfiltration through service APIs. Wraps projects in a service perimeter so that even an attacker holding valid credentials can't move data from BigQuery / GCS / Bigtable / etc. out of the perimeter. Has no direct AWS or Azure equivalent — frequently the single feature that decides \"we'll do this workload on GCP.\"",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-vpc-sc"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-psc",
+      "name": "PSC — Private Service Connect",
+      "description": "GCP's mechanism for consuming a service over a private IP — the customer creates a PSC endpoint inside their VPC and traffic to that IP routes to the producer without traversing the public internet. The GCP equivalent of AWS PrivateLink and Azure Private Link.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-psc"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sse",
+      "name": "SSE — Security Service Edge",
+      "description": "The security half of SASE — SWG + ZTNA + CASB + FWaaS delivered from a vendor's cloud — without the SD-WAN networking layer. Gartner coined the term to recognize that some buyers want the security stack without committing to a full SASE network. Vendors: Zscaler, Netskope, Cloudflare One, Palo Alto Prisma Access.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sse"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-envoy",
+      "name": "Envoy",
+      "description": "High-performance C++ proxy originally built by Lyft. The data plane for Istio and Cloud Service Mesh; also the engine inside many API gateways and ingress controllers. Configurable via xDS APIs. Where most cloud-native mTLS, retry, circuit-breaking, and HTTP filtering actually happens at runtime.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-envoy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cloud-armor",
+      "name": "Cloud Armor",
+      "description": "Google Cloud's combined WAF and DDoS service. Sits in front of Global Load Balancers, supports OWASP CRS rules, custom rules in CEL, geo-blocking, and bot management; Cloud Armor Enterprise adds Adaptive Protection (ML-driven L7 anomaly detection).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cloud-armor"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-s3",
+      "name": "S3 — Simple Storage Service",
+      "description": "AWS's object storage service. The most common cloud-security failure surface: public buckets, overly broad bucket policies, world-readable objects, and ACL/policy interactions that produce surprises. Capital One, LastPass, Snowflake-adjacent leaks, and many others all involved S3 as the exfil destination.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-s3"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-kms",
+      "name": "KMS — Key Management Service",
+      "description": "Managed service that creates, stores, and uses cryptographic keys. AWS KMS, Azure Key Vault, GCP Cloud KMS.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-kms"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-key-vault",
+      "name": "Key Vault",
+      "description": "Azure's combined KMS and secrets store. Holds keys (software- or HSM-protected), secrets (passwords, connection strings), and certificates. Access governed by RBAC or legacy access policies.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-key-vault"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cloud-kms",
+      "name": "Cloud KMS",
+      "description": "Google Cloud's KMS service. Software keys, HSM-backed keys, and external key support. Integrates with Customer-Managed Encryption Keys (CMEK) across most GCP services.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cloud-kms"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-hsm",
+      "name": "HSM — Hardware Security Module",
+      "description": "Tamper-resistant hardware that performs crypto operations and never lets keys leave it.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-hsm"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-kek",
+      "name": "KEK / DEK — Key Encryption Key / Data Encryption Key",
+      "description": "Pattern: encrypt data with a DEK, then encrypt the DEK with a KEK held in KMS/HSM.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-kek"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-envelope-encryption",
+      "name": "Envelope Encryption",
+      "description": "The standard cloud pattern of wrapping a DEK with a KEK so the DEK can travel with the ciphertext.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-envelope-encryption"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-byok",
+      "name": "BYOK / HYOK",
+      "description": "Bring/Hold Your Own Key — customer supplies (or holds) the master key, not the cloud provider.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-byok"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-secrets-manager",
+      "name": "Secrets Manager / Vault",
+      "description": "A managed store for credentials, API keys, and connection strings (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault, GCP Secret Manager).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-secrets-manager"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-dlp",
+      "name": "DLP — Data Loss Prevention",
+      "description": "Tooling that detects and blocks sensitive data (PII, PHI, secrets) from leaving its boundary.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-dlp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-purview",
+      "name": "Microsoft Purview",
+      "description": "Microsoft's data-governance and compliance platform — data classification, retention, DLP, insider-risk, and audit. Replaces the older Compliance Center and integrates with Microsoft 365 and Azure data services.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-purview"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-tokenization",
+      "name": "Tokenization",
+      "description": "Replacing sensitive values with non-reversible references; the real value lives in a token vault.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-tokenization"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-encryption-at-rest",
+      "name": "Encryption at Rest / In Transit / In Use",
+      "description": "Three states data can be in. Cloud KMS handles 1 & 2; confidential computing handles 3.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-encryption-at-rest"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-tls",
+      "name": "TLS — Transport Layer Security",
+      "description": "Encrypts data in transit. TLS 1.2 minimum; 1.3 preferred.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-tls"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-mtls",
+      "name": "mTLS — Mutual TLS",
+      "description": "Both client and server authenticate via certificates. Common inside service meshes.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-mtls"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pki",
+      "name": "PKI — Public Key Infrastructure",
+      "description": "The system of CAs, certificates, and trust chains that issues and validates the keys behind TLS, code signing, and S/MIME.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pki"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pqc",
+      "name": "PQC — Post-Quantum Cryptography",
+      "description": "Cryptographic algorithms designed to resist attacks from sufficiently large quantum computers. NIST's first standardized PQC suite (ML-KEM, ML-DSA, SLH-DSA) is what cloud providers and TLS implementations are migrating toward.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pqc"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-hndl",
+      "name": "HNDL — Harvest Now, Decrypt Later",
+      "description": "Threat model where an adversary captures encrypted traffic or data today, banking on future quantum computers to break it. The reason PQC migrations are urgent for long-lived secrets even though large quantum computers don't exist yet.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-hndl"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-crypto-agility",
+      "name": "Crypto Agility",
+      "description": "The property of a system that can swap cryptographic algorithms (and key sizes) without redesign. Critical for the PQC transition — and for surviving the next algorithm break after that.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-crypto-agility"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-dek",
+      "name": "DEK — Data Encryption Key",
+      "description": "The symmetric key that actually encrypts the data. In envelope encryption the DEK travels with the ciphertext (encrypted by a KEK), so you can rotate the wrapping key without re-encrypting everything underneath.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-dek"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-tee",
+      "name": "TEE — Trusted Execution Environment",
+      "description": "Hardware-isolated CPU region that protects code and data even from the host OS, hypervisor, and cloud operator. The substrate under confidential computing: AWS Nitro Enclaves, Azure Confidential VMs (AMD SEV-SNP, Intel TDX), GCP Confidential VMs, Confidential GKE Nodes, Confidential Space.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-tee"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-fips-140",
+      "name": "FIPS 140-2 / 140-3",
+      "description": "US federal standards for cryptographic modules. Level 1 = software-only with approved algorithms; Level 2 = tamper-evident; Level 3 = tamper-resistant with identity-based auth; Level 4 = active tamper response. The procurement bar for FedRAMP, DoD, and many regulated buyers. Cloud HSMs are typically Level 3.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-fips-140"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-air-gap",
+      "name": "Air Gap (Cloud)",
+      "description": "Physical or logical separation that prevents an attacker on one network from reaching another. In cloud the true physical air gap is rare; the practical pattern is a virtual air gap — backups replicated to a separate account/subscription/project with one-way pull, no shared admin trust, and IAM that does not allow the source side to write or delete in the destination. Pair with immutable backups for ransomware resilience.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-air-gap"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-immutable-backup",
+      "name": "Immutable Backup",
+      "description": "Backup data that cannot be modified or deleted before its retention window expires — not by accident, not by an attacker, not by an admin. Cloud-native primitives: S3 Object Lock (Compliance mode prevents even root from deleting), Azure Immutable Blob Storage (time-based or legal-hold), GCS Bucket Lock, Glacier Vault Lock. The \"L\" in the 3-2-1-1-0 rule.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-immutable-backup"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-siem",
+      "name": "SIEM — Security Information and Event Management",
+      "description": "Central log aggregation + correlation + alerting. Splunk, Microsoft Sentinel, Chronicle, Elastic, Sumo.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-siem"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sentinel",
+      "name": "Microsoft Sentinel",
+      "description": "Microsoft's cloud-native SIEM and SOAR platform, built on Azure Monitor / Log Analytics. Native ingestion for Microsoft 365, Entra, Defender, and many third-party sources; KQL-based detection rules.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sentinel"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-security-hub",
+      "name": "AWS Security Hub",
+      "description": "AWS's central findings aggregator. Pulls signals from GuardDuty, IAM Access Analyzer, Inspector, Macie, and partner products into one normalized view, plus automated CSPM checks against frameworks like CIS, AWS FSBP, and PCI.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-security-hub"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-soar",
+      "name": "SOAR — Security Orchestration, Automation, and Response",
+      "description": "Runs automated playbooks against alerts — enrich, contain, ticket, page.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-soar"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-soc",
+      "name": "SOC — Security Operations Center",
+      "description": "The team (and room) that monitors and triages security alerts.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-soc"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-edr",
+      "name": "EDR / XDR / NDR / MDR",
+      "description": "Endpoint / eXtended / Network Detection & Response. MDR adds a managed service. XDR claims to unify telemetry across surfaces.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-edr"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cloudtrail",
+      "name": "CloudTrail / Activity Log / Audit Log",
+      "description": "The control-plane audit trail for AWS / Azure / GCP. Your most important log source in cloud.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cloudtrail"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-vpc-flow-logs",
+      "name": "VPC Flow Logs",
+      "description": "Network metadata (5-tuple, action, bytes) for traffic in a VPC. Cheap, useful for DFIR.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-vpc-flow-logs"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-guardduty",
+      "name": "GuardDuty / Defender for Cloud / Security Command Center (SCC)",
+      "description": "Native threat detection services in AWS / Azure / GCP.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-guardduty"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-falco",
+      "name": "Falco",
+      "description": "Open-source runtime threat detection for Linux and Kubernetes, originally based on syscalls and now eBPF.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-falco"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sigma",
+      "name": "Sigma",
+      "description": "Vendor-agnostic detection rule format that compiles to SIEM-specific queries.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sigma"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-yara",
+      "name": "YARA",
+      "description": "Pattern-matching rules for files, malware, and memory artifacts.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-yara"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-opentelemetry",
+      "name": "OpenTelemetry (OTel)",
+      "description": "Open standard for emitting traces, metrics, and logs across languages and platforms.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-opentelemetry"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ioc",
+      "name": "IOC — Indicator of Compromise",
+      "description": "An artifact (hash, IP, domain) tied to known-bad activity.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ioc"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ioa",
+      "name": "IOA — Indicator of Attack",
+      "description": "A pattern of behavior suggesting attack regardless of specific artifacts.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ioa"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-dwell-time",
+      "name": "Dwell Time",
+      "description": "How long an attacker is in your environment before detection. The metric defenders try to shrink.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-dwell-time"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-mttd",
+      "name": "MTTD / MTTR",
+      "description": "Mean Time To Detect / Respond. Common SOC KPIs.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-mttd"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-dfir",
+      "name": "DFIR — Digital Forensics & Incident Response",
+      "description": "The discipline (and team) that handles incidents end-to-end.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-dfir"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-detection-engineering",
+      "name": "Detection Engineering",
+      "description": "The practice of building, testing, and maintaining detection content as code — Sigma rules, KQL queries, YARA signatures — with measurable coverage against MITRE ATT&CK techniques. Distinct from \"writing alerts,\" in that it treats detections as a versioned, peer-reviewed, regression-tested artifact.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-detection-engineering"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-threat-hunting",
+      "name": "Threat Hunting",
+      "description": "Hypothesis-driven search through telemetry for adversary activity that hasn't tripped an alert. Hunting tests detection coverage, surfaces dwell-time issues, and produces new detection-engineering content.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-threat-hunting"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-incident-response",
+      "name": "Incident Response (IR)",
+      "description": "The end-to-end process of preparing for, detecting, containing, eradicating, and recovering from security incidents — plus the post-mortem that feeds back into detection engineering. DFIR is the forensics-heavy variant; IR is the umbrella program. Codified by NIST SP 800-61 and SANS PICERL.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-incident-response"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-threat-intelligence",
+      "name": "Threat Intelligence (CTI)",
+      "description": "Collected, analyzed information about adversaries, their TTPs, infrastructure, and victims — used to prioritize defenses and inform detection engineering. Tactical (IOCs), operational (campaigns), strategic (motives, geopolitics). Feeds: vendor reports, ISACs, OSINT, and internal incident telemetry.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-threat-intelligence"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-scc",
+      "name": "SCC — Security Command Center",
+      "description": "GCP's native cloud security platform. Standard tier covers asset inventory and basic findings; Premium adds CSPM, Event Threat Detection, Container Threat Detection, Web Security Scanner; Enterprise integrates Mandiant threat intel and the Google SecOps (formerly Chronicle) SIEM/SOAR — effectively a full CNAPP + SIEM bundle.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-scc"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-defender-for-cloud",
+      "name": "Defender for Cloud",
+      "description": "Microsoft's native cloud security platform for Azure (and AWS / GCP, in multi-cloud mode). The free tier provides Cloud Security Posture Management; paid Defender plans add workload protection for servers, containers, databases, storage, App Service, Key Vault, etc. Findings flow to Microsoft Sentinel.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-defender-for-cloud"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-caldera",
+      "name": "CALDERA",
+      "description": "Open-source adversary-emulation framework from MITRE. Runs ATT&CK-mapped techniques end-to-end against a live environment to validate detections and response playbooks. Complementary to Stratus Red Team (cloud-focused) and Atomic Red Team (per-technique).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-caldera"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-atomic-red-team",
+      "name": "Atomic Red Team",
+      "description": "Open-source library of small, single-technique tests mapped to MITRE ATT&CK. The standard for \"does my detection actually fire when this technique runs?\" — invoked by hand or by Invoke-AtomicRedTeam, the PowerShell harness. The \"atomic\" complement to CALDERA's full-chain emulation.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-atomic-red-team"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cspm",
+      "name": "CSPM — Cloud Security Posture Management",
+      "description": "Continuous misconfiguration scanning of cloud accounts (public S3, open SGs, missing MFA, etc.).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cspm"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-kspm",
+      "name": "KSPM — Kubernetes Security Posture Management",
+      "description": "Same idea, scoped to Kubernetes (RBAC sprawl, privileged pods, missing PSS).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-kspm"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ciem",
+      "name": "CIEM — Cloud Infrastructure Entitlements Management",
+      "description": "Permission analysis — finds unused permissions, identifies privilege paths, drives least privilege.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ciem"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cwpp",
+      "name": "CWPP — Cloud Workload Protection Platform",
+      "description": "Runtime protection for VMs, containers, and serverless — agent-based or eBPF.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cwpp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cnapp",
+      "name": "CNAPP — Cloud-Native Application Protection Platform",
+      "description": "The vendor super-bundle: CSPM + CWPP + CIEM + IaC scanning + sometimes DSPM/ASPM.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cnapp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-dspm",
+      "name": "DSPM — Data Security Posture Management",
+      "description": "Discovers and classifies sensitive data across cloud and SaaS, then flags risky exposure.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-dspm"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sspm",
+      "name": "SSPM — SaaS Security Posture Management",
+      "description": "Continuous configuration and identity audit across SaaS apps (Microsoft 365, Google Workspace, Salesforce, GitHub, Slack, Okta, etc.). Covers admin sprawl, third-party OAuth-app risk, weak baselines, dormant accounts, and external sharing. The third leg of the *PM stool alongside CSPM (IaaS) and KSPM (Kubernetes). Vendors: Adaptive Shield (CrowdStrike), AppOmni, Obsidian, Wing, Grip, Reco, Valence.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sspm"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-aspm",
+      "name": "ASPM — Application Security Posture Management",
+      "description": "Aggregates SAST/DAST/SCA findings and ties them to ownership, priority, and reachability.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-aspm"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cadr",
+      "name": "CADR — Cloud Application Detection and Response",
+      "description": "Newer category: runtime detection focused on application-layer attacks in cloud.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cadr"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ai-app",
+      "name": "AI-APP — AI Application Protection Platform",
+      "description": "Emerging category (coined by Wiz) for platforms that secure deployed AI/LLM applications end-to-end — model inventory, prompt-injection defenses, data-flow monitoring between models and tools, and runtime detection of agent misuse. Pairs with CNAPP for the AI workload layer.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ai-app"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-opa",
+      "name": "OPA — Open Policy Agent",
+      "description": "General-purpose policy engine. Decisions in, decisions out.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-opa"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-rego",
+      "name": "Rego",
+      "description": "The query language used by OPA.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-rego"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-policy-as-code",
+      "name": "Policy-as-Code",
+      "description": "Expressing security and compliance rules as code — versioned, reviewable, testable.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-policy-as-code"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-drift",
+      "name": "Drift",
+      "description": "Live infrastructure no longer matching its declared state (Terraform, Bicep, CFN). A common post-incident artifact.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-drift"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-hardening",
+      "name": "Hardening / Baseline",
+      "description": "Reducing attack surface to a defined \"known good\" configuration (CIS Benchmark, vendor security best practices).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-hardening"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pss",
+      "name": "PSS — Pod Security Standards",
+      "description": "Kubernetes' built-in pod-hardening tiers — Privileged / Baseline / Restricted — replacing the deprecated PodSecurityPolicy.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pss"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ctem",
+      "name": "CTEM — Continuous Threat Exposure Management",
+      "description": "Gartner-coined program model that unifies vulnerability management, attack-surface management, identity-risk analysis, and red-team validation into one continuous loop. Increasingly the framing replacing traditional \"patch the CVE\" vulnerability programs.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ctem"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-prowler",
+      "name": "Prowler",
+      "description": "Open-source multi-cloud security assessment tool. Runs hundreds of CSPM-style checks against AWS, Azure, GCP, and Kubernetes mapped to CIS, NIST, PCI, and other frameworks. The default starting point for someone learning cloud posture without a commercial CNAPP.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-prowler"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-attack-surface",
+      "name": "Attack Surface",
+      "description": "The sum of all points where an unauthenticated or low-privilege actor can interact with your systems — public IPs, exposed APIs, leaked credentials, third-party SaaS integrations, signed artifacts, employee inboxes. Attack Surface Management (ASM) is the discipline of continuously discovering and reducing it.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-attack-surface"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-supply-chain",
+      "name": "Supply-Chain Attack",
+      "description": "Compromising the path that produces or delivers software so the malicious change rides through trusted channels — a poisoned dependency, a backdoored build step, a stolen signing key, a malicious GitHub Action. SolarWinds, the PyPI/npm typosquats, Codecov, and the XZ backdoor are all examples. The SLSA framework, SBOMs, and Sigstore exist to harden it.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-supply-chain"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cve",
+      "name": "CVE — Common Vulnerabilities and Exposures",
+      "description": "A unique ID for a publicly disclosed vulnerability, assigned by MITRE/CNAs.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cve"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cvss",
+      "name": "CVSS — Common Vulnerability Scoring System",
+      "description": "0–10 severity score for a CVE. Famously poorly correlated with actual exploitation.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cvss"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-epss",
+      "name": "EPSS — Exploit Prediction Scoring System",
+      "description": "FIRST-maintained probability that a CVE will be exploited in the next 30 days. Pairs better with CVSS than CVSS does alone.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-epss"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-kev",
+      "name": "KEV — Known Exploited Vulnerabilities",
+      "description": "CISA's catalog of CVEs known to be actively exploited. The \"fix this now\" list.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-kev"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sast",
+      "name": "SAST / DAST / IAST",
+      "description": "Static / Dynamic / Interactive Application Security Testing. Source-time / run-time / both.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sast"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sca",
+      "name": "SCA — Software Composition Analysis",
+      "description": "Identifies open-source dependencies and their known vulnerabilities.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sca"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sbom",
+      "name": "SBOM — Software Bill of Materials",
+      "description": "The ingredient list for a piece of software — components, versions, licenses, hashes. Formats: SPDX, CycloneDX.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sbom"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-slsa",
+      "name": "SLSA — Supply-chain Levels for Software Artifacts",
+      "description": "OpenSSF framework defining levels of build-pipeline integrity (signed provenance, isolated builders, etc.).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-slsa"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sigstore",
+      "name": "Sigstore / cosign",
+      "description": "Free, keyless artifact signing using short-lived OIDC-based certs and a public transparency log.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sigstore"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pinning",
+      "name": "Pinning",
+      "description": "Referring to a dependency by an immutable identifier — a content hash or commit SHA — instead of a moveable label like a version tag or branch. A line like nginx:1.27-alpine or actions/checkout@v4 resolves to whatever bytes the publisher has pointed that label at right now; pinning replaces it with @sha256:65645c… or a 40-character commit SHA, which the publisher can't quietly redefine. If the upstream artifact is tampered with, the hash no longer matches and the build fails closed instead of silently shipping the new bytes. Standard hardening for container base images, GitHub Actions, package lockfiles, and any other build-time dependency exposed to supply-chain attacks. The trade-off is friction: pins must be manually updated to take new versions, but that friction is the feature — automated upstream compromise can't propagate without a human noticing.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pinning"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-provenance",
+      "name": "Provenance",
+      "description": "Verifiable record of how a build artifact was produced — source commit, builder, dependencies.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-provenance"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-dependency-confusion",
+      "name": "Dependency Confusion",
+      "description": "Supply-chain attack where a public package matches the name of a private internal one and gets pulled by mistake.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-dependency-confusion"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-typosquatting",
+      "name": "Typosquatting",
+      "description": "Malicious package using a misspelling of a legitimate one.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-typosquatting"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pypi",
+      "name": "PyPI — Python Package Index",
+      "description": "The official public repository for Python packages. A frequent supply-chain target — typosquatting, dependency confusion, and account takeovers of maintainers all show up here regularly.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pypi"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-npm",
+      "name": "npm",
+      "description": "The default package registry for JavaScript / Node.js. Same threat profile as PyPI: typosquatting, dependency confusion, post-install scripts that steal secrets, and high-blast-radius compromises of popular packages.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-npm"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-vex",
+      "name": "VEX — Vulnerability Exploitability eXchange",
+      "description": "Statement attached to an SBOM saying whether a known CVE is actually exploitable in this product / build.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-vex"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cwe",
+      "name": "CWE — Common Weakness Enumeration",
+      "description": "MITRE's catalog of weakness types (e.g., CWE-79 = XSS, CWE-89 = SQL injection). CVEs are concrete instances; CWEs are the categories.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cwe"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-vulnerability-management",
+      "name": "Vulnerability Management",
+      "description": "The program of discovering, prioritizing, remediating, and verifying vulnerabilities across an environment. Modern cloud VM blends CVE data with EPSS, KEV, reachability, runtime evidence, and ownership routing — moving toward CTEM rather than chasing every CVSS 7+.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-vulnerability-management"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-reachability",
+      "name": "Reachability",
+      "description": "Whether a vulnerable function in a dependency is actually invoked by the application — call-graph analysis from the entrypoint down to the vulnerable code. Cuts an SCA backlog by 60–90% in most codebases because most CVEs are in unused code paths. Vendors: Endor Labs, Backslash, Aikido, Apiiro, Snyk Code (in part), Wiz (in part).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-reachability"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-capec",
+      "name": "CAPEC — Common Attack Pattern Enumeration and Classification",
+      "description": "MITRE's catalog of how attacks are carried out — the technique-shaped counterpart to CWE's weakness catalog. Used in threat modeling to enumerate attack patterns against a system. Cross-referenced from CWE and ATT&CK.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-capec"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-nis2",
+      "name": "NIS2 Directive",
+      "description": "EU directive (2022/2555) expanding cybersecurity obligations across \"essential\" and \"important\" entities — energy, transport, banking, health, cloud providers, MSPs, and more. Member states transposed it into national law in 2024–2025. Mandates risk management, supply-chain due diligence, 24-hour incident notification, and personal liability for management.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-nis2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-soc-2",
+      "name": "SOC 2",
+      "description": "AICPA audit covering Security (required) plus optional Availability, Confidentiality, Processing Integrity, and Privacy.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-soc-2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-iso",
+      "name": "ISO/IEC 27001",
+      "description": "International standard for an Information Security Management System (ISMS). Certifiable.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-iso"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pci-dss",
+      "name": "PCI DSS",
+      "description": "Payment Card Industry Data Security Standard. If you process card data, this applies.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pci-dss"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-hipaa",
+      "name": "HIPAA",
+      "description": "US healthcare regulation governing protected health information (PHI).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-hipaa"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-gdpr",
+      "name": "GDPR / CCPA / CPRA",
+      "description": "EU and California data-protection laws. Govern lawful basis, rights, and breach disclosure.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-gdpr"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-fedramp",
+      "name": "FedRAMP",
+      "description": "US federal program authorizing cloud services for government use. Low / Moderate / High baselines.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-fedramp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-nist-csf",
+      "name": "NIST CSF — Cybersecurity Framework",
+      "description": "Govern / Identify / Protect / Detect / Respond / Recover. Common North-Star for security programs.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-nist-csf"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-nist-sp-800-53",
+      "name": "NIST SP 800-53",
+      "description": "The US-government control catalog underlying FedRAMP and many compliance regimes.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-nist-sp-800-53"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-nist-sp-800-171",
+      "name": "NIST SP 800-171",
+      "description": "Controls for protecting Controlled Unclassified Information (CUI) in non-federal systems.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-nist-sp-800-171"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cis-benchmarks",
+      "name": "CIS Benchmarks",
+      "description": "Hardening guides for specific platforms (AWS, Azure, GCP, K8s, OSes). Maintained by the Center for Internet Security.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cis-benchmarks"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-csa-ccm",
+      "name": "CSA CCM — Cloud Controls Matrix",
+      "description": "Cloud Security Alliance's cloud-specific control framework.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-csa-ccm"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-dora",
+      "name": "DORA",
+      "description": "EU Digital Operational Resilience Act — financial-sector ICT risk and third-party oversight.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-dora"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cmmc",
+      "name": "CMMC — Cybersecurity Maturity Model Certification",
+      "description": "US Department of Defense framework gating eligibility for DoD contracts. CMMC 2.0 has three levels: Level 1 (self-assessed, 17 controls aligned to FAR 52.204-21), Level 2 (third-party C3PAO-assessed, 110 controls aligned to NIST SP 800-171), Level 3 (DIBCAC-assessed, adds 800-172 controls). Phased rollout began in late 2024.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cmmc"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-tsc",
+      "name": "TSC — Trust Services Criteria",
+      "description": "AICPA's five criteria categories underneath SOC 2: Security (always required), Availability, Confidentiality, Processing Integrity, Privacy. The criteria are what the auditor tests against; selecting Security alone is the baseline SOC 2 report.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-tsc"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-baa",
+      "name": "BAA — Business Associate Agreement",
+      "description": "The HIPAA-mandated contract between a Covered Entity (e.g., a hospital) and any vendor that handles Protected Health Information on its behalf. AWS, Azure, GCP, and most major SaaS sign BAAs covering specific services; using a non-BAA-covered service for PHI is itself a HIPAA violation.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-baa"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-sox",
+      "name": "SOX — Sarbanes-Oxley Act",
+      "description": "2002 US law that mandates internal controls over financial reporting for public companies. In cloud the relevant artifacts are IT General Controls (ITGCs) — change management, access reviews, segregation of duties, backup verification — applied to systems that touch the general ledger. Auditors trace from a financial transaction back to the IAM model that protected it.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-sox"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-iso-27017",
+      "name": "ISO/IEC 27017 / 27018",
+      "description": "Cloud-specific addenda to ISO/IEC 27001. 27017 adds cloud-service-provider and cloud-customer controls (shared responsibility, virtual environment hardening); 27018 adds protections for PII processed by cloud providers (a partial GDPR-aligned baseline).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-iso-27017"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-iso-42001",
+      "name": "ISO/IEC 42001",
+      "description": "2023 standard for AI Management Systems — the AI-specific analogue of ISO 27001. Certifiable. Covers governance, risk, lifecycle, transparency, and continuous improvement for organizations that build or deploy AI systems. The first formal compliance framework for AI risk; pairs with NIST AI RMF on the controls side.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-iso-42001"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-mitre-att-ck",
+      "name": "MITRE ATT&CK",
+      "description": "Knowledge base of adversary tactics, techniques, and procedures. Has Cloud, Containers, Mobile, ICS matrices.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-mitre-att-ck"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-d3fend",
+      "name": "D3FEND",
+      "description": "MITRE's defensive counterpart to ATT&CK — countermeasure techniques mapped to attacker techniques.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-d3fend"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ttp",
+      "name": "TTP — Tactics, Techniques, and Procedures",
+      "description": "The \"how\" of an adversary's behavior, increasingly specific from tactic → technique → procedure.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ttp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-kill-chain",
+      "name": "Kill Chain",
+      "description": "Lockheed Martin's seven-stage model of an intrusion: Recon → Weaponization → Delivery → Exploitation → Installation → C2 → Actions on Objectives.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-kill-chain"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-initial-access",
+      "name": "Initial Access",
+      "description": "How the attacker first lands — phish, exposed service, valid credentials, supply chain.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-initial-access"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-lateral-movement",
+      "name": "Lateral Movement",
+      "description": "Pivoting from one foothold to other systems, often using stolen tokens.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-lateral-movement"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-privilege-escalation",
+      "name": "Privilege Escalation",
+      "description": "Gaining higher rights than originally granted (vertical) or rights of a peer (horizontal).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-privilege-escalation"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-persistence",
+      "name": "Persistence",
+      "description": "Mechanisms attackers leave to survive reboots, password rotations, and credential rotations.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-persistence"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-exfiltration",
+      "name": "Exfiltration",
+      "description": "Stealing data out of the environment — often via DNS, S3, GitHub, or messaging services.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-exfiltration"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-c2",
+      "name": "C2 — Command & Control",
+      "description": "The channel an attacker uses to control implants. Often blended with legitimate cloud services.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-c2"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-credential-stuffing",
+      "name": "Credential Stuffing",
+      "description": "Replaying breached username/password pairs against other services.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-credential-stuffing"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-infostealer",
+      "name": "Infostealer",
+      "description": "Commodity malware (RedLine, Raccoon, LummaC2, Vidar…) that scrapes browser-saved credentials, session cookies, crypto wallets, and authenticated SaaS tokens off an infected workstation. Logs are then sold on criminal markets — the same data that fueled the Snowflake/UNC5537 wave. The reason \"the laptop got infected\" is now a cloud problem.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-infostealer"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-data-exfiltration",
+      "name": "Data Exfiltration",
+      "description": "Stealing data out of the environment. The \"Actions on Objectives\" stage of most cloud breaches. Common channels: S3 uploads, DNS tunneling, GitHub gists, Discord/Slack webhooks, Telegram bots, and outbound HTTPS to attacker infrastructure. Egress controls and DLP are the defensive layer.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-data-exfiltration"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-red-team",
+      "name": "Red Team / Blue Team / Purple Team",
+      "description": "Red-team operators emulate an adversary against a real target with realistic objectives and stealth. Blue-team operators defend, detect, and respond. Purple-team engagements run them together — red executes, blue watches, both tune detections in real time. Distinct from a one-off pen test, a red-team engagement assumes weeks-to-months and full TTP latitude.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-red-team"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-phishing",
+      "name": "Phishing / Spear Phishing / Whaling",
+      "description": "Email-borne credential theft, targeted variant, and exec-targeted variant.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-phishing"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-consent-phishing",
+      "name": "Consent Phishing / OAuth Phishing",
+      "description": "Tricking a user into granting an attacker-owned OAuth app permission to their account. No password ever stolen.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-consent-phishing"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-mfa-fatigue",
+      "name": "MFA Fatigue / Push Bombing",
+      "description": "Spamming push prompts until the user accepts one. Defeated by number matching and FIDO2.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-mfa-fatigue"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ssrf",
+      "name": "SSRF — Server-Side Request Forgery",
+      "description": "Trick a server into fetching an attacker-chosen URL. In cloud, the historical path to IMDS credentials.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ssrf"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-xss",
+      "name": "XSS — Cross-Site Scripting",
+      "description": "Injecting attacker-controlled JS into another user's session. Stored, reflected, DOM-based.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-xss"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-csrf",
+      "name": "CSRF — Cross-Site Request Forgery",
+      "description": "Tricking a victim's browser into making an authenticated request to a target site.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-csrf"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-rce",
+      "name": "RCE — Remote Code Execution",
+      "description": "Running attacker code on a server. The most consequential class of bug.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-rce"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-golden-saml",
+      "name": "Golden SAML",
+      "description": "Forging arbitrary SAML assertions after stealing the IdP's signing key. Made famous by SolarWinds.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-golden-saml"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-golden-ticket",
+      "name": "Golden Ticket / Silver Ticket",
+      "description": "Active Directory Kerberos ticket forgeries (krbtgt or service-account hashes).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-golden-ticket"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pass-the-hash",
+      "name": "Pass-the-Hash / Pass-the-Token / Pass-the-Cookie",
+      "description": "Reusing stolen credential material without ever knowing the underlying password.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pass-the-hash"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-bola",
+      "name": "BOLA / IDOR — Broken Object Level Authorization",
+      "description": "API1 in the OWASP API Top 10 (also known as Insecure Direct Object Reference). The endpoint authorizes the caller but doesn't check that the caller is allowed to act on this specific object. GET /accounts/123 returns Bob's account when Alice asks because the API only checks \"is the caller authenticated\" and not \"does Alice own account 123.\" The single most common API bug; almost every real-world API breach traces back to a BOLA-shaped flaw.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-bola"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-living-off-the-land",
+      "name": "Living Off the Land (LOTL)",
+      "description": "Attackers using legitimate, signed tools already in the environment (PowerShell, certutil, AWS CLI) to evade detection.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-living-off-the-land"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-shadow-it",
+      "name": "Shadow IT / Shadow AI",
+      "description": "Unsanctioned services / AI tools adopted by employees, outside the visibility of security and IT.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-shadow-it"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-stratus-red-team",
+      "name": "Stratus Red Team",
+      "description": "Open-source cloud attack-emulation tool from DataDog. Lets defenders trigger a catalog of granular MITRE ATT&CK-mapped techniques (S3 exfil, IAM persistence, EC2 IMDS abuse, etc.) against a real cloud account to validate detection engineering coverage.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-stratus-red-team"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cloudgoat",
+      "name": "CloudGoat",
+      "description": "Rhino Security Labs' intentionally vulnerable AWS environment. Spins up scenario-based scenarios (privilege escalation paths, IAM misconfigurations, exposed services) you attack and learn from — the de facto starter CTF for AWS pentesting.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cloudgoat"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-flaws",
+      "name": "flAWS / flAWS2",
+      "description": "Scott Piper's classic AWS-focused security CTFs. Each level teaches a real misconfiguration class — public S3 buckets, EC2 metadata, IAM trust policies, federated identity. Free, browser-driven, and still the most-recommended on-ramp into AWS attacker thinking.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-flaws"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-threat-modeling",
+      "name": "Threat Modeling",
+      "description": "A structured exercise that answers Adam Shostack's four questions: What are we building? What can go wrong? What are we going to do about it? Did we do a good job? Outputs a prioritized list of threats and mitigations against a specific system or change. Best done at design time — when fixes are cheap — and re-run when the architecture shifts.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-threat-modeling"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-stride",
+      "name": "STRIDE",
+      "description": "Microsoft's threat-categorization mnemonic: Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege. Applied per element or per data-flow in a system diagram to enumerate threats. The most common starting framework in threat modeling.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-stride"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-pasta",
+      "name": "PASTA — Process for Attack Simulation and Threat Analysis",
+      "description": "Seven-stage risk-driven threat modeling methodology: define objectives → define technical scope → decompose the application → threat analysis → vulnerability analysis → attack modeling → risk & impact analysis. Heavier than STRIDE; pairs well with business-context risk discussions.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-pasta"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-linddun",
+      "name": "LINDDUN",
+      "description": "Privacy-focused threat modeling framework: Linkability, Identifiability, Non-repudiation, Detectability, Disclosure of information, Unawareness, Non-compliance. Increasingly used to satisfy GDPR Article 25 (\"data protection by design\") and Article 35 (DPIA) requirements.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-linddun"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-dread",
+      "name": "DREAD",
+      "description": "Microsoft's risk-scoring mnemonic — Damage, Reproducibility, Exploitability, Affected users, Discoverability — each scored 0–10, averaged for a threat. Officially deprecated by Microsoft (the scoring is too subjective to be reliable), but still seen in older threat-modeling material. Modern programs prefer FAIR or simple Likelihood × Impact heuristics.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-dread"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-fair",
+      "name": "FAIR — Factor Analysis of Information Risk",
+      "description": "A quantitative model for translating cyber risk into expressed financial loss exposure ranges. Decomposes Risk into Loss Event Frequency (Threat Event Frequency × Vulnerability) and Loss Magnitude. Standardized by The Open Group; the foundation of most modern cyber-risk quantification programs.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-fair"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-attack-tree",
+      "name": "Attack Tree",
+      "description": "Bruce Schneier's tree-shaped representation of attacker goals: the root is the goal (e.g., \"exfiltrate customer data\"), children are sub-goals or methods, leaves are concrete techniques. Nodes can be AND/OR combined. A complement to STRIDE — STRIDE enumerates categories, attack trees enumerate paths.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-attack-tree"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-mitre-atlas",
+      "name": "MITRE ATLAS — Adversarial Threat Landscape for AI Systems",
+      "description": "MITRE's ATT&CK-shaped knowledge base for attacks on AI and ML systems — tactics like reconnaissance, ML model access, exfiltration, impact, and techniques like prompt injection, model evasion, training-data poisoning, and model exfiltration. The de facto cross-vendor taxonomy for AI red-team work.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-mitre-atlas"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-bfla",
+      "name": "BFLA — Broken Function Level Authorization",
+      "description": "API5 in the OWASP API Top 10. A non-admin can call admin-only endpoints because the function-level authorization isn't enforced — e.g., POST /admin/users works for any authenticated caller. Often hidden by UI conventions: the front-end never shows the button, so the back-end forgot to check.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-bfla"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-bopla",
+      "name": "BOPLA — Broken Object Property Level Authorization",
+      "description": "API3 in the OWASP API Top 10. The caller can read or modify properties of an object they're not supposed to — e.g., the user-update endpoint accepts an is_admin field that should only be settable by admins. Encompasses excessive data exposure (read-side) and mass assignment (write-side).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-bopla"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-owasp-api",
+      "name": "OWASP API Security Top 10",
+      "description": "OWASP's API-specific risk catalog (2023 edition): API1 BOLA, API2 Broken Authentication, API3 BOPLA, API4 Unrestricted Resource Consumption, API5 BFLA, API6 Unrestricted Access to Sensitive Business Flows, API7 SSRF, API8 Security Misconfiguration, API9 Improper Inventory Management, API10 Unsafe Consumption of APIs. Distinct from the original OWASP Top 10 because most API attacks aren't web-layer attacks.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-owasp-api"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ai",
+      "name": "AI — Artificial Intelligence",
+      "description": "In a cloud-security context, \"AI\" almost always means systems built around large language models — chat assistants, RAG pipelines, autonomous agents, and the cloud services that host them. The security concerns are configuration of model endpoints, data flow into and out of models, prompt injection, and the blast radius of agents with tool access.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ai"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-llm",
+      "name": "LLM — Large Language Model",
+      "description": "Transformer-based models trained on huge text corpora; the engine behind chat assistants and agents.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-llm"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-fine-tuning",
+      "name": "Fine-Tuning",
+      "description": "Continuing the training of a base LLM on a narrower dataset to specialize it. Security implications: the fine-tuning corpus often contains sensitive internal data, the resulting weights become a sensitive asset, and training-data extraction attacks can recover memorized examples.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-fine-tuning"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-embedding",
+      "name": "Embedding",
+      "description": "A vector representation of text (or images, code) produced by a model so semantic similarity can be computed by distance. The retrieval half of RAG runs over a vector database of embeddings. Embeddings can also leak information about the source text, so embedding stores need access controls.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-embedding"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-prompt-injection",
+      "name": "Prompt Injection",
+      "description": "Untrusted input that overrides the system prompt or coerces the model into actions it shouldn't take. The defining LLM vulnerability.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-prompt-injection"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-indirect-prompt-injection",
+      "name": "Indirect Prompt Injection",
+      "description": "Injection delivered via content the model retrieves (web pages, emails, docs) rather than the user's message.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-indirect-prompt-injection"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-jailbreak",
+      "name": "Jailbreak",
+      "description": "Inputs that bypass an LLM's safety training to elicit prohibited content.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-jailbreak"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-rag",
+      "name": "RAG — Retrieval-Augmented Generation",
+      "description": "Retrieving relevant documents at query time and stuffing them into the model's context.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-rag"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-mcp",
+      "name": "MCP — Model Context Protocol",
+      "description": "Open standard for giving LLMs structured access to tools and data sources.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-mcp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-agent",
+      "name": "Agent / Agentic System",
+      "description": "An LLM that can take actions via tools, often in multi-step loops. Expands the blast radius of prompt injection.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-agent"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-tool-use",
+      "name": "Tool Use / Function Calling",
+      "description": "An LLM emitting a structured request to call an external function (API, shell, browser).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-tool-use"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-confused-deputy",
+      "name": "Confused-Deputy (in agents)",
+      "description": "An agent acting on behalf of the wrong principal — typically because tool input from one user is interpreted as instructions from another.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-confused-deputy"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-guardrails",
+      "name": "Guardrails",
+      "description": "Input/output filters around an LLM to block prompt injection, PII leaks, or off-topic responses. Helpful, not sufficient.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-guardrails"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-model-exfiltration",
+      "name": "Model Exfiltration",
+      "description": "Stealing weights or fine-tuning data from a hosted model.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-model-exfiltration"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-training-data-extraction",
+      "name": "Training-Data Extraction",
+      "description": "Eliciting verbatim training data from a model, especially memorized PII or secrets.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-training-data-extraction"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ai-red-teaming",
+      "name": "AI Red-Teaming",
+      "description": "Adversarial probing of a model or agent for harmful, biased, or insecure behaviors. Distinct from infrastructure red-teaming: the targets are prompt injection, jailbreaks, training-data leakage, and tool-use abuse rather than networks and credentials.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ai-red-teaming"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-owasp-llm-top-10",
+      "name": "OWASP LLM Top 10",
+      "description": "The community-maintained top risks list for LLM applications.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-owasp-llm-top-10"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-nist-ai-rmf",
+      "name": "NIST AI RMF",
+      "description": "NIST's AI Risk Management Framework — Govern / Map / Measure / Manage.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-nist-ai-rmf"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-promptware",
+      "name": "Promptware",
+      "description": "Malicious payloads delivered via prompts to LLMs and agents — a cloud-relevant attack class as agents gain real-world tool access (see Breach Kill Chains).",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-promptware"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-iac",
+      "name": "IaC — Infrastructure as Code",
+      "description": "Declaring infrastructure in versioned code. Terraform / OpenTofu, CloudFormation, Bicep, Pulumi, Crossplane.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-iac"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-landing-zone",
+      "name": "Landing Zone / Cloud Foundation",
+      "description": "The baseline of accounts, identities, networks, logging sinks, and guardrails that workloads land into. Each major cloud has a reference design: AWS Control Tower / Landing Zone Accelerator, Azure Cloud Adoption Framework landing zones, GCP Enterprise Foundations Blueprint. The goal is that the second, fifth, and five-hundredth workload all start with the same identity model, network segmentation, log aggregation, and policy-as-code guardrails — not whatever the team that built it decided in the moment. See our landing zones guide.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-landing-zone"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-gitops",
+      "name": "GitOps",
+      "description": "Use Git as the source of truth for desired state; an agent reconciles the live system to match.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-gitops"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ci-cd",
+      "name": "CI/CD — Continuous Integration / Continuous Delivery",
+      "description": "Pipelines that build, test, and deploy code automatically.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ci-cd"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-immutable-infrastructure",
+      "name": "Immutable Infrastructure",
+      "description": "Servers/containers are never modified after deploy — they're replaced. Reduces drift and forensics surprises.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-immutable-infrastructure"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-blue",
+      "name": "Blue/Green & Canary Deploys",
+      "description": "Deployment patterns that ship to a subset of traffic to limit blast radius.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-blue"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-blast-radius",
+      "name": "Blast Radius",
+      "description": "The scope of damage if a credential, identity, or system is compromised. Minimizing it is a design principle.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-blast-radius"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ephemeral-credentials",
+      "name": "Ephemeral Credentials",
+      "description": "Short-lived (minutes to hours) credentials issued by STS / OIDC federation. The replacement for long-lived access keys.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ephemeral-credentials"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-secrets-sprawl",
+      "name": "Secrets Sprawl",
+      "description": "Long-lived API keys checked into repos, dumped in shell histories, or shared in chat. Cloud's most reliable attack source.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-secrets-sprawl"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-shift-left",
+      "name": "Shift Left / Shift Right",
+      "description": "Doing security in dev/CI (left) vs. runtime/production (right). Both are needed.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-shift-left"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-toil",
+      "name": "Toil",
+      "description": "Repetitive manual operational work. SRE term — the thing automation aims to eliminate.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-toil"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-slo",
+      "name": "SLO / SLI / SLA",
+      "description": "Service Level Objective / Indicator / Agreement — what you target, how you measure, what you're contractually liable for.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-slo"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-runbook",
+      "name": "Runbook / Playbook",
+      "description": "Documented procedures for handling specific operational or security events.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-runbook"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-terraform",
+      "name": "Terraform / OpenTofu",
+      "description": "HashiCorp's IaC tool — declarative HCL configurations applied via a state file to provision cloud resources. OpenTofu is the open-source fork after the 2023 license change. Most cloud-security findings ultimately get fixed in Terraform; IaC scanners (Checkov, tfsec, KICS, Terrascan) catch issues before apply.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-terraform"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-devsecops",
+      "name": "DevSecOps",
+      "description": "Embedding security checks into the developer workflow — SAST, SCA, IaC scanning, secret scanning, and policy gates running in CI rather than as a pre-prod review. The cultural goal is shared ownership; the practical goal is finding issues at the left end of the pipeline where they're cheapest to fix.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-devsecops"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-rto",
+      "name": "RTO — Recovery Time Objective",
+      "description": "The maximum acceptable wall-clock time between a disruption and the service being restored. Set per workload tier: tier-0 systems might have a 1-hour RTO; an internal report can have 72 hours. Drives the architecture spend — multi-region active-active is RTO ≈ 0; cold standby may be 24+ hours.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-rto"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-rpo",
+      "name": "RPO — Recovery Point Objective",
+      "description": "The maximum acceptable amount of data loss measured in time. RPO of 1 hour means you can afford to lose up to 1 hour of writes. Sets the cadence and replication mode for backups — synchronous replication for near-zero RPO, scheduled snapshots for hour-class RPO, daily backups for day-class RPO.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-rpo"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-three-two-one",
+      "name": "3-2-1-1-0 Rule",
+      "description": "Modern backup principle, extending the classic 3-2-1: 3 copies of data, on 2 distinct media or platforms, with 1 copy offsite, 1 copy immutable, and 0 errors when restoration is tested. The \"1 immutable\" and \"0 errors\" additions are post-ransomware-era updates that distinguish working programs from theatre.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-three-two-one"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-ambient-mode",
+      "name": "Ambient Mode (Service Mesh)",
+      "description": "A sidecarless service mesh architecture pioneered by Istio Ambient. Mesh functions (L4 mTLS via a per-node ztunnel; optional L7 policy/observability via a \"waypoint\" proxy) are deployed as shared infrastructure rather than as a sidecar injected into every pod. Trades the per-pod isolation of sidecars for substantially lower memory and operational cost. Cilium offers a similar eBPF-based sidecarless mode.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-ambient-mode"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-graphql",
+      "name": "GraphQL",
+      "description": "Query language for APIs where the client specifies the shape of the response. Security pitfalls unique to GraphQL: introspection enabled in production (exposes the full schema), query-depth / complexity attacks (a single nested query can fan out to millions of resolver calls), batching attacks that bypass per-request rate limits, and authorization checks that must move from endpoint-level to resolver-level. Defenses: persisted queries, depth/complexity limits, server-side authz at the resolver, and disabled introspection in prod.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-graphql"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-grpc",
+      "name": "gRPC",
+      "description": "Google-originated RPC framework using HTTP/2 and Protocol Buffers. Security characteristics: binary protocol opaque to most WAFs, no built-in rate limiting, server reflection often left on in dev/staging (exposes the schema). Pair with mTLS for service-to-service auth and put a gRPC-aware proxy (Envoy, Linkerd) in front for retries, timeouts, and rate limiting.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-grpc"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-nist",
+      "name": "NIST",
+      "description": "US National Institute of Standards and Technology. Owns CSF, the SP 800-series, NVD, and the AI RMF.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-nist"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cisa",
+      "name": "CISA",
+      "description": "US Cybersecurity & Infrastructure Security Agency. Publishes KEV, advisories, and Secure-by-Design guidance.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cisa"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-mitre",
+      "name": "MITRE",
+      "description": "Operates the CVE program, ATT&CK, D3FEND, and CWE.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-mitre"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-csa",
+      "name": "CSA — Cloud Security Alliance",
+      "description": "Industry body behind CCSK, CCAK, the CCM, and the Egregious Eleven / Top Threats reports.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-csa"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-owasp",
+      "name": "OWASP",
+      "description": "Open Worldwide Application Security Project. Top 10 series, ASVS, ZAP.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-owasp"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-enisa",
+      "name": "ENISA",
+      "description": "EU Agency for Cybersecurity. Publishes risk reports and threat-landscape research.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-enisa"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-first",
+      "name": "FIRST",
+      "description": "Forum of Incident Response and Security Teams. Owns CVSS and EPSS, hosts the global CSIRT community.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-first"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cncf",
+      "name": "CNCF",
+      "description": "Cloud Native Computing Foundation. Stewards Kubernetes, Falco, OPA, OpenTelemetry, and more.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cncf"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-openssf",
+      "name": "OpenSSF",
+      "description": "Open Source Security Foundation. Stewards SLSA, Sigstore, Scorecard.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-openssf"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-nvd",
+      "name": "NVD — National Vulnerability Database",
+      "description": "NIST's enriched feed of CVEs with CVSS scoring and CPE tagging.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-nvd"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-cisa-kev",
+      "name": "CISA KEV",
+      "description": "The Known Exploited Vulnerabilities catalog maintained by CISA. The authoritative \"patch this now\" list for vulnerabilities seen in real attacks.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-cisa-kev"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-owasp-zap",
+      "name": "OWASP ZAP",
+      "description": "Open-source web-application security scanner from OWASP. Common in CI pipelines for DAST.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-owasp-zap"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://csoh.org/glossary.html#term-openssf-scorecard",
+      "name": "OpenSSF Scorecard",
+      "description": "Automated checks that score the security posture of an open-source project — signed releases, branch protection, dependency pinning, fuzzing — producing a 0–10 score.",
+      "inDefinedTermSet": "https://csoh.org/glossary.html",
+      "url": "https://csoh.org/glossary.html#term-openssf-scorecard"
     }
+  ]
+}
     </script>
   <noscript><style>.js-enabled header nav{display:block !important}</style></noscript>
 </head>
@@ -74,7 +2484,7 @@
                       <button class="dropdown-toggle active" aria-expanded="true" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
                       <div class="dropdown-menu mega-menu mega-3col">
                         <div class="mega-col">
-                          <h4 class="mega-heading">Foundations</h4>
+                          <span class="mega-heading">Foundations</span>
                           <ul>
                             <li><a href="what-is-cloud-security.html">What is Cloud Security?</a></li>
                             <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
@@ -85,7 +2495,7 @@
                           </ul>
                         </div>
                         <div class="mega-col">
-                          <h4 class="mega-heading">Topics</h4>
+                          <span class="mega-heading">Topics</span>
                           <ul>
                             <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
                             <li><a href="containers.html">Containers</a></li>
@@ -110,7 +2520,7 @@
                           </ul>
                         </div>
                         <div class="mega-col">
-                          <h4 class="mega-heading">Career &amp; Growth</h4>
+                          <span class="mega-heading">Career &amp; Growth</span>
                           <ul>
                             <li><a href="learning-path.html">Learning Path</a></li>
                             <li><a href="cloud-security-certifications.html">Certifications</a></li>
@@ -150,7 +2560,7 @@
                       <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Community <span class="caret" aria-hidden="true">▾</span></button>
                       <div class="dropdown-menu mega-menu mega-2col">
                         <div class="mega-col">
-                          <h4 class="mega-heading">Live</h4>
+                          <span class="mega-heading">Live</span>
                           <ul>
                             <li><a href="sessions.html">Friday Zoom Sessions</a></li>
                             <li><a href="community.html">Community &amp; Signal</a></li>
@@ -158,7 +2568,7 @@
                           </ul>
                         </div>
                         <div class="mega-col">
-                          <h4 class="mega-heading">Archive</h4>
+                          <span class="mega-heading">Archive</span>
                           <ul>
                             <li><a href="meetings.html">Meeting Recaps</a></li>
                             <li><a href="presentations.html">Presentations</a></li>

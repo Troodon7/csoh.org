@@ -3679,6 +3679,7 @@ footer {
 }
 
 .mega-heading {
+    display: block;
     font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;

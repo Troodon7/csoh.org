@@ -39,10 +39,10 @@
     <link rel="dns-prefetch" href="https://www.paypal.com/us/home">
     <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=0e1857bd" as="style"
-        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
-    <link rel="stylesheet" href="/style.css?v=0e1857bd"
-        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+    <link rel="preload" href="/style.css?v=3fb52699" as="style"
+        integrity="sha384-ANJCGGd6EdsnPZTQ/b98RJyWsi8KOVi0IlIq/WWkE+mMZN/lW/1mYqnNme8uWcB7">
+    <link rel="stylesheet" href="/style.css?v=3fb52699"
+        integrity="sha384-ANJCGGd6EdsnPZTQ/b98RJyWsi8KOVi0IlIq/WWkE+mMZN/lW/1mYqnNme8uWcB7">
 
     <script type="application/ld+json">
     {
@@ -161,7 +161,7 @@
                       <button class="dropdown-toggle active" aria-expanded="true" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
                       <div class="dropdown-menu mega-menu mega-3col">
                         <div class="mega-col">
-                          <h4 class="mega-heading">Foundations</h4>
+                          <span class="mega-heading">Foundations</span>
                           <ul>
                             <li><a href="what-is-cloud-security.html" aria-current="page">What is Cloud Security?</a></li>
                             <li><a href="shared-responsibility-model.html">Shared Responsibility</a></li>
@@ -172,7 +172,7 @@
                           </ul>
                         </div>
                         <div class="mega-col">
-                          <h4 class="mega-heading">Topics</h4>
+                          <span class="mega-heading">Topics</span>
                           <ul>
                             <li><a href="cloud-security-best-practices.html">Best Practices</a></li>
                             <li><a href="containers.html">Containers</a></li>
@@ -197,7 +197,7 @@
                           </ul>
                         </div>
                         <div class="mega-col">
-                          <h4 class="mega-heading">Career &amp; Growth</h4>
+                          <span class="mega-heading">Career &amp; Growth</span>
                           <ul>
                             <li><a href="learning-path.html">Learning Path</a></li>
                             <li><a href="cloud-security-certifications.html">Certifications</a></li>
@@ -237,7 +237,7 @@
                       <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Community <span class="caret" aria-hidden="true">▾</span></button>
                       <div class="dropdown-menu mega-menu mega-2col">
                         <div class="mega-col">
-                          <h4 class="mega-heading">Live</h4>
+                          <span class="mega-heading">Live</span>
                           <ul>
                             <li><a href="sessions.html">Friday Zoom Sessions</a></li>
                             <li><a href="community.html">Community &amp; Signal</a></li>
@@ -245,7 +245,7 @@
                           </ul>
                         </div>
                         <div class="mega-col">
-                          <h4 class="mega-heading">Archive</h4>
+                          <span class="mega-heading">Archive</span>
                           <ul>
                             <li><a href="meetings.html">Meeting Recaps</a></li>
                             <li><a href="presentations.html">Presentations</a></li>
@@ -427,7 +427,7 @@
 
         <section id="shared-responsibility">
             <h2>The shared responsibility model</h2>
-            <p>The single most important concept in cloud security is the <strong><a class="glossary-link" href="glossary.html#term-shared-responsibility-model">shared responsibility model</a></strong>. Cloud providers secure some things; you secure the rest. The line moves depending on the service.</p>
+            <p>The single most important concept in cloud security is the <strong><a class="glossary-link" href="glossary.html#term-shared-responsibility-model">shared responsibility model</a></strong>. Cloud providers secure some things; you secure the rest. The line moves depending on the service. <a href="shared-responsibility-model.html">Read the full breakdown across IaaS, PaaS, SaaS and serverless →</a></p>
             <p>The classic framing:</p>
             <ul>
                 <li><strong>Security <em>of</em> the cloud</strong> — physical data centers, the network backbone, the <a class="glossary-link" href="glossary.html#term-hypervisor">hypervisor</a>, the managed-service internals. The provider's job, full stop.</li>
@@ -493,7 +493,7 @@
             <p>In the cloud, identity is the new perimeter. Every API call is authenticated and authorized against an identity — a user, a role, a <a class="glossary-link" href="glossary.html#term-service-principal">service principal</a>, a <a class="glossary-link" href="glossary.html#term-service-account">workload identity</a>. Strong IAM means least-privilege policies, no long-lived access keys where you can avoid them, <a class="glossary-link" href="glossary.html#term-mfa">MFA</a> everywhere, and continuous review of who can do what. Most cloud breaches involve at least one identity failure: an over-privileged role, a leaked key, a phished session token.</p>
 
             <h3 id="pillar-posture">Configuration and posture</h3>
-            <p>The cloud is a giant configuration surface. Public <a class="glossary-link" href="glossary.html#term-s3">S3</a> buckets, open security groups, unencrypted disks, disabled logging, weak password policies — these are the day-to-day failure modes. CSPM tools exist to find them at scale and keep them fixed.</p>
+            <p>The cloud is a giant configuration surface. Public <a class="glossary-link" href="glossary.html#term-s3">S3</a> buckets, open security groups, unencrypted disks, disabled logging, weak password policies — these are the day-to-day failure modes. CSPM tools exist to find them at scale and keep them fixed. <a href="cspm-vs-cnapp.html">See how CSPM, CNAPP, CWPP, CIEM and DSPM compare →</a></p>
 
             <h3 id="pillar-network">Network security</h3>
             <p>VPCs, subnets, security groups, network ACLs, private endpoints, transit gateways, service meshes. The principles are familiar — segment, restrict, monitor — but the implementation is provider-specific and changes constantly.</p>
@@ -502,7 +502,7 @@
             <p>Encrypt data at rest and <a class="glossary-link" href="glossary.html#term-encryption-at-rest">in transit</a>, manage keys (<a class="glossary-link" href="glossary.html#term-kms">KMS</a>, <a class="glossary-link" href="glossary.html#term-key-vault">Key Vault</a>, <a class="glossary-link" href="glossary.html#term-cloud-kms">Cloud KMS</a>), classify what's sensitive, and prevent <a class="glossary-link" href="glossary.html#term-exfiltration">exfiltration</a>. Increasingly this also means thinking about what data you let LLMs and <a class="glossary-link" href="glossary.html#term-ai">AI</a> services see.</p>
 
             <h3 id="pillar-workload">Application and workload security</h3>
-            <p>Secure code, dependency scanning, <a href="containers.html">container image hardening</a>, runtime protection for VMs and <a href="kubernetes.html">Kubernetes</a>, <a class="glossary-link" href="glossary.html#term-serverless">serverless</a> function security, and the <a href="ci-cd.html">CI/CD pipeline</a> that ships all of it. CWPP and CNAPP platforms cover much of this.</p>
+            <p>Secure code, dependency scanning, <a href="containers.html">container image hardening</a>, runtime protection for VMs and <a href="kubernetes.html">Kubernetes</a>, <a class="glossary-link" href="glossary.html#term-serverless">serverless</a> function security, and the <a href="ci-cd.html">CI/CD pipeline</a> that ships all of it. CWPP and CNAPP platforms cover much of this. For the account-structure foundation that underpins all of this, see <a href="landing-zones.html">cloud landing zones</a>.</p>
 
             <h3 id="pillar-detect">Threat detection and response</h3>
             <p><a class="glossary-link" href="glossary.html#term-cloudtrail">CloudTrail</a>, Azure Activity Log, GCP Audit Logs feeding a <a class="glossary-link" href="glossary.html#term-siem">SIEM</a>. Provider-native services like <a class="glossary-link" href="glossary.html#term-guardduty">GuardDuty</a>, Defender for Cloud, and Security Command Center. Detection content mapped to <a class="glossary-link" href="glossary.html#term-mitre">MITRE</a> ATT&amp;CK Cloud techniques. A response <a class="glossary-link" href="glossary.html#term-runbook">runbook</a> for when something fires.</p>

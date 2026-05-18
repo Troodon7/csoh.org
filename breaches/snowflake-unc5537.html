@@ -7,20 +7,20 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta name="description" content="A financially motivated threat actor tracked as UNC5537 spent months harvesting Snowflake credentials from infostealer malware logs, then systematically…">
     <meta name="keywords" content="Snowflake / UNC5537 2024, breach analysis, kill chain, MITRE ATT&CK, cloud security incident, post-mortem, 2024">
-    <title>Snowflake / UNC5537 2024 (2024) Breach Kill Chain - CSOH</title>
+    <title>Snowflake / UNC5537 2024 Breach Kill Chain - CSOH</title>
 
     <link rel="canonical" href="https://csoh.org/breaches/snowflake-unc5537.html">
     <link rel="alternate" type="application/rss+xml" title="CSOH Cloud Security News" href="/feed.xml">
     <link rel="icon" type="image/png" href="/favicon.png">
     <meta name="theme-color" content="#2c3e50">
 
-    <meta property="og:title" content="Snowflake / UNC5537 2024 (2024) Breach Kill Chain">
+    <meta property="og:title" content="Snowflake / UNC5537 2024 Breach Kill Chain">
     <meta property="og:description" content="A financially motivated threat actor tracked as UNC5537 spent months harvesting Snowflake credentials from infostealer malware logs, then systematically…">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://csoh.org/breaches/snowflake-unc5537.html">
     <meta property="og:image" content="https://csoh.org/banner.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Snowflake / UNC5537 2024 (2024) Breach Kill Chain">
+    <meta name="twitter:title" content="Snowflake / UNC5537 2024 Breach Kill Chain">
     <meta name="twitter:description" content="A financially motivated threat actor tracked as UNC5537 spent months harvesting Snowflake credentials from infostealer malware logs, then systematically…">
     <meta name="twitter:image" content="https://csoh.org/banner.png">
     <!-- Resource hints: warm up TCP+TLS to high-traffic external origins
@@ -33,16 +33,16 @@
     <link rel="dns-prefetch" href="https://www.paypal.com">
     <link rel="dns-prefetch" href="https://img.youtube.com">
 
-    <link rel="preload" href="/style.css?v=0e1857bd" as="style"
-        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
-    <link rel="stylesheet" href="/style.css?v=0e1857bd"
-        integrity="sha384-U9QrVnm5Y2S8NBuFhAxzxZ9inyHVyNBW1LMjExS3FrrkQrWXsmku3/NIUhLqwdRq">
+    <link rel="preload" href="/style.css?v=3fb52699" as="style"
+        integrity="sha384-ANJCGGd6EdsnPZTQ/b98RJyWsi8KOVi0IlIq/WWkE+mMZN/lW/1mYqnNme8uWcB7">
+    <link rel="stylesheet" href="/style.css?v=3fb52699"
+        integrity="sha384-ANJCGGd6EdsnPZTQ/b98RJyWsi8KOVi0IlIq/WWkE+mMZN/lW/1mYqnNme8uWcB7">
     <link rel="stylesheet" href="/breach-timeline.css?v=29fbd6a9" integrity="sha384-WrezLhCC8Bdnk6bhRviNG3f7jv+K1IW8/RCNel8OBIyPAd9wiZ4IMtSBG5Nu6Wja">
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "NewsArticle",
       "headline": 'UNC5537 / Snowflake – Infostealer Creds → No MFA → SHOW TABLES → Bulk Exfil → 100+ Orgs Extorted',
       "description": "A financially motivated threat actor tracked as UNC5537 spent months harvesting Snowflake credentials from infostealer malware logs, then systematically…",
       "author": {
@@ -112,7 +112,7 @@
                       <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Learn <span class="caret" aria-hidden="true">▾</span></button>
                       <div class="dropdown-menu mega-menu mega-3col">
                         <div class="mega-col">
-                          <h4 class="mega-heading">Foundations</h4>
+                          <span class="mega-heading">Foundations</span>
                           <ul>
                             <li><a href="../what-is-cloud-security.html">What is Cloud Security?</a></li>
                             <li><a href="../shared-responsibility-model.html">Shared Responsibility</a></li>
@@ -122,7 +122,7 @@
                           </ul>
                         </div>
                         <div class="mega-col">
-                          <h4 class="mega-heading">Topics</h4>
+                          <span class="mega-heading">Topics</span>
                           <ul>
                             <li><a href="../cloud-security-best-practices.html">Best Practices</a></li>
                             <li><a href="../containers.html">Containers</a></li>
@@ -135,7 +135,7 @@
                           </ul>
                         </div>
                         <div class="mega-col">
-                          <h4 class="mega-heading">Career &amp; Growth</h4>
+                          <span class="mega-heading">Career &amp; Growth</span>
                           <ul>
                             <li><a href="../learning-path.html">Learning Path</a></li>
                             <li><a href="../cloud-security-certifications.html">Certifications</a></li>
@@ -163,7 +163,7 @@
                       <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Community <span class="caret" aria-hidden="true">▾</span></button>
                       <div class="dropdown-menu mega-menu mega-2col">
                         <div class="mega-col">
-                          <h4 class="mega-heading">Live</h4>
+                          <span class="mega-heading">Live</span>
                           <ul>
                             <li><a href="../sessions.html">Friday Zoom Sessions</a></li>
                             <li><a href="../community.html">Community &amp; Signal</a></li>
@@ -171,7 +171,7 @@
                           </ul>
                         </div>
                         <div class="mega-col">
-                          <h4 class="mega-heading">Archive</h4>
+                          <span class="mega-heading">Archive</span>
                           <ul>
                             <li><a href="../meetings.html">Meeting Recaps</a></li>
                             <li><a href="../presentations.html">Presentations</a></li>
@@ -345,6 +345,15 @@
   </div>
         </div>
 
+    <div class="src-box defense-topics-box">
+      <h4>Related defense topics</h4>
+      <div class="src-links">
+        <a class="src-link" href="../saas-security.html">SaaS security</a>
+        <a class="src-link" href="../iam.html">IAM, MFA & cloud identity</a>
+        <a class="src-link" href="../data-security.html">Cloud data security</a>
+        <a class="src-link" href="../threat-research.html">Cloud threat research</a>
+      </div>
+    </div>
         <nav class="incident-pager" aria-label="Other breach kill chains">
             <a class="pager-link pager-prev" href="promptware.html">← Previous breach</a>
             <a class="pager-link pager-index" href="../breach-timeline.html">All breaches</a>
