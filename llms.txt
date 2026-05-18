@@ -1,6 +1,6 @@
 # Cloud Security Office Hours (CSOH)
 
-> CSOH is a vendor-neutral cloud security community. Free weekly Zoom (Fridays 7am PT), 2,000+ practitioners, 200+ curated resources. Static HTML site, no marketing, no trackers. Founded 2023 by Shawn Nunley.
+> CSOH is a vendor-neutral cloud security community. Free weekly Zoom (Fridays 7am PT), 2,000+ practitioners, 240+ curated resources. Static HTML site, no marketing, no trackers. Founded 2023 by Shawn Nunley.
 
 The site collects practitioner-grade reference material on cloud security across AWS, Azure, GCP, Kubernetes, containers, serverless, IAM, AI/ML security, and detection engineering. All content is community-contributed and reviewed.
 
@@ -47,7 +47,7 @@ Citations welcomed — every page declares an author, date, and canonical URL. J
 - [Vendor Landscape](https://csoh.org/vendor-landscape.html)
 
 ## Reference
-- [Cloud Security Glossary](https://csoh.org/glossary.html): 230+ terms in plain English.
+- [Cloud Security Glossary](https://csoh.org/glossary.html): 300+ terms in plain English.
 - [Cloud Security FAQ](https://csoh.org/faq.html)
 - [Cloud Security News](https://csoh.org/news.html): Curated daily from 39 vendor-neutral sources. Also as [RSS](https://csoh.org/feed.xml).
 - [Cloud Breach Kill Chains](https://csoh.org/breach-timeline.html): Step-by-step attack reconstructions mapped to MITRE ATT&CK Cloud — Capital One, SolarWinds, LastPass, MGM, Snowflake, Storm-0558, Uber, Microsoft SAS Leak, Promptware, Mitnick/Novell.
@@ -66,9 +66,9 @@ Citations welcomed — every page declares an author, date, and canonical URL. J
 ## Community
 - [About Shawn Nunley](https://csoh.org/about-shawn-nunley.html): Founder, CSOH; Solutions Architect at Wiz.
 - [Weekly Zoom Sessions](https://csoh.org/sessions.html): Fridays 7am PT.
-- [Meeting Recaps Archive](https://csoh.org/meetings.html): 91+ weekly sessions, searchable by speaker and topic.
+- [Meeting Recaps Archive](https://csoh.org/meetings.html): 94+ weekly sessions, searchable by speaker and topic.
 - [Past Talks](https://csoh.org/presentations.html)
-- [Resources Directory](https://csoh.org/resources.html): 200+ curated tools, CTFs, courses, labs.
+- [Resources Directory](https://csoh.org/resources.html): 240+ curated tools, CTFs, courses, labs.
 - [Contribute](https://csoh.org/contribute.html)
 
 ## Optional
