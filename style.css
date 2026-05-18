@@ -3639,10 +3639,11 @@ footer {
     min-width: 580px;
     max-width: 92vw;
     padding: 1rem 1.25rem 1.1rem;
-    /* Center under the toggle so the menu stays visually balanced even
-       when the toggle is far left or far right in the nav. */
-    left: 50%;
-    transform: translateX(-50%) translateY(-4px);
+    /* Align the menu's left edge with the toggle. Centering with
+       translateX(-50%) overflows the viewport when the toggle is near
+       the left edge of the nav (e.g. "Learn"). */
+    left: 0;
+    transform: translateY(-4px);
     display: grid;
     gap: 1.5rem;
 }
@@ -3650,7 +3651,7 @@ footer {
 .has-mega:hover > .dropdown-menu.mega-menu,
 .has-mega:focus-within > .dropdown-menu.mega-menu,
 .has-mega.open > .dropdown-menu.mega-menu {
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
 }
 
 .has-mega > .dropdown-menu.mega-3col {
