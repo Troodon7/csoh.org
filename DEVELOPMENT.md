@@ -140,7 +140,7 @@ csoh.org/
 ├── meetings.html                    # Weekly meeting recaps → `meetings/`
 ├── presentations.html               # Recorded presentation archive
 ├── chat-resources.html              # Community-shared URLs from Zoom chat
-├── resources.html                   # 200+ curated resources (largest page; auto-refreshed weekly)
+├── resources.html                   # 240+ curated resources (largest page; auto-refreshed weekly)
 ├── news.html                        # Auto-generated news articles
 ├── rss.html                         # RSS subscription landing page
 │
@@ -175,7 +175,7 @@ csoh.org/
 ├── glossary.js                      # Glossary page live search
 ├── breach-timeline.css / .js        # Breach timeline page-specific assets
 │
-├── tools/                  # Python automation scripts (URL safety, normalization, previews, sitemap, presentations schema, glossary cross-linking, OG image generation)
+├── tools/                  # Python automation scripts (URL safety, normalization, previews, sitemap, presentations schema, glossary cross-linking, OG image generation incl. meeting variant, meeting → topic-page link injection)
 ├── .github/workflows/      # CI/CD pipelines (10 workflows incl. update-news, update-resources, gcp-deploy, normalize-urls, check-broken-links, check-url-safety, validate-html, lint, site-update-deploy)
 └── update_news.py          # News aggregation from 39 RSS feeds
 ```
